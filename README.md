@@ -11,6 +11,7 @@ Repository describing things I've done up to date
 During this time period, I used MATLAB and Python to analyze epilepsy Stereoelectroencephalography (SEEG) data. Each patient had the varying channel data condensed into a network. All channels formed a weighted undirected graph between all other channels, with a coherence, or power similarity measure as the weighted edge between vertices. This graph was formed at an averaged time window over the entire time series with an overlap of a certain percentage. 
 
 Once the time series graph was formed, every graph produced an eigenvector centrality measure, which measures how important certain vertices are in the graph. From here, various data mining analyses were done to look for a notion of a pre-ictal state. The following analyses were carried out:
+
 1. Separate the preictal, ictal and postictal stages by +/-5, 10 minutes and then for each stage compute a gap statistic that leads to a statistical way of arriving at optimal k
 2. Compute k-means from each and plot state progression 
 -> ictal state follows a state progression that is unsupervised and still follows that from publication
@@ -26,6 +27,7 @@ Would be difficult to extend to the colonoscopy experiments in the Durr lab beca
 In this rotation, I investigated a paired word task to study the electrophysiology of basic memory mechanisms in retrieval. We were looking at spectral features of different paired words and the features during retrieval of the correct paired word. 
 
 For example, BRICK might be paired with CLOCK, and then later paired with GLASS. We are interested in determining if there are differences in spectral features in certain areas of the brain that encode these differences in word pair encodings. To analyze this data, we carried out the following procedure:
+
 1. Compute eeg voltage data from all channels
 2. Compute the Morlet Wavelet transform on all channels to obtain a power estimate at different frequency bands
 -> resulting eeg data from -1 seconds to 5 seconds after probeWord comes on the screen
