@@ -32,4 +32,6 @@ Once the time series graph was formed, every graph produced an eigenvector centr
 1. Game Enhanced Augmented Reality (GEAR): A platform for foot control of your computer to reduce tension and increase usability.
 2. HopHacks Clinical Search Index (CSI): A web platform for searching for relevant clinical trials related to your disease.
 
+# Second Year (August 2016- May 2017)
+
 
