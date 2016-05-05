@@ -21,6 +21,7 @@ First Semester:
 1. Principles of Biomedical Instrumentation
 2. Principles of Complex Network Theory
 3. Applied Mathematics for Science and Engineering
+
 Second Semester:
 1. Honors Instrumentation
 2. The Art of Data Science
