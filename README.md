@@ -27,3 +27,9 @@ Once the time series graph was formed, every graph produced an eigenvector centr
 2. The Art of Data Science
 3. Convex Optimization
 4. Learning Theory
+
+## Other Projects:
+1. Game Enhanced Augmented Reality (GEAR): A platform for foot control of your computer to reduce tension and increase usability.
+2. HopHacks Clinical Search Index (CSI): A web platform for searching for relevant clinical trials related to your disease.
+
+
