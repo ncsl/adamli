@@ -17,12 +17,12 @@ Once the time series graph was formed, every graph produced an eigenvector centr
 ## Rotation 3 (01/16 - 06/16) Zaghloul (NIH):
 
 ## Courses:
-First Semester:
+#### First Semester:
 1. Principles of Biomedical Instrumentation
 2. Principles of Complex Network Theory
 3. Applied Mathematics for Science and Engineering
 
-Second Semester:
+#### Second Semester:
 1. Honors Instrumentation
 2. The Art of Data Science
 3. Convex Optimization
