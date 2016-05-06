@@ -38,19 +38,40 @@ For example, BRICK might be paired with CLOCK, and then later paired with GLASS.
 ## Courses:
 #### First Semester:
 1. Principles of Biomedical Instrumentation
+  - Learned about sensors and biomedical circuitry for denoising and sampling human data (e.g. EEG, ECG, EMG) and creating a ECG/EMG circuit. Heavily exposed to circuit design of instrumentation amplifiers, op-amp circuits, filters and sampling data. 
+  - Created an EMG/ECG concurrent sensor circuit with sautered components 
+  - Created a Teensyduino controlled prototype with Flexiforce sensors for bio-gaming
 2. Principles of Complex Network Theory
 3. Applied Mathematics for Science and Engineering
+  - Learned about differential equations from ordinary 1st order, 2nd order, fourier series and partial differential equations.
+  - Looked at different methods of analytical solving such as, separation of variables, 
 
 #### Second Semester:
 1. Honors Instrumentation
+  - Built a better prototype for bio-gaming with an improved design
 2. The Art of Data Science
+  - Worked on a research dataset with features of "predicted" synapses from electron microscopy data
+  - Learned about the data science methodology and how to apply various data visualizations, statistical methods and machine learning algorithms to data.
 3. Convex Optimization
+  - Covered convex analysis and theory, along with algorithms for solving non-smooth (un differentiable), smooth (differentiable) functions
+  - Covered Lagrangian duality theory for solving problems and acceleration methods for first-derivative methods. Looked at l1 regularization of objective functions. 
 4. Learning Theory
+  - Covered Kalman filtering and its relations to solving state-space models, Bayesian inference and optimal feedback control theory
+  - Used Bellman equations and Kalman filter to simulate biological systems (e.g. head and eye movements)
 
 ## Other Projects:
 1. Game Enhanced Augmented Reality (GEAR): A platform for foot control of your computer to reduce tension and increase usability.
 2. HopHacks Clinical Search Index (CSI): A web platform for searching for relevant clinical trials related to your disease.
 
 # Second Year (August 2016- May 2017)
+## Research
 
+## Courses
+#### First Semester:
+1. Statistical Theory
+2. Bayesian Statistics
+3. Nonlinear Optimization
+4. Digital Signal Processing
 
+#### Second Semester:
+1. 
