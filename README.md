@@ -69,9 +69,47 @@ For example, BRICK might be paired with CLOCK, and then later paired with GLASS.
 ## Courses
 #### First Semester:
 1. Statistical Theory
-2. Bayesian Statistics
-3. Nonlinear Optimization
-4. Digital Signal Processing
+2. Bayesian Statistics (Yes)
+3. Nonlinear Optimization 
+4. Digital Signal Processing (Yes)
+5. Models of the Neuron (if commit with Sri)
 
 #### Second Semester:
-1. 
+1. Statistical Theory
+2. Nonlinear Optimization
+3. NSS Medical School Track
+
+# To Study For Doctoral Board Oral Exam:
+1. Convex Optimization
+  - what is a minimizer, objective function, subdifferential, gradient, convex set, convex function
+  - What is Lagrangian duality
+  - algorithms for smooth, nonsmooth functions
+  - l1, l2 regularization
+  - acceleration methods (Nesterov)
+2. Learning Theory
+  - derivation of Kalman filter
+  - utilizing multiple sensor inputs
+  - derivation of Bellman equation
+3. Mathematics for Science and Engineering
+  - solving ordinary differential equations
+  - solving partial differential equations
+  - Green's theorem, laplacian, gradient
+  - power series
+  - Fourier series
+  - Separation of Variables 
+4. 
+
+
+# Third Year (August 2017- May 2018)
+## Research
+
+## Courses
+#### First Semester:
+1. Statistical Theory / Probability Theory
+2. Introduction to Differential Geometry
+3. Nonlinear Optimization 
+
+#### Second Semester:
+1. Riemannian Geometry
+2. Advanced Bayesian Statistics
+3. Graph Theory
