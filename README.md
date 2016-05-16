@@ -72,7 +72,7 @@ For example, BRICK might be paired with CLOCK, and then later paired with GLASS.
 2. Bayesian Statistics (Yes)
 3. Nonlinear Optimization 
 4. Digital Signal Processing (Yes)
-5. Models of the Neuron (if commit with Sri)
+5. Models of the Neuron (Yes)
 
 #### Second Semester:
 1. Statistical Theory
@@ -90,6 +90,7 @@ For example, BRICK might be paired with CLOCK, and then later paired with GLASS.
   - derivation of Kalman filter
   - utilizing multiple sensor inputs
   - derivation of Bellman equation
+  - general expectation-maximization (solving for expected log likelihood, and maximizing)
 3. Mathematics for Science and Engineering
   - solving ordinary differential equations
   - solving partial differential equations
