@@ -69,12 +69,12 @@ while (search && t<= 10)
         pt = pt - gamma*grad;
     end % end of loop through grad descent
     disp([t iter cost sum(pt>=0)]);
-    if (i == numSteps)
+    if (i == steps)
         CF(t) = cost;
         p(:,t) = pt;
     end
     if ~(cost < (11-iter)*tol && (sum(pt>0) == N))
-        pt = rand(N, 1);
+        pt = rand(, 1);
         iter = 1;
     else
         iter = iter+1;
@@ -90,13 +90,12 @@ if (search)
     p = [];
     CF = [];
 else
-    pos = find(sum(p>=0, 1)==N);
+    pos = find(sum(p>=0, 1)==n);
     CF = CF(pos);
     p = p(:,pos);
     [CF ind] = min(CF);
     p = p(:,ind);
 end
-p 
-CF
+
 % end
 
