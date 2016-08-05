@@ -48,5 +48,38 @@ for i=1:length(w)
     r = find(sum(abs(DelJ{i}) , 2));
     er = [zeros(r-1, 1); 1; zeros(N-r, 1)];
     
+    Jp = J + DelJ{i}; % perturbed functional network
+    Jp = Jp(r,:)';    % the perturbed func. network at 1 row
+    
+    % initialize parameters for constrained gradient descent
+    numSteps = 10000;
+    eta = 0.1;
+    gamma = 0.1;
+    line_search = false;
+    
+    if constrained == 0
+        B = null(p');
+    elseif constrained == 1
+        B = null(orth([p er])');
+    elseif constrained == 2
+        I = eye(N);
+        E = I(:, W(r,:) ~= 0);
+        B = null(orth([p null(E')])');
+    end
+    
+    %%- PERFORM GRAD DESCENT With Constraints
+    for i=1:numSteps
+        J = -alpha*p + diag(tanh(W*p + h)) * (1-p); % recompute Jacobian
+        G = J(r,:)' - Jp;                           % get the perturbation of that row 
+        
+%         beta(r), W(r,:)', p, h(r), r
+        df = beta(r).*(sech(W(r,:)*p + h).^2;
+        d2f = beta(r).*(-2 * tanh(W(r,:)*p + h) .* sech(W'*p + h) .^2;
+        grad = 
+        
+        
+        
+        
+    end
     
 end

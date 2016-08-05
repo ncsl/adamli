@@ -14,7 +14,7 @@
 % - p = 
 % - CF = 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% function [p CF] = GradientDescent(alpha, beta, W, h, link)
+function [p CF] = GradientDescent(alpha, beta, W, h, link)
 alpha = 0.1;
 link = 'tanh';
 N = 3;
@@ -98,5 +98,5 @@ else
 end
 p 
 CF
-% end
+end
 
