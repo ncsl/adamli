@@ -14,16 +14,7 @@
 % - p = 
 % - CF = 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-function [p CF] = GradientDescent(alpha, beta, W, h, link)
-alpha = 0.1;
-link = 'tanh';
-N = 3;
-h = 0.25+0.5*(rand(N,1));
-beta = 1.0+0.0*rand(N,1);
-frac = 1;
-[We, Wi] = GenerateNetwork(N, frac);
-W = We - Wi;
-
+function [p, CF] = GradientDescent(alpha, beta, W, h, link)
 % define parameters for gradient descent
 N = length(W);
 tol = sqrt(N)*2e-3;         % the tolerance at which, to stop grad descent
@@ -42,15 +33,11 @@ t = 1;
 
 while (search && t<= 10)
     for i=1:numSteps   % perform number of grad descent steps
-        % nodal rate equation for network probability
+        % nodal rate equation for network probability from eqn. 2.26
         pdot = -alpha*pt + diag(tanh(W*pt + h)) * (1-pt);
-
+        
         % compute Jacobian using eqn 2.29 from paper and gradient of cost
-        % function from A3
-        f = tanh(W*pt + h);
-        df = sech(W*pt+h);
-        grad = repmat(df, [1 N]).*W.*repmat(1-pt, [1 N]);
-        grad = grad'*pdot;
+        grad = Jacobian(alpha, beta, W, pt, h, link)'*pdot;
         cost = norm(grad);          % get l2 norm of gradient of cost 
 
         %%- OPTIONAL do a line search to improve rate of convergence
