@@ -25,7 +25,9 @@ recording_duration = dataArray{:, 6};
 num_channels = dataArray{:, 7};
 included_channels = dataArray{:, 8};
 
-%%
+numer_of_samples = 
+
+%% READ EEG FILE
 patient_file_path = './data/pt1sz2/';
 frequency = 1000; % sampling freq. at 1 kHz
 

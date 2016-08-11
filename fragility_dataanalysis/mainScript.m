@@ -25,7 +25,9 @@ recording_duration = dataArray{:, 6};
 num_channels = dataArray{:, 7};
 included_channels = dataArray{:, 8};
 
-%%
+number_of_samples = frequency * recording_duration;
+
+%% READ EEG FILE
 patient_file_path = './data/pt1sz2/';
 frequency = 1000; % sampling freq. at 1 kHz
 
@@ -36,4 +38,5 @@ for i=1:length(f)
     patient_file_names{i} = f(i).name;
 end
 
-patient_files = containers.Map(patient_file_names, file_sizes)
+patient_files = containers.Map(patient_file_names, number_of_samples)
+patient_files(patient_file_names{1})
