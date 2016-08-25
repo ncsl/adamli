@@ -1,8 +1,9 @@
 % SCRIPT to run extraction of eeg and creating matrix from the channel data
 % x = Ax
-%% READ PATIENT ID FILE
+%% 0: READ PATIENT ID FILE
 % change these paramters depending on patient
-patient_id_path = './pt1sz2.csv';
+patient = 'pt1sz2';
+patient_id_path = './pt1sz2.csv'
 included_channels = [1:36 42 43 46:54 56:69 72:95];
 patient_file_path = './data/pt1sz2/';
 frequency_sampling = 1000; % sampling freq. at 1 kHz
@@ -10,7 +11,6 @@ BP_FILTER_RAW = 1;
 
 bands = [0 4; 4 8; 8 13; 13 30; 30 90];
 gamma = bands(5, :);
-
 
 % For more information, see the TEXTSCAN documentation.
 formatSpec = '%s%{MM/dd/yyyy}D%{HH:mm:ss}D%{HH:mm:ss}D%{HH:mm:ss}D%f%f%s%[^\n\r]';
@@ -53,7 +53,7 @@ else
     preFiltStrShort  = '_noFilt';
 end
 
-%% READ EEG FILE
+% READ EEG FILE
 % files to process
 f = dir([patient_file_path '*eeg.csv']);
 patient_file_names = cell(1, length(f))
@@ -76,25 +76,26 @@ eeg = csv2eeg(patient_file_path, filename, num_values, num_channels);
 eeg = buttfilt(eeg,[59.5 60.5], frequency_sampling,'stop',1); %-filter is overkill: order 1 --> 25 dB drop (removing 5-15dB peak)
 
 % 1C. pre-process channel data by normalization at each time point
-eeg = eeg - repmat(mean(eeg, 1), size(eeg, 1), 1);
-eeg = eeg ./ repmat(std(eeg, [], 1), size(eeg, 1), 1);
+% eeg = eeg - repmat(mean(eeg, 1), size(eeg, 1), 1);
+% eeg = eeg ./ repmat(std(eeg, [], 1), size(eeg, 1), 1);
 
 % 1C. only get columns of interest and time points of interest
-timeSStart = seconds(onset_time - recording_start) * frequency_sampling; % time seizure starts
+timeSStart = milliseconds(onset_time - recording_start); % time seizure starts
 file_length = length(eeg);
 num_channels = length(included_channels);
 
 % window parameters - overlap, #samples, stepsize, window pointer
 sliding_window_overlap = 0.5;                                            % window overlap (seconds)
-nsamples = round(sliding_window_overlap * frequency_sampling);           % number of samples to analyze
-stepwin = 1;                                                             % step size of sliding horizon (seconds)
-lastwindow = timeSStart - 10;                                                 % where to grab data
-sample_to_access = lastwindow;
+nsamples = round(sliding_window_overlap * frequency_sampling);           % number of samples to analyze (milliseconds)
+stepwin = 1*frequency_sampling;                                          % step size of sliding horizon (milliseconds)
+lastwindow = timeSStart - 50*frequency_sampling;                         % where to grab data (milliseconds)
+sample_to_access = lastwindow;                  
 
 tic;
 limit = fix((file_length - (nsamples - stepwin * frequency_sampling)) / (stepwin * frequency_sampling));
-limit = timeSStart / frequency_sampling;
-
+limit = timeSStart;
+disp(['Seizure starts at ', num2str(limit), ' milliseconds']);
+ 
 while (sample_to_access < limit)
     % step 1: extract the data and apply the notch filter. Note that column
     %         #i in the extracted matrix is filled by data samples from the
@@ -105,25 +106,26 @@ while (sample_to_access < limit)
 
     % step 2: compute some functional connectivity 
     % linear model: Ax = b; A\b -> x
-    b = tmpdata(:); b = b(num_channels+1:end); % define b 
-    A = zeros(length(b), num_channels^2);
-    A(1, 1:num_channels) = tmpdata(:, 1);      % build up A matrix
-    pointerA = num_channels;
-    tic; % takes around 481 seconds to build the matrix
-    for i=2:size(A, 1)-1
-        pointerA = (i-1)*num_channels;
-        try
-            A(i, pointerA+1:pointerA+num_channels) = tmpdata(:, i);
-        catch
-            pointerA+1
-            pointerA+num_channels;
-        end
+    b = tmpdata(:); b = b(num_channels+1:end); % define b
+      
+    tmpdata = tmpdata';
+    tic;
+    % build up A matrix with a loop modifying #time_samples points and #chans at a time
+    A = zeros(length(b), num_channels^2);               % initialize A for speed
+    n = 1:num_channels:size(A,1);                       % set the indices through rows
+    A(n, 1:num_channels) = tmpdata(1:end-1,:);          % set the first loop
+    for i=2 : size(A,2)/num_channels % loop through columns #channels per loop
+        rowInds = n+(i-1);
+        colInds = (i-1)*num_channels+1:i*num_channels;
+        A(rowInds, colInds) = tmpdata(1:end-1,:);
     end
     toc;
-    size(A)
     
+    % create the reshaped adjacency matrix
     tic;
     theta = A\b;                                % solve for x, connectivity
+    theta_adj = reshape(theta, num_channels, num_channels)';
+    imagesc(theta_adj)
     toc;
     
 %     R = corrcoef(tmpdata');
@@ -131,10 +133,21 @@ while (sample_to_access < limit)
 %     save(outputfile, 'theta');
 
 %     %%- Do some check on the eigenspectrum of the connectivity matrix
-    E = eig(theta);
+    E = eig(theta_adj);
+    
+    % step 3: Plotting Eigenspectrum
+    titleStr = {['Eigenspectrum of A\b=x for ', patient_id_path], ...
+        ['time point (seconds) before seizure: ', num2str((timeSStart - lastwindow)/frequency_sampling)]};
+    plot(real(E), imag(E), 'o')
+    title(titleStr);
+    xlabel('Real'); ylabel('Imaginary');
+    
+    % save the theta_adj made
+    fileName = strcat(patient, '_', num2str(lastwindow/frequency_sampling));
+    save(fileName, 'theta_adj');
     
     % step 3: update the pointer and window
     sample_to_access = sample_to_access + stepwin;
-    lastwindow = frequency_sampling * sample_to_access;
+    lastwindow = sample_to_access;
 end
     
