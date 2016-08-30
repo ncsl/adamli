@@ -115,8 +115,7 @@ while (sample_to_access < limit)
     A = zeros(length(b), num_channels^2);               % initialize A for speed
     n = 1:num_channels:size(A,1);                       % set the indices through rows
     A(n, 1:num_channels) = tmpdata(1:end-1,:);          % set the first loop
-    
-    for i=2 : num_channels % loop through columns #channels per loop
+    for i=2 : size(A,2)/num_channels % loop through columns #channels per loop
         rowInds = n+(i-1);
         colInds = (i-1)*num_channels+1:i*num_channels;
         A(rowInds, colInds) = tmpdata(1:end-1,:);

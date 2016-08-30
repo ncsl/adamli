@@ -15,7 +15,7 @@ for i=35:84
     
     %%- determine which indices have eigenspectrums that are stable
     max_eig = max(abs(eig(theta_adj)));
-    if (max_eig < 1) % this is a stable eigenspectrum
+    if (1)%max_eig < 1) % this is a stable eigenspectrum
         N = size(theta_adj, 1); % number of rows
         del_size = zeros(N, length(w));
         del_table = cell(N, length(w));
@@ -56,7 +56,7 @@ for i=35:84
         %%- Plot 
         figure;
         subplot(311);
-        titleStr = ['Eigenspectrum of A\b=x for ', patient];
+        titleStr = {['Eigenspectrum of A\b=x for ', patient]};
         plot(eig(theta_adj), 'ko')
         title(titleStr);
         xlabel('Real'); ylabel('Imaginary');
