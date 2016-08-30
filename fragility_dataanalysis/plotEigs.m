@@ -2,7 +2,7 @@
 w0 = 2*pi/10;
 w = linspace(0, w0, 101); 
 % sigma = linspace(0, sigma0, 100);
-sigma0 = 1.1;
+sigma0 = 1.0;
 sigma = sigma0 - w; % move to the unit circle 1, for a plethora of different radial frequencies
 b = [0; 1];
 perturbationType = 'R';
@@ -90,3 +90,6 @@ end
 
 figure;
 plot(avge_fragility, 'ko');
+title('Averaged Fragility From 50 seconds to 1 second before Seizure');
+xlabel('50 seconds -> 1 second before seizure');
+ylabel('Fragility (Minimum Norm Perturbation)');
