@@ -1,31 +1,28 @@
-<<<<<<< HEAD
 % define w0/w and sigma for the frequency range to grid search over
 w0 = 2*pi/10;
 w = linspace(0, w0, 101); 
 % sigma = linspace(0, sigma0, 100);
-sigma = 1.1 - w; % move to the unit circle 1, for a plethora of different radial frequencies
+sigma0 = 1.1;
+sigma = sigma0 - w; % move to the unit circle 1, for a plethora of different radial frequencies
 b = [0; 1];
 perturbationType = 'R';
 patient = 'pt1sz2';
 
 
 avge_fragility = [];
-=======
 close all
 
 A_tilda = 0;
 count = 0;
->>>>>>> c572e9e87ba1e0a3d648cd744ad16daf7598bbcd
-% loop through mat files and open them up
+
+% loop through mat files and open them upbcd
 for i=35:84
     count = count +1;
     load(strcat('pt1sz2_', num2str(i)));
-    rank(theta_adj)
-    
-<<<<<<< HEAD
+
     %%- determine which indices have eigenspectrums that are stable
     max_eig = max(abs(eig(theta_adj)));
-    if (max_eig < 1) % this is a stable eigenspectrum
+    if (max_eig < sigma0) % this is a stable eigenspectrum
         N = size(theta_adj, 1); % number of rows
         del_size = zeros(N, length(w));
         del_table = cell(N, length(w));
@@ -89,34 +86,7 @@ for i=35:84
         
         avge_fragility = [avge_fragility; mean(fragility_table)];
     end
-    
-%     figure;
-%     plot(eig(theta_adj), 'o');
 end
 
 figure;
 plot(avge_fragility, 'ko');
-=======
-    if (i==35)
-        A_tilda = theta_adj;
-    else
-        A_tilda = A_tilda+theta_adj;
-    end
-        
-    
-%     figure;
-%     plot(eig(theta_adj), 'o');
-%     title('Eigenspectrum of A\b=x matrix');
-%     xlabel('Real');
-%     ylabel('Imaginary');
-%     
-%     figure;
-%     imagesc(theta_adj);
-%     colorbar(); colormap('jet');
-%     title('Adjacency Matrix');
-%     set(gca,'tickdir','out','YDir','normal');
-end
-
-A_tildaa = A_tilda/count;
-plot(eig(A_tildaa), 'o')
->>>>>>> c572e9e87ba1e0a3d648cd744ad16daf7598bbcd
