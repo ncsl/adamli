@@ -2,7 +2,7 @@
 w0 = 2*pi/10;
 w = linspace(0, w0, 101); 
 % sigma = linspace(0, sigma0, 100);
-sigma0 = 1.0;
+sigma0 = 1.05;
 sigma = sigma0 - w; % move to the unit circle 1, for a plethora of different radial frequencies
 b = [0; 1];
 perturbationType = 'R';
@@ -61,25 +61,25 @@ for i=35:84
         end
         
         %%- Plot 
-        figure;
-        subplot(311);
-        titleStr = ['Eigenspectrum of A\b=x for ', patient];
-        plot(eig(theta_adj), 'ko')
-        title(titleStr);
-        xlabel('Real'); ylabel('Imaginary');
-    
-        subplot(312);
-        imagesc(theta_adj); 
-        colorbar(); colormap('jet');
-        xlabel('Electrodes Affecting Other Channels');
-        ylabel('Electrodes Affected By Other Channels');
-        
-        subplot(313);
-        plot(fragility_table, 'ko');
-        title(['Fragility Per Electrode at ', num2str(85-i), ' seconds before seizure']);
-        xlabel(['Electrodes (n=', num2str(N),')']);
-        ylabel(['Minimum Norm Perturbation at Certain w']);
-        
+%         figure;
+%         subplot(311);
+%         titleStr = ['Eigenspectrum of A\b=x for ', patient];
+%         plot(eig(theta_adj), 'ko')
+%         title(titleStr);
+%         xlabel('Real'); ylabel('Imaginary');
+%     
+%         subplot(312);
+%         imagesc(theta_adj); 
+%         colorbar(); colormap('jet');
+%         xlabel('Electrodes Affecting Other Channels');
+%         ylabel('Electrodes Affected By Other Channels');
+%         
+%         subplot(313);
+%         plot(fragility_table, 'ko');
+%         title(['Fragility Per Electrode at ', num2str(85-i), ' seconds before seizure']);
+%         xlabel(['Electrodes (n=', num2str(N),')']);
+%         ylabel(['Minimum Norm Perturbation at Certain w']);
+%         
         max_eig
         i
         max(imag(eig(theta_adj)))
@@ -87,6 +87,7 @@ for i=35:84
         avge_fragility = [avge_fragility; mean(fragility_table)];
     end
 end
+close all;
 
 figure;
 plot(avge_fragility, 'ko');
