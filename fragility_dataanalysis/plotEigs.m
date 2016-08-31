@@ -2,7 +2,7 @@
 w0 = 2*pi/10;
 w = linspace(0, w0, 101); 
 % sigma = linspace(0, sigma0, 100);
-sigma0 = 1.05;
+sigma0 = 1.25 ;
 sigma = sigma0 - w; % move to the unit circle 1, for a plethora of different radial frequencies
 b = [0; 1];
 perturbationType = 'R';
