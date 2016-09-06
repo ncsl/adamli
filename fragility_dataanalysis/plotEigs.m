@@ -7,7 +7,24 @@ sigma = sqrt(sigma0 - w.^2); % move to the unit circle 1, for a plethora of diff
 b = [0; 1];
 perturbationType = 'R';
 patient = 'pt1sz2';
+included_channels = [1:36 42 43 46:54 56:69 72:95];
 
+% define epileptogenic zone
+fid = fopen('./data/pt1sz2/pt1sz2_labels.csv');
+labels = textscan(fid, '%s', 'Delimiter', ',');
+labels = labels{:}; labels = labels(included_channels);
+fclose(fid);
+ezone_labels = {'POLPST1', 'POLPST2', 'POLPST3', 'POLAD1', 'POLAD2'};
+
+% define cell function to search for the EZ labels
+cellfind = @(string)(@(cell_contents)(strcmp(string,cell_contents)));
+ezone_indices = zeros(length(ezone_labels),1);
+for i=1:length(ezone_labels)
+    indice = cellfun(cellfind(ezone_labels{i}), labels, 'UniformOutput', 0);
+    indice = [indice{:}];
+    test = 1:length(labels);
+    ezone_indices(i) = test(indice);
+end
 
 avge_fragility = [];
 close all
@@ -113,9 +130,9 @@ title('Fragility From 50 to 1 Seconds Before Seizure For All Chans');
 xlabel('Time 50->1 Second');
 ylabel('Channels');
 
-for i=1:length(ezone)
-    plot(get(gca, 'xlim'), [ezone(i)-0.5 ezone(i)-0.5], 'k');
-    plot(get(gca, 'xlim'), [ezone(i)+0.5 ezone(i)+0.5], 'k');
+for i=1:length(ezone_labels)
+    plot(get(gca, 'xlim'), [ezone_labels(i)-0.5 ezone_labels(i)-0.5], 'k');
+    plot(get(gca, 'xlim'), [ezone_labels(i)+0.5 ezone_labels(i)+0.5], 'k');
 end
 
 figure;
@@ -131,7 +148,6 @@ colorbar(); colormap('jet');
 title('Row Sum From 50 to 1 Seconds Before Seizure For All Chans');
 xlabel('Time 50->1 Second');
 ylabel('Channels');
-
 
 figure;
 plot(avge_fragility, 'ko');
