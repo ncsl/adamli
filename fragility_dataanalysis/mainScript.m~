@@ -9,7 +9,6 @@ patfile = strcat(patient, '.csv');
 patient_eeg_path = strcat('./data/', patient);
 included_channels = [1:36 42 43 46:54 56:69 72:95]; % pt1
 
-%%- set file path for the patient file 
 dataDir = './data/';
 patient_file_path = fullfile(dataDir, patfile);
 frequency_sampling = 1000; % sampling freq. at 1 kHz
@@ -93,7 +92,7 @@ num_channels = length(included_channels);
 % window parameters - overlap, #samples, stepsize, window pointer
 sliding_window_overlap = 0.75;                                            % window overlap (seconds)
 nsamples = round(sliding_window_overlap * frequency_sampling);           % number of samples to analyze (milliseconds)
-stepwin = 0.5*frequency_sampling;                                          % step size of sliding horizon (milliseconds)
+stepwin = 1*frequency_sampling;                                          % step size of sliding horizon (milliseconds)
 lastwindow = timeSStart - 50*frequency_sampling;                         % where to grab data (milliseconds)
 sample_to_access = lastwindow;                  
 

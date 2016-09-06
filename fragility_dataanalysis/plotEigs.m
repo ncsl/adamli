@@ -122,17 +122,21 @@ for i=35:84
     end
 end
 
+chanticks = 5:5:85;
+LT = 1.5;
+
 %%- PLOT THE HEATMAP OF FRAGILITY 
 figure;
 imagesc(frag_time_chan);
 colorbar(); colormap('jet');
 title('Fragility From 50 to 1 Seconds Before Seizure For All Chans');
-xlabel('Time 50->1 Second');
+xlabel('Time 50->1 Second'); 
 ylabel('Channels');
-
+set(gca, 'YTick', chanticks);
+hold on
 for i=1:length(ezone_labels)
-    plot(get(gca, 'xlim'), [ezone_labels(i)-0.5 ezone_labels(i)-0.5], 'k');
-    plot(get(gca, 'xlim'), [ezone_labels(i)+0.5 ezone_labels(i)+0.5], 'k');
+    plot(get(gca, 'xlim'), [ezone_indices(i)-0.5 ezone_indices(i)-0.5], 'k', 'LineWidth', LT);
+    plot(get(gca, 'xlim'), [ezone_indices(i)+0.5 ezone_indices(i)+0.5], 'k', 'LineWidth', LT);
 end
 
 figure;
