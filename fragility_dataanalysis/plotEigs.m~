@@ -113,11 +113,6 @@ title('Fragility From 50 to 1 Seconds Before Seizure For All Chans');
 xlabel('Time 50->1 Second');
 ylabel('Channels');
 
-for i=1:length(ezone)
-    plot(get(gca, 'xlim'), [ezone(i)-0.5 ezone(i)-0.5], 'k');
-    plot(get(gca, 'xlim'), [ezone(i)+0.5 ezone(i)+0.5], 'k');
-end
-
 figure;
 imagesc(colsum_time_chan);
 colorbar(); colormap('jet');
