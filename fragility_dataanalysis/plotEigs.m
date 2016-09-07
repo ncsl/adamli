@@ -1,15 +1,21 @@
+clear all;
+close all;
+
 % define w0/w and sigma for the frequency range to grid search over
 w0 = 1;
 w = linspace(-1, w0, 101); 
 % sigma = linspace(0, sigma0, 100);
-sigma0 = 1.1;
-sigma = sqrt(sigma0 - w.^2); % move to the unit circle 1, for a plethora of different radial frequencies
+sigma0 = 1.25;
+sigma = sqrt(sigma0^2 - w.^2); % move to the unit circle 1, for a plethora of different radial frequencies
 b = [0; 1];
 perturbationType = 'R';
-patient = 'pt1sz2';
+pat_id = 'pt1';
+sz_id = 'sz2';
+patient = strcat(pat_id, sz_id);
 included_channels = [1:36 42 43 46:54 56:69 72:95];
 
 % define epileptogenic zone
+dataDir = './adj_mats_500_1/';
 fid = fopen('./data/pt1sz2/pt1sz2_labels.csv');
 labels = textscan(fid, '%s', 'Delimiter', ',');
 labels = labels{:}; labels = labels(included_channels);
@@ -26,21 +32,19 @@ for i=1:length(ezone_labels)
     ezone_indices(i) = test(indice);
 end
 
-avge_fragility = [];
-close all
-
-A_tilda = 0;
-count = 0;
-
-frag_time_chan = zeros(size(theta_adj, 1), length(35:84));
-colsum_time_chan = zeros(size(theta_adj, 1), length(35:84));
-rowsum_time_chan = zeros(size(theta_adj, 1), length(35:84));
+% initialize avge fragility, fragility/time/channel, colsum, rowsum
+% heatmaps
+timeRange = 35:84;
+avge_fragility = zeros(length(timeRange),1); % from all channels
+ezone_avge_fragility = zeros(length(timeRange),1); % from only ezone channels
+frag_time_chan = zeros(length(included_channels), length(timeRange));
+colsum_time_chan = zeros(length(included_channels), length(timeRange));
+rowsum_time_chan = zeros(length(included_channels), length(timeRange));
 
 % loop through mat files and open them upbcd
-iTime = 1;
+iTime = 1; % time pointer for heatmaps
 for i=35:84
-    count = count +1;
-    load(strcat('pt1sz2_', num2str(i)));
+    load(fullfile(dataDir, strcat('pt1sz2_', num2str(i))));
 
     %%- determine which indices have eigenspectrums that are stable
     max_eig = max(abs(eig(theta_adj)));
@@ -83,6 +87,7 @@ for i=35:84
             r = r(1); c = c(1);
             ek = [zeros(r-1, 1); 1; zeros(N-r, 1)]; % unit vector at this row
             
+            % store the fragility for each node
             fragility_table(iNode) = del_size(iNode, c);
         end % end of loop through channels
         
@@ -90,10 +95,16 @@ for i=35:84
         colsum_time_chan(:, iTime) = sum(theta_adj, 1);
         rowsum_time_chan(:, iTime) = sum(theta_adj, 2);
         
+        % update list of average fragility at this time point
+        avge_fragility(iTime) = mean(fragility_table);
+        ezone_avge_fragility(iTime) = mean(fragility_table(ezone_indices));
+        
         % update pointer for the fragility heat map
         iTime = iTime+1;
         
         %%- Plot 1 time point
+%         plotPoints = 1:size(theta_adj,1);
+%         plotPoints(ezone_indices) = [];
 %         figure;
 %         subplot(311);
 %         titleStr = ['Eigenspectrum of A\b=x for ', patient];
@@ -109,16 +120,15 @@ for i=35:84
 %         ylabel('Electrodes Affected By Other Channels');
 %         
 %         subplot(313);
-%         plot(fragility_table, 'ko');
+%         plot(plotPoints, fragility_table(plotPoints), 'ko'); hold on;
+%         plot(ezone_indices, fragility_table(ezone_indices), 'ro');
 %         title(['Fragility Per Electrode at ', num2str(85-i), ' seconds before seizure']);
 %         xlabel(['Electrodes (n=', num2str(N),')']);
 %         ylabel(['Minimum Norm Perturbation at Certain w']);
-        
+         
         max_eig
         i
         max(imag(eig(theta_adj)))
-        
-        avge_fragility = [avge_fragility; mean(fragility_table)];
     end
 end
 
@@ -139,22 +149,38 @@ for i=1:length(ezone_labels)
     plot(get(gca, 'xlim'), [ezone_indices(i)+0.5 ezone_indices(i)+0.5], 'k', 'LineWidth', LT);
 end
 
+% how this channel affects all other channels
 figure;
 imagesc(colsum_time_chan);
 colorbar(); colormap('jet');
 title('Column Sum From 50 to 1 Seconds Before Seizure For All Chans');
 xlabel('Time 50->1 Second');
 ylabel('Channels');
+set(gca, 'YTick', chanticks);
+hold on
+for i=1:length(ezone_labels)
+    plot(get(gca, 'xlim'), [ezone_indices(i)-0.5 ezone_indices(i)-0.5], 'k', 'LineWidth', LT);
+    plot(get(gca, 'xlim'), [ezone_indices(i)+0.5 ezone_indices(i)+0.5], 'k', 'LineWidth', LT);
+end
 
+% how all channels affect this channel
 figure;
 imagesc(rowsum_time_chan);
 colorbar(); colormap('jet');
 title('Row Sum From 50 to 1 Seconds Before Seizure For All Chans');
 xlabel('Time 50->1 Second');
 ylabel('Channels');
+set(gca, 'YTick', chanticks);
+hold on
+for i=1:length(ezone_labels)
+    plot(get(gca, 'xlim'), [ezone_indices(i)-0.5 ezone_indices(i)-0.5], 'k', 'LineWidth', LT);
+    plot(get(gca, 'xlim'), [ezone_indices(i)+0.5 ezone_indices(i)+0.5], 'k', 'LineWidth', LT);
+end
 
+% average fragility 
 figure;
-plot(avge_fragility, 'ko');
+plot(avge_fragility, 'ko'); hold on;
+plot(ezone_avge_fragility, 'r*');
 title('Averaged Fragility From 50 seconds to 1 second before Seizure');
 xlabel('50 seconds -> 1 second before seizure');
 ylabel('Fragility (Minimum Norm Perturbation)');
