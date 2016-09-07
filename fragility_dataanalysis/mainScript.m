@@ -150,8 +150,8 @@ while (sample_to_access < limit)
     title(titleStr);
     xlabel('Real'); ylabel('Imaginary');
     
-    % save the theta_adj made
-    fileName = strcat(pat_id, '_', num2str(lastwindow/frequency_sampling));
+    %% save the theta_adj made
+    fileName = strcat(patient, '_', num2str(lastwindow/frequency_sampling));
     save(fileName, 'theta_adj');
     
     % step 3: update the pointer and window
