@@ -1,5 +1,5 @@
-clear all;
-close all;
+% clear all;
+% close all;
 
 % define w0/w and sigma for the frequency range to grid search over
 w0 = 1;
@@ -15,7 +15,7 @@ patient = strcat(pat_id, sz_id);
 included_channels = [1:36 42 43 46:54 56:69 72:95];
 
 % define epileptogenic zone
-dataDir = './adj_mats_500_05/';
+dataDir = fullfile('./adj_mats_500_05/', patient);
 fid = fopen(strcat('./data/',patient, '/', patient, '_labels.csv'));
 labels = textscan(fid, '%s', 'Delimiter', ',');
 labels = labels{:}; labels = labels(included_channels);
@@ -40,6 +40,7 @@ filerange = length(matFiles);
 
 timeRange = 35:84;
 timeSStart = 85;
+szIndex = 0;
 timeIndices = [];
 avge_fragility = zeros(filerange,1); % from all channels
 ezone_avge_fragility = zeros(filerange,1); % from only ezone channels
@@ -58,6 +59,12 @@ for i=1:filerange
     indexMat = strfind(matFile, '.mat');
     currenttime = str2double(matFile(indexTime+1:indexMat-1));
     timeIndices = [timeIndices; currenttime];
+    
+    % set the seizure index for plotting
+    if timeSStart == currenttime
+        szIndex = i;
+    end
+    
     
     %%- determine which indices have eigenspectrums that are stable
     max_eig = max(abs(eig(theta_adj)));
@@ -149,23 +156,33 @@ toc
 % chanticks = 5:5:85;
 LT = 1.5;
 FONTSIZE=16;
+xIndices = 1:110;
 
 %%- PLOT THE HEATMAP OF FRAGILITY 
 titleStr = {'Minimum L2-Norm Perturbation For All Channels', ...
-    'From Before Preseizure to 10 Seconds Postseizure'};
-xticks = (timeIndices(1) - timeSStart):5:(timeIndices(end) - timeSStart);
+    'From 50 Seconds Preseizure to 5 Seconds Postseizure'};
+xticks = (timeIndices(1) - timeSStart)-0.5:5:(timeIndices(110) - timeSStart);
 
 figure;
-imagesc(frag_time_chan); hold on;
+imagesc(frag_time_chan(:, xIndices)); hold on;
 colorbar(); colormap('jet');
-title(titleStr, 'FontSize', FONTSIZE+4);
-xlabel('Time (sec)', 'FontSize', FONTSIZE);  ylabel('Electrode Channels', 'FontSize', FONTSIZE);
-set(gca, 'FontSize', FONTSIZE-4);
-% set(gca, 'XTick', [XLowerLim:5:XUpperLim]);
-
 XLim = get(gca, 'xlim');
 XLowerLim = XLim(1);
 XUpperLim = XLim(2);
+
+% set title, labels and ticks
+title(titleStr, 'FontSize', FONTSIZE+4);
+xlabel('Time (sec)', 'FontSize', FONTSIZE);  ylabel('Electrode Channels', 'FontSize', FONTSIZE);
+set(gca, 'FontSize', FONTSIZE-4);
+colorbar(); colormap('jet');
+XLim = get(gca, 'xlim');
+XLowerLim = XLim(1);
+XUpperLim = XLim(2);
+set(gca, 'FontSize', FONTSIZE-4);
+set(gca, 'XTick', [XLowerLim+0.5:5:XUpperLim]);
+set(gca, 'XTickLabel', xticks);
+
+
 xlim([XLowerLim 121]);
 plot(repmat(121, length(ezone_indices),1), ezone_indices, '*r');
 % set(gca, 'YTick', chanticks);
