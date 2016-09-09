@@ -2,16 +2,17 @@
 % x = Ax
 %% 0: READ PATIENT ID FILE
 % change these paramters depending on patient
-% pat_id = 'pt10';
-% sz_id = 'sz3';
-pat_id = 'JH105';
-sz_id = 'sz1';
+pat_id = 'pt1'; sz_id = 'sz2';
+pat_id = 'JH105'; sz_id = 'sz1';
+
+included_channels = [1:36 42 43 46:54 56:69 72:95]; % pt1
+% included_channels = [1:3 5:22 24:37 42 43 46:85 88 89]; %pt10
+included_channels = [1:4 7:12 14:19 21:37 42 43 46:49 51:53 55:75 78:99]; %JH105
+
 patient = strcat(pat_id, sz_id);
 patfile = strcat(patient, '.csv');
 patient_eeg_path = strcat('./data/', patient);
-included_channels = [1:36 42 43 46:54 56:69 72:95]; % pt1
-included_channels = [1:3 5:22 24:37 42 43 46:85 88 89]; %pt10
-included_channels = [1:4 7:12 14:19 21:37 42 43 46:49 51:53 55:75 78:99]; %JHU105
+
 %%- set file path for the patient file 
 dataDir = './data/';
 patient_file_path = fullfile(dataDir, patfile);
