@@ -1,11 +1,11 @@
-clear all;
-close all;
+% clear all;
+% close all;
 
 % define w0/w and sigma for the frequency range to grid search over
 w0 = 1;
 w = linspace(-1, w0, 101); 
 % sigma = linspace(0, sigma0, 100);
-sigma0 = 1.25;
+sigma0 = 1.1;
 sigma = sqrt(sigma0^2 - w.^2); % move to the unit circle 1, for a plethora of different radial frequencies
 b = [0; 1];
 perturbationType = 'R';
@@ -15,12 +15,12 @@ patient = strcat(pat_id, sz_id);
 included_channels = [1:36 42 43 46:54 56:69 72:95];
 
 % define epileptogenic zone
-dataDir = './adj_mats_500_1/';
-fid = fopen('./data/pt1sz2/pt1sz2_labels.csv');
+dataDir = fullfile('./adj_mats_500_05/', patient);
+fid = fopen(strcat('./data/',patient, '/', patient, '_labels.csv'));
 labels = textscan(fid, '%s', 'Delimiter', ',');
 labels = labels{:}; labels = labels(included_channels);
 fclose(fid);
-ezone_labels = {'POLPST1', 'POLPST2', 'POLPST3', 'POLAD1', 'POLAD2'};
+ezone_labels = {'POLPST1', 'POLPST2', 'POLPST3', 'POLAD1', 'POLAD2'}; %ptsz1
 
 % define cell function to search for the EZ labels
 cellfind = @(string)(@(cell_contents)(strcmp(string,cell_contents)));
@@ -34,18 +34,38 @@ end
 
 % initialize avge fragility, fragility/time/channel, colsum, rowsum
 % heatmaps
+matFiles = dir(fullfile(dataDir, '*.mat'));
+matFiles = {matFiles.name};
+filerange = length(matFiles);
+
 timeRange = 35:84;
-avge_fragility = zeros(length(timeRange),1); % from all channels
-ezone_avge_fragility = zeros(length(timeRange),1); % from only ezone channels
-frag_time_chan = zeros(length(included_channels), length(timeRange));
-colsum_time_chan = zeros(length(included_channels), length(timeRange));
-rowsum_time_chan = zeros(length(included_channels), length(timeRange));
+timeSStart = 85;
+szIndex = 0;
+timeIndices = [];
+avge_fragility = zeros(filerange,1); % from all channels
+ezone_avge_fragility = zeros(filerange,1); % from only ezone channels
+frag_time_chan = zeros(length(included_channels), filerange);
+colsum_time_chan = zeros(length(included_channels), filerange);
+rowsum_time_chan = zeros(length(included_channels), filerange);
 
 % loop through mat files and open them upbcd
 iTime = 1; % time pointer for heatmaps
-for i=35:84
-    load(fullfile(dataDir, strcat('pt1sz2_', num2str(i))));
-
+tic;
+for i=1:filerange
+    matFile = matFiles{i};
+    load(fullfile(dataDir, matFile));
+    
+    indexTime = strfind(matFile, '_');
+    indexMat = strfind(matFile, '.mat');
+    currenttime = str2double(matFile(indexTime+1:indexMat-1));
+    timeIndices = [timeIndices; currenttime];
+    
+    % set the seizure index for plotting
+    if timeSStart == currenttime
+        szIndex = i;
+    end
+    
+    
     %%- determine which indices have eigenspectrums that are stable
     max_eig = max(abs(eig(theta_adj)));
     if (max_eig < sigma0) % this is a stable eigenspectrum
@@ -102,7 +122,7 @@ for i=35:84
         % update pointer for the fragility heat map
         iTime = iTime+1;
         
-        %%- Plot 1 time point
+%         %%- Plot 1 time point
 %         plotPoints = 1:size(theta_adj,1);
 %         plotPoints(ezone_indices) = [];
 %         figure;
@@ -122,31 +142,53 @@ for i=35:84
 %         subplot(313);
 %         plot(plotPoints, fragility_table(plotPoints), 'ko'); hold on;
 %         plot(ezone_indices, fragility_table(ezone_indices), 'ro');
-%         title(['Fragility Per Electrode at ', num2str(85-i), ' seconds before seizure']);
+%         title(['Fragility Per Electrode at ', num2str(timeSStart - currenttime), ' seconds before seizure']);
 %         xlabel(['Electrodes (n=', num2str(N),')']);
 %         ylabel(['Minimum Norm Perturbation at Certain w']);
-         
+%          
         max_eig
         i
         max(imag(eig(theta_adj)))
     end
 end
+toc
 
-chanticks = 5:5:85;
+% chanticks = 5:5:85;
 LT = 1.5;
+FONTSIZE=16;
+xIndices = 1:110;
 
 %%- PLOT THE HEATMAP OF FRAGILITY 
+titleStr = {'Minimum L2-Norm Perturbation For All Channels', ...
+    'From 50 Seconds Preseizure to 5 Seconds Postseizure'};
+xticks = (timeIndices(1) - timeSStart)-0.5:5:(timeIndices(110) - timeSStart);
+
 figure;
-imagesc(frag_time_chan);
+imagesc(frag_time_chan(:, xIndices)); hold on;
 colorbar(); colormap('jet');
-title('Fragility From 50 to 1 Seconds Before Seizure For All Chans');
-xlabel('Time 50->1 Second'); 
-ylabel('Channels');
-set(gca, 'YTick', chanticks);
-hold on
+XLim = get(gca, 'xlim');
+XLowerLim = XLim(1);
+XUpperLim = XLim(2);
+
+% set title, labels and ticks
+title(titleStr, 'FontSize', FONTSIZE+4);
+xlabel('Time (sec)', 'FontSize', FONTSIZE);  ylabel('Electrode Channels', 'FontSize', FONTSIZE);
+set(gca, 'FontSize', FONTSIZE-4);
+colorbar(); colormap('jet');
+XLim = get(gca, 'xlim');
+XLowerLim = XLim(1);
+XUpperLim = XLim(2);
+set(gca, 'FontSize', FONTSIZE-4);
+set(gca, 'XTick', [XLowerLim+0.5:5:XUpperLim]);
+set(gca, 'XTickLabel', xticks);
+
+
+xlim([XLowerLim 121]);
+plot(repmat(121, length(ezone_indices),1), ezone_indices, '*r');
+% set(gca, 'YTick', chanticks);
 for i=1:length(ezone_labels)
-    plot(get(gca, 'xlim'), [ezone_indices(i)-0.5 ezone_indices(i)-0.5], 'k', 'LineWidth', LT);
-    plot(get(gca, 'xlim'), [ezone_indices(i)+0.5 ezone_indices(i)+0.5], 'k', 'LineWidth', LT);
+    plot(get(gca, 'xlim')-1, [ezone_indices(i)-0.5 ezone_indices(i)-0.5], 'k', 'LineWidth', LT);
+    plot(get(gca, 'xlim')-1, [ezone_indices(i)+0.5 ezone_indices(i)+0.5], 'k', 'LineWidth', LT);
 end
 
 % how this channel affects all other channels
@@ -156,7 +198,7 @@ colorbar(); colormap('jet');
 title('Column Sum From 50 to 1 Seconds Before Seizure For All Chans');
 xlabel('Time 50->1 Second');
 ylabel('Channels');
-set(gca, 'YTick', chanticks);
+% set(gca, 'YTick', chanticks);
 hold on
 for i=1:length(ezone_labels)
     plot(get(gca, 'xlim'), [ezone_indices(i)-0.5 ezone_indices(i)-0.5], 'k', 'LineWidth', LT);
@@ -170,7 +212,7 @@ colorbar(); colormap('jet');
 title('Row Sum From 50 to 1 Seconds Before Seizure For All Chans');
 xlabel('Time 50->1 Second');
 ylabel('Channels');
-set(gca, 'YTick', chanticks);
+% set(gca, 'YTick', chanticks);
 hold on
 for i=1:length(ezone_labels)
     plot(get(gca, 'xlim'), [ezone_indices(i)-0.5 ezone_indices(i)-0.5], 'k', 'LineWidth', LT);
