@@ -95,17 +95,20 @@ num_channels = length(included_channels);
 
 % window parameters - overlap, #samples, stepsize, window pointer
 sliding_window_overlap = 0.5;                                            % window overlap (seconds)
+preseizureTime = 60;
+postseizureTime = 10;
 nsamples = round(sliding_window_overlap * frequency_sampling);           % number of samples to analyze (milliseconds)
 stepwin = 0.5*frequency_sampling;                                          % step size of sliding horizon (milliseconds)
-lastwindow = timeSStart - 60*frequency_sampling;                         % where to grab data (milliseconds)
+lastwindow = timeSStart - preseizureTime*frequency_sampling;                         % where to grab data (milliseconds)
 sample_to_access = lastwindow;                  
 
 tic;
+index = 1;
 limit = fix((file_length - (nsamples - stepwin * frequency_sampling)) / (stepwin * frequency_sampling));
-limit = timeSStart + 10000; % go to seizure start, or + 10 seconds
+limit = timeSStart + postseizureTime*frequency_sampling; % go to seizure start, or + 10 seconds
 disp(['Seizure starts at ', num2str(limit), ' milliseconds']);
  
-while (sample_to_access < limit)
+while (sample_to_access <= limit)
     % step 1: extract the data and apply the notch filter. Note that column
     %         #i in the extracted matrix is filled by data samples from the
     %         recording channel #i.
@@ -154,15 +157,26 @@ while (sample_to_access < limit)
     xlabel('Real'); ylabel('Imaginary');
     
     %% save the theta_adj made
-    fileName = strcat(patient, '_', num2str(lastwindow/frequency_sampling), '.mat');
-    adjDir = './adj_mats_500_05/';
+    fileName = strcat(patient, '_', num2str(index), '.mat');
+    adjDir = fullfile('./adj_mats_500_05/', patient);
     if ~exist(adjDir)
         mkdir(adjDir);
     end
-    save(fullfile(adjDir, fileName), 'theta_adj');
+    
+    data.theta_adj = theta_adj;
+    data.seizureTime = timeSStart;
+    data.winSize = nsamples;
+    data.stepSize = stepwin;
+    data.timewrtSz = lastwindow - timeSStart;
+    data.timeStart = timeSStart - preseizureTime*frequency_sampling;
+    data.timeEnd = timeSStart + postseizureTime*frequency_sampling;
+    data.index = index;
+    
+    save(fullfile(adjDir, fileName), 'data');
     
     % step 3: update the pointer and window
     sample_to_access = sample_to_access + stepwin;
     lastwindow = sample_to_access;
+    index = index + 1;
 end
     
