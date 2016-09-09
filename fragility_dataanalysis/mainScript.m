@@ -151,7 +151,7 @@ while (sample_to_access < limit)
     xlabel('Real'); ylabel('Imaginary');
     
     %% save the theta_adj made
-    fileName = strcat(patient, '_', num2str(lastwindow/frequency_sampling));
+    fileName = strcat(patient, '_', num2str(lastwindow/frequency_sampling), '.mat');
     adjDir = './adj_mats_500_05/';
     if ~exist(adjDir)
         mkdir(adjDir);
