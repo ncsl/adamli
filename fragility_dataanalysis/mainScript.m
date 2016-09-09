@@ -91,7 +91,7 @@ file_length = length(eeg);
 num_channels = length(included_channels);
 
 % window parameters - overlap, #samples, stepsize, window pointer
-sliding_window_overlap = 0.75;                                            % window overlap (seconds)
+sliding_window_overlap = 0.5;                                            % window overlap (seconds)
 nsamples = round(sliding_window_overlap * frequency_sampling);           % number of samples to analyze (milliseconds)
 stepwin = 0.5*frequency_sampling;                                          % step size of sliding horizon (milliseconds)
 lastwindow = timeSStart - 50*frequency_sampling;                         % where to grab data (milliseconds)
@@ -99,7 +99,7 @@ sample_to_access = lastwindow;
 
 tic;
 limit = fix((file_length - (nsamples - stepwin * frequency_sampling)) / (stepwin * frequency_sampling));
-limit = timeSStart;
+limit = timeSStart + 10000; % go to seizure start, or + 10 seconds
 disp(['Seizure starts at ', num2str(limit), ' milliseconds']);
  
 while (sample_to_access < limit)
@@ -144,7 +144,7 @@ while (sample_to_access < limit)
     E = eig(theta_adj);
     
     % step 3: Plotting Eigenspectrum
-    titleStr = {['Eigenspectrum of A\b=x for ', patient_id_path], ...
+    titleStr = {['Eigenspectrum of A\b=x for ', patient], ...
         ['time point (seconds) before seizure: ', num2str((timeSStart - lastwindow)/frequency_sampling)]};
     plot(real(E), imag(E), 'o')
     title(titleStr);
@@ -152,7 +152,11 @@ while (sample_to_access < limit)
     
     %% save the theta_adj made
     fileName = strcat(patient, '_', num2str(lastwindow/frequency_sampling));
-    save(fileName, 'theta_adj');
+    adjDir = './adj_mats_500_05/';
+    if ~exist(adjDir)
+        mkdir(adjDir);
+    end
+    save(fullfile(adjDir, fileName), 'theta_adj');
     
     % step 3: update the pointer and window
     sample_to_access = sample_to_access + stepwin;
