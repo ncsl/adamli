@@ -1,5 +1,5 @@
-% clear all;
-% close all;
+clear all;
+close all;
 
 % define w0/w and sigma for the frequency range to grid search over
 w0 = 1;
@@ -14,13 +14,14 @@ sz_id = 'sz2';
 patient = strcat(pat_id, sz_id);
 included_channels = [1:36 42 43 46:54 56:69 72:95];
 
-% define epileptogenic zone
+%% Define epileptogenic zone
 dataDir = fullfile('./adj_mats_500_05/', patient);
-fid = fopen(strcat('./data/',patient, '/', patient, '_labels.csv'));
+fid = fopen(strcat('./data/',patient, '/', patient, '_labels.csv')); % open up labels to get all the channels
 labels = textscan(fid, '%s', 'Delimiter', ',');
 labels = labels{:}; labels = labels(included_channels);
 fclose(fid);
-ezone_labels = {'POLPST1', 'POLPST2', 'POLPST3', 'POLAD1', 'POLAD2'}; %ptsz1
+ezone_labels = {'POLPST1', 'POLPST2', 'POLPST3', 'POLAD1', 'POLAD2'}; %pt1
+ezone_labels = {'POLATT1', 'POLATT2', 'POLAD1', 'POLAD2', 'POLAD3'}; %pt1
 
 % define cell function to search for the EZ labels
 cellfind = @(string)(@(cell_contents)(strcmp(string,cell_contents)));
@@ -32,47 +33,57 @@ for i=1:length(ezone_labels)
     ezone_indices(i) = test(indice);
 end
 
+%% Initialize Variables
 % initialize avge fragility, fragility/time/channel, colsum, rowsum
 % heatmaps
 matFiles = dir(fullfile(dataDir, '*.mat'));
-matFiles = {matFiles.name};
-filerange = length(matFiles);
+matFiles = {matFiles.name};                     % cell array of all mat file names in order
+matFiles = natsortfiles(matFiles);
 
-timeRange = 35:84;
-timeSStart = 85;
-szIndex = 0;
-timeIndices = [];
-avge_fragility = zeros(filerange,1); % from all channels
-ezone_avge_fragility = zeros(filerange,1); % from only ezone channels
-frag_time_chan = zeros(length(included_channels), filerange);
-colsum_time_chan = zeros(length(included_channels), filerange);
-rowsum_time_chan = zeros(length(included_channels), filerange);
+timeRange = length(matFiles);
+
+timeIndices = [];                               % vector to store time indices of each window of data
+avge_minPerturb = zeros(timeRange,1);     % store the avge fragility from all channels @ each time
+ezone_minPerturb_fragility = zeros(timeRange,1); % from only ezone channels
+
+minPerturb_time_chan = zeros(length(included_channels), ... % fragility at each time/channel
+                    timeRange);
+colsum_time_chan = zeros(length(included_channels), ... % colsum at each time/channel
+                    timeRange);
+rowsum_time_chan = zeros(length(included_channels), ... % rowsum at each time/channel
+                    timeRange);
 
 % loop through mat files and open them upbcd
 iTime = 1; % time pointer for heatmaps
 tic;
-for i=1:filerange
+for i=1:length(matFiles)
+    %%- 01: Extract File and Information
     matFile = matFiles{i};
-    load(fullfile(dataDir, matFile));
+    data = load(fullfile(dataDir, matFile));
+    data = data.data;
     
-    indexTime = strfind(matFile, '_');
-    indexMat = strfind(matFile, '.mat');
-    currenttime = str2double(matFile(indexTime+1:indexMat-1));
-    timeIndices = [timeIndices; currenttime];
-    
-    % set the seizure index for plotting
-    if timeSStart == currenttime
-        szIndex = i;
+    theta_adj = data.theta_adj;
+    timewrtSz = data.timewrtSz;
+    index = data.index;
+    if (i == 1) % only set these variables once -> save time
+        timeStart = data.timeStart / 1000;
+        timeEnd = data.timeEnd / 1000;
+        seizureTime = data.seizureTime / 1000;
+        winSize = data.winSize;
+        stepSize = data.stepSize;
     end
     
+    % store all the time indices with respect to seizure
+    timeIndices = [timeIndices; timewrtSz];
     
-    %%- determine which indices have eigenspectrums that are stable
+    %%- 02:Compute Minimum Norm Perturbation
+    % determine which indices have eigenspectrums that are stable
     max_eig = max(abs(eig(theta_adj)));
     if (max_eig < sigma0) % this is a stable eigenspectrum
         N = size(theta_adj, 1); % number of rows
         del_size = zeros(N, length(w));
         del_table = cell(N, length(w));
-        fragility_table = zeros(N, 1);
+        minPerturb_table = zeros(N, 1);
  
         %%- grid search over sigma and w for each row to determine, what is
         %%- the fragility.
@@ -95,29 +106,30 @@ for i=1:filerange
                 
                 del = B'*inv(B*B')*b;
                 
-                del_size(iNode, iW) = norm(del); % store the norm of the perturbation
+                del_size(iNode, iW) = norm(del); % store the l2-norm of the perturbation
                 del_table{iNode, iW} = del;
             end
             
             % store fragility, for each node at a certain time point
-            frag_time_chan(iNode, iTime) = min(del_size(iNode,:));
+            minPerturb_time_chan(iNode, iTime) = min(del_size(iNode,:));
             
             % find column for each row of minimum norm perturbation
             [r, c] = ind2sub([N length(w)], find(del_size == min(del_size(iNode, :))));
             r = r(1); c = c(1);
             ek = [zeros(r-1, 1); 1; zeros(N-r, 1)]; % unit vector at this row
             
-            % store the fragility for each node
-            fragility_table(iNode) = del_size(iNode, c);
+            % store the minimum norm perturbation for each node
+            minPerturb_table(iNode) = del_size(iNode, c);
         end % end of loop through channels
         
+        %%- 03: Store Results (colsum, rowsum, perturbation,
         % store col/row sum of adjacency matrix
         colsum_time_chan(:, iTime) = sum(theta_adj, 1);
         rowsum_time_chan(:, iTime) = sum(theta_adj, 2);
         
         % update list of average fragility at this time point
-        avge_fragility(iTime) = mean(fragility_table);
-        ezone_avge_fragility(iTime) = mean(fragility_table(ezone_indices));
+        avge_minPerturb(iTime) = mean(minPerturb_table);
+        ezone_minPerturb_fragility(iTime) = mean(minPerturb_table(ezone_indices));
         
         % update pointer for the fragility heat map
         iTime = iTime+1;
@@ -145,7 +157,6 @@ for i=1:filerange
 %         title(['Fragility Per Electrode at ', num2str(timeSStart - currenttime), ' seconds before seizure']);
 %         xlabel(['Electrodes (n=', num2str(N),')']);
 %         ylabel(['Minimum Norm Perturbation at Certain w']);
-%          
         max_eig
         i
         max(imag(eig(theta_adj)))
@@ -153,76 +164,161 @@ for i=1:filerange
 end
 toc
 
+fig = {};
 % chanticks = 5:5:85;
 LT = 1.5;
-FONTSIZE=16;
-xIndices = 1:110;
+FONTSIZE=18;
+xIndices = 1:(size(minPerturb_time_chan,2)-20);
+% xIndices = 1:size(minPerturb_time_chan,2);
+
+save(fullfile(dataDir,'final_data.mat'), 'avge_minPerturb', 'ezone_minPerturb_fragility', ...
+                                'minPerturb_time_chan', 'colsum_time_chan', 'rowsum_time_chan');
+
+avge_minPerturb = avge_minPerturb(xIndices);
+ezone_minPerturb_fragility = ezone_minPerturb_fragility(xIndices);
+minPerturb_time_chan = minPerturb_time_chan(:,xIndices);
+colsum_time_chan = colsum_time_chan(:,xIndices);
+rowsum_time_chan = rowsum_time_chan(:,xIndices);
+
 
 %%- PLOT THE HEATMAP OF FRAGILITY 
-titleStr = {'Minimum L2-Norm Perturbation For All Channels', ...
-    'From 50 Seconds Preseizure to 5 Seconds Postseizure'};
-xticks = (timeIndices(1) - timeSStart)-0.5:5:(timeIndices(110) - timeSStart);
-
-figure;
-imagesc(frag_time_chan(:, xIndices)); hold on;
-colorbar(); colormap('jet');
-XLim = get(gca, 'xlim');
-XLowerLim = XLim(1);
-XUpperLim = XLim(2);
-
+fig{end+1} = figure(1);
+imagesc(minPerturb_time_chan); hold on;
+c = colorbar(); colormap('jet'); set(gca,'box','off')
+XLim = get(gca, 'xlim'); XLowerLim = XLim(1); XUpperLim = XLim(2);
 % set title, labels and ticks
-title(titleStr, 'FontSize', FONTSIZE+4);
+xticks = (timeStart - seizureTime) : 5 : (timeEnd - seizureTime);
+titleStr = {'Minimum L2-Norm Perturbation For All Channels', ...
+    'From 60 Seconds Preseizure to 5 Seconds Postseizure'};
+title(titleStr, 'FontSize', FONTSIZE+2);
+ylabel(c, 'Minimum L2-Norm Perturbation');
 xlabel('Time (sec)', 'FontSize', FONTSIZE);  ylabel('Electrode Channels', 'FontSize', FONTSIZE);
-set(gca, 'FontSize', FONTSIZE-4);
-colorbar(); colormap('jet');
-XLim = get(gca, 'xlim');
-XLowerLim = XLim(1);
-XUpperLim = XLim(2);
-set(gca, 'FontSize', FONTSIZE-4);
-set(gca, 'XTick', [XLowerLim+0.5:5:XUpperLim]);
-set(gca, 'XTickLabel', xticks);
+set(gca, 'FontSize', FONTSIZE-3, 'LineWidth', LT);
+set(gca, 'XTick', (XLowerLim+0.5:10:XUpperLim+0.5)); set(gca, 'XTickLabel', xticks); % set xticks and their labels
+set(gca, 'YTick', [1, 5:5:length(included_channels)]);
+xlim([XLowerLim XUpperLim+1]); % increase the xlim by 1, to mark regions of EZ
+% add the labels for the EZ electrodes (rows)
+% set(gca, 'clim', [0 0.35]);
 
-
-xlim([XLowerLim 121]);
-plot(repmat(121, length(ezone_indices),1), ezone_indices, '*r');
-% set(gca, 'YTick', chanticks);
+plot(repmat(XUpperLim+1, length(ezone_indices),1), ezone_indices, '*r');
 for i=1:length(ezone_labels)
-    plot(get(gca, 'xlim')-1, [ezone_indices(i)-0.5 ezone_indices(i)-0.5], 'k', 'LineWidth', LT);
-    plot(get(gca, 'xlim')-1, [ezone_indices(i)+0.5 ezone_indices(i)+0.5], 'k', 'LineWidth', LT);
+    x1 = XLowerLim + 0.01;
+    x2 = XUpperLim - 0.01;
+    x = [x1 x2 x2 x1 x1];
+    y1 = ezone_indices(i)-0.5;
+    y2 = ezone_indices(i)+0.5;
+    y = [y1 y1 y2 y2 y1];
+    plot(x, y, 'r-', 'LineWidth', 2.5);
 end
+legend('EZ Electrodes');
 
-% how this channel affects all other channels
-figure;
-imagesc(colsum_time_chan);
-colorbar(); colormap('jet');
-title('Column Sum From 50 to 1 Seconds Before Seizure For All Chans');
-xlabel('Time 50->1 Second');
-ylabel('Channels');
-% set(gca, 'YTick', chanticks);
-hold on
+
+% PLOT COLSUM: how this channel affects all other channels
+fig{end+1} = figure;
+imagesc(colsum_time_chan); hold on;
+c = colorbar(); colormap('jet'); set(gca,'box','off')
+XLim = get(gca, 'xlim'); XLowerLim = XLim(1); XUpperLim = XLim(2);
+
+xticks = (timeStart - seizureTime) : 5 : (timeEnd - seizureTime);
+titleStr = {'Column Sum of Matrix A Of Each Channel', ...
+    'From 60 Seconds Preseizure to 5 Seconds Postseizure'};
+title(titleStr, 'FontSize', FONTSIZE+2);
+ylabel(c, 'Column Sum');
+xlabel('Time (sec)', 'FontSize', FONTSIZE);  ylabel('Electrode Channels', 'FontSize', FONTSIZE);
+set(gca, 'FontSize', FONTSIZE-3, 'LineWidth', LT);
+set(gca, 'XTick', (XLowerLim+0.5:10:XUpperLim+0.5)); set(gca, 'XTickLabel', xticks); % set xticks and their labels
+set(gca, 'YTick', [1, 5:5:length(included_channels)]);
+xlim([XLowerLim XUpperLim+1]); % increase the xlim by 1, to mark regions of EZ
+% add the labels for the EZ electrodes (rows)
+plot(repmat(XUpperLim+1, length(ezone_indices),1), ezone_indices, '*r');
 for i=1:length(ezone_labels)
-    plot(get(gca, 'xlim'), [ezone_indices(i)-0.5 ezone_indices(i)-0.5], 'k', 'LineWidth', LT);
-    plot(get(gca, 'xlim'), [ezone_indices(i)+0.5 ezone_indices(i)+0.5], 'k', 'LineWidth', LT);
+    x1 = XLowerLim + 0.01;
+    x2 = XUpperLim - 0.01;
+    x = [x1 x2 x2 x1 x1];
+    y1 = ezone_indices(i)-0.5;
+    y2 = ezone_indices(i)+0.5;
+    y = [y1 y1 y2 y2 y1];
+    plot(x, y, 'r-', 'LineWidth', 2.5);
+end
+legend('EZ Electrodes');
+
+
+% PLOT ROWSUM: how all channels affect this channel
+fig{end+1} = figure;
+imagesc(rowsum_time_chan); hold on;
+c = colorbar(); colormap('jet'); set(gca,'box','off')
+titleStr = {'Row Sum of Matrix A Of Each Channel', ...
+    'From 60 Seconds Preseizure to 5 Seconds Postseizure'};
+title(titleStr, 'FontSize', FONTSIZE+2);
+ylabel(c, 'Row Sum');
+xlabel('Time (sec)', 'FontSize', FONTSIZE);  ylabel('Electrode Channels', 'FontSize', FONTSIZE);
+set(gca, 'FontSize', FONTSIZE-3, 'LineWidth', LT);
+set(gca, 'XTick', (XLowerLim+0.5:10:XUpperLim+0.5)); set(gca, 'XTickLabel', xticks); % set xticks and their labels
+set(gca, 'YTick', [1, 5:5:length(included_channels)]);
+xlim([XLowerLim XUpperLim+1]); % increase the xlim by 1, to mark regions of EZ
+% add the labels for the EZ electrodes (rows)
+plot(repmat(XUpperLim+1, length(ezone_indices),1), ezone_indices, '*r');
+for i=1:length(ezone_labels)
+    x1 = XLowerLim + 0.01;
+    x2 = XUpperLim - 0.01;
+    x = [x1 x2 x2 x1 x1];
+    y1 = ezone_indices(i)-0.5;
+    y2 = ezone_indices(i)+0.5;
+    y = [y1 y1 y2 y2 y1];
+    plot(x, y, 'r-', 'LineWidth', 2.5);
+end
+legend('EZ Electrodes');
+
+% PLOT average fragility 
+fig{end+1} = figure;
+plot(avge_minPerturb, 'ko'); hold on; set(gca,'box','off')
+plot(ezone_minPerturb_fragility, 'r*');
+titleStr = {'Averaged Perturbation Across All Channels', ...
+    'From 60 Seconds Preseizure to 5 Seconds Postseizure'};
+title(titleStr, 'FontSize', FONTSIZE+2);
+xlabel('Time (sec)', 'FontSize', FONTSIZE);  
+ylabel('Minimum L2-Norm Perturbation', 'FontSize', FONTSIZE);
+set(gca, 'FontSize', FONTSIZE-3, 'LineWidth', LT);
+legend('All Channels', 'EZ Channels');
+set(gca, 'XTick', (XLowerLim+0.5:10:XUpperLim+0.5)); set(gca, 'XTickLabel', xticks); 
+
+%% Compute Fragility Ranking
+% for the minPerturb_time_chan = x. (max(col(x)) - x) / max(col(x)) =>
+% fragility weight on each electrode
+
+fragility_rankings = zeros(size(minPerturb_time_chan,1),size(minPerturb_time_chan,2));
+% loop through each channel
+for i=1:size(minPerturb_time_chan,1)
+    for j=1:size(minPerturb_time_chan, 2) % loop through each time point
+        fragility_rankings(i,j) = (max(minPerturb_time_chan(:,j)) - minPerturb_time_chan(i,j)) ...
+                                    / max(minPerturb_time_chan(:,j));
+    end
 end
 
 % how all channels affect this channel
-figure;
-imagesc(rowsum_time_chan);
-colorbar(); colormap('jet');
-title('Row Sum From 50 to 1 Seconds Before Seizure For All Chans');
-xlabel('Time 50->1 Second');
-ylabel('Channels');
-% set(gca, 'YTick', chanticks);
-hold on
+fig{end+1} = figure;
+imagesc(fragility_rankings); hold on;
+c = colorbar(); colormap('jet'); set(gca,'box','off')
+titleStr = {'Fragility Ranking Of Each Channel', ...
+    'From 60 Seconds Preseizure to 5 Seconds Postseizure'};
+title(titleStr, 'FontSize', FONTSIZE+2);
+ylabel(c, 'Fragility Ranking');
+xlabel('Time (sec)', 'FontSize', FONTSIZE);  ylabel('Electrode Channels', 'FontSize', FONTSIZE);
+set(gca, 'FontSize', FONTSIZE-3, 'LineWidth', LT);
+set(gca, 'XTick', (XLowerLim+0.5:10:XUpperLim+0.5)); set(gca, 'XTickLabel', xticks); % set xticks and their labels
+set(gca, 'YTick', [1, 5:5:length(included_channels)]);
+xlim([XLowerLim XUpperLim+1]); % increase the xlim by 1, to mark regions of EZ
+% add the labels for the EZ electrodes (rows)
+plot(repmat(XUpperLim+1, length(ezone_indices),1), ezone_indices, '*r');
 for i=1:length(ezone_labels)
-    plot(get(gca, 'xlim'), [ezone_indices(i)-0.5 ezone_indices(i)-0.5], 'k', 'LineWidth', LT);
-    plot(get(gca, 'xlim'), [ezone_indices(i)+0.5 ezone_indices(i)+0.5], 'k', 'LineWidth', LT);
+    x1 = XLowerLim + 0.01;
+    x2 = XUpperLim - 0.01;
+    x = [x1 x2 x2 x1 x1];
+    y1 = ezone_indices(i)-0.5;
+    y2 = ezone_indices(i)+0.5;
+    y = [y1 y1 y2 y2 y1];
+    plot(x, y, 'r-', 'LineWidth', 2.5);
 end
+legend('EZ Electrodes');
 
-% average fragility 
-figure;
-plot(avge_fragility, 'ko'); hold on;
-plot(ezone_avge_fragility, 'r*');
-title('Averaged Fragility From 50 seconds to 1 second before Seizure');
-xlabel('50 seconds -> 1 second before seizure');
-ylabel('Fragility (Minimum Norm Perturbation)');
+
