@@ -164,22 +164,21 @@ for i=1:length(matFiles)
 end
 toc
 
+xIndices = 1:(size(minPerturb_time_chan,2)-20);
+save(fullfile(dataDir,'final_data.mat'), 'avge_minPerturb', 'ezone_minPerturb_fragility', ...
+                                'minPerturb_time_chan', 'colsum_time_chan', 'rowsum_time_chan');
+
 fig = {};
 % chanticks = 5:5:85;
 LT = 1.5;
 FONTSIZE=18;
-xIndices = 1:(size(minPerturb_time_chan,2)-20);
-% xIndices = 1:size(minPerturb_time_chan,2);
 
-save(fullfile(dataDir,'final_data.mat'), 'avge_minPerturb', 'ezone_minPerturb_fragility', ...
-                                'minPerturb_time_chan', 'colsum_time_chan', 'rowsum_time_chan');
-
+% reset where everything is
 avge_minPerturb = avge_minPerturb(xIndices);
 ezone_minPerturb_fragility = ezone_minPerturb_fragility(xIndices);
 minPerturb_time_chan = minPerturb_time_chan(:,xIndices);
 colsum_time_chan = colsum_time_chan(:,xIndices);
 rowsum_time_chan = rowsum_time_chan(:,xIndices);
-
 
 %%- PLOT THE HEATMAP OF FRAGILITY 
 fig{end+1} = figure(1);
@@ -188,8 +187,8 @@ c = colorbar(); colormap('jet'); set(gca,'box','off')
 XLim = get(gca, 'xlim'); XLowerLim = XLim(1); XUpperLim = XLim(2);
 % set title, labels and ticks
 xticks = (timeStart - seizureTime) : 5 : (timeEnd - seizureTime);
-titleStr = {'Minimum L2-Norm Perturbation For All Channels', ...
-    'From 60 Seconds Preseizure to 5 Seconds Postseizure'};
+titleStr = {'Minimum Norm Perturbation For All Channels', ...
+    'Time Locked To Seizure'};
 title(titleStr, 'FontSize', FONTSIZE+2);
 ylabel(c, 'Minimum L2-Norm Perturbation');
 xlabel('Time (sec)', 'FontSize', FONTSIZE);  ylabel('Electrode Channels', 'FontSize', FONTSIZE);
@@ -220,8 +219,8 @@ c = colorbar(); colormap('jet'); set(gca,'box','off')
 XLim = get(gca, 'xlim'); XLowerLim = XLim(1); XUpperLim = XLim(2);
 
 xticks = (timeStart - seizureTime) : 5 : (timeEnd - seizureTime);
-titleStr = {'Column Sum of Matrix A Of Each Channel', ...
-    'From 60 Seconds Preseizure to 5 Seconds Postseizure'};
+titleStr = {'Column Sum of Matrix A For Each Channel', ...
+    'Time Locked To Seizure'};
 title(titleStr, 'FontSize', FONTSIZE+2);
 ylabel(c, 'Column Sum');
 xlabel('Time (sec)', 'FontSize', FONTSIZE);  ylabel('Electrode Channels', 'FontSize', FONTSIZE);
@@ -247,8 +246,8 @@ legend('EZ Electrodes');
 fig{end+1} = figure;
 imagesc(rowsum_time_chan); hold on;
 c = colorbar(); colormap('jet'); set(gca,'box','off')
-titleStr = {'Row Sum of Matrix A Of Each Channel', ...
-    'From 60 Seconds Preseizure to 5 Seconds Postseizure'};
+titleStr = {'Row Sum of Matrix A For Each Channel', ...
+    'Time Locked To Seizure'};
 title(titleStr, 'FontSize', FONTSIZE+2);
 ylabel(c, 'Row Sum');
 xlabel('Time (sec)', 'FontSize', FONTSIZE);  ylabel('Electrode Channels', 'FontSize', FONTSIZE);
@@ -273,8 +272,8 @@ legend('EZ Electrodes');
 fig{end+1} = figure;
 plot(avge_minPerturb, 'ko'); hold on; set(gca,'box','off')
 plot(ezone_minPerturb_fragility, 'r*');
-titleStr = {'Averaged Perturbation Across All Channels', ...
-    'From 60 Seconds Preseizure to 5 Seconds Postseizure'};
+titleStr = {'Averaged Minimum Norm Perturbation Across All Channels', ...
+    'Time Locked To Seizure'};
 title(titleStr, 'FontSize', FONTSIZE+2);
 xlabel('Time (sec)', 'FontSize', FONTSIZE);  
 ylabel('Minimum L2-Norm Perturbation', 'FontSize', FONTSIZE);
@@ -300,7 +299,7 @@ fig{end+1} = figure;
 imagesc(fragility_rankings); hold on;
 c = colorbar(); colormap('jet'); set(gca,'box','off')
 titleStr = {'Fragility Ranking Of Each Channel', ...
-    'From 60 Seconds Preseizure to 5 Seconds Postseizure'};
+    'Time Locked To Seizure'};
 title(titleStr, 'FontSize', FONTSIZE+2);
 ylabel(c, 'Fragility Ranking');
 xlabel('Time (sec)', 'FontSize', FONTSIZE);  ylabel('Electrode Channels', 'FontSize', FONTSIZE);
