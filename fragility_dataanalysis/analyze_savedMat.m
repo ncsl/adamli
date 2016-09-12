@@ -1,13 +1,7 @@
 %% Define epileptogenic zone
 patient = 'pt1sz2';
-patient = 'pt2sz1';
-included_channels = [1:36 42 43 46:54 56:69 72:95]; %pt1
-included_channels = [1:19 21:37 43 44 47:74 75 79]; %pt2
-dataDir = fullfile('./adj_mats_500_05/', patient);
-fid = fopen(strcat('./data/',patient, '/', patient, '_labels.csv')); % open up labels to get all the channels
-labels = textscan(fid, '%s', 'Delimiter', ',');
-labels = labels{:}; labels = labels(included_channels);
-fclose(fid);
+% patient = 'pt2sz1';
+
 ezone_labels = {'POLPST1', 'POLPST2', 'POLPST3', 'POLAD1', 'POLAD2'}; %pt1
 ezone_labels = {'POLATT1', 'POLATT2', 'POLAD1', 'POLAD2', 'POLAD3'}; %pt1
 earlyspread_labels = {'POLATT3', 'POLAST1', 'POLAST2'};
@@ -15,9 +9,16 @@ latespread_labels = {'POLATT4', 'POLATT5', 'POLATT6', ...
                     'POLSLT2', 'POLSLT3', 'POLSLT4', ...
                     'POLMLT2', 'POLMLT3', 'POLMLT4', 'POLG8', 'POLG16'};
 
-ezone_labels = {'POLMST1', 'POLPST1', 'POLTT1'}; %pt2
-earlyspread_labels = {'POLTT2', 'POLAST2', 'POLMST2', 'POLPST2', 'POLALEX1', 'POLALEX5'};
+% ezone_labels = {'POLMST1', 'POLPST1', 'POLTT1'}; %pt2
+% earlyspread_labels = {'POLTT2', 'POLAST2', 'POLMST2', 'POLPST2', 'POLALEX1', 'POLALEX5'};
 
+included_channels = [1:36 42 43 46:54 56:69 72:95]; %pt1
+% included_channels = [1:19 21:37 43 44 47:74 75 79]; %pt2
+dataDir = fullfile('./adj_mats_500_05/', patient);
+fid = fopen(strcat('./data/',patient, '/', patient, '_labels.csv')); % open up labels to get all the channels
+labels = textscan(fid, '%s', 'Delimiter', ',');
+labels = labels{:}; labels = labels(included_channels);
+fclose(fid);
                 
 % define cell function to search for the EZ labels
 cellfind = @(string)(@(cell_contents)(strcmp(string,cell_contents)));
@@ -81,11 +82,34 @@ FONTSIZE = 20;
 LT=1.5;
 xticks = (timeStart - seizureTime) : 5 : (timeEnd - seizureTime);
 
+%%- PLOT THE HEATMAP OF FRAGILITY 
+fig{end+1} = figure(1);
+imagesc(minPerturb_time_chan(:,1:end-20)); hold on;
+c = colorbar(); colormap('jet'); set(gca,'box','off')
+XLim = get(gca, 'xlim'); XLowerLim = XLim(1); XUpperLim = XLim(2);
+% set title, labels and ticks
+xticks = (timeStart - seizureTime) : 5 : (timeEnd - seizureTime);
+titleStr = {'Minimum Norm Perturbation For All Channels', ...
+    'Time Locked To Seizure'};
+title(titleStr, 'FontSize', FONTSIZE+2);
+ylabel(c, 'Minimum L2-Norm Perturbation');
+xlabel('Time (sec)', 'FontSize', FONTSIZE);  ylabel('Electrode Channels', 'FontSize', FONTSIZE);
+set(gca, 'FontSize', FONTSIZE-3, 'LineWidth', LT);
+set(gca, 'XTick', (XLowerLim+0.5:10:XUpperLim+0.5)); set(gca, 'XTickLabel', xticks); % set xticks and their labels
+set(gca, 'YTick', [1, 5:5:length(included_channels)]);
+xlim([XLowerLim XUpperLim+1]); % increase the xlim by 1, to mark regions of EZ
+% add the labels for the EZ electrodes (rows)
+% set(gca, 'clim', [0 0.35]);
 
+plot(repmat(XUpperLim+1, length(ezone_indices),1), ezone_indices, '*r');
+plot(repmat(XUpperLim+1, length(earlyspread_indices), 1), earlyspread_indices, '*', 'color', [1 .5 0]);
+plot(repmat(XUpperLim+1, length(latespread_indices),1), latespread_indices, '*', 'color', [1 .75 0]);
+
+legend('EZ Electrodes');
 
 % fragility ranking
 fig{end+1} = figure;
-imagesc(fragility_rankings(:,1:end-10)); hold on;
+imagesc(fragility_rankings(:,1:end-20)); hold on;
 c = colorbar(); colormap('jet'); set(gca,'box','off')
 titleStr = {'Fragility Ranking Of Each Channel', ...
     'Time Locked To Seizure'};
@@ -109,7 +133,7 @@ plot(repmat(XUpperLim+1, length(ezone_indices),1), ezone_indices, '*r');
 %     plot(x, y, 'r-', 'LineWidth', 2.5);
 % end
 
-plot(repmat(XUpperLim+1, length(earlyspread_indices), 1), earlyspread_indices, '*', 'color', [ .5 0]);
+plot(repmat(XUpperLim+1, length(earlyspread_indices), 1), earlyspread_indices, '*', 'color', [1 .5 0]);
 % for i=1:length(earlyspread_labels)
 %     if earlyspread_indices(i) ~= 0
 %         x1 = XLowerLim + 0.01;
