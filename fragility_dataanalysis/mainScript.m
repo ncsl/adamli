@@ -8,6 +8,7 @@ pat_id = 'pt2'; sz_id = 'sz1';
 included_channels = [1:36 42 43 46:54 56:69 72:95]; % pt1
 % included_channels = [1:3 5:22 24:37 42 43 46:85 88 89]; %pt10
 included_channels = [1:4 7:12 14:19 21:37 42 43 46:49 51:53 55:75 78:99]; %JH105
+included_channels = [1:19 21:37 43 44 47:74 75 79]; %pt2
 
 patient = strcat(pat_id, sz_id);
 patfile = strcat(patient, '.csv');
