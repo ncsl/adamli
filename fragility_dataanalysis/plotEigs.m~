@@ -9,11 +9,12 @@ sigma0 = 1.1;
 sigma = sqrt(sigma0^2 - w.^2); % move to the unit circle 1, for a plethora of different radial frequencies
 b = [0; 1];
 perturbationType = 'R';
-pat_id = 'pt2';
-sz_id = 'sz1';
+pat_id = 'pt1';
+sz_id = 'sz2';
 % pat_id = 'JH105';
 % sz_id = 'sz1';
 patient = strcat(pat_id, sz_id);
+
 if strcmp(pat_id, 'pt1')
     included_channels = [1:36 42 43 46:69 72:95];
     ezone_labels = {'POLPST1', 'POLPST2', 'POLPST3', 'POLAD1', 'POLAD2'}; %pt1
@@ -28,11 +29,10 @@ elseif strcmp(pat_id, 'pt2')
     earlyspread_labels = {'POLTT2', 'POLAST2', 'POLMST2', 'POLPST2', 'POLALEX1', 'POLALEX5'};
 elseif strcmp(pat_id, 'JH105')
     included_channels = [1:4 7:12 14:19 21:37 42 43 46:49 51:53 55:75 78:99]; % JH105
-    ezone_labels = {'POLRPG4', 'POLRPG5', 'POLRPG6', 'POLRPG12', 'POLRPG13', 'POLG14',...
-        'POLAPD1', 'POLAPD2', 'POLAPD3', 'POLAPD4', 'POLAPD5', 'POLAPD6', 'POLAPD7', 'POLAPD8', ...
-        'POLPPD1', 'POLPPD2', 'POLPPD3', 'POLPPD4', 'POLPPD5', 'POLPPD6', 'POLPPD7', 'POLPPD8', ...
-        'POLASI3', 'POLPSI5', 'POLPSI6', 'POLPDI2'}; % JH105
-end
+    ezone_labels = {...%'POLG4', 'POLG5', 'POLG6', 'POLG12', 'POLG13', 'POLG14',...
+                'POLASI2', 'POLASI3', 'POLPSI5', 'POLPSI6', 'POLPDI2'}; % JH105
+end 
+
 %% Define epileptogenic zone
 dataDir = fullfile('./adj_mats_500_05/', patient);
 fid = fopen(strcat('./data/',patient, '/', patient, '_labels.csv')); % open up labels to get all the channels
