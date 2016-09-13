@@ -16,7 +16,7 @@ patient_eeg_path = strcat('./data/', patient);
 
 %%- set file path for the patient file 
 dataDir = './data/';
-patient_file_path = fullfile(dataDir, patfile);
+patient_file_path = fullfile(dataDir, patient, patfile);
 frequency_sampling = 1000; % sampling freq. at 1 kHz
 BP_FILTER_RAW = 1;
 
