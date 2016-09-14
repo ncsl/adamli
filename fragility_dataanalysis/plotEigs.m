@@ -1,3 +1,5 @@
+%%% RUN once to generate finaldata.mat
+%%% Won't run if it is already generated
 clear all;
 close all;
 
@@ -9,7 +11,7 @@ sigma0 = 1.1;
 sigma = sqrt(sigma0^2 - w.^2); % move to the unit circle 1, for a plethora of different radial frequencies
 b = [0; 1];
 perturbationType = 'R';
-pat_id = 'pt1'; sz_id = 'sz3';
+pat_id = 'pt2'; sz_id = 'sz1';
 % pat_id = 'JH105';
 % sz_id = 'sz1';
 patient = strcat(pat_id, sz_id);
