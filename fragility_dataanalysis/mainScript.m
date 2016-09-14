@@ -2,7 +2,7 @@
 % x = Ax
 %% 0: READ PATIENT ID FILE
 % change these paramters depending on patient
-pat_id = 'pt2'; sz_id = 'sz3';
+pat_id = 'pt1'; sz_id = 'sz3';
 %pat_id = 'JH105'; sz_id = 'sz1';
 
 if strcmp(pat_id, 'pt1')
