@@ -4,7 +4,7 @@ clc;
 
 %% 0: LOAD in the adj matrix files, and eeg file for initial condition
 % adjustable parameters
-pat_id = 'pt1'; sz_id = 'sz3';
+pat_id = 'pt2'; sz_id = 'sz1';
 frequency_sampling = 1000;
 if strcmp(pat_id, 'pt1')
     included_channels = [1:36 42 43 46:69 72:95];
@@ -60,7 +60,7 @@ recording_start = dataArray{:, 3};
 onset_time = dataArray{:, 4};
 offset_time = dataArray{:, 5};
 recording_duration = dataArray{:, 6};
-num_channels = dataArray{:, 7};
+num_channels = length(included_channels);
 number_of_samples = frequency_sampling * recording_duration;
 
 patient_files = containers.Map(patient_file_names, number_of_samples)
@@ -76,9 +76,11 @@ eeg = eeg(included_channels, :); % only get the included channels
 % 2A. starting from time point zero as initial condition
 initial_cond = eeg(:, 1);
 x_current = initial_cond;
+w = linspace(-1, 1, 101); 
+radius = 1.1;
 noise_var = var(initial_cond); % variance across all channels
 
-load(fullfile(dataDir, matFiles{1}));
+load(fullfile(dataDir, matFiles{4}));
 timeStart = data.timeStart / frequency_sampling;     % time data starts (sec)
 timeEnd = data.timeEnd / frequency_sampling;         % time data ends (sec)
 seizureTime = data.seizureTime / frequency_sampling; % time seizure starts (sec)
@@ -102,9 +104,12 @@ for i=2:length(matFiles)
         x_next = theta_adj * x_current;
     else % seizure zone
         % use adj. mat + Delta
-        Delta = 0; % function for computing Delta
+        delta = computeDelta(w, radius, theta_adj);
         x_next = (theta_adj + Delta) * x_current;
     end
+    
+    % add noise
+    x_next = x_next + normrnd(0, noise_var, num_channels, 1);
     
     % store the generated vector
     x_current = x_next;

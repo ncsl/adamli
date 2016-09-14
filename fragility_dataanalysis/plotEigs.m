@@ -11,7 +11,7 @@ sigma0 = 1.1;
 sigma = sqrt(sigma0^2 - w.^2); % move to the unit circle 1, for a plethora of different radial frequencies
 b = [0; 1];
 perturbationType = 'R';
-pat_id = 'pt2'; sz_id = 'sz1';
+pat_id = 'pt1'; sz_id = 'sz2';
 % pat_id = 'JH105';
 % sz_id = 'sz1';
 patient = strcat(pat_id, sz_id);
@@ -185,7 +185,7 @@ end
 toc
 
 xIndices = 1:(size(minPerturb_time_chan,2)-20);
-save(fullfile(dataDir,'final_data.mat'), 'avge_minPerturb', 'ezone_minPerturb_fragility', ...
+save(fullfile(dataDir,'finaldata', strcat(patient,'final_data.mat')), 'avge_minPerturb', 'ezone_minPerturb_fragility', ...
                                 'minPerturb_time_chan', 'colsum_time_chan', 'rowsum_time_chan');
 
 fig = {};
