@@ -1,3 +1,7 @@
+close all;
+clear all;
+clc;
+
 %% Define epileptogenic zone
 pat_id = 'pt2';
 sz_id = 'sz3';
@@ -10,6 +14,10 @@ load(fullfile(dataDir, patient, strcat(patient, '_3')));    % load in example pr
 
 if strcmp(pat_id, 'pt1')
     included_channels = [1:36 42 43 46:69 72:95];
+    
+    if strcmp(sz_id, 'sz2')
+        included_channels = [1:36 42 43 46:54 56:69 72:95];
+    end
     ezone_labels = {'POLPST1', 'POLPST2', 'POLPST3', 'POLAD1', 'POLAD2'}; %pt1
     ezone_labels = {'POLATT1', 'POLATT2', 'POLAD1', 'POLAD2', 'POLAD3'}; %pt1
     earlyspread_labels = {'POLATT3', 'POLAST1', 'POLAST2'};
@@ -92,7 +100,8 @@ lin_weights = (1:size(minPerturb_time_chan,2));
 fragility_weights = fragility_rankings*lin_weights';
 avge_weight = mean(fragility_weights);
 SEM = std(fragility_weights) / sqrt(length(fragility_weights)); % standard error
-ts_99 = tinv([1e-10 1-1e-10], length(fragility_weights) - 1);
+% ts_99 = tinv([1e-10 1-1e-10], length(fragility_weights) - 1);
+ts_99 = tinv([0.005 1-0.005], length(fragility_weights) - 1);
 CI_99 = avge_weight + ts_99*SEM;
 ts_95 = tinv([0.025 0.975], length(fragility_weights) - 1);
 CI_95 = avge_weight + ts_95*SEM;
@@ -129,6 +138,9 @@ plot(repmat(XUpperLim+1, length(earlyspread_indices), 1), earlyspread_indices, '
 % plot(repmat(XUpperLim+1, length(latespread_indices),1), latespread_indices, '*', 'color', [1 .75 0]);
 legend('EZ Electrodes');
 
+figDir = './acc_figures/';
+savefig(fullfile(figDir, strcat(patient, 'minPerturbation')));
+
 % fragility ranking
 fig{end+1} = figure;
 subplot(121);
@@ -143,16 +155,19 @@ xlabel('Time (sec)', 'FontSize', FONTSIZE);  ylabel('Electrode Channels', 'FontS
 set(gca, 'FontSize', FONTSIZE-3, 'LineWidth', LT);
 set(gca, 'XTick', (XLowerLim+0.5:10:XUpperLim+0.5)); set(gca, 'XTickLabel', xticks); % set xticks and their labels
 set(gca, 'YTick', [1, 5:5:length(included_channels)]);
+xlim([XLowerLim XUpperLim+1]); % increase the xlim by 1, to mark regions of EZ
+% add the labels for the EZ electrodes (rows)
+plot(repmat(XUpperLim+1, length(ezone_indices),1), ezone_indices, '*r');
 
 % add secondary plot with linear weighting
 % Add secondary plot, rotate clockwise and link x-y axes
 subplot(122);
 stem(fragility_weights-avge_weight); hold on; set(gca,'box','off');
-plot(ezone_indices, fragility_weights(ezone_indices), 'r*');
+plot(ezone_indices, fragility_weights(ezone_indices)-avge_weight, 'r*');
 ax2 = gca; suptitle(titleStr);
 YLim = get(gca, 'ylim'); YLowerLim = YLim(1); YUpperLim = YLim(2);
 % plot(ax2.XLim, [avge_weight avge_weight], 'k'); % plot average
-CI_99 = CI_99 - avge_weight;
+CI_99 = CI_99 - avge_weight; % take out if you want to look at CI
 plot(ax2.XLim, [CI_99(1) CI_99(1)], '-r'); % plot CI
 plot(ax2.XLim, [CI_99(2) CI_99(2)], '-r');
 xlim([1 length(included_channels)]); % set xlim
@@ -182,9 +197,11 @@ for i=1:length(earlyspread_labels) %%- Plot earlyspread channels
         plot(x, y, 'k-', 'LineWidth', 2.5);
     end
 end
-legend('', 'EZ', 'Early Spread');
+% legend('', 'EZ', 'Early Spread');
 camroll(-90);
+ylim([YLowerLim YUpperLim])
 
+savefig(fullfile(figDir, strcat(patient, 'fragilityRanking')));
 
 % plot(repmat(XUpperLim+1, length(ezone_indices),1), ezone_indices, '*r');
 % for i=1:length(ezone_labels)

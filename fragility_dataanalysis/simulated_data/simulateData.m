@@ -2,6 +2,8 @@ clear all;
 close all;
 clc;
 
+addpath('/Users/adam2392/Documents/adamli/fragility_dataanalysis'); % access to main functions
+
 %% 0: LOAD in the adj matrix files, and eeg file for initial condition
 % adjustable parameters
 pat_id = 'pt2'; sz_id = 'sz1';
@@ -46,7 +48,6 @@ end
 
 % location of adj. matrix matfiles
 patient = strcat(pat_id, sz_id)
-addpath('/Users/adam2392/Documents/adamli/fragility_dataanalysis'); % access to main functions
 dataDir = fullfile('../adj_mats_500_05', patient);
 matFiles = dir(fullfile(dataDir, '*.mat'));
 matFiles = {matFiles.name};                     % cell array of all mat file names in order
@@ -92,13 +93,6 @@ eeg = csv2eeg(patient_eeg_path, filename, num_values, num_channels);
 num_channels=length(included_channels);
 eeg = eeg(included_channels, :); % only get the included channels
 
-% 2A. starting from time point zero as initial condition
-initial_cond = eeg(:, 1);
-x_current = initial_cond;
-w = linspace(-1, 1, 101); 
-radius = 1.1;
-noise_var = var(eeg(1,1:data.timeStart)); % variance across all channels
-
 %- load an example file to extract meta data
 load(fullfile(dataDir, matFiles{4}));
 timeStart = data.timeStart / frequency_sampling;     % time data starts (sec)
@@ -106,6 +100,13 @@ timeEnd = data.timeEnd / frequency_sampling;         % time data ends (sec)
 seizureTime = data.seizureTime / frequency_sampling; % time seizure starts (sec)
 winSize = data.winSize / frequency_sampling;                % window size (sec)
 stepSize = data.stepSize / frequency_sampling;              % step size (sec)
+
+% 2A. starting from time point zero as initial condition
+initial_cond = eeg(:, 1);
+x_current = initial_cond;
+w = linspace(-1, 1, 101); 
+radius = 1.1;
+noise_var = 1/2 * abs(mean(eeg(1,1:data.timeStart)));%var(eeg(1,1:data.timeStart)); % variance across all channels
 
 %- initialize simulated electrode info
 x_simulated = zeros(num_channels, (timeEnd-timeStart)/stepSize);
@@ -161,4 +162,13 @@ for i=1:length(ezone_indices)
     hold on;
     ax = gca;
     plot([(seizureTime - timeStart)*2, 2*(seizureTime - timeStart)], ax.YLim, 'r-')
+end
+
+figure; hold on;
+for iChan=1:num_channels
+    if iChan == 1
+        plot(x_simulated(iChan, :));
+    else
+        plot(x_simulated(iChan, :) + max(x_simulated(iChan-1, :)));
+    end
 end
