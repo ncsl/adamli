@@ -5,6 +5,7 @@ clc;
 %% 0: LOAD in the adj matrix files, and eeg file for initial condition
 % adjustable parameters
 pat_id = 'pt2'; sz_id = 'sz1';
+patient = strcat(pat_id, sz_id);
 frequency_sampling = 1000;
 if strcmp(pat_id, 'pt1')
     included_channels = [1:36 42 43 46:69 72:95];
@@ -24,6 +25,23 @@ elseif strcmp(pat_id, 'JH105')
         'POLAPD1', 'POLAPD2', 'POLAPD3', 'POLAPD4', 'POLAPD5', 'POLAPD6', 'POLAPD7', 'POLAPD8', ...
         'POLPPD1', 'POLPPD2', 'POLPPD3', 'POLPPD4', 'POLPPD5', 'POLPPD6', 'POLPPD7', 'POLPPD8', ...
         'POLASI3', 'POLPSI5', 'POLPSI6', 'POLPDI2'}; % JH105
+end
+
+fid = fopen(strcat('../data/',patient, '/', patient, '_labels.csv')); % open up labels to get all the channels
+labels = textscan(fid, '%s', 'Delimiter', ',');
+labels = labels{:}; labels = labels(included_channels);
+fclose(fid);
+                
+% define cell function to search for the EZ labels
+cellfind = @(string)(@(cell_contents)(strcmp(string,cell_contents)));
+ezone_indices = zeros(length(ezone_labels),1);
+for i=1:length(ezone_labels)
+    indice = cellfun(cellfind(ezone_labels{i}), labels, 'UniformOutput', 0);
+    indice = [indice{:}];
+    test = 1:length(labels);
+    if ~isempty(test(indice))
+        ezone_indices(i) = test(indice);
+    end
 end
 
 % location of adj. matrix matfiles
@@ -60,7 +78,7 @@ recording_start = dataArray{:, 3};
 onset_time = dataArray{:, 4};
 offset_time = dataArray{:, 5};
 recording_duration = dataArray{:, 6};
-num_channels = length(included_channels);
+num_channels = dataArray{:, 7};
 number_of_samples = frequency_sampling * recording_duration;
 
 patient_files = containers.Map(patient_file_names, number_of_samples)
@@ -71,6 +89,7 @@ num_values = patient_files(patient_file_names{1});
 
 % 1A. extract eeg 
 eeg = csv2eeg(patient_eeg_path, filename, num_values, num_channels);
+num_channels=length(included_channels);
 eeg = eeg(included_channels, :); % only get the included channels
 
 % 2A. starting from time point zero as initial condition
@@ -78,8 +97,9 @@ initial_cond = eeg(:, 1);
 x_current = initial_cond;
 w = linspace(-1, 1, 101); 
 radius = 1.1;
-noise_var = var(initial_cond); % variance across all channels
+noise_var = var(eeg(1,1:data.timeStart)); % variance across all channels
 
+%- load an example file to extract meta data
 load(fullfile(dataDir, matFiles{4}));
 timeStart = data.timeStart / frequency_sampling;     % time data starts (sec)
 timeEnd = data.timeEnd / frequency_sampling;         % time data ends (sec)
@@ -87,6 +107,7 @@ seizureTime = data.seizureTime / frequency_sampling; % time seizure starts (sec)
 winSize = data.winSize / frequency_sampling;                % window size (sec)
 stepSize = data.stepSize / frequency_sampling;              % step size (sec)
 
+%- initialize simulated electrode info
 x_simulated = zeros(num_channels, (timeEnd-timeStart)/stepSize);
 x_simulated(:,1) = x_current;
 
@@ -105,7 +126,7 @@ for i=2:length(matFiles)
     else % seizure zone
         % use adj. mat + Delta
         delta = computeDelta(w, radius, theta_adj);
-        x_next = (theta_adj + Delta) * x_current;
+        x_next = (theta_adj + delta) * x_current;
     end
     
     % add noise
@@ -116,5 +137,28 @@ for i=2:length(matFiles)
     x_simulated(:,i) = x_next;
 end
 
+% 2C. add more to the simulation because I only computed theta_adj for 10
+%seconds post-seizure.
+x_simulated = cat(2, x_simulated, zeros(num_channels, 30*2));
+for i=length(matFiles):size(x_simulated,2)
+    % compute delta since we are in seizure now
+    delta = computeDelta(w, radius, theta_adj);
+    x_next = (theta_adj + delta) * x_current;
+    
+    % add noise
+    x_next = x_next + normrnd(0, noise_var, num_channels, 1);
+    
+    % store the generated vector
+    x_current = x_next;
+    x_simulated(:,i) = x_next;
+end
+    
+figure;
 % 3A. Plot Simulated EEG Data
-
+for i=1:length(ezone_indices)
+    subplot(ceil(length(ezone_indices)/2), 2, i);
+    plot(x_simulated(ezone_indices(i), :));
+    hold on;
+    ax = gca;
+    plot([(seizureTime - timeStart)*2, 2*(seizureTime - timeStart)], ax.YLim, 'r-')
+end
