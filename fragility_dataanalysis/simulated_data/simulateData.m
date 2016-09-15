@@ -2,7 +2,7 @@ clear all;
 close all;
 clc;
 
-addpath('/Users/adam2392/Documents/adamli/fragility_dataanalysis'); % access to main functions
+addpath('../'); % access to main functions
 
 %% 0: LOAD in the adj matrix files, and eeg file for initial condition
 % adjustable parameters
@@ -109,11 +109,16 @@ radius = 1.1;
 noise_var = 1/2 * abs(mean(eeg(1,1:data.timeStart)));%var(eeg(1,1:data.timeStart)); % variance across all channels
 
 %- initialize simulated electrode info
-x_simulated = zeros(num_channels, (timeEnd-timeStart)/stepSize);
+x_simulated = zeros(num_channels, (seizureTime-timeStart)/stepSize * 500 + 20/stepSize * 500);
 x_simulated(:,1) = x_current;
 
-% 2B. Simulate data using the mat Files one by one and add noise
-for i=2:length(matFiles)
+preseizureTime = (seizureTime-timeStart)/stepSize * 500 ;
+postseizureTime = 20/stepSize * 500; % currently set to 20 seconds
+index_simulation = 2;
+
+ clear eeg;
+% 2B. Simulate preseizure data using the mat Files one by one and add noise
+for i=2:length(matFiles)-21
     % load in the adjacency matrix
     load(fullfile(dataDir, matFiles{i}));
     theta_adj = data.theta_adj;
@@ -122,53 +127,64 @@ for i=2:length(matFiles)
 
     % simulate the next round of data x_(t+1) + noise
     if timewrtSz < seizureTime % still pre-seizure
-        % use adj. mat
-        x_next = theta_adj * x_current;
-    else % seizure zone
-        % use adj. mat + Delta
-        delta = computeDelta(w, radius, theta_adj);
-        x_next = (theta_adj + delta) * x_current;
-    end
-    
-    % add noise
-    x_next = x_next + normrnd(0, noise_var, num_channels, 1);
-    
-    % store the generated vector
-    x_current = x_next;
-    x_simulated(:,i) = x_next;
-end
+        % for each mat file loaded, make 500 samples (since our window size
+        % was 500 milliseconds)
+        for iSample=1:500
+            % use adj. mat
+            x_next = theta_adj * x_current;
 
-% 2C. add more to the simulation because I only computed theta_adj for 10
-%seconds post-seizure.
-x_simulated = cat(2, x_simulated, zeros(num_channels, 30*2));
-for i=length(matFiles):size(x_simulated,2)
-    % compute delta since we are in seizure now
-    delta = computeDelta(w, radius, theta_adj);
-    x_next = (theta_adj + delta) * x_current;
-    
-    % add noise
-    x_next = x_next + normrnd(0, noise_var, num_channels, 1);
-    
-    % store the generated vector
-    x_current = x_next;
-    x_simulated(:,i) = x_next;
-end
-    
-figure;
-% 3A. Plot Simulated EEG Data
-for i=1:length(ezone_indices)
-    subplot(ceil(length(ezone_indices)/2), 2, i);
-    plot(x_simulated(ezone_indices(i), :));
-    hold on;
-    ax = gca;
-    plot([(seizureTime - timeStart)*2, 2*(seizureTime - timeStart)], ax.YLim, 'r-')
-end
+            % add noise
+            x_next = x_next + normrnd(0, noise_var, num_channels, 1);
 
-figure; hold on;
-for iChan=1:num_channels
-    if iChan == 1
-        plot(x_simulated(iChan, :));
-    else
-        plot(x_simulated(iChan, :) + max(x_simulated(iChan-1, :)));
+            % store the generated vector
+            x_current = x_next;
+            x_simulated(:,index_simulation) = x_next;        
+            
+            index_simulation = index_simulation + 1; % increment index
+        end
     end
 end
+
+% 2C. Simulate postseizure
+load(fullfile(dataDir, matFiles{end}));
+theta_adj = data.theta_adj;
+timewrtSz = data.timewrtSz / frequency_sampling;
+index = data.index;
+
+% move adjacency matrix into unstable 
+delta = computeDelta(w, radius, theta_adj);
+theta_adj = theta_adj + delta;
+for i=1:postseizureTime
+    % use adj. mat
+    x_next = theta_adj * x_current;
+
+    % add noise
+    x_next = x_next + normrnd(0, noise_var, num_channels, 1);
+
+    % store the generated vector
+    x_current = x_next;
+    x_simulated(:,index_simulation) = x_next;        
+
+    index_simulation = index_simulation + 1; % increment index
+end
+
+save(strcat(patient, '_simulationEEG'), 'x_simulated');
+
+% figure;
+% % 3A. Plot Simulated EEG Data
+% for i=1:length(ezone_indices)
+%     subplot(ceil(length(ezone_indices)/2), 2, i);
+%     plot(x_simulated(ezone_indices(i), :));
+%     hold on;
+%     ax = gca;
+%     plot([(seizureTime - timeStart)*2, 2*(seizureTime - timeStart)], ax.YLim, 'r-')
+% end
+% 
+% figure; hold on;
+% for iChan=1:num_channels
+%     if iChan == 1
+%         plot(x_simulated(iChan, :));
+%     else
+%         plot(x_simulated(iChan, :) + max(x_simulated(iChan-1, :)));
+%     end
+% end
