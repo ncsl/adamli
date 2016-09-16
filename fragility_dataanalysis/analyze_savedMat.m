@@ -62,7 +62,7 @@ for i=1:length(earlyspread_labels)
         earlyspread_indices(i) = test(indice);
     end
 end
-
+earlyspread_indices(earlyspread_indices==0) =  [];
 % latespread_indices = zeros(length(latespread_labels),1);
 % for i=1:length(latespread_labels)
 %     indice = cellfun(cellfind(latespread_labels{i}), labels, 'UniformOutput', 0);
@@ -198,7 +198,8 @@ set(ax3, 'XTick', []);
 set(ax3, 'YTick', y_earlyspreadindices, 'YTickLabel', labels(y_earlyspreadindices), 'FontSize', YAXFontSize, 'YColor', [1 .5 0]);
 linkaxes([ax1 ax3], 'xy');
 
-
+savefig(fullfile(figDir, strcat(patient, 'fragilityRanking')));
+print(fullfile(figDir, strcat(patient, 'fragilityRanking')), '-dpng', '-r0')
 
 % add secondary plot with linear weighting
 % Add secondary plot, rotate clockwise and link x-y axes
