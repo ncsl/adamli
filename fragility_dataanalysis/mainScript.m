@@ -14,7 +14,8 @@ if strcmp(pat_id, 'pt1')
                         'POLSLT2', 'POLSLT3', 'POLSLT4', ...
                         'POLMLT2', 'POLMLT3', 'POLMLT4', 'POLG8', 'POLG16'};
 elseif strcmp(pat_id, 'pt2')
-    included_channels = [1:19 21:37 43 44 47:74 75 79]; %pt2
+%     included_channels = [1:19 21:37 43 44 47:74 75 79]; %pt2
+    included_channels = [1:14 16:19 21:25 27:37 43 44 47:74]
     ezone_labels = {'POLMST1', 'POLPST1', 'POLTT1'}; %pt2
     earlyspread_labels = {'POLTT2', 'POLAST2', 'POLMST2', 'POLPST2', 'POLALEX1', 'POLALEX5'};
 elseif strcmp(pat_id, 'JH105')

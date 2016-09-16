@@ -112,7 +112,7 @@ electrodes_95 = labels(fragility_weights > CI_95(2) & fragility_weights < CI_99(
 
 fig = {};
 FONTSIZE = 20;
-YAXFontSize = 12;
+YAXFontSize = 9;
 LT=1.5;
 xticks = (timeStart - seizureTime) : 5 : (timeEnd - seizureTime);
 ytick = 1:length(included_channels);
