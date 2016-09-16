@@ -123,54 +123,64 @@ index_simulation = 2;
 
  clear eeg;
 % 2B. Simulate preseizure data using the mat Files one by one and add noise
-for i=2:length(matFiles)-21
-    % load in the adjacency matrix
+for i=1:length(matFiles)
     load(fullfile(dataDir, matFiles{i}));
     theta_adj = data.theta_adj;
     timewrtSz = data.timewrtSz / frequency_sampling;
-    index = data.index;
-
-    % simulate the next round of data x_(t+1) + noise
-    if timewrtSz < seizureTime % still pre-seizure
-        % for each mat file loaded, make 500 samples (since our window size
-        % was 500 milliseconds)
-        for iSample=1:500
-            % use adj. mat
-            x_next = theta_adj * x_current;
-
-            % add noise
-            x_next = x_next + normrnd(0, noise_var, num_channels, 1);
-
-            % store the generated vector
-            x_current = x_next;
-            x_simulated(:,index_simulation) = x_next;        
-            
-            index_simulation = index_simulation + 1; % increment index
-        end
+    index = data.index; 
+    
+    if max(eig(theta_adj)) < 1
+        break
     end
 end
+
+% for i=2:length(matFiles)-21
+%     % load in the adjacency matrix
+%     load(fullfile(dataDir, matFiles{i}));
+%     theta_adj = data.theta_adj;
+%     timewrtSz = data.timewrtSz / frequency_sampling;
+%     index = data.index;
+% 
+%     % simulate the next round of data x_(t+1) + noise
+%     if timewrtSz < seizureTime % still pre-seizure
+%         % for each mat file loaded, make 500 samples (since our window size
+%         % was 500 milliseconds)
+%         for iSample=1:500
+%             % use adj. mat
+%             x_next = theta_adj * x_current;
+% 
+%             % add noise
+%             x_next = x_next + normrnd(0, noise_var, num_channels, 1);
+% 
+%             % store the generated vector
+%             x_current = x_next;
+%             x_simulated(:,index_simulation) = x_next;        
+%             
+%             index_simulation = index_simulation + 1; % increment index
+%         end
+%     end
+% end
 % load(fullfile(dataDir, matFiles{1}));
 % theta_adj = data.theta_adj;
 % timewrtSz = data.timewrtSz / frequency_sampling;
 % index = data.index;
-% for i=1:preseizureTime
-%     % use adj. mat
-%     x_next = theta_adj * x_current;
-% 
-%     % add noise
-%     x_next = x_next + normrnd(0, noise_var, num_channels, 1);
-% 
-%     % store the generated vector
-%     x_current = x_next;
-%     x_simulated(:,index_simulation) = x_next;        
-% 
-%     index_simulation = index_simulation + 1; % increment index
-% end
+for i=2:preseizureTime
+    % use adj. mat
+    x_next = theta_adj * x_current;
 
+    % add noise
+    x_next = x_next + normrnd(0, noise_var, num_channels, 1);
+
+    % store the generated vector
+    x_current = x_next;
+    x_simulated(:,index_simulation) = x_next;        
+
+    index_simulation = index_simulation + 1; % increment index
+end
+figure;
+plot(x_simulated(3,:));
 
 % 2C. Simulate postseizure
-
-
 load(fullfile(dataDir, matFiles{end}));
 theta_adj = data.theta_adj;
 timewrtSz = data.timewrtSz / frequency_sampling;
@@ -192,8 +202,10 @@ for i=1:postseizureTime
 
     index_simulation = index_simulation + 1; % increment index
 end
-plot(x_simulated(2,1:30000))
-save(strcat(patient, '_simulationEEG'), 'x_simulated');
+figure;
+plot(x_simulated(2,:))
+EEG = x_simulated;
+save('EEG', 'EEG');
 
 % figure;
 % % 3A. Plot Simulated EEG Data
