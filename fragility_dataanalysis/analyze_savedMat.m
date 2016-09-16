@@ -3,8 +3,8 @@ clear all;
 clc;
 
 %% Define epileptogenic zone
-pat_id = 'pt2';
-sz_id = 'sz3';
+pat_id = 'pt1';
+sz_id = 'sz2';
 patient = strcat(pat_id,sz_id);
 dataDir = fullfile('./adj_mats_500_05/');
 finalDataDir = fullfile(dataDir, 'finaldata');
