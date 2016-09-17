@@ -2,8 +2,11 @@
 % x = Ax
 %% 0: READ PATIENT ID FILE
 % change these paramters depending on patient
-pat_id = 'pt1'; sz_id = 'sz3';
+sz_ids = {'sz1', 'sz3'};
+pat_id = 'pt2'; sz_id = 'sz1';
 %pat_id = 'JH105'; sz_id = 'sz1';
+for i=1:2
+sz_id = sz_ids{i};
 
 if strcmp(pat_id, 'pt1')
     included_channels = [1:36 42 43 46:69 72:95];
@@ -15,7 +18,7 @@ if strcmp(pat_id, 'pt1')
                         'POLMLT2', 'POLMLT3', 'POLMLT4', 'POLG8', 'POLG16'};
 elseif strcmp(pat_id, 'pt2')
 %     included_channels = [1:19 21:37 43 44 47:74 75 79]; %pt2
-    included_channels = [1:14 16:19 21:25 27:37 43 44 47:74]
+    included_channels = [1:14 16:19 21:25 27:37 43 44 47:74];
     ezone_labels = {'POLMST1', 'POLPST1', 'POLTT1'}; %pt2
     earlyspread_labels = {'POLTT2', 'POLAST2', 'POLMST2', 'POLPST2', 'POLALEX1', 'POLALEX5'};
 elseif strcmp(pat_id, 'JH105')
@@ -196,4 +199,4 @@ while (sample_to_access <= limit)
     lastwindow = sample_to_access;
     index = index + 1;
 end
-    
+end
