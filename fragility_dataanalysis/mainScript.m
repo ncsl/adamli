@@ -3,10 +3,10 @@
 %% 0: READ PATIENT ID FILE
 % change these paramters depending on patient
 sz_ids = {'sz1', 'sz3'};
-pat_id = 'pt2'; sz_id = 'sz1';
+pat_id = 'pt1'; sz_id = 'sz2';
 %pat_id = 'JH105'; sz_id = 'sz1';
-for i=1:2
-sz_id = sz_ids{i};
+% for i=1:2
+% sz_id = sz_ids{i};
 
 if strcmp(pat_id, 'pt1')
     included_channels = [1:36 42 43 46:69 72:95];
@@ -199,4 +199,4 @@ while (sample_to_access <= limit)
     lastwindow = sample_to_access;
     index = index + 1;
 end
-end
+% end

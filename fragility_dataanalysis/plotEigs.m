@@ -11,11 +11,20 @@ sigma0 = 1.1;
 sigma = sqrt(sigma0^2 - w.^2); % move to the unit circle 1, for a plethora of different radial frequencies
 b = [0; 1];
 perturbationType = 'R';
-pat_id = 'pt2'; sz_id = 'sz3';
+pat_id = 'pt1'; sz_id = 'sz3';
+patients = {'pt1sz3'};
+for p=1:length(patients)
+   patient = patients{p};
 % pat_id = 'JH105';
 % sz_id = 'sz1';
-patient = strcat(pat_id, sz_id);
+% patient = strcat(pat_id, sz_id);
 if strcmp(pat_id, 'pt1') 
+    included_channels = [1:36 42 43 46:69 72:95];
+    
+    if strcmp(sz_id, 'sz2')
+        included_channels = [1:36 42 43 46:54 56:69 72:95];
+    end
+    
     ezone_labels = {'POLPST1', 'POLPST2', 'POLPST3', 'POLAD1', 'POLAD2'}; %pt1
     ezone_labels = {'POLATT1', 'POLATT2', 'POLAD1', 'POLAD2', 'POLAD3'}; %pt1
     earlyspread_labels = {'POLATT3', 'POLAST1', 'POLAST2'};
@@ -334,3 +343,4 @@ end
 legend('EZ Electrodes');
 
 
+end
