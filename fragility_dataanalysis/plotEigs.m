@@ -11,7 +11,7 @@ sigma0 = 1.1;
 sigma = sqrt(sigma0^2 - w.^2); % move to the unit circle 1, for a plethora of different radial frequencies
 b = [0; 1];
 perturbationType = 'R';
-pat_id = 'pt1'; sz_id = 'sz3';
+pat_id = 'pt2'; sz_id = 'sz3';
 % pat_id = 'JH105';
 % sz_id = 'sz1';
 patient = strcat(pat_id, sz_id);
@@ -23,7 +23,8 @@ if strcmp(pat_id, 'pt1')
                         'POLSLT2', 'POLSLT3', 'POLSLT4', ...
                         'POLMLT2', 'POLMLT3', 'POLMLT4', 'POLG8', 'POLG16'};
 elseif strcmp(pat_id, 'pt2')
-    included_channels = [1:19 21:37 43 44 47:74 75 79]; %pt2
+%     included_channels = [1:19 21:37 43 44 47:74 75 79]; %pt2
+    included_channels = [1:14 16:19 21:25 27:37 43 44 47:74];
     ezone_labels = {'POLMST1', 'POLPST1', 'POLTT1'}; %pt2
     earlyspread_labels = {'POLTT2', 'POLAST2', 'POLMST2', 'POLPST2', 'POLALEX1', 'POLALEX5'};
 elseif strcmp(pat_id, 'JH105')
@@ -153,29 +154,6 @@ for i=1:length(matFiles)
         % update pointer for the fragility heat map
         iTime = iTime+1;
         
-%         %%- Plot 1 time point
-%         plotPoints = 1:size(theta_adj,1);
-%         plotPoints(ezone_indices) = [];
-%         figure;
-%         subplot(311);
-%         titleStr = ['Eigenspectrum of A\b=x for ', patient];
-%         plot(eig(theta_adj), 'ko'); hold on;
-%         plot(sigma, w, 'ro')
-%         title(titleStr);
-%         xlabel('Real'); ylabel('Imaginary');
-%     
-%         subplot(312);
-%         imagesc(theta_adj); 
-%         colorbar(); colormap('jet');
-%         xlabel('Electrodes Affecting Other Channels');
-%         ylabel('Electrodes Affected By Other Channels');
-%         
-%         subplot(313);
-%         plot(plotPoints, fragility_table(plotPoints), 'ko'); hold on;
-%         plot(ezone_indices, fragility_table(ezone_indices), 'ro');
-%         title(['Fragility Per Electrode at ', num2str(timeSStart - currenttime), ' seconds before seizure']);
-%         xlabel(['Electrodes (n=', num2str(N),')']);
-%         ylabel(['Minimum Norm Perturbation at Certain w']);
         max_eig
         i
         max(imag(eig(theta_adj)))
@@ -183,10 +161,26 @@ for i=1:length(matFiles)
 end
 toc
 
+
+fragility_rankings = zeros(size(minPerturb_time_chan,1),size(minPerturb_time_chan,2));
+% loop through each channel
+for i=1:size(minPerturb_time_chan,1)
+    for j=1:size(minPerturb_time_chan, 2) % loop through each time point
+        fragility_rankings(i,j) = (max(minPerturb_time_chan(:,j)) - minPerturb_time_chan(i,j)) ...
+                                    / max(minPerturb_time_chan(:,j));
+    end
+end
+
+if (size(fragility_rankings,2) > 120)
+    fragility_rankings = fragility_rankings(:,1:end-20);
+    minPerturb_time_chan = minPerturb_time_chan(:,1:end-20);
+end
+
 xIndices = 1:(size(minPerturb_time_chan,2)-20);
 save(fullfile('./adj_mats_500_05/','finaldata', strcat(patient,'final_data.mat')), 'avge_minPerturb', 'ezone_minPerturb_fragility', ...
-                                'minPerturb_time_chan', 'colsum_time_chan', 'rowsum_time_chan');
+                                'minPerturb_time_chan', 'colsum_time_chan', 'rowsum_time_chan', 'fragility_rankings');
 
+                            
 fig = {};
 % chanticks = 5:5:85;
 LT = 1.5;

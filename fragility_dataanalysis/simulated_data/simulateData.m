@@ -121,61 +121,69 @@ preseizureTime = (seizureTime-timeStart)/stepSize * 500 ;
 postseizureTime = 20/stepSize * 500; % currently set to 20 seconds
 index_simulation = 2;
 
+% add the first 500 milliseconds
+load(fullfile(dataDir, matFiles{1}));
+theta_adj = data.theta_adj;
+timewrtSz = data.timewrtSz / frequency_sampling;
+index = data.index; 
+[V D W] = eig(theta_adj); % perform eigenvalue decomposition
+
+error_adjmat = zeros(length(matFiles), 1);
+n = size(theta_adj, 1); 
+
+% move eigenvalues into |lambda| <= 1
+if max(eig(theta_adj)) > 1
+    indices_to_change = abs(D) > 1;
+    epsilon = (abs(D(indices_to_change)) - 1) .^ 2;
+    D(indices_to_change) = sqrt((1+epsilon).^2 - imag(D(indices_to_change)).^2) + imag(D(indices_to_change))*1i;
+end
+
+% store the min norm between
+error_adjmat(1) = norm(theta_adj - V*D*W);
+theta_adj = V*D*W;
+
+for j=1:499
+    x_next = theta_adj * x_current + normrnd(0, noise_var, num_channels, 1); % update next simulation
+    
+    % store generated vector
+    x_current = x_next;
+    x_simulated(:, index_simulation) = x_next;
+    
+    index_simulation = index_simulation+1; % increment index
+end
+disp('Index Simulation Should be 501');
+index_simulation
+
 %  clear eeg;
 % 2B. Simulate preseizure data using the mat Files one by one and add noise
-for i=1:length(matFiles)
+for i=2:length(matFiles)-21
     load(fullfile(dataDir, matFiles{i}));
     theta_adj = data.theta_adj;
     timewrtSz = data.timewrtSz / frequency_sampling;
     index = data.index; 
     
     if max(eig(theta_adj)) < 1
-        break
+        [V D W] = eig(theta_adj); % eigenvalue decomposition
+        indices_to_change = abs(D) > 1;
+        epsilon = (abs(D(indices_to_change)) - 1) .^ 2;
+        D(indices_to_change) = sqrt((1+epsilon).^2 - imag(D(indices_to_change)).^2) + imag(D(indices_to_change))*1i;
+
+        % store the min norm between
+        error_adjmat(i) = norm(theta_adj - V*D*W);
+        
+        % update theta_adj to be the new one
+        theta_adj = V*D*W;
     end
-end
+    
+    for iSample=1:500 % the next 500 milliseonds of simulation
+        x_next = theta_adj * x_current + normrnd(0, noise_var, num_channels, 1); % update next simulation
+    
+        % store generated vector
+        x_current = x_next;
+        x_simulated(:, index_simulation) = x_next;
 
-% for i=2:length(matFiles)-21
-%     % load in the adjacency matrix
-%     load(fullfile(dataDir, matFiles{i}));
-%     theta_adj = data.theta_adj;
-%     timewrtSz = data.timewrtSz / frequency_sampling;
-%     index = data.index;
-% 
-%     % simulate the next round of data x_(t+1) + noise
-%     if timewrtSz < seizureTime % still pre-seizure
-%         % for each mat file loaded, make 500 samples (since our window size
-%         % was 500 milliseconds)
-%         for iSample=1:500
-%             % use adj. mat
-%             x_next = theta_adj * x_current;
-% 
-%             % add noise
-%             x_next = x_next + normrnd(0, noise_var, num_channels, 1);
-% 
-%             % store the generated vector
-%             x_current = x_next;
-%             x_simulated(:,index_simulation) = x_next;        
-%             
-%             index_simulation = index_simulation + 1; % increment index
-%         end
-%     end
-% end
-% load(fullfile(dataDir, matFiles{1}));
-% theta_adj = data.theta_adj;
-% timewrtSz = data.timewrtSz / frequency_sampling;
-% index = data.index;
-for i=2:preseizureTime
-    % use adj. mat
-    x_next = theta_adj * x_current;
-
-    % add noise
-    x_next = x_next + normrnd(0, noise_var, num_channels, 1);
-
-    % store the generated vector
-    x_current = x_next;
-    x_simulated(:,index_simulation) = x_next;        
-
-    index_simulation = index_simulation + 1; % increment index
+        index_simulation = index_simulation+1; % increment index
+    end
 end
 
 % 2C. Simulate postseizure

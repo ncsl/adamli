@@ -25,7 +25,8 @@ if strcmp(pat_id, 'pt1')
                         'POLSLT2', 'POLSLT3', 'POLSLT4', ...
                         'POLMLT2', 'POLMLT3', 'POLMLT4', 'POLG8', 'POLG16'};
 elseif strcmp(pat_id, 'pt2')
-    included_channels = [1:19 21:37 43 44 47:74 75 79]; %pt2
+%     included_channels = [1:19 21:37 43 44 47:74 75 79]; %pt2
+    included_channels = [1:14 16:19 21:25 27:37 43 44 47:74];
     ezone_labels = {'POLMST1', 'POLPST1', 'POLTT1'}; %pt2
     earlyspread_labels = {'POLTT2', 'POLAST2', 'POLMST2', 'POLPST2', 'POLALEX1', 'POLALEX5'};
 elseif strcmp(pat_id, 'JH105')
@@ -93,6 +94,9 @@ if (size(fragility_rankings,2) > 120)
     fragility_rankings = fragility_rankings(:,1:end-20);
     minPerturb_time_chan = minPerturb_time_chan(:,1:end-20);
 end
+
+save(fullfile('./adj_mats_500_05/','finaldata', strcat(patient,'final_data.mat')), 'avge_minPerturb', 'ezone_minPerturb_fragility', ...
+                                'minPerturb_time_chan', 'colsum_time_chan', 'rowsum_time_chan', 'fragility_rankings');
 
 
 %%- Compute final fragility using linear weight until seizure
