@@ -3,8 +3,8 @@ clear all;
 clc;
 
 %% Define epileptogenic zone
-pat_id = 'pt1';
-sz_id = 'sz2';
+pat_id = 'pt2';
+sz_id = 'sz3';
 patient = strcat(pat_id,sz_id);
 dataDir = fullfile('./adj_mats_500_05/');
 finalDataDir = fullfile(dataDir, 'finaldata');
@@ -149,7 +149,11 @@ plot(repmat(XUpperLim+1, length(earlyspread_indices), 1), earlyspread_indices, '
 legend('EZ Electrodes');
 
 figDir = './acc_figures/';
+currfig = gcf;
+currfig.PaperPosition = [-3.7448   -0.3385   15.9896   11.6771];
 savefig(fullfile(figDir, strcat(patient, 'minPerturbation')));
+print(fullfile(figDir, strcat(patient, 'minPerturbation')), '-dpng', '-r0')
+
 
 % - Plot 02:
 % fragility ranking
@@ -157,16 +161,16 @@ fig{end+1} = figure;
 % subplot(121);
 imagesc(fragility_rankings); hold on;
 c = colorbar(); colormap('jet'); set(gca,'box','off')
-titleStr = {'Fragility Ranking Of Each Channel', ...
+titleStr = {['Fragility Ranking Of Each Channel (', patient ')'], ...
     'Time Locked To Seizure'};
-title(titleStr, 'FontSize', FONTSIZE+2);
 XLim = get(gca, 'xlim'); XLowerLim = XLim(1); XUpperLim = XLim(2);
-ylabel(c, 'Fragility Ranking');
-xlabel('Time (sec)', 'FontSize', FONTSIZE);  ylabel('Electrode Channels', 'FontSize', FONTSIZE);
 set(gca, 'FontSize', FONTSIZE-3, 'LineWidth', LT); set(gca,'YDir','normal');
 set(gca, 'XTick', (XLowerLim+0.5:10:XUpperLim+0.5)); set(gca, 'XTickLabel', xticks); % set xticks and their labels
 % set(gca, 'YTick', [1, 5:5:length(included_channels)]);\
 set(gca, 'YTick', y_indices, 'YTickLabel', labels(y_indices), 'FontSize', YAXFontSize);
+title(titleStr, 'FontSize', FONTSIZE+2);
+ylabel(c, 'Fragility Ranking', 'FontSize', FONTSIZE);
+xlabel('Time (sec)', 'FontSize', FONTSIZE);  ylabel('Electrode Channels', 'FontSize', FONTSIZE);
 xlim([XLowerLim XUpperLim+1]); % increase the xlim by 1, to mark regions of EZ
 % add the labels for the EZ electrodes (rows)
 plot(repmat(XUpperLim+1, length(ezone_indices),1), ezone_indices, '*r','LineWidth', LT);
