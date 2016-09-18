@@ -4,8 +4,8 @@ close all;
 clc;
 
 %% Define epileptogenic zone
-pat_id = 'pt1';
-sz_id = 'sz2';
+pat_id = 'pt2';
+sz_id = 'sz3';
 patient = strcat(pat_id,sz_id);
 dataDir = fullfile('./adj_mats_500_05/');
 finalDataDir = fullfile(dataDir, 'finaldata');
@@ -30,6 +30,7 @@ elseif strcmp(pat_id, 'pt2')
     included_channels = [1:14 16:19 21:25 27:37 43 44 47:74];
     ezone_labels = {'POLMST1', 'POLPST1', 'POLTT1'}; %pt2
     earlyspread_labels = {'POLTT2', 'POLAST2', 'POLMST2', 'POLPST2', 'POLALEX1', 'POLALEX5'};
+    latespread_labels = {};
 elseif strcmp(pat_id, 'JH105')
     included_channels = [1:4 7:12 14:19 21:37 42 43 46:49 51:53 55:75 78:99]; % JH105
     ezone_labels = {'POLRPG4', 'POLRPG5', 'POLRPG6', 'POLRPG12', 'POLRPG13', 'POLG14',...
@@ -67,15 +68,16 @@ end
 earlyspread_indices(earlyspread_indices==0) =  [];
 
 latespread_indices = zeros(length(latespread_labels),1);
-for i=1:length(latespread_labels)
-    indice = cellfun(cellfind(latespread_labels{i}), labels, 'UniformOutput', 0);
-    indice = [indice{:}];
-    test = 1:length(labels);
-    if ~isempty(test(indice))
-        latespread_indices(i) = test(indice);
+if strcmp(pat_id, 'pt1')
+    for i=1:length(latespread_labels)
+        indice = cellfun(cellfind(latespread_labels{i}), labels, 'UniformOutput', 0);
+        indice = [indice{:}];
+        test = 1:length(labels);
+        if ~isempty(test(indice))
+            latespread_indices(i) = test(indice);
+        end
     end
 end
- 
 %% Compute Fragility Ranking and 
 timeStart = data.timeStart / 1000;
 timeEnd = data.timeEnd / 1000;
@@ -119,21 +121,49 @@ electrodes_95 = labels(fragility_weights > CI_95(2) & fragility_weights < CI_99(
 top50 = mean(fragility_weights(fragility_weights > avge_weight)) - avge_weight;
 
 %%- compute threshold weight
-threshold = 0.7;
+threshold = 0.8;
 threshold_fragility = fragility_rankings;
 threshold_fragility(threshold_fragility > threshold) = 1;
 threshold_fragility(threshold_fragility <= threshold) = 0;
 rowsum = sum(threshold_fragility,2);
+rowsum = rowsum/max(rowsum);
+[y, ind] = sort(-rowsum);
+sorted_fragility = fragility_rankings(ind,:);
+sorted_weights = -y;
 figure;
-plot(rowsum); hold on;
+plot(sorted_weights); hold on;
 ax = gca;
-plot(ezone_indices, rowsum(ezone_indices), 'r*'); hold on;
-plot(ax.XLim, mean(rowsum),'k-');
 title(['Ranking of Electrodes Based on Threshold ', num2str(threshold)]);
 xlabel('electrodes');
 ylabel('Sum of Ones')
 figDir = './acc_figures/';;
 print(fullfile(figDir, strcat(patient, 'electrodeRanks')), '-dpng', '-r0')
+
+figure; FONTSIZE=20; LT=1.5; YAXFontSize = 10;
+imagesc(sorted_fragility); hold on;
+c = colorbar(); colormap('jet'); set(gca,'box','off')
+XLim = get(gca, 'xlim'); XLowerLim = XLim(1); XUpperLim = XLim(2);
+% set title, labels and ticks
+xticks = (timeStart - seizureTime) : 5 : (timeEnd - seizureTime);
+titleStr = {['Minimum Norm Perturbation Sorted By Rank ', patient], ...
+    'Time Locked To Seizure'};
+title(titleStr, 'FontSize', FONTSIZE+2);
+ax1 = gca;
+ylabel(c, 'Minimum L2-Norm Perturbation');
+xlabel('Time (sec)', 'FontSize', FONTSIZE);  ylabel('Electrode Channels', 'FontSize', FONTSIZE);
+set(gca, 'FontSize', FONTSIZE-3, 'LineWidth', LT);
+set(gca, 'XTick', (XLowerLim+0.5:10:XUpperLim+0.5)); set(gca, 'XTickLabel', xticks); % set xticks and their labels
+set(gca, 'YTick', [1, 5:5:length(included_channels)]);
+ylabel(c, 'Fragility Ranking', 'FontSize', FONTSIZE);
+xlabel('Time (sec)', 'FontSize', FONTSIZE);  ylabel('Electrode Channels', 'FontSize', FONTSIZE);
+set(gca, 'YTick', sort(ind), 'YTickLabel', labels(ind), 'fontsize', YAXFontSize);
+figDir = './acc_figures/';
+currfig = gcf;
+currfig.PaperPosition = [-3.7448   -0.3385   15.9896   11.6771];
+print(fullfile(figDir, strcat(patient, 'sortedFragility')), '-dpng', '-r0')
+
+
+ezone_labels
 
 % initialize variables for plotting and the indices of the channels
 fig = {};
@@ -276,7 +306,7 @@ if sum(latespread_indices) > 0
     set(ax4, 'YTick', y_latespreadindices, 'YTickLabel', labels(y_latespreadindices), 'FontSize', YAXFontSize, 'YColor', 'blue');
     linkaxes([ax1 ax3], 'xy');
 end
-legend('red = EZ', 'orange = early spread', 'blue = late spread');
+% legend('red = EZ', 'orange = early spread', 'blue = late spread');
 savefig(fullfile(figDir, strcat(patient, 'fragilityRanking')));
 print(fullfile(figDir, strcat(patient, 'fragilityRanking')), '-dpng', '-r0')
 
