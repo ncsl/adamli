@@ -6,7 +6,11 @@ clc;
 %% Define epileptogenic zone
 pat_id = 'pt2';
 sz_id = 'sz3';
+patients = {'pt1sz2', 'pt1sz3', 'pt2sz1', 'pt2sz3'};
+for z=1:length(patients)
 patient = strcat(pat_id,sz_id);
+patient = patients{z};
+pat_id = patient(1:3);
 dataDir = fullfile('./adj_mats_500_05/');
 finalDataDir = fullfile(dataDir, 'finaldata');
 
@@ -136,7 +140,7 @@ ax = gca;
 title(['Ranking of Electrodes Based on Threshold ', num2str(threshold)]);
 xlabel('electrodes');
 ylabel('Sum of Ones')
-figDir = './acc_figures/';;
+figDir = './acc_figures/';
 print(fullfile(figDir, strcat(patient, 'electrodeRanks')), '-dpng', '-r0')
 
 %%- print weights into an excel file
@@ -177,7 +181,7 @@ ezone_labels
 
 % initialize variables for plotting and the indices of the channels
 fig = {};
-FONTSIZE = 20;
+FONTSIZE = 22;
 YAXFontSize = 9;
 LT=1.5;
 xticks = (timeStart - seizureTime) : 5 : (timeEnd - seizureTime);
@@ -191,36 +195,13 @@ y_ezoneindices = sort(ezone_indices);
 y_earlyspreadindices = sort(earlyspread_indices);
 y_latespreadindices = sort(latespread_indices);
 
-figure;
-stem(fragility_weights-avge_weight); hold on; set(gca,'box','off');
-plot(ezone_indices, fragility_weights(ezone_indices)-avge_weight, 'r*');
-ax2 = gca; 
-YLim = get(gca, 'ylim'); YLowerLim = YLim(1); YUpperLim = YLim(2);
-% plot(ax2.XLim, [avge_weight avge_weight], 'k'); % plot average
-CI_99_plot = CI_99 - avge_weight; % take out if you want to look at CI
-CI_95_plot = CI_95 - avge_weight; % take out if you want to look at CI
-
-plot(ax2.XLim, [CI_99_plot(1) CI_99_plot(1)], '-r'); % plot CI
-plot(ax2.XLim, [CI_99_plot(2) CI_99_plot(2)], '-r');
-plot(ax2.XLim, [CI_95_plot(1) CI_95_plot(1)], '-k'); % plot CI
-plot(ax2.XLim, [CI_95_plot(2) CI_95_plot(2)], '-k');
-plot(ax2.XLim, [top50 top50], '-k');
-xlim([1 length(included_channels)]); % set xlim
-set(gca, 'YTick', []);
-set(gca, 'XTick', [1 5:5:length(included_channels)]);
-xlabel('Electrode Channels');
-ylabel('Fragility Weight');
-set(gca, 'yaxislocation', 'right');
-set(gca, 'FontSize', FONTSIZE-3, 'LineWidth', LT);
-camroll(-90);
-ylim([YLowerLim YUpperLim])
-
 %%- PLOT THE HEATMAP OF MIN PERTURBATION AND FRAGILITY 
 % - Plot 01:
 fig{end+1} = figure;
 % subplot(121);
 imagesc(minPerturb_time_chan); hold on;
 c = colorbar(); colormap('jet'); set(gca,'box','off')
+set(gca,'YDir','normal');
 XLim = get(gca, 'xlim'); XLowerLim = XLim(1); XUpperLim = XLim(2);
 % set title, labels and ticks
 xticks = (timeStart - seizureTime) : 5 : (timeEnd - seizureTime);
@@ -229,55 +210,40 @@ titleStr = {'Minimum Norm Perturbation For All Channels', ...
 title(titleStr, 'FontSize', FONTSIZE+2);
 ax1 = gca;
 ylabel(c, 'Minimum L2-Norm Perturbation');
-xlabel('Time (sec)', 'FontSize', FONTSIZE);  ylabel('Electrode Channels', 'FontSize', FONTSIZE);
+xlabel('Time (sec)', 'FontSize', FONTSIZE);  
+ylab = ylabel('Electrode Channels', 'FontSize', FONTSIZE);
 set(gca, 'FontSize', FONTSIZE-3, 'LineWidth', LT);
 set(gca, 'XTick', (XLowerLim+0.5:10:XUpperLim+0.5)); set(gca, 'XTickLabel', xticks); % set xticks and their labels
 set(gca, 'YTick', [1, 5:5:length(included_channels)]);
-
+xlim([XLowerLim, XUpperLim+1]);
+currfig = gcf;
 plot(repmat(XUpperLim+1, length(ezone_indices),1), ezone_indices, '*r');
 plot(repmat(XUpperLim+1, length(earlyspread_indices), 1), earlyspread_indices, '*', 'color', [1 .5 0]);
-% plot(repmat(XUpperLim+1, length(latespread_indices),1), latespread_indices, '*', 'color', [1 .75 0]);
-legend('EZ Electrodes');
-
-figDir = './acc_figures/';
-currfig = gcf;
-currfig.PaperPosition = [-3.7448   -0.3385   15.9896   11.6771];
-savefig(fullfile(figDir, strcat(patient, 'minPerturbation')));
-print(fullfile(figDir, strcat(patient, 'minPerturbation')), '-dpng', '-r0')
-
-
-% - Plot 02:
-% fragility ranking
-fig{end+1} = figure;
-% subplot(121);
-imagesc(fragility_rankings); hold on;
-c = colorbar(); set(c, 'fontsize', FONTSIZE); colormap('jet'); set(gca,'box','off')
-titleStr = {['Fragility Ranking Of Each Channel (', patient ')'], ...
-    'Time Locked To Seizure'};
-XLim = get(gca, 'xlim'); XLowerLim = XLim(1); XUpperLim = XLim(2);
-ax = gca;
-set(gca, 'FontSize', FONTSIZE-3, 'LineWidth', LT); set(gca,'YDir','normal');
-set(gca, 'XTick', (XLowerLim+0.5:10:XUpperLim+0.5)); set(gca, 'XTickLabel', xticks, 'fontsize', FONTSIZE); % set xticks and their labels
-a = get(gca,'XTickLabel');
-set(gca,'XTickLabel',a,'fontsize',FONTSIZE)
-set(gca, 'YTick', y_indices, 'YTickLabel', labels(y_indices), 'fontsize', YAXFontSize);
-title(titleStr, 'FontSize', FONTSIZE+2);
-ylabel(c, 'Fragility Ranking', 'FontSize', FONTSIZE);
-xlabel('Time (sec)', 'FontSize', FONTSIZE);  ylabel('Electrode Channels', 'FontSize', FONTSIZE);
-xlim([XLowerLim XUpperLim+1]); % increase the xlim by 1, to mark regions of EZ
-% add the labels for the EZ electrodes (rows)
-plot(repmat(XUpperLim+1, length(ezone_indices),1), ezone_indices, '*r','LineWidth', LT);
-plot(repmat(XUpperLim+1, length(earlyspread_indices),1), earlyspread_indices, '*', 'Color', [1 .5 0], 'LineWidth', LT);
 if sum(latespread_indices) > 0
-    plot(repmat(XUpperLim+1, length(latespread_indices),1), latespread_indices, '*', 'Color', 'blue', 'LineWidth', LT);
+    plot(repmat(XUpperLim+1, length(latespread_indices),1), latespread_indices, '*', 'color', 'blue');
 end
 ax1 = gca;
 ax1_xlim = ax1.XLim;
 ax1_ylim = ax1.YLim;
+set(gca, 'YTick', []);
+% move ylabel to the left
+ylab.Position = ylab.Position + [-.25 0 0];
 
-currfig = gcf;
 currfig.PaperPosition = [-3.7448   -0.3385   15.9896   11.6771];
 currfig.Position = [1986           1        1535        1121];
+
+% label all the electrodes
+% set(gca, 'YTick', y_indices, 'YTickLabel', labels(y_indices), 'fontsize', YAXFontSize);
+axy = axes('Position',ax1.Position,...
+    'XAxisLocation','bottom',...
+    'YAxisLocation','left',...
+    'Color','none', ...
+    'XLim', ax1_xlim,...
+    'YLim', ax1_ylim,...
+    'box', 'off');
+set(axy, 'XTick', []);
+set(axy, 'YTick', y_indices, 'YTickLabel', labels(y_indices), 'fontsize', YAXFontSize);
+
 % set second axes for ezone indices
 ax2 = axes('Position',ax1.Position,...
     'XAxisLocation','bottom',...
@@ -316,10 +282,110 @@ if sum(latespread_indices) > 0
     set(ax4, 'YTick', y_latespreadindices, 'YTickLabel', labels(y_latespreadindices), 'FontSize', YAXFontSize, 'YColor', 'blue');
     linkaxes([ax1 ax3], 'xy');
 end
-% legend('red = EZ', 'orange = early spread', 'blue = late spread');
+axes(ax1);
+leg = legend('EZ Electrodes', 'Early Onset', 'Late Onset');
+% leg.Position = leg.Position + [.2 .2 0 0];
+
+figDir = './acc_figures/';
+currfig = gcf;
+currfig.PaperPosition = [-3.7448   -0.3385   15.9896   11.6771];
+savefig(fullfile(figDir, strcat(patient, 'minPerturbation')));
+print(fullfile(figDir, strcat(patient, 'minPerturbation')), '-dpng', '-r0')
+
+% - Plot 02:
+% fragility ranking
+fig{end+1} = figure;
+% subplot(121);
+imagesc(fragility_rankings); hold on;
+c = colorbar(); set(c, 'fontsize', FONTSIZE); colormap('jet'); set(gca,'box','off')
+titleStr = {['Fragility Ranking Of Each Channel (', patient ')'], ...
+    'Time Locked To Seizure'};
+XLim = get(gca, 'xlim'); XLowerLim = XLim(1); XUpperLim = XLim(2);
+ax = gca;
+set(gca, 'FontSize', FONTSIZE-3, 'LineWidth', LT); set(gca,'YDir','normal');
+set(gca, 'XTick', (XLowerLim+0.5:10:XUpperLim+0.5)); set(gca, 'XTickLabel', xticks, 'fontsize', FONTSIZE); % set xticks and their labels
+a = get(gca,'XTickLabel');
+set(gca,'XTickLabel',a,'fontsize',FONTSIZE)
+title(titleStr, 'FontSize', FONTSIZE+5);
+ylabel(c, 'Fragility Ranking', 'FontSize', FONTSIZE);
+xlabel('Time (sec)', 'FontSize', FONTSIZE);  
+ylab = ylabel('Electrode Channels', 'FontSize', FONTSIZE);
+xlim([XLowerLim XUpperLim+1]); % increase the xlim by 1, to mark regions of EZ
+% add the labels for the EZ electrodes (rows)
+plot(repmat(XUpperLim+1, length(ezone_indices),1), ezone_indices, '*r','LineWidth', LT);
+plot(repmat(XUpperLim+1, length(earlyspread_indices),1), earlyspread_indices, '*', 'Color', [1 .5 0], 'LineWidth', LT);
+if sum(latespread_indices) > 0
+    plot(repmat(XUpperLim+1, length(latespread_indices),1), latespread_indices, '*', 'Color', 'blue', 'LineWidth', LT);
+end
+ax1 = gca;
+ax1_xlim = ax1.XLim;
+ax1_ylim = ax1.YLim;
+set(gca, 'YTick', []);
+% move ylabel to the left
+ylab.Position = ylab.Position + [-.15 0 0];
+legend('EZ Electrodes', 'Early Onset', 'Late Onset');
+
+currfig = gcf;
+currfig.PaperPosition = [-3.7448   -0.3385   15.9896   11.6771];
+currfig.Position = [1986           1        1535        1121]; %workstation
+currfig.Position = [1 55 1440 773];
+
+% label all the electrodes
+% set(gca, 'YTick', y_indices, 'YTickLabel', labels(y_indices), 'fontsize', YAXFontSize);
+axy = axes('Position',ax1.Position,...
+    'XAxisLocation','bottom',...
+    'YAxisLocation','left',...
+    'Color','none', ...
+    'XLim', ax1_xlim,...
+    'YLim', ax1_ylim,...
+    'box', 'off');
+set(axy, 'XTick', []);
+set(axy, 'YTick', y_indices, 'YTickLabel', labels(y_indices), 'fontsize', YAXFontSize);
+
+% set second axes for ezone indices
+ax2 = axes('Position',ax1.Position,...
+    'XAxisLocation','bottom',...
+    'YAxisLocation','left',...
+    'Color','none', ...
+    'XLim', ax1_xlim,...
+    'YLim', ax1_ylim,...
+    'box', 'off');
+set(ax2, 'XTick', []);
+set(ax2, 'YTick', y_ezoneindices, 'YTickLabel', labels(y_ezoneindices), 'FontSize', YAXFontSize, 'YColor', 'red');
+linkaxes([ax1 ax2], 'xy');
+
+% set third axes for early spread
+ax3 = axes('Position',ax1.Position,...
+    'XAxisLocation','bottom',...
+    'YAxisLocation','left',...
+    'Color','none', ...
+    'XLim', ax1_xlim,...
+    'YLim', ax1_ylim,...
+    'box', 'off');
+set(ax3, 'XTick', []);
+set(ax3, 'YTick', y_earlyspreadindices, 'YTickLabel', labels(y_earlyspreadindices), 'FontSize', YAXFontSize, 'YColor', [1 .5 0]);
+linkaxes([ax1 ax3], 'xy');
+
+if sum(latespread_indices) > 0 
+    % 4th axes for latespread
+    % set third axes for early spread
+    ax4 = axes('Position',ax1.Position,...
+        'XAxisLocation','bottom',...
+        'YAxisLocation','left',...
+        'Color','none', ...
+        'XLim', ax1_xlim,...
+        'YLim', ax1_ylim,...
+        'box', 'off');
+    set(ax4, 'XTick', []);
+    set(ax4, 'YTick', y_latespreadindices, 'YTickLabel', labels(y_latespreadindices), 'FontSize', YAXFontSize, 'YColor', 'blue');
+    linkaxes([ax1 ax3], 'xy');
+end
+axes(ax1);
+leg = legend('EZ', 'Early Onset', 'Late Onset');
+leg.Position = [0.8792    0.0103    0.1021    0.0880];
 savefig(fullfile(figDir, strcat(patient, 'fragilityRanking')));
 print(fullfile(figDir, strcat(patient, 'fragilityRanking')), '-dpng', '-r0')
-
+end
 % add secondary plot with linear weighting
 % Add secondary plot, rotate clockwise and link x-y axes
 % subplot(122);
