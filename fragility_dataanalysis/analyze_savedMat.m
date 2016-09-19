@@ -104,21 +104,21 @@ end
 
 
 %%- Compute final fragility using linear weight until seizure
-lin_weights = (1:size(minPerturb_time_chan,2));
-fragility_weights = fragility_rankings*lin_weights';
-% fragility_weights = sum(fragility_rankings, 2);
-avge_weight = mean(fragility_weights);
-SEM = std(fragility_weights) / sqrt(length(fragility_weights)); % standard error
-% ts_99 = tinv([1e-10 1-1e-10], length(fragility_weights) - 1);
-ts_99 = tinv([0.005 1-0.005], length(fragility_weights) - 1);
-CI_99 = avge_weight + ts_99*SEM;
-ts_95 = tinv([0.025 0.975], length(fragility_weights) - 1);
-CI_95 = avge_weight + ts_95*SEM;
-
-% get 95 and 99 confidence interval
-electrodes_99 = labels(fragility_weights > CI_99(2))
-electrodes_95 = labels(fragility_weights > CI_95(2) & fragility_weights < CI_99(2))
-top50 = mean(fragility_weights(fragility_weights > avge_weight)) - avge_weight;
+% lin_weights = (1:size(minPerturb_time_chan,2));
+% fragility_weights = fragility_rankings*lin_weights';
+% % fragility_weights = sum(fragility_rankings, 2);
+% avge_weight = mean(fragility_weights);
+% SEM = std(fragility_weights) / sqrt(length(fragility_weights)); % standard error
+% % ts_99 = tinv([1e-10 1-1e-10], length(fragility_weights) - 1);
+% ts_99 = tinv([0.005 1-0.005], length(fragility_weights) - 1);
+% CI_99 = avge_weight + ts_99*SEM;
+% ts_95 = tinv([0.025 0.975], length(fragility_weights) - 1);
+% CI_95 = avge_weight + ts_95*SEM;
+% 
+% % get 95 and 99 confidence interval
+% electrodes_99 = labels(fragility_weights > CI_99(2))
+% electrodes_95 = labels(fragility_weights > CI_95(2) & fragility_weights < CI_99(2))
+% top50 = mean(fragility_weights(fragility_weights > avge_weight)) - avge_weight;
 
 %%- compute threshold weight
 threshold = 0.8;
@@ -139,6 +139,16 @@ ylabel('Sum of Ones')
 figDir = './acc_figures/';;
 print(fullfile(figDir, strcat(patient, 'electrodeRanks')), '-dpng', '-r0')
 
+%%- print weights into an excel file
+weight_file = fullfile(figDir, strcat(patient, 'electrodeWeights.csv'));
+fid = fopen(weight_file, 'w');
+sorted_labels = labels(ind);
+for i=1:length(labels)
+    fprintf(fid, '%6s, %f \n', sorted_labels{i}, sorted_weights(i)); 
+end
+fclose(fid);
+
+%%- Heatmap of sorted fragility ranks
 figure; FONTSIZE=20; LT=1.5; YAXFontSize = 10;
 imagesc(sorted_fragility); hold on;
 c = colorbar(); colormap('jet'); set(gca,'box','off')

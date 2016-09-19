@@ -6,7 +6,7 @@ addpath('../'); % access to main functions
 
 %% 0: LOAD in the adj matrix files, and eeg file for initial condition
 % adjustable parameters
-pat_id = 'pt1'; sz_id = 'sz2';
+pat_id = 'pt2'; sz_id = 'sz1';
 patient = strcat(pat_id, sz_id);
 frequency_sampling = 1000;
 if strcmp(pat_id, 'pt1')
@@ -22,7 +22,8 @@ if strcmp(pat_id, 'pt1')
                         'POLSLT2', 'POLSLT3', 'POLSLT4', ...
                         'POLMLT2', 'POLMLT3', 'POLMLT4', 'POLG8', 'POLG16'};
 elseif strcmp(pat_id, 'pt2')
-    included_channels = [1:19 21:37 43 44 47:74 75 79]; %pt2
+%     included_channels = [1:19 21:37 43 44 47:74 75 79]; %pt2
+    included_channels = [1:14 16:19 21:25 27:37 43 44 47:74];
     ezone_labels = {'POLMST1', 'POLPST1', 'POLTT1'}; %pt2
     earlyspread_labels = {'POLTT2', 'POLAST2', 'POLMST2', 'POLPST2', 'POLALEX1', 'POLALEX5'};
 elseif strcmp(pat_id, 'JH105')
@@ -110,7 +111,7 @@ initial_cond = eeg(:, 1);
 x_current = initial_cond;
 w = linspace(-1, 1, 101); 
 radius = 1.1;
-noise_var = 1/2 * abs(mean(eeg(1,1:data.timeStart)));%var(eeg(1,1:data.timeStart)); % variance across all channels
+noise_var = 1/2 * abs(mean(eeg(1,1:500)));%var(eeg(1,1:data.timeStart)); % variance across all channels
 % noise_var = 1;
 
 %- initialize simulated electrode info
@@ -161,6 +162,8 @@ for i=2:length(matFiles)-21
     theta_adj = data.theta_adj;
     timewrtSz = data.timewrtSz / frequency_sampling;
     index = data.index; 
+    
+    noise_var = 1/2 * abs(mean(eeg(1,500*(i-1):500*i)));
     
     if max(eig(theta_adj)) < 1
         [V D W] = eig(theta_adj); % eigenvalue decomposition
