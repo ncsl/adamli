@@ -1,7 +1,5 @@
 # Fragility Data Analysis Work Plan and Documentation
 
-[Status: 100%]
-
 ## Workplan:
 1. Update Functions In Matlab/Python:
 	- turn scripts to compute adj. mats, and compute perturbations into functions  []
