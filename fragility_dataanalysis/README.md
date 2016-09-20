@@ -1,5 +1,7 @@
 # Fragility Data Analysis Work Plan and Documentation
 
+[Status: 100%]
+
 ## Workplan:
 1. Update Functions In Matlab/Python:
 	- turn scripts to compute adj. mats, and compute perturbations into functions  []
@@ -15,6 +17,10 @@
 5. Develop Fragility Statistic:
 	- develop a better statistic for comparing electrodes. Would be best if it could come up with a probability of electrode being in EZ with some sort of confidence interval. 
 
+6. How sensitive are these measures to what channels are included?
+	- can we automatically reject channels?
+	- automate selection of channels better then what EZTrack currently has -> makes things easier to run for new patients
+
 ### Additional Ideas:
 1. Different ways of generating connectivity between electrodes 
 	- Pearson correlation
@@ -24,7 +30,6 @@
 	- 
 
 3. Using other system identification methods that scale with size (MR.SID).
-
 
 ## Documentation:
 File descriptions:
