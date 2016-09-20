@@ -25,6 +25,7 @@
 
 ## Documentation:
 File descriptions:
+
 1. computeAdjMats:
 	This function takes a time range of EEG data, step size, window size and computes an adjacency matrix, A for each window using a vector autoregression model.
 
