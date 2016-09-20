@@ -12,6 +12,9 @@
 	- JHU patients to explore differences between grid and strip electrode patients
 4. run analysis on cleveland SEEG patients
 
+5. Develop Fragility Statistic:
+	- develop a better statistic for comparing electrodes. Would be best if it could come up with a probability of electrode being in EZ with some sort of confidence interval. 
+
 ### Additional Ideas:
 1. Different ways of generating connectivity between electrodes 
 	- Pearson correlation

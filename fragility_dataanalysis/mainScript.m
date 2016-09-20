@@ -1,3 +1,4 @@
+addpath('./fragility_library/');
 patient_ids = {'pt1', 'pt2'};
 seizure_ids = {'sz1', 'sz3'};
 eegfilepath = strcat('./data/', patient);
