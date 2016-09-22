@@ -18,7 +18,7 @@
 % - None, but it saves a mat file for the patient/seizure over all windows
 % in the time range
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-function computeAdjMats(patient_id, seizure_id, included_channels, ...
+function computeparallelAdjMats(patient_id, seizure_id, included_channels, ...    
     timeRange, winSize, stepSize, ezone_labels, earlyspread_labels, latespread_labels)
 addpath('./fragility_library/');
 
@@ -91,13 +91,14 @@ eeg = csv2eeg(patient_eeg_path, filename, num_values, num_channels);
 eeg = buttfilt(eeg,[59.5 60.5], frequency_sampling,'stop',1);
 % 1C. only get columns of interest and time points of interest
 seizureStart = milliseconds(onset_time - recording_start); % time seizure starts
+seizureEnd = milliseconds(offset_time - recording_start); % time seizure ends
 file_length = length(eeg); 
 num_channels = length(included_channels);
 
 % window parameters - overlap, #samples, stepsize, window pointer
 preseizureTime = timeRange(1); % e.g. 60 seconds 
 postseizureTime = timeRange(2); % e.g. 10 seconds
-dataStart = seizureStart - preseizureTime*frequency_sampling;  % current data window                      % where to grab data (milliseconds)
+dataStart = seizureStart + preseizureTime*frequency_sampling;  % current data window                      % where to grab data (milliseconds)
 
 % begin computation and time it
 tic;
@@ -111,20 +112,26 @@ disp(['Seizure starts at ', num2str(limit), ' milliseconds']);
  
 % convert an index of the data window based on which index of the parfor
 % loop you are in.
+eeg = eeg(included_channels,:);
 
 tic;
 dataWindow = dataStart;
 dataRange = limit-dataWindow
-parfor i=1:dataRange/stepSize    
-    % step 3: set datawindow based on current index
+
+% create a temp cell to hold all indices of the eeg data to run in parallel
+tempeegcell = cell(dataRange/stepSize, 1);
+for i=1:dataRange/stepSize
     dataWindow = dataStart + (i-1)*stepSize;
-    
+    tempeegcell{i} = eeg(:, dataWindow + 1:dataWindow + winSize);
+end
+clear eeg
+
+parfor i=1:dataRange/stepSize    
     % step 1: extract the data and apply the notch filter. Note that column
     %         #i in the extracted matrix is filled by data samples from the
     %         recording channel #i.
-    tmpdata = eeg(included_channels, dataWindow + 1:dataWindow + winSize);
-    [nc, t] = size(tmpdata)
-    
+    tmpdata = tempeegcell{i};%eeg(:, dataWindow + 1:dataWindow + winSize);
+
     % step 2: compute some functional connectivity 
     % linear model: Ax = b; A\b -> x
     b = tmpdata(:); % define b as vectorized by stacking columns on top of another
@@ -135,7 +142,7 @@ parfor i=1:dataRange/stepSize
     % build up A matrix with a loop modifying #time_samples points and #chans at a time
     A = zeros(length(b), num_channels^2);               % initialize A for speed
     N = 1:num_channels:size(A,1);                       % set the indices through rows
-    A(n, 1:num_channels) = tmpdata(1:end-1,:);          % set the first loop
+    A(N, 1:num_channels) = tmpdata(1:end-1,:);          % set the first loop
     
     for iChan=2 : num_channels % loop through columns #channels per loop
         rowInds = N+(iChan-1);
@@ -158,6 +165,7 @@ parfor i=1:dataRange/stepSize
     data = struct();
     data.theta_adj = theta_adj;
     data.seizureTime = seizureStart;
+    data.seizureEnd = seizureEnd;
     data.winSize = winSize;
     data.stepSize = stepSize;
     data.timewrtSz = dataWindow - seizureStart;
@@ -165,6 +173,10 @@ parfor i=1:dataRange/stepSize
     data.timeEnd = seizureStart + postseizureTime*frequency_sampling;
     data.index = i;
     data.included_channels = included_channels;
+    data.ezone_labels = ezone_labels;
+    data.earlyspread_labels = earlyspread_labels;
+    data.latespread_labels = latespread_labels;
+    data.date = date;
     parsave(fullfile(adjDir, fileName), data);
 end
 toc;
