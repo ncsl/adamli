@@ -126,6 +126,7 @@ for i=1:dataRange/stepSize
 end
 clear eeg
 
+parpool('local', 5);
 parfor i=1:dataRange/stepSize    
     % step 1: extract the data and apply the notch filter. Note that column
     %         #i in the extracted matrix is filled by data samples from the
@@ -178,6 +179,8 @@ parfor i=1:dataRange/stepSize
     data.latespread_labels = latespread_labels;
     data.date = date;
     parsave(fullfile(adjDir, fileName), data);
+    
+    fprintf('%6s \n', ['Finished with step ', num2str(i)]);
 end
 toc;
 end

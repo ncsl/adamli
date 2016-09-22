@@ -14,28 +14,43 @@
 % - None, but it saves a mat file for the patient/seizure over all windows
 % in the time range -> adjDir/final_data
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-function computePerturbations(patient_id, seizure_id, w_space, radius, perturbationType)
+function computePerturbations(patient_id, seizure_id, winSize, stepSize, ...
+    included_channels, ezone_labels, earlyspread_labels, latespread_labels, ...
+    w_space, radius, perturbationType)
 if nargin == 0
     patient_id = 'pt1';
     seizure_id = 'sz2';
     radius = 1.1;
     w_space = linspace(-1, 1, 101);
     perturbationType = 'R';
+    winSize = 500;
+    stepSize = 500;
+    included_channels = 0;
 end
 
 %% 0: Initialize All Necessary Vars and Dirs
-sigma = sqrt(radius^2 - w.^2); % move to the unit circle 1, for a plethora of different radial frequencies
+sigma = sqrt(radius^2 - w_space.^2); % move to the unit circle 1, for a plethora of different radial frequencies
 b = [0; 1];
 patient = strcat(patient_id, seizure_id);
 
 %- initialize directories and labels
 adjDir = fullfile(strcat('./adj_mats_win', num2str(winSize), ...
-    '_step', num2str(stepSize)), patient);
+    '_step', num2str(stepSize)));
 %- set file path for the patient file 
 dataDir = './data/';
 patient_eeg_path = strcat('./data/', patient);
 patient_label_path = fullfile(dataDir, patient, strcat(patient, '_labels.csv'));
-
+%% 1: Read in Data and Initialize Variables For Analysis
+matFiles = dir(fullfile(adjDir,patient, '*.mat'));
+matFiles = {matFiles.name};         % cell array of all mat file names in order
+matFiles = natsortfiles(matFiles);  % 3rd party - natural sorting order
+data = load(fullfile(adjDir, patient,matFiles{2}));    % load in example preprocessed mat
+data = data.data;
+try % take out later
+    included_channels = data.included_channels;
+catch
+    disp('no included yet...');
+end
 fid = fopen(patient_label_path); % open up labels to get all the channels
 labels = textscan(fid, '%s', 'Delimiter', ',');
 labels = labels{:}; labels = labels(included_channels);
@@ -65,7 +80,7 @@ end
 earlyspread_indices(earlyspread_indices==0) =  [];
 
 latespread_indices = zeros(length(latespread_labels),1);
-if strcmp(pat_id, 'pt1')
+if ~isempty(latespread_labels)
     for i=1:length(latespread_labels)
         indice = cellfun(cellfind(latespread_labels{i}), labels, 'UniformOutput', 0);
         indice = [indice{:}];
@@ -75,14 +90,6 @@ if strcmp(pat_id, 'pt1')
         end
     end
 end
-
-%% 1: Read in Data and Initialize Variables For Analysis
-matFiles = dir(fullfile(adjDir, '*.mat'));
-matFiles = {matFiles.name};         % cell array of all mat file names in order
-matFiles = natsortfiles(matFiles);  % 3rd party - natural sorting order
-data = load(fullfile(adjDir, patient, matFiles{2}));    % load in example preprocessed mat
-data = data.data;
-included_channels = data.included_channels;
 
 %- initialize matrices for colsum, rowsum, and minimum perturbation
 timeRange = length(matFiles);               % the number of mat files to analyze
@@ -100,7 +107,7 @@ tic; % start counter
 for i=1:length(matFiles) % loop through each adjacency matrix
     %%- 01: Extract File and Information
     matFile = matFiles{i};
-    data = load(fullfile(dataDir, matFile));
+    data = load(fullfile(adjDir,patient, matFile));
     data = data.data;
     
     theta_adj = data.theta_adj;
@@ -117,9 +124,9 @@ for i=1:length(matFiles) % loop through each adjacency matrix
     %%- 02:Compute Minimum Norm Perturbation
     % determine which indices have eigenspectrums that are stable
     max_eig = max(abs(eig(theta_adj)));
-    if (max_eig < sigma0) % this is a stable eigenspectrum
+    if (max_eig < radius) % this is a stable eigenspectrum
         N = size(theta_adj, 1); % number of rows
-        del_size = zeros(N, length(w));
+        del_size = zeros(N, length(w_space));
         
         %%- grid search over sigma and w for each row to determine, what is
         %%- the min norm perturbation
@@ -137,20 +144,31 @@ for i=1:length(matFiles) % loop through each adjacency matrix
                     if size(C,1) > 1
                         size(C)
                         disp('Could be an error in setting Row and Col Pert.');
+                        k = waitforbuttonpress
                     end
                 elseif (perturbationType == 'C')
                     C = inv(A - lambda*eye(N))*ek; 
                     if size(C,2) > 1
                         size(C)
                         disp('Could be an error in setting Row and Col Pert.');
+                        k = waitforbuttonpress
                     end
                 end
-                Cr = real(C);
-                Ci = imag(C);
-                B = [Ci; Cr];
-                
-                % compute perturbation necessary
+                Cr = real(C);  Ci = imag(C);
+                if strcmp(perturbationType, 'R')
+                    B = [Ci; Cr];
+                else
+                    B = [Ci, Cr]';
+                end
+
                 del = B'*inv(B*B')*b;
+                
+%                 if w_space(iW) ~= 0
+%                     % compute perturbation necessary
+%                     del = B'*inv(B*B')*b;
+%                 else
+%                     del = C./(norm(C)^2);
+%                 end
                 
                 % store the l2-norm of the perturbation
                 del_size(iNode, iW) = norm(del); 
@@ -182,8 +200,8 @@ end
 
 %- make processed file dir, if not saved yet.
 if ~exist(fullfile(adjDir, strcat(perturbationType, '_finaldata')), 'dir')
-    mkdir(fullfile(adjDir,  strcat(perturbationType, '_finaldata'))));
+    mkdir(fullfile(adjDir,  strcat(perturbationType, '_finaldata')));
 end
-save(fullfile(adjDir, strcat(perturbationType, '_finaldata')), strcat(patient,'final_data.mat')),...
+save(fullfile(adjDir, strcat(perturbationType, '_finaldata'), strcat(patient,'final_data.mat')),...
  'minPerturb_time_chan', 'colsum_time_chan', 'rowsum_time_chan', 'fragility_rankings');
 end
