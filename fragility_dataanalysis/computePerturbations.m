@@ -181,9 +181,9 @@ for i=1:size(minPerturb_time_chan,1)      % loop through each channel
 end
 
 %- make processed file dir, if not saved yet.
-if ~exist(fullfile(adjDir, 'finaldata'), 'dir')
-    mkdir(fullfile(adjDir, 'finaldata'));
+if ~exist(fullfile(adjDir, strcat(perturbationType, '_finaldata')), 'dir')
+    mkdir(fullfile(adjDir,  strcat(perturbationType, '_finaldata'))));
 end
-save(fullfile(adjDir,'finaldata', strcat(patient,'final_data.mat')),...
+save(fullfile(adjDir, strcat(perturbationType, '_finaldata')), strcat(patient,'final_data.mat')),...
  'minPerturb_time_chan', 'colsum_time_chan', 'rowsum_time_chan', 'fragility_rankings');
 end
