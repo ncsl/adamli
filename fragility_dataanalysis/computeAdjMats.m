@@ -155,7 +155,8 @@ for i=1:dataRange/stepSize
     fileName = strcat(patient, '_', num2str(index), '.mat');
     
     %- save the data into a struct into a mat file
-    %- save the data into a struct into a mat file
+    %- save the data into a struct into a mat file - time all in
+    %milliseconds
     data = struct();
     data.theta_adj = theta_adj;
     data.seizureTime = seizureStart;

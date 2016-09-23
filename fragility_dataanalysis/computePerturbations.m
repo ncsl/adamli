@@ -138,8 +138,8 @@ for i=1:length(matFiles) % loop through each adjacency matrix
                 lambda = sigma(iW) + 1i*w_space(iW);
 
                 % row perturbation inversion
-                if (perturbationType == 'C')
-                    C = inv(A - lambda*eye(N))*ek;  
+                if (perturbationType == 'R')
+                    C = ek'*inv(A - lambda*eye(N));  
                     
                     if size(C,1) > 1
                         size(C)
