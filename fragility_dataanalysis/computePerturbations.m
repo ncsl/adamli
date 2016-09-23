@@ -131,15 +131,15 @@ for i=1:length(matFiles) % loop through each adjacency matrix
         %%- grid search over sigma and w for each row to determine, what is
         %%- the min norm perturbation
         for iNode=1:N
-            ek = [zeros(iNode-1, 1); 1; zeros(N-iNode,1)]; % unit vector at this node
+            ek = [zeros(iNode-1, 1); 1; zeros(N-iNode,1)]; % unit column vector at this node
             A = theta_adj; 
             
             for iW=1:length(w_space) % loop through frequencies
                 lambda = sigma(iW) + 1i*w_space(iW);
 
                 % row perturbation inversion
-                if (perturbationType == 'R')
-                    C = ek'*inv(A - lambda*eye(N));  
+                if (perturbationType == 'C')
+                    C = inv(A - lambda*eye(N))*ek;  
                     
                     if size(C,1) > 1
                         size(C)

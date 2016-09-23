@@ -50,11 +50,10 @@ stepSize = 500;
 % end
 
 %% COMPUTE PERTURBATIONS
-patients = {...%'pt1sz2',
-    'pt1sz3', 'pt2sz1', 'pt2sz3'};
+patients = {'pt1sz2',  'pt1sz3', 'pt2sz1', 'pt2sz3'};
 w_space = linspace(-1, 1, 101);
 radius = 1.1;
-perturbationType = 'C';
+perturbationType = 'R';
 for i=1:length(patients)
     patient = patients{i};
     patient_id = patient(1:strfind(patient, 'sz')-1);
