@@ -13,7 +13,6 @@
 % in the time range -> adjDir/final_data
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 function analyzePerturbations(patient_id, seizure_id, perturbationType, threshold, winSize, stepSize)
-close all;
     if (nargin == 0)
         patient_id = 'pt1';
         seizure_id = 'sz2';
@@ -154,9 +153,6 @@ FONTSIZE = 22;
 YAXFontSize = 9;
 LT = 1.5;
 figDir = fullfile('./acc_figures/', perturbationType);
-if ~exist(figDir, 'dir')
-    mkdir(figDir);
-end
 
 xticks = (timeStart - seizureTime) : 5 : (timeEnd - seizureTime);
 ytick = 1:length(included_channels);
@@ -287,7 +283,6 @@ end
 yticks = ytick(ismember(ind_sorted_weights, y_indices)); % index thru sorted_labels
 ezone_ticks = ytick(ismember(ind_sorted_weights, ezone_indices));
 earlyspread_ticks = ytick(ismember(ind_sorted_weights, earlyspread_indices));
-latespread_ticks = 0;
 if (sum(latespread_indices) > 0)
     latespread_ticks = ytick(ismember(ind_sorted_weights, latespread_indices));
 end
