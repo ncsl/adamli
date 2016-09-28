@@ -1,25 +1,49 @@
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% FUNCTION: computeAdjMats
-% DESCRIPTION: This function takes a time range of EEG data, step size, 
-% window size and computes an adjacency matrix, A for each window using 
-% a vector autoregression model.
+% Main script to run first
 %
-% INPUT:
-% - patient_id = The id of the patient (e.g. pt1, JH105, UMMC001)
-% - seizure_id = the id of the seizure (e.g. sz1, sz3)
-% - included_channels = the list of included channels for this patient
-% which can be copy/pasted from EZTrack's patient csv file
-% - timeRange = [preseizuretime, postseizuretime]
-% - winSize = the window size of each data segment to be used for an
-% adjacency matrix. It is in milliseconds
-% - stepSize = the step size over this window of analysis (in milliseconds)
+% Description: Run's the script for all the setup code that we need for
+% analyzing a certain patient's electrode data. Includes, channels of
+% interest, clinical annotations, timeRange, window Size, step Size, w
+% space of search and radius of eigenvalue disc.
 %
-% OUTPUT:
-% - None, but it saves a mat file for the patient/seizure over all windows
-% in the time range
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-function computeAdjMats(patient_id, seizure_id, included_channels, ...
-    timeRange, winSize, stepSize, ezone_labels, earlyspread_labels, latespread_labels)
+
+%- directory variables and patients to run over
+% patient_ids = {'pt1', 'pt2'};
+% seizure_ids = {'sz2', 'sz3'};
+% perturbationTypes = ['C', 'R'];
+% patient = strcat(patient_id, seizure_id);
+
+%- set variables for computing adjacency matrix
+timeRange = [-60, 20];
+winSize = 500;
+stepSize = 500;
+w_space = linspace(-1, 1, 101);
+radius = 1.1;
+
+%%- List of included_channels based on patient
+if strcmp(patient_id, 'pt1')
+    included_channels = [1:36 42 43 46:69 72:95];
+    ezone_labels = {'POLPST1', 'POLPST2', 'POLPST3', 'POLAD1', 'POLAD2'}; %pt1
+    ezone_labels = {'POLATT1', 'POLATT2', 'POLAD1', 'POLAD2', 'POLAD3'}; %pt1
+    earlyspread_labels = {'POLATT3', 'POLAST1', 'POLAST2'};
+    latespread_labels = {'POLATT4', 'POLATT5', 'POLATT6', ...
+                        'POLSLT2', 'POLSLT3', 'POLSLT4', ...
+                        'POLMLT2', 'POLMLT3', 'POLMLT4', 'POLG8', 'POLG16'};
+elseif strcmp(patient_id, 'pt2')
+%     included_channels = [1:19 21:37 43 44 47:74 75 79]; %pt2
+    included_channels = [1:14 16:19 21:25 27:37 43 44 47:74];
+    ezone_labels = {'POLMST1', 'POLPST1', 'POLTT1'}; %pt2
+    earlyspread_labels = {'POLTT2', 'POLAST2', 'POLMST2', 'POLPST2', 'POLALEX1', 'POLALEX5'};
+     latespread_labels = {};
+elseif strcmp(patient_id, 'JH105')
+    included_channels = [1:4 7:12 14:19 21:37 42 43 46:49 51:53 55:75 78:99]; % JH105
+    ezone_labels = {'POLRPG4', 'POLRPG5', 'POLRPG6', 'POLRPG12', 'POLRPG13', 'POLG14',...
+        'POLAPD1', 'POLAPD2', 'POLAPD3', 'POLAPD4', 'POLAPD5', 'POLAPD6', 'POLAPD7', 'POLAPD8', ...
+        'POLPPD1', 'POLPPD2', 'POLPPD3', 'POLPPD4', 'POLPPD5', 'POLPPD6', 'POLPPD7', 'POLPPD8', ...
+        'POLASI3', 'POLPSI5', 'POLPSI6', 'POLPDI2'}; % JH105
+     latespread_labels = {};
+end
+
+%% BEGIN PreProcess Cleaning of Data
 % add libraries of functions
 addpath('./fragility_library/');
 addpath('/Users/adam2392/Dropbox/eeg_toolbox');
@@ -141,64 +165,3 @@ eeg = eeg(included_channels,:);
 tic;
 dataWindow = dataStart;
 dataRange = limit-dataWindow
-for i=1:dataRange/stepSize  
-%     leastSquaresAdjMat(i, eeg, included_channels, patient, ...
-%          winSize, stepSize, ezone_labels, earlyspread_labels, latespread_labels);
-    dataWindow = dataStart + (i-1)*stepSize;
-    
-    % step 1: extract the data and apply the notch filter. Note that column
-    %         #i in the extracted matrix is filled by data samples from the
-    %         recording channel #i.
-    tmpdata = eeg(:, dataWindow + 1:dataWindow + winSize);
-
-    % step 2: compute some functional connectivity 
-    % linear model: Ax = b; A\b -> x
-    b = tmpdata(:); % define b as vectorized by stacking columns on top of another
-    b = b(num_channels+1:end); % only get the time points after the first one
-    
-    tmpdata = tmpdata';
-    tic;
-    % build up A matrix with a loop modifying #time_samples points and #chans at a time
-    A = zeros(length(b), num_channels^2);               % initialize A for speed
-    N = 1:num_channels:size(A,1);                       % set the indices through rows
-    A(n, 1:num_channels) = tmpdata(1:end-1,:);          % set the first loop
-    
-    for iChan=2 : num_channels % loop through columns #channels per loop
-        rowInds = n+(iChan-1);
-        colInds = (iChan-1)*num_channels+1:iChan*num_channels;
-        A(rowInds, colInds) = tmpdata(1:end-1,:);
-    end
-    toc;
-    
-    % create the reshaped adjacency matrix
-    tic;
-    theta = A\b;                                                % solve for x, connectivity
-    theta_adj = reshape(theta, num_channels, num_channels)';    % reshape fills in columns first, so must transpose
-    imagesc(theta_adj)
-    toc;
-    
-    %% save the theta_adj made
-    fileName = strcat(patient, '_', num2str(index), '.mat');
-    
-    %- save the data into a struct into a mat file
-    %- save the data into a struct into a mat file - time all in
-    %milliseconds
-    data = struct();
-    data.theta_adj = theta_adj;
-    data.seizureTime = seizureStart;
-    data.seizureEnd = seizureEnd;
-    data.winSize = winSize;
-    data.stepSize = stepSize;
-    data.timewrtSz = dataWindow - seizureStart;
-    data.timeStart = seizureStart - preseizureTime*frequency_sampling;
-    data.timeEnd = seizureStart + postseizureTime*frequency_sampling;
-    data.index = i;
-    data.included_channels = included_channels;
-    data.ezone_labels = ezone_labels;
-    data.earlyspread_labels = earlyspread_labels;
-    data.latespread_labels = latespread_labels;
-    data.date = date;
-    
-    save(fullfile(adjDir, fileName), 'data');
-end
-end

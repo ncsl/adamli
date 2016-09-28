@@ -5,14 +5,13 @@
 % Input:
 % 
 function leastSquaresAdjMat(i, eeg, included_channels, patient, ...
-         winSize, stepSize, ezone_labels, earlyspread_labels, latespread_labels)
-    
+         winSize, stepSize, ezone_labels, earlyspread_labels, latespread_labels) 
     dataWindow = dataStart + (i-1)*stepSize;
     
     % step 1: extract the data and apply the notch filter. Note that column
     %         #i in the extracted matrix is filled by data samples from the
     %         recording channel #i.
-    tmpdata = eeg(included_channels, dataWindow + 1:dataWindow + winSize);
+    tmpdata = eeg(:, dataWindow + 1:dataWindow + winSize);
 
     % step 2: compute some functional connectivity 
     % linear model: Ax = b; A\b -> x
@@ -32,7 +31,7 @@ function leastSquaresAdjMat(i, eeg, included_channels, patient, ...
         A(rowInds, colInds) = tmpdata(1:end-1,:);
     end
     toc;
-    
+    fprintf('%6s \n', 'done');
     % create the reshaped adjacency matrix
     tic;
     theta = A\b;                                                % solve for x, connectivity
