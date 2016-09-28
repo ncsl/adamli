@@ -30,13 +30,16 @@ matlab_jvm="matlab -nojvm -nodesktop -nosplash -r"
 		exit 1;
 	}
 # set patient_id, seizure_id, run setup script, ...
+	for job in `seq 0 5`
+	do
+		index=($proc+1)+24*job 
 matlab -logfile /home/ali/adamli/fragility_dataanalysis/_log/job$1.txt -nojvm \ 
 -nodisplay -nosplash -r "patient_id='$patient_id'; \
  			seizure_id='$seizure_id'; \
  			serverMainScript; \
  			leastSquaresAdjMat($1, eeg, included_channels, patient, \
 	          winSize, stepSize, ezone_labels, earlyspread_labels, latespread_labels); exit"
-
+done
 # for i in `seq 1 2`;
 # do
 # 	$matlab_jvm "leastSquaresAdjMat($i, eeg, included_channels, patient, \

@@ -1,10 +1,10 @@
 #!/bin/bash -l
-#PBS -N dque
+#PBS -N compute_adjacency_mat
 #PBS -l nodes=3:ppn=8
 #PBS -l walltime=14:00:00
 #PBS -M ali39@jhu.edu
 #PBS -m abe
-#PBS -q testq
+#PBS -q dque
 #PBS -S /bin/bash
 #PBS -d /home/ali/adamli/fragility_dataanalysis
 #PBS -e /home/ali/adamli/fragility_dataanalysis/_log/test.err
@@ -13,16 +13,14 @@
 source /etc/profile.modules
 module load matlab/matlab2013a
 
-cd /projects/sarma/cluster_script_example
-
-params=10
+# cd /projects/sarma/cluster_script_example
 
 for proc in `seq 0 23` 
 do
-	for job in `seq 0 5`
-	do
-		index=($proc+1)+24*job # pass in the index of the window to analyze
-		pbsdsh -n $proc /home/ali/adamli/fragility_dataanalysis/runAnalysis.sh $index &
-	done
+	# for job in `seq 0 5`
+	# do
+	# 	index=($proc+1)+24*job # pass in the index of the window to analyze
+		pbsdsh -n $proc /home/ali/adamli/fragility_dataanalysis/runAnalysis.sh &
+	# done
 done
 wait
