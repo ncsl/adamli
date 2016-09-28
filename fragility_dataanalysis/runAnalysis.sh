@@ -1,4 +1,6 @@
 # This script runs the computation/estimation of adjacency matrices
+source /etc/profile.modules
+module load matlab/matlab2013a
 
 clear # clear terminal window
 
@@ -18,6 +20,8 @@ while true; do
 	read -r perturbationType
 done
 
+echo "You entered: $patient_id and $seizure_id and perturbationType"
+
 ## 02: Set parameters for matlab to run, and check if matlab is on path
 matlab_jvm="matlab -nojvm -nodesktop -nosplash -r"
 [[ ! -z "`which matlab`" ]] || \
@@ -26,19 +30,18 @@ matlab_jvm="matlab -nojvm -nodesktop -nosplash -r"
 		exit 1;
 	}
 # set patient_id, seizure_id, run setup script, ...
-# 
-# $matlab_jvm "patient_id='$patient_id'; \
-# 			seizure_id='$seizure_id'; \
-# 			serverMainScript; exit"
-
+matlab -logfile /home/ali/adamli/fragility_dataanalysis/_log/job$1.txt -nojvm \ 
+-nodisplay -nosplash -r "patient_id='$patient_id'; \
+ 			seizure_id='$seizure_id'; \
+ 			serverMainScript; \
+ 			leastSquaresAdjMat($1, eeg, included_channels, patient, \
+	          winSize, stepSize, ezone_labels, earlyspread_labels, latespread_labels); exit"
 
 # for i in `seq 1 2`;
 # do
 # 	$matlab_jvm "leastSquaresAdjMat($i, eeg, included_channels, patient, \
 #          winSize, stepSize, ezone_labels, earlyspread_labels, latespread_labels); exit"
 # done
-
-echo "You entered: $patient_id and $seizure_id and perturbationType"
 
 # $matlab_jvm "computeAdjMats; \load('metadata'); \
 #     leastSquaresAdjMat(i, eeg, included_channels, patient, \
