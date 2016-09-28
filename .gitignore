@@ -1,4 +1,6 @@
 *_eeg.csv
 /fragility_dataanalysis/data/*_eeg.csv
 *EEG.mat
-fragility_dataanalysis/data/Seiz_Data/*
+fragility_dataanalysis/data/Seiz_Data/
+*pathdef.m
+*.m~
