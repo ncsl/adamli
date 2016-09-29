@@ -4,7 +4,7 @@
 % 
 % Input:
 % 
-function serverLeastSquaresAdjMat(i, dataStart, eeg, included_channels, patient, ...
+function serverLeastSquaresAdjMat(i, dataStart, eeg, num_channels, patient, ...
          winSize, stepSize, ezone_labels, earlyspread_labels, latespread_labels) 
     dataWindow = dataStart + (i-1)*stepSize;
     
