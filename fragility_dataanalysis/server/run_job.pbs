@@ -14,6 +14,7 @@ source /etc/profile.modules
 module load matlab/matlab2013a
 
 for proc in `seq 0 23` 
+do
 	pbsdsh -n $proc /home/ali/adamli/fragility_dataanalysis/runAnalysis.sh $proc $patient_id $seizure_id $perturbationType &
 done
 wait
