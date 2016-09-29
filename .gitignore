@@ -5,4 +5,4 @@ fragility_dataanalysis/data/Seiz_Data/
 *pathdef.m
 *.m~
 *.sh.*
-*_log/*
+*/_log/
