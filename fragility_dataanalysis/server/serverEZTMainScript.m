@@ -1,7 +1,7 @@
 % patient_id = '007';
 % seizure_id = 'seiz001';
 cd ..
-
+addpath('./eeg_toolbox/');
 %- set variables for computing adjacency matrix
 timeRange = [60, 20];
 winSize = 500;
