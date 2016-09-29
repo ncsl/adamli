@@ -1,0 +1,24 @@
+#!/bin/bash -l
+#PBS -N TEST
+#PBS -l nodes=2:ppn=8
+#PBS -l walltime=00:30:00
+#PBS -M your.email@jhu.edu
+#PBS -m abe
+#PBS -q testq
+#PBS -S /bin/bash
+#PBS -d /projects/sarma/cluster_script_example/
+#PBS -e /projects/sarma/cluster_script_example/_log/test.err
+#PBS -o /projects/sarma/cluster_script_example/_log/test.out
+
+source /etc/profile.modules
+module load matlab/matlab2013a
+
+cd /projects/sarma/cluster_script_example
+
+# run matlab for each processor
+for proc in `seq 0 15` 
+do
+id=$((proc+1))
+pbsdsh -n $proc /projects/sarma/cluster_script_example/helper_test.sh $id $param &
+done
+wait
