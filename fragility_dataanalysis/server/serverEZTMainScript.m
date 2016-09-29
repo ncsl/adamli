@@ -1,5 +1,5 @@
-% patient_id = '007';
-% seizure_id = 'seiz001';
+patient_id = '007';
+seizure_id = 'seiz001';
 
 addpath(genpath('../eeg_toolbox/'));
 %- set variables for computing adjacency matrix

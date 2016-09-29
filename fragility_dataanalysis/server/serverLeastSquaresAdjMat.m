@@ -4,7 +4,7 @@
 % 
 % Input:
 % 
-function serverLeastSquaresAdjMat(i, eeg, included_channels, patient, ...
+function serverLeastSquaresAdjMat(i, dataStart, eeg, included_channels, patient, ...
          winSize, stepSize, ezone_labels, earlyspread_labels, latespread_labels) 
     dataWindow = dataStart + (i-1)*stepSize;
     
@@ -36,7 +36,6 @@ function serverLeastSquaresAdjMat(i, eeg, included_channels, patient, ...
     tic;
     theta = A\b;                                                % solve for x, connectivity
     theta_adj = reshape(theta, num_channels, num_channels)';    % reshape fills in columns first, so must transpose
-    imagesc(theta_adj)
     toc;
     
     %% save the theta_adj made
