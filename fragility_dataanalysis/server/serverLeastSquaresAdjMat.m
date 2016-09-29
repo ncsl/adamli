@@ -4,7 +4,7 @@
 % 
 % Input:
 % 
-function leastSquaresAdjMat(i, eeg, included_channels, patient, ...
+function serverLeastSquaresAdjMat(i, eeg, included_channels, patient, ...
          winSize, stepSize, ezone_labels, earlyspread_labels, latespread_labels) 
     dataWindow = dataStart + (i-1)*stepSize;
     
@@ -23,10 +23,10 @@ function leastSquaresAdjMat(i, eeg, included_channels, patient, ...
     % build up A matrix with a loop modifying #time_samples points and #chans at a time
     A = zeros(length(b), num_channels^2);               % initialize A for speed
     N = 1:num_channels:size(A,1);                       % set the indices through rows
-    A(n, 1:num_channels) = tmpdata(1:end-1,:);          % set the first loop
+    A(N, 1:num_channels) = tmpdata(1:end-1,:);          % set the first loop
     
     for iChan=2 : num_channels % loop through columns #channels per loop
-        rowInds = n+(iChan-1);
+        rowInds = N+(iChan-1);
         colInds = (iChan-1)*num_channels+1:iChan*num_channels;
         A(rowInds, colInds) = tmpdata(1:end-1,:);
     end
@@ -59,7 +59,6 @@ function leastSquaresAdjMat(i, eeg, included_channels, patient, ...
     data.ezone_labels = ezone_labels;
     data.earlyspread_labels = earlyspread_labels;
     data.latespread_labels = latespread_labels;
-    data.date = date;
     
     save(fullfile(adjDir, fileName), 'data');
 end
