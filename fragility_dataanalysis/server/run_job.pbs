@@ -13,10 +13,6 @@
 source /etc/profile.modules
 module load matlab/matlab2013a
 
-# cd /projects/sarma/cluster_script_example
-# runs the sleep function on all faulty nodes 
-sh run_all_pbs.sh
-
 for proc in `seq 0 23` 
 	pbsdsh -n $proc /home/ali/adamli/fragility_dataanalysis/runAnalysis.sh $proc $patient_id $seizure_id $perturbationType &
 done

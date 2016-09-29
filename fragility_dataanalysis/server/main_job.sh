@@ -19,5 +19,10 @@ done
 
 echo "You entered: $patient_id and $seizure_id and perturbationType"
 
+# runs the sleep function on all faulty nodes 
+qsub -l walltime=24:00:00,nodes=node054 run_b_sleep.sh
+qsub -l walltime=24:00:00,nodes=node215 run_b_sleep.sh
+qsub -l walltime=24:00:00,nodes=node232 run_b_sleep.sh
+
 ## 02: Call pbs job, which in turn calls run_all_pbs (put nodes to sleep) and runAnalysis
 qsub -v patient_id=$patient_id,seizure_id=$seizure_id,perturbationType=$perturbationType run_job.pbs
