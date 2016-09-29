@@ -20,4 +20,4 @@ done
 echo "You entered: $patient_id and $seizure_id and perturbationType"
 
 ## 02: Call pbs job, which in turn calls run_all_pbs (put nodes to sleep) and runAnalysis
-qsub -v patient_id=$patient_id seizure_id=$seizure_id perturbationType=$perturbationType run_job.pbs
+qsub -v patient_id=$patient_id,seizure_id=$seizure_id,perturbationType=$perturbationType run_job.pbs
