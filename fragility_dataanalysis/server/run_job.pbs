@@ -6,15 +6,15 @@
 #PBS -m abe
 #PBS -q dque
 #PBS -S /bin/bash
-#PBS -d /home/ali/adamli/fragility_dataanalysis
-#PBS -e /home/ali/adamli/fragility_dataanalysis/_log/test.err
-#PBS -o /home/ali/adamli/fragility_dataanalysis/_log/test.out
+#PBS -d /home/ali/adamli/fragility_dataanalysis/server
+#PBS -e /home/ali/adamli/fragility_dataanalysis/server/_log/test.err
+#PBS -o /home/ali/adamli/fragility_dataanalysis/server/_log/test.out
 
 source /etc/profile.modules
 module load matlab/matlab2013a
 
 for proc in `seq 0 23` 
 do
-	pbsdsh -n $proc /home/ali/adamli/fragility_dataanalysis/runAnalysis.sh $proc $patient_id $seizure_id $perturbationType &
+	pbsdsh -n $proc /home/ali/adamli/fragility_dataanalysis/server/runAnalysis.sh $proc $patient_id $seizure_id $perturbationType &
 done
 wait

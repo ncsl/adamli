@@ -27,7 +27,7 @@ do
 	echo $winIndex
 
 	# open matlab and call functions
-	matlab -logfile /home/ali/adamli/fragility_dataanalysis/_log/job$1.txt -nojvm -nodisplay -nosplash -r "patient_id='$patient_id'; \
+	matlab -logfile /home/ali/adamli/fragility_dataanalysis/server/_log/job$1.txt -nojvm -nodisplay -nosplash -r "patient_id='$patient_id'; \
  			seizure_id='$seizure_id'; \
  			serverEZTMainScript; \
  			serverLeastSquaresAdjMat($winIndex, eeg, included_channels, patient, \
