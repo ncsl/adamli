@@ -1,5 +1,5 @@
 #!/bin/bash -l
-clear # clear terminal window
+# clear # clear terminal window
 
 ## 01: Prompt user for input that runs the analysis
 echo "Begin estimation of adjacency matrices." # print beginning statement
@@ -17,7 +17,7 @@ while true; do
 	read -r perturbationType
 done
 
-echo "You entered: $patient_id and $seizure_id and perturbationType"
+echo "You entered: $patient_id and $seizure_id and $perturbationType"
 
 # runs the sleep function on all faulty nodes 
 qsub -l walltime=24:00:00,nodes=node054 run_b_sleep.sh
