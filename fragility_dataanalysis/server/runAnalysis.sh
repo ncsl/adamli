@@ -1,5 +1,8 @@
 #!/bin/bash -l
 # This script runs the computation/estimation of adjacency matrices
+source /etc/profile.modules
+module load matlab/matlab2013a
+
 ## 00: Load in input parameters
 proc="$1"
 patient_id="$2"
