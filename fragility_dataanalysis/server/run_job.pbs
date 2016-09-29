@@ -9,10 +9,6 @@
 #PBS -d /home/ali/adamli/fragility_dataanalysis/server
 #PBS -e /home/ali/adamli/fragility_dataanalysis/server/_log/test.err
 #PBS -o /home/ali/adamli/fragility_dataanalysis/server/_log/test.out
-
-source /etc/profile.modules
-module load matlab/matlab2013a
-
 cd /home/ali/adamli/fragility_dataanalysis/server
 
 for proc in `seq 0 23` 
