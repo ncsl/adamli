@@ -1,7 +1,7 @@
 % patient_id = '007';
 % seizure_id = 'seiz001';
-cd ..
-addpath(genpath('./eeg_toolbox/'));
+
+addpath(genpath('../eeg_toolbox/'));
 %- set variables for computing adjacency matrix
 timeRange = [60, 20];
 winSize = 500;
@@ -42,7 +42,7 @@ end
 
 %% BEGIN PreProcess Cleaning of Data
 % add libraries of functions
-addpath('./fragility_library/');
+addpath('../fragility_library/');
 addpath('/Users/adam2392/Dropbox/eeg_toolbox');
 
 %% 0: READ PATIENT ID FILE
@@ -52,15 +52,15 @@ frequency_sampling = 1000; % sampling freq. at 1 kHz
 BP_FILTER_RAW = 1;
 
 % create the adjacency file directory to store the computed adj. mats
-adjDir = fullfile(strcat('./adj_mats_win', num2str(winSize), ...
+adjDir = fullfile(strcat('../adj_mats_win', num2str(winSize), ...
     '_step', num2str(stepSize)), patient);
 if ~exist(adjDir, 'dir')
     mkdir(adjDir);
 end
 
 %- set file path for the patient file 
-dataDir = './data/';
-patient_eeg_path = strcat('./data/Seiz_Data/', strcat('EZT', patient_id));
+dataDir = '../data/';
+patient_eeg_path = strcat('../data/Seiz_Data/', strcat('EZT', patient_id));
 
 %- apply a bandpass filter raw data? (i.e. pre-filter the wave?)
 if BP_FILTER_RAW==1,
