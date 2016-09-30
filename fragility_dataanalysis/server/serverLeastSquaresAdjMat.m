@@ -14,7 +14,7 @@ function serverLeastSquaresAdjMat(i, eeg, metadata)
     seizureEnd              = metadata.seizureEnd;
     adjDir                  = metadata.adjDir;
     preseizureTime          = metadata.preseizureTime;
-    postseizureTime         = metadata.preseizureTime;
+    postseizureTime         = metadata.postseizureTime;
     winSize                 = metadata.winSize;
     stepSize                = metadata.stepSize;
     ezone_labels            = metadata.ezone_labels;
@@ -67,8 +67,8 @@ function serverLeastSquaresAdjMat(i, eeg, metadata)
     data.winSize = winSize;
     data.stepSize = stepSize;
     data.timewrtSz = dataWindow - seizureStart;
-    data.timeStart = seizureStart - preseizureTime*frequency_sampling;
-    data.timeEnd = seizureStart + postseizureTime*frequency_sampling;
+    data.timeStart = seizureStart - preseizureTime*frequency_sampling; %start time of analysis
+    data.timeEnd = seizureStart + postseizureTime*frequency_sampling;  %end time of analysis
     data.index = i;
     data.included_channels = included_channels;
     data.ezone_labels = ezone_labels;

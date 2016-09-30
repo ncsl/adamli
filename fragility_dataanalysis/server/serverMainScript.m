@@ -4,14 +4,6 @@
 % analyzing a certain patient's electrode data. Includes, channels of
 % interest, clinical annotations, timeRange, window Size, step Size, w
 % space of search and radius of eigenvalue disc.
- %
-
-%- directory variables and patients to run over
-% patient_ids = {'pt1', 'pt2'};
-% seizure_ids = {'sz2', 'sz3'};
-% perturbationTypes = ['C', 'R'];
-% patient = strcat(patient_id, seizure_id);
-
 % patient_id = '007';
 % seizure_id = 'seiz001';
 
