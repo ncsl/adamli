@@ -1,5 +1,5 @@
-patient_id = '007';
-seizure_id = 'seiz001';
+% patient_id = '007';
+% seizure_id = 'seiz001';
 
 addpath(genpath('../eeg_toolbox/'));
 %- set variables for computing adjacency matrix
@@ -102,7 +102,6 @@ dataStart = seizureStart - preseizureTime*frequency_sampling;  % current data wi
 
 % begin computation and time it
 tic;
-index = 1;
 limit = seizureStart + postseizureTime*frequency_sampling; % go to seizure start, or + 10 seconds
 
 disp(['The range locked to seizure to look over is', num2str(-timeRange(1)), ...
@@ -115,3 +114,26 @@ disp(['Seizure starts at ', num2str(limit), ' milliseconds']);
 tic;
 dataWindow = dataStart;
 dataRange = limit-dataWindow
+
+% create a struct for the least square function to read in.
+metadata = struct();
+metadata.dataStart = dataStart;
+metadata.num_channels = num_channels;
+metadata.patient = patient;
+metadata.included_channels = included_channels;
+metadata.frequency_sampling = frequency_sampling;
+metadata.seizureStart = seizureStart;
+metadata.seizureEnd = seizureEnd;
+metadata.adjDir = adjDir;
+metadata.preseizureTime = postseizureTime;
+metadata.winSize = winSize;
+metadata.stepSize = stepSize;
+metadata.ezone_labels = ezone_labels;
+metadata.earlyspread_labels = earlyspread_labels;
+metadata.latespread_labels = latespread_labels;
+
+% tempfilename = fullfile('_meta', strcat(patient, 'metadata'));
+% if ~exist(tempfilename, 'dir')
+%     mkdir('_meta');
+% end
+% save(tempfilename);

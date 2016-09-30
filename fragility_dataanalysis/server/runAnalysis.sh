@@ -33,6 +33,5 @@ do
 	matlab -logfile /home/ali/adamli/fragility_dataanalysis/server/_log/job$1.txt -nojvm -nodisplay -nosplash -r "patient_id='$patient_id'; \
  			seizure_id='$seizure_id'; \
  			serverEZTMainScript; \
- 			serverLeastSquaresAdjMat($winIndex, dataStart, eeg, num_channels, patient, \
-	          winSize, stepSize, ezone_labels, earlyspread_labels, latespread_labels); exit"
+ 			serverLeastSquaresAdjMat($winIndex, eeg, metadata); exit"
 done

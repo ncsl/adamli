@@ -15,8 +15,7 @@
 % patient_id = '007';
 % seizure_id = 'seiz001';
 
-cd ..
-addpath('./eeg_toolbox/');
+addpath(genpath('../eeg_toolbox/'));
 %- set variables for computing adjacency matrix
 timeRange = [-60, 20];
 winSize = 500;
@@ -50,7 +49,7 @@ end
 
 %% BEGIN PreProcess Cleaning of Data
 % add libraries of functions
-addpath('./fragility_library/');
+addpath('../fragility_library/');
 addpath('/Users/adam2392/Dropbox/eeg_toolbox');
 
 %% 0: READ PATIENT ID FILE
@@ -60,15 +59,15 @@ frequency_sampling = 1000; % sampling freq. at 1 kHz
 BP_FILTER_RAW = 1;
 
 % create the adjacency file directory to store the computed adj. mats
-adjDir = fullfile(strcat('./adj_mats_win', num2str(winSize), ...
+adjDir = fullfile(strcat('../adj_mats_win', num2str(winSize), ...
     '_step', num2str(stepSize)), patient);
 if ~exist(adjDir, 'dir')
     mkdir(adjDir);
 end
 
 %- set file path for the patient file 
-dataDir = './data/';
-patient_eeg_path = strcat('./data/', patient);
+dataDir = '../data/';
+patient_eeg_path = strcat('../data/', patient);
 patient_file_path = fullfile(dataDir, patient, strcat(patient, '.csv'));
 
 %- set the meta data using the patient input file
@@ -137,3 +136,20 @@ eeg = eeg(included_channels,:);
 tic;
 dataWindow = dataStart;
 dataRange = limit-dataWindow
+
+% create a struct for the least square function to read in.
+metadata = struct();
+metadata.dataStart = dataStart;
+metadata.num_channels = num_channels;
+metadata.patient = patient;
+metadata.included_channels = included_channels;
+metadata.frequency_sampling = frequency_sampling;
+metadata.seizureStart = seizureStart;
+metadata.seizureEnd = seizureEnd;
+metadata.adjDir = adjDir;
+metadata.preseizureTime = postseizureTime;
+metadata.winSize = winSize;
+metadata.stepSize = stepSize;
+metadata.ezone_labels = ezone_labels;
+metadata.earlyspread_labels = earlyspread_labels;
+metadata.latespread_labels = latespread_labels;

@@ -4,15 +4,31 @@
 % 
 % Input:
 % 
-function serverLeastSquaresAdjMat(i, dataStart, eeg, num_channels, patient, ...
-         winSize, stepSize, ezone_labels, earlyspread_labels, latespread_labels) 
+function serverLeastSquaresAdjMat(i, eeg, metadata) 
+    dataStart               = metadata.dataStart;
+    num_channels            = metadata.num_channels;
+    patient                 = metadata.patient;
+    included_channels       = metadata.included_channels;
+    frequency_sampling      = metadata.frequency_sampling;
+    seizureStart            = metadata.seizureStart;
+    seizureEnd              = metadata.seizureEnd;
+    adjDir                  = metadata.adjDir;
+    preseizureTime          = metadata.preseizureTime;
+    postseizureTime         = metadata.preseizureTime;
+    winSize                 = metadata.winSize;
+    stepSize                = metadata.stepSize;
+    ezone_labels            = metadata.ezone_labels;
+    earlyspread_labels      = metadata.earlyspread_labels;
+    latespread_labels       = metadata.latespread_labels;
+    
     dataWindow = dataStart + (i-1)*stepSize;
     
     % step 1: extract the data and apply the notch filter. Note that column
     %         #i in the extracted matrix is filled by data samples from the
     %         recording channel #i.
     tmpdata = eeg(:, dataWindow + 1:dataWindow + winSize);
-
+    clear metadata eeg % save space - save ram
+    
     % step 2: compute some functional connectivity 
     % linear model: Ax = b; A\b -> x
     b = tmpdata(:); % define b as vectorized by stacking columns on top of another
