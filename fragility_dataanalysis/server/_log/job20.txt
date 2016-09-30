@@ -29,4 +29,4 @@ dataRange =
 
 Elapsed time is 8390.116233 seconds.
   done 
-sed time is 3475.939387 seconds.
+Elapsed time is 8279.828632 seconds.

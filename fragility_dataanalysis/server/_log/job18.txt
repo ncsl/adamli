@@ -27,6 +27,6 @@ dataRange =
 
        80000
 
-Elapsed time is 7082.459155 seconds.
+Elapsed time is 10815.494083 seconds.
   done 
-sed time is 3475.732554 seconds.
+ed time is 3475.732554 seconds.
