@@ -27,6 +27,6 @@ dataRange =
 
        80000
 
-Elapsed time is 8532.660123 seconds.
+Elapsed time is 9403.839504 seconds.
   done 
 sed time is 3519.607784 seconds.
