@@ -26,7 +26,7 @@ for ind in `seq 0 0`
 do
 	winIndex=$(($proc+1))
 	job=$((24*ind))
-	winIndex=$((index+job))
+	winIndex=$((winIndex+job))
 	echo $winIndex
 
 	# open matlab and call functions
