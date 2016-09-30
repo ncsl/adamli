@@ -39,7 +39,7 @@ function serverLeastSquaresAdjMat(i, dataStart, eeg, num_channels, patient, ...
     toc;
     
     %% save the theta_adj made
-    fileName = strcat(patient, '_', num2str(index), '.mat');
+    fileName = strcat(patient, '_', num2str(i), '.mat');
     
     %- save the data into a struct into a mat file
     %- save the data into a struct into a mat file - time all in

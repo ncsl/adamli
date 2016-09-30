@@ -161,10 +161,10 @@ for i=1:dataRange/stepSize
     % build up A matrix with a loop modifying #time_samples points and #chans at a time
     A = zeros(length(b), num_channels^2);               % initialize A for speed
     N = 1:num_channels:size(A,1);                       % set the indices through rows
-    A(n, 1:num_channels) = tmpdata(1:end-1,:);          % set the first loop
+    A(N, 1:num_channels) = tmpdata(1:end-1,:);          % set the first loop
     
     for iChan=2 : num_channels % loop through columns #channels per loop
-        rowInds = n+(iChan-1);
+        rowInds = N+(iChan-1);
         colInds = (iChan-1)*num_channels+1:iChan*num_channels;
         A(rowInds, colInds) = tmpdata(1:end-1,:);
     end
@@ -178,7 +178,7 @@ for i=1:dataRange/stepSize
     toc;
     
     %% save the theta_adj made
-    fileName = strcat(patient, '_', num2str(index), '.mat');
+    fileName = strcat(patient, '_', num2str(i), '.mat');
     
     %- save the data into a struct into a mat file
     %- save the data into a struct into a mat file - time all in
