@@ -1,0 +1,28 @@
+
+                            < M A T L A B (R) >
+                  Copyright 1984-2013 The MathWorks, Inc.
+                    R2013a (8.1.0.604) 64-bit (glnxa64)
+                             February 15, 2013
+
+ 
+To get started, type one of these: helpwin, helpdesk, or demo.
+For product information, visit www.mathworks.com.
+ 
+[Warning: Name is nonexistent or not a directory:
+/Users/adam2392/Dropbox/eeg_toolbox] 
+[> In path at 110
+  In addpath at 87
+  In serverEZTMainScript at 46] 
+
+patient =
+
+EZT090_seiz003
+
+[Warning: Directory already exists.] 
+[> In serverEZTMainScript at 58] 
+The range locked to seizure to look over is-60 until 20
+Total number of channels 111
+Length of to be included cElapsed time is 4913.165750 seconds.
+  done 
+sed time is 3513.248678 secondsElapsed time is 5179.241189 seconds.
+  done 
