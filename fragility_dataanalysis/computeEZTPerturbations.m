@@ -1,62 +1,70 @@
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% FUNCTION: computePerturbations
-% DESCRIPTION: This function takes adjacency matrices and computes the
-% minimum l2-norm perturbation required to destabilize the system.
-% 
-% INPUT:
-% - patient_id = The id of the patient (e.g. pt1, JH105, UMMC001)
-% - seizure_id = the id of the seizure (e.g. sz1, sz3)
-% - w_space = the frequency space on unit disc that we want to search over
-% - radius = the radius of disc that we want to perturb eigenvalues to
-% - perturbationType = 'R', or 'C' for row or column perturbation
-% 
-% OUTPUT:
-% - None, but it saves a mat file for the patient/seizure over all windows
-% in the time range -> adjDir/final_data
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-function computePerturbations(patient_id, seizure_id, winSize, stepSize, ...
+function computeEZTPerturbations(patient_id, seizure_id, winSize, stepSize, ...
     included_channels, ezone_labels, earlyspread_labels, latespread_labels, ...
     w_space, radius, perturbationType)
 if nargin == 0
-    patient_id = 'pt1';
-    seizure_id = 'sz2';
+    addpath('./fragility_library/');
+    patient_id = '005';
+    seizure_id = 'seiz001';
     radius = 1.1;
     w_space = linspace(-1, 1, 101);
     perturbationType = 'R';
     winSize = 500;
     stepSize = 500;
     included_channels = 0;
+    
+    if strcmp(patient_id, '007')
+        included_channels = [];
+        ezone_labels = {'O7', 'E8', 'E7', 'I5', 'E9', 'I6', 'E3', 'E2',...
+            'O4', 'O5', 'I8', 'I7', 'E10', 'E1', 'O6', 'I1', 'I9', 'E6',...
+            'I4', 'O3', 'O2', 'I10', 'E4', 'Y1', 'O1', 'I3', 'I2'}; %pt1
+        earlyspread_labels = {};
+        latespread_labels = {};
+    elseif strcmp(patient_id, '005')
+        included_channels = [];
+        ezone_labels = {'U4', 'U3', 'U5', 'U6', 'U8', 'U7'}; 
+        earlyspread_labels = {};
+         latespread_labels = {};
+    elseif strcmp(patient_id, '019')
+        included_channels = [];
+        ezone_labels = {'I5', 'I6', 'B9', 'I9', 'T10', 'I10', 'B6', 'I4', ...
+            'T9', 'I7', 'B3', 'B5', 'B4', 'I8', 'T6', 'B10', 'T3', ...
+            'B1', 'T8', 'T7', 'B7', 'I3', 'B2', 'I2', 'T4', 'T2'}; 
+        earlyspread_labels = {};
+         latespread_labels = {}; 
+     elseif strcmp(patient_id, '045') % FAILURES
+        included_channels = [];
+        ezone_labels = {'X2', 'X1'}; %pt2
+        earlyspread_labels = {};
+         latespread_labels = {}; 
+      elseif strcmp(patient_id, '090') % FAILURES
+        included_channels = [];
+        ezone_labels = {'N2', 'N1', 'N3', 'N8', 'N9', 'N6', 'N7', 'N5'}; 
+        earlyspread_labels = {};
+         latespread_labels = {}; 
+    end
+    patient_id = 'EZT005';
 end
 
 %% 0: Initialize All Necessary Vars and Dirs
 sigma = sqrt(radius^2 - w_space.^2); % move to the unit circle 1, for a plethora of different radial frequencies
 b = [0; 1];
-patient = strcat(patient_id, seizure_id);
+patient = strcat(patient_id, '_', seizure_id);
 
 %- initialize directories and labels
 adjDir = fullfile(strcat('./adj_mats_win', num2str(winSize), ...
     '_step', num2str(stepSize)));
+
 %- set file path for the patient file 
 dataDir = './data/';
-patient_eeg_path = strcat('./data/', patient);
-patient_label_path = fullfile(dataDir, patient, strcat(patient, '_labels.csv'));
+patient_eeg_path = fullfile('./data/Seiz_Data/', patient_id, patient);
+eegdata = load(patient_eeg_path);
+labels = eegdata.elec_labels;
+
 %% 1: Read in Data and Initialize Variables For Analysis
 matFiles = dir(fullfile(adjDir,patient, '*.mat'));
 matFiles = {matFiles.name};         % cell array of all mat file names in order
 matFiles = natsortfiles(matFiles);  % 3rd party - natural sorting order
 
-try % take out later
-    included_channels = data.included_channels;
-    data = load(fullfile(adjDir, patient,matFiles{2}));    % load in example preprocessed mat
-    data = data.data;
-catch
-    disp('no included yet...');
-end
-fid = fopen(patient_label_path); % open up labels to get all the channels
-labels = textscan(fid, '%s', 'Delimiter', ',');
-labels = labels{:}; labels = labels(included_channels);
-fclose(fid);
-                       
 % define cell function to search for the EZ labels
 cellfind = @(string)(@(cell_contents)(strcmp(string,cell_contents)));
 ezone_indices = zeros(length(ezone_labels),1);
@@ -68,7 +76,6 @@ for i=1:length(ezone_labels)
         ezone_indices(i) = test(indice);
     end
 end
-
 earlyspread_indices = zeros(length(earlyspread_labels),1);
 for i=1:length(earlyspread_labels)
     indice = cellfun(cellfind(earlyspread_labels{i}), labels, 'UniformOutput', 0);
@@ -79,7 +86,6 @@ for i=1:length(earlyspread_labels)
     end
 end
 earlyspread_indices(earlyspread_indices==0) =  [];
-
 latespread_indices = zeros(length(latespread_labels),1);
 if ~isempty(latespread_labels)
     for i=1:length(latespread_labels)
@@ -94,11 +100,11 @@ end
 
 %- initialize matrices for colsum, rowsum, and minimum perturbation
 timeRange = length(matFiles);               % the number of mat files to analyze
-colsum_time_chan = zeros(length(included_channels), ... % colsum at each time/channel
+colsum_time_chan = zeros(length(labels), ... % colsum at each time/channel
                     timeRange);
-rowsum_time_chan = zeros(length(included_channels), ... % rowsum at each time/channel
+rowsum_time_chan = zeros(length(labels), ... % rowsum at each time/channel
                     timeRange);
-minPerturb_time_chan = zeros(length(included_channels), ... % fragility at each time/channel
+minPerturb_time_chan = zeros(length(labels), ... % fragility at each time/channel
                     timeRange);
 timeIndices = [];             % vector to store time indices (secs) of each window of data
 
@@ -162,14 +168,14 @@ for i=1:length(matFiles) % loop through each adjacency matrix
                     B = [Ci, Cr]';
                 end
 
-                del = B'*inv(B*B')*b;
-                
-%                 if w_space(iW) ~= 0
-%                     % compute perturbation necessary
-%                     del = B'*inv(B*B')*b;
-%                 else
-%                     del = C./(norm(C)^2);
-%                 end
+%                 del = B'*inv(B*B')*b;
+%                 
+                if w_space(iW) ~= 0
+                    % compute perturbation necessary
+                    del = B'*inv(B*B')*b;
+                else
+                    del = C./(norm(C)^2);
+                end
                 
                 % store the l2-norm of the perturbation
                 del_size(iNode, iW) = norm(del); 
@@ -205,4 +211,5 @@ if ~exist(fullfile(adjDir, strcat(perturbationType, '_finaldata')), 'dir')
 end
 save(fullfile(adjDir, strcat(perturbationType, '_finaldata'), strcat(patient,'final_data.mat')),...
  'minPerturb_time_chan', 'colsum_time_chan', 'rowsum_time_chan', 'fragility_rankings');
+
 end
