@@ -145,7 +145,9 @@ eeg = eeg(included_channels,:);
 
 tic;
 dataWindow = dataStart;
-dataRange = limit-dataWindow
+dataRange = limit-dataWindow;
+
+disp(['Running analysis for ', num2str(dataRange), ' milliseconds']);
 for i=1:dataRange/stepSize  
 %     leastSquaresAdjMat(i, eeg, included_channels, patient, ...
 %          winSize, stepSize, ezone_labels, earlyspread_labels, latespread_labels);
