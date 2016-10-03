@@ -117,6 +117,9 @@ dataRange = limit-dataWindow
 for i=1:dataRange/stepSize  % loop through the datawindows and compute adjacency matrices
     dataWindow = dataStart + (i-1)*stepSize;
     
+    fileName = strcat(patient, '_before', num2str(i), '.mat');
+    
+    
     % step 1: extract the data and apply the notch filter. Note that column
     %         #i in the extracted matrix is filled by data samples from the
     %         recording channel #i.
@@ -149,8 +152,6 @@ for i=1:dataRange/stepSize  % loop through the datawindows and compute adjacency
     toc;
     
     %% save the theta_adj made
-    fileName = strcat(patient, '_', num2str(i), '.mat');
-    
     %- save the data into a struct into a mat file
     %- save the data into a struct into a mat file - time all in
     %milliseconds

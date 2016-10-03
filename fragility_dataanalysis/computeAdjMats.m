@@ -25,8 +25,8 @@ addpath('./fragility_library/');
 addpath('/Users/adam2392/Dropbox/eeg_toolbox');
 
 if nargin == 0
-    patient_id = 'pt1';
-    seizure_id = 'sz2';
+    patient_id = 'pt7';
+    seizure_id = 'sz19';
     included_channels = [1:36 42 43 46:69 72:95];
     if strcmp(patient_id, 'pt1')
         included_channels = [1:36 42 43 46:69 72:95];
@@ -42,6 +42,11 @@ if nargin == 0
         ezone_labels = {'POLMST1', 'POLPST1', 'POLTT1'}; %pt2
         earlyspread_labels = {'POLTT2', 'POLAST2', 'POLMST2', 'POLPST2', 'POLALEX1', 'POLALEX5'};
          latespread_labels = {};
+     elseif strcmp(patient_id, 'pt7')
+        included_channels = [1:17 19:35 37:38 41:62 67:109];
+        ezone_labels = {};
+        earlyspread_labels = {};
+        latespread_labels = {};
     elseif strcmp(patient_id, 'JH105')
         included_channels = [1:4 7:12 14:19 21:37 42 43 46:49 51:53 55:75 78:99]; % JH105
         ezone_labels = {'POLRPG4', 'POLRPG5', 'POLRPG6', 'POLRPG12', 'POLRPG13', 'POLG14',...
@@ -146,6 +151,9 @@ for i=1:dataRange/stepSize
 %          winSize, stepSize, ezone_labels, earlyspread_labels, latespread_labels);
     dataWindow = dataStart + (i-1)*stepSize;
     
+    fileName = strcat(patient, '_', num2str(i), '_before', num2str(seizureStart-dataWindow), '.mat');
+    
+    
     % step 1: extract the data and apply the notch filter. Note that column
     %         #i in the extracted matrix is filled by data samples from the
     %         recording channel #i.
@@ -157,7 +165,7 @@ for i=1:dataRange/stepSize
     b = b(num_channels+1:end); % only get the time points after the first one
     
     tmpdata = tmpdata';
-    tic;
+%     tic;
     % build up A matrix with a loop modifying #time_samples points and #chans at a time
     A = zeros(length(b), num_channels^2);               % initialize A for speed
     N = 1:num_channels:size(A,1);                       % set the indices through rows
@@ -168,7 +176,7 @@ for i=1:dataRange/stepSize
         colInds = (iChan-1)*num_channels+1:iChan*num_channels;
         A(rowInds, colInds) = tmpdata(1:end-1,:);
     end
-    toc;
+%     toc;
     
     % create the reshaped adjacency matrix
     tic;
@@ -178,8 +186,7 @@ for i=1:dataRange/stepSize
     toc;
     
     %% save the theta_adj made
-    fileName = strcat(patient, '_', num2str(i), '.mat');
-    
+
     %- save the data into a struct into a mat file
     %- save the data into a struct into a mat file - time all in
     %milliseconds
@@ -197,7 +204,6 @@ for i=1:dataRange/stepSize
     data.ezone_labels = ezone_labels;
     data.earlyspread_labels = earlyspread_labels;
     data.latespread_labels = latespread_labels;
-    data.date = date;
     
     save(fullfile(adjDir, fileName), 'data');
 end
