@@ -26,3 +26,4 @@ Length of to be included cElapsed time is 5084.419670 seconds.
   done 
 sed time is 3523.713841 secondsElapsed time is 5231.598428 seconds.
   done 
+Elapsed time is 40542.752274 seconds.
