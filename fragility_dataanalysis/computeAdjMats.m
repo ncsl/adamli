@@ -22,11 +22,11 @@ function computeAdjMats(patient_id, seizure_id, included_channels, ...
     timeRange, winSize, stepSize, ezone_labels, earlyspread_labels, latespread_labels)
 % add libraries of functions
 addpath('./fragility_library/');
-addpath('/Users/adam2392/Dropbox/eeg_toolbox');
+addpath(genpath('/Users/adam2392/Dropbox/eeg_toolbox'));
 
 if nargin == 0
-    patient_id = 'pt7';
-    seizure_id = 'sz19';
+    patient_id = 'pt1';
+    seizure_id = 'sz3';
     included_channels = [1:36 42 43 46:69 72:95];
     if strcmp(patient_id, 'pt1')
         included_channels = [1:36 42 43 46:69 72:95];
@@ -179,12 +179,13 @@ for i=1:dataRange/stepSize
         A(rowInds, colInds) = tmpdata(1:end-1,:);
     end
 %     toc;
-    
+    % A is a sparse matrix, so store it as such
+    A = sparse(A);
+
     % create the reshaped adjacency matrix
     tic;
     theta = A\b;                                                % solve for x, connectivity
     theta_adj = reshape(theta, num_channels, num_channels)';    % reshape fills in columns first, so must transpose
-    imagesc(theta_adj)
     toc;
     
     %% save the theta_adj made
