@@ -23,6 +23,7 @@ function computeAdjMats(patient_id, seizure_id, included_channels, ...
 % add libraries of functions
 addpath('./fragility_library/');
 addpath(genpath('/Users/adam2392/Dropbox/eeg_toolbox'));
+addpath(genpath('/home/WIN/ali39/Documents/adamli/fragility_dataanalysis/eeg_toolbox/'));
 
 if nargin == 0
     patient_id = 'pt1';

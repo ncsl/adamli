@@ -9,7 +9,7 @@ seizure_ids = {'sz2', 'sz3'};
 perturbationTypes = ['C', 'R'];
 
 %- set variables for computing adjacency matrix
-timeRange = [30, 0];
+timeRange = [60, 0];
 winSize = 500;
 stepSize = 500;
 
