@@ -1,35 +1,35 @@
 ----------------------------------------
-Begin PBS Prologue Fri Sep 30 09:40:51 EDT 2016 1475242851
-Job ID:		1886786.mgt
+Begin PBS Prologue Fri Sep 30 09:46:21 EDT 2016 1475243181
+Job ID:		1886790.mgt
 Username:	ali
 Group:		sarma
-Nodes:		node020 node021 node023
-End PBS Prologue Fri Sep 30 09:40:51 EDT 2016 1475242851
+Nodes:		node024 node025 node026
+End PBS Prologue Fri Sep 30 09:46:21 EDT 2016 1475243181
 ----------------------------------------
 1
-8
-7
 4
+2
+7
+6
+8
 3
 5
-2
-6
-12
-16
+21
+19
+18
+23
+17
+22
+20
+24
 15
 14
+16
+12
+13
+9
 10
 11
-9
-13
-20
-23
-24
-17
-19
-22
-18
-21
 
                             < M A T L A B (R) >
                   Copyright 1984-2013 The MathWorks, Inc.
@@ -126,70 +126,6 @@ End PBS Prologue Fri Sep 30 09:40:51 EDT 2016 1475242851
                     R2013a (8.1.0.604) 64-bit (glnxa64)
                              February 15, 2013
 
- 
- 
- 
- 
- 
- 
- 
- 
-To get started, type one of these: helpwin, helpdesk, or demo.
-To get started, type one of these: helpwin, helpdesk, or demo.
-To get started, type one of these: helpwin, helpdesk, or demo.
-To get started, type one of these: helpwin, helpdesk, or demo.
-To get started, type one of these: helpwin, helpdesk, or demo.
-To get started, type one of these: helpwin, helpdesk, or demo.
-To get started, type one of these: helpwin, helpdesk, or demo.
-To get started, type one of these: helpwin, helpdesk, or demo.
-For product information, visit www.mathworks.com.
- 
-For product information, visit www.mathworks.com.
-For product information, visit www.mathworks.com.
-For product information, visit www.mathworks.com.
- 
- 
-For product information, visit www.mathworks.com.
- 
-For product information, visit www.mathworks.com.
- 
- 
-For product information, visit www.mathworks.com.
- 
-For product information, visit www.mathworks.com.
- 
- 
- 
- 
- 
- 
- 
- 
- 
-To get started, type one of these: helpwin, helpdesk, or demo.
-To get started, type one of these: helpwin, helpdesk, or demo.
-To get started, type one of these: helpwin, helpdesk, or demo.
-To get started, type one of these: helpwin, helpdesk, or demo.
-To get started, type one of these: helpwin, helpdesk, or demo.
-To get started, type one of these: helpwin, helpdesk, or demo.
-To get started, type one of these: helpwin, helpdesk, or demo.
-To get started, type one of these: helpwin, helpdesk, or demo.
-For product information, visit www.mathworks.com.
-For product information, visit www.mathworks.com.
- 
- 
-For product information, visit www.mathworks.com.
-For product information, visit www.mathworks.com.
-For product information, visit www.mathworks.com.
- 
-For product information, visit www.mathworks.com.
-For product information, visit www.mathworks.com.
- 
-For product information, visit www.mathworks.com.
- 
- 
- 
- 
 
                             < M A T L A B (R) >
                   Copyright 1984-2013 The MathWorks, Inc.
@@ -260,9 +196,44 @@ For product information, visit www.mathworks.com.
  
 For product information, visit www.mathworks.com.
 For product information, visit www.mathworks.com.
+ 
+ 
+For product information, visit www.mathworks.com.
+For product information, visit www.mathworks.com.
+For product information, visit www.mathworks.com.
+ 
+ 
+ 
+For product information, visit www.mathworks.com.
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+To get started, type one of these: helpwin, helpdesk, or demo.
+To get started, type one of these: helpwin, helpdesk, or demo.
+To get started, type one of these: helpwin, helpdesk, or demo.
+To get started, type one of these: helpwin, helpdesk, or demo.
+To get started, type one of these: helpwin, helpdesk, or demo.
+To get started, type one of these: helpwin, helpdesk, or demo.
+To get started, type one of these: helpwin, helpdesk, or demo.
+To get started, type one of these: helpwin, helpdesk, or demo.
+For product information, visit www.mathworks.com.
+ 
+For product information, visit www.mathworks.com.
+For product information, visit www.mathworks.com.
+For product information, visit www.mathworks.com.
+ 
+ 
+ 
 For product information, visit www.mathworks.com.
 For product information, visit www.mathworks.com.
  
+ 
 For product information, visit www.mathworks.com.
 For product information, visit www.mathworks.com.
  
@@ -270,46 +241,35 @@ For product information, visit www.mathworks.com.
  
  
  
-[Warning: Name is nonexistent or not a directory:
-/Users/adam2392/Dropbox/eeg_toolbox] 
-[> In path at 110
-  In addpath at 87
-  In serverEZTMainScript at 46] 
-[Warning: Name is nonexistent or not a directory:
-/Users/adam2392/Dropbox/eeg_toolbox] 
-[> In path at 110
-  In addpath at 87
-  In serverEZTMainScript at 46] 
-[Warning: Name is nonexistent or not a directory:
-/Users/adam2392/Dropbox/eeg_toolbox] 
-[> In path at 110
-  In addpath at 87
-  In serverEZTMainScript at 46] 
-[Warning: Name is nonexistent or not a directory:
-/Users/adam2392/Dropbox/eeg_toolbox] 
-[> In path at 110
-  In addpath at 87
-  In serverEZTMainScript at 46] 
-[Warning: Name is nonexistent or not a directory:
-/Users/adam2392/Dropbox/eeg_toolbox] 
-[> In path at 110
-  In addpath at 87
-  In serverEZTMainScript at 46] 
-[Warning: Name is nonexistent or not a directory:
-/Users/adam2392/Dropbox/eeg_toolbox] 
-[> In path at 110
-  In addpath at 87
-  In serverEZTMainScript at 46] 
-[Warning: Name is nonexistent or not a directory:
-/Users/adam2392/Dropbox/eeg_toolbox] 
-[> In path at 110
-  In addpath at 87
-  In serverEZTMainScript at 46] 
-[Warning: Name is nonexistent or not a directory:
-/Users/adam2392/Dropbox/eeg_toolbox] 
-[> In path at 110
-  In addpath at 87
-  In serverEZTMainScript at 46] 
+ 
+ 
+ 
+ 
+ 
+To get started, type one of these: helpwin, helpdesk, or demo.
+To get started, type one of these: helpwin, helpdesk, or demo.
+To get started, type one of these: helpwin, helpdesk, or demo.
+To get started, type one of these: helpwin, helpdesk, or demo.
+To get started, type one of these: helpwin, helpdesk, or demo.
+To get started, type one of these: helpwin, helpdesk, or demo.
+To get started, type one of these: helpwin, helpdesk, or demo.
+To get started, type one of these: helpwin, helpdesk, or demo.
+For product information, visit www.mathworks.com.
+For product information, visit www.mathworks.com.
+For product information, visit www.mathworks.com.
+ 
+ 
+ 
+For product information, visit www.mathworks.com.
+ 
+For product information, visit www.mathworks.com.
+For product information, visit www.mathworks.com.
+For product information, visit www.mathworks.com.
+For product information, visit www.mathworks.com.
+ 
+ 
+ 
+ 
 [Warning: Name is nonexistent or not a directory:
 /Users/adam2392/Dropbox/eeg_toolbox] 
 [> In path at 110
@@ -353,82 +313,42 @@ For product information, visit www.mathworks.com.
 
 patient =
 
-EZT019_seiz002
+EZT090_seiz003
 
 
 patient =
 
-EZT019_seiz002
+EZT090_seiz003
 
 
 patient =
 
-EZT019_seiz002
+EZT090_seiz003
 
 
 patient =
 
-EZT019_seiz002
+EZT090_seiz003
 
 
 patient =
 
-EZT019_seiz002
+EZT090_seiz003
 
 
 patient =
 
-EZT019_seiz002
+EZT090_seiz003
 
 
 patient =
 
-EZT019_seiz002
+EZT090_seiz003
 
 
 patient =
 
-EZT019_seiz002
-
-
-patient =
-
-EZT019_seiz002
-
-
-patient =
-
-EZT019_seiz002
-
-
-patient =
-
-EZT019_seiz002
-
-
-patient =
-
-EZT019_seiz002
-
-
-patient =
-
-EZT019_seiz002
-
-
-patient =
-
-EZT019_seiz002
-
-
-patient =
-
-EZT019_seiz002
-
-
-patient =
-
-EZT019_seiz002
+EZT090_seiz003
 
 [Warning: Name is nonexistent or not a directory:
 /Users/adam2392/Dropbox/eeg_toolbox] 
@@ -473,45 +393,328 @@ EZT019_seiz002
 
 patient =
 
-EZT019_seiz002
+EZT090_seiz003
 
 
 patient =
 
-EZT019_seiz002
+EZT090_seiz003
 
 
 patient =
 
-EZT019_seiz002
+EZT090_seiz003
 
 
 patient =
 
-EZT019_seiz002
+EZT090_seiz003
 
 
 patient =
 
-EZT019_seiz002
+EZT090_seiz003
 
 
 patient =
 
-EZT019_seiz002
+EZT090_seiz003
 
 
 patient =
 
-EZT019_seiz002
+EZT090_seiz003
 
 
 patient =
 
-EZT019_seiz002
+EZT090_seiz003
+
+[Warning: Directory already exists.] 
+[> In serverEZTMainScript at 58] 
+[Warning: Directory already exists.] 
+[> In serverEZTMainScript at 58] 
+[Warning: Directory already exists.] 
+[> In serverEZTMainScript at 58] 
+[Warning: Directory already exists.] 
+[> In serverEZTMainScript at 58] 
+[Warning: Directory already exists.] 
+[> In serverEZTMainScript at 58] 
+[Warning: Directory already exists.] 
+[> In serverEZTMainScript at 58] 
+[Warning: Directory already exists.] 
+[> In serverEZTMainScript at 58] 
+[Warning: Name is nonexistent or not a directory:
+/Users/adam2392/Dropbox/eeg_toolbox] 
+[> In path at 110
+  In addpath at 87
+  In serverEZTMainScript at 46] 
+[Warning: Name is nonexistent or not a directory:
+/Users/adam2392/Dropbox/eeg_toolbox] 
+[> In path at 110
+  In addpath at 87
+  In serverEZTMainScript at 46] 
+[Warning: Name is nonexistent or not a directory:
+/Users/adam2392/Dropbox/eeg_toolbox] 
+[> In path at 110
+  In addpath at 87
+  In serverEZTMainScript at 46] 
+[Warning: Name is nonexistent or not a directory:
+/Users/adam2392/Dropbox/eeg_toolbox] 
+[> In path at 110
+  In addpath at 87
+  In serverEZTMainScript at 46] 
+[Warning: Name is nonexistent or not a directory:
+/Users/adam2392/Dropbox/eeg_toolbox] 
+[> In path at 110
+  In addpath at 87
+  In serverEZTMainScript at 46] 
+[Warning: Name is nonexistent or not a directory:
+/Users/adam2392/Dropbox/eeg_toolbox] 
+[> In path at 110
+  In addpath at 87
+  In serverEZTMainScript at 46] 
+[Warning: Name is nonexistent or not a directory:
+/Users/adam2392/Dropbox/eeg_toolbox] 
+[> In path at 110
+  In addpath at 87
+  In serverEZTMainScript at 46] 
+[Warning: Name is nonexistent or not a directory:
+/Users/adam2392/Dropbox/eeg_toolbox] 
+[> In path at 110
+  In addpath at 87
+  In serverEZTMainScript at 46] 
+
+patient =
+
+EZT090_seiz003
+
+
+patient =
+
+EZT090_seiz003
+
+
+patient =
+
+EZT090_seiz003
+
+
+patient =
+
+EZT090_seiz003
+
+
+patient =
+
+EZT090_seiz003
+
+
+patient =
+
+EZT090_seiz003
+
+
+patient =
+
+EZT090_seiz003
+
+
+patient =
+
+EZT090_seiz003
 
 The range locked to seizure to look over is-60 until 20
-Total number of channels 79
+Total number of channels 111
+Length of to be included channels 0
+Seizure starts at 140001 milliseconds
+
+dataRange =
+
+       80000
+
+The range locked to seizure to look over is-60 until 20
+Total number of channels 111
+Length of to be included channels 0
+Seizure starts at 140001 milliseconds
+
+dataRange =
+
+       80000
+
+The range locked to seizure to look over is-60 until 20
+Total number of channels 111
+Length of to be included channels 0
+Seizure starts at 140001 milliseconds
+
+dataRange =
+
+       80000
+
+The range locked to seizure to look over is-60 until 20
+Total number of channels 111
+Length of to be included channels 0
+Seizure starts at 140001 milliseconds
+
+dataRange =
+
+       80000
+
+The range locked to seizure to look over is-60 until 20
+Total number of channels 111
+Length of to be included channels 0
+Seizure starts at 140001 milliseconds
+
+dataRange =
+
+       80000
+
+The range locked to seizure to look over is-60 until 20
+Total number of channels 111
+Length of to be included channels 0
+Seizure starts at 140001 milliseconds
+
+dataRange =
+
+       80000
+
+The range locked to seizure to look over is-60 until 20
+Total number of channels 111
+Length of to be included channels 0
+Seizure starts at 140001 milliseconds
+
+dataRange =
+
+       80000
+
+The range locked to seizure to look over is-60 until 20
+Total number of channels 111
+Length of to be included channels 0
+Seizure starts at 140001 milliseconds
+
+dataRange =
+
+       80000
+
+The range locked to seizure to look over is-60 until 20
+Total number of channels 111
+Length of to be included channels 0
+Seizure starts at 140001 milliseconds
+
+dataRange =
+
+       80000
+
+The range locked to seizure to look over is-60 until 20
+Total number of channels 111
+Length of to be included channels 0
+Seizure starts at 140001 milliseconds
+
+dataRange =
+
+       80000
+
+The range locked to seizure to look over is-60 until 20
+Total number of channels 111
+Length of to be included channels 0
+Seizure starts at 140001 milliseconds
+
+dataRange =
+
+       80000
+
+The range locked to seizure to look over is-60 until 20
+Total number of channels 111
+Length of to be included channels 0
+Seizure starts at 140001 milliseconds
+
+dataRange =
+
+       80000
+
+The range locked to seizure to look over is-60 until 20
+Total number of channels 111
+Length of to be included channels 0
+Seizure starts at 140001 milliseconds
+
+dataRange =
+
+       80000
+
+The range locked to seizure to look over is-60 until 20
+Total number of channels 111
+Length of to be included channels 0
+Seizure starts at 140001 milliseconds
+
+dataRange =
+
+       80000
+
+The range locked to seizure to look over is-60 until 20
+Total number of channels 111
+Length of to be included channels 0
+Seizure starts at 140001 milliseconds
+
+dataRange =
+
+       80000
+
+The range locked to seizure to look over is-60 until 20
+Total number of channels 111
+Length of to be included channels 0
+Seizure starts at 140001 milliseconds
+
+dataRange =
+
+       80000
+
+The range locked to seizure to look over is-60 until 20
+Total number of channels 111
+Length of to be included channels 0
+Seizure starts at 140001 milliseconds
+
+dataRange =
+
+       80000
+
+The range locked to seizure to look over is-60 until 20
+Total number of channels 111
+Length of to be included channels 0
+Seizure starts at 140001 milliseconds
+
+dataRange =
+
+       80000
+
+The range locked to seizure to look over is-60 until 20
+Total number of channels 111
+Length of to be included channels 0
+Seizure starts at 140001 milliseconds
+
+dataRange =
+
+       80000
+
+The range locked to seizure to look over is-60 until 20
+Total number of channels 111
+Length of to be included channels 0
+Seizure starts at 140001 milliseconds
+
+dataRange =
+
+       80000
+
+The range locked to seizure to look over is-60 until 20
+Total number of channels 111
+Length of to be included channels 0
+Seizure starts at 140001 milliseconds
+
+dataRange =
+
+       80000
+
+The range locked to seizure to look over is-60 until 20
+Total number of channels 111
 Length of to be included channels 0
 Seizure starts at 140001 milliseconds
 
@@ -521,7 +724,7 @@ dataRange =
 
 The range locked to seizure to look over is-60 until 20
 The range locked to seizure to look over is-60 until 20
-Total number of channels 79
+Total number of channels 111
 Length of to be included channels 0
 Seizure starts at 140001 milliseconds
 
@@ -529,8 +732,7 @@ dataRange =
 
        80000
 
-The range locked to seizure to look over is-60 until 20
-Total number of channels 79
+Total number of channels 111
 Length of to be included channels 0
 Seizure starts at 140001 milliseconds
 
@@ -538,279 +740,74 @@ dataRange =
 
        80000
 
-Total number of channels 79
-Length of to be included channels 0
-Seizure starts at 140001 milliseconds
-
-dataRange =
-
-       80000
-
-The range locked to seizure to look over is-60 until 20
-Total number of channels 79
-Length of to be included channels 0
-Seizure starts at 140001 milliseconds
-
-dataRange =
-
-       80000
-
-The range locked to seizure to look over is-60 until 20
-Total number of channels 79
-Length of to be included channels 0
-Seizure starts at 140001 milliseconds
-
-dataRange =
-
-       80000
-
-The range locked to seizure to look over is-60 until 20
-Total number of channels 79
-Length of to be included channels 0
-Seizure starts at 140001 milliseconds
-
-dataRange =
-
-       80000
-
-The range locked to seizure to look over is-60 until 20
-Total number of channels 79
-Length of to be included channels 0
-Seizure starts at 140001 milliseconds
-
-dataRange =
-
-       80000
-
-The range locked to seizure to look over is-60 until 20
-Total number of channels 79
-Length of to be included channels 0
-Seizure starts at 140001 milliseconds
-
-dataRange =
-
-       80000
-
-The range locked to seizure to look over is-60 until 20
-Total number of channels 79
-Length of to be included channels 0
-Seizure starts at 140001 milliseconds
-
-dataRange =
-
-       80000
-
-The range locked to seizure to look over is-60 until 20
-Total number of channels 79
-Length of to be included channels 0
-Seizure starts at 140001 milliseconds
-
-dataRange =
-
-       80000
-
-The range locked to seizure to look over is-60 until 20
-Total number of channels 79
-Length of to be included channels 0
-Seizure starts at 140001 milliseconds
-
-dataRange =
-
-       80000
-
-The range locked to seizure to look over is-60 until 20
-Total number of channels 79
-Length of to be included channels 0
-Seizure starts at 140001 milliseconds
-
-dataRange =
-
-       80000
-
-The range locked to seizure to look over is-60 until 20
-The range locked to seizure to look over is-60 until 20
-Total number of channels 79
-Length of to be included channels 0
-The range locked to seizure to look over is-60 until 20
-Seizure starts at 140001 milliseconds
-
-dataRange =
-
-       80000
-
-Total number of channels 79
-Length of to be included channels 0
-Seizure starts at 140001 milliseconds
-
-dataRange =
-
-       80000
-
-Total number of channels 79
-Length of to be included channels 0
-Seizure starts at 140001 milliseconds
-
-dataRange =
-
-       80000
-
-The range locked to seizure to look over is-60 until 20
-Total number of channels 79
-Length of to be included channels 0
-Seizure starts at 140001 milliseconds
-
-dataRange =
-
-       80000
-
-The range locked to seizure to look over is-60 until 20
-The range locked to seizure to look over is-60 until 20
-Total number of channels 79
-Length of to be included channels 0
-Seizure starts at 140001 milliseconds
-
-dataRange =
-
-       80000
-
-Total number of channels 79
-Length of to be included channels 0
-Seizure starts at 140001 milliseconds
-
-dataRange =
-
-       80000
-
-The range locked to seizure to look over is-60 until 20
-Total number of channels 79
-Length of to be included channels 0
-Seizure starts at 140001 milliseconds
-
-dataRange =
-
-       80000
-
-The range locked to seizure to look over is-60 until 20
-Total number of channels 79
-Length of to be included channels 0
-Seizure starts at 140001 milliseconds
-
-dataRange =
-
-       80000
-
-The range locked to seizure to look over is-60 until 20
-Total number of channels 79
-Length of to be included channels 0
-Seizure starts at 140001 milliseconds
-
-dataRange =
-
-       80000
-
-The range locked to seizure to look over is-60 until 20
-Total number of channels 79
-Length of to be included channels 0
-Seizure starts at 140001 milliseconds
-
-dataRange =
-
-       80000
-
-The range locked to seizure to look over is-60 until 20
-Total number of channels 79
-Length of to be included channels 0
-Seizure starts at 140001 milliseconds
-
-dataRange =
-
-       80000
-
-Elapsed time is 4.524937 seconds.
+Elapsed time is 2898.414331 seconds.
   done 
-Elapsed time is 4.438357 seconds.
+Elapsed time is 4196.277863 seconds.
   done 
-Elapsed time is 4.448545 seconds.
+Elapsed time is 4824.618713 seconds.
   done 
-Elapsed time is 4.308733 seconds.
+Elapsed time is 4841.296399 seconds.
   done 
-Elapsed time is 4.452140 seconds.
+Elapsed time is 4892.679460 seconds.
   done 
-Elapsed time is 4.475796 seconds.
+Elapsed time is 4984.467351 seconds.
   done 
-Elapsed time is 4.491220 seconds.
+Elapsed time is 5179.241189 seconds.
   done 
-Elapsed time is 4.366724 seconds.
+Elapsed time is 5231.598428 seconds.
   done 
-Elapsed time is 4.443921 seconds.
+Elapsed time is 5390.740954 seconds.
   done 
-Elapsed time is 4.407192 seconds.
+Elapsed time is 5414.444421 seconds.
   done 
-Elapsed time is 4.436826 seconds.
+Elapsed time is 5461.154054 seconds.
   done 
-Elapsed time is 4.298298 seconds.
-Elapsed time is 4.419287 seconds.
+Elapsed time is 5471.102588 seconds.
   done 
+Elapsed time is 5499.088250 seconds.
   done 
-Elapsed time is 4.423305 seconds.
+Elapsed time is 5735.661554 seconds.
   done 
-Elapsed time is 4.394201 seconds.
+Elapsed time is 5767.566106 seconds.
   done 
-Elapsed time is 4.420726 seconds.
+Elapsed time is 5906.647109 seconds.
   done 
-Elapsed time is 4.422310 seconds.
+Elapsed time is 6284.449061 seconds.
   done 
-Elapsed time is 4.439598 seconds.
+Elapsed time is 9063.465668 seconds.
   done 
-Elapsed time is 4.409559 seconds.
+Elapsed time is 9161.817735 seconds.
   done 
-Elapsed time is 4.355120 seconds.
+Elapsed time is 9403.839504 seconds.
   done 
-Elapsed time is 4.425864 seconds.
+Elapsed time is 10018.702884 seconds.
   done 
-Elapsed time is 4.420202 seconds.
+Elapsed time is 10109.587184 seconds.
   done 
-Elapsed time is 4.384843 seconds.
+Elapsed time is 10815.494083 seconds.
   done 
-Elapsed time is 4.376684 seconds.
+Elapsed time is 10967.856397 seconds.
   done 
-Elapsed time is 3321.833643 seconds.
-Elapsed time is 3334.047293 seconds.
-Elapsed time is 3332.624187 seconds.
-Elapsed time is 3399.965631 seconds.
-Elapsed time is 3408.286751 seconds.
-Elapsed time is 3414.614967 seconds.
-Elapsed time is 3429.708000 seconds.
-Elapsed time is 3444.471431 seconds.
-Elapsed time is 3451.783388 seconds.
-Elapsed time is 3458.136121 seconds.
-Elapsed time is 3465.167605 seconds.
-Elapsed time is 3463.110471 seconds.
-Elapsed time is 3470.266654 seconds.
-Elapsed time is 3470.958699 seconds.
-Elapsed time is 3472.268693 seconds.
-Elapsed time is 3472.146470 seconds.
-Elapsed time is 3473.896118 seconds.
-Elapsed time is 3474.931321 seconds.
-Elapsed time is 3474.667107 seconds.
-Elapsed time is 3476.238788 seconds.
-Elapsed time is 3475.732554 seconds.
-Elapsed time is 3497.513607 seconds.
-Elapsed time is 3513.248678 seconds.
-Elapsed time is 3523.713841 seconds.
+Elapsed time is 8279.828632 seconds.
+Elapsed time is 27355.308341 seconds.
+Elapsed time is 37558.491325 seconds.
+Elapsed time is 40290.195208 seconds.
+Elapsed time is 40779.320668 seconds.
+Elapsed time is 40542.752274 seconds.
+Elapsed time is 41527.799930 seconds.
 ----------------------------------------
-Begin PBS Epilogue Fri Sep 30 10:41:02 EDT 2016 1475246462
-Job ID:		1886786.mgt
+Begin PBS Epilogue Fri Sep 30 23:49:06 EDT 2016 1475293746
+Job ID:		1886790.mgt
 Username:	ali
 Group:		sarma
 Job Name:	compute_adjacency_mat
-Session:	9595
+Session:	11206
 Limits:		neednodes=3:ppn=8,nodes=3:ppn=8,walltime=14:00:00
-Resources:	cput=23:05:00,mem=97149948kb,vmem=118903516kb,walltime=01:00:06
+Resources:	cput=76:05:16,mem=97078024kb,vmem=281264984kb,walltime=14:02:39
 Queue:		dque
 Account:		
-Nodes:	node020 node021 node023
+Nodes:	node024 node025 node026
 Killing leftovers...
 
-End PBS Epilogue Fri Sep 30 10:41:04 EDT 2016 1475246464
+End PBS Epilogue Fri Sep 30 23:49:10 EDT 2016 1475293750
 ----------------------------------------
