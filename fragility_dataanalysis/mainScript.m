@@ -16,17 +16,25 @@ stepSize = 500;
 % patient_ids = {'007'};%, '007'};% '019', '045', '090'};
 % seizure_ids = {'seiz001', 'seiz002'};
 patient_ids = {'pt7'};
-seizure_ids = {'sz19', 'sz21', 'sz22'};
+seizure_ids = {'sz21', 'sz22'};
 
+patients = {'pt7sz21', 'pt7sz22'};
+%'pt1sz2', 'pt2sz3', 'JH105sz1', 
 COMPUTE_ADJ = 1;
-COMPUTE_PERT = 1;
+COMPUTE_PERT = 0;
 PLOT = 0;
 %% Compute Adj Mats for Each Patient and 2 seizures
 if COMPUTE_ADJ
-    for p_id=1:length(patient_ids)
-        for s_id=1:length(seizure_ids)
-            patient_id = patient_ids{p_id};
-            seizure_id = seizure_ids{s_id};
+    for p=1:length(patients)
+        patient = patients{p};
+        split = strfind(patient, 'sz');
+        patient_id = patient(1:split-1);
+        seizure_id = patient(split:end);
+        
+%     for p_id=1:length(patient_ids)
+%         for s_id=1:length(seizure_ids)
+%             patient_id = patient_ids{p_id};
+%             seizure_id = seizure_ids{s_id};
             if strcmp(patient_id, '007')
                 included_channels = [];
                 ezone_labels = {'O7', 'E8', 'E7', 'I5', 'E9', 'I6', 'E3', 'E2',...
@@ -87,7 +95,7 @@ if COMPUTE_ADJ
 %                 timeRange, winSize, stepSize, ezone_labels, earlyspread_labels, latespread_labels)
             computeAdjMats(patient_id, seizure_id, included_channels, ...
                 timeRange, winSize, stepSize, ezone_labels, earlyspread_labels, latespread_labels);
-        end
+%         end
     end
 end
 
