@@ -144,6 +144,9 @@ for i=1:dataRange/stepSize  % loop through the datawindows and compute adjacency
     end
     toc;
     
+    % A is a sparse matrix, so store it as such
+    A = sparse(A);
+
     % create the reshaped adjacency matrix
     tic;
     theta = A\b;                                                % solve for x, connectivity
