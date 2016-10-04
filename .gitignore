@@ -6,3 +6,6 @@ fragility_dataanalysis/data/Seiz_Data/
 *.m~
 *.sh.*
 _log/*
+/fragility_dataanalysis/simulated_data/EZT*/*
+/fragility_dataanalysis/simulated_data/EEG.mat
+*.edf
