@@ -57,7 +57,7 @@ fid = fopen(strcat('./data/',patient, '/', patient, '_labels.csv')); % open up l
 
 % load in example and processed data
 final_data = load(fullfile(finalDataDir, strcat(patient, 'final_data'))); % load in final data mat
-data = load(fullfile(adjDir, patient, strcat(patient, '_3')));    % load in example preprocessed mat
+data = load(fullfile(adjDir, patient, strcat(patient, '_1_before60000')));    % load in example preprocessed mat
 data = data.data;
 
 %- load in meta data from example preprocessed mat
@@ -77,9 +77,11 @@ catch
     disp('Not yet data set.');
 end
 
+%adding a comment change...
+
 %- read in labels
 labels = textscan(fid, '%s', 'Delimiter', ',');
-labels = labels{:}; labels = labels(included_channels);
+labels = labels{:}; %labels = labels(included_channels);
 fclose(fid);
                 
 % define cell function to search for the EZ labels

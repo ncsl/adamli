@@ -18,9 +18,8 @@ stepSize = 500;
 patient_ids = {'pt7'};
 seizure_ids = {'sz21', 'sz22'};
 
-patients = {'pt7sz21', 'pt7sz22'};
-%'pt1sz2', 'pt2sz3', 'JH105sz1', 
-COMPUTE_ADJ = 1;
+patients = {'pt7sz21', 'pt7sz22', 'pt1sz2', 'pt2sz3', 'JH105sz1'};
+COMPUTE_ADJ = 0;
 COMPUTE_PERT = 0;
 PLOT = 0;
 %% Compute Adj Mats for Each Patient and 2 seizures
@@ -132,7 +131,7 @@ if COMPUTE_PERT
                         'POLPPD1', 'POLPPD2', 'POLPPD3', 'POLPPD4', 'POLPPD5', 'POLPPD6', 'POLPPD7', 'POLPPD8', ...
                         'POLASI3', 'POLPSI5', 'POLPSI6', 'POLPDI2'}; % JH105
                      latespread_labels = {};
-                 elseif strcmpt(patient_id, 'pt7')
+                 elseif strcmp(patient_id, 'pt7')
                     included_channels = [1:17 19:35 37:38 41:62 67:109];
                     ezone_labels = {};
                     earlyspread_labels = {};
@@ -182,16 +181,16 @@ if COMPUTE_PERT
 end
 
 % %% PLOT PERTURBATIONS
-% threshold = 0.8;
-% for j=1:length(perturbationTypes)
-%     perturbationType = perturbationTypes(j);
-%     for i=1:length(patients)
-%         patient = patients{i};
-%         patient_id = patient(1:strfind(patient, 'sz')-1);
-%         seizure_id = patient(4:end);
-%         analyzePerturbations(patient_id, seizure_id, perturbationType, threshold, winSize, stepSize)
-%     end
-% end
+threshold = 0.8;
+for j=1:length(perturbationTypes)
+    perturbationType = perturbationTypes(j);
+    for i=1:length(patients)
+        patient = patients{i};
+        patient_id = patient(1:strfind(patient, 'sz')-1);
+        seizure_id = patient(4:end);
+        analyzePerturbations(patient_id, seizure_id, perturbationType, threshold, winSize, stepSize)
+    end
+end
 
 % for EZT
 if PLOT
