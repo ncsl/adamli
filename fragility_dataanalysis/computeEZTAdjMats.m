@@ -2,7 +2,8 @@ function computeEZTAdjMats(patient_id, seizure_id, included_channels, ...
     timeRange, winSize, stepSize, ezone_labels, earlyspread_labels, latespread_labels)
 % add libraries of functions
 addpath('./fragility_library/');
-% addpath('/Users/adam2392/Dropbox/eeg_toolbox');
+addpath(genpath('/Users/adam2392/Dropbox/eeg_toolbox'));
+addpath(genpath('/home/WIN/ali39/Documents/adamli/fragility_dataanalysis/eeg_toolbox/'));
 
 if nargin == 0
     patient_id = '005';
@@ -110,15 +111,20 @@ disp(['Total number of channels ', num2str(num_channels)]);
 disp(['Length of to be included channels ', num2str(length(included_channels))]);
 disp(['Seizure starts at ', num2str(limit), ' milliseconds']);
 
+if ~isempty(included_channels)
+    % only grab the included_channels of eeg 
+    num_channels = length(included_channels);
+    eeg = eeg(included_channels,:);
+end
 
 tic;
 dataWindow = dataStart;
-dataRange = limit-dataWindow
+dataRange = limit-dataWindow;
+disp(['Running analysis for ', num2str(dataRange), ' milliseconds']);
 for i=1:dataRange/stepSize  % loop through the datawindows and compute adjacency matrices
     dataWindow = dataStart + (i-1)*stepSize;
     
-    fileName = strcat(patient, '_before', num2str(i), '.mat');
-    
+    fileName = strcat(patient, '_', num2str(i), '_before', num2str(seizureStart-dataWindow), '.mat');
     
     % step 1: extract the data and apply the notch filter. Note that column
     %         #i in the extracted matrix is filled by data samples from the
@@ -146,7 +152,8 @@ for i=1:dataRange/stepSize  % loop through the datawindows and compute adjacency
     
     % A is a sparse matrix, so store it as such
     A = sparse(A);
-
+    b = double(b);
+    
     % create the reshaped adjacency matrix
     tic;
     theta = A\b;                                                % solve for x, connectivity
