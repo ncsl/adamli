@@ -102,16 +102,23 @@ end
 
 %% COMPUTE PERTURBATIONS
 if COMPUTE_PERT
-    patients = {'pt1sz2',  'pt1sz3', 'pt2sz1', 'pt2sz3'};
+%     patients = {'pt1sz2',  'pt1sz3', 'pt2sz1', 'pt2sz3'};
     w_space = linspace(-1, 1, 101);
     radius = 1.1;
     for j=1:length(perturbationTypes)
         perturbationType = perturbationTypes(j);
-        for i=1:length(patient_ids)
-            for k=1:length(seizure_ids)
+        
+        for i=1:length(patients)
+            patient = patients{i};
+            split = strfind(patient, 'sz');
+            patient_id = patient(1:split-1);
+            seizure_id = patient(split:end);
+        
+%         for i=1:length(patient_ids)
+%             for k=1:length(seizure_ids)
     %             patient = patients{i};
-                patient_id = patient_ids{i};
-                seizure_id = seizure_ids{k};
+%                 patient_id = patient_ids{i};
+%                 seizure_id = seizure_ids{k};
                 if strcmp(patient_id, 'pt1')
                     included_channels = [1:36 42 43 46:69 72:95];
                     ezone_labels = {'POLPST1', 'POLPST2', 'POLPST3', 'POLAD1', 'POLAD2'}; %pt1
@@ -132,6 +139,7 @@ if COMPUTE_PERT
                         'POLAPD1', 'POLAPD2', 'POLAPD3', 'POLAPD4', 'POLAPD5', 'POLAPD6', 'POLAPD7', 'POLAPD8', ...
                         'POLPPD1', 'POLPPD2', 'POLPPD3', 'POLPPD4', 'POLPPD5', 'POLPPD6', 'POLPPD7', 'POLPPD8', ...
                         'POLASI3', 'POLPSI5', 'POLPSI6', 'POLPDI2'}; % JH105
+                    earlyspread_labels = {};
                      latespread_labels = {};
                  elseif strcmp(patient_id, 'pt7')
                     included_channels = [1:17 19:35 37:38 41:62 67:109];
@@ -178,7 +186,7 @@ if COMPUTE_PERT
                     included_channels, ezone_labels, earlyspread_labels, latespread_labels, ...
                     w_space, radius, perturbationType)
             end
-        end
+%         end
     end
 end
 
