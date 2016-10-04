@@ -64,6 +64,9 @@ if sum(y_latespreadindices) > 0
 end
 axes(ax1);
 leg = legend('EZ Electrodes', 'Early Onset', 'Late Onset');
-leg.Position = [0.8792    0.0103    0.1021    0.0880];
-
+try
+    leg.Position = [0.8792    0.0103    0.1021    0.0880];
+catch
+    disp('Legend not set yet for patient');
+end
 end

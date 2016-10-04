@@ -81,7 +81,13 @@ end
 
 %- read in labels
 labels = textscan(fid, '%s', 'Delimiter', ',');
-labels = labels{:}; %labels = labels(included_channels);
+labels = labels{:}; 
+try
+    labels = labels(included_channels);
+catch
+    disp('labels already clipped');
+    length(labels) == length(included_channels)
+end
 fclose(fid);
                 
 % define cell function to search for the EZ labels
