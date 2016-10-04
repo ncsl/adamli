@@ -167,9 +167,8 @@ for i=1:length(matFiles) % loop through each adjacency matrix
                 else
                     B = [Ci, Cr]';
                 end
-
-%                 del = B'*inv(B*B')*b;
-%                 
+  
+                % compute perturbation
                 if w_space(iW) ~= 0
                     % compute perturbation necessary
                     del = B'*inv(B*B')*b;
