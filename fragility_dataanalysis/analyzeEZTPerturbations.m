@@ -2,7 +2,7 @@ function analyzeEZTPerturbations(patient_id, seizure_id, perturbationType, thres
     close all;
 if nargin == 0
     addpath('./fragility_library/');
-    patient_id = '005';
+    patient_id = '007';
     seizure_id = '_seiz001';
     radius = 1.1;
     w_space = linspace(-1, 1, 101);
@@ -10,7 +10,7 @@ if nargin == 0
     winSize = 500;
     stepSize = 500;
     included_channels = 0;
-    patient_id = 'EZT005';
+    patient_id = 'EZT007';
     perturbationType = 'C';
     threshold = 0.8;
 end
@@ -28,7 +28,7 @@ labels = eegdata.elec_labels;
 
 % load in example and processed data
 final_data = load(fullfile(finalDataDir, strcat(patient, 'final_data'))); % load in final data mat
-data = load(fullfile(adjDir, patient, strcat(patient, '_3')));    % load in example preprocessed mat
+data = load(fullfile(adjDir, patient, strcat(patient, '_1_before60000')));    % load in example preprocessed mat
 data = data.data;
 
 %- load in meta data from example preprocessed mat
@@ -228,6 +228,84 @@ plotIndices(currfig, plotOptions, y_indices, labels, ...
 
 savefig(fullfile(figDir, strcat(patient, 'fragilityRanking')));
 print(fullfile(figDir, strcat(patient, 'fragilityRanking')), '-dpng', '-r0')
+
+%% sort by rowsum of fragility ranking metrics
+rowsum_fragility = sum(fragility_rankings, 2);
+[vals, ind] = sort(rowsum_fragility); % sort in descending order
+
+% get indices for each clinical annotation
+ind_sorted_weights = ind;
+[a, b] = ismember(ind_sorted_weights, ezone_indices);
+b(b==0) = [];
+ezone_indices = ezone_indices(b);
+
+[a, b] = ismember(ind_sorted_weights, earlyspread_indices);
+b(b==0) = [];
+earlyspread_indices = earlyspread_indices(b);
+
+[a, b] = ismember(ind_sorted_weights, latespread_indices);
+b(b==0) = [];
+latespread_indices = latespread_indices(b);
+
+ytick = 1:length(included_channels);
+y_indices = ind_sorted_weights(~ismember(ind_sorted_weights, [ezone_indices; earlyspread_indices]));
+% y_indices = setdiff(ytick, [ezone_indices; earlyspread_indices]);
+if sum(latespread_indices > 0)
+    latespread_indices(latespread_indices ==0) = [];
+    y_indices = ind_sorted_weights(~ismember(ind_sorted_weights, [ezone_indices; earlyspread_indices; latespread_indices]));
+end
+yticks = ytick(ismember(ind_sorted_weights, y_indices)); % index thru sorted_labels
+ezone_ticks = ytick(ismember(ind_sorted_weights, ezone_indices));
+earlyspread_ticks = ytick(ismember(ind_sorted_weights, earlyspread_indices));
+latespread_ticks = 0;
+if (sum(latespread_indices) > 0)
+    latespread_ticks = ytick(ismember(ind_sorted_weights, latespread_indices));
+end
+
+%% Heatmap of sorted fragility ranks
+fig{end+1} = figure; 
+imagesc(fragility_rankings(ind,:)); hold on;  
+c = colorbar(); colormap('jet'); set(gca,'box','off'); set(c, 'fontsize', FONTSIZE); 
+XLim = get(gca, 'xlim'); XLowerLim = XLim(1); XUpperLim = XLim(2);
+% set title, labels and ticks
+titleStr = {['Fragility Sorted By RowSum ', patient], ... 
+    'perturbation: ', perturbationType, ...
+    'Time Locked To Seizure'};
+title(titleStr, 'FontSize', FONTSIZE+2);
+set(gca, 'FontSize', FONTSIZE-3, 'LineWidth', LT); set(gca,'YDir','normal');
+set(gca, 'XTick', (XLowerLim+0.5:10:XUpperLim+0.5)); set(gca, 'XTickLabel', xticks, 'fontsize', FONTSIZE); % set xticks and their labels
+a = get(gca,'XTickLabel'); set(gca,'XTickLabel',a,'fontsize',FONTSIZE)
+title(titleStr, 'FontSize', FONTSIZE+5);
+ylabel(c, 'Fragility Ranking', 'FontSize', FONTSIZE);
+xlabel('Time (sec)', 'FontSize', FONTSIZE);  
+ylab = ylabel('Electrode Channels', 'FontSize', FONTSIZE);
+% move ylabel to the left
+ylab.Position = ylab.Position + [-.25 0 0];
+set(gca, 'YTick', [1, 5:5:length(included_channels)]);
+
+currfig = gcf;
+currfig.PaperPosition = [-3.7448   -0.3385   15.9896   11.6771];
+currfig.Position = [1986           1        1535        1121]; %workstation
+% currfig.Position = [1 55 1440 773];
+% add the labels for the EZ electrodes (rows)
+xlim([XLowerLim XUpperLim+1]); % increase the xlim by 1, to mark regions of EZ
+plot(repmat(XUpperLim+1, length(ezone_indices),1), ezone_ticks, '*r');
+plot(repmat(XUpperLim+1, length(earlyspread_indices), 1), earlyspread_ticks, '*', 'color', [1 .5 0]);
+if sum(latespread_indices) > 0
+    plot(repmat(XUpperLim+1, length(latespread_indices),1), latespread_ticks, '*', 'color', 'blue');
+end
+plotOptions = struct();
+plotOptions.YAXFontSize = YAXFontSize;
+plotOptions.FONTSIZE = FONTSIZE;
+plotOptions.LT = LT;
+plotIndices(currfig, plotOptions, yticks, labels, ...
+                            ezone_ticks, ...
+                            earlyspread_ticks, ...
+                            latespread_ticks)
+
+savefig(fullfile(figDir, strcat(patient, 'sortedFragility')));
+print(fullfile(figDir, strcat(patient, 'sortedRowSumFragility')), '-dpng', '-r0')
+
 
 %- 2d) re-sort the labels to plot the sorted fragility map
 % [a, b] = ismember(ind_sorted_weights, ezone_indices);

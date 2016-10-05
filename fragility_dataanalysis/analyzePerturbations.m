@@ -239,6 +239,7 @@ fig{end+1} = figure;
 imagesc(fragility_rankings); hold on;
 c = colorbar(); set(c, 'fontsize', FONTSIZE); colormap('jet'); set(gca,'box','off')
 titleStr = {['Fragility Ranking Of Each Channel (', patient ')'], ...
+    'perturbation: ', perturbationType,...
     'Time Locked To Seizure'};
 XLim = get(gca, 'xlim'); XLowerLim = XLim(1); XUpperLim = XLim(2);
 title(titleStr, 'FontSize', FONTSIZE+5);
@@ -384,6 +385,7 @@ c = colorbar(); colormap('jet'); set(gca,'box','off'); set(c, 'fontsize', FONTSI
 XLim = get(gca, 'xlim'); XLowerLim = XLim(1); XUpperLim = XLim(2);
 % set title, labels and ticks
 titleStr = {['Fragility Sorted By RowSum ', patient], ...
+    'perturbation: ', perturbationType, ...
     'Time Locked To Seizure'};
 title(titleStr, 'FontSize', FONTSIZE+2);
 set(gca, 'FontSize', FONTSIZE-3, 'LineWidth', LT); set(gca,'YDir','normal');
