@@ -13,14 +13,14 @@ timeRange = [60, 0];
 winSize = 500;
 stepSize = 500;
 
-patient_ids = {'090'};
+patient_ids = {'019'};
 seizure_ids = {'seiz003', 'seiz002'};
-% patient_ids = {'005'};
-% seizure_ids = {'seiz001', 'seiz002'};
+patient_ids = {'005', '019'};
+seizure_ids = {'seiz001', 'seiz002'};
 
 patients = { 'JH105sz1', 'pt7sz21', 'pt7sz22', 'pt1sz2', 'pt2sz3'};
 COMPUTE_ADJ = 0;
-COMPUTE_PERT = 1;
+COMPUTE_PERT = 0;
 PLOT = 1;
 %% Compute Adj Mats for Each Patient and 2 seizures
 if COMPUTE_ADJ
@@ -194,7 +194,7 @@ if PLOT
         for i=1:length(patients)
             patient = patients{i};
             patient_id = patient(1:strfind(patient, 'sz')-1);
-            seizure_id = patient(4:end);
+            seizure_id = patient(strfind(patient, 'sz'):end);
             analyzePerturbations(patient_id, seizure_id, perturbationType, threshold, winSize, stepSize)
         end
     end
