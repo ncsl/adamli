@@ -13,8 +13,8 @@ timeRange = [60, 0];
 winSize = 500;
 stepSize = 500;
 
-patient_ids = {'007', '019', '045', '090'};
-seizure_ids = {'seiz001', 'seiz002'};
+patient_ids = {'090'}; %'007', '019', '045', 
+seizure_ids = {'seiz003', 'seiz002'};
 % patient_ids = {'pt7'};
 % seizure_ids = {'sz21', 'sz22'};
 
