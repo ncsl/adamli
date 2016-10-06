@@ -13,31 +13,21 @@ timeRange = [60, 0];
 winSize = 500;
 stepSize = 500;
 
-<<<<<<< HEAD
 patient_ids = {'007'}; %'005', '019'};
-=======
 % patient_ids = {'019'};
 % seizure_ids = {'seiz003', 'seiz002'};
 patient_ids = {'005'};
->>>>>>> 372b7c389802d1230e3f339bea08ab4e9d4b44e8
 seizure_ids = {'seiz001', 'seiz002'};
 % patient_ids = {'090'};
 % seizure_ids = {'seiz003', 'seiz002'};
 
-<<<<<<< HEAD
 patient_ids = {'pt7'};
 seizure_ids = {'sz19'};
 
 patients = {'pt7sz19'}; %'JH105sz1', 'pt7sz21', 'pt7sz22', 'pt1sz2', 'pt2sz3'};
-COMPUTE_ADJ = 1;
+COMPUTE_ADJ = 0;
 COMPUTE_PERT = 1;
 PLOT = 1;
-=======
-patients = { 'JH105sz1', 'pt7sz21', 'pt7sz22', 'pt1sz2', 'pt2sz3'};
-COMPUTE_ADJ = 1;
-COMPUTE_PERT = 1;
-PLOT = 0;
->>>>>>> 372b7c389802d1230e3f339bea08ab4e9d4b44e8
 %% Compute Adj Mats for Each Patient and 2 seizures
 if COMPUTE_ADJ
 %     for p=1:length(patients)
