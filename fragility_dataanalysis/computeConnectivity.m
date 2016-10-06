@@ -45,7 +45,6 @@ end
 eeg = buttfilt(eeg,[59.5 60.5], frequency_sampling,'stop',1);
 
 % initialize metadata describing the seizure and the recording
-file_length = length(eeg); 
 if ~isempty(included_channels)
     num_channels = length(included_channels);
 else
@@ -101,6 +100,7 @@ for i=1:dataRange/stepSize
 
     % A is a sparse matrix, so store it as such
     A = sparse(A);
+    b = double(b);
 
     % create the reshaped adjacency matrix
     tic;
@@ -127,6 +127,8 @@ for i=1:dataRange/stepSize
     data.latespread_labels = latespread_labels;
     
     save(fullfile(toSaveAdjDir, fileName), 'data');
+    
+    disp(['Saved file: ', fileName]);
 end
 
 end
