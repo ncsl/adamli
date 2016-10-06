@@ -145,8 +145,10 @@ title(['Ranking of Electrodes Based on Threshold ', num2str(threshold)], 'FontSi
 xlabel('electrodes');
 set(ax, 'XTick', ax.XLim(1):ax.XLim(2), 'XTickLabels', sorted_labels, 'XTickLabelRotation', 90);
 ylabel('Ranking of Electrodes Based on Fragility Metric')
-
-print(fullfile(figDir, strcat(patient, 'electrodeRanks')), '-dpng', '-r0')
+currfig = gcf;
+currfig.PaperPosition = [-3.7448   -0.3385   15.9896   11.6771];
+currfig.Position = [1986           1        1535        1121];
+print(fullfile(figDir, patient, strcat(patient, 'electrodeRanks')), '-dpng', '-r0')
 
 % - 2b) minimum perturbation over time and channels:
 fig{end+1} = figure;
@@ -187,8 +189,8 @@ plotIndices(currfig, plotOptions, y_indices, labels, ...
                             y_earlyspreadindices, ...
                             y_latespreadindices)
 %- save the figure
-savefig(fullfile(figDir, strcat(patient, 'minPerturbation')));
-print(fullfile(figDir, strcat(patient, 'minPerturbation')), '-dpng', '-r0')
+% savefig(fullfile(figDir, strcat(patient, 'minPerturbation')));
+print(fullfile(figDir, patient, strcat(patient, 'minPerturbation')), '-dpng', '-r0')
 
 %- 2c) fragility_ranking over time and channels
 fig{end+1} = figure;
@@ -226,8 +228,8 @@ plotIndices(currfig, plotOptions, y_indices, labels, ...
                             y_earlyspreadindices, ...
                             y_latespreadindices)
 
-savefig(fullfile(figDir, strcat(patient, 'fragilityRanking')));
-print(fullfile(figDir, strcat(patient, 'fragilityRanking')), '-dpng', '-r0')
+% savefig(fullfile(figDir, strcat(patient, 'fragilityRanking')));
+print(fullfile(figDir, patient, strcat(patient, 'fragilityRanking')), '-dpng', '-r0')
 
 %% sort by rowsum of fragility ranking metrics
 rowsum_fragility = sum(fragility_rankings, 2);
@@ -303,8 +305,8 @@ plotIndices(currfig, plotOptions, yticks, labels, ...
                             earlyspread_ticks, ...
                             latespread_ticks)
 
-savefig(fullfile(figDir, strcat(patient, 'sortedFragility')));
-print(fullfile(figDir, strcat(patient, 'sortedRowSumFragility')), '-dpng', '-r0')
+% savefig(fullfile(figDir, strcat(patient, 'sortedFragility')));
+print(fullfile(figDir, patient, strcat(patient, 'sortedRowSumFragility')), '-dpng', '-r0')
 
 
 %- 2d) re-sort the labels to plot the sorted fragility map

@@ -168,14 +168,14 @@ for i=1:length(matFiles) % loop through each adjacency matrix
                     B = [Ci, Cr]';
                 end
 
-                del = B'*inv(B*B')*b;
+%                 del = B'*inv(B*B')*b;
                 
-%                 if w_space(iW) ~= 0
-%                     % compute perturbation necessary
-%                     del = B'*inv(B*B')*b;
-%                 else
-%                     del = C./(norm(C)^2);
-%                 end
+                if w_space(iW) ~= 0
+                    % compute perturbation necessary
+                    del = B'*inv(B*B')*b;
+                else
+                    del = C./(norm(C)^2);
+                end
                 
                 % store the l2-norm of the perturbation
                 del_size(iNode, iW) = norm(del); 
