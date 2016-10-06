@@ -16,6 +16,8 @@ function analyzePerturbations(patient_id, seizure_id, plot_args, clinicalLabels)
 close all;
     
 %% 0: Initialize Variables, EZONE, EarlySpread and LateSpread Indices
+patient = strcat(patient_id, seizure_id);
+
 perturbationType = plot_args.perturbationType;
 radius = plot_args.radius;
 finalDataDir = plot_args.finalDataDir;
@@ -80,6 +82,8 @@ earlyspread_indices(earlyspread_indices==0) =  [];
 latespread_indices(latespread_indices==0) = [];
 
 %% 1: Extract Processed Data and Begin Plotting and Save in finalDataDir
+final_data = load(fullfile(finalDataDir, strcat(patient, 'final_data'))); % load in final data mat
+
 minPerturb_time_chan = final_data.minPerturb_time_chan;
 fragility_rankings = final_data.fragility_rankings;
 rowsum_time_chan = final_data.rowsum_time_chan;
@@ -130,33 +134,32 @@ y_latespreadindices = sort(latespread_indices);
 
 fig = {};
 
-%- 2a) plotting sorted_weights
+%% 2a) plotting sorted_weights
 figure;
 plot(sorted_weights); hold on; 
 ax = gca; 
 set(ax, 'box', 'off');
 title(['Ranking of Electrodes Based on Threshold ', num2str(threshold)], 'FontSize', FONTSIZE);
-xlabel('electrodes');
+xlabel('electrodes'); ylabel('Ranking of Electrodes Based on Fragility Metric')
 set(ax, 'XTick', ax.XLim(1):ax.XLim(2), 'XTickLabels', sorted_labels, 'XTickLabelRotation', 90);
-ylabel('Ranking of Electrodes Based on Fragility Metric')
 
 print(fullfile(figDir, strcat(patient, 'electrodeRanks')), '-dpng', '-r0')
 
-% - 2b) minimum perturbation over time and channels:
+%% 2b) minimum perturbation over time and channels:
 fig{end+1} = figure;
 imagesc(minPerturb_time_chan); hold on;
+
 c = colorbar(); colormap('jet'); set(gca,'box','off')
 set(gca,'YDir','normal');
 XLim = get(gca, 'xlim'); XLowerLim = XLim(1); XUpperLim = XLim(2);
 % set title, labels and ticks
-xticks = (dataStart - seizureTime) : 5 : (dataEnd - seizureTime);
 titleStr = {'Minimum Norm Perturbation For All Channels', ...
     'Time Locked To Seizure'};
 title(titleStr, 'FontSize', FONTSIZE+2);
-ax1 = gca;
 ylabel(c, 'Minimum L2-Norm Perturbation');
 xlabel('Time (sec)', 'FontSize', FONTSIZE);  
 ylab = ylabel('Electrode Channels', 'FontSize', FONTSIZE);
+
 set(gca, 'FontSize', FONTSIZE-3, 'LineWidth', LT);
 set(gca, 'XTick', (XLowerLim+0.5:10:XUpperLim+0.5)); set(gca, 'XTickLabel', xticks); % set xticks and their labels
 set(gca, 'YTick', [1, 5:5:length(included_channels)]);
@@ -165,6 +168,7 @@ currfig.PaperPosition = [-3.7448   -0.3385   15.9896   11.6771];
 currfig.Position = [1986           1        1535        1121];
 % move ylabel to the left
 ylab.Position = ylab.Position + [-.25 0 0];
+
 % plot start star's for the different clinical annotations
 xlim([XLowerLim, XUpperLim+1]);
 plot(repmat(XUpperLim+1, length(ezone_indices),1), ezone_indices, '*r');
@@ -172,6 +176,8 @@ plot(repmat(XUpperLim+1, length(earlyspread_indices), 1), earlyspread_indices, '
 if sum(latespread_indices) > 0
     plot(repmat(XUpperLim+1, length(latespread_indices),1), latespread_indices, '*', 'color', 'blue');
 end
+
+% plot the different labels on different axes to give different colors
 plotOptions = struct();
 plotOptions.YAXFontSize = YAXFontSize;
 plotOptions.FONTSIZE = FONTSIZE;
@@ -184,7 +190,7 @@ plotIndices(currfig, plotOptions, y_indices, labels, ...
 savefig(fullfile(figDir, strcat(patient, 'minPerturbation')));
 print(fullfile(figDir, strcat(patient, 'minPerturbation')), '-dpng', '-r0')
 
-%- 2c) fragility_ranking over time and channels
+%% 2c) fragility_ranking over time and channels
 fig{end+1} = figure;
 imagesc(fragility_rankings); hold on;
 c = colorbar(); set(c, 'fontsize', FONTSIZE); colormap('jet'); set(gca,'box','off')
@@ -224,7 +230,7 @@ plotIndices(currfig, plotOptions, y_indices, labels, ...
 savefig(fullfile(figDir, strcat(patient, 'fragilityRanking')));
 print(fullfile(figDir, strcat(patient, 'fragilityRanking')), '-dpng', '-r0')
 
-%- 2d) sort by rowsum of fragility ranking metrics
+%% 2d) sort by rowsum of fragility ranking metrics
 rowsum_fragility = sum(fragility_rankings, 2);
 [vals, ind] = sort(rowsum_fragility); % sort in descending order
 
@@ -257,7 +263,7 @@ if (sum(latespread_indices) > 0)
     latespread_ticks = ytick(ismember(ind_sorted_weights, latespread_indices));
 end
 
-%% Heatmap of sorted fragility ranks
+%- Heatmap of sorted fragility ranks
 fig{end+1} = figure; 
 imagesc(fragility_rankings(ind,:)); hold on;  
 c = colorbar(); colormap('jet'); set(gca,'box','off'); set(c, 'fontsize', FONTSIZE); 
@@ -300,6 +306,4 @@ plotIndices(currfig, plotOptions, yticks, labels, ...
 
 savefig(fullfile(figDir, strcat(patient, 'sortedFragility')));
 print(fullfile(figDir, strcat(patient, 'sortedRowSumFragility')), '-dpng', '-r0')
-
-
 end
