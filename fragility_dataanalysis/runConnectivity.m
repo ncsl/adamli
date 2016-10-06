@@ -2,18 +2,17 @@ clear all;
 close all;
 clc;
 
-
+% settings to run
 patients = {'EZT005_seiz001', 'EZT005_seiz002', 'EZT007_seiz001', 'EZT007_seiz002', ...
-    'EZT019_seiz001', 'EZT019_seiz002', 'EZT090_seiz002', 'EZT090_seiz003'};
+    'EZT019_seiz001', 'EZT019_seiz002', 'EZT090_seiz002', 'EZT090_seiz003', ...
+    'pt1sz2', 'pt1sz3', 'pt2sz1', 'pt2sz3', 'pt7sz19', 'pt7sz21', 'pt7sz22', 'JH105sz1'};
 perturbationTypes = ['R', 'C'];
 w_space = linspace(-1, 1, 101);
 radius = 1.1;
+threshold = 0.8;
 
-patient_id = 'pt1';
-seizure_id = 'sz3';
-
-addpath('./fragility_library/');
 % add libraries of functions
+addpath('./fragility_library/');
 addpath(genpath('/Users/adam2392/Dropbox/eeg_toolbox'));
 addpath(genpath('/home/WIN/ali39/Documents/adamli/fragility_dataanalysis/eeg_toolbox/'));
 
@@ -135,6 +134,19 @@ for p=1:length(patients)
         end
         patient_files = containers.Map(patient_file_names, number_of_samples)
 
+        % extract labels
+        patient_label_path = fullfile(dataDir, patient, strcat(patient, '_labels.csv'));
+        fid = fopen(patient_label_path); % open up labels to get all the channels
+        labels = textscan(fid, '%s', 'Delimiter', ',');
+        labels = labels{:}; 
+        try
+            labels = labels(included_channels);
+        catch
+            disp('labels already clipped');
+            length(labels) == length(included_channels)
+        end
+        fclose(fid);
+        
         %- Extract EEG and Perform Analysis
         filename = patient_file_names{1};
         num_values = patient_files(patient_file_names{1});
@@ -148,6 +160,7 @@ for p=1:length(patients)
         % files to process
         data = load(fullfile(patient_eeg_path, patient));
         eeg = data.data;
+        labels = data.elec_labels;
         onset_time = data.seiz_start_mark;
         offset_time = data.seiz_end_mark;
         recording_start = 0; % since they dont' give absolute time of starting the recording
@@ -174,6 +187,7 @@ for p=1:length(patients)
     adj_args.included_channels = included_channels;
     adj_args.seizureStart = seizureStart;
     adj_args.seizureEnd = seizureEnd;
+    adj_args.labels = labels;
 
     % compute connectivity
     computeConnectivity(patient_id, seizure_id, eeg, clinicalLabels, adj_args);
@@ -184,22 +198,43 @@ for p=1:length(patients)
         
         toSaveFinalDataDir = fullfile(strcat('./adj_mats_win', num2str(winSize), ...
             '_step', num2str(stepSize)), strcat(perturbationType, '_finaldata'));
+        toSaveFinalDataDir = './test';
         if ~exist(toSaveFinalDataDir, 'dir')
             mkdir(toSaveFinalDataDir, 'dir');
         end
-
-        toSaveFigDir = fullfile('./figures/', perturbationType, patient);
-        if ~exist(toSaveFigDir, 'dir')
-            mkdir(toSaveFigDir);
-        end
         
+        perturb_args = struct();
+        perturb_args.perturbationType = perturbationType;
+        perturb_args.w_space = w_space;
+        perturb_args.radius = radius;
+        perturb_args.adjDir = toSaveAdjDir;
+        perturb_args.toSaveFinalDataDir = toSaveFinalDataDir;
+        perturb_args.labels = labels;
+        
+        computePerturbations(patient_id, seizure_id, perturb_args);
     end
-end
-
-for p=1:length(patients)
-    for j=1:length(pertubationTypes)
-        
-        
-        
-    end
+    
+    %% 03: PLOT PERTURBATION RESULTS
+%     for j=1:length(perturbationTypes)
+%         perturbationType = perturbationTypes(j);
+% 
+%         toSaveFigDir = fullfile('./figures/', perturbationType, patient);
+%         if ~exist(toSaveFigDir, 'dir')
+%             mkdir(toSaveFigDir);
+%         end
+% 
+%         plot_args = struct();
+%         plot_args.perturbationType = perturbationType;
+%         plot_args.radius = radius;
+%         plot_args.finalDataDir = toSaveFinalDataDir;
+%         plot_args.toSaveFigDir = toSaveFigDir;
+%         plot_args.labels = labels;
+%         plot_args.dataStart = seizureStart - timeRange(1)*frequency_sampling;
+%         plot_args.dataEnd = seizureStart + timeRnage(2)*frequency_sampling;
+%         plot_args.FONTSIZE = 22;
+%         plot_args.YAXFontSize = 9;
+%         plot_args.LT = 1.5;
+%         
+%         analyzePerturbations(patient_id, seizure_id, plot_args, clinicalLabels);
+%     end
 end

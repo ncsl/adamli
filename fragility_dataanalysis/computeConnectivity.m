@@ -19,6 +19,7 @@ toSaveAdjDir = adj_args.toSaveAdjDir;
 seizureStart = adj_args.seizureStart; % time seizure starts
 seizureEnd = adj_args.seizureEnd; % time seizure ends
 included_channels = adj_args.included_channels;
+labels = adj_args.labels;
 
 ezone_labels = clinicalLabels.ezone_labels;
 earlyspread_labels = clinicalLabels.earlyspread_labels;
@@ -125,6 +126,7 @@ for i=1:dataRange/stepSize
     data.ezone_labels = ezone_labels;
     data.earlyspread_labels = earlyspread_labels;
     data.latespread_labels = latespread_labels;
+    data.labels = labels;
     
     save(fullfile(toSaveAdjDir, fileName), 'data');
     

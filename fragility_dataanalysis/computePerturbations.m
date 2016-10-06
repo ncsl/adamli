@@ -14,9 +14,7 @@
 % - None, but it saves a mat file for the patient/seizure over all windows
 % in the time range -> adjDir/final_data
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-function computePerturbations(patient_id, seizure_id, winSize, stepSize, ...
-    included_channels, ezone_labels, earlyspread_labels, latespread_labels, ...
-    w_space, radius, perturbationType)
+function computePerturbations(patient_id, seizure_id, perturb_args)%, clinicalLabels)
 if nargin == 0
     patient_id = 'pt1';
     seizure_id = 'sz2';
@@ -27,85 +25,30 @@ if nargin == 0
     stepSize = 500;
     included_channels = 0;
 end
-
-%% 0: Initialize All Necessary Vars and Dirs
-sigma = sqrt(radius^2 - w_space.^2); % move to the unit circle 1, for a plethora of different radial frequencies
-b = [0; 1];
 patient = strcat(patient_id, seizure_id);
+%% 0: Extract Vars and Initialize Parameters
+perturbationType = perturb_args.perturbationType;
+w_space = perturb_args.w_space;
+radius = perturb_args.radius;
+adjDir = perturb_args.adjDir;
+toSaveFinalDataDir = perturb_args.toSaveFinalDataDir;
 
-%- initialize directories and labels
-adjDir = fullfile(strcat('./adj_mats_win', num2str(winSize), ...
-    '_step', num2str(stepSize)));
-%- set file path for the patient file 
-dataDir = './data/';
-patient_eeg_path = strcat('./data/', patient);
-patient_label_path = fullfile(dataDir, patient, strcat(patient, '_labels.csv'));
-%% 1: Read in Data and Initialize Variables For Analysis
-matFiles = dir(fullfile(adjDir,patient, '*.mat'));
+sigma = sqrt(radius^2 - w_space.^2); % move to the unit circle 1, for a plethora of different radial frequencies
+b = [0; 1];                          % initialize for perturbation computation later
+
+matFiles = dir(fullfile(adjDir, '*.mat'));
 matFiles = {matFiles.name};         % cell array of all mat file names in order
 matFiles = natsortfiles(matFiles);  % 3rd party - natural sorting order
 
-try % take out later
-    included_channels = data.included_channels;
-    data = load(fullfile(adjDir, patient,matFiles{2}));    % load in example preprocessed mat
-    data = data.data;
-catch
-    disp('no included yet...');
-end
-fid = fopen(patient_label_path); % open up labels to get all the channels
-labels = textscan(fid, '%s', 'Delimiter', ',');
-labels = labels{:}; 
-try
-    labels = labels(included_channels);
-catch
-    disp('labels already clipped');
-    length(labels) == length(included_channels)
-end
-fclose(fid);
-                       
-% define cell function to search for the EZ labels
-cellfind = @(string)(@(cell_contents)(strcmp(string,cell_contents)));
-ezone_indices = zeros(length(ezone_labels),1);
-for i=1:length(ezone_labels)
-    indice = cellfun(cellfind(ezone_labels{i}), labels, 'UniformOutput', 0);
-    indice = [indice{:}];
-    test = 1:length(labels);
-    if ~isempty(test(indice))
-        ezone_indices(i) = test(indice);
-    end
-end
-
-earlyspread_indices = zeros(length(earlyspread_labels),1);
-for i=1:length(earlyspread_labels)
-    indice = cellfun(cellfind(earlyspread_labels{i}), labels, 'UniformOutput', 0);
-    indice = [indice{:}];
-    test = 1:length(labels);
-    if ~isempty(test(indice))
-        earlyspread_indices(i) = test(indice);
-    end
-end
-earlyspread_indices(earlyspread_indices==0) =  [];
-
-latespread_indices = zeros(length(latespread_labels),1);
-if ~isempty(latespread_labels)
-    for i=1:length(latespread_labels)
-        indice = cellfun(cellfind(latespread_labels{i}), labels, 'UniformOutput', 0);
-        indice = [indice{:}];
-        test = 1:length(labels);
-        if ~isempty(test(indice))
-            latespread_indices(i) = test(indice);
-        end
-    end
-end
-
+%% 1: Begin Perturbation Analysis
 %- initialize matrices for colsum, rowsum, and minimum perturbation
 timeRange = length(matFiles);               % the number of mat files to analyze
 colsum_time_chan = zeros(length(included_channels), ... % colsum at each time/channel
-                    timeRange);
+                                                timeRange);
 rowsum_time_chan = zeros(length(included_channels), ... % rowsum at each time/channel
-                    timeRange);
+                                                timeRange);
 minPerturb_time_chan = zeros(length(included_channels), ... % fragility at each time/channel
-                    timeRange);
+                                                timeRange);
 timeIndices = [];             % vector to store time indices (secs) of each window of data
 
 % loop through mat files and open them upbcd
@@ -114,11 +57,12 @@ tic; % start counter
 for i=1:length(matFiles) % loop through each adjacency matrix
     %%- 01: Extract File and Information
     matFile = matFiles{i};
-    data = load(fullfile(adjDir,patient, matFile));
+    data = load(fullfile(adjDir, matFile));
     data = data.data;
     
     theta_adj = data.theta_adj;
     timewrtSz = data.timewrtSz / 1000; % in seconds
+    
     index = data.index;
     if (i == 1) % only set these variables once -> save time in seconds
         timeStart = data.timeStart / 1000;
@@ -168,8 +112,6 @@ for i=1:length(matFiles) % loop through each adjacency matrix
                     B = [Ci, Cr]';
                 end
 
-%                 del = B'*inv(B*B')*b;
-                
                 if w_space(iW) ~= 0
                     % compute perturbation necessary
                     del = B'*inv(B*B')*b;
@@ -205,10 +147,17 @@ for i=1:size(minPerturb_time_chan,1)      % loop through each channel
     end
 end
 
-%- make processed file dir, if not saved yet.
-if ~exist(fullfile(adjDir, strcat(perturbationType, '_finaldata')), 'dir')
-    mkdir(fullfile(adjDir,  strcat(perturbationType, '_finaldata')));
-end
-save(fullfile(adjDir, strcat(perturbationType, '_finaldata'), strcat(patient,'final_data.mat')),...
- 'minPerturb_time_chan', 'colsum_time_chan', 'rowsum_time_chan', 'fragility_rankings');
+metadata = struct();
+% metadata.ezone_labels = ezone_labels;
+% metadata.earlyspread_labels = earlyspread_labels;
+% metadata.latespread_labels = latespread_labels;
+metadata.seizureStart = seizureStart;
+metadata.seizureEnd = seizureEnd;
+metadata.winSize = winSize;
+metadata.stepSize = stepSize;
+metadata.radius = radius;
+% metadata.labels = labels;
+
+save(fullfile(toSaveFinalDataDir, strcat(perturbationType, '_finaldata'), strcat(patient,'final_data.mat')),...
+ 'minPerturb_time_chan', 'colsum_time_chan', 'rowsum_time_chan', 'fragility_rankings', 'metadata');
 end
