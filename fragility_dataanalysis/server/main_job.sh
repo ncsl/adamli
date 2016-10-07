@@ -28,4 +28,4 @@ qsub -l walltime=24:00:00,nodes=node232 run_b_sleep.sh
 
 ## 02: Call pbs job, which in turn calls run_all_pbs (put nodes to sleep) and runAnalysis
 # qsub -v patient_id=$patient_id,seizure_id=$seizure_id,perturbationType=$perturbationType run_job.pbs
-qsub -v patients=$patients[@] run_job.pbs
+qsub run_job.pbs
