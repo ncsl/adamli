@@ -39,5 +39,4 @@ matlab_jvm="matlab -nojvm -nodesktop -nosplash -r"
 # run adjacency computation and then run perturbation analysis on the same patient/seizure
 # open matlab and call functions
 matlab -logfile /home/ali/adamli/fragility_dataanalysis/server/_log/job$1.txt -nojvm -nodisplay -nosplash -r "patient='$patient'; \
-	serverAdjMatScript; \
-	serverPerturbationScript; exit"
+	serverAdjMainScript; exit"
