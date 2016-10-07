@@ -28,6 +28,12 @@ YAXFontSize = plot_args.YAXFontSize;
 LT = plot_args.LT;
 dataStart = plot_args.dataStart;
 dataEnd = plot_args.dataEnd;
+threshold = plot_args.threshold;
+seizureStart = plot_args.seizureStart;
+
+dataStart = dataStart / 1000;
+dataEnd  = dataEnd / 1000;
+seizureStart = seizureStart / 1000;
 
 %- grab clinical annotations
 ezone_labels = clinicalLabels.ezone_labels;
@@ -121,7 +127,7 @@ end
 fclose(fid);
 
 %% 2. Plotting
-xticks = (dataStart - seizureTime) : 5 : (dataEnd - seizureTime); % set x_ticks at intervals
+xticks = (dataStart - seizureStart) : 5 : (dataEnd - seizureStart); % set x_ticks at intervals
 ytick = 1:num_channels;                                           % 1 xtick per channel
 y_indices = setdiff(ytick, [ezone_indices; earlyspread_indices]);
 if sum(latespread_indices > 0)
@@ -143,7 +149,7 @@ title(['Ranking of Electrodes Based on Threshold ', num2str(threshold)], 'FontSi
 xlabel('electrodes'); ylabel('Ranking of Electrodes Based on Fragility Metric')
 set(ax, 'XTick', ax.XLim(1):ax.XLim(2), 'XTickLabels', sorted_labels, 'XTickLabelRotation', 90);
 
-print(fullfile(figDir, strcat(patient, 'electrodeRanks')), '-dpng', '-r0')
+print(fullfile(toSaveFigDir, strcat(patient, 'electrodeRanks')), '-dpng', '-r0')
 
 %% 2b) minimum perturbation over time and channels:
 fig{end+1} = figure;
@@ -162,7 +168,7 @@ ylab = ylabel('Electrode Channels', 'FontSize', FONTSIZE);
 
 set(gca, 'FontSize', FONTSIZE-3, 'LineWidth', LT);
 set(gca, 'XTick', (XLowerLim+0.5:10:XUpperLim+0.5)); set(gca, 'XTickLabel', xticks); % set xticks and their labels
-set(gca, 'YTick', [1, 5:5:length(included_channels)]);
+set(gca, 'YTick', [1, 5:5:num_channels]);
 currfig = gcf;
 currfig.PaperPosition = [-3.7448   -0.3385   15.9896   11.6771];
 currfig.Position = [1986           1        1535        1121];
@@ -187,25 +193,28 @@ plotIndices(currfig, plotOptions, y_indices, labels, ...
                             y_earlyspreadindices, ...
                             y_latespreadindices)
 %- save the figure
-savefig(fullfile(figDir, strcat(patient, 'minPerturbation')));
-print(fullfile(figDir, strcat(patient, 'minPerturbation')), '-dpng', '-r0')
+savefig(fullfile(toSaveFigDir, strcat(patient, 'minPerturbation')));
+print(fullfile(toSaveFigDir, strcat(patient, 'minPerturbation')), '-dpng', '-r0')
 
 %% 2c) fragility_ranking over time and channels
 fig{end+1} = figure;
 imagesc(fragility_rankings); hold on;
 c = colorbar(); set(c, 'fontsize', FONTSIZE); colormap('jet'); set(gca,'box','off')
-titleStr = {['Fragility Ranking Of Each Channel (', patient ')'], ...
-    'perturbation: ', perturbationType,...
-    'Time Locked To Seizure'};
+titleStr = {['Fragility Metric (', patient ')'], ...
+    ['perturbation: ', perturbationType,...
+    ' Time Locked to Seizure']};
+set(gca, 'FontSize', FONTSIZE-3, 'LineWidth', LT);
+set(gca, 'XTick', (XLowerLim+0.5:10:XUpperLim+0.5)); set(gca, 'XTickLabel', xticks); % set xticks and their labels
+set(gca, 'YTick', [1, 5:5:num_channels]);
 XLim = get(gca, 'xlim'); XLowerLim = XLim(1); XUpperLim = XLim(2);
-title(titleStr, 'FontSize', FONTSIZE+5);
+title(titleStr, 'FontSize', FONTSIZE+2);
 ylabel(c, 'Fragility Ranking', 'FontSize', FONTSIZE);
 xlabel('Time (sec)', 'FontSize', FONTSIZE);  
 ylab = ylabel('Electrode Channels', 'FontSize', FONTSIZE);
 set(gca, 'FontSize', FONTSIZE-3, 'LineWidth', LT); set(gca,'YDir','normal');
 set(gca, 'XTick', (XLowerLim+0.5:10:XUpperLim+0.5)); set(gca, 'XTickLabel', xticks, 'fontsize', FONTSIZE); % set xticks and their labels
 a = get(gca,'XTickLabel'); set(gca,'XTickLabel',a,'fontsize',FONTSIZE); % setting some fontsize
-set(gca, 'YTick', [1, 5:5:length(included_channels)]);
+set(gca, 'YTick', [1, 5:5:num_channels]);
 currfig = gcf;
 currfig.PaperPosition = [-3.7448   -0.3385   15.9896   11.6771];
 currfig.Position = [1986           1        1535        1121];
@@ -227,8 +236,8 @@ plotIndices(currfig, plotOptions, y_indices, labels, ...
                             y_earlyspreadindices, ...
                             y_latespreadindices)
 
-savefig(fullfile(figDir, strcat(patient, 'fragilityRanking')));
-print(fullfile(figDir, strcat(patient, 'fragilityRanking')), '-dpng', '-r0')
+savefig(fullfile(toSaveFigDir, strcat(patient, 'fragilityRanking')));
+print(fullfile(toSaveFigDir, strcat(patient, 'fragilityRanking')), '-dpng', '-r0')
 
 %% 2d) sort by rowsum of fragility ranking metrics
 rowsum_fragility = sum(fragility_rankings, 2);
@@ -248,7 +257,7 @@ earlyspread_indices = earlyspread_indices(b);
 b(b==0) = [];
 latespread_indices = latespread_indices(b);
 
-ytick = 1:length(included_channels);
+ytick = 1:num_channels;
 y_indices = ind_sorted_weights(~ismember(ind_sorted_weights, [ezone_indices; earlyspread_indices]));
 % y_indices = setdiff(ytick, [ezone_indices; earlyspread_indices]);
 if sum(latespread_indices > 0)
@@ -282,11 +291,8 @@ xlabel('Time (sec)', 'FontSize', FONTSIZE);
 ylab = ylabel('Electrode Channels', 'FontSize', FONTSIZE);
 % move ylabel to the left
 ylab.Position = ylab.Position + [-.25 0 0];
-set(gca, 'YTick', [1, 5:5:length(included_channels)]);
+set(gca, 'YTick', [1, 5:5:num_channels]);
 
-currfig = gcf;
-currfig.PaperPosition = [-3.7448   -0.3385   15.9896   11.6771];
-currfig.Position = [1986           1        1535        1121]; %workstation
 % currfig.Position = [1 55 1440 773];
 % add the labels for the EZ electrodes (rows)
 xlim([XLowerLim XUpperLim+1]); % increase the xlim by 1, to mark regions of EZ
@@ -295,6 +301,9 @@ plot(repmat(XUpperLim+1, length(earlyspread_indices), 1), earlyspread_ticks, '*'
 if sum(latespread_indices) > 0
     plot(repmat(XUpperLim+1, length(latespread_indices),1), latespread_ticks, '*', 'color', 'blue');
 end
+currfig = gcf;
+currfig.PaperPosition = [-3.7448   -0.3385   15.9896   11.6771];
+currfig.Position = [1986           1        1535        1121]; %workstation
 plotOptions = struct();
 plotOptions.YAXFontSize = YAXFontSize;
 plotOptions.FONTSIZE = FONTSIZE;
@@ -304,6 +313,6 @@ plotIndices(currfig, plotOptions, yticks, labels, ...
                             earlyspread_ticks, ...
                             latespread_ticks)
 
-savefig(fullfile(figDir, strcat(patient, 'sortedFragility')));
-print(fullfile(figDir, strcat(patient, 'sortedRowSumFragility')), '-dpng', '-r0')
+savefig(fullfile(toSaveFigDir, strcat(patient, 'sortedFragility')));
+print(fullfile(toSaveFigDir, strcat(patient, 'sortedRowSumFragility')), '-dpng', '-r0')
 end

@@ -191,7 +191,7 @@ for p=1:length(patients)
     adj_args.labels = labels;
 
     % compute connectivity
-    computeConnectivity(patient_id, seizure_id, eeg, clinicalLabels, adj_args);
+%     computeConnectivity(patient_id, seizure_id, eeg, clinicalLabels, adj_args);
     
     %% 02: RUN PERTURBATION ANALYSIS
     for j=1:length(perturbationTypes)
@@ -212,30 +212,32 @@ for p=1:length(patients)
         perturb_args.labels = labels;
         perturb_args.included_channels = included_channels;
         
-        computePerturbations(patient_id, seizure_id, perturb_args);
+%         computePerturbations(patient_id, seizure_id, perturb_args);
     end
     
     %% 03: PLOT PERTURBATION RESULTS
-%     for j=1:length(perturbationTypes)
-%         perturbationType = perturbationTypes(j);
-% 
-%         toSaveFigDir = fullfile('./figures/', perturbationType, patient);
-%         if ~exist(toSaveFigDir, 'dir')
-%             mkdir(toSaveFigDir);
-%         end
-% 
-%         plot_args = struct();
-%         plot_args.perturbationType = perturbationType;
-%         plot_args.radius = radius;
-%         plot_args.finalDataDir = toSaveFinalDataDir;
-%         plot_args.toSaveFigDir = toSaveFigDir;
-%         plot_args.labels = labels;
-%         plot_args.dataStart = seizureStart - timeRange(1)*frequency_sampling;
-%         plot_args.dataEnd = seizureStart + timeRnage(2)*frequency_sampling;
-%         plot_args.FONTSIZE = 22;
-%         plot_args.YAXFontSize = 9;
-%         plot_args.LT = 1.5;
-%         
-%         analyzePerturbations(patient_id, seizure_id, plot_args, clinicalLabels);
-%     end
+    for j=1:length(perturbationTypes)
+        perturbationType = perturbationTypes(j);
+
+        toSaveFigDir = fullfile('./figures/', perturbationType, patient);
+        if ~exist(toSaveFigDir, 'dir')
+            mkdir(toSaveFigDir);
+        end
+
+        plot_args = struct();
+        plot_args.perturbationType = perturbationType;
+        plot_args.radius = radius;
+        plot_args.finalDataDir = toSaveFinalDataDir;
+        plot_args.toSaveFigDir = toSaveFigDir;
+        plot_args.labels = labels;
+        plot_args.seizureStart = seizureStart;
+        plot_args.dataStart = seizureStart - timeRange(1)*frequency_sampling;
+        plot_args.dataEnd = seizureStart + timeRange(2)*frequency_sampling;
+        plot_args.FONTSIZE = 22;
+        plot_args.YAXFontSize = 9;
+        plot_args.LT = 1.5;
+        plot_args.threshold = threshold;
+        
+        analyzePerturbations(patient_id, seizure_id, plot_args, clinicalLabels);
+    end
 end
