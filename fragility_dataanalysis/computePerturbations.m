@@ -70,6 +70,8 @@ for i=1:length(matFiles) % loop through each adjacency matrix
         timeEnd = data.timeEnd / 1000;
         seizureStart = data.seizureStart / 1000;
         seizureEnd = data.seizureEnd / 1000;
+        winSize = data.winSize;
+        stepSize = data.stepSize;
     end
     % store all the time indices with respect to seizure
     timeIndices = [timeIndices; timewrtSz];
