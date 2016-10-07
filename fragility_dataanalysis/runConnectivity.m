@@ -3,9 +3,10 @@ close all;
 clc;
 
 % settings to run
-patients = {'EZT005_seiz001', 'EZT005_seiz002', 'EZT007_seiz001', 'EZT007_seiz002', ...
+patients = {'pt1sz2', 'pt1sz3', 'pt2sz1', 'pt2sz3', 'pt7sz19', 'pt7sz21', 'pt7sz22', 'JH105sz1', ...
+    'EZT005_seiz001', 'EZT005_seiz002', 'EZT007_seiz001', 'EZT007_seiz002', ...
     'EZT019_seiz001', 'EZT019_seiz002', 'EZT090_seiz002', 'EZT090_seiz003', ...
-    'pt1sz2', 'pt1sz3', 'pt2sz1', 'pt2sz3', 'pt7sz19', 'pt7sz21', 'pt7sz22', 'JH105sz1'};
+    };
 perturbationTypes = ['R', 'C'];
 w_space = linspace(-1, 1, 101);
 radius = 1.1;
@@ -19,11 +20,11 @@ addpath(genpath('/home/WIN/ali39/Documents/adamli/fragility_dataanalysis/eeg_too
 %%- Begin Loop Through Different Patients Here
 for p=1:length(patients)
     patient = patients{p};
-    try
-        patient_id = patient(1:strfind(patient, 'seiz')-2);
-        seizure_id = strcat('_', patient(strfind(patient, 'seiz'):end));
-        seeg = 1;
-    catch
+   
+    patient_id = patient(1:strfind(patient, 'seiz')-2);
+    seizure_id = strcat('_', patient(strfind(patient, 'seiz'):end));
+    seeg = 1;
+    if isempty(patient_id)
         patient_id = patient(1:strfind(patient, 'sz')-1);
         seizure_id = patient(strfind(patient, 'sz'):end);
         seeg = 0;
@@ -31,31 +32,31 @@ for p=1:length(patients)
 
     %% DEFINE CHANNELS AND CLINICAL ANNOTATIONS
     if strcmp(patient_id, 'EZT007')
-        included_channels = [];
+        included_channels = [1:16 18:53 55:71 74:78 81:94];
         ezone_labels = {'O7', 'E8', 'E7', 'I5', 'E9', 'I6', 'E3', 'E2',...
             'O4', 'O5', 'I8', 'I7', 'E10', 'E1', 'O6', 'I1', 'I9', 'E6',...
             'I4', 'O3', 'O2', 'I10', 'E4', 'Y1', 'O1', 'I3', 'I2'}; %pt1
         earlyspread_labels = {};
         latespread_labels = {};
     elseif strcmp(patient_id, 'EZT005')
-        included_channels = [];
+        included_channels = [1:21 23:60 63:88];
         ezone_labels = {'U4', 'U3', 'U5', 'U6', 'U8', 'U7'}; 
         earlyspread_labels = {};
          latespread_labels = {};
     elseif strcmp(patient_id, 'EZT019')
-        included_channels = [];
+        included_channels = [1:5 7:22 24:79];
         ezone_labels = {'I5', 'I6', 'B9', 'I9', 'T10', 'I10', 'B6', 'I4', ...
             'T9', 'I7', 'B3', 'B5', 'B4', 'I8', 'T6', 'B10', 'T3', ...
             'B1', 'T8', 'T7', 'B7', 'I3', 'B2', 'I2', 'T4', 'T2'}; 
         earlyspread_labels = {};
          latespread_labels = {}; 
      elseif strcmp(patient_id, 'EZT045') % FAILURES 2 EZONE LABELS?
-        included_channels = [];
+        included_channels = [1 3:14 16:20 24:28 30:65];
         ezone_labels = {'X2', 'X1'}; %pt2
         earlyspread_labels = {};
          latespread_labels = {}; 
       elseif strcmp(patient_id, 'EZT090') % FAILURES
-        included_channels = [];
+        included_channels = [1:25 27:42 44:49 51:73 75:90 95:111];
         ezone_labels = {'N2', 'N1', 'N3', 'N8', 'N9', 'N6', 'N7', 'N5'}; 
         earlyspread_labels = {};
          latespread_labels = {}; 
@@ -210,6 +211,7 @@ for p=1:length(patients)
         perturb_args.adjDir = toSaveAdjDir;
         perturb_args.toSaveFinalDataDir = toSaveFinalDataDir;
         perturb_args.labels = labels;
+        perturb_args.included_channels = included_channels;
         
         computePerturbations(patient_id, seizure_id, perturb_args);
     end
