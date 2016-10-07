@@ -162,6 +162,6 @@ metadata.stepSize = stepSize;
 metadata.radius = radius;
 % metadata.labels = labels;
 
-save(fullfile(toSaveFinalDataDir, strcat(perturbationType, '_finaldata'), strcat(patient,'final_data.mat')),...
+save(fullfile(toSaveFinalDataDir, strcat(patient,'final_data.mat')),...
  'minPerturb_time_chan', 'colsum_time_chan', 'rowsum_time_chan', 'fragility_rankings', 'metadata');
 end

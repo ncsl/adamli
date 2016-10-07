@@ -199,9 +199,8 @@ for p=1:length(patients)
         
         toSaveFinalDataDir = fullfile(strcat('./adj_mats_win', num2str(winSize), ...
             '_step', num2str(stepSize)), strcat(perturbationType, '_finaldata'));
-        toSaveFinalDataDir = './test';
         if ~exist(toSaveFinalDataDir, 'dir')
-            mkdir(toSaveFinalDataDir, 'dir');
+            mkdir(toSaveFinalDataDir);
         end
         
         perturb_args = struct();
