@@ -90,19 +90,31 @@ latespread_indices(latespread_indices==0) = [];
 %% 1: Extract Processed Data and Begin Plotting and Save in finalDataDir
 final_data = load(fullfile(finalDataDir, strcat(patient, 'final_data'))); % load in final data mat
 
+try
+    patient = [patient(1:6), patient(8:end)];
+catch
+    patient
+end
+patient
+
+
 minPerturb_time_chan = final_data.minPerturb_time_chan;
 fragility_rankings = final_data.fragility_rankings;
 rowsum_time_chan = final_data.rowsum_time_chan;
 colsum_time_chan = final_data.colsum_time_chan;
-metadata = final_data.metadata;
+% metadata = final_data.metadata;
 
 num_channels = size(fragility_rankings,1);
 num_windows = size(fragility_rankings,2);
 
 % only get -60 to 0 seconds of data
 if (size(fragility_rankings,2) > 121)
-    fragility_rankings = fragility_rankings(:,1:end-20);
-    minPerturb_time_chan = minPerturb_time_chan(:,1:end-20);
+    fragility_rankings = fragility_rankings(:,1:119);
+    minPerturb_time_chan = minPerturb_time_chan(:,1:119);
+end
+if isnan(fragility_rankings(1,120))
+    fragility_rankings = fragility_rankings(:,1:119);
+    minPerturb_time_chan = minPerturb_time_chan(:,1:119);
 end
 
 %%- 1a) Apply thresholding to fragility_rankings
@@ -113,18 +125,6 @@ rowsum = sum(threshold_fragility,2); rowsum = rowsum/max(rowsum);
 [sorted_weights, ind_sorted_weights] = sort(rowsum, 'descend'); % find the electrode's rowsums in descending order and the indices
 sorted_fragility = fragility_rankings(ind_sorted_weights,:); % create the sorted fragility
 
-%%- 1b) print weights into an excel file
-elecWeightsDir = fullfile(toSaveFigDir, '_electrode_weights');
-if ~exist(elecWeightsDir, 'dir')
-    mkdir(elecWeightsDir);
-end
-weight_file = fullfile(elecWeightsDir, strcat(patient, 'electrodeWeights.csv'));
-fid = fopen(weight_file, 'w');
-sorted_labels = labels(ind_sorted_weights);
-for i=1:length(labels)
-    fprintf(fid, '%6s, %f \n', sorted_labels{i}, sorted_weights(i)); 
-end
-fclose(fid);
 
 %% 2. Plotting
 xticks = (dataStart - seizureStart) : 5 : (dataEnd - seizureStart); % set x_ticks at intervals
@@ -139,17 +139,6 @@ y_earlyspreadindices = sort(earlyspread_indices);
 y_latespreadindices = sort(latespread_indices);
 
 fig = {};
-
-%% 2a) plotting sorted_weights
-figure;
-plot(sorted_weights); hold on; 
-ax = gca; 
-set(ax, 'box', 'off');
-title(['Ranking of Electrodes Based on Threshold ', num2str(threshold)], 'FontSize', FONTSIZE);
-xlabel('electrodes'); ylabel('Ranking of Electrodes Based on Fragility Metric')
-set(ax, 'XTick', ax.XLim(1):ax.XLim(2), 'XTickLabels', sorted_labels, 'XTickLabelRotation', 90);
-
-print(fullfile(toSaveFigDir, strcat(patient, 'electrodeRanks')), '-dpng', '-r0')
 
 %% 2b) minimum perturbation over time and channels:
 fig{end+1} = figure;
@@ -200,26 +189,22 @@ print(fullfile(toSaveFigDir, strcat(patient, 'minPerturbation')), '-dpng', '-r0'
 fig{end+1} = figure;
 imagesc(fragility_rankings); hold on;
 c = colorbar(); set(c, 'fontsize', FONTSIZE); colormap('jet'); set(gca,'box','off')
-titleStr = {['Fragility Metric (', patient ')'], ...
-    ['perturbation: ', perturbationType,...
-    ' Time Locked to Seizure']};
-set(gca, 'FontSize', FONTSIZE-3, 'LineWidth', LT);
-set(gca, 'XTick', (XLowerLim+0.5:10:XUpperLim+0.5)); set(gca, 'XTickLabel', xticks); % set xticks and their labels
-set(gca, 'YTick', [1, 5:5:num_channels]);
-XLim = get(gca, 'xlim'); XLowerLim = XLim(1); XUpperLim = XLim(2);
-title(titleStr, 'FontSize', FONTSIZE+2);
+titleStr = {['Fragility Metric (', patient, ')'], ...
+    [perturbationType, ' perturbation: ', ' Time Locked to Seizure']};
 ylabel(c, 'Fragility Ranking', 'FontSize', FONTSIZE);
+title(titleStr, 'FontSize', FONTSIZE+2);
+
 xlabel('Time (sec)', 'FontSize', FONTSIZE);  
 ylab = ylabel('Electrode Channels', 'FontSize', FONTSIZE);
-set(gca, 'FontSize', FONTSIZE-3, 'LineWidth', LT); set(gca,'YDir','normal');
-set(gca, 'XTick', (XLowerLim+0.5:10:XUpperLim+0.5)); set(gca, 'XTickLabel', xticks, 'fontsize', FONTSIZE); % set xticks and their labels
-a = get(gca,'XTickLabel'); set(gca,'XTickLabel',a,'fontsize',FONTSIZE); % setting some fontsize
+set(gca, 'FontSize', FONTSIZE-3, 'LineWidth', LT);
+set(gca, 'XTick', (XLowerLim+0.5:10:XUpperLim+0.5)); set(gca, 'XTickLabel', xticks); % set xticks and their labels
 set(gca, 'YTick', [1, 5:5:num_channels]);
 currfig = gcf;
 currfig.PaperPosition = [-3.7448   -0.3385   15.9896   11.6771];
 currfig.Position = [1986           1        1535        1121];
 % move ylabel to the left
 ylab.Position = ylab.Position + [-.25 0 0];
+
 % plot start star's for the different clinical annotations
 xlim([XLowerLim, XUpperLim+1]);
 plot(repmat(XUpperLim+1, length(ezone_indices),1), ezone_indices, '*r');
@@ -227,6 +212,8 @@ plot(repmat(XUpperLim+1, length(earlyspread_indices), 1), earlyspread_indices, '
 if sum(latespread_indices) > 0
     plot(repmat(XUpperLim+1, length(latespread_indices),1), latespread_indices, '*', 'color', 'blue');
 end
+
+% plot the different labels on different axes to give different colors
 plotOptions = struct();
 plotOptions.YAXFontSize = YAXFontSize;
 plotOptions.FONTSIZE = FONTSIZE;
@@ -235,7 +222,7 @@ plotIndices(currfig, plotOptions, y_indices, labels, ...
                             y_ezoneindices, ...
                             y_earlyspreadindices, ...
                             y_latespreadindices)
-
+                        
 savefig(fullfile(toSaveFigDir, strcat(patient, 'fragilityRanking')));
 print(fullfile(toSaveFigDir, strcat(patient, 'fragilityRanking')), '-dpng', '-r0')
 
@@ -315,4 +302,33 @@ plotIndices(currfig, plotOptions, yticks, labels, ...
 
 savefig(fullfile(toSaveFigDir, strcat(patient, 'sortedFragility')));
 print(fullfile(toSaveFigDir, strcat(patient, 'sortedRowSumFragility')), '-dpng', '-r0')
+
+try
+    %%- 1b) print weights into an excel file
+elecWeightsDir = fullfile(toSaveFigDir, '_electrode_weights');
+if ~exist(elecWeightsDir, 'dir')
+    mkdir(elecWeightsDir);
+end
+weight_file = fullfile(elecWeightsDir, strcat(patient, 'electrodeWeights.csv'));
+fid = fopen(weight_file, 'w');
+sorted_labels = labels(ind_sorted_weights);
+for i=1:length(labels)
+    fprintf(fid, '%6s, %f \n', sorted_labels{i}, sorted_weights(i)); 
+end
+fclose(fid);
+
+%% 2a) plotting sorted_weights
+figure;
+plot(sorted_weights); hold on; 
+ax = gca; 
+set(ax, 'box', 'off');
+title(['Ranking of Electrodes Based on Threshold ', num2str(threshold)], 'FontSize', FONTSIZE);
+xlabel('electrodes'); ylabel('Ranking of Electrodes Based on Fragility Metric')
+set(ax, 'XTick', ax.XLim(1):ax.XLim(2), 'XTickLabels', sorted_labels, 'XTickLabelRotation', 90);
+
+print(fullfile(toSaveFigDir, strcat(patient, 'electrodeRanks')), '-dpng', '-r0')
+
+catch
+    disp('cant make weights');
+end
 end
