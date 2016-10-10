@@ -3,7 +3,7 @@ close all;
 clc;
 
 % settings to run
-patients = {'pt1sz2', 'pt1sz3', 'pt2sz1', 'pt2sz3', 'pt7sz19', 'pt7sz21', 'pt7sz22', 'JH105sz1', ...
+patients = {...%'pt1sz2', 'pt1sz3', 'pt2sz1', 'pt2sz3', 'pt7sz19', 'pt7sz21', 'pt7sz22', 'JH105sz1', ...
     'EZT005_seiz001', 'EZT005_seiz002', 'EZT007_seiz001', 'EZT007_seiz002', ...
     'EZT019_seiz001', 'EZT019_seiz002', 'EZT090_seiz002', 'EZT090_seiz003', ...
     };
@@ -219,6 +219,12 @@ for p=1:length(patients)
     for j=1:length(perturbationTypes)
         perturbationType = perturbationTypes(j);
 
+        toSaveFinalDataDir = fullfile(strcat('./adj_mats_win', num2str(winSize), ...
+            '_step', num2str(stepSize)), strcat(perturbationType, '_finaldata'));
+        if ~exist(toSaveFinalDataDir, 'dir')
+            mkdir(toSaveFinalDataDir);
+        end
+        
         toSaveFigDir = fullfile('./figures/', perturbationType, patient);
         if ~exist(toSaveFigDir, 'dir')
             mkdir(toSaveFigDir);
@@ -237,7 +243,7 @@ for p=1:length(patients)
         plot_args.YAXFontSize = 9;
         plot_args.LT = 1.5;
         plot_args.threshold = threshold;
-        
+        close all
         analyzePerturbations(patient_id, seizure_id, plot_args, clinicalLabels);
     end
 end
