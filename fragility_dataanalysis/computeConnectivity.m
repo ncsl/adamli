@@ -62,7 +62,7 @@ currentWindow = dataStart;
 dataRange = limit-currentWindow;
 
 
-disp(['The range locked to seizure to look over is', num2str(-timeRange(1)), ...
+disp(['The range locked to seizure to look over is ', num2str(-timeRange(1)), ...
     ' until ', num2str(timeRange(2))]); 
 disp(['Total number of channels ', num2str(num_channels)]);
 disp(['Length of to be included channels ', num2str(length(included_channels))]);

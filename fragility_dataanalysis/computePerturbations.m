@@ -33,6 +33,7 @@ radius = perturb_args.radius;
 adjDir = perturb_args.adjDir;
 toSaveFinalDataDir = perturb_args.toSaveFinalDataDir;
 included_channels = perturb_args.included_channels;
+num_channels = perturb_args.num_channels
 
 sigma = sqrt(radius^2 - w_space.^2); % move to the unit circle 1, for a plethora of different radial frequencies
 b = [0; 1];                          % initialize for perturbation computation later
@@ -44,11 +45,11 @@ matFiles = natsortfiles(matFiles);  % 3rd party - natural sorting order
 %% 1: Begin Perturbation Analysis
 %- initialize matrices for colsum, rowsum, and minimum perturbation
 timeRange = length(matFiles);               % the number of mat files to analyze
-colsum_time_chan = zeros(length(included_channels), ... % colsum at each time/channel
+colsum_time_chan = zeros(num_channels, ... % colsum at each time/channel
                                                 timeRange);
-rowsum_time_chan = zeros(length(included_channels), ... % rowsum at each time/channel
+rowsum_time_chan = zeros(num_channels, ... % rowsum at each time/channel
                                                 timeRange);
-minPerturb_time_chan = zeros(length(included_channels), ... % fragility at each time/channel
+minPerturb_time_chan = zeros(num_channels, ... % fragility at each time/channel
                                                 timeRange);
 timeIndices = [];             % vector to store time indices (secs) of each window of data
 

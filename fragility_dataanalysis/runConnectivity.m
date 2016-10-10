@@ -7,6 +7,8 @@ patients = {'pt1sz2', 'pt1sz3', 'pt2sz1', 'pt2sz3', 'pt7sz19', 'pt7sz21', 'pt7sz
     'EZT005_seiz001', 'EZT005_seiz002', 'EZT007_seiz001', 'EZT007_seiz002', ...
     'EZT019_seiz001', 'EZT019_seiz002', 'EZT090_seiz002', 'EZT090_seiz003', ...
     };
+patients = { 'EZT120_seiz001', 'EZT120_seiz002'}; %'EZT108_seiz002',
+patients = {'Pat2sz1p', 'Pat2sz2p', 'Pat2sz3p', 'Pat16sz1p', 'Pat16sz2p', 'Pat16sz3p'};
 perturbationTypes = ['R', 'C'];
 w_space = linspace(-1, 1, 101);
 radius = 1.1;
@@ -59,7 +61,28 @@ for p=1:length(patients)
         included_channels = [1:25 27:42 44:49 51:73 75:90 95:111];
         ezone_labels = {'N2', 'N1', 'N3', 'N8', 'N9', 'N6', 'N7', 'N5'}; 
         earlyspread_labels = {};
-         latespread_labels = {}; 
+         latespread_labels = {};
+    elseif strcmp(patient_id, 'EZT108')
+        included_channels = [];
+        ezone_labels = {'P2', 'P7', 'P1', 'P3', 'V5', 'P8', 'V4', 'P6', 'V1', 'V3', ...
+                        'V2', 'O8', 'O2', 'O4' ,'O5', 'O6', 'O3', 'P5', 'O1', 'P4', 'O7', 'V8'};
+        earlyspread_labels = {};
+        latespread_labels = {};
+    elseif strcmp(patient_id, 'EZT120')
+        included_channels = [];
+        ezone_labels = {'C7', 'C8', 'C9', 'C6', 'C2', 'C10', 'C1'};
+        earlyspread_labels = {};
+        latespread_labels = {};
+    elseif strcmp(patient_id, 'Pat2')
+        included_channels = [];
+        ezone_labels = {};
+        earlyspread_labels = {};
+        latespread_labels = {};
+    elseif strcmp(patient_id, 'Pat16')
+        included_channels = [];
+        ezone_labels = {};
+        earlyspread_labels = {};
+        latespread_labels = {};
     elseif strcmp(patient_id, 'pt7')
         included_channels = [1:17 19:35 37:38 41:62 67:109];
         ezone_labels = {};
@@ -190,8 +213,13 @@ for p=1:length(patients)
     adj_args.seizureEnd = seizureEnd;
     adj_args.labels = labels;
 
+    if seizureStart < 60000
+        disp('not 60 seconds of preseizure data');
+        waitforbuttonpress;
+    end
+    
     % compute connectivity
-%     computeConnectivity(patient_id, seizure_id, eeg, clinicalLabels, adj_args);
+    computeConnectivity(patient_id, seizure_id, eeg, clinicalLabels, adj_args);
     
     %% 02: RUN PERTURBATION ANALYSIS
     for j=1:length(perturbationTypes)
@@ -211,8 +239,9 @@ for p=1:length(patients)
         perturb_args.toSaveFinalDataDir = toSaveFinalDataDir;
         perturb_args.labels = labels;
         perturb_args.included_channels = included_channels;
+        perturb_args.num_channels = size(eeg, 1);
         
-%         computePerturbations(patient_id, seizure_id, perturb_args);
+        computePerturbations(patient_id, seizure_id, perturb_args);
     end
     
     %% 03: PLOT PERTURBATION RESULTS
