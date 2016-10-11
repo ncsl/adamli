@@ -188,6 +188,7 @@ print(fullfile(toSaveFigDir, strcat(patient, 'minPerturbation')), '-dpng', '-r0'
 %% 2c) fragility_ranking over time and channels
 fig{end+1} = figure;
 imagesc(fragility_rankings); hold on;
+set(gca,'YDir','normal');
 c = colorbar(); set(c, 'fontsize', FONTSIZE); colormap('jet'); set(gca,'box','off')
 titleStr = {['Fragility Metric (', patient, ')'], ...
     [perturbationType, ' perturbation: ', ' Time Locked to Seizure']};

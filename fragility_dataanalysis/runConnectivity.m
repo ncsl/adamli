@@ -7,8 +7,8 @@ patients = {...%'pt1sz2', 'pt1sz3', 'pt2sz1', 'pt2sz3', 'pt7sz19', 'pt7sz21', 'p
     'EZT005_seiz001', 'EZT005_seiz002', 'EZT007_seiz001', 'EZT007_seiz002', ...
     'EZT019_seiz001', 'EZT019_seiz002', 'EZT090_seiz002', 'EZT090_seiz003', ...
     };
-patients = { 'EZT120_seiz001', 'EZT120_seiz002'}; %'EZT108_seiz002',
-patients = {'Pat2sz1p', 'Pat2sz2p', 'Pat2sz3p', 'Pat16sz1p', 'Pat16sz2p', 'Pat16sz3p'};
+patients = { 'EZT108_seiz002', 'EZT120_seiz001', 'EZT120_seiz002'}; %,
+% patients = {'Pat2sz1p', 'Pat2sz2p', 'Pat2sz3p', 'Pat16sz1p', 'Pat16sz2p', 'Pat16sz3p'};
 perturbationTypes = ['R', 'C'];
 w_space = linspace(-1, 1, 101);
 radius = 1.1;
@@ -64,8 +64,7 @@ for p=1:length(patients)
          latespread_labels = {};
     elseif strcmp(patient_id, 'EZT108')
         included_channels = [];
-        ezone_labels = {'P2', 'P7', 'P1', 'P3', 'V5', 'P8', 'V4', 'P6', 'V1', 'V3', ...
-                        'V2', 'O8', 'O2', 'O4' ,'O5', 'O6', 'O3', 'P5', 'O1', 'P4', 'O7', 'V8'};
+        ezone_labels = {'F2', 'V7', 'O3', 'O4'}; % marked ictal onset areas
         earlyspread_labels = {};
         latespread_labels = {};
     elseif strcmp(patient_id, 'EZT120')
@@ -219,7 +218,7 @@ for p=1:length(patients)
     end
     
     % compute connectivity
-    computeConnectivity(patient_id, seizure_id, eeg, clinicalLabels, adj_args);
+%     computeConnectivity(patient_id, seizure_id, eeg, clinicalLabels, adj_args);
     
     %% 02: RUN PERTURBATION ANALYSIS
     for j=1:length(perturbationTypes)
@@ -241,7 +240,7 @@ for p=1:length(patients)
         perturb_args.included_channels = included_channels;
         perturb_args.num_channels = size(eeg, 1);
         
-        computePerturbations(patient_id, seizure_id, perturb_args);
+%         computePerturbations(patient_id, seizure_id, perturb_args);
     end
     
     %% 03: PLOT PERTURBATION RESULTS
