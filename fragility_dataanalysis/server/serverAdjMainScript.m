@@ -1,10 +1,20 @@
+function serverAdjMainScript(patient, radius, winSize, stepSize, frequency_sampling)
 addpath('../fragility_library/');
 addpath(genpath('../eeg_toolbox/'));
 addpath('../');
 perturbationTypes = ['R', 'C'];
 w_space = linspace(-1, 1, 101);
-radius = 1.1;
 threshold = 0.8;
+
+if nargin == 0
+    patient='pt1sz2';
+    % window paramters
+    radius = 1.1;
+    winSize = 250; % 500 milliseconds
+    stepSize = 250; 
+    frequency_sampling = 1000; % in Hz
+end
+timeRange = [60 0];
 
 patient_id = patient(1:strfind(patient, 'seiz')-2);
 seizure_id = strcat('_', patient(strfind(patient, 'seiz'):end));
@@ -44,7 +54,27 @@ elseif strcmp(patient_id, 'EZT019')
     included_channels = [1:25 27:42 44:49 51:73 75:90 95:111];
     ezone_labels = {'N2', 'N1', 'N3', 'N8', 'N9', 'N6', 'N7', 'N5'}; 
     earlyspread_labels = {};
-     latespread_labels = {}; 
+     latespread_labels = {};
+elseif strcmp(patient_id, 'EZT108')
+    included_channels = [];
+    ezone_labels = {'F2', 'V7', 'O3', 'O4'}; % marked ictal onset areas
+    earlyspread_labels = {};
+    latespread_labels = {};
+elseif strcmp(patient_id, 'EZT120')
+    included_channels = [];
+    ezone_labels = {'C7', 'C8', 'C9', 'C6', 'C2', 'C10', 'C1'};
+    earlyspread_labels = {};
+    latespread_labels = {};
+elseif strcmp(patient_id, 'Pat2')
+    included_channels = [];
+    ezone_labels = {};
+    earlyspread_labels = {};
+    latespread_labels = {};
+elseif strcmp(patient_id, 'Pat16')
+    included_channels = [];
+    ezone_labels = {};
+    earlyspread_labels = {};
+    latespread_labels = {};
 elseif strcmp(patient_id, 'pt7')
     included_channels = [1:17 19:35 37:38 41:62 67:109];
     ezone_labels = {};
@@ -79,12 +109,6 @@ clinicalLabels.earlyspread_labels = earlyspread_labels;
 clinicalLabels.latespread_labels = latespread_labels;
 
 %% DEFINE COMPUTATION PARAMETERS AND DIRECTORIES TO SAVE DATA
-% window paramters
-winSize = 500; % 500 milliseconds
-stepSize = 500; 
-timeRange = [60 0];
-frequency_sampling = 1000; % in Hz
-
 patient = strcat(patient_id, seizure_id);
 disp(['Looking at patient: ',patient]);
 
@@ -175,6 +199,12 @@ adj_args.seizureStart = seizureStart;
 adj_args.seizureEnd = seizureEnd;
 adj_args.labels = labels;
 
+if seizureStart < 60000
+    disp('not 60 seconds of preseizure data');
+    disp(patient);
+    waitforbuttonpress;
+end
+
 % compute connectivity
 computeConnectivity(patient_id, seizure_id, eeg, clinicalLabels, adj_args);
 
@@ -196,6 +226,8 @@ for j=1:length(perturbationTypes)
     perturb_args.toSaveFinalDataDir = toSaveFinalDataDir;
     perturb_args.labels = labels;
     perturb_args.included_channels = included_channels;
+    perturb_args.num_channels = size(eeg, 1);
 
     computePerturbations(patient_id, seizure_id, perturb_args);
+end
 end

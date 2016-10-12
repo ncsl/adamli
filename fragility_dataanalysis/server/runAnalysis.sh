@@ -36,7 +36,12 @@ matlab_jvm="matlab -nojvm -nodesktop -nosplash -r"
 #  			serverLeastSquaresAdjMat($winIndex, eeg, metadata); exit"
 # done
 
+winSize=250
+stepSize=250
+frequency_sampling=1000
+radius=1.1
+
 # run adjacency computation and then run perturbation analysis on the same patient/seizure
 # open matlab and call functions
 matlab -logfile /home/ali/adamli/fragility_dataanalysis/server/_log/job$1.txt -nojvm -nodisplay -nosplash -r "patient='$patient'; \
-	serverAdjMainScript; exit"
+	serverAdjMainScript($patient, $radius, $winSize, $stepSize, $frequency_sampling); exit"
