@@ -16,7 +16,7 @@ For product information, visit www.mathworks.com.
 
 patient =
 
-EZT090_seiz003
+EZT090_seiz002
 
 The range locked to seizure to look over is-60 until 20
 Total number of channels 111
@@ -27,6 +27,10 @@ dataRange =
 
        80000
 
-Elapsed time is 5461.154054 seconds.
+Elapsed time is 5579.015454 seconds.
   done 
-sed time is 3444.471431 seconds.
+Elapsed time is 31973.033114 seconds.
+verLeastSquaresAdjMat (line 29)
+    tmpdata = eeg(:, dataWindow + 1:dataWindow + winSize);
+} 
+

@@ -16,13 +16,22 @@ For product information, visit www.mathworks.com.
 
 patient =
 
-EZT090_seiz003
+EZT090_seiz002
 
-[Warning: Directory already exists.] 
-[> In serverEZTMainScript at 58] 
 The range locked to seizure to look over is-60 until 20
 Total number of channels 111
-Length of to be included cElapsed time is 4913.165750 seconds.
+Length of to be included channels 0
+Seizure starts at 140001 milliseconds
+
+dataRange =
+
+       80000
+
+Elapsed time is 4404.446898 seconds.
   done 
-sed time is 3513.248678 secondsElapsed time is 5179.241189 seconds.
-  done 
+ve integers or logicals.
+
+Error in serverLeastSquaresAdjMat (line 29)
+    tmpdata = eeg(:, dataWindow + 1:dataWindow + winSize);
+} 
+
