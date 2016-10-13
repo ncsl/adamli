@@ -63,6 +63,14 @@ for i=1:length(matFiles) % loop through each adjacency matrix
     data = data.data;
     
     theta_adj = data.theta_adj;
+    
+    if max(abs(eig(theta_adj))) > radius
+        logfile = strcat(patient, '_perturbation_log.txt');
+        fid = fopen(logfile, 'w');
+        fprintf(fid, '%6s, %f \n', 'This patient has eigenvalue > radius, check it!'); 
+        fclose(fid);
+    end
+    
     timewrtSz = data.timewrtSz / 1000; % in seconds
     
     index = data.index;

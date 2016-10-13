@@ -218,7 +218,7 @@ for p=1:length(patients)
     end
     
     % compute connectivity
-%     computeConnectivity(patient_id, seizure_id, eeg, clinicalLabels, adj_args);
+    computeConnectivity(patient_id, seizure_id, eeg, clinicalLabels, adj_args);
     
     %% 02: RUN PERTURBATION ANALYSIS
     for j=1:length(perturbationTypes)
@@ -272,6 +272,6 @@ for p=1:length(patients)
         plot_args.LT = 1.5;
         plot_args.threshold = threshold;
         close all
-%         analyzePerturbations(patient_id, seizure_id, plot_args, clinicalLabels);
+        analyzePerturbations(patient_id, seizure_id, plot_args, clinicalLabels);
     end
 end
