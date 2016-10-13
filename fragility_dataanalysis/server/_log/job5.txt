@@ -8,30 +8,33 @@
 To get started, type one of these: helpwin, helpdesk, or demo.
 For product information, visit www.mathworks.com.
  
-[Warning: Name is nonexistent or not a directory:
-/Users/adam2392/Dropbox/eeg_toolbox] 
-[> In path at 110
-  In addpath at 87
-  In serverEZTMainScript at 46] 
-
-patient =
-
-EZT090_seiz002
-
-The range locked to seizure to look over is-60 until 20
-Total number of channels 111
-Length of to be included channels 0
-Seizure starts at 140001 milliseconds
-
-dataRange =
-
-       80000
-
-Elapsed time is 3798.340505 seconds.
-  done 
-ve integers or logicals.
-
-Error in serverLeastSquaresAdjMat (line 29)
-    tmpdata = eeg(:, dataWindow + 1:dataWindow + winSize);
-} 
-
+Looking at patient: pt7sz21
+The range locked to seizure to look over is -60 until 0
+Total number of channels 101
+Length of to be included channels 101
+Seizure starts at 80000 milliseconds
+Running analysis for 60000 milliseconds
+Elapsed time is 2.313915 seconds.
+Saved file: pt7sz21_1_before60000.mat
+Elapsed time is 2.267384 seconds.
+Saved file: pt7sz21_2_before59750.mat
+Elapsed time is 2.413414 seconds.
+Saved file: pt7sz21_3_before59500.mat
+Elapsed time is 2.257466 seconds.
+Saved file: pt7sz21_4_before59250.mat
+Elapsed time is 2.242570 seconds.
+Saved file: pt7sz21_5_before59000.mat
+Elapsed time is 2.237226 seconds.
+Saved file: pt7sz21_6_before58750.mat
+Elapsed time is 2.290642 seconds.
+Saved file: pt7sz21_7_before58500.mat
+Elapsed time is 2.363419 seconds.
+Saved file: pt7sz21_8_before58250.mat
+Elapsed time is 2.253884 seconds.
+Saved file: pt7sz21_9_before58000.mat
+Elapsed time is 2.330270 seconds.
+Saved file: pt7sz21_10_before57750.mat
+Elapsed time is 2.199386 seconds.
+Saved file: pt7sz21_11_before57500.mat
+Elapsed time is 2.206742 seconds.
+Saved file: pt7sz21_12_before57250.mat

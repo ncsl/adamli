@@ -9,14 +9,46 @@ To get started, type one of these: helpwin, helpdesk, or demo.
 For product information, visit www.mathworks.com.
  
 Looking at patient: pt1sz3
-{Error using textscan
-Badly formed format string.
-
-Error in readLabels (line 11)
-    dataArray = textscan(fileID, formatSpec, 'Delimiter',',', 'HeaderLines' ,1
-    , 'ReturnOnError', false);
-
-Error in serverAdjMainScript (line 107)
-    [~, ~, recording_start, ...
-} 
-
+The range locked to seizure to look over is -60 until 0
+Total number of channels 86
+Length of to be included channels 86
+Seizure starts at 101000 milliseconds
+Running analysis for 60000 milliseconds
+Elapsed time is 1.530966 seconds.
+Saved file: pt1sz3_1_before60000.mat
+Elapsed time is 1.536873 seconds.
+Saved file: pt1sz3_2_before59750.mat
+Elapsed time is 1.357471 seconds.
+Saved file: pt1sz3_3_before59500.mat
+Elapsed time is 1.511468 seconds.
+Saved file: pt1sz3_4_before59250.mat
+Elapsed time is 1.449836 seconds.
+Saved file: pt1sz3_5_before59000.mat
+Elapsed time is 1.459563 seconds.
+Saved file: pt1sz3_6_before58750.mat
+Elapsed time is 1.475496 seconds.
+Saved file: pt1sz3_7_before58500.mat
+Elapsed time is 1.463399 seconds.
+Saved file: pt1sz3_8_before58250.mat
+Elapsed time is 1.559167 seconds.
+Saved file: pt1sz3_9_before58000.mat
+Elapsed time is 1.449717 seconds.
+Saved file: pt1sz3_10_before57750.mat
+Elapsed time is 1.364181 seconds.
+Saved file: pt1sz3_11_before57500.mat
+Elapsed time is 1.533444 seconds.
+Saved file: pt1sz3_12_before57250.mat
+Elapsed time is 1.461667 seconds.
+Saved file: pt1sz3_13_before57000.mat
+Elapsed time is 1.543737 seconds.
+Saved file: pt1sz3_14_before56750.mat
+Elapsed time is 1.443665 seconds.
+Saved file: pt1sz3_15_before56500.mat
+Elapsed time is 1.390568 seconds.
+Saved file: pt1sz3_16_before56250.mat
+Elapsed time is 1.547559 seconds.
+Saved file: pt1sz3_17_before56000.mat
+Elapsed time is 1.457310 seconds.
+Saved file: pt1sz3_18_before55750.mat
+Elapsed time is 1.410669 seconds.
+Saved file: pt1sz3_19_before55500.mat

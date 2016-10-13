@@ -8,30 +8,97 @@
 To get started, type one of these: helpwin, helpdesk, or demo.
 For product information, visit www.mathworks.com.
  
-[Warning: Name is nonexistent or not a directory:
-/Users/adam2392/Dropbox/eeg_toolbox] 
-[> In path at 110
-  In addpath at 87
-  In serverEZTMainScript at 46] 
-
-patient =
-
-EZT090_seiz002
-
-The range locked to seizure to look over is-60 until 20
-Total number of channels 111
-Length of to be included channels 0
-Seizure starts at 140001 milliseconds
-
-dataRange =
-
-       80000
-
-Elapsed time is 5290.907649 seconds.
-  done 
-ve integers or logicals.
-
-Error in serverLeastSquaresAdjMat (line 29)
-    tmpdata = eeg(:, dataWindow + 1:dataWindow + winSize);
-} 
-
+Looking at patient: pt2sz3
+The range locked to seizure to look over is -60 until 0
+Total number of channels 64
+Length of to be included channels 64
+Seizure starts at 118000 milliseconds
+Running analysis for 60000 milliseconds
+Elapsed time is 1.043567 seconds.
+Saved file: pt2sz3_1_before60000.mat
+Elapsed time is 0.789770 seconds.
+Saved file: pt2sz3_2_before59750.mat
+Elapsed time is 0.711762 seconds.
+Saved file: pt2sz3_3_before59500.mat
+Elapsed time is 0.829635 seconds.
+Saved file: pt2sz3_4_before59250.mat
+Elapsed time is 0.647522 seconds.
+Saved file: pt2sz3_5_before59000.mat
+Elapsed time is 0.806033 seconds.
+Saved file: pt2sz3_6_before58750.mat
+Elapsed time is 0.632050 seconds.
+Saved file: pt2sz3_7_before58500.mat
+Elapsed time is 0.722630 seconds.
+Saved file: pt2sz3_8_before58250.mat
+Elapsed time is 0.731468 seconds.
+Saved file: pt2sz3_9_before58000.mat
+Elapsed time is 0.747757 seconds.
+Saved file: pt2sz3_10_before57750.mat
+Elapsed time is 0.774494 seconds.
+Saved file: pt2sz3_11_before57500.mat
+Elapsed time is 0.678716 seconds.
+Saved file: pt2sz3_12_before57250.mat
+Elapsed time is 0.804501 seconds.
+Saved file: pt2sz3_13_before57000.mat
+Elapsed time is 0.687635 seconds.
+Saved file: pt2sz3_14_before56750.mat
+Elapsed time is 0.698626 seconds.
+Saved file: pt2sz3_15_before56500.mat
+Elapsed time is 0.729057 seconds.
+Saved file: pt2sz3_16_before56250.mat
+Elapsed time is 0.711441 seconds.
+Saved file: pt2sz3_17_before56000.mat
+Elapsed time is 0.740109 seconds.
+Saved file: pt2sz3_18_before55750.mat
+Elapsed time is 0.673011 seconds.
+Saved file: pt2sz3_19_before55500.mat
+Elapsed time is 0.790255 seconds.
+Saved file: pt2sz3_20_before55250.mat
+Elapsed time is 0.713489 seconds.
+Saved file: pt2sz3_21_before55000.mat
+Elapsed time is 0.651511 seconds.
+Saved file: pt2sz3_22_before54750.mat
+Elapsed time is 0.771801 seconds.
+Saved file: pt2sz3_23_before54500.mat
+Elapsed time is 0.740674 seconds.
+Saved file: pt2sz3_24_before54250.mat
+Elapsed time is 0.760751 seconds.
+Saved file: pt2sz3_25_before54000.mat
+Elapsed time is 0.703178 seconds.
+Saved file: pt2sz3_26_before53750.mat
+Elapsed time is 0.766289 seconds.
+Saved file: pt2sz3_27_before53500.mat
+Elapsed time is 0.755278 seconds.
+Saved file: pt2sz3_28_before53250.mat
+Elapsed time is 0.642962 seconds.
+Saved file: pt2sz3_29_before53000.mat
+Elapsed time is 0.757765 seconds.
+Saved file: pt2sz3_30_before52750.mat
+Elapsed time is 0.814034 seconds.
+Saved file: pt2sz3_31_before52500.mat
+Elapsed time is 0.757874 seconds.
+Saved file: pt2sz3_32_before52250.mat
+Elapsed time is 0.690611 seconds.
+Saved file: pt2sz3_33_before52000.mat
+Elapsed time is 0.747783 seconds.
+Saved file: pt2sz3_34_before51750.mat
+Elapsed time is 0.808029 seconds.
+Saved file: pt2sz3_35_before51500.mat
+Elapsed time is 0.565316 seconds.
+Saved file: pt2sz3_36_before51250.mat
+Elapsed time is 0.761412 seconds.
+Saved file: pt2sz3_37_before51000.mat
+Elapsed time is 0.792627 seconds.
+Saved file: pt2sz3_38_before50750.mat
+Elapsed time is 0.708165 seconds.
+Saved file: pt2sz3_39_before50500.mat
+Elapsed time is 0.758426 seconds.
+Saved file: pt2sz3_40_before50250.mat
+Elapsed time is 0.765872 seconds.
+Saved file: pt2sz3_41_before50000.mat
+Elapsed time is 0.829555 seconds.
+Saved file: pt2sz3_42_before49750.mat
+Elapsed time is 0.565329 seconds.
+Saved file: pt2sz3_43_before49500.mat
+Elapsed time is 0.769416 seconds.
+Saved file: pt2sz3_44_before49250.mat

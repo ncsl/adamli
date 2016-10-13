@@ -8,30 +8,49 @@
 To get started, type one of these: helpwin, helpdesk, or demo.
 For product information, visit www.mathworks.com.
  
-[Warning: Name is nonexistent or not a directory:
-/Users/adam2392/Dropbox/eeg_toolbox] 
-[> In path at 110
-  In addpath at 87
-  In serverEZTMainScript at 46] 
-
-patient =
-
-EZT090_seiz002
-
-The range locked to seizure to look over is-60 until 20
-Total number of channels 111
-Length of to be included channels 0
-Seizure starts at 140001 milliseconds
-
-dataRange =
-
-       80000
-
-Elapsed time is 4404.446898 seconds.
-  done 
-ve integers or logicals.
-
-Error in serverLeastSquaresAdjMat (line 29)
-    tmpdata = eeg(:, dataWindow + 1:dataWindow + winSize);
-} 
-
+Looking at patient: JH105sz1
+The range locked to seizure to look over is -60 until 0
+Total number of channels 85
+Length of to be included channels 85
+Seizure starts at 69000 milliseconds
+Running analysis for 60000 milliseconds
+Elapsed time is 1.722039 seconds.
+Saved file: JH105sz1_1_before60000.mat
+Elapsed time is 1.526009 seconds.
+Saved file: JH105sz1_2_before59750.mat
+Elapsed time is 1.474444 seconds.
+Saved file: JH105sz1_3_before59500.mat
+Elapsed time is 1.541188 seconds.
+Saved file: JH105sz1_4_before59250.mat
+Elapsed time is 1.505280 seconds.
+Saved file: JH105sz1_5_before59000.mat
+Elapsed time is 1.541745 seconds.
+Saved file: JH105sz1_6_before58750.mat
+Elapsed time is 1.400598 seconds.
+Saved file: JH105sz1_7_before58500.mat
+Elapsed time is 1.302804 seconds.
+Saved file: JH105sz1_8_before58250.mat
+Elapsed time is 1.520517 seconds.
+Saved file: JH105sz1_9_before58000.mat
+Elapsed time is 1.480804 seconds.
+Saved file: JH105sz1_10_before57750.mat
+Elapsed time is 1.410364 seconds.
+Saved file: JH105sz1_11_before57500.mat
+Elapsed time is 1.397996 seconds.
+Saved file: JH105sz1_12_before57250.mat
+Elapsed time is 1.371406 seconds.
+Saved file: JH105sz1_13_before57000.mat
+Elapsed time is 1.518164 seconds.
+Saved file: JH105sz1_14_before56750.mat
+Elapsed time is 1.438983 seconds.
+Saved file: JH105sz1_15_before56500.mat
+Elapsed time is 1.292028 seconds.
+Saved file: JH105sz1_16_before56250.mat
+Elapsed time is 1.436544 seconds.
+Saved file: JH105sz1_17_before56000.mat
+Elapsed time is 1.464852 seconds.
+Saved file: JH105sz1_18_before55750.mat
+Elapsed time is 1.583062 seconds.
+Saved file: JH105sz1_19_before55500.mat
+Elapsed time is 1.447160 seconds.
+Saved file: JH105sz1_20_before55250.mat
