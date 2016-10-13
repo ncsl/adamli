@@ -114,7 +114,7 @@ disp(['Looking at patient: ',patient]);
 
 % create the adjacency file directory to store the computed adj. mats
 toSaveAdjDir = fullfile(strcat('../adj_mats_win', num2str(winSize), ...
-    '_step', num2str(stepSize)), patient);
+    '_step', num2str(stepSize), '_freq', num2str(frequency_sampling), '_radius', num2str(radius)), patient);
 if ~exist(toSaveAdjDir, 'dir')
     mkdir(toSaveAdjDir);
 end
@@ -195,7 +195,7 @@ for j=1:length(perturbationTypes)
     perturbationType = perturbationTypes(j);
 
     toSaveFinalDataDir = fullfile(strcat('../adj_mats_win', num2str(winSize), ...
-        '_step', num2str(stepSize), '_freq', frequency_sampling, '_radius', radius),...
+    '_step', num2str(stepSize), '_freq', num2str(frequency_sampling), '_radius', num2str(radius)),...
         strcat(perturbationType, '_finaldata'));
     if ~exist(toSaveFinalDataDir, 'dir')
         mkdir(toSaveFinalDataDir);
