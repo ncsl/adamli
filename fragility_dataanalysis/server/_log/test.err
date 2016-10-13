@@ -3,53 +3,15 @@
 Error in serverAdjMainScript (line 107)
 clinicalLabels.ezone_labels = ezone_labels;
 } 
-{Error using load
-Unable to read file '../data/pt7sz21,/pt7sz21,': no such file or directory.
+{Undefined function or variable "ezone_labels".
 
-Error in serverAdjMainScript (line 131)
-    data = load(fullfile(patient_eeg_path, patient));
+Error in serverAdjMainScript (line 107)
+clinicalLabels.ezone_labels = ezone_labels;
 } 
-{Error using load
-Unable to read file '../data/pt2sz3,/pt2sz3,': no such file or directory.
+{Undefined function or variable "ezone_labels".
 
-Error in serverAdjMainScript (line 131)
-    data = load(fullfile(patient_eeg_path, patient));
-} 
-{Error using load
-Unable to read file '../data/pt7sz19,/pt7sz19,': no such file or directory.
-
-Error in serverAdjMainScript (line 131)
-    data = load(fullfile(patient_eeg_path, patient));
-} 
-{Error using load
-Unable to read file '../data/pt1sz2,/pt1sz2,': no such file or directory.
-
-Error in serverAdjMainScript (line 131)
-    data = load(fullfile(patient_eeg_path, patient));
-} 
-{Error using load
-Unable to read file '../data/pt1sz3,/pt1sz3,': no such file or directory.
-
-Error in serverAdjMainScript (line 131)
-    data = load(fullfile(patient_eeg_path, patient));
-} 
-{Error using load
-Unable to read file '../data/JH105sz1,/JH105sz1,': no such file or directory.
-
-Error in serverAdjMainScript (line 131)
-    data = load(fullfile(patient_eeg_path, patient));
-} 
-{Error using load
-Unable to read file '../data/pt7sz22,/pt7sz22,': no such file or directory.
-
-Error in serverAdjMainScript (line 131)
-    data = load(fullfile(patient_eeg_path, patient));
-} 
-{Error using load
-Unable to read file '../data/pt2sz1,/pt2sz1,': no such file or directory.
-
-Error in serverAdjMainScript (line 131)
-    data = load(fullfile(patient_eeg_path, patient));
+Error in serverAdjMainScript (line 107)
+clinicalLabels.ezone_labels = ezone_labels;
 } 
 {Undefined function or variable "ezone_labels".
 
@@ -57,21 +19,21 @@ Error in serverAdjMainScript (line 107)
 clinicalLabels.ezone_labels = ezone_labels;
 } 
 {Undefined function or variable "ezone_labels".
-
-Error in serverAdjMainScript (line 107)
-clinicalLabels.ezone_labels = ezone_labels;
-} 
-{Undefined function or variable "ezone_labels".
-
-Error in serverAdjMainScript (line 107)
-clinicalLabels.ezone_labels = ezone_labels;
-} 
-{Undefined function or variable "ezone_labels".
 
 Error in serverAdjMainScript (line 107)
 clinicalLabels.ezone_labels = ezone_labels;
 } 
 {Undefined function or variable "ezone_labels".
+
+Error in serverAdjMainScript (line 107)
+clinicalLabels.ezone_labels = ezone_labels;
+} 
+{Undefined function or variable "ezone_labels".
+
+Error in serverAdjMainScript (line 107)
+clinicalLabels.ezone_labels = ezone_labels;
+} 
+{Undefined function or variable "ezone_labels".
 
 Error in serverAdjMainScript (line 107)
 clinicalLabels.ezone_labels = ezone_labels;

@@ -54,3 +54,163 @@ Elapsed time is 1.583062 seconds.
 Saved file: JH105sz1_19_before55500.mat
 Elapsed time is 1.447160 seconds.
 Saved file: JH105sz1_20_before55250.mat
+Elapsed time is 1.295944 seconds.
+Saved file: JH105sz1_21_before55000.mat
+Elapsed time is 1.474806 seconds.
+Saved file: JH105sz1_22_before54750.mat
+Elapsed time is 1.471556 seconds.
+Saved file: JH105sz1_23_before54500.mat
+Elapsed time is 1.532532 seconds.
+Saved file: JH105sz1_24_before54250.mat
+Elapsed time is 1.444681 seconds.
+Saved file: JH105sz1_25_before54000.mat
+Elapsed time is 1.349011 seconds.
+Saved file: JH105sz1_26_before53750.mat
+Elapsed time is 1.488307 seconds.
+Saved file: JH105sz1_27_before53500.mat
+Elapsed time is 1.486834 seconds.
+Saved file: JH105sz1_28_before53250.mat
+Elapsed time is 1.377405 seconds.
+Saved file: JH105sz1_29_before53000.mat
+Elapsed time is 1.498429 seconds.
+Saved file: JH105sz1_30_before52750.mat
+Elapsed time is 1.467196 seconds.
+Saved file: JH105sz1_31_before52500.mat
+Elapsed time is 1.490068 seconds.
+Saved file: JH105sz1_32_before52250.mat
+Elapsed time is 1.485256 seconds.
+Saved file: JH105sz1_33_before52000.mat
+Elapsed time is 1.462712 seconds.
+Saved file: JH105sz1_34_before51750.mat
+Elapsed time is 1.531591 seconds.
+Saved file: JH105sz1_35_before51500.mat
+Elapsed time is 1.398145 seconds.
+Saved file: JH105sz1_36_before51250.mat
+Elapsed time is 1.333681 seconds.
+Saved file: JH105sz1_37_before51000.mat
+Elapsed time is 1.508080 seconds.
+Saved file: JH105sz1_38_before50750.mat
+Elapsed time is 1.449835 seconds.
+Saved file: JH105sz1_39_before50500.mat
+Elapsed time is 1.395451 seconds.
+Saved file: JH105sz1_40_before50250.mat
+Elapsed time is 1.417974 seconds.
+Saved file: JH105sz1_41_before50000.mat
+Elapsed time is 1.416373 seconds.
+Saved file: JH105sz1_42_before49750.mat
+Elapsed time is 1.602215 seconds.
+Saved file: JH105sz1_43_before49500.mat
+Elapsed time is 1.480184 seconds.
+Saved file: JH105sz1_44_before49250.mat
+Elapsed time is 1.283678 seconds.
+Saved file: JH105sz1_45_before49000.mat
+Elapsed time is 1.458303 seconds.
+Saved file: JH105sz1_46_before48750.mat
+Elapsed time is 1.486431 seconds.
+Saved file: JH105sz1_47_before48500.mat
+Elapsed time is 1.563089 seconds.
+Saved file: JH105sz1_48_before48250.mat
+Elapsed time is 1.444209 seconds.
+Saved file: JH105sz1_49_before48000.mat
+Elapsed time is 1.292490 seconds.
+Saved file: JH105sz1_50_before47750.mat
+Elapsed time is 1.472506 seconds.
+Saved file: JH105sz1_51_before47500.mat
+Elapsed time is 1.443180 seconds.
+Saved file: JH105sz1_52_before47250.mat
+Elapsed time is 1.362221 seconds.
+Saved file: JH105sz1_53_before47000.mat
+Elapsed time is 1.440223 seconds.
+Saved file: JH105sz1_54_before46750.mat
+Elapsed time is 1.389906 seconds.
+Saved file: JH105sz1_55_before46500.mat
+Elapsed time is 1.522205 seconds.
+Saved file: JH105sz1_56_before46250.mat
+Elapsed time is 1.475281 seconds.
+Saved file: JH105sz1_57_before46000.mat
+Elapsed time is 1.478550 seconds.
+Saved file: JH105sz1_58_before45750.mat
+Elapsed time is 1.463898 seconds.
+Saved file: JH105sz1_59_before45500.mat
+Elapsed time is 1.393811 seconds.
+Saved file: JH105sz1_60_before45250.mat
+Elapsed time is 1.550197 seconds.
+Saved file: JH105sz1_61_before45000.mat
+Elapsed time is 1.427904 seconds.
+Saved file: JH105sz1_62_before44750.mat
+Elapsed time is 1.400434 seconds.
+Saved file: JH105sz1_63_before44500.mat
+Elapsed time is 1.518394 seconds.
+Saved file: JH105sz1_64_before44250.mat
+Elapsed time is 1.366189 seconds.
+Saved file: JH105sz1_65_before44000.mat
+Elapsed time is 1.466694 seconds.
+Saved file: JH105sz1_66_before43750.mat
+Elapsed time is 1.433130 seconds.
+Saved file: JH105sz1_67_before43500.mat
+Elapsed time is 1.298432 seconds.
+Saved file: JH105sz1_68_before43250.mat
+Elapsed time is 1.562648 seconds.
+Saved file: JH105sz1_69_before43000.mat
+Elapsed time is 1.471441 seconds.
+Saved file: JH105sz1_70_before42750.mat
+Elapsed time is 1.341303 seconds.
+Saved file: JH105sz1_71_before42500.mat
+Elapsed time is 1.492879 seconds.
+Saved file: JH105sz1_72_before42250.mat
+Elapsed time is 1.482643 seconds.
+Saved file: JH105sz1_73_before42000.mat
+Elapsed time is 1.564082 seconds.
+Saved file: JH105sz1_74_before41750.mat
+Elapsed time is 1.449785 seconds.
+Saved file: JH105sz1_75_before41500.mat
+Elapsed time is 1.492974 seconds.
+Saved file: JH105sz1_76_before41250.mat
+Elapsed time is 1.521732 seconds.
+Saved file: JH105sz1_77_before41000.mat
+Elapsed time is 1.420748 seconds.
+Saved file: JH105sz1_78_before40750.mat
+Elapsed time is 1.511703 seconds.
+Saved file: JH105sz1_79_before40500.mat
+Elapsed time is 1.499464 seconds.
+Saved file: JH105sz1_80_before40250.mat
+Elapsed time is 1.465505 seconds.
+Saved file: JH105sz1_81_before40000.mat
+Elapsed time is 1.505935 seconds.
+Saved file: JH105sz1_82_before39750.mat
+Elapsed time is 1.409917 seconds.
+Saved file: JH105sz1_83_before39500.mat
+Elapsed time is 1.402656 seconds.
+Saved file: JH105sz1_84_before39250.mat
+Elapsed time is 1.419163 seconds.
+Saved file: JH105sz1_85_before39000.mat
+Elapsed time is 1.372549 seconds.
+Saved file: JH105sz1_86_before38750.mat
+Elapsed time is 1.468775 seconds.
+Saved file: JH105sz1_87_before38500.mat
+Elapsed time is 1.398529 seconds.
+Saved file: JH105sz1_88_before38250.mat
+Elapsed time is 1.327089 seconds.
+Saved file: JH105sz1_89_before38000.mat
+Elapsed time is 1.451962 seconds.
+Saved file: JH105sz1_90_before37750.mat
+Elapsed time is 1.418114 seconds.
+Saved file: JH105sz1_91_before37500.mat
+Elapsed time is 1.354803 seconds.
+Saved file: JH105sz1_92_before37250.mat
+Elapsed time is 1.361656 seconds.
+Saved file: JH105sz1_93_before37000.mat
+Elapsed time is 1.342778 seconds.
+Saved file: JH105sz1_94_before36750.mat
+Elapsed time is 1.580196 seconds.
+Saved file: JH105sz1_95_before36500.mat
+Elapsed time is 1.379019 seconds.
+Saved file: JH105sz1_96_before36250.mat
+Elapsed time is 1.407559 seconds.
+Saved file: JH105sz1_97_before36000.mat
+Elapsed time is 1.458953 seconds.
+Saved file: JH105sz1_98_before35750.mat
+Elapsed time is 1.317821 seconds.
+Saved file: JH105sz1_99_before35500.mat
+Elapsed time is 1.496964 seconds.
+Saved file: JH105sz1_100_before35250.mat

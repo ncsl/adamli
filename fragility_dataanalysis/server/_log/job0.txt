@@ -52,3 +52,161 @@ Elapsed time is 1.492421 seconds.
 Saved file: pt1sz2_18_before55750.mat
 Elapsed time is 1.346919 seconds.
 Saved file: pt1sz2_19_before55500.mat
+Elapsed time is 1.650633 seconds.
+Saved file: pt1sz2_20_before55250.mat
+Elapsed time is 1.424311 seconds.
+Saved file: pt1sz2_21_before55000.mat
+Elapsed time is 1.256907 seconds.
+Saved file: pt1sz2_22_before54750.mat
+Elapsed time is 1.720148 seconds.
+Saved file: pt1sz2_23_before54500.mat
+Elapsed time is 1.488336 seconds.
+Saved file: pt1sz2_24_before54250.mat
+Elapsed time is 1.330033 seconds.
+Saved file: pt1sz2_25_before54000.mat
+Elapsed time is 1.703270 seconds.
+Saved file: pt1sz2_26_before53750.mat
+Elapsed time is 1.602566 seconds.
+Saved file: pt1sz2_27_before53500.mat
+Elapsed time is 1.310496 seconds.
+Saved file: pt1sz2_28_before53250.mat
+Elapsed time is 1.657731 seconds.
+Saved file: pt1sz2_29_before53000.mat
+Elapsed time is 1.464407 seconds.
+Saved file: pt1sz2_30_before52750.mat
+Elapsed time is 1.366137 seconds.
+Saved file: pt1sz2_31_before52500.mat
+Elapsed time is 1.526140 seconds.
+Saved file: pt1sz2_32_before52250.mat
+Elapsed time is 1.451570 seconds.
+Saved file: pt1sz2_33_before52000.mat
+Elapsed time is 1.486779 seconds.
+Saved file: pt1sz2_34_before51750.mat
+Elapsed time is 1.494027 seconds.
+Saved file: pt1sz2_35_before51500.mat
+Elapsed time is 1.455527 seconds.
+Saved file: pt1sz2_36_before51250.mat
+Elapsed time is 1.561195 seconds.
+Saved file: pt1sz2_37_before51000.mat
+Elapsed time is 1.450596 seconds.
+Saved file: pt1sz2_38_before50750.mat
+Elapsed time is 1.373173 seconds.
+Saved file: pt1sz2_39_before50500.mat
+Elapsed time is 1.540574 seconds.
+Saved file: pt1sz2_40_before50250.mat
+Elapsed time is 1.462807 seconds.
+Saved file: pt1sz2_41_before50000.mat
+Elapsed time is 1.462897 seconds.
+Saved file: pt1sz2_42_before49750.mat
+Elapsed time is 1.441433 seconds.
+Saved file: pt1sz2_43_before49500.mat
+Elapsed time is 1.410786 seconds.
+Saved file: pt1sz2_44_before49250.mat
+Elapsed time is 1.560480 seconds.
+Saved file: pt1sz2_45_before49000.mat
+Elapsed time is 1.452798 seconds.
+Saved file: pt1sz2_46_before48750.mat
+Elapsed time is 1.376339 seconds.
+Saved file: pt1sz2_47_before48500.mat
+Elapsed time is 1.467201 seconds.
+Saved file: pt1sz2_48_before48250.mat
+Elapsed time is 1.475126 seconds.
+Saved file: pt1sz2_49_before48000.mat
+Elapsed time is 1.555802 seconds.
+Saved file: pt1sz2_50_before47750.mat
+Elapsed time is 1.459428 seconds.
+Saved file: pt1sz2_51_before47500.mat
+Elapsed time is 1.350185 seconds.
+Saved file: pt1sz2_52_before47250.mat
+Elapsed time is 1.509856 seconds.
+Saved file: pt1sz2_53_before47000.mat
+Elapsed time is 1.486036 seconds.
+Saved file: pt1sz2_54_before46750.mat
+Elapsed time is 1.429415 seconds.
+Saved file: pt1sz2_55_before46500.mat
+Elapsed time is 1.461013 seconds.
+Saved file: pt1sz2_56_before46250.mat
+Elapsed time is 1.385574 seconds.
+Saved file: pt1sz2_57_before46000.mat
+Elapsed time is 1.525610 seconds.
+Saved file: pt1sz2_58_before45750.mat
+Elapsed time is 1.461548 seconds.
+Saved file: pt1sz2_59_before45500.mat
+Elapsed time is 1.524203 seconds.
+Saved file: pt1sz2_60_before45250.mat
+Elapsed time is 1.497142 seconds.
+Saved file: pt1sz2_61_before45000.mat
+Elapsed time is 1.360578 seconds.
+Saved file: pt1sz2_62_before44750.mat
+Elapsed time is 1.617437 seconds.
+Saved file: pt1sz2_63_before44500.mat
+Elapsed time is 1.463244 seconds.
+Saved file: pt1sz2_64_before44250.mat
+Elapsed time is 1.345373 seconds.
+Saved file: pt1sz2_65_before44000.mat
+Elapsed time is 1.550630 seconds.
+Saved file: pt1sz2_66_before43750.mat
+Elapsed time is 1.471442 seconds.
+Saved file: pt1sz2_67_before43500.mat
+Elapsed time is 1.423477 seconds.
+Saved file: pt1sz2_68_before43250.mat
+Elapsed time is 1.462646 seconds.
+Saved file: pt1sz2_69_before43000.mat
+Elapsed time is 1.385138 seconds.
+Saved file: pt1sz2_70_before42750.mat
+Elapsed time is 1.626388 seconds.
+Saved file: pt1sz2_71_before42500.mat
+Elapsed time is 1.456776 seconds.
+Saved file: pt1sz2_72_before42250.mat
+Elapsed time is 1.291519 seconds.
+Saved file: pt1sz2_73_before42000.mat
+Elapsed time is 1.576805 seconds.
+Saved file: pt1sz2_74_before41750.mat
+Elapsed time is 1.496646 seconds.
+Saved file: pt1sz2_75_before41500.mat
+Elapsed time is 1.406957 seconds.
+Saved file: pt1sz2_76_before41250.mat
+Elapsed time is 1.467750 seconds.
+Saved file: pt1sz2_77_before41000.mat
+Elapsed time is 1.471448 seconds.
+Saved file: pt1sz2_78_before40750.mat
+Elapsed time is 1.619073 seconds.
+Saved file: pt1sz2_79_before40500.mat
+Elapsed time is 1.393931 seconds.
+Saved file: pt1sz2_80_before40250.mat
+Elapsed time is 1.325701 seconds.
+Saved file: pt1sz2_81_before40000.mat
+Elapsed time is 1.694785 seconds.
+Saved file: pt1sz2_82_before39750.mat
+Elapsed time is 1.508024 seconds.
+Saved file: pt1sz2_83_before39500.mat
+Elapsed time is 1.362020 seconds.
+Saved file: pt1sz2_84_before39250.mat
+Elapsed time is 1.676543 seconds.
+Saved file: pt1sz2_85_before39000.mat
+Elapsed time is 1.544431 seconds.
+Saved file: pt1sz2_86_before38750.mat
+Elapsed time is 1.325013 seconds.
+Saved file: pt1sz2_87_before38500.mat
+Elapsed time is 1.498982 seconds.
+Saved file: pt1sz2_88_before38250.mat
+Elapsed time is 1.403082 seconds.
+Saved file: pt1sz2_89_before38000.mat
+Elapsed time is 1.402301 seconds.
+Saved file: pt1sz2_90_before37750.mat
+Elapsed time is 1.400883 seconds.
+Saved file: pt1sz2_91_before37500.mat
+Elapsed time is 1.361413 seconds.
+Saved file: pt1sz2_92_before37250.mat
+Elapsed time is 1.511514 seconds.
+Saved file: pt1sz2_93_before37000.mat
+Elapsed time is 1.500573 seconds.
+Saved file: pt1sz2_94_before36750.mat
+Elapsed time is 1.468856 seconds.
+Saved file: pt1sz2_95_before36500.mat
+Elapsed time is 1.522106 seconds.
+Saved file: pt1sz2_96_before36250.mat
+Elapsed time is 1.414458 seconds.
+Saved file: pt1sz2_97_before36000.mat
+Elapsed time is 1.624999 seconds.
+Saved file: pt1sz2_98_before35750.mat

@@ -38,3 +38,103 @@ Elapsed time is 2.279562 seconds.
 Saved file: pt7sz19_11_before57500.mat
 Elapsed time is 2.111789 seconds.
 Saved file: pt7sz19_12_before57250.mat
+Elapsed time is 2.237040 seconds.
+Saved file: pt7sz19_13_before57000.mat
+Elapsed time is 2.221778 seconds.
+Saved file: pt7sz19_14_before56750.mat
+Elapsed time is 2.108588 seconds.
+Saved file: pt7sz19_15_before56500.mat
+Elapsed time is 2.244262 seconds.
+Saved file: pt7sz19_16_before56250.mat
+Elapsed time is 2.136467 seconds.
+Saved file: pt7sz19_17_before56000.mat
+Elapsed time is 2.076174 seconds.
+Saved file: pt7sz19_18_before55750.mat
+Elapsed time is 2.221181 seconds.
+Saved file: pt7sz19_19_before55500.mat
+Elapsed time is 2.021746 seconds.
+Saved file: pt7sz19_20_before55250.mat
+Elapsed time is 2.268906 seconds.
+Saved file: pt7sz19_21_before55000.mat
+Elapsed time is 2.079896 seconds.
+Saved file: pt7sz19_22_before54750.mat
+Elapsed time is 2.074946 seconds.
+Saved file: pt7sz19_23_before54500.mat
+Elapsed time is 2.257327 seconds.
+Saved file: pt7sz19_24_before54250.mat
+Elapsed time is 2.227376 seconds.
+Saved file: pt7sz19_25_before54000.mat
+Elapsed time is 2.416806 seconds.
+Saved file: pt7sz19_26_before53750.mat
+Elapsed time is 2.154263 seconds.
+Saved file: pt7sz19_27_before53500.mat
+Elapsed time is 2.125620 seconds.
+Saved file: pt7sz19_28_before53250.mat
+Elapsed time is 2.241048 seconds.
+Saved file: pt7sz19_29_before53000.mat
+Elapsed time is 2.101991 seconds.
+Saved file: pt7sz19_30_before52750.mat
+Elapsed time is 2.267358 seconds.
+Saved file: pt7sz19_31_before52500.mat
+Elapsed time is 2.196663 seconds.
+Saved file: pt7sz19_32_before52250.mat
+Elapsed time is 2.142263 seconds.
+Saved file: pt7sz19_33_before52000.mat
+Elapsed time is 2.241690 seconds.
+Saved file: pt7sz19_34_before51750.mat
+Elapsed time is 2.106307 seconds.
+Saved file: pt7sz19_35_before51500.mat
+Elapsed time is 2.172311 seconds.
+Saved file: pt7sz19_36_before51250.mat
+Elapsed time is 2.335756 seconds.
+Saved file: pt7sz19_37_before51000.mat
+Elapsed time is 2.107486 seconds.
+Saved file: pt7sz19_38_before50750.mat
+Elapsed time is 2.246683 seconds.
+Saved file: pt7sz19_39_before50500.mat
+Elapsed time is 2.168019 seconds.
+Saved file: pt7sz19_40_before50250.mat
+Elapsed time is 2.046090 seconds.
+Saved file: pt7sz19_41_before50000.mat
+Elapsed time is 2.198901 seconds.
+Saved file: pt7sz19_42_before49750.mat
+Elapsed time is 2.159568 seconds.
+Saved file: pt7sz19_43_before49500.mat
+Elapsed time is 2.064700 seconds.
+Saved file: pt7sz19_44_before49250.mat
+Elapsed time is 2.231174 seconds.
+Saved file: pt7sz19_45_before49000.mat
+Elapsed time is 2.049104 seconds.
+Saved file: pt7sz19_46_before48750.mat
+Elapsed time is 2.229418 seconds.
+Saved file: pt7sz19_47_before48500.mat
+Elapsed time is 2.192415 seconds.
+Saved file: pt7sz19_48_before48250.mat
+Elapsed time is 2.153498 seconds.
+Saved file: pt7sz19_49_before48000.mat
+Elapsed time is 2.230475 seconds.
+Saved file: pt7sz19_50_before47750.mat
+Elapsed time is 2.086051 seconds.
+Saved file: pt7sz19_51_before47500.mat
+Elapsed time is 2.061448 seconds.
+Saved file: pt7sz19_52_before47250.mat
+Elapsed time is 2.179338 seconds.
+Saved file: pt7sz19_53_before47000.mat
+Elapsed time is 2.251152 seconds.
+Saved file: pt7sz19_54_before46750.mat
+Elapsed time is 2.146278 seconds.
+Saved file: pt7sz19_55_before46500.mat
+Elapsed time is 2.450081 seconds.
+Saved file: pt7sz19_56_before46250.mat
+Elapsed time is 2.118625 seconds.
+Saved file: pt7sz19_57_before46000.mat
+Elapsed time is 2.222348 seconds.
+Saved file: pt7sz19_58_before45750.mat
+Elapsed time is 2.092094 seconds.
+Saved file: pt7sz19_59_before45500.mat
+Elapsed time is 2.022166 seconds.
+Saved file: pt7sz19_60_before45250.mat
+Elapsed time is 2.088078 seconds.
+Saved file: pt7sz19_61_before45000.mat
+Elapsed time is 2.047964 seconds.
+Saved file: pt7sz19_62_before44750.mat
