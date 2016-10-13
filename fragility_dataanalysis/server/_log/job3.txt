@@ -128,33 +128,194 @@ On 16 out of 30 to analyze.
 On 17 out of 30 to analyze.
 On 18 out of 30 to analyze.
 On 19 out of 30 to analyze.
- seconds.
-Saved file: pt2sz3_38_before11500.mat
-Elapsed time is 1.259068 seconds.
-Saved file: pt2sz3_39_before11000.mat
-Elapsed time is 1.424320 seconds.
-Saved file: pt2sz3_40_before10500.mat
-Elapsed time is 1.465863 seconds.
-Saved file: pt2sz3_41_before10000.mat
-Elapsed time is 1.578532 seconds.
-Saved file: pt2sz3_42_before9500.mat
-Elapsed time is 1.200578 seconds.
-Saved file: pt2sz3_43_before9000.mat
-Elapsed time is 1.407628 seconds.
-Saved file: pt2sz3_44_before8500.mat
-Elapsed time is 1.599923 seconds.
-Saved file: pt2sz3_45_before8000.mat
-Elapsed time is 1.289052 seconds.
-Saved file: pt2sz3_46_before7500.mat
-Elapsed time is 1.422304 seconds.
-Saved file: pt2sz3_47_before7000.mat
-Elapsed time is 1.427107 seconds.
-Saved file: pt2sz3_48_before6500.mat
-Elapsed time is 1.574441 seconds.
-Saved file: pt2sz3_49_before6000.mat
-Elapsed time is 1.168394 seconds.
-Saved file: pt2sz3_50_before5500.mat
-Elapsed time is 1.424864 seconds.
-Saved file: pt2sz3_51_before5000.mat
-Elapsed time is 1.561806 seconds.
-Saved file: pt2sz3_52_before4500.mat
+On 20 out of 30 to analyze.
+On 21 out of 30 to analyze.
+On 22 out of 30 to analyze.
+On 23 out of 30 to analyze.
+On 24 out of 30 to analyze.
+On 25 out of 30 to analyze.
+On 26 out of 30 to analyze.
+On 27 out of 30 to analyze.
+On 28 out of 30 to analyze.
+On 29 out of 30 to analyze.
+On 30 out of 30 to analyze.
+Elapsed time is 276.232423 seconds.
+
+num_channels =
+
+    64
+
+On 1 out of 30 to analyze.
+On 2 out of 30 to analyze.
+On 3 out of 30 to analyze.
+On 4 out of 30 to analyze.
+On 5 out of 30 to analyze.
+On 6 out of 30 to analyze.
+On 7 out of 30 to analyze.
+On 8 out of 30 to analyze.
+On 9 out of 30 to analyze.
+On 10 out of 30 to analyze.
+On 11 out of 30 to analyze.
+On 12 out of 30 to analyze.
+On 13 out of 30 to analyze.
+On 14 out of 30 to analyze.
+On 15 out of 30 to analyze.
+On 16 out of 30 to analyze.
+On 17 out of 30 to analyze.
+On 18 out of 30 to analyze.
+On 19 out of 30 to analyze.
+On 20 out of 30 to analyze.
+On 21 out of 30 to analyze.
+On 22 out of 30 to analyze.
+On 23 out of 30 to analyze.
+On 24 out of 30 to analyze.
+On 25 out of 30 to analyze.
+On 26 out of 30 to analyze.
+On 27 out of 30 to analyze.
+On 28 out of 30 to analyze.
+On 29 out of 30 to analyze.
+On 30 out of 30 to analyze.
+Elapsed time is 244.077774 seconds.
+sz3_55_before3000.mat
+Elapsed time is 1.571479 seconds.
+Saved file: pt2sz3_56_before2500.mat
+Elapsed time is 1.151285 seconds.
+Saved file: pt2sz3_57_before2000.mat
+Elapsed time is 1.422068 seconds.
+Saved file: pt2sz3_58_before1500.mat
+Elapsed time is 1.524157 seconds.
+Saved file: pt2sz3_59_before1000.mat
+Elapsed time is 1.568236 seconds.
+Saved file: pt2sz3_60_before500.mat
+
+num_channels =
+
+    64
+
+On 1 out of 60 to analyze.
+On 2 out of 60 to analyze.
+On 3 out of 60 to analyze.
+On 4 out of 60 to analyze.
+On 5 out of 60 to analyze.
+On 6 out of 60 to analyze.
+On 7 out of 60 to analyze.
+On 8 out of 60 to analyze.
+On 9 out of 60 to analyze.
+On 10 out of 60 to analyze.
+On 11 out of 60 to analyze.
+On 12 out of 60 to analyze.
+On 13 out of 60 to analyze.
+On 14 out of 60 to analyze.
+On 15 out of 60 to analyze.
+On 16 out of 60 to analyze.
+On 17 out of 60 to analyze.
+On 18 out of 60 to analyze.
+On 19 out of 60 to analyze.
+On 20 out of 60 to analyze.
+On 21 out of 60 to analyze.
+On 22 out of 60 to analyze.
+On 23 out of 60 to analyze.
+On 24 out of 60 to analyze.
+On 25 out of 60 to analyze.
+On 26 out of 60 to analyze.
+On 27 out of 60 to analyze.
+On 28 out of 60 to analyze.
+On 29 out of 60 to analyze.
+On 30 out of 60 to analyze.
+On 31 out of 60 to analyze.
+On 32 out of 60 to analyze.
+On 33 out of 60 to analyze.
+On 34 out of 60 to analyze.
+On 35 out of 60 to analyze.
+On 36 out of 60 to analyze.
+On 37 out of 60 to analyze.
+On 38 out of 60 to analyze.
+On 39 out of 60 to analyze.
+On 40 out of 60 to analyze.
+On 41 out of 60 to analyze.
+On 42 out of 60 to analyze.
+On 43 out of 60 to analyze.
+On 44 out of 60 to analyze.
+On 45 out of 60 to analyze.
+On 46 out of 60 to analyze.
+On 47 out of 60 to analyze.
+On 48 out of 60 to analyze.
+On 49 out of 60 to analyze.
+On 50 out of 60 to analyze.
+On 51 out of 60 to analyze.
+On 52 out of 60 to analyze.
+On 53 out of 60 to analyze.
+On 54 out of 60 to analyze.
+On 55 out of 60 to analyze.
+On 56 out of 60 to analyze.
+On 57 out of 60 to analyze.
+On 58 out of 60 to analyze.
+On 59 out of 60 to analyze.
+On 60 out of 60 to analyze.
+Elapsed time is 549.665676 seconds.
+
+num_channels =
+
+    64
+
+On 1 out of 60 to analyze.
+On 2 out of 60 to analyze.
+On 3 out of 60 to analyze.
+On 4 out of 60 to analyze.
+On 5 out of 60 to analyze.
+On 6 out of 60 to analyze.
+On 7 out of 60 to analyze.
+On 8 out of 60 to analyze.
+On 9 out of 60 to analyze.
+On 10 out of 60 to analyze.
+On 11 out of 60 to analyze.
+On 12 out of 60 to analyze.
+On 13 out of 60 to analyze.
+On 14 out of 60 to analyze.
+On 15 out of 60 to analyze.
+On 16 out of 60 to analyze.
+On 17 out of 60 to analyze.
+On 18 out of 60 to analyze.
+On 19 out of 60 to analyze.
+On 20 out of 60 to analyze.
+On 21 out of 60 to analyze.
+On 22 out of 60 to analyze.
+On 23 out of 60 to analyze.
+On 24 out of 60 to analyze.
+On 25 out of 60 to analyze.
+On 26 out of 60 to analyze.
+On 27 out of 60 to analyze.
+On 28 out of 60 to analyze.
+On 29 out of 60 to analyze.
+On 30 out of 60 to analyze.
+On 31 out of 60 to analyze.
+On 32 out of 60 to analyze.
+On 33 out of 60 to analyze.
+On 34 out of 60 to analyze.
+On 35 out of 60 to analyze.
+On 36 out of 60 to analyze.
+On 37 out of 60 to analyze.
+On 38 out of 60 to analyze.
+On 39 out of 60 to analyze.
+On 40 out of 60 to analyze.
+On 41 out of 60 to analyze.
+On 42 out of 60 to analyze.
+On 43 out of 60 to analyze.
+On 44 out of 60 to analyze.
+On 45 out of 60 to analyze.
+On 46 out of 60 to analyze.
+On 47 out of 60 to analyze.
+On 48 out of 60 to analyze.
+On 49 out of 60 to analyze.
+On 50 out of 60 to analyze.
+On 51 out of 60 to analyze.
+On 52 out of 60 to analyze.
+On 53 out of 60 to analyze.
+On 54 out of 60 to analyze.
+On 55 out of 60 to analyze.
+On 56 out of 60 to analyze.
+On 57 out of 60 to analyze.
+On 58 out of 60 to analyze.
+On 59 out of 60 to analyze.
+On 60 out of 60 to analyze.
+Elapsed time is 484.429521 seconds.
