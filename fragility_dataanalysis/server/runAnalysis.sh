@@ -41,6 +41,11 @@ stepSize=100
 frequency_sampling=1000
 radius=1.1
 
+echo $winSize
+echo $stepSize
+echo $frequency_sampling
+echo $radius
+
 # run adjacency computation and then run perturbation analysis on the same patient/seizure
 # open matlab and call functions
 matlab -logfile /home/ali/adamli/fragility_dataanalysis/server/_log/job$1.txt -nojvm -nodisplay -nosplash -r "currentpatient='$patient'; \
