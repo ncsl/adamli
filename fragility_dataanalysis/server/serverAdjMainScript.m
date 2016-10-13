@@ -12,7 +12,7 @@ if nargin == 0
     radius = 1.1;
     winSize = 250; % 500 milliseconds
     stepSize = 250; 
-    frequency_sampling = 1000; % in Hz
+    frequency_sampling = 500; % in Hz
 end
 timeRange = [60 0];
 
@@ -164,7 +164,16 @@ end
 if frequency_sampling ~=1000
     disp('downsampling to ');
     frequency_sampling
+    size(eeg)
+    seizureStart
+    seizureEnd
     eeg = eeg(:, 1:(1000/frequency_sampling):end);
+    seizureStart = seizureStart * frequency_sampling/1000;
+    seizureEnd = seizureEnd * frequency_sampling/1000;
+    
+    size(eeg)
+    seizureStart
+    seizureEnd
 end
 
 %% 01: RUN FUNCTIONAL CONNECTIVITY COMPUTATION
@@ -181,7 +190,7 @@ adj_args.seizureStart = seizureStart;
 adj_args.seizureEnd = seizureEnd;
 adj_args.labels = labels;
 
-if seizureStart < 60000
+if seizureStart < 60 * frequency_sampling
     disp('not 60 seconds of preseizure data');
     disp(patient);
     waitforbuttonpress;
@@ -211,6 +220,7 @@ if size(eeg, 1) < winSize
         perturb_args.labels = labels;
         perturb_args.included_channels = included_channels;
         perturb_args.num_channels = size(eeg, 1);
+        perturb_args.frequency_sampling = frequency_sampling;
 
         computePerturbations(patient_id, seizure_id, perturb_args);
     end

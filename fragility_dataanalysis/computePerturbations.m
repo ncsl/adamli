@@ -34,6 +34,7 @@ adjDir = perturb_args.adjDir;
 toSaveFinalDataDir = perturb_args.toSaveFinalDataDir;
 included_channels = perturb_args.included_channels;
 num_channels = perturb_args.num_channels
+frequency_sampling = perturb_args.frequency_sampling;
 
 sigma = sqrt(radius^2 - w_space.^2); % move to the unit circle 1, for a plethora of different radial frequencies
 b = [0; 1];                          % initialize for perturbation computation later
@@ -75,10 +76,10 @@ for i=1:length(matFiles) % loop through each adjacency matrix
     
     index = data.index;
     if (i == 1) % only set these variables once -> save time in seconds
-        timeStart = data.timeStart / 1000;
-        timeEnd = data.timeEnd / 1000;
-        seizureStart = data.seizureStart / 1000;
-        seizureEnd = data.seizureEnd / 1000;
+        timeStart = data.timeStart / frequency_sampling;
+        timeEnd = data.timeEnd / frequency_sampling;
+        seizureStart = data.seizureStart / frequency_sampling;
+        seizureEnd = data.seizureEnd / frequency_sampling;
         winSize = data.winSize;
         stepSize = data.stepSize;
     end

@@ -197,6 +197,21 @@ for p=1:length(patients)
     if ~isempty(included_channels)
         eeg = eeg(included_channels, :);
     end
+    
+    if frequency_sampling ~=1000
+        disp('downsampling to ');
+        frequency_sampling
+        size(eeg)
+        seizureStart
+        seizureEnd
+        eeg = eeg(:, 1:(1000/frequency_sampling):end);
+        seizureStart = seizureStart * frequency_sampling/1000;
+        seizureEnd = seizureEnd * frequency_sampling/1000;
+
+        size(eeg)
+        seizureStart
+        seizureEnd
+    end
 
     %% 01: RUN FUNCTIONAL CONNECTIVITY COMPUTATION
     % define args for computing the functional connectivity
