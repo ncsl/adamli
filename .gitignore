@@ -9,3 +9,4 @@ _log/*
 /fragility_dataanalysis/simulated_data/EZT*/*
 /fragility_dataanalysis/simulated_data/EEG.mat
 *.edf
+/fragility_dataanalysis/data/*/*.mat

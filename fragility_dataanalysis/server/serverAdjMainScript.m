@@ -125,43 +125,19 @@ if ~seeg
     %- set file path for the patient file 
     dataDir = '../data/';
     patient_eeg_path = strcat('../data/', patient);
-    patient_file_path = fullfile(dataDir, patient, strcat(patient, '.csv'));
 
-    %- set the meta data using the patient input file
-    [~, ~, recording_start, ...
-     onset_time, offset_time, ...
-     recording_duration, num_channels] = readLabels(patient_file_path);
-    number_of_samples = frequency_sampling * recording_duration;
-    seizureStart = milliseconds(onset_time - recording_start); % time seizure starts
-    seizureEnd = milliseconds(offset_time - recording_start); % time seizure ends
-
-    % READ EEG FILE
+    % READ EEG FILE Mat File
     % files to process
-    f = dir([patient_eeg_path '/*eeg.csv']);
-    patient_file_names = cell(1, length(f));
-    for iChan=1:length(f)
-        patient_file_names{iChan} = f(iChan).name;
-    end
-    patient_files = containers.Map(patient_file_names, number_of_samples)
-
-    % extract labels
-    patient_label_path = fullfile(dataDir, patient, strcat(patient, '_labels.csv'));
-    fid = fopen(patient_label_path); % open up labels to get all the channels
-    labels = textscan(fid, '%s', 'Delimiter', ',');
-    labels = labels{:}; 
-    try
-        labels = labels(included_channels);
-    catch
-        disp('labels already clipped');
-        length(labels) == length(included_channels)
-    end
-    fclose(fid);
-
-    %- Extract EEG and Perform Analysis
-    filename = patient_file_names{1};
-    num_values = patient_files(patient_file_names{1});
-    % extract eeg 
-    eeg = csv2eeg(patient_eeg_path, filename, num_values, num_channels);
+    data = load(fullfile(patient_eeg_path, patient));
+    eeg = data.data;
+    labels = data.elec_labels;
+    onset_time = data.seiz_start_mark;
+    offset_time = data.seiz_end_mark;
+    recording_start = 0; % since they dont' give absolute time of starting the recording
+    seizureStart = (onset_time - recording_start); % time seizure starts
+    seizureEnd = (offset_time - recording_start); % time seizure ends
+    recording_duration = size(data.data, 2);
+    num_channels = size(data.data, 1);
 else
     %% EZT/SEEG PATIENTS
     patient_eeg_path = strcat('../data/Seiz_Data/', patient_id);
@@ -183,6 +159,12 @@ end
 % only take included_channels
 if ~isempty(included_channels)
     eeg = eeg(included_channels, :);
+end
+
+if frequency_sampling ~=1000
+    disp('downsampling to ');
+    frequency_sampling
+    eeg = eeg(:, 1:(1000/frequency_sampling):end);
 end
 
 %% 01: RUN FUNCTIONAL CONNECTIVITY COMPUTATION
@@ -213,7 +195,8 @@ for j=1:length(perturbationTypes)
     perturbationType = perturbationTypes(j);
 
     toSaveFinalDataDir = fullfile(strcat('../adj_mats_win', num2str(winSize), ...
-        '_step', num2str(stepSize)), strcat(perturbationType, '_finaldata'));
+        '_step', num2str(stepSize), '_freq', frequency_sampling, '_radius', radius),...
+        strcat(perturbationType, '_finaldata'));
     if ~exist(toSaveFinalDataDir, 'dir')
         mkdir(toSaveFinalDataDir);
     end

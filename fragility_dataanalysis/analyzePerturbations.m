@@ -266,9 +266,9 @@ imagesc(fragility_rankings(ind,:)); hold on;
 c = colorbar(); colormap('jet'); set(gca,'box','off'); set(c, 'fontsize', FONTSIZE); 
 XLim = get(gca, 'xlim'); XLowerLim = XLim(1); XUpperLim = XLim(2);
 % set title, labels and ticks
-titleStr = {['Fragility Sorted By RowSum ', patient], ...
-    'perturbation: ', perturbationType, ...
-    'Time Locked To Seizure'};
+titleStr = {['Fragility Rowsum sorted(', patient, ')'], ...
+    [perturbationType, ' perturbation: ', ' Time Locked to Seizure']};
+ylabel(c, 'Fragility Ranking', 'FontSize', FONTSIZE);
 title(titleStr, 'FontSize', FONTSIZE+2);
 set(gca, 'FontSize', FONTSIZE-3, 'LineWidth', LT); set(gca,'YDir','normal');
 set(gca, 'XTick', (XLowerLim+0.5:10:XUpperLim+0.5)); set(gca, 'XTickLabel', xticks, 'fontsize', FONTSIZE); % set xticks and their labels
