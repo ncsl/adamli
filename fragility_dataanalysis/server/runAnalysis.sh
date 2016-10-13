@@ -43,5 +43,5 @@ radius=1.1
 
 # run adjacency computation and then run perturbation analysis on the same patient/seizure
 # open matlab and call functions
-matlab -logfile /home/ali/adamli/fragility_dataanalysis/server/_log/job$1.txt -nojvm -nodisplay -nosplash -r "patient='$patient'; \
-	serverAdjMainScript($patient, $radius, $winSize, $stepSize, $frequency_sampling); exit"
+matlab -logfile /home/ali/adamli/fragility_dataanalysis/server/_log/job$1.txt -nojvm -nodisplay -nosplash -r "currentpatient='$patient'; \
+	serverAdjMainScript(currentpatient, $radius, $winSize, $stepSize, $frequency_sampling); exit"
