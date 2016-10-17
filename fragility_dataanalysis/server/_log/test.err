@@ -1,54 +1,46 @@
+ModuleCmd_Load.c(200):ERROR:105: Unable to locate a modulefile for 'matlab/matlab2013a'
+ModuleCmd_Load.c(200):ERROR:105: Unable to locate a modulefile for 'matlab/matlab2013a'
+which: no matlab in (/usr/kerberos/bin:/bin:/usr/bin:/usr/lpp/mmfs/bin:/opt/intel/Compiler/11.0/083/bin/intel64/:/usr/mpi/gcc/openmpi-1.2.6/bin:/usr/local/torque/x86_64/bin:/usr/local/torque/x86_64/sbin:/home/ali/bin)
+ModuleCmd_Load.c(200):ERROR:105: Unable to locate a modulefile for 'matlab/matlab2013a'
+which: no matlab in (/usr/kerberos/bin:/bin:/usr/bin:/usr/lpp/mmfs/bin:/opt/intel/Compiler/11.0/083/bin/intel64/:/usr/mpi/gcc/openmpi-1.2.6/bin:/usr/local/torque/x86_64/bin:/usr/local/torque/x86_64/sbin:/home/ali/bin)
+ModuleCmd_Load.c(200):ERROR:105: Unable to locate a modulefile for 'matlab/matlab2013a'
+which: no matlab in (/usr/kerberos/bin:/bin:/usr/bin:/usr/lpp/mmfs/bin:/opt/intel/Compiler/11.0/083/bin/intel64/:/usr/mpi/gcc/openmpi-1.2.6/bin:/usr/local/torque/x86_64/bin:/usr/local/torque/x86_64/sbin:/home/ali/bin)
+which: no matlab in (/usr/kerberos/bin:/bin:/usr/bin:/usr/lpp/mmfs/bin:/opt/intel/Compiler/11.0/083/bin/intel64/:/usr/mpi/gcc/openmpi-1.2.6/bin:/usr/local/torque/x86_64/bin:/usr/local/torque/x86_64/sbin:/home/ali/bin)
+ModuleCmd_Load.c(200):ERROR:105: Unable to locate a modulefile for 'matlab/matlab2013a'
+ModuleCmd_Load.c(200):ERROR:105: Unable to locate a modulefile for 'matlab/matlab2013a'
+which: no matlab in (/usr/kerberos/bin:/bin:/usr/bin:/usr/lpp/mmfs/bin:/opt/intel/Compiler/11.0/083/bin/intel64/:/usr/mpi/gcc/openmpi-1.2.6/bin:/usr/local/torque/x86_64/bin:/usr/local/torque/x86_64/sbin:/home/ali/bin)
+ModuleCmd_Load.c(200):ERROR:105: Unable to locate a modulefile for 'matlab/matlab2013a'
+which: no matlab in (/usr/kerberos/bin:/bin:/usr/bin:/usr/lpp/mmfs/bin:/opt/intel/Compiler/11.0/083/bin/intel64/:/usr/mpi/gcc/openmpi-1.2.6/bin:/usr/local/torque/x86_64/bin:/usr/local/torque/x86_64/sbin:/home/ali/bin)
+ModuleCmd_Load.c(200):ERROR:105: Unable to locate a modulefile for 'matlab/matlab2013a'
+which: no matlab in (/usr/kerberos/bin:/bin:/usr/bin:/usr/lpp/mmfs/bin:/opt/intel/Compiler/11.0/083/bin/intel64/:/usr/mpi/gcc/openmpi-1.2.6/bin:/usr/local/torque/x86_64/bin:/usr/local/torque/x86_64/sbin:/home/ali/bin)
+which: no matlab in (/usr/kerberos/bin:/bin:/usr/bin:/usr/lpp/mmfs/bin:/opt/intel/Compiler/11.0/083/bin/intel64/:/usr/mpi/gcc/openmpi-1.2.6/bin:/usr/local/torque/x86_64/bin:/usr/local/torque/x86_64/sbin:/home/ali/bin)
+TERM environment variable not set.
+TERM environment variable not set.
+TERM environment variable not set.
+TERM environment variable not set.
+TERM environment variable not set.
+TERM environment variable not set.
+TERM environment variable not set.
+TERM environment variable not set.
+pbsdsh: task 13 exit status 1
+pbsdsh: task 9 exit status 1
+pbsdsh: task 12 exit status 1
+pbsdsh: task 14 exit status 1
+pbsdsh: task 11 exit status 1
+pbsdsh: task 15 exit status 1
+pbsdsh: task 10 exit status 1
+pbsdsh: task 8 exit status 1
 {Undefined function or variable "ezone_labels".
 
 Error in serverAdjMainScript (line 107)
 clinicalLabels.ezone_labels = ezone_labels;
 } 
 {Undefined function or variable "ezone_labels".
-
-Error in serverAdjMainScript (line 107)
-clinicalLabels.ezone_labels = ezone_labels;
-} 
-{Undefined function or variable "ezone_labels".
 
 Error in serverAdjMainScript (line 107)
 clinicalLabels.ezone_labels = ezone_labels;
 } 
 {Undefined function or variable "ezone_labels".
-
-Error in serverAdjMainScript (line 107)
-clinicalLabels.ezone_labels = ezone_labels;
-} 
-{Undefined function or variable "ezone_labels".
-
-Error in serverAdjMainScript (line 107)
-clinicalLabels.ezone_labels = ezone_labels;
-} 
-{Undefined function or variable "ezone_labels".
-
-Error in serverAdjMainScript (line 107)
-clinicalLabels.ezone_labels = ezone_labels;
-} 
-{Undefined function or variable "ezone_labels".
-
-Error in serverAdjMainScript (line 107)
-clinicalLabels.ezone_labels = ezone_labels;
-} 
-{Undefined function or variable "ezone_labels".
-
-Error in serverAdjMainScript (line 107)
-clinicalLabels.ezone_labels = ezone_labels;
-} 
-{Undefined function or variable "ezone_labels".
-
-Error in serverAdjMainScript (line 107)
-clinicalLabels.ezone_labels = ezone_labels;
-} 
-{Undefined function or variable "ezone_labels".
-
-Error in serverAdjMainScript (line 107)
-clinicalLabels.ezone_labels = ezone_labels;
-} 
-{Undefined function or variable "ezone_labels".
 
 Error in serverAdjMainScript (line 107)
 clinicalLabels.ezone_labels = ezone_labels;
