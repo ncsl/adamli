@@ -22,6 +22,7 @@ perturbationType = plot_args.perturbationType;
 radius = plot_args.radius;
 finalDataDir = plot_args.finalDataDir;
 toSaveFigDir = plot_args.toSaveFigDir;
+toSaveWeightsDir = plot_args.toSaveWeightsDir;
 labels = plot_args.labels;
 FONTSIZE = plot_args.FONTSIZE;
 YAXFontSize = plot_args.YAXFontSize;
@@ -30,6 +31,7 @@ dataStart = plot_args.dataStart;
 dataEnd = plot_args.dataEnd;
 threshold = plot_args.threshold;
 seizureStart = plot_args.seizureStart;
+frequency_sampling = plot_args.frequency_sampling;
 
 dataStart = dataStart / 1000;
 dataEnd  = dataEnd / 1000;
@@ -108,14 +110,14 @@ num_channels = size(fragility_rankings,1);
 num_windows = size(fragility_rankings,2);
 
 % only get -60 to 0 seconds of data
-if (size(fragility_rankings,2) > 121)
-    fragility_rankings = fragility_rankings(:,1:119);
-    minPerturb_time_chan = minPerturb_time_chan(:,1:119);
-end
-if isnan(fragility_rankings(1,120))
-    fragility_rankings = fragility_rankings(:,1:119);
-    minPerturb_time_chan = minPerturb_time_chan(:,1:119);
-end
+% if (size(fragility_rankings,2) > 121)
+%     fragility_rankings = fragility_rankings(:,1:119);
+%     minPerturb_time_chan = minPerturb_time_chan(:,1:119);
+% end
+% if isnan(fragility_rankings(1,120))
+%     fragility_rankings = fragility_rankings(:,1:119);
+%     minPerturb_time_chan = minPerturb_time_chan(:,1:119);
+% end
 
 %%- 1a) Apply thresholding to fragility_rankings
 threshold_fragility = fragility_rankings;
@@ -305,12 +307,8 @@ savefig(fullfile(toSaveFigDir, strcat(patient, 'sortedFragility')));
 print(fullfile(toSaveFigDir, strcat(patient, 'sortedRowSumFragility')), '-dpng', '-r0')
 
 try
-    %%- 1b) print weights into an excel file
-elecWeightsDir = fullfile(toSaveFigDir, '_electrode_weights');
-if ~exist(elecWeightsDir, 'dir')
-    mkdir(elecWeightsDir);
-end
-weight_file = fullfile(elecWeightsDir, strcat(patient, 'electrodeWeights.csv'));
+%%- 1b) print weights into an excel file
+weight_file = fullfile(toSaveWeightsDir, strcat(patient, 'electrodeWeights.csv'));
 fid = fopen(weight_file, 'w');
 sorted_labels = labels(ind_sorted_weights);
 for i=1:length(labels)
