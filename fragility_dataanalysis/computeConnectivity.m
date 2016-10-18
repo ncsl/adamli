@@ -69,6 +69,10 @@ disp(['Length of to be included channels ', num2str(length(included_channels))])
 disp(['Seizure starts at ', num2str(limit), ' milliseconds']);
 disp(['Running analysis for ', num2str(dataRange), ' milliseconds']);
 
+% set stepsize and window size to reflect sampling rate (milliseconds)
+stepSize = stepSize * frequency_sampling/1000; 
+winSize = winSize * frequency_sampling/1000;
+
 for i=1:dataRange/stepSize  
     dataWindow = dataStart + (i-1)*stepSize; % get step size as function of current step
     

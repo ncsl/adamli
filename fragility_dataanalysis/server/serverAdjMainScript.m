@@ -165,8 +165,8 @@ if frequency_sampling ~=1000
     eeg = eeg(:, 1:(1000/frequency_sampling):end);
     seizureStart = seizureStart * frequency_sampling/1000;
     seizureEnd = seizureEnd * frequency_sampling/1000;
-    winSize = winSize*frequency_sampling/1000;
-    stepSize = stepSize*frequency_sampling/1000;
+%     winSize = winSize*frequency_sampling/1000;
+%     stepSize = stepSize*frequency_sampling/1000;
 end
 
 %% 01: RUN FUNCTIONAL CONNECTIVITY COMPUTATION

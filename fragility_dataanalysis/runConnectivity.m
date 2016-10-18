@@ -11,11 +11,11 @@ patients = {'pt1sz2', 'pt1sz3', 'pt2sz1', 'pt2sz3', 'JH105sz1', 'pt7sz19', 'pt7s
 % patients = {'Pat2sz1p', 'Pat2sz2p', 'Pat2sz3p'};%, 'Pat16sz1p', 'Pat16sz2p', 'Pat16sz3p'};
 perturbationTypes = ['R', 'C'];
 w_space = linspace(-1, 1, 101);
-radius = 1.1;
-threshold = 0.8;
-winSize = 100; % 500 milliseconds
-stepSize = 100; 
-frequency_sampling = 1000; % in Hz
+radius = 1.1;             % spectral radius
+threshold = 0.8;          % threshold on fragility metric
+winSize = 500;            % 500 milliseconds
+stepSize = 500; 
+frequency_sampling = 500; % in Hz
 timeRange = [60 0];
 
 
@@ -232,7 +232,7 @@ for p=1:length(patients)
     end
     
     % compute connectivity
-%     computeConnectivity(patient_id, seizure_id, eeg, clinicalLabels, adj_args);
+    computeConnectivity(patient_id, seizure_id, eeg, clinicalLabels, adj_args);
     
     %% 02: RUN PERTURBATION ANALYSIS
     for j=1:length(perturbationTypes)
@@ -255,7 +255,7 @@ for p=1:length(patients)
         perturb_args.included_channels = included_channels;
         perturb_args.num_channels = size(eeg, 1);
         
-%         computePerturbations(patient_id, seizure_id, perturb_args);
+        computePerturbations(patient_id, seizure_id, perturb_args);
     end
     
     %% 03: PLOT PERTURBATION RESULTS
