@@ -13,9 +13,9 @@ perturbationTypes = ['R', 'C'];
 w_space = linspace(-1, 1, 101);
 radius = 1.1;
 threshold = 0.8;
-winSize = 500; % 500 milliseconds
-stepSize = 500; 
-frequency_sampling = 250; % in Hz
+winSize = 100; % 500 milliseconds
+stepSize = 100; 
+frequency_sampling = 1000; % in Hz
 timeRange = [60 0];
 
 
