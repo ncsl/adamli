@@ -9,4 +9,38 @@ To get started, type one of these: helpwin, helpdesk, or demo.
 For product information, visit www.mathworks.com.
  
 Looking at patient: pt7sz21
-pt7sz21 is underdetermined, must use optimization techniques
+The range locked to seizure to look over is -60 until 0
+Total number of channels 101
+Length of to be included channels 101
+Seizure starts at 40000 milliseconds
+Running analysis for 30000 milliseconds
+Elapsed time is 2.217728 seconds.
+Saved file: pt7sz21_1_before30000.mat
+Elapsed time is 2.105626 seconds.
+Saved file: pt7sz21_2_before29750.mat
+Elapsed time is 2.151331 seconds.
+Saved file: pt7sz21_3_before29500.mat
+Elapsed time is 2.164350 seconds.
+Saved file: pt7sz21_4_before29250.mat
+Elapsed time is 2.102828 seconds.
+Saved file: pt7sz21_5_before29000.mat
+Elapsed time is 2.166057 seconds.
+Saved file: pt7sz21_6_before28750.mat
+Elapsed time is 2.284644 seconds.
+Saved file: pt7sz21_7_before28500.mat
+Elapsed time is 2.185362 seconds.
+Saved file: pt7sz21_8_before28250.mat
+Elapsed time is 2.209999 seconds.
+Saved file: pt7sz21_9_before28000.mat
+Elapsed time is 1.382565 seconds.
+{Error using save
+Cannot create 'pt7sz21_10_before27750.mat' because
+'../adj_mats_win500_step500_freq500_radius1.1/pt7sz21' does not exist.
+
+Error in computeConnectivity (line 135)
+    save(fullfile(toSaveAdjDir, fileName), 'data');
+
+Error in serverAdjMainScript (line 194)
+    computeConnectivity(patient_id, seizure_id, eeg, clinicalLabels, adj_args);
+} 
+
