@@ -15,7 +15,7 @@ radius = 1.1;
 threshold = 0.8;
 winSize = 500; % 500 milliseconds
 stepSize = 500; 
-frequency_sampling = 500; % in Hz
+frequency_sampling = 250; % in Hz
 timeRange = [60 0];
 
 
