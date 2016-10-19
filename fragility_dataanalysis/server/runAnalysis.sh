@@ -36,9 +36,9 @@ matlab_jvm="matlab -nojvm -nodesktop -nosplash -r"
 #  			serverLeastSquaresAdjMat($winIndex, eeg, metadata); exit"
 # done
 
-winSize=500
-stepSize=500
-frequency_sampling=250
+winSize=250
+stepSize=250
+frequency_sampling=1000
 radius=1.1
 
 echo $winSize
