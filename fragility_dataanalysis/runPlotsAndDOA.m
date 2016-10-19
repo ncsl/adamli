@@ -124,13 +124,6 @@ for p=1:length(patients)
     patient = strcat(patient_id, seizure_id);
     disp(['Looking at patient: ',patient]);
 
-    % create the adjacency file directory to store the computed adj. mats
-    toSaveAdjDir = fullfile(strcat('.adj_mats_win', num2str(winSize), ...
-    '_step', num2str(stepSize), '_freq', num2str(frequency_sampling), '_radius', num2str(radius)), patient);
-    if ~exist(toSaveAdjDir, 'dir')
-        mkdir(toSaveAdjDir);
-    end
-
     %%- grab eeg data in different ways... depending on who we got it from
     if ~seeg
         %% NIH, JHU PATIENTS
@@ -159,21 +152,6 @@ for p=1:length(patients)
             length(labels) == length(included_channels)
         end
         fclose(fid);
-
-        % READ EEG FILE
-        % files to process
-        f = dir([patient_eeg_path '/*eeg.csv']);
-        patient_file_names = cell(1, length(f));
-        for iChan=1:length(f)
-            patient_file_names{iChan} = f(iChan).name;
-        end
-        patient_files = containers.Map(patient_file_names, number_of_samples)
-        
-        %- Extract EEG and Perform Analysis
-        filename = patient_file_names{1};
-        num_values = patient_files(patient_file_names{1});
-        % extract eeg 
-        eeg = csv2eeg(patient_eeg_path, filename, num_values, num_channels);
     else
         %% EZT/SEEG PATIENTS
         patient_eeg_path = strcat('./data/Seiz_Data/', patient_id);
@@ -181,7 +159,6 @@ for p=1:length(patients)
         % READ EEG FILE Mat File
         % files to process
         data = load(fullfile(patient_eeg_path, patient));
-        eeg = data.data;
         labels = data.elec_labels;
         onset_time = data.seiz_start_mark;
         offset_time = data.seiz_end_mark;
@@ -192,52 +169,10 @@ for p=1:length(patients)
         num_channels = size(data.data, 1);
     end
 
-    % only take included_channels
-    if ~isempty(included_channels)
-        eeg = eeg(included_channels, :);
-    end
-    
-    if frequency_sampling ~=1000
-        disp('downsampling to ');
-        frequency_sampling
-        size(eeg)
-        seizureStart
-        seizureEnd
-        eeg = eeg(:, 1:(1000/frequency_sampling):end);
-        seizureStart = seizureStart * frequency_sampling/1000;
-        seizureEnd = seizureEnd * frequency_sampling/1000;
-
-        size(eeg)
-        seizureStart
-        seizureEnd
-    end
-
-    %% 01: RUN FUNCTIONAL CONNECTIVITY COMPUTATION
-    % define args for computing the functional connectivity
-    adj_args = struct();
-    adj_args.BP_FILTER_RAW = 1; % apply notch filter or not?
-    adj_args.frequency_sampling = frequency_sampling; % frequency that this eeg data was sampled at
-    adj_args.winSize = winSize;
-    adj_args.stepSize = stepSize;
-    adj_args.timeRange = timeRange;
-    adj_args.toSaveAdjDir = toSaveAdjDir;
-    adj_args.included_channels = included_channels;
-    adj_args.seizureStart = seizureStart;
-    adj_args.seizureEnd = seizureEnd;
-    adj_args.labels = labels;
-
-    if seizureStart < 60 * frequency_sampling
-        disp('not 60 seconds of preseizure data');
-        waitforbuttonpress;
-    end
-    
-    % compute connectivity
-    computeConnectivity(patient_id, seizure_id, eeg, clinicalLabels, adj_args);
-    
-    %% 02: RUN PERTURBATION ANALYSIS
+%% 03: PLOT PERTURBATION RESULTS
     for j=1:length(perturbationTypes)
         perturbationType = perturbationTypes(j);
-        
+
         toSaveFinalDataDir = fullfile(strcat('./adj_mats_win', num2str(winSize), ...
         '_step', num2str(stepSize), '_freq', num2str(frequency_sampling), '_radius', num2str(radius)),...
             strcat(perturbationType, '_finaldata'));
@@ -245,16 +180,63 @@ for p=1:length(patients)
             mkdir(toSaveFinalDataDir);
         end
         
-        perturb_args = struct();
-        perturb_args.perturbationType = perturbationType;
-        perturb_args.w_space = w_space;
-        perturb_args.radius = radius;
-        perturb_args.adjDir = toSaveAdjDir;
-        perturb_args.toSaveFinalDataDir = toSaveFinalDataDir;
-        perturb_args.labels = labels;
-        perturb_args.included_channels = included_channels;
-        perturb_args.num_channels = size(eeg, 1);
+        toSaveFigDir = fullfile('./figures/', perturbationType, strcat(patient, num2str(winSize), ...
+            '_step', num2str(stepSize), '_freq', num2str(frequency_sampling), '_radius', num2str(radius)));
+        if ~exist(toSaveFigDir, 'dir')
+            mkdir(toSaveFigDir);
+        end
         
-        computePerturbations(patient_id, seizure_id, perturb_args);
+        toSaveWeightsDir = fullfile('./figures/', strcat(perturbationType, '_electrode_weights'), strcat(patient, num2str(winSize), ...
+            '_step', num2str(stepSize), '_freq', num2str(frequency_sampling), '_radius', num2str(radius)));
+        if ~exist(toSaveWeightsDir, 'dir')
+            mkdir(toSaveWeightsDir);
+        end
+
+        plot_args = struct();
+        plot_args.perturbationType = perturbationType;
+        plot_args.radius = radius;
+        plot_args.finalDataDir = toSaveFinalDataDir;
+        plot_args.toSaveFigDir = toSaveFigDir;
+        plot_args.toSaveWeightsDir = toSaveWeightsDir;
+        plot_args.labels = labels;
+        plot_args.seizureStart = seizureStart;
+        plot_args.dataStart = seizureStart - timeRange(1)*frequency_sampling;
+        plot_args.dataEnd = seizureStart + timeRange(2)*frequency_sampling;
+        plot_args.FONTSIZE = 22;
+        plot_args.YAXFontSize = 9;
+        plot_args.LT = 1.5;
+        plot_args.threshold = threshold;
+        plot_args.frequency_sampling = frequency_sampling;
+        
+        close all
+        analyzePerturbations(patient_id, seizure_id, plot_args, clinicalLabels);
     end
+    
+%     for j=1:length(perturbationTypes)
+%         perturbationType = perturbationTypes(j);
+% 
+%         toSaveFinalDataDir = fullfile(strcat('./adj_mats_win', num2str(winSize), ...
+%         '_step', num2str(stepSize), '_freq', num2str(frequency_sampling), '_radius', num2str(radius)),...
+%             strcat(perturbationType, '_finaldata'));
+%         if ~exist(toSaveFinalDataDir, 'dir')
+%             mkdir(toSaveFinalDataDir);
+%         end
+%         
+%         toSaveFigDir = fullfile('./figures/', strcat(perturbationType, '_electrode_weights'), strcat(patient, num2str(winSize), ...
+%             '_step', num2str(stepSize), '_freq', num2str(frequency_sampling), '_radius', num2str(radius)));
+%         if ~exist(toSaveFigDir, 'dir')
+%             mkdir(toSaveFigDir);
+%         end
+%         stats_args = struct();
+%         stats_args.perturbationType = perturbationType;
+%         stats_args.w_space = w_space;
+%         stats_args.radius = radius;
+%         stats_args.adjDir = toSaveAdjDir;
+%         stats_args.toSaveFinalDataDir = toSaveFinalDataDir;
+%         stats_args.labels = labels;
+%         stats_args.included_channels = included_channels;
+%         stats_args.num_channels = size(eeg, 1);
+%         
+%         
+%     end
 end

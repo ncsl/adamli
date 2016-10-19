@@ -161,16 +161,15 @@ for i=1:size(minPerturb_time_chan,1)      % loop through each channel
     end
 end
 
+% save some sort of metadata
 metadata = struct();
-% metadata.ezone_labels = ezone_labels;
-% metadata.earlyspread_labels = earlyspread_labels;
-% metadata.latespread_labels = latespread_labels;
+metadata.frequency_sampling = frequency_sampling;
 metadata.seizureStart = seizureStart;
 metadata.seizureEnd = seizureEnd;
 metadata.winSize = winSize;
 metadata.stepSize = stepSize;
 metadata.radius = radius;
-% metadata.labels = labels;
+metadata.patient = patient;
 
 save(fullfile(toSaveFinalDataDir, strcat(patient,'final_data.mat')),...
  'minPerturb_time_chan', 'colsum_time_chan', 'rowsum_time_chan', 'fragility_rankings', 'metadata');

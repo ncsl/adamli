@@ -77,7 +77,7 @@ for i=1:dataRange/stepSize
     dataWindow = dataStart + (i-1)*stepSize; % get step size as function of current step
     
     % initialize the file name to save the adjacency matrix as
-    fileName = strcat(patient, '_', num2str(i), '_before', num2str(seizureStart-dataWindow), '.mat');
+    fileName = strcat(patient, '_', num2str(i), '_before', num2str((seizureStart-dataWindow)*(1000/frequency_sampling), '.mat');
     
     
     % step 1: extract the data and apply the notch filter. Note that column
