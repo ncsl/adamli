@@ -6,7 +6,7 @@ perturbationTypes = ['R', 'C'];
 w_space = linspace(-1, 1, 101);
 threshold = 0.8;
 
-if nargin == 0
+if nargin == 0 % testing purposes
     patient='pt1sz2';
     % window paramters
     radius = 1.1;
