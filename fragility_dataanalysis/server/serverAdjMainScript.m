@@ -114,7 +114,7 @@ disp(['Looking at patient: ',patient]);
 
 % create the adjacency file directory to store the computed adj. mats
 toSaveAdjDir = fullfile(strcat('../adj_mats_win', num2str(winSize), ...
-    '_step', num2str(stepSize), '_freq', num2str(frequency_sampling), '_radius', num2str(radius)), patient);
+    '_step', num2str(stepSize), '_freq', num2str(frequency_sampling), patient);
 if ~exist(toSaveAdjDir, 'dir')
     mkdir(toSaveAdjDir);
 end
@@ -193,30 +193,30 @@ if size(eeg, 1) < winSize
     % compute connectivity
     computeConnectivity(patient_id, seizure_id, eeg, clinicalLabels, adj_args);
 
-    %% 02: RUN PERTURBATION ANALYSIS
-    for j=1:length(perturbationTypes)
-        perturbationType = perturbationTypes(j);
-
-        toSaveFinalDataDir = fullfile(strcat('../adj_mats_win', num2str(winSize), ...
-        '_step', num2str(stepSize), '_freq', num2str(frequency_sampling), '_radius', num2str(radius)),...
-            strcat(perturbationType, '_finaldata'));
-        if ~exist(toSaveFinalDataDir, 'dir')
-            mkdir(toSaveFinalDataDir);
-        end
-
-        perturb_args = struct();
-        perturb_args.perturbationType = perturbationType;
-        perturb_args.w_space = w_space;
-        perturb_args.radius = radius;
-        perturb_args.adjDir = toSaveAdjDir;
-        perturb_args.toSaveFinalDataDir = toSaveFinalDataDir;
-        perturb_args.labels = labels;
-        perturb_args.included_channels = included_channels;
-        perturb_args.num_channels = size(eeg, 1);
-        perturb_args.frequency_sampling = frequency_sampling;
-
-        computePerturbations(patient_id, seizure_id, perturb_args);
-    end
+%     %% 02: RUN PERTURBATION ANALYSIS
+%     for j=1:length(perturbationTypes)
+%         perturbationType = perturbationTypes(j);
+% 
+%         toSaveFinalDataDir = fullfile(strcat('../adj_mats_win', num2str(winSize), ...
+%         '_step', num2str(stepSize), '_freq', num2str(frequency_sampling), '_radius', num2str(radius)),...
+%             strcat(perturbationType, '_finaldata'));
+%         if ~exist(toSaveFinalDataDir, 'dir')
+%             mkdir(toSaveFinalDataDir);
+%         end
+% 
+%         perturb_args = struct();
+%         perturb_args.perturbationType = perturbationType;
+%         perturb_args.w_space = w_space;
+%         perturb_args.radius = radius;
+%         perturb_args.adjDir = toSaveAdjDir;
+%         perturb_args.toSaveFinalDataDir = toSaveFinalDataDir;
+%         perturb_args.labels = labels;
+%         perturb_args.included_channels = included_channels;
+%         perturb_args.num_channels = size(eeg, 1);
+%         perturb_args.frequency_sampling = frequency_sampling;
+% 
+%         computePerturbations(patient_id, seizure_id, perturb_args);
+%     end
 else
     disp([patient, ' is underdetermined, must use optimization techniques']);
 end

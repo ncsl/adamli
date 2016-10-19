@@ -129,7 +129,7 @@ sorted_fragility = fragility_rankings(ind_sorted_weights,:); % create the sorted
 
 
 %% 2. Plotting
-xticks = (dataStart - seizureStart) : 5 : (dataEnd - seizureStart); % set x_ticks at intervals
+xticks = (dataStart - seizureStart) * 1000/frequency_sampling : 5 : (dataEnd - seizureStart) * 1000/frequency_sampling; % set x_ticks at intervals
 ytick = 1:num_channels;                                           % 1 xtick per channel
 y_indices = setdiff(ytick, [ezone_indices; earlyspread_indices]);
 if sum(latespread_indices > 0)
