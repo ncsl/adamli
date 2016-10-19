@@ -190,5 +190,5 @@ try
         computePerturbations(patient_id, seizure_id, perturb_args);
     end
 catch
-    disp([patient, ' is underdetermined, must use optimization techniques']);
+    disp([patient, ' is underdetermined in perturbation analysis, must use optimization techniques']);
 end

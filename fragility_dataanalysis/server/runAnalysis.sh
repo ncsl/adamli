@@ -45,16 +45,20 @@ echo $winSize
 echo $stepSize
 echo $frequency_sampling
 echo $radius
+echo $RUNCONNECTIVITY
 
 # run adjacency computation and then run perturbation analysis on the same patient/seizure
 # open matlab and call functions
 if [[ "$RUNCONNECTIVITY" -eq 1 ]]; then
+	echo "Running connectivity computation."
 	matlab -logfile /home/ali/adamli/fragility_dataanalysis/server/_log/job$1.txt -nojvm -nodisplay -nosplash -r "currentpatient='$patient'; \
 		serverAdjMainScript(currentpatient, $winSize, $stepSize, $frequency_sampling);\
+		serverPerturbationScript(currentpatient, $radius, $winSize, $stepSize, $frequency_sampling);\
 		exit"
-fi
-
-# run perturbation analysis
-matlab -logfile /home/ali/adamli/fragility_dataanalysis/server/_log/job$1.txt -nojvm -nodisplay -nosplash -r "currentpatient='$patient'; \
+else
+	echo "Running perturbation computation."
+	# run perturbation analysis
+	matlab -logfile /home/ali/adamli/fragility_dataanalysis/server/_log/job$1.txt -nojvm -nodisplay -nosplash -r "currentpatient='$patient'; \
 	serverPerturbationScript(currentpatient, $radius, $winSize, $stepSize, $frequency_sampling);\
 	exit"
+fi
