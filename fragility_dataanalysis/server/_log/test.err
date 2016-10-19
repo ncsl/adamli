@@ -23,6 +23,21 @@ clinicalLabels.ezone_labels = ezone_labels;
 Error in serverAdjMainScript (line 107)
 clinicalLabels.ezone_labels = ezone_labels;
 } 
+{Undefined function or variable "ezone_labels".
+
+Error in serverAdjMainScript (line 107)
+clinicalLabels.ezone_labels = ezone_labels;
+} 
+{Undefined function or variable "ezone_labels".
+
+Error in serverAdjMainScript (line 107)
+clinicalLabels.ezone_labels = ezone_labels;
+} 
+{Undefined function or variable "ezone_labels".
+
+Error in serverAdjMainScript (line 107)
+clinicalLabels.ezone_labels = ezone_labels;
+} 
 {Undefined function or variable "ezone_labels".
 
 Error in serverAdjMainScript (line 107)
@@ -37,100 +52,5 @@ clinicalLabels.ezone_labels = ezone_labels;
 
 Error in serverAdjMainScript (line 107)
 clinicalLabels.ezone_labels = ezone_labels;
-} 
-{Undefined function or variable "ezone_labels".
-
-Error in serverAdjMainScript (line 107)
-clinicalLabels.ezone_labels = ezone_labels;
-} 
-{Undefined function or variable "ezone_labels".
-
-Error in serverAdjMainScript (line 107)
-clinicalLabels.ezone_labels = ezone_labels;
-} 
-{Undefined function or variable "ezone_labels".
-
-Error in serverAdjMainScript (line 107)
-clinicalLabels.ezone_labels = ezone_labels;
-} 
-{Error using save
-Cannot create 'pt2sz1_34_before21750.mat' because
-'../adj_mats_win500_step500_freq500_radius1.1/pt2sz1' does not exist.
-
-Error in computeConnectivity (line 135)
-    save(fullfile(toSaveAdjDir, fileName), 'data');
-
-Error in serverAdjMainScript (line 194)
-    computeConnectivity(patient_id, seizure_id, eeg, clinicalLabels, adj_args);
-} 
-{Error using save
-Cannot create 'pt7sz22_9_before28000.mat' because
-'../adj_mats_win500_step500_freq500_radius1.1/pt7sz22' does not exist.
-
-Error in computeConnectivity (line 135)
-    save(fullfile(toSaveAdjDir, fileName), 'data');
-
-Error in serverAdjMainScript (line 194)
-    computeConnectivity(patient_id, seizure_id, eeg, clinicalLabels, adj_args);
-} 
-{Error using save
-Cannot create 'pt1sz2_15_before26500.mat' because
-'../adj_mats_win500_step500_freq500_radius1.1/pt1sz2' does not exist.
-
-Error in computeConnectivity (line 135)
-    save(fullfile(toSaveAdjDir, fileName), 'data');
-
-Error in serverAdjMainScript (line 194)
-    computeConnectivity(patient_id, seizure_id, eeg, clinicalLabels, adj_args);
-} 
-{Error using save
-Cannot create 'pt2sz3_34_before21750.mat' because
-'../adj_mats_win500_step500_freq500_radius1.1/pt2sz3' does not exist.
-
-Error in computeConnectivity (line 135)
-    save(fullfile(toSaveAdjDir, fileName), 'data');
-
-Error in serverAdjMainScript (line 194)
-    computeConnectivity(patient_id, seizure_id, eeg, clinicalLabels, adj_args);
-} 
-{Error using save
-Cannot create 'JH105sz1_16_before26250.mat' because
-'../adj_mats_win500_step500_freq500_radius1.1/JH105sz1' does not exist.
-
-Error in computeConnectivity (line 135)
-    save(fullfile(toSaveAdjDir, fileName), 'data');
-
-Error in serverAdjMainScript (line 194)
-    computeConnectivity(patient_id, seizure_id, eeg, clinicalLabels, adj_args);
-} 
-{Error using save
-Cannot create 'pt1sz3_15_before26500.mat' because
-'../adj_mats_win500_step500_freq500_radius1.1/pt1sz3' does not exist.
-
-Error in computeConnectivity (line 135)
-    save(fullfile(toSaveAdjDir, fileName), 'data');
-
-Error in serverAdjMainScript (line 194)
-    computeConnectivity(patient_id, seizure_id, eeg, clinicalLabels, adj_args);
-} 
-{Error using save
-Cannot create 'pt7sz19_10_before27750.mat' because
-'../adj_mats_win500_step500_freq500_radius1.1/pt7sz19' does not exist.
-
-Error in computeConnectivity (line 135)
-    save(fullfile(toSaveAdjDir, fileName), 'data');
-
-Error in serverAdjMainScript (line 194)
-    computeConnectivity(patient_id, seizure_id, eeg, clinicalLabels, adj_args);
-} 
-{Error using save
-Cannot create 'pt7sz21_10_before27750.mat' because
-'../adj_mats_win500_step500_freq500_radius1.1/pt7sz21' does not exist.
-
-Error in computeConnectivity (line 135)
-    save(fullfile(toSaveAdjDir, fileName), 'data');
-
-Error in serverAdjMainScript (line 194)
-    computeConnectivity(patient_id, seizure_id, eeg, clinicalLabels, adj_args);
 } 
 
