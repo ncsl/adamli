@@ -1,66 +1,24 @@
 ----------------------------------------
-Begin PBS Prologue Wed Oct 19 11:32:52 EDT 2016 1476891172
-Job ID:		2058118.mgt
+Begin PBS Prologue Wed Oct 19 13:45:46 EDT 2016 1476899146
+Job ID:		2058126.mgt
 Username:	ali
 Group:		sarma
-Nodes:		node010 node124 node240
-End PBS Prologue Wed Oct 19 11:32:52 EDT 2016 1476891172
+Nodes:		node050 node051 node052
+End PBS Prologue Wed Oct 19 13:45:46 EDT 2016 1476899146
 ----------------------------------------
 500
 500
+500
 1000
+500
 2.0
-0
-Running perturbation computation.
-500
-500
 1000
-2.0
 0
-Running perturbation computation.
-500
-500
-1000
-2.0
-0
-Running perturbation computation.
-500
-500
-1000
-2.0
-0
-Running perturbation computation.
-500
-500
-1000
-2.0
-0
-Running perturbation computation.
-500
-500
-1000
-2.0
-0
-Running perturbation computation.
-500
-500
-500
-1000
-2.0
-0
-500
-1000
 2.0
 0
 Running perturbation computation.
 Running perturbation computation.
 500
-500
-1000
-2.0
-0
-500
-Running perturbation computation.
 500
 1000
 2.0
@@ -83,18 +41,60 @@ Running perturbation computation.
 500
 500
 1000
+2.0
+0
 1000
-2.0
-2.0
-0
-0
 Running perturbation computation.
+2.0
+0
 Running perturbation computation.
 500
 500
 1000
 2.0
 0
+Running perturbation computation.
+500
+500
+500
+500
+1000
+2.0
+0
+500
+1000
+2.0
+0
+500
+1000
+2.0
+0
+Running perturbation computation.
+Running perturbation computation.
+Running perturbation computation.
+500
+500
+500
+1000
+2.0
+0
+500
+1000
+2.0
+0
+500
+500
+500
+1000
+2.0
+0
+Running perturbation computation.
+500
+1000
+2.0
+0
+Running perturbation computation.
+Running perturbation computation.
 Running perturbation computation.
 500
 500
@@ -234,21 +234,6 @@ Running perturbation computation.
                     R2013a (8.1.0.604) 64-bit (glnxa64)
                              February 15, 2013
 
- 
- 
- 
-To get started, type one of these: helpwin, helpdesk, or demo.
-To get started, type one of these: helpwin, helpdesk, or demo.
-To get started, type one of these: helpwin, helpdesk, or demo.
-For product information, visit www.mathworks.com.
- 
-For product information, visit www.mathworks.com.
-For product information, visit www.mathworks.com.
- 
- 
- 
- 
- 
  
  
  
@@ -259,117 +244,135 @@ To get started, type one of these: helpwin, helpdesk, or demo.
 To get started, type one of these: helpwin, helpdesk, or demo.
 To get started, type one of these: helpwin, helpdesk, or demo.
 To get started, type one of these: helpwin, helpdesk, or demo.
+For product information, visit www.mathworks.com.
+For product information, visit www.mathworks.com.
+ 
+ 
+For product information, visit www.mathworks.com.
+For product information, visit www.mathworks.com.
+For product information, visit www.mathworks.com.
+ 
+ 
+ 
+ 
+To get started, type one of these: helpwin, helpdesk, or demo.
+For product information, visit www.mathworks.com.
+ 
+ 
+ 
+ 
 To get started, type one of these: helpwin, helpdesk, or demo.
 To get started, type one of these: helpwin, helpdesk, or demo.
 To get started, type one of these: helpwin, helpdesk, or demo.
 For product information, visit www.mathworks.com.
 For product information, visit www.mathworks.com.
 For product information, visit www.mathworks.com.
+ 
+ 
+ 
+ 
+To get started, type one of these: helpwin, helpdesk, or demo.
 For product information, visit www.mathworks.com.
  
  
+To get started, type one of these: helpwin, helpdesk, or demo.
 For product information, visit www.mathworks.com.
  
  
+ 
+ 
+ 
+ 
+To get started, type one of these: helpwin, helpdesk, or demo.
+To get started, type one of these: helpwin, helpdesk, or demo.
+To get started, type one of these: helpwin, helpdesk, or demo.
+To get started, type one of these: helpwin, helpdesk, or demo.
+To get started, type one of these: helpwin, helpdesk, or demo.
+ 
+For product information, visit www.mathworks.com.
+For product information, visit www.mathworks.com.
+For product information, visit www.mathworks.com.
 For product information, visit www.mathworks.com.
 For product information, visit www.mathworks.com.
  
+ 
+ 
+ 
+ 
+To get started, type one of these: helpwin, helpdesk, or demo.
+ 
+For product information, visit www.mathworks.com.
+ 
+To get started, type one of these: helpwin, helpdesk, or demo.
 For product information, visit www.mathworks.com.
  
  
+To get started, type one of these: helpwin, helpdesk, or demo.
+For product information, visit www.mathworks.com.
  
 Looking at patient: EZT090_seiz003
->> Looking at patient: EZT090_seiz002
- 
- 
- 
- 
- 
- 
- 
- 
-To get started, type one of these: helpwin, helpdesk, or demo.
-To get started, type one of these: helpwin, helpdesk, or demo.
-To get started, type one of these: helpwin, helpdesk, or demo.
-To get started, type one of these: helpwin, helpdesk, or demo.
-To get started, type one of these: helpwin, helpdesk, or demo.
-To get started, type one of these: helpwin, helpdesk, or demo.
-To get started, type one of these: helpwin, helpdesk, or demo.
-To get started, type one of these: helpwin, helpdesk, or demo.
-For product information, visit www.mathworks.com.
-For product information, visit www.mathworks.com.
-For product information, visit www.mathworks.com.
- 
- 
-For product information, visit www.mathworks.com.
-For product information, visit www.mathworks.com.
-For product information, visit www.mathworks.com.
- 
- 
- 
- 
-For product information, visit www.mathworks.com.
-For product information, visit www.mathworks.com.
- 
- 
+Looking at patient: EZT019_seiz001
+Looking at patient: EZT005_seiz001
+Looking at patient: EZT007_seiz002
+Looking at patient: EZT005_seiz002
+Looking at patient: EZT090_seiz002
+>> Looking at patient: EZT045_seiz001
+Looking at patient: EZT045_seiz002
+Looking at patient: EZT007_seiz001
+Looking at patient: EZT019_seiz002
 Looking at patient: JH105sz1
-Looking at patient: pt7sz19
-Looking at patient: pt2sz3
-Looking at patient: pt7sz21
 Looking at patient: pt2sz1
+Looking at patient: pt2sz3
+Looking at patient: pt7sz22
+Looking at patient: pt7sz19
 Looking at patient: pt1sz3
 Looking at patient: pt1sz2
-Looking at patient: pt7sz22
-Looking at patient: EZT005_seiz001
-Looking at patient: EZT007_seiz001
-Looking at patient: EZT045_seiz002
-Looking at patient: EZT005_seiz002
-Looking at patient: EZT007_seiz002
-Looking at patient: EZT019_seiz002
-Looking at patient: EZT045_seiz001
-Looking at patient: EZT019_seiz001
+Looking at patient: pt7sz21
 
 num_channels =
 
-    65
+    59
 
-Elapsed time is 0.000448 seconds.
-  MException with properties:
-
-    identifier: 'MATLAB:UndefinedFunction'
-       message: 'Undefined function or variable "seizureStart".'
-         cause: {}
-         stack: [2x1 struct]
-
-EZT045_seiz001 is underdetermined in perturbation analysis, must use optimization techniques
 
 num_channels =
 
-    65
+    77
 
-Elapsed time is 0.000456 seconds.
-  MException with properties:
-
-    identifier: 'MATLAB:UndefinedFunction'
-       message: 'Undefined function or variable "seizureStart".'
-         cause: {}
-         stack: [2x1 struct]
-
-EZT045_seiz002 is underdetermined in perturbation analysis, must use optimization techniques
 
 num_channels =
 
-    79
+    59
 
-Elapsed time is 0.000416 seconds.
-  MException with properties:
 
-    identifier: 'MATLAB:UndefinedFunction'
-       message: 'Undefined function or variable "seizureStart".'
-         cause: {}
-         stack: [2x1 struct]
+num_channels =
 
-EZT019_seiz002 is underdetermined in perturbation analysis, must use optimization techniques
+    88
+
+
+num_channels =
+
+    88
+
+
+num_channels =
+
+    77
+
+
+num_channels =
+
+    85
+
+
+num_channels =
+
+    85
+
+
+num_channels =
+
+    85
+
 
 num_channels =
 
@@ -378,221 +381,141 @@ num_channels =
 
 num_channels =
 
-    79
-
-Elapsed time is 0.000569 seconds.
-
-num_channels =
-
-    94
-
-Elapsed time is 0.000862 seconds.
-  MException with properties:
-
-    identifier: 'MATLAB:UndefinedFunction'
-       message: 'Undefined function or variable "seizureStart".'
-         cause: {}
-         stack: [2x1 struct]
-
-JH105sz1 is underdetermined in perturbation analysis, must use optimization techniques
-  MException with properties:
-
-    identifier: 'MATLAB:UndefinedFunction'
-       message: 'Undefined function or variable "seizureStart".'
-         cause: {}
-         stack: [2x1 struct]
-
-Elapsed time is 0.000488 seconds.
-EZT019_seiz001 is underdetermined in perturbation analysis, must use optimization techniques
-  MException with properties:
-
-    identifier: 'MATLAB:UndefinedFunction'
-       message: 'Undefined function or variable "seizureStart".'
-         cause: {}
-         stack: [2x1 struct]
-
-EZT007_seiz001 is underdetermined in perturbation analysis, must use optimization techniques
-
-num_channels =
-
-    94
+    86
 
 
 num_channels =
 
-    88
+    64
 
-Elapsed time is 0.000551 seconds.
-  MException with properties:
-
-    identifier: 'MATLAB:UndefinedFunction'
-       message: 'Undefined function or variable "seizureStart".'
-         cause: {}
-         stack: [2x1 struct]
-
-EZT007_seiz002 is underdetermined in perturbation analysis, must use optimization techniques
-Elapsed time is 0.000547 seconds.
-  MException with properties:
-
-    identifier: 'MATLAB:UndefinedFunction'
-       message: 'Undefined function or variable "seizureStart".'
-         cause: {}
-         stack: [2x1 struct]
-
-EZT005_seiz001 is underdetermined in perturbation analysis, must use optimization techniques
 
 num_channels =
 
-    88
+    64
 
-Elapsed time is 0.000465 seconds.
-  MException with properties:
-
-    identifier: 'MATLAB:UndefinedFunction'
-       message: 'Undefined function or variable "seizureStart".'
-         cause: {}
-         stack: [2x1 struct]
-
-EZT005_seiz002 is underdetermined in perturbation analysis, must use optimization techniques
 
 num_channels =
 
-   111
+   101
 
-Elapsed time is 0.000428 seconds.
-  MException with properties:
-
-    identifier: 'MATLAB:UndefinedFunction'
-       message: 'Undefined function or variable "seizureStart".'
-         cause: {}
-         stack: [2x1 struct]
-
-pt7sz19 is underdetermined in perturbation analysis, must use optimization techniques
-
-num_channels =
-
-    98
-
-Elapsed time is 0.000474 seconds.
-  MException with properties:
-
-    identifier: 'MATLAB:UndefinedFunction'
-       message: 'Undefined function or variable "seizureStart".'
-         cause: {}
-         stack: [2x1 struct]
-
-pt1sz2 is underdetermined in perturbation analysis, must use optimization techniques
 
 num_channels =
 
     86
 
-Elapsed time is 0.000443 seconds.
-  MException with properties:
-
-    identifier: 'MATLAB:UndefinedFunction'
-       message: 'Undefined function or variable "seizureStart".'
-         cause: {}
-         stack: [2x1 struct]
-
-pt2sz3 is underdetermined in perturbation analysis, must use optimization techniques
 
 num_channels =
 
-    86
-
-Elapsed time is 0.000486 seconds.
-  MException with properties:
-
-    identifier: 'MATLAB:UndefinedFunction'
-       message: 'Undefined function or variable "seizureStart".'
-         cause: {}
-         stack: [2x1 struct]
-
-pt2sz1 is underdetermined in perturbation analysis, must use optimization techniques
-
-num_channels =
-
-   111
+   103
 
 
 num_channels =
 
-   111
+   101
 
-Elapsed time is 0.000439 seconds.
-  MException with properties:
-
-    identifier: 'MATLAB:UndefinedFunction'
-       message: 'Undefined function or variable "seizureStart".'
-         cause: {}
-         stack: [2x1 struct]
-
-EZT090_seiz003 is underdetermined in perturbation analysis, must use optimization techniques
-Elapsed time is 0.000475 seconds.
-  MException with properties:
-
-    identifier: 'MATLAB:UndefinedFunction'
-       message: 'Undefined function or variable "seizureStart".'
-         cause: {}
-         stack: [2x1 struct]
-
-pt7sz21 is underdetermined in perturbation analysis, must use optimization techniques
 
 num_channels =
 
-    98
+   103
 
-Elapsed time is 0.000417 seconds.
-  MException with properties:
-
-    identifier: 'MATLAB:UndefinedFunction'
-       message: 'Undefined function or variable "seizureStart".'
-         cause: {}
-         stack: [2x1 struct]
-
-pt1sz3 is underdetermined in perturbation analysis, must use optimization techniques
-
-num_channels =
-
-   111
-
-Elapsed time is 0.000409 seconds.
-  MException with properties:
-
-    identifier: 'MATLAB:UndefinedFunction'
-       message: 'Undefined function or variable "seizureStart".'
-         cause: {}
-         stack: [2x1 struct]
-
-pt7sz22 is underdetermined in perturbation analysis, must use optimization techniques
-
-num_channels =
-
-   111
-
-Elapsed time is 0.000426 seconds.
-  MException with properties:
-
-    identifier: 'MATLAB:UndefinedFunction'
-       message: 'Undefined function or variable "seizureStart".'
-         cause: {}
-         stack: [2x1 struct]
-
-EZT090_seiz002 is underdetermined in perturbation analysis, must use optimization techniques
+On 1 out of 120 to analyze.
+On 1 out of 120 to analyze.
+On 1 out of 120 to analyze.
+On 1 out of 120 to analyze.
+On 1 out of 120 to analyze.
+On 1 out of 120 to analyze.
+On 1 out of 120 to analyze.
+On 1 out of 120 to analyze.
+On 1 out of 120 to analyze.
+On 2 out of 120 to analyze.
+On 2 out of 120 to analyze.
+On 2 out of 120 to analyze.
+On 1 out of 120 to analyze.
+On 1 out of 120 to analyze.
+On 1 out of 120 to analyze.
+On 1 out of 120 to analyze.
+On 2 out of 120 to analyze.
+On 3 out of 120 to analyze.
+On 3 out of 120 to analyze.
+On 2 out of 120 to analyze.
 ----------------------------------------
-Begin PBS Epilogue Wed Oct 19 11:33:09 EDT 2016 1476891189
-Job ID:		2058118.mgt
+Begin PBS Epilogue Wed Oct 19 13:49:22 EDT 2016 1476899362
+Job ID:		2058126.mgt
 Username:	ali
 Group:		sarma
 Job Name:	compute_adjacency_mat
-Session:	21786
+Session:	19349
 Limits:		neednodes=3:ppn=8,nodes=3:ppn=8,walltime=14:00:00
-Resources:	cput=00:00:49,mem=3835464kb,vmem=13339904kb,walltime=00:00:12
+Resources:	cput=00:29:14,mem=6551688kb,vmem=20264756kb,walltime=00:03:29
 Queue:		dque
 Account:		
-Nodes:	node010 node124 node240
+Nodes:	node050 node051 node052
 Killing leftovers...
+node052:	killing node052 2786
+node052:	KILLING node052 2786
+node052:	killing node052 2794
+node052:	KILLING node052 2794
+node052:	killing node052 2868
+node052:	KILLING node052 2868
+node051:	killing node051 13405
+node051:	KILLING node051 13405
+node051:	killing node051 13406
+node051:	KILLING node051 13406
+node051:	killing node051 13417
+node051:	KILLING node051 13417
+node051:	killing node051 13425
+node051:	KILLING node051 13425
+node051:	killing node051 13442
+node051:	KILLING node051 13442
+node051:	killing node051 13453
+node051:	KILLING node051 13453
+node051:	killing node051 13466
+node051:	KILLING node051 13466
+node051:	killing node051 13618
+node051:	KILLING node051 13618
+node051:	killing node051 13619
+node051:	KILLING node051 13619
+node051:	killing node051 13622
+node051:	killing node051 13625
+node051:	KILLING node051 13625
+node051:	killing node051 13626
+node051:	KILLING node051 13626
+node051:	killing node051 13646
+node051:	KILLING node051 13646
 
-End PBS Epilogue Wed Oct 19 11:33:09 EDT 2016 1476891189
+End PBS Epilogue Wed Oct 19 13:49:23 EDT 2016 1476899363
+----------------------------------------
+----------------------------------------
+Begin PBS Epilogue Wed Oct 19 13:49:25 EDT 2016 1476899365
+Job ID:		2058126.mgt
+Username:	ali
+Group:		sarma
+Job Name:	compute_adjacency_mat
+Session:	19349
+Limits:		neednodes=3:ppn=8,nodes=3:ppn=8,walltime=14:00:00
+Resources:	cput=00:29:14,mem=6551688kb,vmem=20264756kb,walltime=00:03:29
+Queue:		dque
+Account:		
+Nodes:	node050 node051 node052
+Killing leftovers...
+node052:	killing node052 2786
+node052:	KILLING node052 2786
+node052:	killing node052 2794
+node052:	KILLING node052 2794
+node051:	killing node051 13405
+node051:	KILLING node051 13405
+node051:	killing node051 13406
+node051:	KILLING node051 13406
+node051:	killing node051 13417
+node051:	KILLING node051 13417
+node051:	killing node051 13425
+node051:	KILLING node051 13425
+node051:	killing node051 13442
+node051:	KILLING node051 13442
+node051:	killing node051 13453
+node051:	KILLING node051 13453
+node051:	killing node051 13466
+node051:	KILLING node051 13466
+
+End PBS Epilogue Wed Oct 19 13:49:25 EDT 2016 1476899365
 ----------------------------------------

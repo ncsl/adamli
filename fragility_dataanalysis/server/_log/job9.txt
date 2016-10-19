@@ -12,14 +12,890 @@ Looking at patient: EZT005_seiz002
 
 num_channels =
 
-    88
+    85
 
-Elapsed time is 0.000465 seconds.
-  MException with properties:
+On 1 out of 120 to analyze.
+On 2 out of 120 to analyze.
+On 3 out of 120 to analyze.
+On 4 out of 480 to analyze.
+On 5 out of 480 to analyze.
+On 6 out of 120 to analyze.
+On 7 out of 480 to analyze.
+On 8 out of 480 to analyze.
+On 9 out of 480 to analyze.
+On 10 out of 480 to analyze.
+On 11 out of 480 to analyze.
+On 12 out of 480 to analyze.
+On 13 out of 480 to analyze.
+On 14 out of 480 to analyze.
+On 15 out of 480 to analyze.
+On 16 out of 480 to analyze.
+On 17 out of 480 to analyze.
+On 18 out of 480 to analyze.
+On 19 out of 480 to analyze.
+On 20 out of 480 to analyze.
+On 21 out of 480 to analyze.
+On 22 out of 120 to analyze.
+On 23 out of 120 to analyze.
+On 24 out of 120 to analyze.
+On 25 out of 120 to analyze.
+On 26 out of 120 to analyze.
+On 27 out of 120 to analyze.
+On 28 out of 120 to analyze.
+On 29 out of 120 to analyze.
+On 30 out of 120 to analyze.
+On 31 out of 120 to analyze.
+On 32 out of 120 to analyze.
+On 33 out of 120 to analyze.
+On 34 out of 120 to analyze.
+On 35 out of 120 to analyze.
+On 36 out of 120 to analyze.
+On 37 out of 120 to analyze.
+On 38 out of 120 to analyze.
+On 39 out of 120 to analyze.
+On 40 out of 120 to analyze.
+On 41 out of 120 to analyze.
+On 42 out of 120 to analyze.
+On 44 out of 480 to analyze.
+On 44 out of 120 to analyze.
+On 45 out of 120 to analyze.
+On 46 out of 120 to analyze.
+On 47 out of 120 to analyze.
+On 48 out of 120 to analyze.
+On 49 out of 120 to analyze.
+On 50 out of 120 to analyze.
+On 51 out of 120 to analyze.
+On 52 out of 120 to analyze.
+On 53 out of 120 to analyze.
+On 54 out of 120 to analyze.
+On 55 out of 120 to analyze.
+On 56 out of 120 to analyze.
+On 57 out of 120 to analyze.
+On 58 out of 120 to analyze.
+On 59 out of 120 to analyze.
+On 60 out of 120 to analyze.
+On 61 out of 120 to analyze.
+On 62 out of 120 to analyze.
+On 63 out of 120 to analyze.
+On 64 out of 120 to analyze.
+On 65 out of 120 to analyze.
+On 66 out of 120 to analyze.
+On 67 out of 120 to analyze.
+On 68 out of 120 to analyze.
+On 69 out of 120 to analyze.
+On 71 out of 120 to analyze.
+On 72 out of 120 to analyze.
+On 73 out of 120 to analyze.
+On 74 out of 120 to analyze.
+On 74 out of 120 to analyze.
+On 76 out of 120 to analyze.
+On 77 out of 120 to analyze.
+On 78 out of 120 to analyze.
+On 78 out of 120 to analyze.
+On 79 out of 120 to analyze.
+On 80 out of 120 to analyze.
+On 81 out of 120 to analyze.
+On 82 out of 120 to analyze.
+On 83 out of 120 to analyze.
+On 84 out of 120 to analyze.
+On 85 out of 120 to analyze.
+On 86 out of 120 to analyze.
+On 87 out of 120 to analyze.
+On 88 out of 120 to analyze.
+On 89 out of 120 to analyze.
+On 90 out of 120 to analyze.
+On 91 out of 120 to analyze.
+On 92 out of 120 to analyze.
+On 93 out of 120 to analyze.
+On 94 out of 120 to analyze.
+On 95 out of 120 to analyze.
+On 96 out of 120 to analyze.
+On 97 out of 120 to analyze.
+On 98 out of 120 to analyze.
+On 99 out of 120 to analyze.
+On 100 out of 120 to analyze.
+On 101 out of 120 to analyze.
+On 102 out of 120 to analyze.
+On 103 out of 120 to analyze.
+OOn 106 out of 120 to analyze.On 105 out of 120 to analyze.
+.
+ 106 out of 120 to analyze.
+On 107 out of 120 to analyze.
+econds.
+Saved file: EZT005_seiz002_13_before54000.mat
+[Warning: Integer operands are required for colon operator when used as index] 
+[> In computeConnectivity at 80
+  In serverAdjMainScript at 189] 
+Elapsed time is 1.480876 seconds.
+Saved file: EZT005_seiz002_14_before53500.mat
+[Warning: Integer operands are required for colon operator when used as index] 
+[> In computeConnectivity at 80
+  In serverAdjMainScript at 189] 
+Elapsed time is 1.441442 seconds.
+Saved file: EZT005_seiz002_15_before53000.mat
+[Warning: Integer operands are required for colon operator when used as index] 
+[> In computeConnectivity at 80
+  In serverAdjMainScript at 189] 
+Elapsed time is 1.472447 seconds.
+Saved file: EZT005_seiz002_16_before52500.mat
+[Warning: Integer operands are required for colon operator when used as index] 
+[> In computeConnectivity at 80
+  In serverAdjMainScript at 189] 
+Elapsed time is 1.316726 seconds.
+Saved file: EZT005_seiz002_17_before52000.mat
+[Warning: Integer operands are required for colon operator when used as index] 
+[> In computeConnectivity at 80
+  In serverAdjMainScript at 189] 
+Elapsed time is 1.375434 seconds.
+Saved file: EZT005_seiz002_18_before51500.mat
+[Warning: Integer operands are required for colon operator when used as index] 
+[> In computeConnectivity at 80
+  In serverAdjMainScript at 189] 
+Elapsed time is 1.271327 seconds.
+Saved file: EZT005_seiz002_19_before51000.mat
+[Warning: Integer operands are required for colon operator when used as index] 
+[> In computeConnectivity at 80
+  In serverAdjMainScript at 189] 
+Elapsed time is 1.163170 seconds.
+Saved file: EZT005_seiz002_20_before50500.mat
+[Warning: Integer operands are required for colon operator when used as index] 
+[> In computeConnectivity at 80
+  In serverAdjMainScript at 189] 
+Elapsed time is 1.266950 seconds.
+Saved file: EZT005_seiz002_21_before50000.mat
+[Warning: Integer operands are required for colon operator when used as index] 
+[> In computeConnectivity at 80
+  In serverAdjMainScript at 189] 
+Elapsed time is 1.392980 seconds.
+Saved file: EZT005_seiz002_22_before49500.mat
+[Warning: Integer operands are required for colon operator when used as index] 
+[> In computeConnectivity at 80
+  In serverAdjMainScript at 189] 
+Elapsed time is 1.497516 seconds.
+Saved file: EZT005_seiz002_23_before49000.mat
+[Warning: Integer operands are required for colon operator when used as index] 
+[> In computeConnectivity at 80
+  In serverAdjMainScript at 189] 
+Elapsed time is 1.283136 seconds.
+Saved file: EZT005_seiz002_24_before48500.mat
+[Warning: Integer operands are required for colon operator when used as index] 
+[> In computeConnectivity at 80
+  In serverAdjMainScript at 189] 
+Elapsed time is 1.593707 seconds.
+Saved file: EZT005_seiz002_25_before48000.mat
+[Warning: Integer operands are required for colon operator when used as index] 
+[> In computeConnectivity at 80
+  In serverAdjMainScript at 189] 
+Elapsed time is 1.625645 seconds.
+Saved file: EZT005_seiz002_26_before47500.mat
+[Warning: Integer operands are required for colon operator when used as index] 
+[> In computeConnectivity at 80
+  In serverAdjMainScript at 189] 
+Elapsed time is 1.541660 seconds.
+Saved file: EZT005_seiz002_27_before47000.mat
+[Warning: Integer operands are required for colon operator when used as index] 
+[> In computeConnectivity at 80
+  In serverAdjMainScript at 189] 
+Elapsed time is 1.428528 seconds.
+Saved file: EZT005_seiz002_28_before46500.mat
+[Warning: Integer operands are required for colon operator when used as index] 
+[> In computeConnectivity at 80
+  In serverAdjMainScript at 189] 
+Elapsed time is 1.422294 seconds.
+Saved file: EZT005_seiz002_29_before46000.mat
+[Warning: Integer operands are required for colon operator when used as index] 
+[> In computeConnectivity at 80
+  In serverAdjMainScript at 189] 
+Elapsed time is 1.331647 seconds.
+Saved file: EZT005_seiz002_30_before45500.mat
+[Warning: Integer operands are required for colon operator when used as index] 
+[> In computeConnectivity at 80
+  In serverAdjMainScript at 189] 
+Elapsed time is 1.294326 seconds.
+Saved file: EZT005_seiz002_31_before45000.mat
+[Warning: Integer operands are required for colon operator when used as index] 
+[> In computeConnectivity at 80
+  In serverAdjMainScript at 189] 
+Elapsed time is 1.244371 seconds.
+Saved file: EZT005_seiz002_32_before44500.mat
+[Warning: Integer operands are required for colon operator when used as index] 
+[> In computeConnectivity at 80
+  In serverAdjMainScript at 189] 
+Elapsed time is 1.216681 seconds.
+Saved file: EZT005_seiz002_33_before44000.mat
+[Warning: Integer operands are required for colon operator when used as index] 
+[> In computeConnectivity at 80
+  In serverAdjMainScript at 189] 
+Elapsed time is 1.412743 seconds.
+Saved file: EZT005_seiz002_34_before43500.mat
+[Warning: Integer operands are required for colon operator when used as index] 
+[> In computeConnectivity at 80
+  In serverAdjMainScript at 189] 
+Elapsed time is 1.615251 seconds.
+Saved file: EZT005_seiz002_35_before43000.mat
+[Warning: Integer operands are required for colon operator when used as index] 
+[> In computeConnectivity at 80
+  In serverAdjMainScript at 189] 
+Elapsed time is 1.671358 seconds.
+Saved file: EZT005_seiz002_36_before42500.mat
+[Warning: Integer operands are required for colon operator when used as index] 
+[> In computeConnectivity at 80
+  In serverAdjMainScript at 189] 
+Elapsed time is 1.635262 seconds.
+Saved file: EZT005_seiz002_37_before42000.mat
+[Warning: Integer operands are required for colon operator when used as index] 
+[> In computeConnectivity at 80
+  In serverAdjMainScript at 189] 
+Elapsed time is 1.616842 seconds.
+Saved file: EZT005_seiz002_38_before41500.mat
+[Warning: Integer operands are required for colon operator when used as index] 
+[> In computeConnectivity at 80
+  In serverAdjMainScript at 189] 
+Elapsed time is 1.547808 seconds.
+Saved file: EZT005_seiz002_39_before41000.mat
+[Warning: Integer operands are required for colon operator when used as index] 
+[> In computeConnectivity at 80
+  In serverAdjMainScript at 189] 
+Elapsed time is 1.532611 seconds.
+Saved file: EZT005_seiz002_40_before40500.mat
+[Warning: Integer operands are required for colon operator when used as index] 
+[> In computeConnectivity at 80
+  In serverAdjMainScript at 189] 
+Elapsed time is 1.491944 seconds.
+Saved file: EZT005_seiz002_41_before40000.mat
+[Warning: Integer operands are required for colon operator when used as index] 
+[> In computeConnectivity at 80
+  In serverAdjMainScript at 189] 
+Elapsed time is 1.424838 seconds.
+Saved file: EZT005_seiz002_42_before39500.mat
+[Warning: Integer operands are required for colon operator when used as index] 
+[> In computeConnectivity at 80
+  In serverAdjMainScript at 189] 
+Elapsed time is 1.392940 seconds.
+Saved file: EZT005_seiz002_43_before39000.mat
+[Warning: Integer operands are required for colon operator when used as index] 
+[> In computeConnectivity at 80
+  In serverAdjMainScript at 189] 
+Elapsed time is 1.486304 seconds.
+Saved file: EZT005_seiz002_44_before38500.mat
+[Warning: Integer operands are required for colon operator when used as index] 
+[> In computeConnectivity at 80
+  In serverAdjMainScript at 189] 
+Elapsed time is 1.317391 seconds.
+Saved file: EZT005_seiz002_45_before38000.mat
+[Warning: Integer operands are required for colon operator when used as index] 
+[> In computeConnectivity at 80
+  In serverAdjMainScript at 189] 
+Elapsed time is 1.300982 seconds.
+Saved file: EZT005_seiz002_46_before37500.mat
+[Warning: Integer operands are required for colon operator when used as index] 
+[> In computeConnectivity at 80
+  In serverAdjMainScript at 189] 
+Elapsed time is 1.110163 seconds.
+Saved file: EZT005_seiz002_47_before37000.mat
+[Warning: Integer operands are required for colon operator when used as index] 
+[> In computeConnectivity at 80
+  In serverAdjMainScript at 189] 
+Elapsed time is 1.391468 seconds.
+Saved file: EZT005_seiz002_48_before36500.mat
+[Warning: Integer operands are required for colon operator when used as index] 
+[> In computeConnectivity at 80
+  In serverAdjMainScript at 189] 
+Elapsed time is 1.299714 seconds.
+Saved file: EZT005_seiz002_49_before36000.mat
+[Warning: Integer operands are required for colon operator when used as index] 
+[> In computeConnectivity at 80
+  In serverAdjMainScript at 189] 
+Elapsed time is 1.458167 seconds.
+Saved file: EZT005_seiz002_50_before35500.mat
+[Warning: Integer operands are required for colon operator when used as index] 
+[> In computeConnectivity at 80
+  In serverAdjMainScript at 189] 
+Elapsed time is 1.557645 seconds.
+Saved file: EZT005_seiz002_51_before35000.mat
+[Warning: Integer operands are required for colon operator when used as index] 
+[> In computeConnectivity at 80
+  In serverAdjMainScript at 189] 
+Elapsed time is 1.105007 seconds.
+Saved file: EZT005_seiz002_52_before34500.mat
+[Warning: Integer operands are required for colon operator when used as index] 
+[> In computeConnectivity at 80
+  In serverAdjMainScript at 189] 
+Elapsed time is 1.218655 seconds.
+Saved file: EZT005_seiz002_53_before34000.mat
+[Warning: Integer operands are required for colon operator when used as index] 
+[> In computeConnectivity at 80
+  In serverAdjMainScript at 189] 
+Elapsed time is 1.282578 seconds.
+Saved file: EZT005_seiz002_54_before33500.mat
+[Warning: Integer operands are required for colon operator when used as index] 
+[> In computeConnectivity at 80
+  In serverAdjMainScript at 189] 
+Elapsed time is 1.323418 seconds.
+Saved file: EZT005_seiz002_55_before33000.mat
+[Warning: Integer operands are required for colon operator when used as index] 
+[> In computeConnectivity at 80
+  In serverAdjMainScript at 189] 
+Elapsed time is 1.291511 seconds.
+Saved file: EZT005_seiz002_56_before32500.mat
+[Warning: Integer operands are required for colon operator when used as index] 
+[> In computeConnectivity at 80
+  In serverAdjMainScript at 189] 
+Elapsed time is 1.253037 seconds.
+Saved file: EZT005_seiz002_57_before32000.mat
+[Warning: Integer operands are required for colon operator when used as index] 
+[> In computeConnectivity at 80
+  In serverAdjMainScript at 189] 
+Elapsed time is 1.094046 seconds.
+Saved file: EZT005_seiz002_58_before31500.mat
+[Warning: Integer operands are required for colon operator when used as index] 
+[> In computeConnectivity at 80
+  In serverAdjMainScript at 189] 
+Elapsed time is 1.190302 seconds.
+Saved file: EZT005_seiz002_59_before31000.mat
+[Warning: Integer operands are required for colon operator when used as index] 
+[> In computeConnectivity at 80
+  In serverAdjMainScript at 189] 
+Elapsed time is 1.232075 seconds.
+Saved file: EZT005_seiz002_60_before30500.mat
+[Warning: Integer operands are required for colon operator when used as index] 
+[> In computeConnectivity at 80
+  In serverAdjMainScript at 189] 
+Elapsed time is 1.157971 seconds.
+Saved file: EZT005_seiz002_61_before30000.mat
+[Warning: Integer operands are required for colon operator when used as index] 
+[> In computeConnectivity at 80
+  In serverAdjMainScript at 189] 
+Elapsed time is 1.149186 seconds.
+Saved file: EZT005_seiz002_62_before29500.mat
+[Warning: Integer operands are required for colon operator when used as index] 
+[> In computeConnectivity at 80
+  In serverAdjMainScript at 189] 
+Elapsed time is 1.132844 seconds.
+Saved file: EZT005_seiz002_63_before29000.mat
+[Warning: Integer operands are required for colon operator when used as index] 
+[> In computeConnectivity at 80
+  In serverAdjMainScript at 189] 
+Elapsed time is 0.986845 seconds.
+Saved file: EZT005_seiz002_64_before28500.mat
+[Warning: Integer operands are required for colon operator when used as index] 
+[> In computeConnectivity at 80
+  In serverAdjMainScript at 189] 
+Elapsed time is 0.937705 seconds.
+Saved file: EZT005_seiz002_65_before28000.mat
+[Warning: Integer operands are required for colon operator when used as index] 
+[> In computeConnectivity at 80
+  In serverAdjMainScript at 189] 
+Elapsed time is 0.954027 seconds.
+Saved file: EZT005_seiz002_66_before27500.mat
+[Warning: Integer operands are required for colon operator when used as index] 
+[> In computeConnectivity at 80
+  In serverAdjMainScript at 189] 
+Elapsed time is 0.927906 seconds.
+Saved file: EZT005_seiz002_67_before27000.mat
+[Warning: Integer operands are required for colon operator when used as index] 
+[> In computeConnectivity at 80
+  In serverAdjMainScript at 189] 
+Elapsed time is 0.992276 seconds.
+Saved file: EZT005_seiz002_68_before26500.mat
+[Warning: Integer operands are required for colon operator when used as index] 
+[> In computeConnectivity at 80
+  In serverAdjMainScript at 189] 
+Elapsed time is 1.222519 seconds.
+Saved file: EZT005_seiz002_69_before26000.mat
+[Warning: Integer operands are required for colon operator when used as index] 
+[> In computeConnectivity at 80
+  In serverAdjMainScript at 189] 
+Elapsed time is 1.048018 seconds.
+Saved file: EZT005_seiz002_70_before25500.mat
+[Warning: Integer operands are required for colon operator when used as index] 
+[> In computeConnectivity at 80
+  In serverAdjMainScript at 189] 
+Elapsed time is 1.205596 seconds.
+Saved file: EZT005_seiz002_71_before25000.mat
+[Warning: Integer operands are required for colon operator when used as index] 
+[> In computeConnectivity at 80
+  In serverAdjMainScript at 189] 
+Elapsed time is 1.185527 seconds.
+Saved file: EZT005_seiz002_72_before24500.mat
+[Warning: Integer operands are required for colon operator when used as index] 
+[> In computeConnectivity at 80
+  In serverAdjMainScript at 189] 
+Elapsed time is 1.284600 seconds.
+Saved file: EZT005_seiz002_73_before24000.mat
+[Warning: Integer operands are required for colon operator when used as index] 
+[> In computeConnectivity at 80
+  In serverAdjMainScript at 189] 
+Elapsed time is 1.357167 seconds.
+Saved file: EZT005_seiz002_74_before23500.mat
+[Warning: Integer operands are required for colon operator when used as index] 
+[> In computeConnectivity at 80
+  In serverAdjMainScript at 189] 
+Elapsed time is 1.061759 seconds.
+Saved file: EZT005_seiz002_75_before23000.mat
+[Warning: Integer operands are required for colon operator when used as index] 
+[> In computeConnectivity at 80
+  In serverAdjMainScript at 189] 
+Elapsed time is 1.037187 seconds.
+Saved file: EZT005_seiz002_76_before22500.mat
+[Warning: Integer operands are required for colon operator when used as index] 
+[> In computeConnectivity at 80
+  In serverAdjMainScript at 189] 
+Elapsed time is 1.013752 seconds.
+Saved file: EZT005_seiz002_77_before22000.mat
+[Warning: Integer operands are required for colon operator when used as index] 
+[> In computeConnectivity at 80
+  In serverAdjMainScript at 189] 
+Elapsed time is 1.058508 seconds.
+Saved file: EZT005_seiz002_78_before21500.mat
+[Warning: Integer operands are required for colon operator when used as index] 
+[> In computeConnectivity at 80
+  In serverAdjMainScript at 189] 
+Elapsed time is 1.062926 seconds.
+Saved file: EZT005_seiz002_79_before21000.mat
+[Warning: Integer operands are required for colon operator when used as index] 
+[> In computeConnectivity at 80
+  In serverAdjMainScript at 189] 
+Elapsed time is 0.986238 seconds.
+Saved file: EZT005_seiz002_80_before20500.mat
+[Warning: Integer operands are required for colon operator when used as index] 
+[> In computeConnectivity at 80
+  In serverAdjMainScript at 189] 
+Elapsed time is 1.077065 seconds.
+Saved file: EZT005_seiz002_81_before20000.mat
+[Warning: Integer operands are required for colon operator when used as index] 
+[> In computeConnectivity at 80
+  In serverAdjMainScript at 189] 
+Elapsed time is 1.053435 seconds.
+Saved file: EZT005_seiz002_82_before19500.mat
+[Warning: Integer operands are required for colon operator when used as index] 
+[> In computeConnectivity at 80
+  In serverAdjMainScript at 189] 
+Elapsed time is 1.106094 seconds.
+Saved file: EZT005_seiz002_83_before19000.mat
+[Warning: Integer operands are required for colon operator when used as index] 
+[> In computeConnectivity at 80
+  In serverAdjMainScript at 189] 
+Elapsed time is 1.058833 seconds.
+Saved file: EZT005_seiz002_84_before18500.mat
+[Warning: Integer operands are required for colon operator when used as index] 
+[> In computeConnectivity at 80
+  In serverAdjMainScript at 189] 
+Elapsed time is 1.042382 seconds.
+Saved file: EZT005_seiz002_85_before18000.mat
+[Warning: Integer operands are required for colon operator when used as index] 
+[> In computeConnectivity at 80
+  In serverAdjMainScript at 189] 
+Elapsed time is 1.004074 seconds.
+Saved file: EZT005_seiz002_86_before17500.mat
+[Warning: Integer operands are required for colon operator when used as index] 
+[> In computeConnectivity at 80
+  In serverAdjMainScript at 189] 
+Elapsed time is 0.927485 seconds.
+Saved file: EZT005_seiz002_87_before17000.mat
+[Warning: Integer operands are required for colon operator when used as index] 
+[> In computeConnectivity at 80
+  In serverAdjMainScript at 189] 
+Elapsed time is 0.961556 seconds.
+Saved file: EZT005_seiz002_88_before16500.mat
+[Warning: Integer operands are required for colon operator when used as index] 
+[> In computeConnectivity at 80
+  In serverAdjMainScript at 189] 
+Elapsed time is 1.045570 seconds.
+Saved file: EZT005_seiz002_89_before16000.mat
+[Warning: Integer operands are required for colon operator when used as index] 
+[> In computeConnectivity at 80
+  In serverAdjMainScript at 189] 
+Elapsed time is 1.546945 seconds.
+Saved file: EZT005_seiz002_90_before15500.mat
+[Warning: Integer operands are required for colon operator when used as index] 
+[> In computeConnectivity at 80
+  In serverAdjMainScript at 189] 
+Elapsed time is 1.036129 seconds.
+Saved file: EZT005_seiz002_91_before15000.mat
+[Warning: Integer operands are required for colon operator when used as index] 
+[> In computeConnectivity at 80
+  In serverAdjMainScript at 189] 
+Elapsed time is 1.099671 seconds.
+Saved file: EZT005_seiz002_92_before14500.mat
+[Warning: Integer operands are required for colon operator when used as index] 
+[> In computeConnectivity at 80
+  In serverAdjMainScript at 189] 
+Elapsed time is 1.140416 seconds.
+Saved file: EZT005_seiz002_93_before14000.mat
+[Warning: Integer operands are required for colon operator when used as index] 
+[> In computeConnectivity at 80
+  In serverAdjMainScript at 189] 
+Elapsed time is 1.168027 seconds.
+Saved file: EZT005_seiz002_94_before13500.mat
+[Warning: Integer operands are required for colon operator when used as index] 
+[> In computeConnectivity at 80
+  In serverAdjMainScript at 189] 
+Elapsed time is 1.173734 seconds.
+Saved file: EZT005_seiz002_95_before13000.mat
+[Warning: Integer operands are required for colon operator when used as index] 
+[> In computeConnectivity at 80
+  In serverAdjMainScript at 189] 
+Elapsed time is 1.152540 seconds.
+Saved file: EZT005_seiz002_96_before12500.mat
+[Warning: Integer operands are required for colon operator when used as index] 
+[> In computeConnectivity at 80
+  In serverAdjMainScript at 189] 
+Elapsed time is 1.104046 seconds.
+Saved file: EZT005_seiz002_97_before12000.mat
+[Warning: Integer operands are required for colon operator when used as index] 
+[> In computeConnectivity at 80
+  In serverAdjMainScript at 189] 
+Elapsed time is 1.496934 seconds.
+Saved file: EZT005_seiz002_98_before11500.mat
+[Warning: Integer operands are required for colon operator when used as index] 
+[> In computeConnectivity at 80
+  In serverAdjMainScript at 189] 
+Elapsed time is 1.621756 seconds.
+Saved file: EZT005_seiz002_99_before11000.mat
+[Warning: Integer operands are required for colon operator when used as index] 
+[> In computeConnectivity at 80
+  In serverAdjMainScript at 189] 
+Elapsed time is 0.937454 seconds.
+Saved file: EZT005_seiz002_100_before10500.mat
+[Warning: Integer operands are required for colon operator when used as index] 
+[> In computeConnectivity at 80
+  In serverAdjMainScript at 189] 
+Elapsed time is 0.859758 seconds.
+Saved file: EZT005_seiz002_101_before10000.mat
+[Warning: Integer operands are required for colon operator when used as index] 
+[> In computeConnectivity at 80
+  In serverAdjMainScript at 189] 
+Elapsed time is 0.846360 seconds.
+Saved file: EZT005_seiz002_102_before9500.mat
+[Warning: Integer operands are required for colon operator when used as index] 
+[> In computeConnectivity at 80
+  In serverAdjMainScript at 189] 
+Elapsed time is 1.044797 seconds.
+Saved file: EZT005_seiz002_103_before9000.mat
+[Warning: Integer operands are required for colon operator when used as index] 
+[> In computeConnectivity at 80
+  In serverAdjMainScript at 189] 
+Elapsed time is 1.032193 seconds.
+Saved file: EZT005_seiz002_104_before8500.mat
+[Warning: Integer operands are required for colon operator when used as index] 
+[> In computeConnectivity at 80
+  In serverAdjMainScript at 189] 
+Elapsed time is 0.934025 seconds.
+Saved file: EZT005_seiz002_105_before8000.mat
+[Warning: Integer operands are required for colon operator when used as index] 
+[> In computeConnectivity at 80
+  In serverAdjMainScript at 189] 
+Elapsed time is 0.949001 seconds.
+Saved file: EZT005_seiz002_106_before7500.mat
+[Warning: Integer operands are required for colon operator when used as index] 
+[> In computeConnectivity at 80
+  In serverAdjMainScript at 189] 
+Elapsed time is 1.061251 seconds.
+Saved file: EZT005_seiz002_107_before7000.mat
+[Warning: Integer operands are required for colon operator when used as index] 
+[> In computeConnectivity at 80
+  In serverAdjMainScript at 189] 
+Elapsed time is 1.284952 seconds.
+Saved file: EZT005_seiz002_108_before6500.mat
+[Warning: Integer operands are required for colon operator when used as index] 
+[> In computeConnectivity at 80
+  In serverAdjMainScript at 189] 
+Elapsed time is 1.159414 seconds.
+Saved file: EZT005_seiz002_109_before6000.mat
+[Warning: Integer operands are required for colon operator when used as index] 
+[> In computeConnectivity at 80
+  In serverAdjMainScript at 189] 
+Elapsed time is 1.141758 seconds.
+Saved file: EZT005_seiz002_110_before5500.mat
+[Warning: Integer operands are required for colon operator when used as index] 
+[> In computeConnectivity at 80
+  In serverAdjMainScript at 189] 
+Elapsed time is 1.031734 seconds.
+Saved file: EZT005_seiz002_111_before5000.mat
+[Warning: Integer operands are required for colon operator when used as index] 
+[> In computeConnectivity at 80
+  In serverAdjMainScript at 189] 
+Elapsed time is 1.143619 seconds.
+Saved file: EZT005_seiz002_112_before4500.mat
+[Warning: Integer operands are required for colon operator when used as index] 
+[> In computeConnectivity at 80
+  In serverAdjMainScript at 189] 
+Elapsed time is 1.103203 seconds.
+Saved file: EZT005_seiz002_113_before4000.mat
+[Warning: Integer operands are required for colon operator when used as index] 
+[> In computeConnectivity at 80
+  In serverAdjMainScript at 189] 
+Elapsed time is 1.133454 seconds.
+Saved file: EZT005_seiz002_114_before3500.mat
+[Warning: Integer operands are required for colon operator when used as index] 
+[> In computeConnectivity at 80
+  In serverAdjMainScript at 189] 
+Elapsed time is 1.185614 seconds.
+Saved file: EZT005_seiz002_115_before3000.mat
+[Warning: Integer operands are required for colon operator when used as index] 
+[> In computeConnectivity at 80
+  In serverAdjMainScript at 189] 
+Elapsed time is 1.172927 seconds.
+Saved file: EZT005_seiz002_116_before2500.mat
+[Warning: Integer operands are required for colon operator when used as index] 
+[> In computeConnectivity at 80
+  In serverAdjMainScript at 189] 
+Elapsed time is 1.142256 seconds.
+Saved file: EZT005_seiz002_117_before2000.mat
+[Warning: Integer operands are required for colon operator when used as index] 
+[> In computeConnectivity at 80
+  In serverAdjMainScript at 189] 
+Elapsed time is 1.030692 seconds.
+Saved file: EZT005_seiz002_118_before1500.mat
+[Warning: Integer operands are required for colon operator when used as index] 
+[> In computeConnectivity at 80
+  In serverAdjMainScript at 189] 
+Elapsed time is 1.070732 seconds.
+Saved file: EZT005_seiz002_119_before1000.mat
+[Warning: Integer operands are required for colon operator when used as index] 
+[> In computeConnectivity at 80
+  In serverAdjMainScript at 189] 
+Elapsed time is 1.005856 seconds.
+Saved file: EZT005_seiz002_120_before500.mat
+Looking at patient: EZT005_seiz002
 
-    identifier: 'MATLAB:UndefinedFunction'
-       message: 'Undefined function or variable "seizureStart".'
-         cause: {}
-         stack: [2x1 struct]
+num_channels =
 
-EZT005_seiz002 is underdetermined in perturbation analysis, must use optimization techniques
+    85
+
+On 1 out of 120 to analyze.
+On 2 out of 120 to analyze.
+On 3 out of 120 to analyze.
+On 4 out of 120 to analyze.
+On 5 out of 120 to analyze.
+On 6 out of 120 to analyze.
+On 7 out of 120 to analyze.
+On 8 out of 120 to analyze.
+On 9 out of 120 to analyze.
+On 10 out of 120 to analyze.
+On 11 out of 120 to analyze.
+On 12 out of 120 to analyze.
+On 13 out of 120 to analyze.
+On 14 out of 120 to analyze.
+On 15 out of 120 to analyze.
+On 16 out of 120 to analyze.
+On 17 out of 120 to analyze.
+On 18 out of 120 to analyze.
+On 19 out of 120 to analyze.
+On 20 out of 120 to analyze.
+On 21 out of 120 to analyze.
+On 22 out of 120 to analyze.
+On 23 out of 120 to analyze.
+On 24 out of 120 to analyze.
+On 25 out of 120 to analyze.
+On 26 out of 120 to analyze.
+On 27 out of 120 to analyze.
+On 28 out of 120 to analyze.
+On 29 out of 120 to analyze.
+On 30 out of 120 to analyze.
+On 31 out of 120 to analyze.
+On 32 out of 120 to analyze.
+On 33 out of 120 to analyze.
+On 34 out of 120 to analyze.
+On 35 out of 120 to analyze.
+On 36 out of 120 to analyze.
+On 37 out of 120 to analyze.
+On 38 out of 120 to analyze.
+On 39 out of 120 to analyze.
+On 40 out of 120 to analyze.
+On 41 out of 120 to analyze.
+On 42 out of 120 to analyze.
+On 43 out of 120 to analyze.
+On 44 out of 120 to analyze.
+On 45 out of 120 to analyze.
+On 46 out of 120 to analyze.
+On 47 out of 120 to analyze.
+On 48 out of 120 to analyze.
+On 49 out of 120 to analyze.
+On 50 out of 120 to analyze.
+On 51 out of 120 to analyze.
+On 52 out of 120 to analyze.
+On 53 out of 120 to analyze.
+On 54 out of 120 to analyze.
+On 55 out of 120 to analyze.
+On 56 out of 120 to analyze.
+On 57 out of 120 to analyze.
+On 58 out of 120 to analyze.
+On 59 out of 120 to analyze.
+On 60 out of 120 to analyze.
+On 61 out of 120 to analyze.
+On 62 out of 120 to analyze.
+On 63 out of 120 to analyze.
+On 64 out of 120 to analyze.
+On 65 out of 120 to analyze.
+On 66 out of 120 to analyze.
+On 67 out of 120 to analyze.
+On 68 out of 120 to analyze.
+On 69 out of 120 to analyze.
+On 70 out of 120 to analyze.
+On 71 out of 120 to analyze.
+On 72 out of 120 to analyze.
+On 73 out of 120 to analyze.
+On 74 out of 120 to analyze.
+On 75 out of 120 to analyze.
+On 76 out of 120 to analyze.
+On 77 out of 120 to analyze.
+On 78 out of 120 to analyze.
+On 79 out of 120 to analyze.
+On 80 out of 120 to analyze.
+On 81 out of 120 to analyze.
+On 82 out of 120 to analyze.
+On 83 out of 120 to analyze.
+On 84 out of 120 to analyze.
+On 85 out of 120 to analyze.
+On 86 out of 120 to analyze.
+On 87 out of 120 to analyze.
+On 88 out of 120 to analyze.
+On 89 out of 120 to analyze.
+On 90 out of 120 to analyze.
+On 91 out of 120 to analyze.
+On 92 out of 120 to analyze.
+On 93 out of 120 to analyze.
+On 94 out of 120 to analyze.
+On 95 out of 120 to analyze.
+On 96 out of 120 to analyze.
+On 97 out of 120 to analyze.
+On 98 out of 120 to analyze.
+On 99 out of 120 to analyze.
+On 100 out of 120 to analyze.
+On 101 out of 120 to analyze.
+On 102 out of 120 to analyze.
+On 103 out of 120 to analyze.
+On 104 out of 120 to analyze.
+On 105 out of 120 to analyze.
+On 106 out of 120 to analyze.
+On 107 out of 120 to analyze.
+On 108 out of 120 to analyze.
+On 109 out of 120 to analyze.
+On 110 out of 120 to analyze.
+On 111 out of 120 to analyze.
+On 112 out of 120 to analyze.
+On 113 out of 120 to analyze.
+On 114 out of 120 to analyze.
+On 115 out of 120 to analyze.
+On 116 out of 120 to analyze.
+On 117 out of 120 to analyze.
+On 118 out of 120 to analyze.
+On 119 out of 120 to analyze.
+On 120 out of 120 to analyze.
+Elapsed time is 4830.489265 seconds.
+
+num_channels =
+
+    85
+
+On 1 out of 120 to analyze.
+On 2 out of 120 to analyze.
+On 3 out of 120 to analyze.
+On 4 out of 120 to analyze.
+On 5 out of 120 to analyze.
+On 6 out of 120 to analyze.
+On 7 out of 120 to analyze.
+On 8 out of 120 to analyze.
+On 9 out of 120 to analyze.
+On 10 out of 120 to analyze.
+On 11 out of 120 to analyze.
+On 12 out of 120 to analyze.
+On 13 out of 120 to analyze.
+On 14 out of 120 to analyze.
+On 15 out of 120 to analyze.
+On 16 out of 120 to analyze.
+On 17 out of 120 to analyze.
+On 18 out of 120 to analyze.
+On 19 out of 120 to analyze.
+On 20 out of 120 to analyze.
+On 21 out of 120 to analyze.
+On 22 out of 120 to analyze.
+On 23 out of 120 to analyze.
+On 24 out of 120 to analyze.
+On 25 out of 120 to analyze.
+On 26 out of 120 to analyze.
+On 27 out of 120 to analyze.
+On 28 out of 120 to analyze.
+On 29 out of 120 to analyze.
+On 30 out of 120 to analyze.
+On 31 out of 120 to analyze.
+On 32 out of 120 to analyze.
+On 33 out of 120 to analyze.
+On 34 out of 120 to analyze.
+On 35 out of 120 to analyze.
+On 36 out of 120 to analyze.
+On 37 out of 120 to analyze.
+On 38 out of 120 to analyze.
+On 39 out of 120 to analyze.
+On 40 out of 120 to analyze.
+On 41 out of 120 to analyze.
+On 42 out of 120 to analyze.
+On 43 out of 120 to analyze.
+On 44 out of 120 to analyze.
+On 45 out of 120 to analyze.
+On 46 out of 120 to analyze.
+On 47 out of 120 to analyze.
+On 48 out of 120 to analyze.
+On 49 out of 120 to analyze.
+On 50 out of 120 to analyze.
+On 51 out of 120 to analyze.
+On 52 out of 120 to analyze.
+On 53 out of 120 to analyze.
+On 54 out of 120 to analyze.
+On 55 out of 120 to analyze.
+On 56 out of 120 to analyze.
+On 57 out of 120 to analyze.
+On 58 out of 120 to analyze.
+On 59 out of 120 to analyze.
+On 60 out of 120 to analyze.
+On 61 out of 120 to analyze.
+On 62 out of 120 to analyze.
+On 63 out of 120 to analyze.
+On 64 out of 120 to analyze.
+On 65 out of 120 to analyze.
+On 66 out of 120 to analyze.
+On 67 out of 120 to analyze.
+On 68 out of 120 to analyze.
+On 69 out of 120 to analyze.
+On 70 out of 120 to analyze.
+On 71 out of 120 to analyze.
+On 72 out of 120 to analyze.
+On 73 out of 120 to analyze.
+On 74 out of 120 to analyze.
+On 75 out of 120 to analyze.
+On 76 out of 120 to analyze.
+On 77 out of 120 to analyze.
+On 78 out of 120 to analyze.
+On 79 out of 120 to analyze.
+On 80 out of 120 to analyze.
+On 81 out of 120 to analyze.
+On 82 out of 120 to analyze.
+On 83 out of 120 to analyze.
+On 84 out of 120 to analyze.
+On 85 out of 120 to analyze.
+On 86 out of 120 to analyze.
+On 87 out of 120 to analyze.
+On 88 out of 120 to analyze.
+On 89 out of 120 to analyze.
+On 90 out of 120 to analyze.
+On 91 out of 120 to analyze.
+On 92 out of 120 to analyze.
+On 93 out of 120 to analyze.
+On 94 out of 120 to analyze.
+On 95 out of 120 to analyze.
+On 96 out of 120 to analyze.
+On 97 out of 120 to analyze.
+On 98 out of 120 to analyze.
+On 99 out of 120 to analyze.
+On 100 out of 120 to analyze.
+On 101 out of 120 to analyze.
+On 102 out of 120 to analyze.
+On 103 out of 120 to analyze.
+On 104 out of 120 to analyze.
+On 105 out of 120 to analyze.
+On 106 out of 120 to analyze.
+On 107 out of 120 to analyze.
+On 108 out of 120 to analyze.
+On 109 out of 120 to analyze.
