@@ -20,6 +20,8 @@ patient = strcat(patient_id, seizure_id);
 
 perturbationType = plot_args.perturbationType;
 radius = plot_args.radius;
+winSize = plot_args.winSize;
+stepSize = plot_args.stepSize;
 finalDataDir = plot_args.finalDataDir;
 toSaveFigDir = plot_args.toSaveFigDir;
 toSaveWeightsDir = plot_args.toSaveWeightsDir;
@@ -129,7 +131,7 @@ sorted_fragility = fragility_rankings(ind_sorted_weights,:); % create the sorted
 
 
 %% 2. Plotting
-xticks = (dataStart - seizureStart) * 1000/frequency_sampling : 5 : (dataEnd - seizureStart) * 1000/frequency_sampling; % set x_ticks at intervals
+xticks = (dataStart - seizureStart) * 1000/frequency_sampling : 5  : (dataEnd - seizureStart) * 1000/frequency_sampling; % set x_ticks at intervals
 ytick = 1:num_channels;                                           % 1 xtick per channel
 y_indices = setdiff(ytick, [ezone_indices; earlyspread_indices]);
 if sum(latespread_indices > 0)
@@ -158,7 +160,7 @@ xlabel('Time (sec)', 'FontSize', FONTSIZE);
 ylab = ylabel('Electrode Channels', 'FontSize', FONTSIZE);
 
 set(gca, 'FontSize', FONTSIZE-3, 'LineWidth', LT);
-set(gca, 'XTick', (XLowerLim+0.5:10:XUpperLim+0.5)); set(gca, 'XTickLabel', xticks); % set xticks and their labels
+set(gca, 'XTick', (XLowerLim+0.5 : 10*500/stepSize : XUpperLim+0.5)); set(gca, 'XTickLabel', xticks); % set xticks and their labels
 set(gca, 'YTick', [1, 5:5:num_channels]);
 currfig = gcf;
 currfig.PaperPosition = [-3.7448   -0.3385   15.9896   11.6771];
@@ -200,7 +202,7 @@ title(titleStr, 'FontSize', FONTSIZE+2);
 xlabel('Time (sec)', 'FontSize', FONTSIZE);  
 ylab = ylabel('Electrode Channels', 'FontSize', FONTSIZE);
 set(gca, 'FontSize', FONTSIZE-3, 'LineWidth', LT);
-set(gca, 'XTick', (XLowerLim+0.5:10:XUpperLim+0.5)); set(gca, 'XTickLabel', xticks); % set xticks and their labels
+set(gca, 'XTick', (XLowerLim+0.5 : 10*500/stepSize : XUpperLim+0.5)); set(gca, 'XTickLabel', xticks); % set xticks and their labels
 set(gca, 'YTick', [1, 5:5:num_channels]);
 currfig = gcf;
 currfig.PaperPosition = [-3.7448   -0.3385   15.9896   11.6771];
@@ -271,9 +273,9 @@ XLim = get(gca, 'xlim'); XLowerLim = XLim(1); XUpperLim = XLim(2);
 titleStr = {['Fragility Rowsum sorted(', patient, ')'], ...
     [perturbationType, ' perturbation: ', ' Time Locked to Seizure']};
 ylabel(c, 'Fragility Ranking', 'FontSize', FONTSIZE);
-title(titleStr, 'FontSize', FONTSIZE+2);
+title(titleStr, 'FontSize', FONTSIZE);
 set(gca, 'FontSize', FONTSIZE-3, 'LineWidth', LT); set(gca,'YDir','normal');
-set(gca, 'XTick', (XLowerLim+0.5:10:XUpperLim+0.5)); set(gca, 'XTickLabel', xticks, 'fontsize', FONTSIZE); % set xticks and their labels
+set(gca, 'XTick', (XLowerLim+0.5 : 10*500/stepSize : XUpperLim+0.5)); set(gca, 'XTickLabel', xticks, 'fontsize', FONTSIZE); % set xticks and their labels
 a = get(gca,'XTickLabel'); set(gca,'XTickLabel',a,'fontsize',FONTSIZE)
 title(titleStr, 'FontSize', FONTSIZE+5);
 ylabel(c, 'Fragility Ranking', 'FontSize', FONTSIZE);

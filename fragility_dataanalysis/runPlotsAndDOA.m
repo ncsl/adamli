@@ -13,9 +13,9 @@ perturbationTypes = ['R', 'C'];
 w_space = linspace(-1, 1, 101);
 radius = 1.1;             % spectral radius
 threshold = 0.8;          % threshold on fragility metric
-winSize = 500;            % 500 milliseconds
-stepSize = 500; 
-frequency_sampling = 500; % in Hz
+winSize = 250;            % 500 milliseconds
+stepSize = 250; 
+frequency_sampling = 1000; % in Hz
 timeRange = [60 0];
 
 
@@ -180,7 +180,7 @@ for p=1:length(patients)
             mkdir(toSaveFinalDataDir);
         end
         
-        toSaveFigDir = fullfile('./figures/', perturbationType, strcat(patient, num2str(winSize), ...
+        toSaveFigDir = fullfile('./figures/', perturbationType, strcat(patient, '_win', num2str(winSize), ...
             '_step', num2str(stepSize), '_freq', num2str(frequency_sampling), '_radius', num2str(radius)));
         if ~exist(toSaveFigDir, 'dir')
             mkdir(toSaveFigDir);
@@ -195,6 +195,8 @@ for p=1:length(patients)
         plot_args = struct();
         plot_args.perturbationType = perturbationType;
         plot_args.radius = radius;
+        plot_args.winSize = winSize;
+        plot_args.stepSize = stepSize;
         plot_args.finalDataDir = toSaveFinalDataDir;
         plot_args.toSaveFigDir = toSaveFigDir;
         plot_args.toSaveWeightsDir = toSaveWeightsDir;
