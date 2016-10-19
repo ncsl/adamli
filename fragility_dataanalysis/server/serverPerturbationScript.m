@@ -175,8 +175,8 @@ end
         perturbationType = perturbationTypes(j);
 
         toSaveFinalDataDir = fullfile(strcat('../adj_mats_win', num2str(winSize), ...
-        '_step', num2str(stepSize), '_freq', num2str(frequency_sampling)), strcat(perturbationType, '_finaldata'), ...
-            '_radius', num2str(radius));
+        '_step', num2str(stepSize), '_freq', num2str(frequency_sampling)), strcat(perturbationType, '_finaldata', ...
+            '_radius', num2str(radius)));
         if ~exist(toSaveFinalDataDir, 'dir')
             mkdir(toSaveFinalDataDir);
         end
