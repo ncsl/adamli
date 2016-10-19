@@ -99,12 +99,12 @@ catch
 end
 patient
 
-
+% set data to local variables
 minPerturb_time_chan = final_data.minPerturb_time_chan;
 fragility_rankings = final_data.fragility_rankings;
 rowsum_time_chan = final_data.rowsum_time_chan;
 colsum_time_chan = final_data.colsum_time_chan;
-% metadata = final_data.metadata;
+metadata = final_data.metadata;
 
 num_channels = size(fragility_rankings,1);
 num_windows = size(fragility_rankings,2);
