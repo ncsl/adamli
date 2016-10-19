@@ -139,61 +139,51 @@ OnOn 1 out of 120 to analyze.
 On 124 out of 480 to analyzeOnOn 125 out of 480 to analyOn 4On 126 out of 480 to anaOn 5 oOn 127 out of 480 to aOn 6 outOn 128 out of 480 toOn 7 out oOn 129 out of 480 On 8 out of On 130 out of 480 to analyze.
 On 131 out of On 10 out of 120On 132 out of 480 to analyze.
 On 133 out of 480 to analyze.
+On 134 out On 13 out of 120 toOn 135 outOn 14 out of 120 to On 136 ouOn 15 out of 120 to aOn 137 oOn 16 out of 120 to anOn 138 On 17 out of 120 to anaOn 139On 18 out of 120 to analOn 14On 19 out of 120 to analyOn 1On 20 out of 120 to analyzOn On 21 out of 120 to analyzeOnOn 22 out of 120 to analyze.OOn 23 out of 120 to analyze.
+On 24 out of 120 to analyze.
+On 25 out of 120 to analyze.
+On 26 out of 120 to analyze.
+On 27 out of 120 to analyze.
+On 28 out of 120 to analyze.
+On 29 out of 120 to analyze.
+On 30 out of 120 to analyze.
+On 31 out of 120 to analyze.
+On 32 out of 120 to analyze.
+On 33 out of 120 to analyze.
+On 34 out of 120 to analyze.
+On 35 out of 120 to analyze.
+On 36 out of 120 to analyze.
+On 37 out of 120 to analyze.
+On 38 out of 120 to analyze.
+On 39 out of 120 to analyze.
+On 40 out of 120 to analyze.
+On 41 out of 120 to analyze.
+On 42 out of 120 to analyze.
+On 43 out of 120 toOn 165 outOn 44 out of 120 to On 166 ouOn 45 out of 120 to aOn 167 oOn 46 out of 120 to anOn 168 On 47 out of 120 to anaOn 169On 48 out of 120 to analOn 170 out of 480 to analyze.
+On 171 out of 480 to analyze.
+On 172 out of 480 to analyze.
+On 173 out of 480 to analyze.
+On 174 out of 480 to analyze.
+On 175 out of 480 to analyze.
+On 176 out of 480 to analyze.
+On 177 out of 480 to analyze.
+On 178 out of 480 to analyze.
+On 179 out of 480 to analyze.
+On 180 out of 480 to analyze.
+On 181 out of 480 to anOn 61 oOn 182 out of 480 to aOn 62 ouOn 183 out of 480 to On 63 out of 120 to analyze.
+On 64 out of 120 to analyze.
 o analyze.
-of 240 to analyze.
-On 135 out of 240 to analyze.
-analyze.
-On 15 out of 120 to analyze.
-On 16 out of 120 to analyze.
-On 17 out of 120 to analyze.
-On 18 out of 120 to analyze.
-On 19 out of 120 to analyze.
-On 20 out of 120 to analyze.
-lapsed time is 0.800534 seconds.
-Saved file: pt2sz3_56_before32500.mat
-Elapsed time is 0.590135 seconds.
-Saved file: pt2sz3_57_before32000.mat
-Elapsed time is 0.735516 seconds.
-Saved file: pt2sz3_58_before31500.mat
-Elapsed time is 0.799763 seconds.
-Saved file: pt2sz3_59_before31000.mat
-Elapsed time is 0.724764 seconds.
-Saved file: pt2sz3_60_before30500.mat
-Elapsed time is 0.780220 seconds.
-Saved file: pt2sz3_61_before30000.mat
-Elapsed time is 0.731286 seconds.
-Saved file: pt2sz3_62_before29500.mat
-Elapsed time is 0.802808 seconds.
-Saved file: pt2sz3_63_before29000.mat
-Elapsed time is 0.561054 seconds.
-Saved file: pt2sz3_64_before28500.mat
-Elapsed time is 0.772006 seconds.
-Saved file: pt2sz3_65_before28000.mat
-Elapsed time is 0.688339 seconds.
-Saved file: pt2sz3_66_before27500.mat
-Elapsed time is 0.770487 seconds.
-Saved file: pt2sz3_67_before27000.mat
-Elapsed time is 0.763160 seconds.
-Saved file: pt2sz3_68_before26500.mat
-Elapsed time is 0.756277 seconds.
-Saved file: pt2sz3_69_before26000.mat
-Elapsed time is 0.803214 seconds.
-Saved file: pt2sz3_70_before25500.mat
-Elapsed time is 0.603814 seconds.
-Saved file: pt2sz3_71_before25000.mat
-Elapsed time is 0.769919 seconds.
-Saved file: pt2sz3_72_before24500.mat
-Elapsed time is 0.609980 seconds.
-Saved file: pt2sz3_73_before24000.mat
-Elapsed time is 0.789351 seconds.
-Saved file: pt2sz3_74_before23500.mat
-Elapsed time is 0.710809 seconds.
-Saved file: pt2sz3_75_before23000.mat
-Elapsed time is 0.754249 seconds.
-Saved file: pt2sz3_76_before22500.mat
-Elapsed time is 0.801686 seconds.
-Saved file: pt2sz3_77_before22000.mat
-Elapsed time is 0.682657 seconds.
+On 185 out of 240 to analyze.
+On 186 out of 240On 67 out of On 187 out of 240 to analyze.
+20 to analyze.
+On 69 out of 120 to analyze.
+On 70 out of 120 to analyze.
+On 71 out of 120 to analyze.
+On 72 out of 120 to analyze.
+On 73 out of 120 to analyze.
+On 74 out of 120 to analyze.
+On 75 out of 120 to analyze.
+ is 0.682657 seconds.
 Saved file: pt2sz3_78_before21500.mat
 Elapsed time is 0.727805 seconds.
 Saved file: pt2sz3_79_before21000.mat

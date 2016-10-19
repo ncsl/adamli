@@ -36,15 +36,17 @@ On 19 out of 120 to analyze.
 On 20 out of 120 to analyze.
 On 21 out of 120 to analyze.
 On 22 out of 120 to analyze.
-On 23 out of 480 to analyze.
-22_7_before57000.mat
-Elapsed time is 2.197628 seconds.
-Saved file: pt7sz22_8_before56500.mat
-Elapsed time is 2.232745 seconds.
-Saved file: pt7sz22_9_before56000.mat
-Elapsed time is 2.108226 seconds.
-Saved file: pt7sz22_10_before55500.mat
-Elapsed time is 2.181252 seconds.
+On 23 out of 240 to analyze.
+On 24 out of 240 to analyze.
+On 25 out of 240 to analyze.
+On 26 out of 240 to analyze.
+On 27 out of 240 to analyze.
+On 28 out of 240 to analyze.
+On 29 out of 240 to analyze.
+On 30 out of 240 to analyze.
+On 31 out of 240 to analyze.
+On 32 out of 120 to analyze.
+2 seconds.
 Saved file: pt7sz22_11_before55000.mat
 Elapsed time is 1.969291 seconds.
 Saved file: pt7sz22_12_before54500.mat
@@ -348,3 +350,43 @@ On 75 out of 120 to analyze.
 On 76 out of 120 to analyze.
 On 77 out of 120 to analyze.
 On 78 out of 120 to analyze.
+On 79 out of 120 to analyze.
+On 80 out of 120 to analyze.
+On 81 out of 120 to analyze.
+On 82 out of 120 to analyze.
+On 83 out of 120 to analyze.
+On 84 out of 120 to analyze.
+On 85 out of 120 to analyze.
+On 86 out of 120 to analyze.
+On 87 out of 120 to analyze.
+On 88 out of 120 to analyze.
+On 89 out of 120 to analyze.
+On 90 out of 120 to analyze.
+On 91 out of 120 to analyze.
+On 92 out of 120 to analyze.
+On 93 out of 120 to analyze.
+On 94 out of 120 to analyze.
+On 95 out of 120 to analyze.
+On 96 out of 120 to analyze.
+On 97 out of 120 to analyze.
+On 98 out of 120 to analyze.
+On 99 out of 120 to analyze.
+On 100 out of 120 to analyze.
+On 101 out of 120 to analyze.
+On 102 out of 120 to analyze.
+On 103 out of 120 to analyze.
+On 104 out of 120 to analyze.
+On 105 out of 120 to analyze.
+On 106 out of 120 to analyze.
+On 107 out of 120 to analyze.
+On 108 out of 120 to analyze.
+On 109 out of 120 to analyze.
+On 110 out of 120 to analyze.
+On 111 out of 120 to analyze.
+On 112 out of 120 to analyze.
+On 113 out of 120 to analyze.
+On 114 out of 120 to analyze.
+On 115 out of 120 to analyze.
+On 116 out of 120 to analyze.
+On 117 out of 120 to analyze.
+On 118 out of 120 to analyze.

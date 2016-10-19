@@ -135,59 +135,50 @@ Elapsed time is 7851.674378 seOn 122 out of 480 to analyze.
 On 123 out of 480 to analyze.
 On 124 out of 480 to analyzeOnOn 125 out of 480 to analyOn 4On 126 out of 480 to anaOn 5 oOn 127 out of 480 to aOn 6 outOn 128 out of 480 toOn 7 out oOn 129 out of 480 On 8 out of On 130 out of 48On 9 out of 12On 131 out of On 10 out of 120On 132 out of 480 to analyze.
 On 133 out of 480 to analyze.
-o analyze.
-On 13 out of 120 to analyze.
-On 14 out of 120 to analyze.
-On 15 out of 120 to analyze.
-On 16 out of 120 to analyze.
-On 17 out of 120 to analyze.
-On 18 out of 120 to analyze.
-On 19 out of 120 to analyze.
-On 20 out of 120 to analyze.
-lapsed time is 0.819087 seconds.
-Saved file: pt2sz1_56_before32500.mat
-Elapsed time is 0.689542 seconds.
-Saved file: pt2sz1_57_before32000.mat
-Elapsed time is 0.771974 seconds.
-Saved file: pt2sz1_58_before31500.mat
-Elapsed time is 0.751347 seconds.
-Saved file: pt2sz1_59_before31000.mat
-Elapsed time is 0.868598 seconds.
-Saved file: pt2sz1_60_before30500.mat
-Elapsed time is 0.509226 seconds.
-Saved file: pt2sz1_61_before30000.mat
-Elapsed time is 0.758705 seconds.
-Saved file: pt2sz1_62_before29500.mat
-Elapsed time is 0.753713 seconds.
-Saved file: pt2sz1_63_before29000.mat
-Elapsed time is 0.849847 seconds.
-Saved file: pt2sz1_64_before28500.mat
-Elapsed time is 0.700860 seconds.
-Saved file: pt2sz1_65_before28000.mat
-Elapsed time is 0.764116 seconds.
-Saved file: pt2sz1_66_before27500.mat
-Elapsed time is 0.811919 seconds.
-Saved file: pt2sz1_67_before27000.mat
-Elapsed time is 0.643683 seconds.
-Saved file: pt2sz1_68_before26500.mat
-Elapsed time is 0.749261 seconds.
-Saved file: pt2sz1_69_before26000.mat
-Elapsed time is 0.716695 seconds.
-Saved file: pt2sz1_70_before25500.mat
-Elapsed time is 0.832628 seconds.
-Saved file: pt2sz1_71_before25000.mat
-Elapsed time is 0.490791 seconds.
-Saved file: pt2sz1_72_before24500.mat
-Elapsed time is 0.760512 seconds.
-Saved file: pt2sz1_73_before24000.mat
-Elapsed time is 0.770996 seconds.
-Saved file: pt2sz1_74_before23500.mat
-Elapsed time is 0.844244 seconds.
-Saved file: pt2sz1_75_before23000.mat
-Elapsed time is 0.688234 seconds.
-Saved file: pt2sz1_76_before22500.mat
-Elapsed time is 0.744564 seconds.
-Saved file: pt2sz1_77_before22000.mat
+On 134 out of 480 to analyze.
+On 135 out of 480 to analyze.
+On 136 out of 480 to analyze.
+On 137 out of 480 to analyze.
+On 138 out of 480 to analyze.
+On 139 out of 480 to analyze.
+On 140 out of 480 to analyze.
+On 141 out of 480 to analyze.
+On 142 out of 480 to analyze.
+On 143 out of 480 to analyze.
+On 144 out of 480 to analyze.
+On 145 out of 480 to analyze.
+On 146 out of 480 to analyze.
+On 147 out of 480 to analyze.
+On 148 out of 480 to analyze.
+On 149 out of 480 to analyze.
+On 150 out of 480 to analyze.
+On 151 out of 480 to analyze.
+On 152 out of 480 to analyze.
+On 153 out of 480 to analyze.
+On 154 out of 480 to analyze.
+On 155 out of 480 tOn 35 out oOn 156 out of 480 On 36 out ofOn 157 out of 480On 37 out of On 158 out of 48On 38 out of 1On 159 out of 4On 39 out of 12On 160 out of On 40 out of 120On 161 out ofOn 41 out of 120 On 162 out of 480 to analyze.
+On 163 out On 43 out of 120 toOn 164 outOn 44 out of 120 to On 165 ouOn 45 out of 120 to aOn 166 out of 480 to analyze.
+On 167 out of 480 to analyze.
+On 168 out of 480 to analyze.
+On 169 out of 480 to analyze.
+On 1On 51 out of 120 to analyzOn 171 out of 480 to analyze.
+On 172 out of 480 to analyze.
+On 173 out of 480 to analyze.
+On 174 out of 480 to analyze.OOn 175 out of 480 to analyze.
+On 176 out of 480 to analyzOn On 177 out of 480 to analyOn 5On 178 out of 480 to analOn 60On 179 out of 480 to anaOn 61 On 180 out of 480 to anOn 62 oOn 181 out of 480 to aOn 63 ouOn 182 out of 480 to On 64 outOn 183 out of 480 to analyze.
+On 184 out of 480 to analyze.
+f 120 to analyze.
+On 66 out of 120 to analyze.
+On 67 out of 120 to analyze.
+On 68 out of 120 to analyze.
+40 to analyze.
+On 189 out of 240 to analyze.
+On 190 out of 240 to analyze.
+to analyze.
+On 72 out of 120 to analyze.
+On 73 out of 120 to analyze.
+On 74 out of 120 to analyze.
+_before22000.mat
 Elapsed time is 0.815732 seconds.
 Saved file: pt2sz1_78_before21500.mat
 Elapsed time is 0.523231 seconds.

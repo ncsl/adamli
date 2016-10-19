@@ -86,35 +86,41 @@ On 69 out of 240 to analyze.
 On 70 out of 120 to analyze.
 On 71 out of 240 to analyze.
 On 72 out of 240 to analyze.
-
-On 75 out of 480 to analyze.
-n 74 out of 120 to analyze.
-
+On 73 out of 120 to analyze.
+On 74 out of 120 to analyze.
+On 75 out of 120 to analyze.
+On 76 out of 120 to analyze.
+On 77 out of 120 to analyze.
+On 78 out of 120 to analyze.
+On 79 out of 120 to analyze.
+On 80 out of 120 to analyze.
+On 81 out of 120 to analyze.
+On 82 out of 120 to analyze.
+On 83 out of 120 to analyze.
 On 84 out of 120 to analyze.
-ed time is 1.477681 seconds.
-Saved file: JH105sz1_28_before46500.mat
-Elapsed time is 1.434205 seconds.
-Saved file: JH105sz1_29_before46000.mat
-Elapsed time is 1.364805 seconds.
-Saved file: JH105sz1_30_before45500.mat
-Elapsed time is 1.503460 seconds.
-Saved file: JH105sz1_31_before45000.mat
-Elapsed time is 1.383607 seconds.
-Saved file: JH105sz1_32_before44500.mat
-Elapsed time is 1.306979 seconds.
-Saved file: JH105sz1_33_before44000.mat
-Elapsed time is 1.399091 seconds.
-Saved file: JH105sz1_34_before43500.mat
-Elapsed time is 1.346570 seconds.
-Saved file: JH105sz1_35_before43000.mat
-Elapsed time is 1.384984 seconds.
-Saved file: JH105sz1_36_before42500.mat
-Elapsed time is 1.318321 seconds.
-Saved file: JH105sz1_37_before42000.mat
-Elapsed time is 1.330636 seconds.
-Saved file: JH105sz1_38_before41500.mat
-Elapsed time is 1.421282 seconds.
-Saved file: JH105sz1_39_before41000.mat
+On 85 out of 120 to analyze.
+On 86 out of 120 to analyze.
+On 87 out of 120 to analyze.
+On 88 out of 120 to analyze.
+On 89 out of 120 to analyze.
+On 90 out of 120 to analyze.
+On 91 out of 120 to analyze.
+On 92 out of 120 to analyze.
+On 93 out of 120 to analyze.
+On 94 out of 120 to analyze.
+On 95 out of 120 to analyze.
+On 96 out of 120 to analyze.
+On 97 out of 120 to analyze.
+On 98 out of 120 to analyze.
+On 99 out of 120 to analyze.
+
+On 101 out of 240 to analyze.
+n 10On 106 out of 480 to analOn 102 out of 120 to analyze.
+yze.
+3 outOn 114 out of 120 to analyze.
+ of 120 to analyze.
+On 105 out of 120 to analyze.
+000.mat
 Elapsed time is 1.365170 seconds.
 Saved file: JH105sz1_40_before40500.mat
 Elapsed time is 1.307524 seconds.
@@ -420,3 +426,66 @@ On 12 out of 120 to analyze.
 On 13 out of 120 to analyze.
 On 14 out of 120 to analyze.
 On 15 out of 120 to analyze.
+On 16 out of 120 to analyze.
+On 17 out of 120 to analyze.
+On 18 out of 120 to analyze.
+On 19 out of 120 to analyze.
+On 20 out of 120 to analyze.
+On 21 out of 120 to analyze.
+On 22 out of 120 to analyze.
+On 23 out of 120 to analyze.
+On 24 out of 120 to analyze.
+On 25 out of 120 to analyze.
+On 26 out of 120 to analyze.
+On 28 out of 120 to analyze.
+On 30 out of 120 to analyze.
+On 31 out of 120 to analyze.
+On 32 out of 120 to analyze.
+On 33 out of 120 to analyze.
+On 34 out of 120 to analyze.
+On 35 out of 120 to analyze.
+On 36 out of 120 to analyze.
+On 37 out of 120 to analyze.
+On 38 out of 120 to analyze.
+On 39 out of 120 to analyze.
+On 40 out of 120 to analyze.
+On 41 out of 120 to analyze.
+On 42 out of 120 to analyze.
+On 43 out of 120 to analyze.
+On 45 out of 120 to analyze.
+On 46 out of 120 to analyze.
+On 47 out of 120 to analyze.
+On 48 out of 120 to analyze.
+On 49 out of 120 to analyze.
+On 50 out of 120 to analyze.
+On 51 out of 120 to analyze.
+On 52 out of 120 to analyze.
+On 53 out of 120 to analyze.
+On 54 out of 120 to analyze.
+On 55 out of 120 to analyze.
+On 56 out of 120 to analyze.
+On 57 out of 120 to analyze.
+On 58 out of 120 to analyze.
+On 59 out of 120 to analyze.
+On 60 out of 120 to analyze.
+On 61 out of 120 to analyze.
+On 62 out of 120 to analyze.
+On 63 out of 120 to analyze.
+On 64 out of 120 to analyze.
+On 65 out of 120 to analyze.
+On 66 out of 120 to analyze.
+On 67 out of 120 to analyze.
+On 68 out of 120 to analyze.
+On 69 out of 120 to analyze.
+On 70 out of 120 to analyze.
+On 71 out of 120 to analyze.
+On 73 out of 120 to analyze.
+On 74 out of 120 to analyze.
+On 75 out of 120 to analyze.
+On 76 out of 120 to analyze.
+On 77 out of 120 to analyze.
+On 78 out of 120 to analyze.
+On 79 out of 120 to analyze.
+On 80 out of 120 to analyze.
+On 81 out of 120 to analyze.
+On 82 out of 120 to analyze.

@@ -191,77 +191,98 @@ On 211 out of 480 to analyze.
 On 212 out of 480 to analyze.
 On 213 out of 480 to analyze.
 On 214 out of 480 to analyze.
- of 240 to analyze.
-On 204 out of 240 to analyze.
-On 205 out of 240 to analyze.
-On 206 out of 240 to analyze.
-On 207 out of 240 to analyze.
-On 208 out of 240 to analyze.
-On 209 out of 240 to analyze.
-out of 120 to analyze.
-On 95 out of 120 to analyze.
-On 96 out of 120 to analyze.
-On 97 out of 120 to analyze.
-On 98 out of 120 to analyze.
-On 99 out of 120 to analyze.
-On 100 out of 120 to analyze.
-On 101 out of 120 to analyze.
- 98 out of 120 to analyze.
-On 99 out of 120 to analyze.
-On 100 out of 120 to analyze.
-On 101 out of 120 to analyze.
-On 102 out of 120 to analyze.
-On 103 out of 120 to analyze.
-On 104 out of 120 to analyze.
-On 105 out of 120 to analyze.
-On 106 out of 120 to analyze.
-On 107 out of 120 to analyze.
-On 108 out of 120 to analyze.
-On 109 out of 120 to analyze.
-On 110 out of 120 to analyze.
-t at 189] 
-Elapsed time is 1.398504 seconds.
-Saved file: EZT090_seiz002_29_before46000.mat
-[Warning: Integer operands are required for colon operator when used as index] 
-[> In computeConnectivity at 80
-  In serverAdjMainScript at 189] 
-Elapsed time is 1.396997 seconds.
-Saved file: EZT090_seiz002_30_before45500.mat
-[Warning: Integer operands are required for colon operator when used as index] 
-[> In computeConnectivity at 80
-  In serverAdjMainScript at 189] 
-Elapsed time is 1.399924 seconds.
-Saved file: EZT090_seiz002_31_before45000.mat
-[Warning: Integer operands are required for colon operator when used as index] 
-[> In computeConnectivity at 80
-  In serverAdjMainScript at 189] 
-Elapsed time is 1.398149 seconds.
-Saved file: EZT090_seiz002_32_before44500.mat
-[Warning: Integer operands are required for colon operator when used as index] 
-[> In computeConnectivity at 80
-  In serverAdjMainScript at 189] 
-Elapsed time is 1.404026 seconds.
-Saved file: EZT090_seiz002_33_before44000.mat
-[Warning: Integer operands are required for colon operator when used as index] 
-[> In computeConnectivity at 80
-  In serverAdjMainScript at 189] 
-Elapsed time is 1.396732 seconds.
-Saved file: EZT090_seiz002_34_before43500.mat
-[Warning: Integer operands are required for colon operator when used as index] 
-[> In computeConnectivity at 80
-  In serverAdjMainScript at 189] 
-Elapsed time is 1.396844 seconds.
-Saved file: EZT090_seiz002_35_before43000.mat
-[Warning: Integer operands are required for colon operator when used as index] 
-[> In computeConnectivity at 80
-  In serverAdjMainScript at 189] 
-Elapsed time is 1.396226 seconds.
-Saved file: EZT090_seiz002_36_before42500.mat
-[Warning: Integer operands are required for colon operator when used as index] 
-[> In computeConnectivity at 80
-  In serverAdjMainScript at 189] 
-Elapsed time is 1.397324 seconds.
-Saved file: EZT090_seiz002_37_before42000.mat
+On 215 out of 480 to analyze.
+On 216 out of 480 to analyze.
+On 217 out of 480 to analyze.
+On 218 out of 480 to analyze.
+On 219 out of 480 to analyze.
+On 220 out of 480 to analyze.
+On 221 out of 480 to analyze.
+On 222 out of 480 to analyze.
+On 223 out of 480 to analyze.
+On 224 out of 480 to analyze.
+On 225 out of 480 to analyze.
+On 226 out of 480 to analyze.
+On 227 out of 480 to analyze.
+On 228 out of 480 to analyze.
+On 229 out of 480 to analyze.
+On 230 out of 480 to analyze.
+On 231 out of 480 to analyze.
+On 232 out of 480 to analyze.
+On 233 out of 480 to analyze.
+On 234 out of 480 to analyze.
+On 235 out of 480 to analyze.
+On 236 out of 480 to analyze.
+On 237 out of 480 to analyze.
+On 238 out of 480 to analyze.
+On 239 out of 480 to analyze.
+On 240 out of 480 to analyze.
+On 241 out of 480 to analyze.
+On 242 out of 480 to analyze.
+On 243 out of 480 to analyze.
+On 244 out of 480 to analyze.
+On 245 out of 480 to analyze.
+On 246 out of 480 to analyze.
+On 247 out of 480 to analyze.
+On 248 out of 480 to analyze.
+On 249 out of 480 to analyze.
+On 250 out of 480 to analyze.
+On 251 out of 480 to analyze.
+On 252 out of 480 to analyze.
+On 253 out of 480 to analyze.
+On 254 out of 480 to analyze.
+On 255 out of 480 to analyze.
+On 256 out of 480 to analyze.
+On 257 out of 480 to analyze.
+On 258 out of 480 to analyze.
+On 260 out of 480 to analyze.
+On 261 out of 480 to analyze.
+On 262 out of 480 to analyze.
+On 263 out of 480 to analyze.
+On 264 out of 480 to analyze.
+On 265 out of 480 to analyze.
+On 266 out of 480 to analyze.
+On 267 out of 480 to analyze.
+On 268 out of 480 to analyze.
+On 269 out of 480 to analyze.
+On 270 out of 480 to analyze.
+On 271 out of 480 to analyze.
+On 272 out of 480 to analyze.
+On 273 out of 480 to analyze.
+On 274 out of 480 to analyze.
+On 275 out of 480 to analyze.
+On 276 out of 480 to analyze.
+On 277 out of 480 to analyze.
+On 278 out of 480 to analyze.
+On 279 out of 480 to analyze.
+On 280 out of 480 to analyze.
+On 281 out of 480 to analyze.
+On 283 out of 480 to analyze.
+On 284 out of 480 to analyze.
+On 285 out of 480 to analyze.
+On 286 out of 480 to analyze.
+On 287 out of 480 to analyze.
+On 288 out of 480 to analyze.
+On 289 out of 480 to analyze.
+On 290 out of 480 to analyze.
+On 291 out of 480 to analyze.
+On 292 out of 480 to analyze.
+On 294 out of 480 to analyze.
+On 295 out of 480 to analyze.
+On 296 out of 480 to analyze.
+On 297 out of 480 to analyze.
+On 298 out of 480 to analyze.
+On 299 out of 480 to analyze.
+On 300 out of 480 to analyze.
+On 301 out of 480 to analyze.
+On 302 out of 480 to analyze.
+8 out of 240 to analyze.
+On 49 out of 240 to analyze.
+On 50 out of 240 to analyze.
+On 51 out of 240 to analyze.
+On 52 out of 240 to analyze.
+On 53 out of 240 to analyze.
+eiz002_37_before42000.mat
 [Warning: Integer operands are required for colon operator when used as index] 
 [> In computeConnectivity at 80
   In serverAdjMainScript at 189] 
