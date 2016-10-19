@@ -7,7 +7,7 @@ w_space = linspace(-1, 1, 101);
 threshold = 0.8;
 
 if nargin == 0 % testing purposes
-    patient='pt1sz2';
+    patient='EZT007seiz001';
     % window paramters
     radius = 1.1;
     winSize = 250; % 500 milliseconds
@@ -16,7 +16,7 @@ if nargin == 0 % testing purposes
 end
 timeRange = [60 0];
 
-patient_id = patient(1:strfind(patient, 'seiz')-2);
+patient_id = patient(1:strfind(patient, 'seiz')-1);
 seizure_id = strcat('_', patient(strfind(patient, 'seiz'):end));
 seeg = 1;
 if isempty(patient_id)

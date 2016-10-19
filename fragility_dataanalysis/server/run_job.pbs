@@ -19,6 +19,6 @@ patients=('pt1sz2' 'pt1sz3' 'pt2sz1' 'pt2sz3' 'pt7sz19'\
 
 for proc in `seq 0 ${#patients[@]}`; do
 	patient=${patients[proc]}
-	pbsdsh -n $proc /home/ali/adamli/fragility_dataanalysis/server/runAnalysis.sh $proc $patient &
+	pbsdsh -n $proc /home/ali/adamli/fragility_dataanalysis/server/runAnalysis.sh $proc $patient $frequency_sampling $winSize $stepSize $radius &
 done
 wait

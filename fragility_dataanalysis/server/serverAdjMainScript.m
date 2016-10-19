@@ -1,4 +1,4 @@
-function serverAdjMainScript(patient, radius, winSize, stepSize, frequency_sampling)
+function serverAdjMainScript(patient, winSize, stepSize, frequency_sampling)
 addpath('../fragility_library/');
 addpath(genpath('../eeg_toolbox/'));
 addpath('../');
@@ -9,7 +9,6 @@ threshold = 0.8;
 if nargin == 0 % testing purposes
     patient='pt1sz2';
     % window paramters
-    radius = 1.1;
     winSize = 250; % 500 milliseconds
     stepSize = 250; 
     frequency_sampling = 500; % in Hz
