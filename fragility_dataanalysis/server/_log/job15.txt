@@ -8,9 +8,5 @@
 To get started, type one of these: helpwin, helpdesk, or demo.
 For product information, visit www.mathworks.com.
  
-{Undefined function or variable "ezone_labels".
-
-Error in serverAdjMainScript (line 107)
-clinicalLabels.ezone_labels = ezone_labels;
-} 
-
+Looking at patient: EZT045_seiz002
+EZT045_seiz002 is underdetermined in perturbation analysis, must use optimization techniques
