@@ -38,7 +38,7 @@ matlab_jvm="matlab -nojvm -nodesktop -nosplash -r"
 
 winSize=500
 stepSize=500
-frequency_sampling=500
+frequency_sampling=1000
 radius=1.1
 
 echo $winSize
