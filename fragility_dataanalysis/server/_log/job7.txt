@@ -12,47 +12,485 @@ Looking at patient: JH105sz1
 The range locked to seizure to look over is -60 until 0
 Total number of channels 85
 Length of to be included channels 85
-Seizure starts at 34500 milliseconds
-Running analysis for 30000 milliseconds
-Elapsed time is 1.582498 seconds.
-Saved file: JH105sz1_1_before30000.mat
-Elapsed time is 1.556825 seconds.
-Saved file: JH105sz1_2_before29750.mat
-Elapsed time is 1.427765 seconds.
-Saved file: JH105sz1_3_before29500.mat
-Elapsed time is 1.501993 seconds.
-Saved file: JH105sz1_4_before29250.mat
-Elapsed time is 1.535590 seconds.
-Saved file: JH105sz1_5_before29000.mat
-Elapsed time is 1.398393 seconds.
-Saved file: JH105sz1_6_before28750.mat
-Elapsed time is 1.590626 seconds.
-Saved file: JH105sz1_7_before28500.mat
-Elapsed time is 1.388118 seconds.
-Saved file: JH105sz1_8_before28250.mat
-Elapsed time is 1.324333 seconds.
-Saved file: JH105sz1_9_before28000.mat
-Elapsed time is 1.493466 seconds.
-Saved file: JH105sz1_10_before27750.mat
-Elapsed time is 1.356120 seconds.
-Saved file: JH105sz1_11_before27500.mat
-Elapsed time is 1.521666 seconds.
-Saved file: JH105sz1_12_before27250.mat
-Elapsed time is 1.360886 seconds.
-Saved file: JH105sz1_13_before27000.mat
-Elapsed time is 1.287121 seconds.
-Saved file: JH105sz1_14_before26750.mat
-Elapsed time is 1.461381 seconds.
-Saved file: JH105sz1_15_before26500.mat
-Elapsed time is 1.011231 seconds.
-{Error using save
-Cannot create 'JH105sz1_16_before26250.mat' because
-'../adj_mats_win500_step500_freq500_radius1.1/JH105sz1' does not exist.
+Seizure starts at 17250 milliseconds
+Running analysis for 15000 milliseconds
+Elapsed time is 0.560586 seconds.
+Saved file: JH105sz1_1_before15000.mat
+Elapsed time is 0.479099 seconds.
+Saved file: JH105sz1_2_before14875.mat
+Elapsed time is 0.477474 seconds.
+Saved file: JH105sz1_3_before14750.mat
+Elapsed time is 0.456699 seconds.
+Saved file: JH105sz1_4_before14625.mat
+Elapsed time is 0.483019 seconds.
+Saved file: JH105sz1_5_before14500.mat
+Elapsed time is 0.458140 seconds.
+Saved file: JH105sz1_6_before14375.mat
+Elapsed time is 0.456291 seconds.
+Saved file: JH105sz1_7_before14250.mat
+Elapsed time is 0.544985 seconds.
+Saved file: JH105sz1_8_before14125.mat
+Elapsed time is 0.535750 seconds.
+Saved file: JH105sz1_9_before14000.mat
+Elapsed time is 0.545701 seconds.
+Saved file: JH105sz1_10_before13875.mat
+Elapsed time is 0.511070 seconds.
+Saved file: JH105sz1_11_before13750.mat
+Elapsed time is 0.477683 seconds.
+Saved file: JH105sz1_12_before13625.mat
+Elapsed time is 0.490913 seconds.
+Saved file: JH105sz1_13_before13500.mat
+Elapsed time is 0.530076 seconds.
+Saved file: JH105sz1_14_before13375.mat
+Elapsed time is 0.514651 seconds.
+Saved file: JH105sz1_15_before13250.mat
+Elapsed time is 0.549250 seconds.
+Saved file: JH105sz1_16_before13125.mat
+Elapsed time is 0.536227 seconds.
+Saved file: JH105sz1_17_before13000.mat
+Elapsed time is 0.567672 seconds.
+Saved file: JH105sz1_18_before12875.mat
+Elapsed time is 0.492292 seconds.
+Saved file: JH105sz1_19_before12750.mat
+Elapsed time is 0.434848 seconds.
+Saved file: JH105sz1_20_before12625.mat
+Elapsed time is 0.525127 seconds.
+Saved file: JH105sz1_21_before12500.mat
+Elapsed time is 0.535285 seconds.
+Saved file: JH105sz1_22_before12375.mat
+Elapsed time is 0.507728 seconds.
+Saved file: JH105sz1_23_before12250.mat
+Elapsed time is 0.548875 seconds.
+Saved file: JH105sz1_24_before12125.mat
+Elapsed time is 0.526485 seconds.
+Saved file: JH105sz1_25_before12000.mat
+Elapsed time is 0.566220 seconds.
+Saved file: JH105sz1_26_before11875.mat
+Elapsed time is 0.529455 seconds.
+Saved file: JH105sz1_27_before11750.mat
+Elapsed time is 0.488704 seconds.
+Saved file: JH105sz1_28_before11625.mat
+Elapsed time is 0.487914 seconds.
+Saved file: JH105sz1_29_before11500.mat
+Elapsed time is 0.497939 seconds.
+Saved file: JH105sz1_30_before11375.mat
+Elapsed time is 0.532104 seconds.
+Saved file: JH105sz1_31_before11250.mat
+Elapsed time is 0.542439 seconds.
+Saved file: JH105sz1_32_before11125.mat
+Elapsed time is 0.524207 seconds.
+Saved file: JH105sz1_33_before11000.mat
+Elapsed time is 0.558622 seconds.
+Saved file: JH105sz1_34_before10875.mat
+Elapsed time is 0.525209 seconds.
+Saved file: JH105sz1_35_before10750.mat
+Elapsed time is 1.403672 seconds.
+Saved file: JH105sz1_36_before21250.mat
+Elapsed time is 1.303570 seconds.
+Saved file: JH105sz1_37_before21000.mat
+Elapsed time is 1.420844 seconds.
+Saved file: JH105sz1_38_before20750.mat
+Elapsed time is 1.391393 seconds.
+Saved file: JH105sz1_39_before20500.mat
+Elapsed time is 1.564273 seconds.
+Saved file: JH105sz1_40_before20250.mat
+Elapsed time is 1.532328 seconds.
+Saved file: JH105sz1_41_before20000.mat
+Elapsed time is 1.611627 seconds.
+Saved file: JH105sz1_42_before19750.mat
+Elapsed time is 1.416532 seconds.
+Saved file: JH105sz1_43_before19500.mat
+Elapsed time is 1.322818 seconds.
+Saved file: JH105sz1_44_before19250.mat
+Elapsed time is 1.552091 seconds.
+Saved file: JH105sz1_45_before19000.mat
+Elapsed time is 1.407124 seconds.
+Saved file: JH105sz1_46_before18750.mat
+Elapsed time is 1.228492 seconds.
+Saved file: JH105sz1_47_before18500.mat
+Elapsed time is 1.575300 seconds.
+Saved file: JH105sz1_48_before18250.mat
+Elapsed time is 1.415971 seconds.
+Saved file: JH105sz1_49_before18000.mat
+Elapsed time is 1.381441 seconds.
+Saved file: JH105sz1_50_before17750.mat
+Elapsed time is 1.357563 seconds.
+Saved file: JH105sz1_51_before17500.mat
+Elapsed time is 1.260121 seconds.
+Saved file: JH105sz1_52_before17250.mat
+Elapsed time is 1.408478 seconds.
+Saved file: JH105sz1_53_before17000.mat
+Elapsed time is 1.439389 seconds.
+Saved file: JH105sz1_54_before16750.mat
+Elapsed time is 1.066654 seconds.
+Saved file: JH105sz1_55_before16500.mat
+Elapsed time is 1.318153 seconds.
+Saved file: JH105sz1_56_before16250.mat
+Elapsed time is 1.213115 seconds.
+Saved file: JH105sz1_57_before16000.mat
+Elapsed time is 1.320375 seconds.
+Saved file: JH105sz1_58_before15750.mat
+Elapsed time is 1.265045 seconds.
+Saved file: JH105sz1_59_before15500.mat
+Elapsed time is 1.412097 seconds.
+Saved file: JH105sz1_60_before15250.mat
+Elapsed time is 1.030552 seconds.
+Saved file: JH105sz1_61_before15000.mat
+Elapsed time is 1.029928 seconds.
+Saved file: JH105sz1_62_before14750.mat
+Elapsed time is 1.037966 seconds.
+Saved file: JH105sz1_63_before14500.mat
+Elapsed time is 1.031036 seconds.
+Saved file: JH105sz1_64_before14250.mat
+Elapsed time is 1.245674 seconds.
+Saved file: JH105sz1_65_before14000.mat
+Elapsed time is 1.090802 seconds.
+Saved file: JH105sz1_66_before13750.mat
+Elapsed time is 0.959112 seconds.
+Saved file: JH105sz1_67_before13500.mat
+Elapsed time is 1.383605 seconds.
+Saved file: JH105sz1_68_before13250.mat
+Elapsed time is 1.239690 seconds.
+Saved file: JH105sz1_69_before13000.mat
+Elapsed time is 1.004239 seconds.
+Saved file: JH105sz1_70_before12750.mat
+Elapsed time is 1.139035 seconds.
+Saved file: JH105sz1_71_before12500.mat
+Elapsed time is 1.072352 seconds.
+Saved file: JH105sz1_72_before12250.mat
+Elapsed time is 1.241647 seconds.
+Saved file: JH105sz1_73_before12000.mat
+Elapsed time is 1.512020 seconds.
+Saved file: JH105sz1_74_before11750.mat
+Elapsed time is 1.014209 seconds.
+Saved file: JH105sz1_75_before11500.mat
+Elapsed time is 1.037338 seconds.
+Saved file: JH105sz1_76_before11250.mat
+Elapsed time is 1.215175 seconds.
+Saved file: JH105sz1_77_before11000.mat
+Elapsed time is 1.464792 seconds.
+Saved file: JH105sz1_78_before10750.mat
+Elapsed time is 1.339801 seconds.
+Saved file: JH105sz1_79_before10500.mat
+Elapsed time is 1.450453 seconds.
+Saved file: JH105sz1_80_before10250.mat
+Elapsed time is 1.412611 seconds.
+Saved file: JH105sz1_81_before10000.mat
+Elapsed time is 1.487931 seconds.
+Saved file: JH105sz1_82_before9750.mat
+Elapsed time is 1.305904 seconds.
+Saved file: JH105sz1_83_before9500.mat
+Elapsed time is 1.240073 seconds.
+Saved file: JH105sz1_84_before9250.mat
+Elapsed time is 1.157028 seconds.
+Saved file: JH105sz1_85_before9000.mat
+Elapsed time is 1.236370 seconds.
+Saved file: JH105sz1_86_before8750.mat
+Elapsed time is 1.059802 seconds.
+Saved file: JH105sz1_87_before8500.mat
+Elapsed time is 1.530635 seconds.
+Saved file: JH105sz1_88_before8250.mat
+Elapsed time is 1.571645 seconds.
+Saved file: JH105sz1_89_before8000.mat
+Elapsed time is 1.394861 seconds.
+Saved file: JH105sz1_90_before7750.mat
+Elapsed time is 1.482201 seconds.
+Saved file: JH105sz1_91_before7500.mat
+Elapsed time is 1.568573 seconds.
+Saved file: JH105sz1_92_before7250.mat
+Elapsed time is 1.514530 seconds.
+Saved file: JH105sz1_93_before7000.mat
+Elapsed time is 1.431576 seconds.
+Saved file: JH105sz1_94_before6750.mat
+Elapsed time is 1.203362 seconds.
+Saved file: JH105sz1_95_before6500.mat
+Elapsed time is 1.231421 seconds.
+Saved file: JH105sz1_96_before6250.mat
+Elapsed time is 1.548237 seconds.
+Saved file: JH105sz1_97_before6000.mat
+Elapsed time is 1.342936 seconds.
+Saved file: JH105sz1_98_before5750.mat
+Elapsed time is 0.978546 seconds.
+Saved file: JH105sz1_99_before5500.mat
+Elapsed time is 1.124591 seconds.
+Saved file: JH105sz1_100_before5250.mat
+Elapsed time is 1.059416 seconds.
+Saved file: JH105sz1_101_before5000.mat
+Elapsed time is 1.111791 seconds.
+Saved file: JH105sz1_102_before4750.mat
+Elapsed time is 1.054295 seconds.
+Saved file: JH105sz1_103_before4500.mat
+Elapsed time is 0.911142 seconds.
+Saved file: JH105sz1_104_before4250.mat
+Elapsed time is 0.987043 seconds.
+Saved file: JH105sz1_105_before4000.mat
+Elapsed time is 1.006693 seconds.
+Saved file: JH105sz1_106_before3750.mat
+Elapsed time is 1.016639 seconds.
+Saved file: JH105sz1_107_before3500.mat
+Elapsed time is 1.112373 seconds.
+Saved file: JH105sz1_108_before3250.mat
+Elapsed time is 1.114229 seconds.
+Saved file: JH105sz1_109_before3000.mat
+Elapsed time is 1.644391 seconds.
+Saved file: JH105sz1_110_before2750.mat
+Elapsed time is 1.330743 seconds.
+Saved file: JH105sz1_111_before2500.mat
+Elapsed time is 1.050859 seconds.
+Saved file: JH105sz1_112_before2250.mat
+Elapsed time is 1.379247 seconds.
+Saved file: JH105sz1_113_before2000.mat
+Elapsed time is 1.298655 seconds.
+Saved file: JH105sz1_114_before1750.mat
+Elapsed time is 1.180416 seconds.
+Saved file: JH105sz1_115_before1500.mat
+Elapsed time is 1.496620 seconds.
+Saved file: JH105sz1_116_before1250.mat
+Elapsed time is 1.447432 seconds.
+Saved file: JH105sz1_117_before1000.mat
+Elapsed time is 1.267016 seconds.
+Saved file: JH105sz1_118_before750.mat
+Elapsed time is 1.572712 seconds.
+Saved file: JH105sz1_119_before500.mat
+Elapsed time is 1.327672 seconds.
+Saved file: JH105sz1_120_before250.mat
 
-Error in computeConnectivity (line 135)
-    save(fullfile(toSaveAdjDir, fileName), 'data');
+num_chanOn 3 out of 120 On 1 out of 120 to analyze.
+On 2 out of 120 to analyze.
+On 3 out of 120 to analyze.
+On 4 out of 120 to analyze.
+On 5 out of 120 to analyze.
+On 6 out of 120 to analyze.
+On 7 out of 120 to analyze.
+On 8 out of 120 to analyze.
+On 9 out of 120 to analyze.
+On 10 out of 120 to analyze.
+On 11 out of 120 to analyze.
+On 12 out of 120 to analyze.
+On 13 out of 120 to analyze.
+On 14 out of 120 to analyze.
+On 15 out of 120 to analyze.
+On 16 out of 120 to analyze.
+On 17 out of 120 to analyze.
+On 18 out of 120 to analyze.
+On 19 out of 120 to analyze.
+On 20 out of 120 to analyze.
+On 21 out of 120 to analyze.
+On 22 out of 120 to analyze.
+On 23 out of 120 to analyze.
+On 24 out of 120 to analyze.
+On 25 out of 120 to analyze.
+On 26 out of 120 to analyze.
+On 28 out of 120 to analyze.
+On 30 out of 120 to analyze.
+On 31 out of 120 to analyze.
+On 32 out of 120 to analyze.
+On 33 out of 120 to analyze.
+On 34 out of 120 to analyze.
+On 35 out of 120 to analyze.
+On 36 out of 120 to analyze.
+On 37 out of 120 to analyze.
+On 38 out of 120 to analyze.
+On 39 out of 120 to analyze.
+On 40 out of 120 to analyze.
+On 41 out of 120 to analyze.
+On 42 out of 120 to analyze.
+On 43 out of 120 to analyze.
+On 45 out of 120 to analyze.
+On 46 out of 120 to analyze.
+On 47 out of 120 to analyze.
+On 48 out of 120 to analyze.
+On 49 out of 120 to analyze.
+On 50 out of 120 to analyze.
+On 51 out of 120 to analyze.
+On 52 out of 120 to analyze.
+On 53 out of 120 to analyze.
+On 54 out of 120 to analyze.
+On 55 out of 120 to analyze.
+On 56 out of 120 to analyze.
+On 57 out of 120 to analyze.
+On 58 out of 120 to analyze.
+On 59 out of 120 to analyze.
+On 60 out of 120 to analyze.
+On 61 out of 120 to analyze.
+On 62 out of 120 to analyze.
+On 63 out of 120 to analyze.
+On 64 out of 120 to analyze.
+On 65 out of 120 to analyze.
+On 66 out of 120 to analyze.
+On 67 out of 120 to analyze.
+On 68 out of 120 to analyze.
+On 69 out of 120 to analyze.
+On 70 out of 120 to analyze.
+On 71 out of 120 to analyze.
+On 73 out of 120 to analyze.
+On 74 out of 120 to analyze.
+On 75 out of 120 to analyze.
+On 76 out of 120 to analyze.
+On 77 out of 120 to analyze.
+On 78 out of 120 to analyze.
+On 79 out of 120 to analyze.
+On 80 out of 120 to analyze.
+On 81 out of 120 to analyze.
+On 82 out of 120 to analyze.
+On 83 out of 120 to analyze.
+On 84 out of 120 to analyze.
+On 85 out of 120 to analyze.
+On 86 out of 120 to analyze.
+On 87 out of 120 to analyze.
+On 88 out of 120 to analyze.
+On 89 out of 120 to analyze.
+On 90 out of 120 to analyze.
+On 91 out of 120 to analyze.
+On 92 out of 120 to analyze.
+On 93 out of 120 to analyze.
+On 94 out of 120 to analyze.
+On 95 out of 120 to analyze.
+On 96 out of 120 to analyze.
+On 97 out of 120 to analyze.
+On 98 out of 120 to analyze.
+On 99 out of 120 to analyze.
+On 100 out of 120 to analyze.
+On 101 out of 120 to analyze.
+On 102 out of 120 to analyze.
+On 103 out of 120 to analyze.
+On 104 out of 120 to analyze.
+On 105 out of 120 to analyze.
+On 106 out of 120 to analyze.
+On 107 out of 120 to analyze.
+On 108 out of 120 to analyze.
+On 109 out of 120 to analyze.
+On 110 out of 120 to analyze.
+On 111 out of 120 to analyze.
+On 112 out of 120 to analyze.
+On 113 out of 120 to analyze.
+On 114 out of 120 to analyze.
+On 115 out of 120 to analyze.
+On 116 out of 120 to analyze.
+On 117 out of 120 to analyze.
+On 118 out of 120 to analyze.
+On 119 out of 120 to analyze.
+On 120 out of 120 to analyze.
+Elapsed time is 7104.827856 seconds.
 
-Error in serverAdjMainScript (line 194)
-    computeConnectivity(patient_id, seizure_id, eeg, clinicalLabels, adj_args);
-} 
-
+num_channels =
+
+    85
+
+On 1 out of 120 to analyze.
+On 2 out of 120 to analyze.
+On 3 out of 120 to analyze.
+On 4 out of 120 to analyze.
+On 5 out of 120 to analyze.
+On 6 out of 120 to analyze.
+On 7 out of 120 to analyze.
+On 8 out of 120 to analyze.
+On 9 out of 120 to analyze.
+On 10 out of 120 to analyze.
+On 11 out of 120 to analyze.
+On 12 out of 120 to analyze.
+On 13 out of 120 to analyze.
+On 14 out of 120 to analyze.
+On 15 out of 120 to analyze.
+On 16 out of 120 to analyze.
+On 17 out of 120 to analyze.
+On 18 out of 120 to analyze.
+On 19 out of 120 to analyze.
+On 20 out of 120 to analyze.
+On 21 out of 120 to analyze.
+On 22 out of 120 to analyze.
+On 23 out of 120 to analyze.
+On 24 out of 120 to analyze.
+On 25 out of 120 to analyze.
+On 26 out of 120 to analyze.
+On 28 out of 120 to analyze.
+On 30 out of 120 to analyze.
+On 31 out of 120 to analyze.
+On 32 out of 120 to analyze.
+On 33 out of 120 to analyze.
+On 34 out of 120 to analyze.
+On 35 out of 120 to analyze.
+On 36 out of 120 to analyze.
+On 37 out of 120 to analyze.
+On 38 out of 120 to analyze.
+On 39 out of 120 to analyze.
+On 40 out of 120 to analyze.
+On 41 out of 120 to analyze.
+On 42 out of 120 to analyze.
+On 43 out of 120 to analyze.
+On 45 out of 120 to analyze.
+On 46 out of 120 to analyze.
+On 47 out of 120 to analyze.
+On 48 out of 120 to analyze.
+On 49 out of 120 to analyze.
+On 50 out of 120 to analyze.
+On 51 out of 120 to analyze.
+On 52 out of 120 to analyze.
+On 53 out of 120 to analyze.
+On 54 out of 120 to analyze.
+On 55 out of 120 to analyze.
+On 56 out of 120 to analyze.
+On 57 out of 120 to analyze.
+On 58 out of 120 to analyze.
+On 59 out of 120 to analyze.
+On 60 out of 120 to analyze.
+On 61 out of 120 to analyze.
+On 62 out of 120 to analyze.
+On 63 out of 120 to analyze.
+On 64 out of 120 to analyze.
+On 65 out of 120 to analyze.
+On 66 out of 120 to analyze.
+On 67 out of 120 to analyze.
+On 68 out of 120 to analyze.
+On 69 out of 120 to analyze.
+On 70 out of 120 to analyze.
+On 71 out of 120 to analyze.
+On 73 out of 120 to analyze.
+On 74 out of 120 to analyze.
+On 75 out of 120 to analyze.
+On 76 out of 120 to analyze.
+On 77 out of 120 to analyze.
+On 78 out of 120 to analyze.
+On 79 out of 120 to analyze.
+On 80 out of 120 to analyze.
+On 81 out of 120 to analyze.
+On 82 out of 120 to analyze.
+On 83 out of 120 to analyze.
+On 84 out of 120 to analyze.
+On 85 out of 120 to analyze.
+On 86 out of 120 to analyze.
+On 87 out of 120 to analyze.
+On 88 out of 120 to analyze.
+On 89 out of 120 to analyze.
+On 90 out of 120 to analyze.
+On 91 out of 120 to analyze.
+On 92 out of 120 to analyze.
+On 93 out of 120 to analyze.
+On 94 out of 120 to analyze.
+On 95 out of 120 to analyze.
+On 96 out of 120 to analyze.
+On 97 out of 120 to analyze.
+On 98 out of 120 to analyze.
+On 99 out of 120 to analyze.
+On 100 out of 120 to analyze.
+On 101 out of 120 to analyze.
+On 102 out of 120 to analyze.
+On 103 out of 120 to analyze.
+On 104 out of 120 to analyze.
+On 105 out of 120 to analyze.
+On 106 out of 120 to analyze.
+On 107 out of 120 to analyze.
+On 108 out of 120 to analyze.
+On 109 out of 120 to analyze.
+On 110 out of 120 to analyze.
+On 111 out of 120 to analyze.
+On 112 out of 120 to analyze.
+On 113 out of 120 to analyze.
+On 114 out of 120 to analyze.
+On 115 out of 120 to analyze.
+On 116 out of 120 to analyze.
+On 117 out of 120 to analyze.
+On 118 out of 120 to analyze.
+On 119 out of 120 to analyze.
+On 120 out of 120 to analyze.
+Elapsed time is 6210.585951 seconds.
