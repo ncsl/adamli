@@ -111,26 +111,28 @@ On 153 out of 480 to analyze.
 On 154 out of 480 to analyze.
 On 155 out of 480 to analyze.
 On 156 out of 480 to analyze.
- 156 out of 240 to analyze.
- 120 to analyze.
-On 40 out of 120 to analyze.
-On 41 out of 120 to analyze.
-On 42 out of 120 to analyze.
-On 43 out of 120 to analyze.
-On 44 out of 120 to analyze.
-On 45 out of 120 to analyze.
-On 46 out of 120 to analyze.
+On 157 out of 480 to analyze.
+On 158 out of 480 to analyze.
+On 159 out of 480 to analyzeOnOn 160 out of 480 to analyze.
+ 160 out of 240 to analyze.
+ to analyze.
 On 44 out of 120 to analyze.
 On 45 out of 120 to analyze.
 On 46 out of 120 to analyze.
 On 47 out of 120 to analyze.
 On 48 out of 120 to analyze.
 On 49 out of 120 to analyze.
-07_seiz001_21_before50000.mat
-[Warning: Integer operands are required for colon operator when used as index] 
-[> In computeConnectivity at 80
-  In serverAdjMainScript at 189] 
-Elapsed time is 1.481598 seconds.
+On 50 out of 120 to analyze.
+On 51 out of 120 to analyze.
+On 49 out of 120 to analyze.
+On 50 out of 120 to analyze.
+On 51 out of 120 to analyze.
+On 52 out of 120 to analyze.
+On 53 out of 120 to analyze.
+On 54 out of 120 to analyze.
+On 55 out of 120 to analyze.
+On 56 out of 120 to analyze.
+8 seconds.
 Saved file: EZT007_seiz001_22_before49500.mat
 [Warning: Integer operands are required for colon operator when used as index] 
 [> In computeConnectivity at 80

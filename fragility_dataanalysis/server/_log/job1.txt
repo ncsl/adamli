@@ -114,14 +114,14 @@ On 97 out of 480 to analyze.
 On 98 out of 480 to analyze.
 On 99 out of 480 to analyze.
 On 100 out of 480 to analyze.
-On 101 out of 240 to analyze.
-On 102 out of 120 to analyze.
-On 103 out of 120 to analyze.
-On 104 out of 120 to analyze.
-On 105 out of 120 to analyze.
-t
-Elapsed time is 1.416359 seconds.
-Saved file: pt1sz3_41_before40000.mat
+On 101 out of 480 to analyze.
+On 102 out of 480 to analyze.
+On 103 out of 240 to analyze.
+OOn 105 out of 120 to analyze.
+n 105 out of 120 to analyze.
+On 106 out of 120 to analyze.
+On 107 out of 120 to analyze.
+fore40000.mat
 Elapsed time is 1.516616 seconds.
 Saved file: pt1sz3_42_before39500.mat
 Elapsed time is 1.511306 seconds.
@@ -481,3 +481,8 @@ On 66 out of 120 to analyze.
 On 67 out of 120 to analyze.
 On 68 out of 120 to analyze.
 On 69 out of 120 to analyze.
+On 70 out of 120 to analyze.
+On 71 out of 120 to analyze.
+On 72 out of 120 to analyze.
+On 73 out of 120 to analyze.
+On 74 out of 120 to analyze.

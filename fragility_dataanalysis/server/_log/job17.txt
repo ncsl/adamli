@@ -282,25 +282,26 @@ On 293 out of 480 to analyze.
 On 294 out of 480 to analyze.
 On 295 out of 480 to analyze.
 On 296 out of 480 to analyze.
-.
-On 46 out of 240 to analyze.
-On 47 out of 240 to analyze.
-On 48 out of 240 to analyze.
-On 49 out of 240 to analyze.
-On 50 out of 240 to analyze.
-On 51 out of 240 to analyze.
-On 52 out of 240 to analyze.
-On 53 out of 240 to analyze.
-On 54 out of 240 to analyze.
+On 298 out of 480 to analyze.
+On 299 out of 480 to analyze.
+On 300 out of 480 to analyze.
+On 301 out of 480 to analyze.
+On 302 out of 480 to analyze.
+On 303 out of 480 to analyze.
+On 304 out of 480 to analyze.
+On 305 out of 480 to analyze.
+out of 240 to analyze.
 On 55 out of 240 to analyze.
 On 56 out of 240 to analyze.
 On 57 out of 240 to analyze.
 On 58 out of 240 to analyze.
-
-Elapsed time is 1.416311 seconds.
-Saved file: EZT090_seiz003_38_before41500.mat
-[Warning: Integer operands are required for colon operator when used as index] 
-[> In computeConnectivity at 80
+On 59 out of 240 to analyze.
+On 60 out of 240 to analyze.
+On 61 out of 240 to analyze.
+On 62 out of 240 to analyze.
+On 63 out of 240 to analyze.
+On 64 out of 240 to analyze.
+uteConnectivity at 80
   In serverAdjMainScript at 189] 
 Elapsed time is 1.415323 seconds.
 Saved file: EZT090_seiz003_39_before41000.mat

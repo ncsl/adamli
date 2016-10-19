@@ -333,19 +333,22 @@ On 344 out of 480 to analyze.
 On 345 out of 480 to analyze.
 On 346 out of 480 to analyze.
 On 347 out of 480 to analyze.
+On 348 out of 480 to analyze.
+On 349 out of 480 to analyze.
+On 350 out of 480 to analyze.
+On 351 out of 480 to analyze.
+On 352 out of 480 to analyze.
+On 353 out of 480 to analyze.
+On 354 out of 480 to analyze.
+On 355 out of 480 to analyze.
+On 356 out of 480 to analyze.
 0 to analyze.
-On 109 out of 240 to analyze.
-On 110 out of 240 to analyze.
-On 111 out of 240 to analyze.
-On 112 out of 240 to analyze.
-On 113 out of 240 to analyze.
-On 114 out of 240 to analyze.
-Elapsed time is 0.553232 seconds.
-Saved file: EZT045_seiz001_45_before38000.mat
-[Warning: Integer operands are required for colon operator when used as index] 
-[> In computeConnectivity at 80
-  In serverAdjMainScript at 189] 
-Elapsed time is 0.532961 seconds.
+On 118 out of 240 to analyze.
+On 119 out of 240 to analyze.
+On 120 out of 240 to analyze.
+On 121 out of 240 to analyze.
+On 122 out of 240 to analyze.
+me is 0.532961 seconds.
 Saved file: EZT045_seiz001_46_before37500.mat
 [Warning: Integer operands are required for colon operator when used as index] 
 [> In computeConnectivity at 80

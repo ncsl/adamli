@@ -45,9 +45,9 @@ On 28 out of 240 to analyze.
 On 29 out of 240 to analyze.
 On 30 out of 240 to analyze.
 On 31 out of 240 to analyze.
-On 32 out of 120 to analyze.
-2 seconds.
-Saved file: pt7sz22_11_before55000.mat
+On 32 out of 240 to analyze.
+On 33 out of 480 to analyze.
+2_11_before55000.mat
 Elapsed time is 1.969291 seconds.
 Saved file: pt7sz22_12_before54500.mat
 Elapsed time is 2.041369 seconds.
@@ -390,3 +390,13 @@ On 115 out of 120 to analyze.
 On 116 out of 120 to analyze.
 On 117 out of 120 to analyze.
 On 118 out of 120 to analyze.
+On 119 out of 120 to analyze.
+On 120 out of 120 to analyze.
+Elapsed time is 11231.122411 seconds.
+
+num_channels =
+
+   101
+
+On 1 out of 120 to analyze.
+On 2 out of 120 to analyze.

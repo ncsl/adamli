@@ -197,19 +197,15 @@ On 215 out of 240 to analyze.
 On 216 out of 240 to analyze.
 On 217 out of 240 to analyze.
 On 218 out of 240 to analyze.
+On 219 out of 240 to analyze.
+On 220 out of 240 to analyze.
+On 221 out of 240 to analyze.
+On 222 out of 240 to analyze.
+On 223 out of 240 to analyze.
+On 224 out of 240 to analyze.
 
-On 220 out of 480 to analyze.
+On 226 out of 480 to analyze.
  120 to analyze.
-On 106 out of 120 to analyze.
-On 107 out of 120 to analyze.
-On 108 out of 120 to analyze.
-On 109 out of 120 to analyze.
-On 110 out of 120 to analyze.
-On 111 out of 120 to analyze.
-On 112 out of 120 to analyze.
-On 113 out of 120 to analyze.
-On 114 out of 120 to analyze.
-11 out of 120 to analyze.
 On 112 out of 120 to analyze.
 On 113 out of 120 to analyze.
 On 114 out of 120 to analyze.
@@ -219,7 +215,11 @@ On 117 out of 120 to analyze.
 On 118 out of 120 to analyze.
 On 119 out of 120 to analyze.
 On 120 out of 120 to analyze.
-Elapsed time is 5583.089554 seconds.
+Elapsed time is 5901.018003 seconds.
+of 120 to analyze.
+On 119 out of 120 to analyze.
+On 120 out of 120 to analyze.
+Elapsed time is 5587.576443 seconds.
 r operands are required for colon operator when used as index] 
 [> In computeConnectivity at 80
   In serverAdjMainScript at 189] 
