@@ -1,5 +1,5 @@
 #!/bin/bash -l
-#PBS -N compute_adjacency_mat_250window
+#PBS -N compute_adjacency_mat
 #PBS -l nodes=3:ppn=8
 #PBS -l walltime=14:00:00
 #PBS -M ali39@jhu.edu
@@ -11,9 +11,9 @@
 #PBS -o /home/ali/adamli/fragility_dataanalysis/server/_log/test.out
 cd /home/ali/adamli/fragility_dataanalysis/server
 
-# patients listed 5 per row 'pt1sz2' 'pt1sz3' 'pt2sz1' 'pt2sz3' 'pt7sz19'\
- # 'pt7sz21' 'pt7sz22' 'JH105sz1'
-patients=('EZT005seiz001' 'EZT005seiz002'\
+# patients listed 5 per row
+patients=('pt1sz2' 'pt1sz3' 'pt2sz1' 'pt2sz3' 'pt7sz19'\
+ 'pt7sz21' 'pt7sz22' 'JH105sz1' 'EZT005seiz001' 'EZT005seiz002'\
  'EZT007seiz001' 'EZT007seiz002' 'EZT019seiz001' 'EZT019seiz002' 'EZT045seiz001'\
  'EZT045seiz002' 'EZT090seiz002' 'EZT090seiz003')
 
