@@ -73,20 +73,22 @@ On 57 out of 480 to analyze.
 On 58 out of 480 to analyze.
 On 59 out of 480 to analyze.
 On 60 out of 480 to analyze.
-On 60 out of 240 to analyze.
-On 61 out of 120 to analyze.
-On 62 out of 120 to analyze.
-On 63 out of 120 to analyze.
-t
-Elapsed time is 1.331971 seconds.
-Saved file: pt1sz2_24_before48500.mat
-Elapsed time is 1.697516 seconds.
-Saved file: pt1sz2_25_before48000.mat
-Elapsed time is 1.476248 seconds.
-Saved file: pt1sz2_26_before47500.mat
-Elapsed time is 1.141948 seconds.
-Saved file: pt1sz2_27_before47000.mat
-Elapsed time is 1.598067 seconds.
+On 61 out of 480 to analyze.
+On 62 out of 480 to analyze.
+On 63 out of 480 to analyze.
+On 64 out of 480 to analyze.
+On 65 out of 480 to analyze.
+On 66 out of 480 to analyze.
+On 67 out of 480 to analyze.
+On 68 out of 480 to analyze.
+On 69 out of 480 to analyze.
+On 70 out of 480 to analyze.
+On 71 out of 480 to analyze.
+On 71 out of 240 to analyze.
+On 72 out of 120 to analyze.
+On 73 out of 120 to analyze.
+On 74 out of 120 to analyze.
+nds.
 Saved file: pt1sz2_28_before46500.mat
 Elapsed time is 1.436166 seconds.
 Saved file: pt1sz2_29_before46000.mat
@@ -382,3 +384,32 @@ On 101 out of 120 to analyze.
 On 102 out of 120 to analyze.
 On 103 out of 120 to analyze.
 On 104 out of 120 to analyze.
+On 105 out of 120 to analyze.
+On 106 out of 120 to analyze.
+On 107 out of 120 to analyze.
+On 108 out of 120 to analyze.
+On 109 out of 120 to analyze.
+On 110 out of 120 to analyze.
+On 111 out of 120 to analyze.
+On 112 out of 120 to analyze.
+On 113 out of 120 to analyze.
+On 114 out of 120 to analyze.
+On 115 out of 120 to analyze.
+On 116 out of 120 to analyze.
+On 117 out of 120 to analyze.
+On 118 out of 120 to analyze.
+On 119 out of 120 to analyze.
+On 120 out of 120 to analyze.
+Elapsed time is 7614.644811 seconds.
+
+num_channels =
+
+    86
+
+On 1 out of 120 to analyze.
+On 2 out of 120 to analyze.
+On 3 out of 120 to analyze.
+On 4 out of 120 to analyze.
+On 5 out of 120 to analyze.
+On 6 out of 120 to analyze.
+On 7 out of 120 to analyze.

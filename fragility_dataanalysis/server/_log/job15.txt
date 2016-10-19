@@ -194,37 +194,55 @@ On 88 out of 120 to analyze.
 On 89 out of 120 to analyze.
 On 90 out of 120 to analyze.
 On 91 out of 120 to analyze.
-On 92 ouOn 211 out of 240 to On 93 outOn 212 out of 240 toOn 94 out of 120 to analyze.
+On 92 out of 120 to analyze.
+On 93 out of 120 to analyze.
+On 94 out of 120 to analyze.
 On 95 out of 120 to analyze.
 On 96 out of 120 to analyze.
 On 97 out of 120 to analyze.
 On 98 out of 120 to analyze.
-Integer operands are required for colon operator when used as index] 
-[> In computeConnectivity at 80
-  In serverAdjMainScript at 189] 
-Elapsed time is 0.616323 seconds.
-Saved file: EZT045_seiz002_28_before46500.mat
-[Warning: Integer operands are required for colon operator when used as index] 
-[> In computeConnectivity at 80
-  In serverAdjMainScript at 189] 
-Elapsed time is 0.652821 seconds.
-Saved file: EZT045_seiz002_29_before46000.mat
-[Warning: Integer operands are required for colon operator when used as index] 
-[> In computeConnectivity at 80
-  In serverAdjMainScript at 189] 
-Elapsed time is 0.654546 seconds.
-Saved file: EZT045_seiz002_30_before45500.mat
-[Warning: Integer operands are required for colon operator when used as index] 
-[> In computeConnectivity at 80
-  In serverAdjMainScript at 189] 
-Elapsed time is 0.647218 seconds.
-Saved file: EZT045_seiz002_31_before45000.mat
-[Warning: Integer operands are required for colon operator when used as index] 
-[> In computeConnectivity at 80
-  In serverAdjMainScript at 189] 
-Elapsed time is 0.620656 seconds.
-Saved file: EZT045_seiz002_32_before44500.mat
-[Warning: Integer operands are required for colon operator when used as index] 
+On 99 out of 120 to analyze.
+On 100 out of 120 to analyze.
+On 101 out of 120 to analyze.
+On 102 out of 120 to analyze.
+On 103 out of 120 to analyze.
+On 104 out of 120 to analyze.
+On 105 out of 120 to analyze.
+On 106 out of 120 to analyze.
+On 107 out of 120 to analyze.
+On 108 out of 120 to analyze.
+On 109 out of 120 to analyze.
+On 110 out of 120 to analyze.
+On 111 out of 120 to analyze.
+On 112 out of 120 to analyze.
+On 113 out of 120 to analyze.
+On 114 out of 120 to analyze.
+On 115 out of 120 to analyze.
+On 116 out of 120 to analyze.
+On 117 out of 120 to analyze.
+On 118 out of 120 to analyze.
+On 119 out of 120 to analyze.
+On 120 out of 120 to analyze.
+Elapsed time is 4265.012152 seconds.
+analyze.
+Elapsed time is 8278.519990 seconds.
+
+num_channels =
+
+    59OnOn 1 out of 240 to analyze.
+On 2 out of 240 to analyze.
+On 3 out of 240 to analyze.
+On 4 out of 240 to analyze.
+On 5 out of 240 to analyze.
+On 6 out of 240 to analyze.
+On 7 out of 240 to analyze.
+On 8 out of 240 to analyze.
+On 9 out of 240 to analyze.
+On 10 out of 240 to analyze.
+On 11 out of 240 to analyze.
+On 12 out of 240 to analyze.
+On 13 out of 240 toOn 256 out of 480 to analyze.
+er operands are required for colon operator when used as index] 
 [> In computeConnectivity at 80
   In serverAdjMainScript at 189] 
 Elapsed time is 0.550127 seconds.

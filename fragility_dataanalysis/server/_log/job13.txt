@@ -145,30 +145,39 @@ On 128 out of 240 to analyze.
 On 129 out of 240 to analyze.
 On 130 out of 240 to analyze.
 On 131 out of 240 to analyze.
- to analyze.
-On 11 out of 120 to analyze.
-On 12 out of 120 to analyze.
-On 13 out of 120 to analyze.
-On 14 out of 120 to analyze.
-On 15 out of 120 to analyze.
-On 16 out of 120 to analyze.
-is 1.059650 seconds.
-Saved file: EZT019_seiz002_17_before52000.mat
-[Warning: Integer operands are required for colon operator when used as index] 
-[> In computeConnectivity at 80
-  In serverAdjMainScript at 189] 
-Elapsed time is 1.244222 seconds.
-Saved file: EZT019_seiz002_18_before51500.mat
-[Warning: Integer operands are required for colon operator when used as index] 
-[> In computeConnectivity at 80
-  In serverAdjMainScript at 189] 
-Elapsed time is 1.220634 seconds.
-Saved file: EZT019_seiz002_19_before51000.mat
-[Warning: Integer operands are required for colon operator when used as index] 
-[> In computeConnectivity at 80
-  In serverAdjMainScript at 189] 
-Elapsed time is 1.025114 seconds.
-Saved file: EZT019_seiz002_20_before50500.mat
+On 132 out of 240 to analyze.
+On 133 out of 480 to analyze.
+On 134 out of 480 to analyze.
+On 135 out of 480 to analyze.
+On 136 out of 480 to analyze.
+On 137 out of 240 to analyze.
+On 138 out of 240 to analyze.
+On 139 out of 240 to analyze.
+On 140 out of 240 to analyze.
+On 141 out of 240 to analyze.
+On 142 out of 240 to analyze.
+On 143 out of 240 to analyze.
+On 144 out of 240 to analyze.
+On 145 out of 240 to analyze.
+On 146 out of 240 to analyze.
+On 147 out of 240 to analyze.
+On 148 out of 240 to analyze.
+On 149 out of 480 to analyze.
+On 150 out of 480 to analyze.
+On 151 out of 480 to analyze.
+On 152 out of 480 to analyze.
+On 153 out of 240 to analyze.
+On 154 out of 240 to analyze.
+On 155 out of 240 to analyze.
+f 120 to analyze.
+On 36 out of 120 to analyze.
+On 37 out of 120 to analyze.
+On 38 out of 120 to analyze.
+On 39 out of 120 to analyze.
+On 40 out of 120 to analyze.
+On 41 out of 120 to analyze.
+On 42 out of 120 to analyze.
+at
 [Warning: Integer operands are required for colon operator when used as index] 
 [> In computeConnectivity at 80
   In serverAdjMainScript at 189] 

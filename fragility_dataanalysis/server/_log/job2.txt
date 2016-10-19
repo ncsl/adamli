@@ -124,32 +124,27 @@ On 110 out of 120 to analyze.
 On 111 out of 120 to analyze.
 On 112 out of 120 to analyze.
 On 113 out of 120 to analyze.
-OOn 115 out of 120 to analyze.
-n 115 out of 240 to analyze.
+On 114 out of 120 to analyze.
+On 115 out of 120 to analyze.
 On 116 out of 120 to analyze.
 On 117 out of 120 to analyze.
 On 118 out of 120 to analyze.
-onds.
-Saved file: pt2sz1_46_before37500.mat
-Elapsed time is 0.678142 seconds.
-Saved file: pt2sz1_47_before37000.mat
-Elapsed time is 0.727245 seconds.
-Saved file: pt2sz1_48_before36500.mat
-Elapsed time is 0.650118 seconds.
-Saved file: pt2sz1_49_before36000.mat
-Elapsed time is 0.687125 seconds.
-Saved file: pt2sz1_50_before35500.mat
-Elapsed time is 0.668522 seconds.
-Saved file: pt2sz1_51_before35000.mat
-Elapsed time is 0.772012 seconds.
-Saved file: pt2sz1_52_before34500.mat
-Elapsed time is 0.710130 seconds.
-Saved file: pt2sz1_53_before34000.mat
-Elapsed time is 0.750993 seconds.
-Saved file: pt2sz1_54_before33500.mat
-Elapsed time is 0.769202 seconds.
-Saved file: pt2sz1_55_before33000.mat
-Elapsed time is 0.819087 seconds.
+On 119 out of 120 to analyze.
+On 120 out of 120 to analyze.
+Elapsed time is 7851.674378 seOn 122 out of 480 to analyze.
+On 123 out of 480 to analyze.
+On 124 out of 480 to analyzeOnOn 125 out of 480 to analyOn 4On 126 out of 480 to anaOn 5 oOn 127 out of 480 to aOn 6 outOn 128 out of 480 toOn 7 out oOn 129 out of 480 On 8 out of On 130 out of 48On 9 out of 12On 131 out of On 10 out of 120On 132 out of 480 to analyze.
+On 133 out of 480 to analyze.
+o analyze.
+On 13 out of 120 to analyze.
+On 14 out of 120 to analyze.
+On 15 out of 120 to analyze.
+On 16 out of 120 to analyze.
+On 17 out of 120 to analyze.
+On 18 out of 120 to analyze.
+On 19 out of 120 to analyze.
+On 20 out of 120 to analyze.
+lapsed time is 0.819087 seconds.
 Saved file: pt2sz1_56_before32500.mat
 Elapsed time is 0.689542 seconds.
 Saved file: pt2sz1_57_before32000.mat

@@ -73,22 +73,24 @@ On 56 out of 480 to analyze.
 On 57 out of 480 to analyze.
 On 58 out of 480 to analyze.
 On 59 out of 480 to analyze.
-On 60 out of 240 to analyze.
-On 61 out of 240 to analyze.
-On 62 out of 120 to analyze.
-On 63 out of 120 to analyze.
-On 64 out of 120 to analyze.
-conds.
-Saved file: pt1sz3_24_before48500.mat
-Elapsed time is 1.477354 seconds.
-Saved file: pt1sz3_25_before48000.mat
-Elapsed time is 1.625953 seconds.
-Saved file: pt1sz3_26_before47500.mat
-Elapsed time is 1.568450 seconds.
-Saved file: pt1sz3_27_before47000.mat
-Elapsed time is 1.413814 seconds.
-Saved file: pt1sz3_28_before46500.mat
-Elapsed time is 1.462133 seconds.
+On 60 out of 480 to analyze.
+On 61 out of 480 to analyze.
+On 62 out of 480 to analyze.
+On 63 out of 480 to analyze.
+On 64 out of 480 to analyze.
+On 65 out of 480 to analyze.
+On 66 out of 480 to analyze.
+On 67 out of 480 to analyze.
+On 68 out of 480 to analyze.
+On 69 out of 480 to analyze.
+On 70 out of 480 to analyze.
+On 71 out of 480 to analyze.
+On 72 out of 240 to analyze.
+On 73 out of 120 to analyze.
+On 74 out of 120 to analyze.
+On 75 out of 120 to analyze.
+On 76 out of 120 to analyze.
+ 1.462133 seconds.
 Saved file: pt1sz3_29_before46000.mat
 Elapsed time is 1.354236 seconds.
 Saved file: pt1sz3_30_before45500.mat
@@ -382,3 +384,33 @@ On 101 out of 120 to analyze.
 On 102 out of 120 to analyze.
 On 103 out of 120 to analyze.
 On 104 out of 120 to analyze.
+On 105 out of 120 to analyze.
+On 106 out of 120 to analyze.
+On 107 out of 120 to analyze.
+On 108 out of 120 to analyze.
+On 109 out of 120 to analyze.
+On 110 out of 120 to analyze.
+On 111 out of 120 to analyze.
+On 112 out of 120 to analyze.
+On 113 out of 120 to analyze.
+On 114 out of 120 to analyze.
+On 115 out of 120 to analyze.
+On 116 out of 120 to analyze.
+On 117 out of 120 to analyze.
+On 118 out of 120 to analyze.
+On 119 out of 120 to analyze.
+On 120 out of 120 to analyze.
+Elapsed time is 7574.267135 seconds.
+
+num_channels =
+
+    86
+
+On 1 out of 120 to analyze.
+On 2 out of 120 to analyze.
+On 3 out of 120 to analyze.
+On 4 out of 120 to analyze.
+On 5 out of 120 to analyze.
+On 6 out of 120 to analyze.
+On 7 out of 120 to analyze.
+On 8 out of 120 to analyze.

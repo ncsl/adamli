@@ -74,21 +74,24 @@ On 57 out of 120 to analyze.
 On 58 out of 120 to analyze.
 On 59 out of 120 to analyze.
 On 60 out of 120 to analyze.
-On 61 out of 240 to analyze.
+On 61 out of 120 to analyze.
 On 62 out of 120 to analyze.
 On 63 out of 120 to analyze.
+On 64 out of 120 to analyze.
+On 65 out of 120 to analyze.
+On 66 out of 120 to analyze.
+On 67 out of 120 to analyze.
+On 68 out of 120 to analyze.
+On 69 out of 240 to analyze.
+On 70 out of 120 to analyze.
+On 71 out of 240 to analyze.
+On 72 out of 240 to analyze.
 
-conds.
-Saved file: JH105sz1_23_before49000.mat
-Elapsed time is 1.429614 seconds.
-Saved file: JH105sz1_24_before48500.mat
-Elapsed time is 1.393462 seconds.
-Saved file: JH105sz1_25_before48000.mat
-Elapsed time is 1.463960 seconds.
-Saved file: JH105sz1_26_before47500.mat
-Elapsed time is 1.454769 seconds.
-Saved file: JH105sz1_27_before47000.mat
-Elapsed time is 1.477681 seconds.
+On 75 out of 480 to analyze.
+n 74 out of 120 to analyze.
+
+On 84 out of 120 to analyze.
+ed time is 1.477681 seconds.
 Saved file: JH105sz1_28_before46500.mat
 Elapsed time is 1.434205 seconds.
 Saved file: JH105sz1_29_before46000.mat
@@ -387,3 +390,33 @@ On 108 out of 120 to analyze.
 On 109 out of 120 to analyze.
 On 110 out of 120 to analyze.
 On 111 out of 120 to analyze.
+On 112 out of 120 to analyze.
+On 113 out of 120 to analyze.
+On 114 out of 120 to analyze.
+On 115 out of 120 to analyze.
+On 116 out of 120 to analyze.
+On 117 out of 120 to analyze.
+On 118 out of 120 to analyze.
+On 119 out of 120 to analyze.
+On 120 out of 120 to analyze.
+Elapsed time is 7176.699082 seconds.
+
+num_channels =
+
+    85
+
+On 1 out of 120 to analyze.
+On 2 out of 120 to analyze.
+On 3 out of 120 to analyze.
+On 4 out of 120 to analyze.
+On 5 out of 120 to analyze.
+On 6 out of 120 to analyze.
+On 7 out of 120 to analyze.
+On 8 out of 120 to analyze.
+On 9 out of 120 to analyze.
+On 10 out of 120 to analyze.
+On 11 out of 120 to analyze.
+On 12 out of 120 to analyze.
+On 13 out of 120 to analyze.
+On 14 out of 120 to analyze.
+On 15 out of 120 to analyze.

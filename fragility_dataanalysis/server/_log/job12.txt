@@ -135,28 +135,32 @@ On 118 out of 120 to analyze.
 On 119 out of 120 to analyze.
 On 120 out of 120 to analyze.
 Elapsed time is 6667.207382 secOn 123 out of 480 to analyze.
-On 124 out of 480 to analyze.OOn 125 out of 480 to analyzOn On 126 out of 480 to analOn 4 On 127 out of 480 to anOn 5 ouOn 128 out of 480 to On 6 out On 129 out of 480 tOn 7 out ofOn 130 out of 480On 8 out of 1On 131 out of 4On 9 out of 120On 132 out ofOn 10 out of 120 On 133 out oOn 11 out of 120 tOn 134 out On 12 out of 120 toOn 135 outOn 15 out of 120 to analyze.
- of 240 to analyze.
-analyze.
-On 15 out of 120 to analyze.
-cript at 189] 
-Elapsed time is 1.173673 seconds.
-Saved file: EZT019_seiz001_17_before52000.mat
-[Warning: Integer operands are required for colon operator when used as index] 
-[> In computeConnectivity at 80
-  In serverAdjMainScript at 189] 
-Elapsed time is 1.112673 seconds.
-Saved file: EZT019_seiz001_18_before51500.mat
-[Warning: Integer operands are required for colon operator when used as index] 
-[> In computeConnectivity at 80
-  In serverAdjMainScript at 189] 
-Elapsed time is 1.205069 seconds.
-Saved file: EZT019_seiz001_19_before51000.mat
-[Warning: Integer operands are required for colon operator when used as index] 
-[> In computeConnectivity at 80
-  In serverAdjMainScript at 189] 
-Elapsed time is 1.096023 seconds.
-Saved file: EZT019_seiz001_20_before50500.mat
+On 124 out of 480 to analyze.OOn 125 out of 480 to analyzOn On 126 out of 480 to analOn 4 On 127 out of 480 to anOn 5 ouOn 128 out of 480 to On 6 out On 129 out of 480 tOn 7 out ofOn 130 out of 480On 8 out of 1On 131 out of 4On 9 out of 120On 132 out ofOn 10 out of 120 On 133 out oOn 11 out of 120 tOn 134 out On 12 out of 120 toOn 135 outOn 13 out of 120 to On 136 ouOn 14 out of 120 to aOn 137 oOn 15 out of 120 to analyze.
+On 16 out of 120 to analyze.
+On 17 out of 120 to analyze.
+On 18 out of 120 to analyze.
+On 19 out of 120 to analyze.
+On 20 out of 120 to analyze.
+On 21 out of 120 to analyze.
+On 22 out of 120 to analyze.
+On 23 out of 120 to analyze.
+On 24 out of 120 to analyze.
+On 27 out of 120 to analyze.
+On 28 out of 120 to analyze.
+On 30 out of 120 to analyze.
+On 31 out of 120 to analyze.
+On 32 out of 120 to analyze.
+On 33 out of 120 to analyze.
+On 34 out of 120 to analyze.
+On 35 out of 120 to analyze.
+On 36 out of 120 to analyze.
+On 37 out of 120 to analyze.
+On 38 out ofOn 157 out of 480On 39 out of On 158 out of 48On 40 out of 1On 159 out of 480 to analyze.
+0 to analyze.
+On 39 out of 120 to analyze.
+On 40 out of 120 to analyze.
+On 41 out of 120 to analyze.
+T019_seiz001_20_before50500.mat
 [Warning: Integer operands are required for colon operator when used as index] 
 [> In computeConnectivity at 80
   In serverAdjMainScript at 189] 

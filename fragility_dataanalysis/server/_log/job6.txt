@@ -34,9 +34,10 @@ On 17 out of 120 to analyze.
 On 18 out of 120 to analyze.
 On 19 out of 120 to analyze.
 On 20 out of 120 to analyze.
-ved file: pt7sz22_6_before57500.mat
-Elapsed time is 2.106799 seconds.
-Saved file: pt7sz22_7_before57000.mat
+On 21 out of 120 to analyze.
+On 22 out of 120 to analyze.
+On 23 out of 480 to analyze.
+22_7_before57000.mat
 Elapsed time is 2.197628 seconds.
 Saved file: pt7sz22_8_before56500.mat
 Elapsed time is 2.232745 seconds.
@@ -332,3 +333,18 @@ On 60 out of 120 to analyze.
 On 61 out of 120 to analyze.
 On 62 out of 120 to analyze.
 On 63 out of 120 to analyze.
+On 64 out of 120 to analyze.
+On 65 out of 120 to analyze.
+On 66 out of 120 to analyze.
+On 67 out of 120 to analyze.
+On 68 out of 120 to analyze.
+On 69 out of 120 to analyze.
+On 70 out of 120 to analyze.
+On 71 out of 120 to analyze.
+On 72 out of 120 to analyze.
+On 73 out of 120 to analyze.
+On 74 out of 120 to analyze.
+On 75 out of 120 to analyze.
+On 76 out of 120 to analyze.
+On 77 out of 120 to analyze.
+On 78 out of 120 to analyze.
