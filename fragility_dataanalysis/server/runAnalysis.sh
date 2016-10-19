@@ -48,9 +48,11 @@ echo $radius
 
 # run adjacency computation and then run perturbation analysis on the same patient/seizure
 # open matlab and call functions
-matlab -logfile /home/ali/adamli/fragility_dataanalysis/server/_log/job$1.txt -nojvm -nodisplay -nosplash -r "currentpatient='$patient'; \
-	serverAdjMainScript(currentpatient, $winSize, $stepSize, $frequency_sampling);\
-	exit"
+if [ "$RUNCONNECTIVITY" -eq "1" ]; then
+	matlab -logfile /home/ali/adamli/fragility_dataanalysis/server/_log/job$1.txt -nojvm -nodisplay -nosplash -r "currentpatient='$patient'; \
+		serverAdjMainScript(currentpatient, $winSize, $stepSize, $frequency_sampling);\
+		exit"
+fi
 
 # run perturbation analysis
 matlab -logfile /home/ali/adamli/fragility_dataanalysis/server/_log/job$1.txt -nojvm -nodisplay -nosplash -r "currentpatient='$patient'; \
