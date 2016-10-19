@@ -1,5 +1,5 @@
 #!/bin/bash -l
-#PBS -N compute_adjacency_mat_250freq
+#PBS -N compute_adjacency_mat_500freq
 #PBS -l nodes=3:ppn=8
 #PBS -l walltime=14:00:00
 #PBS -M ali39@jhu.edu
