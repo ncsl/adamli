@@ -9,4 +9,17 @@ To get started, type one of these: helpwin, helpdesk, or demo.
 For product information, visit www.mathworks.com.
  
 Looking at patient: EZT019_seiz001
+
+num_channels =
+
+    79
+
+Elapsed time is 0.000862 seconds.
+  MException with properties:
+
+    identifier: 'MATLAB:UndefinedFunction'
+       message: 'Undefined function or variable "seizureStart".'
+         cause: {}
+         stack: [2x1 struct]
+
 EZT019_seiz001 is underdetermined in perturbation analysis, must use optimization techniques
