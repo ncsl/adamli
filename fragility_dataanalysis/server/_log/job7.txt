@@ -115,36 +115,40 @@ On 98 out of 120 to analyze.
 On 99 out of 120 to analyze.
 On 100 out of 120 to analyze.
 On 101 out of 120 to analyze.
-
-On 103 out of 240 to analyze.
-On 104 out of 240 to analyze.
-n 104 out of 120 to analyze.
-yze.
-On 111 out of 480 to analyze.
-yze.
- of 120 to analyze.
+On 102 out of 120 to analyze.
+On 103 out of 120 to analyze.
+On 104 out of 120 to analyze.
+On 105 out of 120 to analyze.
+On 106 out of 120 to analyze.
 On 107 out of 120 to analyze.
-z1_40_before40500.mat
-Elapsed time is 1.307524 seconds.
-Saved file: JH105sz1_41_before40000.mat
-Elapsed time is 1.456703 seconds.
-Saved file: JH105sz1_42_before39500.mat
-Elapsed time is 1.285959 seconds.
-Saved file: JH105sz1_43_before39000.mat
-Elapsed time is 1.255277 seconds.
-Saved file: JH105sz1_44_before38500.mat
-Elapsed time is 1.339897 seconds.
-Saved file: JH105sz1_45_before38000.mat
-Elapsed time is 1.538269 seconds.
-Saved file: JH105sz1_46_before37500.mat
-Elapsed time is 1.376674 seconds.
-Saved file: JH105sz1_47_before37000.mat
-Elapsed time is 1.252363 seconds.
-Saved file: JH105sz1_48_before36500.mat
-Elapsed time is 1.504008 seconds.
-Saved file: JH105sz1_49_before36000.mat
-Elapsed time is 1.318871 seconds.
-Saved file: JH105sz1_50_before35500.mat
+On 108 out of 120 to analyze.
+On 109 out of 120 to analyze.
+On 110 out of 120 to analyze.
+On 111 out of 120 to analyze.
+On 112 out of 120 to analyze.
+On 113 out of 120 to analyze.
+On 114 out of 120 to analyze.
+On 115 out of 120 to analyze.
+On 116 out of 120 to analyze.
+On 117 out of 120 to analyze.
+On 118 out of 120 to analyze.
+On 119 out of 120 to analyze.
+On 120 out of 120 to analyze.
+Elapsed time is 14601.294537 seOn 123 out of 240 to analyze.
+On 124 out of 240 to analyze.
+On 2 out of 120 to analyze.
+.
+On 126 out of 240 to analyze.
+ze.
+On 135 out of 480 to analyze.
+On 136 out of 480 to analyze.
+120 to analyze.
+19 out of 120 to analyze.
+.
+On 8 out of 120 to analyze.
+On 9 out of 120 to analyze.
+On 10 out of 120 to analyze.
+JH105sz1_50_before35500.mat
 Elapsed time is 1.279356 seconds.
 Saved file: JH105sz1_51_before35000.mat
 Elapsed time is 1.427164 seconds.
@@ -496,3 +500,37 @@ On 84 out of 120 to analyze.
 On 85 out of 120 to analyze.
 On 86 out of 120 to analyze.
 On 87 out of 120 to analyze.
+On 88 out of 120 to analyze.
+On 89 out of 120 to analyze.
+On 90 out of 120 to analyze.
+On 91 out of 120 to analyze.
+On 92 out of 120 to analyze.
+On 93 out of 120 to analyze.
+On 94 out of 120 to analyze.
+On 95 out of 120 to analyze.
+On 96 out of 120 to analyze.
+On 97 out of 120 to analyze.
+On 98 out of 120 to analyze.
+On 99 out of 120 to analyze.
+On 100 out of 120 to analyze.
+On 101 out of 120 to analyze.
+On 102 out of 120 to analyze.
+On 103 out of 120 to analyze.
+On 104 out of 120 to analyze.
+On 105 out of 120 to analyze.
+On 106 out of 120 to analyze.
+On 107 out of 120 to analyze.
+On 108 out of 120 to analyze.
+On 109 out of 120 to analyze.
+On 110 out of 120 to analyze.
+On 111 out of 120 to analyze.
+On 112 out of 120 to analyze.
+On 113 out of 120 to analyze.
+On 114 out of 120 to analyze.
+On 115 out of 120 to analyze.
+On 116 out of 120 to analyze.
+On 117 out of 120 to analyze.
+On 118 out of 120 to analyze.
+On 119 out of 120 to analyze.
+On 120 out of 120 to analyze.
+Elapsed time is 6304.176148 seconds.
