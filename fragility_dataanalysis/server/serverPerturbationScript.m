@@ -7,11 +7,12 @@ w_space = linspace(-1, 1, 101);
 
 if nargin == 0 % testing purposes
     patient='EZT007seiz001';
+    patient ='pt7sz19';
     % window paramters
     radius = 1.1;
     winSize = 250; % 500 milliseconds
     stepSize = 250; 
-    frequency_sampling = 500; % in Hz
+    frequency_sampling = 1000; % in Hz
 end
 timeRange = [60 0];
 
@@ -111,13 +112,6 @@ clinicalLabels.latespread_labels = latespread_labels;
 patient = strcat(patient_id, seizure_id);
 disp(['Looking at patient: ',patient]);
 
-% create the adjacency file directory to store the computed adj. mats
-toSaveAdjDir = fullfile(strcat('../adj_mats_win', num2str(winSize), ...
-    '_step', num2str(stepSize), '_freq', num2str(frequency_sampling), '_radius', num2str(radius)), patient);
-if ~exist(toSaveAdjDir, 'dir')
-    mkdir(toSaveAdjDir);
-end
-
 %%- grab eeg data in different ways... depending on who we got it from
 if ~seeg
     %% NIH, JHU PATIENTS
@@ -134,7 +128,7 @@ if ~seeg
     seizureStart = (onset_time - recording_start); % time seizure starts
     seizureEnd = (offset_time - recording_start); % time seizure ends
     recording_duration = size(data.data, 2);
-    num_channels = size(data.data, 1);
+    num_channels = length(included_channels);
 else
     %% EZT/SEEG PATIENTS
     patient_eeg_path = strcat('../data/Seiz_Data/', patient_id);
@@ -149,7 +143,7 @@ else
     seizureStart = (onset_time - recording_start); % time seizure starts
     seizureEnd = (offset_time - recording_start); % time seizure ends
     recording_duration = size(data.data, 2);
-    num_channels = size(data.data, 1);
+    num_channels = length(included_channels);
 end
 
 if frequency_sampling ~=1000
@@ -164,7 +158,19 @@ if seizureStart < 60 * frequency_sampling
     waitforbuttonpress;
 end
 
-try
+% only take included_channels
+if ~isempty(included_channels)
+    num_channels = num_channels;
+end
+
+% create the adjacency file directory to store the computed adj. mats
+toSaveAdjDir = fullfile(strcat('../adj_mats_win', num2str(winSize), ...
+    '_step', num2str(stepSize), '_freq', num2str(frequency_sampling)), patient);
+if ~exist(toSaveAdjDir, 'dir')
+    mkdir(toSaveAdjDir);
+end
+
+% try
     for j=1:length(perturbationTypes)
         perturbationType = perturbationTypes(j);
 
@@ -188,7 +194,7 @@ try
 
         computePerturbations(patient_id, seizure_id, perturb_args);
     end
-catch e
-    disp(e);
-    disp([patient, ' is underdetermined in perturbation analysis, must use optimization techniques']);
+% catch e
+%     disp(e);
+%     disp([patient, ' is underdetermined in perturbation analysis, must use optimization techniques']);
 end
