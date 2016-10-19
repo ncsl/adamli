@@ -45,4 +45,4 @@ fi
 
 ## 02: Call pbs job, which in turn calls run_all_pbs (put nodes to sleep) and runAnalysis
 # qsub -v patient_id=$patient_id,seizure_id=$seizure_id,perturbationType=$perturbationType run_job.pbs
-qsub -v RUN_CONNECTIVITY=$RUNCONNECTIVITY,radius=$radius,frequency_sampling=$frequency_sampling,winSize=$winSize,stepSize=$stepSize run_job.pbs
+qsub -v RUNCONNECTIVITY=$RUNCONNECTIVITY,radius=$radius,frequency_sampling=$frequency_sampling,winSize=$winSize,stepSize=$stepSize run_job.pbs
