@@ -1,6 +1,6 @@
 {Undefined function or variable "ezone_labels".
 
-Error in serverAdjMainScript (line 103)
+Error in serverPerturbationScript (line 107)
 clinicalLabels.ezone_labels = ezone_labels;
 } 
-
+=>> PBS: job killed: walltime 50445 exceeded limit 50400
