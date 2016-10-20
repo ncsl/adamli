@@ -92,7 +92,7 @@ earlyspread_indices(earlyspread_indices==0) =  [];
 latespread_indices(latespread_indices==0) = [];
 
 %% 1: Extract Processed Data and Begin Plotting and Save in finalDataDir
-final_data = load(fullfile(finalDataDir, strcat(patient, 'final_data'))); % load in final data mat
+final_data = load(fullfile(finalDataDir, strcat(patient, 'final_data.mat'))); % load in final data mat
 
 try
     patient = [patient(1:6), patient(8:end)];

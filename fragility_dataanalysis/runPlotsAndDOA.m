@@ -1,9 +1,25 @@
-clear all;
-close all;
-clc;
+% clear all;
+% close all;
+% clc;
+
+
+
+% runPlotsAndDOA(1000, 500, 500, 1.1);
+% runPlotsAndDOA(500, 500, 500, 1.1);
+% runPlotsAndDOA(250, 500, 500, 1.1);
+% runPlotsAndDOA(1000, 250, 250, 1.1);
+% runPlotsAndDOA(1000, 125, 125, 1.1);
+% 
+% runPlotsAndDOA(1000, 500, 500, 1.2);
+% runPlotsAndDOA(1000, 500, 500, 1.5);
+% runPlotsAndDOA(1000, 500, 500, 2.0);
+
+
+function runPlotsAndDOA(frequency_sampling, winSize, stepSize, radius)
 
 % settings to run
-patients = {'pt1sz2', 'pt1sz3', 'pt2sz1', 'pt2sz3', 'JH105sz1', 'pt7sz19', 'pt7sz21', 'pt7sz22',  ...
+patients = {'pt1sz2', 'pt1sz3', 'pt2sz1', 'pt2sz3', 'JH105sz1', ...
+    'pt7sz19', 'pt7sz21', 'pt7sz22',  ...
     'EZT005_seiz001', 'EZT005_seiz002', 'EZT007_seiz001', 'EZT007_seiz002', ...
     'EZT019_seiz001', 'EZT019_seiz002', 'EZT090_seiz002', 'EZT090_seiz003', ...
     };
@@ -11,11 +27,11 @@ patients = {'pt1sz2', 'pt1sz3', 'pt2sz1', 'pt2sz3', 'JH105sz1', 'pt7sz19', 'pt7s
 % patients = {'Pat2sz1p', 'Pat2sz2p', 'Pat2sz3p'};%, 'Pat16sz1p', 'Pat16sz2p', 'Pat16sz3p'};
 perturbationTypes = ['R', 'C'];
 w_space = linspace(-1, 1, 101);
-radius = 1.1;             % spectral radius
+% radius = 1.1;             % spectral radius
 threshold = 0.8;          % threshold on fragility metric
-winSize = 250;            % 500 milliseconds
-stepSize = 250; 
-frequency_sampling = 1000; % in Hz
+% winSize = 500;            % 500 milliseconds
+% stepSize = 500; 
+% frequency_sampling = 1000; % in Hz
 timeRange = [60 0];
 
 % add libraries of functions
@@ -172,7 +188,7 @@ for p=1:length(patients)
     for j=1:length(perturbationTypes)
         perturbationType = perturbationTypes(j);
 
-        toSaveFinalDataDir = fullfile(strcat('../adj_mats_win', num2str(winSize), ...
+        toSaveFinalDataDir = fullfile(strcat('./adj_mats_win', num2str(winSize), ...
         '_step', num2str(stepSize), '_freq', num2str(frequency_sampling)), strcat(perturbationType, '_finaldata', ...
             '_radius', num2str(radius)));
         
@@ -207,9 +223,14 @@ for p=1:length(patients)
         plot_args.frequency_sampling = frequency_sampling;
         
         close all
-        analyzePerturbations(patient_id, seizure_id, plot_args, clinicalLabels);
+        try
+            analyzePerturbations(patient_id, seizure_id, plot_args, clinicalLabels);
+        catch e
+            disp(e)
+            patient
+            perturbationType
+        end
     end
-    
 %     for j=1:length(perturbationTypes)
 %         perturbationType = perturbationTypes(j);
 % 
@@ -237,4 +258,5 @@ for p=1:length(patients)
 %         
 %         
 %     end
+end
 end
