@@ -1,1 +1,1 @@
-This patient has eigenvalue > radius, check it!, 
+This patient has eigenvalue > radius, check it!pt2sz1_250_125_125, 
