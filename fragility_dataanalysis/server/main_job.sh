@@ -21,14 +21,14 @@
 
 # 01: Prompt user for input that runs the analysis
 echo "Begin analysis." # print beginning statement
-printf "Enter frequency sampling: " # prompt for patient_id {pt1, pt2, ..., JH105, EZT005}
-read frequency_sampling
-printf "Enter window size: " # prompt for seizure_id {sz1, sz2, ..., seiz001, seiz003}
-read winSize
-printf "Enter step size: "
-read stepSize
-printf "Enter radius: "
-read radius
+# printf "Enter frequency sampling: " # prompt for patient_id {pt1, pt2, ..., JH105, EZT005}
+# read frequency_sampling
+# printf "Enter window size: " # prompt for seizure_id {sz1, sz2, ..., seiz001, seiz003}
+# read winSize
+# printf "Enter step size: "
+# read stepSize
+# printf "Enter radius: "
+# read radius
 printf "Run Connectivity (Enter 1, or 0)? "
 read RUNCONNECTIVITY
 printf "run sleep (Enter 1, or 0)? "
