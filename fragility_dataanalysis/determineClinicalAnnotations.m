@@ -81,17 +81,18 @@ function [included_channels, ezone_labels, earlyspread_labels, latespread_labels
         latespread_labels = {};
     elseif strcmp(patient_id, 'EZT030')
         included_channels = [];
-        ezone_labels = {};
+        ezone_labels = {'Q11', 'L6', 'M9', 'N9', 'W9'};
         earlyspread_labels = {};
         latespread_labels = {};
     elseif strcmp(patient_id, 'EZT037')
         included_channels = [];
-        ezone_labels = {};
+        ezone_labels = {'C1', 'C2', 'I1', 'I2', 'I3', 'I4', 'I5', 'B1', 'B2', 'E1', 'E2', 'E3', 'E4', ...
+            'E5', 'E6', 'E7', 'E8', 'E9', 'E10'};
         earlyspread_labels = {};
         latespread_labels = {};
     elseif strcmp(patient_id, 'EZT070')
-        included_channels = [];
-        ezone_labels = {};
+        included_channels = [1:82 84:94];
+        ezone_labels = {'B8', 'B9', 'B10', 'T4', 'T5', 'T6', 'T7'};
         earlyspread_labels = {};
         latespread_labels = {};
     end
