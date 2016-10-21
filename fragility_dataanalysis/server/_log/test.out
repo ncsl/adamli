@@ -1,95 +1,35 @@
 ----------------------------------------
-Begin PBS Prologue Wed Oct 19 16:38:29 EDT 2016 1476909509
-Job ID:		2058190.mgt
+Begin PBS Prologue Fri Oct 21 11:29:49 EDT 2016 1477063789
+Job ID:		2077668.mgt
 Username:	ali
 Group:		sarma
-Nodes:		node090 node091 node092
-End PBS Prologue Wed Oct 19 16:38:29 EDT 2016 1476909509
+Nodes:		node067 node124 node240
+End PBS Prologue Fri Oct 21 11:29:49 EDT 2016 1477063789
 ----------------------------------------
-125
-125
+500
+500
 1000
-1.1
-0
-Running perturbation computation.
-125
-125
+500
+500
+1.5
+1
 1000
-1.1
-125
-0
-125
+1.5
+1
+Running connectivity computation.
+Running connectivity computation.
+500
+500
 1000
-1.1
-0
-Running perturbation computation.
-Running perturbation computation.
-125
-125
+1.5
+1
+Running connectivity computation.
+500
+500
 1000
-1.1
-0
-Running perturbation computation.
-125
-125
-1000
-1.1
-0
-Running perturbation computation.
-125
-125
-1000
-1.1
-0
-Running perturbation computation.
-125
-125
-1000
-1.1
-0
-Running perturbation computation.
-125
-125
-1000
-1.1
-0
-Running perturbation computation.
-125
-125
-1000
-1.1
-0
-Running perturbation computation.
-
-                            < M A T L A B (R) >
-                  Copyright 1984-2013 The MathWorks, Inc.
-                    R2013a (8.1.0.604) 64-bit (glnxa64)
-                             February 15, 2013
-
-
-                            < M A T L A B (R) >
-                  Copyright 1984-2013 The MathWorks, Inc.
-                    R2013a (8.1.0.604) 64-bit (glnxa64)
-                             February 15, 2013
-
-
-                            < M A T L A B (R) >
-                  Copyright 1984-2013 The MathWorks, Inc.
-                    R2013a (8.1.0.604) 64-bit (glnxa64)
-                             February 15, 2013
-
-
-                            < M A T L A B (R) >
-                  Copyright 1984-2013 The MathWorks, Inc.
-                    R2013a (8.1.0.604) 64-bit (glnxa64)
-                             February 15, 2013
-
-
-                            < M A T L A B (R) >
-                  Copyright 1984-2013 The MathWorks, Inc.
-                    R2013a (8.1.0.604) 64-bit (glnxa64)
-                             February 15, 2013
-
+1.5
+1
+Running connectivity computation.
 
                             < M A T L A B (R) >
                   Copyright 1984-2013 The MathWorks, Inc.
@@ -115,14 +55,6 @@ Running perturbation computation.
                              February 15, 2013
 
  
-To get started, type one of these: helpwin, helpdesk, or demo.
-For product information, visit www.mathworks.com.
- 
->>  
- 
- 
- 
- 
  
  
  
@@ -130,3303 +62,819 @@ To get started, type one of these: helpwin, helpdesk, or demo.
 To get started, type one of these: helpwin, helpdesk, or demo.
 To get started, type one of these: helpwin, helpdesk, or demo.
 To get started, type one of these: helpwin, helpdesk, or demo.
-To get started, type one of these: helpwin, helpdesk, or demo.
-To get started, type one of these: helpwin, helpdesk, or demo.
-To get started, type one of these: helpwin, helpdesk, or demo.
-To get started, type one of these: helpwin, helpdesk, or demo.
 For product information, visit www.mathworks.com.
-For product information, visit www.mathworks.com.
- 
-For product information, visit www.mathworks.com.
-For product information, visit www.mathworks.com.
- 
 For product information, visit www.mathworks.com.
 For product information, visit www.mathworks.com.
  
  
  
- 
-For product information, visit www.mathworks.com.
 For product information, visit www.mathworks.com.
  
- 
-Looking at patient: pt7sz22
-Looking at patient: JH105sz1
-Looking at patient: pt7sz21
-Looking at patient: pt2sz1
-Looking at patient: pt1sz2
-Looking at patient: pt1sz3
-Looking at patient: pt2sz3
-Looking at patient: pt7sz19
+Looking at patient: JH104sz1
+Looking at patient: JH104sz3
+Looking at patient: JH104sz2
+>> The range locked to seizure to look over is -60 until 0
+Total number of channels 74
+Length of to be included channels 74
+Seizure starts at 64000 milliseconds
+Running analysis for 60000 milliseconds
+The range locked to seizure to look over is -60 until 0
+Total number of channels 74
+Length of to be included channels 74
+Seizure starts at 64000 milliseconds
+Running analysis for 60000 milliseconds
+The range locked to seizure to look over is -60 until 0
+Total number of channels 74
+Length of to be included channels 74
+Seizure starts at 65000 milliseconds
+Running analysis for 60000 milliseconds
+[Warning: Rank deficient, rank = 222, tol =  2.122068e-06.] 
+[> In computeConnectivity at 113
+  In serverAdjMainScript at 116] 
+Elapsed time is 1.243708 seconds.
+Saved file: JH104sz3_1_before60000.mat
+[Warning: Rank deficient, rank = 222, tol =  1.568763e-06.] 
+[> In computeConnectivity at 113
+  In serverAdjMainScript at 116] 
+Elapsed time is 1.288121 seconds.
+Saved file: JH104sz2_1_before60000.mat
+[Warning: Rank deficient, rank = 222, tol =  2.221086e-06.] 
+[> In computeConnectivity at 113
+  In serverAdjMainScript at 116] 
+Elapsed time is 1.314653 seconds.
+Saved file: JH104sz1_1_before60000.mat
+[Warning: Rank deficient, rank = 222, tol =  2.122068e-06.] 
+[> In computeConnectivity at 113
+  In serverAdjMainScript at 116] 
+Elapsed time is 1.175026 seconds.
+Saved file: JH104sz3_2_before59500.mat
+[Warning: Rank deficient, rank = 222, tol =  1.568764e-06.] 
+[> In computeConnectivity at 113
+  In serverAdjMainScript at 116] 
+Elapsed time is 1.250846 seconds.
+Saved file: JH104sz2_2_before59500.mat
+[Warning: Rank deficient, rank = 222, tol =  2.221084e-06.] 
+[> In computeConnectivity at 113
+  In serverAdjMainScript at 116] 
+Elapsed time is 1.254091 seconds.
+Saved file: JH104sz1_2_before59500.mat
+[Warning: Rank deficient, rank = 222, tol =  2.122068e-06.] 
+[> In computeConnectivity at 113
+  In serverAdjMainScript at 116] 
+Elapsed time is 1.216813 seconds.
+Saved file: JH104sz3_3_before59000.mat
+[Warning: Rank deficient, rank = 222, tol =  1.568765e-06.] 
+[> In computeConnectivity at 113
+  In serverAdjMainScript at 116] 
+Elapsed time is 1.300484 seconds.
+Saved file: JH104sz2_3_before59000.mat
+[Warning: Rank deficient, rank = 222, tol =  2.221076e-06.] 
+[> In computeConnectivity at 113
+  In serverAdjMainScript at 116] 
+Elapsed time is 1.294304 seconds.
+Saved file: JH104sz1_3_before59000.mat
+[Warning: Rank deficient, rank = 222, tol =  2.122064e-06.] 
+[> In computeConnectivity at 113
+  In serverAdjMainScript at 116] 
+Elapsed time is 1.202736 seconds.
+Saved file: JH104sz3_4_before58500.mat
+Elapsed time is 1.338347 seconds.
+Saved file: JH104sz3_5_before58000.mat
+[Warning: Rank deficient, rank = 222, tol =  1.568773e-06.] 
+[> In computeConnectivity at 113
+  In serverAdjMainScript at 116] 
+Elapsed time is 1.283249 seconds.
+Saved file: JH104sz2_4_before58500.mat
+[Warning: Rank deficient, rank = 222, tol =  2.221045e-06.] 
+[> In computeConnectivity at 113
+  In serverAdjMainScript at 116] 
+Elapsed time is 1.284279 seconds.
+Saved file: JH104sz1_4_before58500.mat
+Elapsed time is 1.247230 seconds.
+Saved file: JH104sz3_6_before57500.mat
+Elapsed time is 1.392195 seconds.
+Saved file: JH104sz2_5_before58000.mat
+Elapsed time is 1.381648 seconds.
+Saved file: JH104sz1_5_before58000.mat
+Elapsed time is 1.239520 seconds.
+Saved file: JH104sz3_7_before57000.mat
+Elapsed time is 1.360271 seconds.
+Saved file: JH104sz2_6_before57500.mat
+Elapsed time is 1.346670 seconds.
+Saved file: JH104sz1_6_before57500.mat
+Elapsed time is 1.251664 seconds.
+Saved file: JH104sz3_8_before56500.mat
+Elapsed time is 1.245270 seconds.
+Saved file: JH104sz3_9_before56000.mat
+Elapsed time is 1.345348 seconds.
+Saved file: JH104sz1_7_before57000.mat
+Elapsed time is 1.370141 seconds.
+Saved file: JH104sz2_7_before57000.mat
+Elapsed time is 1.254511 seconds.
+Saved file: JH104sz3_10_before55500.mat
+Elapsed time is 1.330359 seconds.
+Saved file: JH104sz1_8_before56500.mat
+Elapsed time is 1.376051 seconds.
+Saved file: JH104sz2_8_before56500.mat
+Elapsed time is 1.227791 seconds.
+Saved file: JH104sz3_11_before55000.mat
+Elapsed time is 1.341311 seconds.
+Saved file: JH104sz1_9_before56000.mat
+Elapsed time is 1.377012 seconds.
+Saved file: JH104sz2_9_before56000.mat
+Elapsed time is 1.235383 seconds.
+Saved file: JH104sz3_12_before54500.mat
+Elapsed time is 1.336847 seconds.
+Saved file: JH104sz1_10_before55500.mat
+Elapsed time is 1.361198 seconds.
+Saved file: JH104sz2_10_before55500.mat
+Elapsed time is 1.241729 seconds.
+Saved file: JH104sz3_13_before54000.mat
+Elapsed time is 1.239766 seconds.
+Saved file: JH104sz3_14_before53500.mat
+Elapsed time is 1.349139 seconds.
+Saved file: JH104sz1_11_before55000.mat
+Elapsed time is 1.372479 seconds.
+Saved file: JH104sz2_11_before55000.mat
+Elapsed time is 1.252680 seconds.
+Saved file: JH104sz3_15_before53000.mat
+Elapsed time is 1.339243 seconds.
+Saved file: JH104sz1_12_before54500.mat
+Elapsed time is 1.361794 seconds.
+Saved file: JH104sz2_12_before54500.mat
+Elapsed time is 1.263603 seconds.
+Saved file: JH104sz3_16_before52500.mat
+Elapsed time is 1.353374 seconds.
+Saved file: JH104sz1_13_before54000.mat
+Elapsed time is 1.363037 seconds.
+Saved file: JH104sz2_13_before54000.mat
+Elapsed time is 1.275601 seconds.
+Saved file: JH104sz3_17_before52000.mat
+Elapsed time is 1.350382 seconds.
+Saved file: JH104sz1_14_before53500.mat
+Elapsed time is 1.272168 seconds.
+Saved file: JH104sz3_18_before51500.mat
+Elapsed time is 1.380560 seconds.
+Saved file: JH104sz2_14_before53500.mat
+Elapsed time is 1.258075 seconds.
+Saved file: JH104sz3_19_before51000.mat
+Elapsed time is 1.375482 seconds.
+Saved file: JH104sz1_15_before53000.mat
+Elapsed time is 1.378037 seconds.
+Saved file: JH104sz2_15_before53000.mat
+Elapsed time is 1.262814 seconds.
+Saved file: JH104sz3_20_before50500.mat
+Elapsed time is 1.360605 seconds.
+Saved file: JH104sz1_16_before52500.mat
+Elapsed time is 1.373373 seconds.
+Saved file: JH104sz2_16_before52500.mat
+Elapsed time is 1.265654 seconds.
+Saved file: JH104sz3_21_before50000.mat
+Elapsed time is 1.381970 seconds.
+Saved file: JH104sz1_17_before52000.mat
+Elapsed time is 1.373677 seconds.
+Saved file: JH104sz2_17_before52000.mat
+Elapsed time is 1.276891 seconds.
+Saved file: JH104sz3_22_before49500.mat
+Elapsed time is 1.257347 seconds.
+Saved file: JH104sz3_23_before49000.mat
+Elapsed time is 1.385243 seconds.
+Saved file: JH104sz1_18_before51500.mat
+Elapsed time is 1.382880 seconds.
+Saved file: JH104sz2_18_before51500.mat
+Elapsed time is 1.451965 seconds.
+Saved file: JH104sz3_24_before48500.mat
+Elapsed time is 1.294838 seconds.
+Saved file: JH104sz2_19_before51000.mat
+Elapsed time is 1.493116 seconds.
+Saved file: JH104sz1_19_before51000.mat
+Elapsed time is 1.281367 seconds.
+Saved file: JH104sz3_25_before48000.mat
+Elapsed time is 1.353478 seconds.
+Saved file: JH104sz2_20_before50500.mat
+Elapsed time is 1.359882 seconds.
+Saved file: JH104sz1_20_before50500.mat
+Elapsed time is 1.266293 seconds.
+Saved file: JH104sz3_26_before47500.mat
+Elapsed time is 1.351548 seconds.
+Saved file: JH104sz2_21_before50000.mat
+Elapsed time is 1.356512 seconds.
+Saved file: JH104sz1_21_before50000.mat
+Elapsed time is 1.276953 seconds.
+Saved file: JH104sz3_27_before47000.mat
+Elapsed time is 1.249377 seconds.
+Saved file: JH104sz3_28_before46500.mat
+Elapsed time is 1.339208 seconds.
+Saved file: JH104sz2_22_before49500.mat
+Elapsed time is 1.360527 seconds.
+Saved file: JH104sz1_22_before49500.mat
+Elapsed time is 1.247944 seconds.
+Saved file: JH104sz3_29_before46000.mat
+Elapsed time is 1.348525 seconds.
+Saved file: JH104sz2_23_before49000.mat
+Elapsed time is 1.370481 seconds.
+Saved file: JH104sz1_23_before49000.mat
+Elapsed time is 1.234325 seconds.
+Saved file: JH104sz3_30_before45500.mat
+Elapsed time is 1.349190 seconds.
+Saved file: JH104sz2_24_before48500.mat
+Elapsed time is 1.368668 seconds.
+Saved file: JH104sz1_24_before48500.mat
+Elapsed time is 1.239433 seconds.
+Saved file: JH104sz3_31_before45000.mat
+Elapsed time is 1.342729 seconds.
+Saved file: JH104sz2_25_before48000.mat
+Elapsed time is 1.348877 seconds.
+Saved file: JH104sz1_25_before48000.mat
+Elapsed time is 1.253168 seconds.
+Saved file: JH104sz3_32_before44500.mat
+Elapsed time is 1.234510 seconds.
+Saved file: JH104sz3_33_before44000.mat
+Elapsed time is 1.349717 seconds.
+Saved file: JH104sz2_26_before47500.mat
+Elapsed time is 1.371575 seconds.
+Saved file: JH104sz1_26_before47500.mat
+Elapsed time is 1.241978 seconds.
+Saved file: JH104sz3_34_before43500.mat
+Elapsed time is 1.344137 seconds.
+Saved file: JH104sz2_27_before47000.mat
+Elapsed time is 1.364041 seconds.
+Saved file: JH104sz1_27_before47000.mat
+Elapsed time is 1.520664 seconds.
+Saved file: JH104sz3_35_before43000.mat
+Elapsed time is 1.257952 seconds.
+Saved file: JH104sz2_28_before46500.mat
+Elapsed time is 1.537031 seconds.
+Saved file: JH104sz1_28_before46500.mat
+Elapsed time is 1.534451 seconds.
+Saved file: JH104sz3_36_before42500.mat
+Elapsed time is 1.276693 seconds.
+Saved file: JH104sz2_29_before46000.mat
+Elapsed time is 1.517915 seconds.
+Saved file: JH104sz1_29_before46000.mat
+Elapsed time is 1.265394 seconds.
+Saved file: JH104sz2_30_before45500.mat
+Elapsed time is 1.554682 seconds.
+Saved file: JH104sz3_37_before42000.mat
+Elapsed time is 1.508015 seconds.
+Saved file: JH104sz1_30_before45500.mat
+Elapsed time is 1.264930 seconds.
+Saved file: JH104sz2_31_before45000.mat
+Elapsed time is 1.549301 seconds.
+Saved file: JH104sz3_38_before41500.mat
+Elapsed time is 1.508689 seconds.
+Saved file: JH104sz1_31_before45000.mat
+Elapsed time is 1.276300 seconds.
+Saved file: JH104sz2_32_before44500.mat
+Elapsed time is 1.529667 seconds.
+Saved file: JH104sz3_39_before41000.mat
+Elapsed time is 1.271735 seconds.
+Saved file: JH104sz2_33_before44000.mat
+Elapsed time is 1.520247 seconds.
+Saved file: JH104sz1_32_before44500.mat
+Elapsed time is 1.538052 seconds.
+Saved file: JH104sz3_40_before40500.mat
+Elapsed time is 1.266876 seconds.
+Saved file: JH104sz2_34_before43500.mat
+Elapsed time is 1.513623 seconds.
+Saved file: JH104sz1_33_before44000.mat
+Elapsed time is 1.237713 seconds.
+Saved file: JH104sz2_35_before43000.mat
+Elapsed time is 1.551636 seconds.
+Saved file: JH104sz3_41_before40000.mat
+Elapsed time is 1.506491 seconds.
+Saved file: JH104sz1_34_before43500.mat
+Elapsed time is 1.242797 seconds.
+Saved file: JH104sz2_36_before42500.mat
+Elapsed time is 1.562814 seconds.
+Saved file: JH104sz3_42_before39500.mat
+Elapsed time is 1.495920 seconds.
+Saved file: JH104sz1_35_before43000.mat
+Elapsed time is 1.461023 seconds.
+Saved file: JH104sz2_37_before42000.mat
+Elapsed time is 1.235232 seconds.
+Saved file: JH104sz3_43_before39000.mat
+Elapsed time is 1.550765 seconds.
+Saved file: JH104sz1_36_before42500.mat
+Elapsed time is 1.474497 seconds.
+Saved file: JH104sz2_38_before41500.mat
+Elapsed time is 1.245684 seconds.
+Saved file: JH104sz3_44_before38500.mat
+Elapsed time is 1.517453 seconds.
+Saved file: JH104sz1_37_before42000.mat
+Elapsed time is 1.245323 seconds.
+Saved file: JH104sz3_45_before38000.mat
+Elapsed time is 1.480508 seconds.
+Saved file: JH104sz2_39_before41000.mat
+Elapsed time is 1.241212 seconds.
+Saved file: JH104sz3_46_before37500.mat
+Elapsed time is 1.483584 seconds.
+Saved file: JH104sz1_38_before41500.mat
+Elapsed time is 1.456055 seconds.
+Saved file: JH104sz2_40_before40500.mat
+Elapsed time is 1.232542 seconds.
+Saved file: JH104sz3_47_before37000.mat
+Elapsed time is 1.456578 seconds.
+Saved file: JH104sz1_39_before41000.mat
+Elapsed time is 1.440869 seconds.
+Saved file: JH104sz2_41_before40000.mat
+Elapsed time is 1.237342 seconds.
+Saved file: JH104sz3_48_before36500.mat
+Elapsed time is 1.432365 seconds.
+Saved file: JH104sz1_40_before40500.mat
+Elapsed time is 1.423927 seconds.
+Saved file: JH104sz2_42_before39500.mat
+Elapsed time is 1.250537 seconds.
+Saved file: JH104sz3_49_before36000.mat
+Elapsed time is 1.240124 seconds.
+Saved file: JH104sz3_50_before35500.mat
+Elapsed time is 1.428820 seconds.
+Saved file: JH104sz1_41_before40000.mat
+Elapsed time is 1.411182 seconds.
+Saved file: JH104sz2_43_before39000.mat
+Elapsed time is 1.262383 seconds.
+Saved file: JH104sz3_51_before35000.mat
+Elapsed time is 1.409301 seconds.
+Saved file: JH104sz1_42_before39500.mat
+Elapsed time is 1.393445 seconds.
+Saved file: JH104sz2_44_before38500.mat
+Elapsed time is 1.259156 seconds.
+Saved file: JH104sz3_52_before34500.mat
+Elapsed time is 1.405276 seconds.
+Saved file: JH104sz1_43_before39000.mat
+Elapsed time is 1.396370 seconds.
+Saved file: JH104sz2_45_before38000.mat
+Elapsed time is 1.268351 seconds.
+Saved file: JH104sz3_53_before34000.mat
+Elapsed time is 1.386777 seconds.
+Saved file: JH104sz1_44_before38500.mat
+Elapsed time is 1.384182 seconds.
+Saved file: JH104sz2_46_before37500.mat
+Elapsed time is 1.283955 seconds.
+Saved file: JH104sz3_54_before33500.mat
+Elapsed time is 1.251253 seconds.
+Saved file: JH104sz3_55_before33000.mat
+Elapsed time is 1.393810 seconds.
+Saved file: JH104sz1_45_before38000.mat
+Elapsed time is 1.390490 seconds.
+Saved file: JH104sz2_47_before37000.mat
+Elapsed time is 1.269111 seconds.
+Saved file: JH104sz3_56_before32500.mat
+Elapsed time is 1.386832 seconds.
+Saved file: JH104sz1_46_before37500.mat
+Elapsed time is 1.368270 seconds.
+Saved file: JH104sz2_48_before36500.mat
+Elapsed time is 1.260268 seconds.
+Saved file: JH104sz3_57_before32000.mat
+Elapsed time is 1.388642 seconds.
+Saved file: JH104sz1_47_before37000.mat
+Elapsed time is 1.369880 seconds.
+Saved file: JH104sz2_49_before36000.mat
+Elapsed time is 1.257224 seconds.
+Saved file: JH104sz3_58_before31500.mat
+Elapsed time is 1.368006 seconds.
+Saved file: JH104sz1_48_before36500.mat
+Elapsed time is 1.251426 seconds.
+Saved file: JH104sz3_59_before31000.mat
+Elapsed time is 1.374763 seconds.
+Saved file: JH104sz2_50_before35500.mat
+Elapsed time is 1.253517 seconds.
+Saved file: JH104sz3_60_before30500.mat
+Elapsed time is 1.399383 seconds.
+Saved file: JH104sz1_49_before36000.mat
+Elapsed time is 1.371719 seconds.
+Saved file: JH104sz2_51_before35000.mat
+Elapsed time is 1.238253 seconds.
+Saved file: JH104sz3_61_before30000.mat
+Elapsed time is 1.387636 seconds.
+Saved file: JH104sz1_50_before35500.mat
+Elapsed time is 1.367700 seconds.
+Saved file: JH104sz2_52_before34500.mat
+Elapsed time is 1.243308 seconds.
+Saved file: JH104sz3_62_before29500.mat
+Elapsed time is 1.378294 seconds.
+Saved file: JH104sz1_51_before35000.mat
+Elapsed time is 1.356116 seconds.
+Saved file: JH104sz2_53_before34000.mat
+Elapsed time is 1.255665 seconds.
+Saved file: JH104sz3_63_before29000.mat
+Elapsed time is 1.241471 seconds.
+Saved file: JH104sz3_64_before28500.mat
+Elapsed time is 1.387540 seconds.
+Saved file: JH104sz1_52_before34500.mat
+Elapsed time is 1.361837 seconds.
+Saved file: JH104sz2_54_before33500.mat
+Elapsed time is 1.245643 seconds.
+Saved file: JH104sz3_65_before28000.mat
+Elapsed time is 1.369770 seconds.
+Saved file: JH104sz1_53_before34000.mat
+Elapsed time is 1.355171 seconds.
+Saved file: JH104sz2_55_before33000.mat
+Elapsed time is 1.238544 seconds.
+Saved file: JH104sz3_66_before27500.mat
+Elapsed time is 1.263415 seconds.
+Saved file: JH104sz2_56_before32500.mat
+Elapsed time is 1.646309 seconds.
+Saved file: JH104sz1_54_before33500.mat
+Elapsed time is 1.518784 seconds.
+Saved file: JH104sz3_67_before27000.mat
+Elapsed time is 1.246881 seconds.
+Saved file: JH104sz2_57_before32000.mat
+Elapsed time is 1.634016 seconds.
+Saved file: JH104sz1_55_before33000.mat
+Elapsed time is 1.515326 seconds.
+Saved file: JH104sz3_68_before26500.mat
+Elapsed time is 1.243616 seconds.
+Saved file: JH104sz2_58_before31500.mat
+Elapsed time is 1.614035 seconds.
+Saved file: JH104sz1_56_before32500.mat
+Elapsed time is 1.513232 seconds.
+Saved file: JH104sz3_69_before26000.mat
+Elapsed time is 1.255474 seconds.
+Saved file: JH104sz2_59_before31000.mat
+Elapsed time is 1.596531 seconds.
+Saved file: JH104sz1_57_before32000.mat
+Elapsed time is 1.254889 seconds.
+Saved file: JH104sz2_60_before30500.mat
+Elapsed time is 1.517346 seconds.
+Saved file: JH104sz3_70_before25500.mat
+Elapsed time is 1.254635 seconds.
+Saved file: JH104sz2_61_before30000.mat
+Elapsed time is 1.583308 seconds.
+Saved file: JH104sz1_58_before31500.mat
+Elapsed time is 1.504625 seconds.
+Saved file: JH104sz3_71_before25000.mat
+Elapsed time is 1.252006 seconds.
+Saved file: JH104sz2_62_before29500.mat
+Elapsed time is 1.544108 seconds.
+Saved file: JH104sz1_59_before31000.mat
+Elapsed time is 1.501438 seconds.
+Saved file: JH104sz3_72_before24500.mat
+Elapsed time is 1.248316 seconds.
+Saved file: JH104sz2_63_before29000.mat
+Elapsed time is 1.509925 seconds.
+Saved file: JH104sz1_60_before30500.mat
+Elapsed time is 1.503099 seconds.
+Saved file: JH104sz3_73_before24000.mat
+Elapsed time is 1.254656 seconds.
+Saved file: JH104sz2_64_before28500.mat
+Elapsed time is 1.469894 seconds.
+Saved file: JH104sz1_61_before30000.mat
+Elapsed time is 1.486669 seconds.
+Saved file: JH104sz3_74_before23500.mat
+Elapsed time is 1.266852 seconds.
+Saved file: JH104sz2_65_before28000.mat
+Elapsed time is 1.247828 seconds.
+Saved file: JH104sz2_66_before27500.mat
+Elapsed time is 1.457167 seconds.
+Saved file: JH104sz1_62_before29500.mat
+Elapsed time is 1.477013 seconds.
+Saved file: JH104sz3_75_before23000.mat
+Elapsed time is 1.245933 seconds.
+Saved file: JH104sz2_67_before27000.mat
+Elapsed time is 1.411036 seconds.
+Saved file: JH104sz1_63_before29000.mat
+Elapsed time is 1.439659 seconds.
+Saved file: JH104sz3_76_before22500.mat
+Elapsed time is 1.235576 seconds.
+Saved file: JH104sz2_68_before26500.mat
+Elapsed time is 1.394932 seconds.
+Saved file: JH104sz1_64_before28500.mat
+Elapsed time is 1.446003 seconds.
+Saved file: JH104sz3_77_before22000.mat
+Elapsed time is 1.239774 seconds.
+Saved file: JH104sz2_69_before26000.mat
+Elapsed time is 1.401897 seconds.
+Saved file: JH104sz1_65_before28000.mat
+Elapsed time is 1.435832 seconds.
+Saved file: JH104sz3_78_before21500.mat
+Elapsed time is 1.251512 seconds.
+Saved file: JH104sz2_70_before25500.mat
+Elapsed time is 1.239076 seconds.
+Saved file: JH104sz2_71_before25000.mat
+Elapsed time is 1.395116 seconds.
+Saved file: JH104sz1_66_before27500.mat
+Elapsed time is 1.433511 seconds.
+Saved file: JH104sz3_79_before21000.mat
+Elapsed time is 1.247967 seconds.
+Saved file: JH104sz2_72_before24500.mat
+Elapsed time is 1.378473 seconds.
+Saved file: JH104sz1_67_before27000.mat
+Elapsed time is 1.414444 seconds.
+Saved file: JH104sz3_80_before20500.mat
+Elapsed time is 1.234914 seconds.
+Saved file: JH104sz2_73_before24000.mat
+Elapsed time is 1.381246 seconds.
+Saved file: JH104sz1_68_before26500.mat
+Elapsed time is 1.423064 seconds.
+Saved file: JH104sz3_81_before20000.mat
+Elapsed time is 1.244158 seconds.
+Saved file: JH104sz2_74_before23500.mat
+Elapsed time is 1.379871 seconds.
+Saved file: JH104sz1_69_before26000.mat
+Elapsed time is 1.407536 seconds.
+Saved file: JH104sz3_82_before19500.mat
+Elapsed time is 1.252812 seconds.
+Saved file: JH104sz2_75_before23000.mat
+Elapsed time is 1.247765 seconds.
+Saved file: JH104sz2_76_before22500.mat
+Elapsed time is 1.372059 seconds.
+Saved file: JH104sz1_70_before25500.mat
+Elapsed time is 1.404649 seconds.
+Saved file: JH104sz3_83_before19000.mat
+Elapsed time is 1.241182 seconds.
+Saved file: JH104sz2_77_before22000.mat
+Elapsed time is 1.358266 seconds.
+Saved file: JH104sz1_71_before25000.mat
+Elapsed time is 1.394247 seconds.
+Saved file: JH104sz3_84_before18500.mat
+Elapsed time is 1.236134 seconds.
+Saved file: JH104sz2_78_before21500.mat
+Elapsed time is 1.372459 seconds.
+Saved file: JH104sz1_72_before24500.mat
+Elapsed time is 1.399169 seconds.
+Saved file: JH104sz3_85_before18000.mat
+Elapsed time is 1.248923 seconds.
+Saved file: JH104sz2_79_before21000.mat
+Elapsed time is 1.363373 seconds.
+Saved file: JH104sz1_73_before24000.mat
+Elapsed time is 1.244569 seconds.
+Saved file: JH104sz2_80_before20500.mat
+Elapsed time is 1.411949 seconds.
+Saved file: JH104sz3_86_before17500.mat
+Elapsed time is 1.252086 seconds.
+Saved file: JH104sz2_81_before20000.mat
+Elapsed time is 1.367270 seconds.
+Saved file: JH104sz1_74_before23500.mat
+Elapsed time is 1.398059 seconds.
+Saved file: JH104sz3_87_before17000.mat
+Elapsed time is 1.235310 seconds.
+Saved file: JH104sz2_82_before19500.mat
+Elapsed time is 1.357049 seconds.
+Saved file: JH104sz1_75_before23000.mat
+Elapsed time is 1.401841 seconds.
+Saved file: JH104sz3_88_before16500.mat
+Elapsed time is 1.238109 seconds.
+Saved file: JH104sz2_83_before19000.mat
+Elapsed time is 1.371032 seconds.
+Saved file: JH104sz1_76_before22500.mat
+Elapsed time is 1.396173 seconds.
+Saved file: JH104sz3_89_before16000.mat
+Elapsed time is 1.246868 seconds.
+Saved file: JH104sz2_84_before18500.mat
+Elapsed time is 1.243232 seconds.
+Saved file: JH104sz2_85_before18000.mat
+Elapsed time is 1.365363 seconds.
+Saved file: JH104sz1_77_before22000.mat
+Elapsed time is 1.397225 seconds.
+Saved file: JH104sz3_90_before15500.mat
+Elapsed time is 1.245986 seconds.
+Saved file: JH104sz2_86_before17500.mat
+Elapsed time is 1.355063 seconds.
+Saved file: JH104sz1_78_before21500.mat
+Elapsed time is 1.387226 seconds.
+Saved file: JH104sz3_91_before15000.mat
+Elapsed time is 1.236874 seconds.
+Saved file: JH104sz2_87_before17000.mat
+Elapsed time is 1.352315 seconds.
+Saved file: JH104sz1_79_before21000.mat
+Elapsed time is 1.399543 seconds.
+Saved file: JH104sz3_92_before14500.mat
+Elapsed time is 1.242354 seconds.
+Saved file: JH104sz2_88_before16500.mat
+Elapsed time is 1.365914 seconds.
+Saved file: JH104sz1_80_before20500.mat
+Elapsed time is 1.391318 seconds.
+Saved file: JH104sz3_93_before14000.mat
+Elapsed time is 1.252557 seconds.
+Saved file: JH104sz2_89_before16000.mat
+Elapsed time is 1.241738 seconds.
+Saved file: JH104sz2_90_before15500.mat
+Elapsed time is 1.362286 seconds.
+Saved file: JH104sz1_81_before20000.mat
+Elapsed time is 1.398778 seconds.
+Saved file: JH104sz3_94_before13500.mat
+Elapsed time is 1.247842 seconds.
+Saved file: JH104sz2_91_before15000.mat
+Elapsed time is 1.353712 seconds.
+Saved file: JH104sz1_82_before19500.mat
+Elapsed time is 1.387805 seconds.
+Saved file: JH104sz3_95_before13000.mat
+Elapsed time is 1.232759 seconds.
+Saved file: JH104sz2_92_before14500.mat
+Elapsed time is 1.356098 seconds.
+Saved file: JH104sz1_83_before19000.mat
+Elapsed time is 1.386006 seconds.
+Saved file: JH104sz3_96_before12500.mat
+Elapsed time is 1.247031 seconds.
+Saved file: JH104sz2_93_before14000.mat
+Elapsed time is 1.350787 seconds.
+Saved file: JH104sz1_84_before18500.mat
+Elapsed time is 1.384769 seconds.
+Saved file: JH104sz3_97_before12000.mat
+Elapsed time is 1.247416 seconds.
+Saved file: JH104sz2_94_before13500.mat
+Elapsed time is 1.243589 seconds.
+Saved file: JH104sz2_95_before13000.mat
+Elapsed time is 1.355155 seconds.
+Saved file: JH104sz1_85_before18000.mat
+Elapsed time is 1.377782 seconds.
+Saved file: JH104sz3_98_before11500.mat
+Elapsed time is 1.237867 seconds.
+Saved file: JH104sz2_96_before12500.mat
+Elapsed time is 1.344340 seconds.
+Saved file: JH104sz1_86_before17500.mat
+Elapsed time is 1.373568 seconds.
+Saved file: JH104sz3_99_before11000.mat
+Elapsed time is 1.235039 seconds.
+Saved file: JH104sz2_97_before12000.mat
+Elapsed time is 1.358215 seconds.
+Saved file: JH104sz1_87_before17000.mat
+Elapsed time is 1.373247 seconds.
+Saved file: JH104sz3_100_before10500.mat
+Elapsed time is 1.241421 seconds.
+Saved file: JH104sz2_98_before11500.mat
+Elapsed time is 1.241576 seconds.
+Saved file: JH104sz2_99_before11000.mat
+Elapsed time is 1.360413 seconds.
+Saved file: JH104sz1_88_before16500.mat
+Elapsed time is 1.378305 seconds.
+Saved file: JH104sz3_101_before10000.mat
+Elapsed time is 1.250429 seconds.
+Saved file: JH104sz2_100_before10500.mat
+Elapsed time is 1.364682 seconds.
+Saved file: JH104sz1_89_before16000.mat
+Elapsed time is 1.369314 seconds.
+Saved file: JH104sz3_102_before9500.mat
+Elapsed time is 1.233824 seconds.
+Saved file: JH104sz2_101_before10000.mat
+Elapsed time is 1.374440 seconds.
+Saved file: JH104sz1_90_before15500.mat
+Elapsed time is 1.376292 seconds.
+Saved file: JH104sz3_103_before9000.mat
+Elapsed time is 1.237121 seconds.
+Saved file: JH104sz2_102_before9500.mat
+Elapsed time is 1.370705 seconds.
+Saved file: JH104sz1_91_before15000.mat
+Elapsed time is 1.373599 seconds.
+Saved file: JH104sz3_104_before8500.mat
+Elapsed time is 1.252269 seconds.
+Saved file: JH104sz2_103_before9000.mat
+Elapsed time is 1.243434 seconds.
+Saved file: JH104sz2_104_before8500.mat
+Elapsed time is 1.376548 seconds.
+Saved file: JH104sz1_92_before14500.mat
+Elapsed time is 1.370543 seconds.
+Saved file: JH104sz3_105_before8000.mat
+Elapsed time is 1.241274 seconds.
+Saved file: JH104sz2_105_before8000.mat
+Elapsed time is 1.359913 seconds.
+Saved file: JH104sz1_93_before14000.mat
+Elapsed time is 1.355800 seconds.
+Saved file: JH104sz3_106_before7500.mat
+Elapsed time is 1.233634 seconds.
+Saved file: JH104sz2_106_before7500.mat
+Elapsed time is 1.364584 seconds.
+Saved file: JH104sz1_94_before13500.mat
+Elapsed time is 1.364305 seconds.
+Saved file: JH104sz3_107_before7000.mat
+Elapsed time is 1.252147 seconds.
+Saved file: JH104sz2_107_before7000.mat
+Elapsed time is 1.354449 seconds.
+Saved file: JH104sz1_95_before13000.mat
+Elapsed time is 1.265404 seconds.
+Saved file: JH104sz2_108_before6500.mat
+Elapsed time is 1.374833 seconds.
+Saved file: JH104sz3_108_before6500.mat
+Elapsed time is 1.263510 seconds.
+Saved file: JH104sz2_109_before6000.mat
+Elapsed time is 1.379881 seconds.
+Saved file: JH104sz1_96_before12500.mat
+Elapsed time is 1.365941 seconds.
+Saved file: JH104sz3_109_before6000.mat
+Elapsed time is 1.274467 seconds.
+Saved file: JH104sz2_110_before5500.mat
+Elapsed time is 1.365973 seconds.
+Saved file: JH104sz1_97_before12000.mat
+Elapsed time is 1.355871 seconds.
+Saved file: JH104sz3_110_before5500.mat
+Elapsed time is 1.263750 seconds.
+Saved file: JH104sz2_111_before5000.mat
+Elapsed time is 1.351980 seconds.
+Saved file: JH104sz1_98_before11500.mat
+Elapsed time is 1.353449 seconds.
+Saved file: JH104sz3_111_before5000.mat
+Elapsed time is 1.273060 seconds.
+Saved file: JH104sz2_112_before4500.mat
+Elapsed time is 1.257783 seconds.
+Saved file: JH104sz2_113_before4000.mat
+Elapsed time is 1.370029 seconds.
+Saved file: JH104sz1_99_before11000.mat
+Elapsed time is 1.360385 seconds.
+Saved file: JH104sz3_112_before4500.mat
+Elapsed time is 1.276655 seconds.
+Saved file: JH104sz2_114_before3500.mat
+Elapsed time is 1.355427 seconds.
+Saved file: JH104sz1_100_before10500.mat
+Elapsed time is 1.353648 seconds.
+Saved file: JH104sz3_113_before4000.mat
+Elapsed time is 1.261683 seconds.
+Saved file: JH104sz2_115_before3000.mat
+Elapsed time is 1.356881 seconds.
+Saved file: JH104sz1_101_before10000.mat
+Elapsed time is 1.355386 seconds.
+Saved file: JH104sz3_114_before3500.mat
+Elapsed time is 1.263952 seconds.
+Saved file: JH104sz2_116_before2500.mat
+Elapsed time is 1.338895 seconds.
+Saved file: JH104sz1_102_before9500.mat
+Elapsed time is 1.342424 seconds.
+Saved file: JH104sz3_115_before3000.mat
+Elapsed time is 1.270443 seconds.
+Saved file: JH104sz2_117_before2000.mat
+Elapsed time is 1.251817 seconds.
+Saved file: JH104sz2_118_before1500.mat
+Elapsed time is 1.350892 seconds.
+Saved file: JH104sz1_103_before9000.mat
+Elapsed time is 1.353509 seconds.
+Saved file: JH104sz3_116_before2500.mat
+Elapsed time is 1.265000 seconds.
+Saved file: JH104sz2_119_before1000.mat
+Elapsed time is 1.340561 seconds.
+Saved file: JH104sz1_104_before8500.mat
+Elapsed time is 1.347175 seconds.
+Saved file: JH104sz3_117_before2000.mat
+Elapsed time is 1.260156 seconds.
+Saved file: JH104sz2_120_before500.mat
+Looking at patient: JH104sz2
 
 num_channels =
 
-    85
+    74
 
-
-num_channels =
-
-   101
-
-
-num_channels =
-
-    64
-
-
-num_channels =
-
-    64
-
+>> Elapsed time is 1.296653 seconds.
+Saved file: JH104sz1_105_before8000.mat
+Elapsed time is 1.295047 seconds.
+Saved file: JH104sz3_118_before1500.mat
+Elapsed time is 1.260180 seconds.
+Saved file: JH104sz1_106_before7500.mat
+Elapsed time is 1.251609 seconds.
+Saved file: JH104sz3_119_before1000.mat
+Elapsed time is 1.262299 seconds.
+Saved file: JH104sz1_107_before7000.mat
+Elapsed time is 1.239868 seconds.
+Saved file: JH104sz3_120_before500.mat
+Looking at patient: JH104sz3
 
 num_channels =
 
-    86
+    74
 
-
-num_channels =
-
-   101
-
-
-num_channels =
-
-    86
-
-
-num_channels =
-
-   101
-
-On 1 out of 480 to analyze.
-On 1 out of 480 to analyze.
-On 2 out of 480 to analyze.
-On 1 out of 480 to analyze.
-On 1 out of 480 to analyze.
-On 1 out of 480 to analyze.
-On 2 out of 480 to analyze.
-On 3 out of 480 to analyze.
-On 3 out of 480 to analyze.
-On 4 out of 480 to analyze.
-On 2 out of 480 to analyze.
-On 4 out of 480 to analyze.
-On 2 out of 480 to analyze.
-On 2 out of 480 to analyze.
-On 5 out of 480 to analyze.
-On 5 out of 480 to analyze.
-On 3 out of 480 to analyze.
-On 1 out of 480 to analyze.
-On 6 out of 480 to analyze.
-On 3 out of 480 to analyze.
-On 6 out of 480 to analyze.
-On 1 out of 480 to analyze.
-On 3 out of 480 to analyze.
-On 7 out of 480 to analyze.
-On 1 out of 480 to analyze.
-On 4 out of 480 to analyze.
-On 7 out of 480 to analyze.
-On 8 out of 480 to analyze.
-On 4 out of 480 to analyze.
-On 8 out of 480 to analyze.
-On 4 out of 480 to analyze.
-On 9 out of 480 to analyze.
-On 5 out of 480 to analyze.
-On 9 out of 480 to analyze.
-On 10 out of 480 to analyze.
-On 5 out of 480 to analyze.
-On 10 out of 480 to analyze.
-On 11 out of 480 to analyze.
-On 6 out of 480 to analyze.
-On 6 out of 480 to analyze.
-On 12 out of 480 to analyze.
-On 2 out of 480 to analyze.
-On 2 out of 480 to analyze.
-On 11 out of 480 to analyze.
-On 7 out of 480 to analyze.
-On 13 out of 480 to analyze.
-On 6 out of 480 to analyze.
-On 12 out of 480 to analyze.
-On 14 out of 480 to analyze.
-On 7 out of 480 to analyze.
-On 2 out of 480 to analyze.
-On 13 out of 480 to analyze.
-On 15 out of 480 to analyze.
-On 8 out of 480 to analyze.
-On 7 out of 480 to analyze.
-On 14 out of 480 to analyze.
-On 16 out of 480 to analyze.
-On 8 out of 480 to analyze.
-On 9 out of 480 to analyze.
-On 15 out of 480 to analyze.
-On 17 out of 480 to analyze.
-On 8 out of 480 to analyze.
-On 16 out of 480 to analyze.
-On 18 out of 480 to analyze.
-On 10 out of 480 to analyze.
-On 17 out of 480 to analyze.
-On 3 out of 480 to analyze.
-On 3 out of 480 to analyze.
-On 9 out of 480 to analyze.
-On 19 out of 480 to analyze.
-On 9 out of 480 to analyze.
-On 18 out of 480 to analyze.
-On 3 out of 480 to analyze.
-On 20 out of 480 to analyze.
-On 19 out of 480 to analyze.
-On 11 out of 480 to analyze.
-On 10 out of 480 to analyze.
-On 21 out of 480 to analyze.
-On 10 out of 480 to analyze.
-On 20 out of 480 to analyze.
-On 12 out of 480 to analyze.
-On 22 out of 480 to analyze.
-On 11 out of 480 to analyze.
-On 21 out of 480 to analyze.
-On 11 out of 480 to analyze.
-On 23 out of 480 to analyze.
-On 4 out of 480 to analyze.
-On 13 out of 480 to analyze.
-On 22 out of 480 to analyze.
-On 12 out of 480 to analyze.
-On 12 out of 480 to analyze.
-On 24 out of 480 to analyze.
-On 4 out of 480 to analyze.
-On 23 out of 480 to analyze.
-On 4 out of 480 to analyze.
-On 24 out of 480 to analyze.
-On 14 out of 480 to analyze.
-On 25 out of 480 to analyze.
-On 13 out of 480 to analyze.
-On 13 out of 480 to analyze.
-On 25 out of 480 to analyze.
-On 26 out of 480 to analyze.
-On 15 out of 480 to analyze.
-On 26 out of 480 to analyze.
-On 14 out of 480 to analyze.
-On 27 out of 480 to analyze.
-On 14 out of 480 to analyze.
-On 27 out of 480 to analyze.
-On 28 out of 480 to analyze.
-On 16 out of 480 to analyze.
-On 28 out of 480 to analyze.
-On 15 out of 480 to analyze.
-On 15 out of 480 to analyze.
-On 29 out of 480 to analyze.
-On 5 out of 480 to analyze.
-On 29 out of 480 to analyze.
-On 5 out of 480 to analyze.
-On 17 out of 480 to analyze.
-On 30 out of 480 to analyze.
-On 5 out of 480 to analyze.
-On 30 out of 480 to analyze.
-On 17 out of 480 to analyze.
-On 16 out of 480 to analyze.
-On 31 out of 480 to analyze.
-On 31 out of 480 to analyze.
-On 18 out of 480 to analyze.
-On 32 out of 480 to analyze.
-On 32 out of 480 to analyze.
-On 18 out of 480 to analyze.
-On 17 out of 480 to analyze.
-On 33 out of 480 to analyze.
-On 33 out of 480 to analyze.
-On 19 out of 480 to analyze.
-On 19 out of 480 to analyze.
-On 34 out of 480 to analyze.
-On 34 out of 480 to analyze.
-On 18 out of 480 to analyze.
-On 35 out of 480 to analyze.
-On 35 out of 480 to analyze.
-On 6 out of 480 to analyze.
-On 36 out of 480 to analyze.
-On 6 out of 480 to analyze.
-On 20 out of 480 to analyze.
-On 20 out of 480 to analyze.
-On 6 out of 480 to analyze.
-On 36 out of 480 to analyze.
-On 19 out of 480 to analyze.
-On 37 out of 480 to analyze.
-On 21 out of 480 to analyze.
-On 37 out of 480 to analyze.
-On 21 out of 480 to analyze.
-On 38 out of 480 to analyze.
-On 20 out of 480 to analyze.
-On 38 out of 480 to analyze.
-On 39 out of 480 to analyze.
-On 40 out of 480 to analyze.
-On 22 out of 480 to analyze.
-On 39 out of 480 to analyze.
-On 22 out of 480 to analyze.
-On 41 out of 480 to analyze.
-On 21 out of 480 to analyze.
-On 40 out of 480 to analyze.
-On 23 out of 480 to analyze.
-On 42 out of 480 to analyze.
-On 23 out of 480 to analyze.
-On 7 out of 480 to analyze.
-On 7 out of 480 to analyze.
-On 8 out of 480 to analyze.
-On 41 out of 480 to analyze.
-On 22 out of 480 to analyze.
-On 43 out of 480 to analyze.
-On 24 out of 480 to analyze.
-On 24 out of 480 to analyze.
-On 42 out of 480 to analyze.
-On 44 out of 480 to analyze.
-On 23 out of 480 to analyze.
-On 43 out of 480 to analyze.
-On 25 out of 480 to analyze.
-On 45 out of 480 to analyze.
-On 24 out of 480 to analyze.
-On 25 out of 480 to analyze.
-On 44 out of 480 to analyze.
-On 46 out of 480 to analyze.
-On 8 out of 480 to analyze.
-On 47 out of 480 to analyze.
-On 26 out of 480 to analyze.
-On 45 out of 480 to analyze.
-On 25 out of 480 to analyze.
-On 8 out of 480 to analyze.
-On 26 out of 480 to analyze.
-On 48 out of 480 to analyze.
-On 46 out of 480 to analyze.
-On 9 out of 480 to analyze.
-On 49 out of 480 to analyze.
-On 27 out of 480 to analyze.
-On 26 out of 480 to analyze.
-On 47 out of 480 to analyze.
-On 50 out of 480 to analyze.
-On 27 out of 480 to analyze.
-On 51 out of 480 to analyze.
-On 48 out of 480 to analyze.
-On 28 out of 480 to analyze.
-On 28 out of 480 to analyze.
-On 27 out of 480 to analyze.
-On 52 out of 480 to analyze.
-On 49 out of 480 to analyze.
-On 53 out of 480 to analyze.
-On 30 out of 480 to analyze.
-On 50 out of 480 to analyze.
-On 29 out of 480 to analyze.
-On 9 out of 480 to analyze.
-On 28 out of 480 to analyze.
-On 54 out of 480 to analyze.
-On 51 out of 480 to analyze.
-On 55 out of 480 to analyze.
-On 9 out of 480 to analyze.
-On 31 out of 480 to analyze.
-On 52 out of 480 to analyze.
-On 10 out of 480 to analyze.
-On 30 out of 480 to analyze.
-On 56 out of 480 to analyze.
-On 53 out of 480 to analyze.
-On 29 out of 480 to analyze.
-On 57 out of 480 to analyze.
-On 32 out of 480 to analyze.
-On 54 out of 480 to analyze.
-On 31 out of 480 to analyze.
-On 55 out of 480 to analyze.
-On 58 out of 480 to analyze.
-On 30 out of 480 to analyze.
-On 32 out of 480 to analyze.
-On 33 out of 480 to analyze.
-On 56 out of 480 to analyze.
-On 59 out of 480 to analyze.
-On 10 out of 480 to analyze.
-On 60 out of 480 to analyze.
-On 57 out of 480 to analyze.
-On 31 out of 480 to analyze.
-On 34 out of 480 to analyze.
-On 61 out of 480 to analyze.
-On 33 out of 480 to analyze.
-On 10 out of 480 to analyze.
-On 11 out of 480 to analyze.
-On 58 out of 480 to analyze.
-On 62 out of 480 to analyze.
-On 32 out of 480 to analyze.
-On 35 out of 480 to analyze.
-On 59 out of 480 to analyze.
-On 34 out of 480 to analyze.
-On 63 out of 480 to analyze.
-On 33 out of 480 to analyze.
-On 60 out of 480 to analyze.
-On 64 out of 480 to analyze.
-On 36 out of 480 to analyze.
-On 35 out of 480 to analyze.
-On 65 out of 480 to analyze.
-On 61 out of 480 to analyze.
-On 37 out of 480 to analyze.
-On 66 out of 480 to analyze.
-On 34 out of 480 to analyze.
-On 62 out of 480 to analyze.
-On 36 out of 480 to analyze.
-On 11 out of 480 to analyze.
-On 67 out of 480 to analyze.
-On 11 out of 480 to analyze.
-On 38 out of 480 to analyze.
-On 12 out of 480 to analyze.
-On 63 out of 480 to analyze.
-On 35 out of 480 to analyze.
-On 68 out of 480 to analyze.
-On 64 out of 480 to analyze.
-On 37 out of 480 to analyze.
-On 39 out of 480 to analyze.
-On 69 out of 480 to analyze.
-On 65 out of 480 to analyze.
-On 36 out of 480 to analyze.
-On 70 out of 480 to analyze.
-On 38 out of 480 to analyze.
-On 66 out of 480 to analyze.
-On 40 out of 480 to analyze.
-On 71 out of 480 to analyze.
-On 67 out of 480 to analyze.
-On 37 out of 480 to analyze.
-On 68 out of 480 to analyze.
-On 72 out of 480 to analyze.
-On 12 out of 480 to analyze.
-On 39 out of 480 to analyze.
-On 13 out of 480 to analyze.
-On 12 out of 480 to analyze.
-On 69 out of 480 to analyze.
-On 41 out of 480 to analyze.
-On 73 out of 480 to analyze.
-On 40 out of 480 to analyze.
-On 38 out of 480 to analyze.
-On 70 out of 480 to analyze.
-On 74 out of 480 to analyze.
-On 42 out of 480 to analyze.
-On 71 out of 480 to analyze.
-On 41 out of 480 to analyze.
-On 39 out of 480 to analyze.
-On 75 out of 480 to analyze.
-On 72 out of 480 to analyze.
-On 76 out of 480 to analyze.
-On 43 out of 480 to analyze.
-On 73 out of 480 to analyze.
-On 42 out of 480 to analyze.
-On 40 out of 480 to analyze.
-On 13 out of 480 to analyze.
-On 77 out of 480 to analyze.
-On 74 out of 480 to analyze.
-On 78 out of 480 to analyze.
-On 44 out of 480 to analyze.
-On 13 out of 480 to analyze.
-On 14 out of 480 to analyze.
-On 43 out of 480 to analyze.
-On 75 out of 480 to analyze.
-On 41 out of 480 to analyze.
-On 79 out of 480 to analyze.
-On 76 out of 480 to analyze.
-On 80 out of 480 to analyze.
-On 45 out of 480 to analyze.
-On 44 out of 480 to analyze.
-On 42 out of 480 to analyze.
-On 81 out of 480 to analyze.
-On 77 out of 480 to analyze.
-On 82 out of 480 to analyze.
-On 46 out of 480 to analyze.
-On 78 out of 480 to analyze.
-On 43 out of 480 to analyze.
-On 14 out of 480 to analyze.
-On 45 out of 480 to analyze.
-On 83 out of 480 to analyze.
-On 79 out of 480 to analyze.
-On 47 out of 480 to analyze.
-On 15 out of 480 to analyze.
-On 84 out of 480 to analyze.
-On 14 out of 480 to analyze.
-On 80 out of 480 to analyze.
-On 46 out of 480 to analyze.
-On 44 out of 480 to analyze.
-On 85 out of 480 to analyze.
-On 48 out of 480 to analyze.
-On 81 out of 480 to analyze.
-On 86 out of 480 to analyze.
-On 87 out of 480 to analyze.
-On 45 out of 480 to analyze.
-On 47 out of 480 to analyze.
-On 82 out of 480 to analyze.
-On 49 out of 480 to analyze.
-On 88 out of 480 to analyze.
-On 83 out of 480 to analyze.
-On 48 out of 480 to analyze.
-On 46 out of 480 to analyze.
-On 15 out of 480 to analyze.
-On 89 out of 480 to analyze.
-On 50 out of 480 to analyze.
-On 84 out of 480 to analyze.
-On 15 out of 480 to analyze.
-On 16 out of 480 to analyze.
-On 49 out of 480 to analyze.
-On 90 out of 480 to analyze.
-On 85 out of 480 to analyze.
-On 47 out of 480 to analyze.
-On 91 out of 480 to analyze.
-On 51 out of 480 to analyze.
-On 86 out of 480 to analyze.
-On 50 out of 480 to analyze.
-On 92 out of 480 to analyze.
-On 87 out of 480 to analyze.
-On 48 out of 480 to analyze.
-On 93 out of 480 to analyze.
-On 52 out of 480 to analyze.
-On 88 out of 480 to analyze.
-On 49 out of 480 to analyze.
-On 51 out of 480 to analyze.
-On 94 out of 480 to analyze.
-On 16 out of 480 to analyze.
-On 89 out of 480 to analyze.
-On 53 out of 480 to analyze.
-On 16 out of 480 to analyze.
-On 90 out of 480 to analyze.
-On 95 out of 480 to analyze.
-On 50 out of 480 to analyze.
-On 17 out of 480 to analyze.
-On 52 out of 480 to analyze.
-On 91 out of 480 to analyze.
-On 96 out of 480 to analyze.
-On 54 out of 480 to analyze.
-On 92 out of 480 to analyze.
-On 51 out of 480 to analyze.
-On 97 out of 480 to analyze.
-On 53 out of 480 to analyze.
-On 93 out of 480 to analyze.
-On 55 out of 480 to analyze.
-On 98 out of 480 to analyze.
-On 52 out of 480 to analyze.
-On 94 out of 480 to analyze.
-On 99 out of 480 to analyze.
-On 54 out of 480 to analyze.
-On 95 out of 480 to analyze.
-On 56 out of 480 to analyze.
-On 53 out of 480 to analyze.
-On 100 out of 480 to analyze.
-On 17 out of 480 to analyze.
-On 96 out of 480 to analyze.
-On 17 out of 480 to analyze.
-On 101 out of 480 to analyze.
-On 18 out of 480 to analyze.
-On 55 out of 480 to analyze.
-On 57 out of 480 to analyze.
-On 97 out of 480 to analyze.
-On 54 out of 480 to analyze.
-On 102 out of 480 to analyze.
-On 103 out of 480 to analyze.
-On 98 out of 480 to analyze.
-On 99 out of 480 to analyze.
-On 58 out of 480 to analyze.
-On 55 out of 480 to analyze.
-On 104 out of 480 to analyze.
-On 56 out of 480 to analyze.
-On 100 out of 480 to analyze.
-On 105 out of 480 to analyze.
-On 106 out of 480 to analyze.
-On 59 out of 480 to analyze.
-On 101 out of 480 to analyze.
-On 57 out of 480 to analyze.
-On 56 out of 480 to analyze.
-On 107 out of 480 to analyze.
-On 18 out of 480 to analyze.
-On 18 out of 480 to analyze.
-On 102 out of 480 to analyze.
-On 60 out of 480 to analyze.
-On 58 out of 480 to analyze.
-On 19 out of 480 to analyze.
-On 108 out of 480 to analyze.
-On 57 out of 480 to analyze.
-On 103 out of 480 to analyze.
-On 61 out of 480 to analyze.
-On 109 out of 480 to analyze.
-On 59 out of 480 to analyze.
-On 104 out of 480 to analyze.
-On 110 out of 480 to analyze.
-On 58 out of 480 to analyze.
-On 111 out of 480 to analyze.
-On 60 out of 480 to analyze.
-On 62 out of 480 to analyze.
-On 105 out of 480 to analyze.
-On 112 out of 480 to analyze.
-On 59 out of 480 to analyze.
-On 106 out of 480 to analyze.
-On 19 out of 480 to analyze.
-On 19 out of 480 to analyze.
-On 61 out of 480 to analyze.
-On 113 out of 480 to analyze.
-On 63 out of 480 to analyze.
-On 107 out of 480 to analyze.
-On 60 out of 480 to analyze.
-On 20 out of 480 to analyze.
-On 114 out of 480 to analyze.
-On 108 out of 480 to analyze.
-On 62 out of 480 to analyze.
-On 64 out of 480 to analyze.
-On 109 out of 480 to analyze.
-On 115 out of 480 to analyze.
-On 61 out of 480 to analyze.
-On 116 out of 480 to analyze.
-On 110 out of 480 to analyze.
-On 65 out of 480 to analyze.
-On 63 out of 480 to analyze.
-On 117 out of 480 to analyze.
-On 111 out of 480 to analyze.
-On 20 out of 480 to analyze.
-On 20 out of 480 to analyze.
-On 118 out of 480 to analyze.
-On 112 out of 480 to analyze.
-On 62 out of 480 to analyze.
-On 64 out of 480 to analyze.
-On 66 out of 480 to analyze.
-On 113 out of 480 to analyze.
-On 119 out of 480 to analyze.
-On 21 out of 480 to analyze.
-On 65 out of 480 to analyze.
-On 63 out of 480 to analyze.
-On 120 out of 480 to analyze.
-On 114 out of 480 to analyze.
-On 67 out of 480 to analyze.
-On 115 out of 480 to analyze.
-On 121 out of 480 to analyze.
-On 64 out of 480 to analyze.
-On 66 out of 480 to analyze.
-On 116 out of 480 to analyze.
-On 122 out of 480 to analyze.
-On 68 out of 480 to analyze.
-On 21 out of 480 to analyze.
-On 21 out of 480 to analyze.
-On 123 out of 480 to analyze.
-On 67 out of 480 to analyze.
-On 117 out of 480 to analyze.
-On 65 out of 480 to analyze.
-On 69 out of 480 to analyze.
-On 124 out of 480 to analyze.
-On 118 out of 480 to analyze.
-On 22 out of 480 to analyze.
-On 125 out of 480 to analyze.
-On 119 out of 480 to analyze.
-On 68 out of 480 to analyze.
-On 66 out of 480 to analyze.
-On 126 out of 480 to analyze.
-On 70 out of 480 to analyze.
-On 120 out of 480 to analyze.
-On 127 out of 480 to analyze.
-On 69 out of 480 to analyze.
-On 67 out of 480 to analyze.
-On 128 out of 480 to analyze.
-On 121 out of 480 to analyze.
-On 71 out of 480 to analyze.
-On 129 out of 480 to analyze.
-On 122 out of 480 to analyze.
-On 70 out of 480 to analyze.
-On 22 out of 480 to analyze.
-On 72 out of 480 to analyze.
-On 22 out of 480 to analyze.
-On 123 out of 480 to analyze.
-On 68 out of 480 to analyze.
-On 130 out of 480 to analyze.
-On 24 out of 480 to analyze.
-On 124 out of 480 to analyze.
-On 71 out of 480 to analyze.
-On 131 out of 480 to analyze.
-On 73 out of 480 to analyze.
-On 69 out of 480 to analyze.
-On 125 out of 480 to analyze.
-On 132 out of 480 to analyze.
-On 72 out of 480 to analyze.
-On 133 out of 480 to analyze.
-On 126 out of 480 to analyze.
-On 74 out of 480 to analyze.
-On 134 out of 480 to analyze.
-On 70 out of 480 to analyze.
-On 127 out of 480 to analyze.
-On 73 out of 480 to analyze.
-On 135 out of 480 to analyze.
-On 128 out of 480 to analyze.
-On 23 out of 480 to analyze.
-On 75 out of 480 to analyze.
-On 23 out of 480 to analyze.
-On 136 out of 480 to analyze.
-On 71 out of 480 to analyze.
-On 129 out of 480 to analyze.
-On 25 out of 480 to analyze.
-On 74 out of 480 to analyze.
-On 137 out of 480 to analyze.
-On 130 out of 480 to analyze.
-On 76 out of 480 to analyze.
-On 138 out of 480 to analyze.
-On 75 out of 480 to analyze.
-On 131 out of 480 to analyze.
-On 72 out of 480 to analyze.
-On 132 out of 480 to analyze.
-On 139 out of 480 to analyze.
-On 77 out of 480 to analyze.
-On 76 out of 480 to analyze.
-On 133 out of 480 to analyze.
-On 140 out of 480 to analyze.
-On 73 out of 480 to analyze.
-On 77 out of 480 to analyze.
-On 26 out of 480 to analyze.
-On 78 out of 480 to analyze.
-On 141 out of 480 to analyze.
-On 24 out of 480 to analyze.
-On 24 out of 480 to analyze.
-On 134 out of 480 to analyze.
-On 74 out of 480 to analyze.
-On 142 out of 480 to analyze.
-On 79 out of 480 to analyze.
-On 135 out of 480 to analyze.
-On 78 out of 480 to analyze.
-On 143 out of 480 to analyze.
-On 136 out of 480 to analyze.
-On 144 out of 480 to analyze.
-On 80 out of 480 to analyze.
-On 75 out of 480 to analyze.
-On 79 out of 480 to analyze.
-On 137 out of 480 to analyze.
-On 145 out of 480 to analyze.
-On 138 out of 480 to analyze.
-On 81 out of 480 to analyze.
-On 76 out of 480 to analyze.
-On 146 out of 480 to analyze.
-On 25 out of 480 to analyze.
-On 25 out of 480 to analyze.
-On 139 out of 480 to analyze.
-On 27 out of 480 to analyze.
-On 80 out of 480 to analyze.
-On 147 out of 480 to analyze.
-On 140 out of 480 to analyze.
-On 77 out of 480 to analyze.
-On 82 out of 480 to analyze.
-On 148 out of 480 to analyze.
-On 141 out of 480 to analyze.
-On 81 out of 480 to analyze.
-On 149 out of 480 to analyze.
-On 78 out of 480 to analyze.
-On 83 out of 480 to analyze.
-On 142 out of 480 to analyze.
-On 150 out of 480 to analyze.
-On 82 out of 480 to analyze.
-On 143 out of 480 to analyze.
-On 151 out of 480 to analyze.
-On 79 out of 480 to analyze.
-On 144 out of 480 to analyze.
-On 28 out of 480 to analyze.
-On 84 out of 480 to analyze.
-On 26 out of 480 to analyze.
-On 152 out of 480 to analyze.
-On 83 out of 480 to analyze.
-On 145 out of 480 to analyze.
-On 80 out of 480 to analyze.
-On 26 out of 480 to analyze.
-On 153 out of 480 to analyze.
-On 147 out of 480 to analyze.
-On 85 out of 480 to analyze.
-On 148 out of 480 to analyze.
-On 81 out of 480 to analyze.
-On 154 out of 480 to analyze.
-On 84 out of 480 to analyze.
-On 86 out of 480 to analyze.
-On 155 out of 480 to analyze.
-On 149 out of 480 to analyze.
-On 82 out of 480 to analyze.
-On 156 out of 480 to analyze.
-On 85 out of 480 to analyze.
-On 150 out of 480 to analyze.
-On 87 out of 480 to analyze.
-On 157 out of 480 to analyze.
-On 27 out of 480 to analyze.
-On 29 out of 480 to analyze.
-On 151 out of 480 to analyze.
-On 27 out of 480 to analyze.
-On 158 out of 480 to analyze.
-On 86 out of 480 to analyze.
-On 152 out of 480 to analyze.
-On 88 out of 480 to analyze.
-On 83 out of 480 to analyze.
-On 159 out of 480 to analyze.
-On 153 out of 480 to analyze.
-On 87 out of 480 to analyze.
-On 160 out of 480 to analyze.
-On 90 out of 480 to analyze.
-On 84 out of 480 to analyze.
-On 154 out of 480 to analyze.
-On 88 out of 480 to analyze.
-On 161 out of 480 to analyze.
-On 155 out of 480 to analyze.
-On 85 out of 480 to analyze.
-On 91 out of 480 to analyze.
-On 162 out of 480 to analyze.
-On 89 out of 480 to analyze.
-On 156 out of 480 to analyze.
-On 163 out of 480 to analyze.
-On 28 out of 480 to analyze.
-On 30 out of 480 to analyze.
-On 86 out of 480 to analyze.
-On 157 out of 480 to analyze.
-On 92 out of 480 to analyze.
-On 28 out of 480 to analyze.
-On 164 out of 480 to analyze.
-On 90 out of 480 to analyze.
-On 158 out of 480 to analyze.
-On 87 out of 480 to analyze.
-On 165 out of 480 to analyze.
-On 93 out of 480 to analyze.
-On 159 out of 480 to analyze.
-On 160 out of 480 to analyze.
-On 166 out of 480 to analyze.
-On 88 out of 480 to analyze.
-On 91 out of 480 to analyze.
-On 161 out of 480 to analyze.
-On 94 out of 480 to analyze.
-On 167 out of 480 to analyze.
-On 162 out of 480 to analyze.
-On 89 out of 480 to analyze.
-On 92 out of 480 to analyze.
-On 163 out of 480 to analyze.
-On 168 out of 480 to analyze.
-On 29 out of 480 to analyze.
-On 31 out of 480 to analyze.
-On 95 out of 480 to analyze.
-On 164 out of 480 to analyze.
-On 169 out of 480 to analyze.
-On 93 out of 480 to analyze.
-On 29 out of 480 to analyze.
-On 90 out of 480 to analyze.
-On 165 out of 480 to analyze.
-On 170 out of 480 to analyze.
-On 96 out of 480 to analyze.
-On 171 out of 480 to analyze.
-On 94 out of 480 to analyze.
-On 166 out of 480 to analyze.
-On 91 out of 480 to analyze.
-On 167 out of 480 to analyze.
-On 98 out of 480 to analyze.
-On 172 out of 480 to analyze.
-On 168 out of 480 to analyze.
-On 173 out of 480 to analyze.
-On 95 out of 480 to analyze.
-On 92 out of 480 to analyze.
-On 169 out of 480 to analyze.
-On 174 out of 480 to analyze.
-On 30 out of 480 to analyze.
-On 99 out of 480 to analyze.
-On 32 out of 480 to analyze.
-On 170 out of 480 to analyze.
-On 175 out of 480 to analyze.
-On 171 out of 480 to analyze.
-On 96 out of 480 to analyze.
-On 93 out of 480 to analyze.
-On 176 out of 480 to analyze.
-On 30 out of 480 to analyze.
-On 100 out of 480 to analyze.
-On 172 out of 480 to analyze.
-On 177 out of 480 to analyze.
-On 178 out of 480 to analyze.
-On 173 out of 480 to analyze.
-On 97 out of 480 to analyze.
-On 94 out of 480 to analyze.
-On 102 out of 480 to analyze.
-On 174 out of 480 to analyze.
-On 179 out of 480 to analyze.
-On 98 out of 480 to analyze.
-On 175 out of 480 to analyze.
-On 180 out of 480 to analyze.
-On 95 out of 480 to analyze.
-On 103 out of 480 to analyze.
-On 31 out of 480 to analyze.
-On 33 out of 480 to analyze.
-On 176 out of 480 to analyze.
-On 181 out of 480 to analyze.
-On 177 out of 480 to analyze.
-On 99 out of 480 to analyze.
-On 96 out of 480 to analyze.
-On 31 out of 480 to analyze.
-On 104 out of 480 to analyze.
-On 182 out of 480 to analyze.
-On 178 out of 480 to analyze.
-On 183 out of 480 to analyze.
-On 179 out of 480 to analyze.
-On 100 out of 480 to analyze.
-On 97 out of 480 to analyze.
-On 184 out of 480 to analyze.
-On 105 out of 480 to analyze.
-On 180 out of 480 to analyze.
-On 185 out of 480 to analyze.
-On 101 out of 480 to analyze.
-On 181 out of 480 to analyze.
-On 98 out of 480 to analyze.
-On 186 out of 480 to analyze.
-On 106 out of 480 to analyze.
-On 182 out of 480 to analyze.
-On 102 out of 480 to analyze.
-On 32 out of 480 to analyze.
-On 99 out of 480 to analyze.
-On 183 out of 480 to analyze.
-On 187 out of 480 to analyze.
-On 32 out of 480 to analyze.
-On 35 out of 480 to analyze.
-On 107 out of 480 to analyze.
-On 184 out of 480 to analyze.
-On 188 out of 480 to analyze.
-On 185 out of 480 to analyze.
-On 103 out of 480 to analyze.
-On 100 out of 480 to analyze.
-On 186 out of 480 to analyze.
-On 109 out of 480 to analyze.
-On 189 out of 480 to analyze.
-On 187 out of 480 to analyze.
-On 101 out of 480 to analyze.
-On 104 out of 480 to analyze.
-On 110 out of 480 to analyze.
-On 190 out of 480 to analyze.
-On 188 out of 480 to analyze.
-On 105 out of 480 to analyze.
-On 189 out of 480 to analyze.
-On 191 out of 480 to analyze.
-On 102 out of 480 to analyze.
-On 33 out of 480 to analyze.
-On 111 out of 480 to analyze.
-On 192 out of 480 to analyze.
-On 190 out of 480 to analyze.
-On 33 out of 480 to analyze.
-On 106 out of 480 to analyze.
-On 191 out of 480 to analyze.
-On 193 out of 480 to analyze.
-On 103 out of 480 to analyze.
-On 36 out of 480 to analyze.
-On 113 out of 480 to analyze.
-On 194 out of 480 to analyze.
-On 192 out of 480 to analyze.
-On 193 out of 480 to analyze.
-On 107 out of 480 to analyze.
-On 104 out of 480 to analyze.
-On 195 out of 480 to analyze.
-On 114 out of 480 to analyze.
-On 194 out of 480 to analyze.
-On 196 out of 480 to analyze.
-On 108 out of 480 to analyze.
-On 105 out of 480 to analyze.
-On 195 out of 480 to analyze.
-On 197 out of 480 to analyze.
-On 115 out of 480 to analyze.
-On 196 out of 480 to analyze.
-On 34 out of 480 to analyze.
-On 106 out of 480 to analyze.
-On 198 out of 480 to analyze.
-On 109 out of 480 to analyze.
-On 34 out of 480 to analyze.
-On 37 out of 480 to analyze.
-On 197 out of 480 to analyze.
-On 199 out of 480 to analyze.
-On 117 out of 480 to analyze.
-On 198 out of 480 to analyze.
-On 200 out of 480 to analyze.
-On 110 out of 480 to analyze.
-On 107 out of 480 to analyze.
-On 199 out of 480 to analyze.
-On 201 out of 480 to analyze.
-On 118 out of 480 to analyze.
-On 202 out of 480 to analyze.
-On 200 out of 480 to analyze.
-On 111 out of 480 to analyze.
-On 203 out of 480 to analyze.
-On 201 out of 480 to analyze.
-On 108 out of 480 to analyze.
-On 119 out of 480 to analyze.
-On 204 out of 480 to analyze.
-On 36 out of 480 to analyze.
-On 202 out of 480 to analyze.
-On 38 out of 480 to analyze.
-On 112 out of 480 to analyze.
-On 35 out of 480 to analyze.
-On 109 out of 480 to analyze.
-On 203 out of 480 to analyze.
-On 120 out of 480 to analyze.
-On 205 out of 480 to analyze.
-On 204 out of 480 to analyze.
-On 206 out of 480 to analyze.
-On 113 out of 480 to analyze.
-On 205 out of 480 to analyze.
-On 110 out of 480 to analyze.
-On 207 out of 480 to analyze.
-On 206 out of 480 to analyze.
-On 121 out of 480 to analyze.
-On 207 out of 480 to analyze.
-On 115 out of 480 to analyze.
-On 111 out of 480 to analyze.
-On 208 out of 480 to analyze.
-On 208 out of 480 to analyze.
-On 116 out of 480 to analyze.
-On 122 out of 480 to analyze.
-On 209 out of 480 to analyze.
-On 37 out of 480 to analyze.
-On 209 out of 480 to analyze.
-On 36 out of 480 to analyze.
-On 112 out of 480 to analyze.
-On 39 out of 480 to analyze.
-On 210 out of 480 to analyze.
-On 210 out of 480 to analyze.
-On 117 out of 480 to analyze.
-On 123 out of 480 to analyze.
-On 211 out of 480 to analyze.
-On 211 out of 480 to analyze.
-On 113 out of 480 to analyze.
-On 212 out of 480 to analyze.
-On 118 out of 480 to analyze.
-On 212 out of 480 to analyze.
-On 124 out of 480 to analyze.
-On 213 out of 480 to analyze.
-On 114 out of 480 to analyze.
-On 213 out of 480 to analyze.
-On 119 out of 480 to analyze.
-On 214 out of 480 to analyze.
-On 214 out of 480 to analyze.
-On 38 out of 480 to analyze.
-On 125 out of 480 to analyze.
-On 37 out of 480 to analyze.
-On 115 out of 480 to analyze.
-On 215 out of 480 to analyze.
-On 215 out of 480 to analyze.
-On 40 out of 480 to analyze.
-On 120 out of 480 to analyze.
-On 216 out of 480 to analyze.
-On 116 out of 480 to analyze.
-On 126 out of 480 to analyze.
-On 216 out of 480 to analyze.
-On 217 out of 480 to analyze.
-On 217 out of 480 to analyze.
-On 121 out of 480 to analyze.
-On 117 out of 480 to analyze.
-On 127 out of 480 to analyze.
-On 218 out of 480 to analyze.
-On 218 out of 480 to analyze.
-On 219 out of 480 to analyze.
-On 219 out of 480 to analyze.
-On 118 out of 480 to analyze.
-On 220 out of 480 to analyze.
-On 122 out of 480 to analyze.
-On 128 out of 480 to analyze.
-On 39 out of 480 to analyze.
-On 221 out of 480 to analyze.
-On 38 out of 480 to analyze.
-On 220 out of 480 to analyze.
-On 119 out of 480 to analyze.
-On 222 out of 480 to analyze.
-On 221 out of 480 to analyze.
-On 130 out of 480 to analyze.
-On 123 out of 480 to analyze.
-On 41 out of 480 to analyze.
-On 223 out of 480 to analyze.
-On 120 out of 480 to analyze.
-On 222 out of 480 to analyze.
-On 131 out of 480 to analyze.
-On 224 out of 480 to analyze.
-On 124 out of 480 to analyze.
-On 223 out of 480 to analyze.
-On 225 out of 480 to analyze.
-On 121 out of 480 to analyze.
-On 224 out of 480 to analyze.
-On 125 out of 480 to analyze.
-On 132 out of 480 to analyze.
-On 226 out of 480 to analyze.
-On 39 out of 480 to analyze.
-On 40 out of 480 to analyze.
-On 122 out of 480 to analyze.
-On 225 out of 480 to analyze.
-On 227 out of 480 to analyze.
-On 133 out of 480 to analyze.
-On 126 out of 480 to analyze.
-On 226 out of 480 to analyze.
-On 228 out of 480 to analyze.
-On 42 out of 480 to analyze.
-On 227 out of 480 to analyze.
-On 134 out of 480 to analyze.
-On 123 out of 480 to analyze.
-On 229 out of 480 to analyze.
-On 127 out of 480 to analyze.
-On 228 out of 480 to analyze.
-On 230 out of 480 to analyze.
-On 229 out of 480 to analyze.
-On 135 out of 480 to analyze.
-On 128 out of 480 to analyze.
-On 231 out of 480 to analyze.
-On 124 out of 480 to analyze.
-On 40 out of 480 to analyze.
-On 230 out of 480 to analyze.
-On 41 out of 480 to analyze.
-On 232 out of 480 to analyze.
-On 231 out of 480 to analyze.
-On 136 out of 480 to analyze.
-On 129 out of 480 to analyze.
-On 125 out of 480 to analyze.
-On 233 out of 480 to analyze.
-On 232 out of 480 to analyze.
-On 137 out of 480 to analyze.
-On 234 out of 480 to analyze.
-On 126 out of 480 to analyze.
-On 233 out of 480 to analyze.
-On 43 out of 480 to analyze.
-On 130 out of 480 to analyze.
-On 234 out of 480 to analyze.
-On 235 out of 480 to analyze.
-On 138 out of 480 to analyze.
-On 127 out of 480 to analyze.
-On 235 out of 480 to analyze.
-On 236 out of 480 to analyze.
-On 131 out of 480 to analyze.
-On 41 out of 480 to analyze.
-On 139 out of 480 to analyze.
-On 42 out of 480 to analyze.
-On 237 out of 480 to analyze.
-On 236 out of 480 to analyze.
-On 128 out of 480 to analyze.
-On 238 out of 480 to analyze.
-On 132 out of 480 to analyze.
-On 140 out of 480 to analyze.
-On 237 out of 480 to analyze.
-On 129 out of 480 to analyze.
-On 238 out of 480 to analyze.
-On 239 out of 480 to analyze.
-On 141 out of 480 to analyze.
-On 239 out of 480 to analyze.
-On 44 out of 480 to analyze.
-On 133 out of 480 to analyze.
-On 240 out of 480 to analyze.
-On 130 out of 480 to analyze.
-On 240 out of 480 to analyze.
-On 241 out of 480 to analyze.
-On 142 out of 480 to analyze.
-On 241 out of 480 to analyze.
-On 134 out of 480 to analyze.
-On 42 out of 480 to analyze.
-On 242 out of 480 to analyze.
-On 242 out of 480 to analyze.
-On 131 out of 480 to analyze.
-On 243 out of 480 to analyze.
-On 43 out of 480 to analyze.
-On 243 out of 480 to analyze.
-On 143 out of 480 to analyze.
-On 244 out of 480 to analyze.
-On 135 out of 480 to analyze.
-On 244 out of 480 to analyze.
-On 132 out of 480 to analyze.
-On 245 out of 480 to analyze.
-On 144 out of 480 to analyze.
-On 246 out of 480 to analyze.
-On 245 out of 480 to analyze.
-On 45 out of 480 to analyze.
-On 247 out of 480 to analyze.
-On 136 out of 480 to analyze.
-On 246 out of 480 to analyze.
-On 133 out of 480 to analyze.
-On 145 out of 480 to analyze.
-On 248 out of 480 to analyze.
-On 247 out of 480 to analyze.
-On 137 out of 480 to analyze.
-On 249 out of 480 to analyze.
-On 43 out of 480 to analyze.
-On 250 out of 480 to analyze.
-On 248 out of 480 to analyze.
-On 146 out of 480 to analyze.
-On 134 out of 480 to analyze.
-On 44 out of 480 to analyze.
-On 251 out of 480 to analyze.
-On 249 out of 480 to analyze.
-On 138 out of 480 to analyze.
-On 252 out of 480 to analyze.
-On 147 out of 480 to analyze.
-On 135 out of 480 to analyze.
-On 250 out of 480 to analyze.
-On 253 out of 480 to analyze.
-On 139 out of 480 to analyze.
-On 251 out of 480 to analyze.
-On 254 out of 480 to analyze.
-On 136 out of 480 to analyze.
-On 148 out of 480 to analyze.
-On 46 out of 480 to analyze.
-On 252 out of 480 to analyze.
-On 140 out of 480 to analyze.
-On 255 out of 480 to analyze.
-On 253 out of 480 to analyze.
-On 137 out of 480 to analyze.
-On 149 out of 480 to analyze.
-On 256 out of 480 to analyze.
-On 254 out of 480 to analyze.
-On 141 out of 480 to analyze.
-On 44 out of 480 to analyze.
-On 257 out of 480 to analyze.
-On 45 out of 480 to analyze.
-On 255 out of 480 to analyze.
-On 150 out of 480 to analyze.
-On 138 out of 480 to analyze.
-On 256 out of 480 to analyze.
-On 258 out of 480 to analyze.
-On 142 out of 480 to analyze.
-On 139 out of 480 to analyze.
-On 257 out of 480 to analyze.
-On 259 out of 480 to analyze.
-On 151 out of 480 to analyze.
-On 143 out of 480 to analyze.
-On 258 out of 480 to analyze.
-On 47 out of 480 to analyze.
-On 260 out of 480 to analyze.
-On 140 out of 480 to analyze.
-On 144 out of 480 to analyze.
-On 259 out of 480 to analyze.
-On 261 out of 480 to analyze.
-On 152 out of 480 to analyze.
-On 45 out of 480 to analyze.
-On 262 out of 480 to analyze.
-On 260 out of 480 to analyze.
-On 141 out of 480 to analyze.
-On 146 out of 480 to analyze.
-On 263 out of 480 to analyze.
-On 153 out of 480 to analyze.
-On 46 out of 480 to analyze.
-On 261 out of 480 to analyze.
-On 142 out of 480 to analyze.
-On 264 out of 480 to analyze.
-On 262 out of 480 to analyze.
-On 154 out of 480 to analyze.
-On 265 out of 480 to analyze.
-On 147 out of 480 to analyze.
-On 263 out of 480 to analyze.
-On 48 out of 480 to analyze.
-On 266 out of 480 to analyze.
-On 264 out of 480 to analyze.
-On 267 out of 480 to analyze.
-On 156 out of 480 to analyze.
-On 143 out of 480 to analyze.
-On 148 out of 480 to analyze.
-On 265 out of 480 to analyze.
-On 268 out of 480 to analyze.
-On 266 out of 480 to analyze.
-On 46 out of 480 to analyze.
-On 269 out of 480 to analyze.
-On 149 out of 480 to analyze.
-On 157 out of 480 to analyze.
-On 144 out of 480 to analyze.
-On 267 out of 480 to analyze.
-On 270 out of 480 to analyze.
-On 47 out of 480 to analyze.
-On 271 out of 480 to analyze.
-On 268 out of 480 to analyze.
-On 150 out of 480 to analyze.
-On 145 out of 480 to analyze.
-On 159 out of 480 to analyze.
-On 269 out of 480 to analyze.
-On 272 out of 480 to analyze.
-On 270 out of 480 to analyze.
-On 146 out of 480 to analyze.
-On 49 out of 480 to analyze.
-On 273 out of 480 to analyze.
-On 151 out of 480 to analyze.
-On 161 out of 480 to analyze.
-On 271 out of 480 to analyze.
-On 274 out of 480 to analyze.
-On 47 out of 480 to analyze.
-On 272 out of 480 to analyze.
-On 152 out of 480 to analyze.
-On 147 out of 480 to analyze.
-On 275 out of 480 to analyze.
-On 162 out of 480 to analyze.
-On 273 out of 480 to analyze.
-On 276 out of 480 to analyze.
-On 153 out of 480 to analyze.
-On 274 out of 480 to analyze.
-On 148 out of 480 to analyze.
-On 48 out of 480 to analyze.
-On 277 out of 480 to analyze.
-On 163 out of 480 to analyze.
-On 278 out of 480 to analyze.
-On 154 out of 480 to analyze.
-On 275 out of 480 to analyze.
-On 279 out of 480 to analyze.
-On 149 out of 480 to analyze.
-On 50 out of 480 to analyze.
-On 280 out of 480 to analyze.
-On 164 out of 480 to analyze.
-On 276 out of 480 to analyze.
-On 281 out of 480 to analyze.
-On 155 out of 480 to analyze.
-On 277 out of 480 to analyze.
-On 150 out of 480 to analyze.
-On 48 out of 480 to analyze.
-On 278 out of 480 to analyze.
-On 282 out of 480 to analyze.
-On 165 out of 480 to analyze.
-On 156 out of 480 to analyze.
-On 279 out of 480 to analyze.
-On 151 out of 480 to analyze.
-On 283 out of 480 to analyze.
-On 166 out of 480 to analyze.
-On 280 out of 480 to analyze.
-On 49 out of 480 to analyze.
-On 284 out of 480 to analyze.
-On 281 out of 480 to analyze.
-On 157 out of 480 to analyze.
-On 285 out of 480 to analyze.
-On 152 out of 480 to analyze.
-On 167 out of 480 to analyze.
-On 282 out of 480 to analyze.
-On 286 out of 480 to analyze.
-On 51 out of 480 to analyze.
-On 168 out of 480 to analyze.
-On 153 out of 480 to analyze.
-On 158 out of 480 to analyze.
-On 287 out of 480 to analyze.
-On 283 out of 480 to analyze.
-On 288 out of 480 to analyze.
-On 284 out of 480 to analyze.
-On 49 out of 480 to analyze.
-On 169 out of 480 to analyze.
-On 154 out of 480 to analyze.
-On 159 out of 480 to analyze.
-On 285 out of 480 to analyze.
-On 289 out of 480 to analyze.
-On 170 out of 480 to analyze.
-On 50 out of 480 to analyze.
-On 290 out of 480 to analyze.
-On 155 out of 480 to analyze.
-On 160 out of 480 to analyze.
-On 286 out of 480 to analyze.
-On 291 out of 480 to analyze.
-On 287 out of 480 to analyze.
-On 171 out of 480 to analyze.
-On 292 out of 480 to analyze.
-On 161 out of 480 to analyze.
-On 288 out of 480 to analyze.
-On 52 out of 480 to analyze.
-On 156 out of 480 to analyze.
-On 293 out of 480 to analyze.
-On 289 out of 480 to analyze.
-On 294 out of 480 to analyze.
-On 172 out of 480 to analyze.
-On 162 out of 480 to analyze.
-On 50 out of 480 to analyze.
-On 290 out of 480 to analyze.
-On 295 out of 480 to analyze.
-On 157 out of 480 to analyze.
-On 173 out of 480 to analyze.
-On 296 out of 480 to analyze.
-On 291 out of 480 to analyze.
-On 51 out of 480 to analyze.
-On 163 out of 480 to analyze.
-On 297 out of 480 to analyze.
-On 292 out of 480 to analyze.
-On 158 out of 480 to analyze.
-On 174 out of 480 to analyze.
-On 298 out of 480 to analyze.
-On 164 out of 480 to analyze.
-On 293 out of 480 to analyze.
-On 53 out of 480 to analyze.
-On 299 out of 480 to analyze.
-On 175 out of 480 to analyze.
-On 294 out of 480 to analyze.
-On 159 out of 480 to analyze.
-On 300 out of 480 to analyze.
-On 51 out of 480 to analyze.
-On 295 out of 480 to analyze.
-On 165 out of 480 to analyze.
-On 296 out of 480 to analyze.
-On 301 out of 480 to analyze.
-On 176 out of 480 to analyze.
-On 52 out of 480 to analyze.
-On 302 out of 480 to analyze.
-On 160 out of 480 to analyze.
-On 166 out of 480 to analyze.
-On 297 out of 480 to analyze.
-On 303 out of 480 to analyze.
-On 298 out of 480 to analyze.
-On 177 out of 480 to analyze.
-On 161 out of 480 to analyze.
-On 167 out of 480 to analyze.
-On 304 out of 480 to analyze.
-On 299 out of 480 to analyze.
-On 54 out of 480 to analyze.
-On 305 out of 480 to analyze.
-On 162 out of 480 to analyze.
-On 300 out of 480 to analyze.
-On 178 out of 480 to analyze.
-On 306 out of 480 to analyze.
-On 168 out of 480 to analyze.
-On 301 out of 480 to analyze.
-On 52 out of 480 to analyze.
-On 307 out of 480 to analyze.
-On 163 out of 480 to analyze.
-On 53 out of 480 to analyze.
-On 169 out of 480 to analyze.
-On 302 out of 480 to analyze.
-On 180 out of 480 to analyze.
-On 308 out of 480 to analyze.
-On 303 out of 480 to analyze.
-On 164 out of 480 to analyze.
-On 309 out of 480 to analyze.
-On 170 out of 480 to analyze.
-On 181 out of 480 to analyze.
-On 304 out of 480 to analyze.
-On 310 out of 480 to analyze.
-On 165 out of 480 to analyze.
-On 305 out of 480 to analyze.
-On 55 out of 480 to analyze.
-On 311 out of 480 to analyze.
-On 182 out of 480 to analyze.
-On 306 out of 480 to analyze.
-On 171 out of 480 to analyze.
-On 53 out of 480 to analyze.
-On 312 out of 480 to analyze.
-On 166 out of 480 to analyze.
-On 307 out of 480 to analyze.
-On 308 out of 480 to analyze.
-On 313 out of 480 to analyze.
-On 183 out of 480 to analyze.
-On 172 out of 480 to analyze.
-On 54 out of 480 to analyze.
-On 167 out of 480 to analyze.
-On 309 out of 480 to analyze.
-On 314 out of 480 to analyze.
-On 184 out of 480 to analyze.
-On 310 out of 480 to analyze.
-On 315 out of 480 to analyze.
-On 168 out of 480 to analyze.
-On 173 out of 480 to analyze.
-On 311 out of 480 to analyze.
-On 316 out of 480 to analyze.
-On 185 out of 480 to analyze.
-On 312 out of 480 to analyze.
-On 317 out of 480 to analyze.
-On 56 out of 480 to analyze.
-On 174 out of 480 to analyze.
-On 169 out of 480 to analyze.
-On 318 out of 480 to analyze.
-On 313 out of 480 to analyze.
-On 54 out of 480 to analyze.
-On 55 out of 480 to analyze.
-On 186 out of 480 to analyze.
-On 319 out of 480 to analyze.
-On 170 out of 480 to analyze.
-On 314 out of 480 to analyze.
-On 175 out of 480 to analyze.
-On 315 out of 480 to analyze.
-On 320 out of 480 to analyze.
-On 171 out of 480 to analyze.
-On 316 out of 480 to analyze.
-On 321 out of 480 to analyze.
-On 187 out of 480 to analyze.
-On 176 out of 480 to analyze.
-On 317 out of 480 to analyze.
-On 322 out of 480 to analyze.
-On 172 out of 480 to analyze.
-On 323 out of 480 to analyze.
-On 57 out of 480 to analyze.
-On 188 out of 480 to analyze.
-On 177 out of 480 to analyze.
-On 318 out of 480 to analyze.
-On 324 out of 480 to analyze.
-On 319 out of 480 to analyze.
-On 173 out of 480 to analyze.
-On 55 out of 480 to analyze.
-On 325 out of 480 to analyze.
-On 320 out of 480 to analyze.
-On 56 out of 480 to analyze.
-On 189 out of 480 to analyze.
-On 178 out of 480 to analyze.
-On 326 out of 480 to analyze.
-On 174 out of 480 to analyze.
-On 321 out of 480 to analyze.
-On 327 out of 480 to analyze.
-On 190 out of 480 to analyze.
-On 322 out of 480 to analyze.
-On 179 out of 480 to analyze.
-On 175 out of 480 to analyze.
-On 328 out of 480 to analyze.
-On 323 out of 480 to analyze.
-On 58 out of 480 to analyze.
-On 329 out of 480 to analyze.
-On 180 out of 480 to analyze.
-On 191 out of 480 to analyze.
-On 324 out of 480 to analyze.
-On 176 out of 480 to analyze.
-On 56 out of 480 to analyze.
-On 330 out of 480 to analyze.
-On 325 out of 480 to analyze.
-On 57 out of 480 to analyze.
-On 331 out of 480 to analyze.
-On 192 out of 480 to analyze.
-On 181 out of 480 to analyze.
-On 326 out of 480 to analyze.
-On 177 out of 480 to analyze.
-On 332 out of 480 to analyze.
-On 327 out of 480 to analyze.
-On 333 out of 480 to analyze.
-On 178 out of 480 to analyze.
-On 182 out of 480 to analyze.
-On 193 out of 480 to analyze.
-On 328 out of 480 to analyze.
-On 334 out of 480 to analyze.
-On 60 out of 480 to analyze.
-On 335 out of 480 to analyze.
-On 329 out of 480 to analyze.
-On 179 out of 480 to analyze.
-On 183 out of 480 to analyze.
-On 58 out of 480 to analyze.
-On 336 out of 480 to analyze.
-On 194 out of 480 to analyze.
-On 57 out of 480 to analyze.
-On 330 out of 480 to analyze.
-On 337 out of 480 to analyze.
-On 180 out of 480 to analyze.
-On 184 out of 480 to analyze.
-On 195 out of 480 to analyze.
-On 331 out of 480 to analyze.
-On 338 out of 480 to analyze.
-On 332 out of 480 to analyze.
-On 181 out of 480 to analyze.
-On 185 out of 480 to analyze.
-On 339 out of 480 to analyze.
-On 197 out of 480 to analyze.
-On 333 out of 480 to analyze.
-On 340 out of 480 to analyze.
-On 61 out of 480 to analyze.
-On 334 out of 480 to analyze.
-On 182 out of 480 to analyze.
-On 59 out of 480 to analyze.
-On 198 out of 480 to analyze.
-On 341 out of 480 to analyze.
-On 186 out of 480 to analyze.
-On 58 out of 480 to analyze.
-On 335 out of 480 to analyze.
-On 342 out of 480 to analyze.
-On 336 out of 480 to analyze.
-On 183 out of 480 to analyze.
-On 343 out of 480 to analyze.
-On 199 out of 480 to analyze.
-On 337 out of 480 to analyze.
-On 187 out of 480 to analyze.
-On 344 out of 480 to analyze.
-On 338 out of 480 to analyze.
-On 200 out of 480 to analyze.
-On 184 out of 480 to analyze.
-On 345 out of 480 to analyze.
-On 188 out of 480 to analyze.
-On 339 out of 480 to analyze.
-On 346 out of 480 to analyze.
-On 60 out of 480 to analyze.
-On 201 out of 480 to analyze.
-On 62 out of 480 to analyze.
-On 340 out of 480 to analyze.
-On 347 out of 480 to analyze.
-On 189 out of 480 to analyze.
-On 185 out of 480 to analyze.
-On 59 out of 480 to analyze.
-On 348 out of 480 to analyze.
-On 202 out of 480 to analyze.
-On 341 out of 480 to analyze.
-On 349 out of 480 to analyze.
-On 186 out of 480 to analyze.
-On 190 out of 480 to analyze.
-On 342 out of 480 to analyze.
-On 350 out of 480 to analyze.
-On 203 out of 480 to analyze.
-On 343 out of 480 to analyze.
-On 351 out of 480 to analyze.
-On 191 out of 480 to analyze.
-On 187 out of 480 to analyze.
-On 204 out of 480 to analyze.
-On 352 out of 480 to analyze.
-On 344 out of 480 to analyze.
-On 63 out of 480 to analyze.
-On 188 out of 480 to analyze.
-On 61 out of 480 to analyze.
-On 192 out of 480 to analyze.
-On 353 out of 480 to analyze.
-On 345 out of 480 to analyze.
-On 205 out of 480 to analyze.
-On 60 out of 480 to analyze.
-On 346 out of 480 to analyze.
-On 354 out of 480 to analyze.
-On 189 out of 480 to analyze.
-On 355 out of 480 to analyze.
-On 347 out of 480 to analyze.
-On 193 out of 480 to analyze.
-On 206 out of 480 to analyze.
-On 190 out of 480 to analyze.
-On 348 out of 480 to analyze.
-On 356 out of 480 to analyze.
-On 194 out of 480 to analyze.
-On 357 out of 480 to analyze.
-On 349 out of 480 to analyze.
-On 207 out of 480 to analyze.
-On 191 out of 480 to analyze.
-On 350 out of 480 to analyze.
-On 358 out of 480 to analyze.
-On 195 out of 480 to analyze.
-On 64 out of 480 to analyze.
-On 61 out of 480 to analyze.
-On 359 out of 480 to analyze.
-On 208 out of 480 to analyze.
-On 62 out of 480 to analyze.
-On 351 out of 480 to analyze.
-On 192 out of 480 to analyze.
-On 196 out of 480 to analyze.
-On 360 out of 480 to analyze.
-On 352 out of 480 to analyze.
-On 209 out of 480 to analyze.
-On 197 out of 480 to analyze.
-On 193 out of 480 to analyze.
-On 361 out of 480 to analyze.
-On 353 out of 480 to analyze.
-On 210 out of 480 to analyze.
-On 362 out of 480 to analyze.
-On 354 out of 480 to analyze.
-On 198 out of 480 to analyze.
-On 194 out of 480 to analyze.
-On 363 out of 480 to analyze.
-On 62 out of 480 to analyze.
-On 65 out of 480 to analyze.
-On 211 out of 480 to analyze.
-On 355 out of 480 to analyze.
-On 63 out of 480 to analyze.
-On 364 out of 480 to analyze.
-On 199 out of 480 to analyze.
-On 356 out of 480 to analyze.
-On 365 out of 480 to analyze.
-On 195 out of 480 to analyze.
-On 357 out of 480 to analyze.
-On 212 out of 480 to analyze.
-On 366 out of 480 to analyze.
-On 200 out of 480 to analyze.
-On 358 out of 480 to analyze.
-On 196 out of 480 to analyze.
-On 213 out of 480 to analyze.
-On 367 out of 480 to analyze.
-On 359 out of 480 to analyze.
-On 201 out of 480 to analyze.
-On 368 out of 480 to analyze.
-On 197 out of 480 to analyze.
-On 66 out of 480 to analyze.
-On 369 out of 480 to analyze.
-On 214 out of 480 to analyze.
-On 360 out of 480 to analyze.
-On 63 out of 480 to analyze.
-On 202 out of 480 to analyze.
-On 64 out of 480 to analyze.
-On 370 out of 480 to analyze.
-On 198 out of 480 to analyze.
-On 215 out of 480 to analyze.
-On 361 out of 480 to analyze.
-On 371 out of 480 to analyze.
-On 203 out of 480 to analyze.
-On 372 out of 480 to analyze.
-On 362 out of 480 to analyze.
-On 199 out of 480 to analyze.
-On 373 out of 480 to analyze.
-On 216 out of 480 to analyze.
-On 363 out of 480 to analyze.
-On 204 out of 480 to analyze.
-On 374 out of 480 to analyze.
-On 364 out of 480 to analyze.
-On 375 out of 480 to analyze.
-On 200 out of 480 to analyze.
-On 217 out of 480 to analyze.
-On 67 out of 480 to analyze.
-On 205 out of 480 to analyze.
-On 365 out of 480 to analyze.
-On 376 out of 480 to analyze.
-On 64 out of 480 to analyze.
-On 366 out of 480 to analyze.
-On 65 out of 480 to analyze.
-On 201 out of 480 to analyze.
-On 218 out of 480 to analyze.
-On 377 out of 480 to analyze.
-On 206 out of 480 to analyze.
-On 378 out of 480 to analyze.
-On 367 out of 480 to analyze.
-On 202 out of 480 to analyze.
-On 219 out of 480 to analyze.
-On 379 out of 480 to analyze.
-On 368 out of 480 to analyze.
-On 207 out of 480 to analyze.
-On 380 out of 480 to analyze.
-On 369 out of 480 to analyze.
-On 220 out of 480 to analyze.
-On 203 out of 480 to analyze.
-On 381 out of 480 to analyze.
-On 208 out of 480 to analyze.
-On 370 out of 480 to analyze.
-On 382 out of 480 to analyze.
-On 66 out of 480 to analyze.
-On 221 out of 480 to analyze.
-On 68 out of 480 to analyze.
-On 66 out of 480 to analyze.
-On 371 out of 480 to analyze.
-On 383 out of 480 to analyze.
-On 204 out of 480 to analyze.
-On 209 out of 480 to analyze.
-On 384 out of 480 to analyze.
-On 222 out of 480 to analyze.
-On 372 out of 480 to analyze.
-On 385 out of 480 to analyze.
-On 205 out of 480 to analyze.
-On 210 out of 480 to analyze.
-On 373 out of 480 to analyze.
-On 386 out of 480 to analyze.
-On 223 out of 480 to analyze.
-On 206 out of 480 to analyze.
-On 387 out of 480 to analyze.
-On 374 out of 480 to analyze.
-On 67 out of 480 to analyze.
-On 211 out of 480 to analyze.
-On 388 out of 480 to analyze.
-On 375 out of 480 to analyze.
-On 207 out of 480 to analyze.
-On 224 out of 480 to analyze.
-On 67 out of 480 to analyze.
-On 389 out of 480 to analyze.
-On 376 out of 480 to analyze.
-On 69 out of 480 to analyze.
-On 212 out of 480 to analyze.
-On 208 out of 480 to analyze.
-On 390 out of 480 to analyze.
-On 377 out of 480 to analyze.
-On 378 out of 480 to analyze.
-On 225 out of 480 to analyze.
-On 213 out of 480 to analyze.
-On 391 out of 480 to analyze.
-On 379 out of 480 to analyze.
-On 392 out of 480 to analyze.
-On 209 out of 480 to analyze.
-On 68 out of 480 to analyze.
-On 380 out of 480 to analyze.
-On 393 out of 480 to analyze.
-On 226 out of 480 to analyze.
-On 214 out of 480 to analyze.
-On 381 out of 480 to analyze.
-On 210 out of 480 to analyze.
-On 394 out of 480 to analyze.
-On 227 out of 480 to analyze.
-On 396 out of 480 to analyze.
-On 382 out of 480 to analyze.
-On 215 out of 480 to analyze.
-On 70 out of 480 to analyze.
-On 68 out of 480 to analyze.
-On 211 out of 480 to analyze.
-On 383 out of 480 to analyze.
-On 228 out of 480 to analyze.
-On 397 out of 480 to analyze.
-On 216 out of 480 to analyze.
-On 384 out of 480 to analyze.
-On 398 out of 480 to analyze.
-On 212 out of 480 to analyze.
-On 385 out of 480 to analyze.
-On 229 out of 480 to analyze.
-On 217 out of 480 to analyze.
-On 69 out of 480 to analyze.
-On 399 out of 480 to analyze.
-On 386 out of 480 to analyze.
-On 400 out of 480 to analyze.
-On 213 out of 480 to analyze.
-On 387 out of 480 to analyze.
-On 230 out of 480 to analyze.
-On 401 out of 480 to analyze.
-On 218 out of 480 to analyze.
-On 388 out of 480 to analyze.
-On 71 out of 480 to analyze.
-On 402 out of 480 to analyze.
-On 231 out of 480 to analyze.
-On 69 out of 480 to analyze.
-On 389 out of 480 to analyze.
-On 214 out of 480 to analyze.
-On 219 out of 480 to analyze.
-On 403 out of 480 to analyze.
-On 390 out of 480 to analyze.
-On 232 out of 480 to analyze.
-On 404 out of 480 to analyze.
-On 391 out of 480 to analyze.
-On 220 out of 480 to analyze.
-On 215 out of 480 to analyze.
-On 392 out of 480 to analyze.
-On 70 out of 480 to analyze.
-On 405 out of 480 to analyze.
-On 233 out of 480 to analyze.
-On 393 out of 480 to analyze.
-On 216 out of 480 to analyze.
-On 221 out of 480 to analyze.
-On 406 out of 480 to analyze.
-On 394 out of 480 to analyze.
-On 234 out of 480 to analyze.
-On 407 out of 480 to analyze.
-On 72 out of 480 to analyze.
-On 217 out of 480 to analyze.
-On 222 out of 480 to analyze.
-On 395 out of 480 to analyze.
-On 408 out of 480 to analyze.
-On 70 out of 480 to analyze.
-On 235 out of 480 to analyze.
-On 396 out of 480 to analyze.
-On 409 out of 480 to analyze.
-On 218 out of 480 to analyze.
-On 223 out of 480 to analyze.
-On 71 out of 480 to analyze.
-On 397 out of 480 to analyze.
-On 410 out of 480 to analyze.
-On 236 out of 480 to analyze.
-On 398 out of 480 to analyze.
-On 219 out of 480 to analyze.
-On 411 out of 480 to analyze.
-On 224 out of 480 to analyze.
-On 237 out of 480 to analyze.
-On 399 out of 480 to analyze.
-On 412 out of 480 to analyze.
-On 220 out of 480 to analyze.
-On 73 out of 480 to analyze.
-On 400 out of 480 to analyze.
-On 413 out of 480 to analyze.
-On 225 out of 480 to analyze.
-On 401 out of 480 to analyze.
-On 238 out of 480 to analyze.
-On 71 out of 480 to analyze.
-On 221 out of 480 to analyze.
-On 414 out of 480 to analyze.
-On 402 out of 480 to analyze.
-On 415 out of 480 to analyze.
-On 226 out of 480 to analyze.
-On 403 out of 480 to analyze.
-On 239 out of 480 to analyze.
-On 72 out of 480 to analyze.
-On 222 out of 480 to analyze.
-On 416 out of 480 to analyze.
-On 404 out of 480 to analyze.
-On 417 out of 480 to analyze.
-On 227 out of 480 to analyze.
-On 240 out of 480 to analyze.
-On 418 out of 480 to analyze.
-On 405 out of 480 to analyze.
-On 223 out of 480 to analyze.
-On 419 out of 480 to analyze.
-On 74 out of 480 to analyze.
-On 228 out of 480 to analyze.
-On 406 out of 480 to analyze.
-On 241 out of 480 to analyze.
-On 420 out of 480 to analyze.
-On 72 out of 480 to analyze.
-On 224 out of 480 to analyze.
-On 407 out of 480 to analyze.
-On 421 out of 480 to analyze.
-On 408 out of 480 to analyze.
-On 242 out of 480 to analyze.
-On 229 out of 480 to analyze.
-On 422 out of 480 to analyze.
-On 225 out of 480 to analyze.
-On 409 out of 480 to analyze.
-On 73 out of 480 to analyze.
-On 423 out of 480 to analyze.
-On 243 out of 480 to analyze.
-On 410 out of 480 to analyze.
-On 230 out of 480 to analyze.
-On 226 out of 480 to analyze.
-On 424 out of 480 to analyze.
-On 411 out of 480 to analyze.
-On 75 out of 480 to analyze.
-On 244 out of 480 to analyze.
-On 231 out of 480 to analyze.
-On 412 out of 480 to analyze.
-On 425 out of 480 to analyze.
-On 227 out of 480 to analyze.
-On 413 out of 480 to analyze.
-On 426 out of 480 to analyze.
-On 73 out of 480 to analyze.
-On 245 out of 480 to analyze.
-On 232 out of 480 to analyze.
-On 414 out of 480 to analyze.
-On 427 out of 480 to analyze.
-On 228 out of 480 to analyze.
-On 415 out of 480 to analyze.
-On 428 out of 480 to analyze.
-On 246 out of 480 to analyze.
-On 74 out of 480 to analyze.
-On 233 out of 480 to analyze.
-On 416 out of 480 to analyze.
-On 429 out of 480 to analyze.
-On 229 out of 480 to analyze.
-On 247 out of 480 to analyze.
-On 430 out of 480 to analyze.
-On 234 out of 480 to analyze.
-On 417 out of 480 to analyze.
-On 431 out of 480 to analyze.
-On 76 out of 480 to analyze.
-On 418 out of 480 to analyze.
-On 230 out of 480 to analyze.
-On 432 out of 480 to analyze.
-On 248 out of 480 to analyze.
-On 235 out of 480 to analyze.
-On 419 out of 480 to analyze.
-On 433 out of 480 to analyze.
-On 74 out of 480 to analyze.
-On 420 out of 480 to analyze.
-On 231 out of 480 to analyze.
-On 434 out of 480 to analyze.
-On 421 out of 480 to analyze.
-On 249 out of 480 to analyze.
-On 236 out of 480 to analyze.
-On 75 out of 480 to analyze.
-On 435 out of 480 to analyze.
-On 422 out of 480 to analyze.
-On 232 out of 480 to analyze.
-On 436 out of 480 to analyze.
-On 423 out of 480 to analyze.
-On 237 out of 480 to analyze.
-On 250 out of 480 to analyze.
-On 437 out of 480 to analyze.
-On 233 out of 480 to analyze.
-On 424 out of 480 to analyze.
-On 77 out of 480 to analyze.
-On 438 out of 480 to analyze.
-On 238 out of 480 to analyze.
-On 251 out of 480 to analyze.
-On 425 out of 480 to analyze.
-On 439 out of 480 to analyze.
-On 234 out of 480 to analyze.
-On 426 out of 480 to analyze.
-On 440 out of 480 to analyze.
-On 239 out of 480 to analyze.
-On 75 out of 480 to analyze.
-On 253 out of 480 to analyze.
-On 427 out of 480 to analyze.
-On 77 out of 480 to analyze.
-On 441 out of 480 to analyze.
-On 235 out of 480 to analyze.
-On 428 out of 480 to analyze.
-On 240 out of 480 to analyze.
-On 254 out of 480 to analyze.
-On 442 out of 480 to analyze.
-On 429 out of 480 to analyze.
-On 236 out of 480 to analyze.
-On 241 out of 480 to analyze.
-On 443 out of 480 to analyze.
-On 430 out of 480 to analyze.
-On 255 out of 480 to analyze.
-On 78 out of 480 to analyze.
-On 431 out of 480 to analyze.
-On 237 out of 480 to analyze.
-On 444 out of 480 to analyze.
-On 432 out of 480 to analyze.
-On 242 out of 480 to analyze.
-On 256 out of 480 to analyze.
-On 433 out of 480 to analyze.
-On 77 out of 480 to analyze.
-On 446 out of 480 to analyze.
-On 238 out of 480 to analyze.
-On 434 out of 480 to analyze.
-On 78 out of 480 to analyze.
-On 243 out of 480 to analyze.
-On 447 out of 480 to analyze.
-On 435 out of 480 to analyze.
-On 257 out of 480 to analyze.
-On 239 out of 480 to analyze.
-On 448 out of 480 to analyze.
-On 436 out of 480 to analyze.
-On 244 out of 480 to analyze.
-On 449 out of 480 to analyze.
-On 437 out of 480 to analyze.
-On 258 out of 480 to analyze.
-On 240 out of 480 to analyze.
-On 79 out of 480 to analyze.
-On 450 out of 480 to analyze.
-On 438 out of 480 to analyze.
-On 245 out of 480 to analyze.
-On 439 out of 480 to analyze.
-On 78 out of 480 to analyze.
-On 451 out of 480 to analyze.
-On 259 out of 480 to analyze.
-On 241 out of 480 to analyze.
-On 452 out of 480 to analyze.
-On 440 out of 480 to analyze.
-On 79 out of 480 to analyze.
-On 246 out of 480 to analyze.
-On 453 out of 480 to analyze.
-On 441 out of 480 to analyze.
-On 260 out of 480 to analyze.
-On 242 out of 480 to analyze.
-On 454 out of 480 to analyze.
-On 442 out of 480 to analyze.
-On 443 out of 480 to analyze.
-On 247 out of 480 to analyze.
-On 261 out of 480 to analyze.
-On 455 out of 480 to analyze.
-On 444 out of 480 to analyze.
-On 243 out of 480 to analyze.
-On 80 out of 480 to analyze.
-On 445 out of 480 to analyze.
-On 456 out of 480 to analyze.
-On 248 out of 480 to analyze.
-On 262 out of 480 to analyze.
-On 446 out of 480 to analyze.
-On 244 out of 480 to analyze.
-On 457 out of 480 to analyze.
-On 79 out of 480 to analyze.
-On 80 out of 480 to analyze.
-On 458 out of 480 to analyze.
-On 447 out of 480 to analyze.
-On 249 out of 480 to analyze.
-On 245 out of 480 to analyze.
-On 459 out of 480 to analyze.
-On 263 out of 480 to analyze.
-On 448 out of 480 to analyze.
-On 460 out of 480 to analyze.
-On 250 out of 480 to analyze.
-On 246 out of 480 to analyze.
-On 449 out of 480 to analyze.
-On 461 out of 480 to analyze.
-On 264 out of 480 to analyze.
-On 450 out of 480 to analyze.
-On 81 out of 480 to analyze.
-On 251 out of 480 to analyze.
-On 462 out of 480 to analyze.
-On 451 out of 480 to analyze.
-On 247 out of 480 to analyze.
-On 80 out of 480 to analyze.
-On 463 out of 480 to analyze.
-On 265 out of 480 to analyze.
-On 452 out of 480 to analyze.
-On 81 out of 480 to analyze.
-On 453 out of 480 to analyze.
-On 464 out of 480 to analyze.
-On 252 out of 480 to analyze.
-On 248 out of 480 to analyze.
-On 465 out of 480 to analyze.
-On 454 out of 480 to analyze.
-On 266 out of 480 to analyze.
-On 466 out of 480 to analyze.
-On 249 out of 480 to analyze.
-On 253 out of 480 to analyze.
-On 455 out of 480 to analyze.
-On 467 out of 480 to analyze.
-On 456 out of 480 to analyze.
-On 267 out of 480 to analyze.
-On 250 out of 480 to analyze.
-On 468 out of 480 to analyze.
-On 82 out of 480 to analyze.
-On 254 out of 480 to analyze.
-On 81 out of 480 to analyze.
-On 457 out of 480 to analyze.
-On 469 out of 480 to analyze.
-On 251 out of 480 to analyze.
-On 268 out of 480 to analyze.
-On 458 out of 480 to analyze.
-On 255 out of 480 to analyze.
-On 82 out of 480 to analyze.
-On 470 out of 480 to analyze.
-On 459 out of 480 to analyze.
-On 471 out of 480 to analyze.
-On 252 out of 480 to analyze.
-On 460 out of 480 to analyze.
-On 269 out of 480 to analyze.
-On 256 out of 480 to analyze.
-On 472 out of 480 to analyze.
-On 461 out of 480 to analyze.
-On 253 out of 480 to analyze.
-On 473 out of 480 to analyze.
-On 270 out of 480 to analyze.
-On 462 out of 480 to analyze.
-On 257 out of 480 to analyze.
-On 463 out of 480 to analyze.
-On 83 out of 480 to analyze.
-On 82 out of 480 to analyze.
-On 474 out of 480 to analyze.
-On 254 out of 480 to analyze.
-On 464 out of 480 to analyze.
-On 475 out of 480 to analyze.
-On 271 out of 480 to analyze.
-On 258 out of 480 to analyze.
-On 83 out of 480 to analyze.
-On 465 out of 480 to analyze.
-On 476 out of 480 to analyze.
-On 272 out of 480 to analyze.
-On 466 out of 480 to analyze.
-On 255 out of 480 to analyze.
-On 259 out of 480 to analyze.
-On 477 out of 480 to analyze.
-On 467 out of 480 to analyze.
-On 273 out of 480 to analyze.
-On 468 out of 480 to analyze.
-On 260 out of 480 to analyze.
-On 256 out of 480 to analyze.
-On 469 out of 480 to analyze.
-On 478 out of 480 to analyze.
-On 83 out of 480 to analyze.
-On 274 out of 480 to analyze.
-On 479 out of 480 to analyze.
-On 84 out of 480 to analyze.
-On 470 out of 480 to analyze.
-On 257 out of 480 to analyze.
-On 261 out of 480 to analyze.
-On 480 out of 480 to analyze.
-Elapsed time is 30892.432023 seconds.
+>> Elapsed time is 1.277110 seconds.
+Saved file: JH104sz1_108_before6500.mat
+Elapsed time is 1.268811 seconds.
+Saved file: JH104sz1_109_before6000.mat
+Elapsed time is 1.263817 seconds.
+Saved file: JH104sz1_110_before5500.mat
+Elapsed time is 1.263704 seconds.
+Saved file: JH104sz1_111_before5000.mat
+Elapsed time is 1.266747 seconds.
+Saved file: JH104sz1_112_before4500.mat
+Elapsed time is 1.265210 seconds.
+Saved file: JH104sz1_113_before4000.mat
+Elapsed time is 1.265581 seconds.
+Saved file: JH104sz1_114_before3500.mat
+Elapsed time is 1.264649 seconds.
+Saved file: JH104sz1_115_before3000.mat
+Elapsed time is 1.266069 seconds.
+Saved file: JH104sz1_116_before2500.mat
+Elapsed time is 1.265806 seconds.
+Saved file: JH104sz1_117_before2000.mat
+Elapsed time is 1.265974 seconds.
+Saved file: JH104sz1_118_before1500.mat
+Elapsed time is 1.267259 seconds.
+Saved file: JH104sz1_119_before1000.mat
+Elapsed time is 1.264985 seconds.
+Saved file: JH104sz1_120_before500.mat
+Looking at patient: JH104sz1
 
 num_channels =
 
-    64
+    74
 
-On 275 out of 480 to analyze.
-On 471 out of 480 to analyze.
-On 84 out of 480 to analyze.
-On 1 out of 480 to analyze.
-On 258 out of 480 to analyze.
-On 262 out of 480 to analyze.
-On 472 out of 480 to analyze.
-On 2 out of 480 to analyze.
-On 276 out of 480 to analyze.
-On 473 out of 480 to analyze.
-On 3 out of 480 to analyze.
-On 259 out of 480 to analyze.
-On 263 out of 480 to analyze.
-On 85 out of 480 to analyze.
-On 4 out of 480 to analyze.
-On 474 out of 480 to analyze.
-On 277 out of 480 to analyze.
-On 85 out of 480 to analyze.
-On 5 out of 480 to analyze.
-On 260 out of 480 to analyze.
-On 475 out of 480 to analyze.
-On 264 out of 480 to analyze.
-On 6 out of 480 to analyze.
-On 476 out of 480 to analyze.
-On 278 out of 480 to analyze.
-On 86 out of 480 to analyze.
-On 7 out of 480 to analyze.
-On 266 out of 480 to analyze.
-On 261 out of 480 to analyze.
-On 477 out of 480 to analyze.
-On 8 out of 480 to analyze.
-On 478 out of 480 to analyze.
-On 279 out of 480 to analyze.
-On 267 out of 480 to analyze.
-On 262 out of 480 to analyze.
-On 9 out of 480 to analyze.
-On 479 out of 480 to analyze.
-On 86 out of 480 to analyze.
-On 10 out of 480 to analyze.
-On 480 out of 480 to analyze.
-Elapsed time is 31553.850531 seconds.
-
-num_channels =
-
-    64
-
-On 86 out of 480 to analyze.
-On 268 out of 480 to analyze.
-On 280 out of 480 to analyze.
-On 263 out of 480 to analyze.
-On 11 out of 480 to analyze.
-On 1 out of 480 to analyze.
-On 12 out of 480 to analyze.
-On 87 out of 480 to analyze.
-On 281 out of 480 to analyze.
-On 2 out of 480 to analyze.
-On 264 out of 480 to analyze.
-On 269 out of 480 to analyze.
-On 13 out of 480 to analyze.
-On 3 out of 480 to analyze.
-On 265 out of 480 to analyze.
-On 14 out of 480 to analyze.
-On 4 out of 480 to analyze.
-On 270 out of 480 to analyze.
-On 282 out of 480 to analyze.
-On 5 out of 480 to analyze.
-On 15 out of 480 to analyze.
-On 87 out of 480 to analyze.
-On 87 out of 480 to analyze.
-On 16 out of 480 to analyze.
-On 266 out of 480 to analyze.
-On 6 out of 480 to analyze.
-On 271 out of 480 to analyze.
-On 17 out of 480 to analyze.
-On 283 out of 480 to analyze.
-On 7 out of 480 to analyze.
-On 18 out of 480 to analyze.
-On 267 out of 480 to analyze.
-On 8 out of 480 to analyze.
-On 272 out of 480 to analyze.
-On 19 out of 480 to analyze.
-On 89 out of 480 to analyze.
-On 284 out of 480 to analyze.
-On 9 out of 480 to analyze.
-On 20 out of 480 to analyze.
-On 268 out of 480 to analyze.
-On 273 out of 480 to analyze.
-On 10 out of 480 to analyze.
-On 285 out of 480 to analyze.
-On 21 out of 480 to analyze.
-On 11 out of 480 to analyze.
-On 274 out of 480 to analyze.
-On 88 out of 480 to analyze.
-On 269 out of 480 to analyze.
-On 22 out of 480 to analyze.
-On 88 out of 480 to analyze.
-On 12 out of 480 to analyze.
-On 286 out of 480 to analyze.
-On 13 out of 480 to analyze.
-On 23 out of 480 to analyze.
-On 14 out of 480 to analyze.
-On 270 out of 480 to analyze.
-On 287 out of 480 to analyze.
-On 275 out of 480 to analyze.
-On 24 out of 480 to analyze.
-On 15 out of 480 to analyze.
-On 25 out of 480 to analyze.
-On 90 out of 480 to analyze.
-On 16 out of 480 to analyze.
-On 26 out of 480 to analyze.
-On 271 out of 480 to analyze.
-On 17 out of 480 to analyze.
-On 276 out of 480 to analyze.
-On 289 out of 480 to analyze.
-On 27 out of 480 to analyze.
-On 272 out of 480 to analyze.
-On 18 out of 480 to analyze.
-On 28 out of 480 to analyze.
-On 277 out of 480 to analyze.
-On 89 out of 480 to analyze.
-On 89 out of 480 to analyze.
-On 29 out of 480 to analyze.
-On 290 out of 480 to analyze.
-On 19 out of 480 to analyze.
-On 273 out of 480 to analyze.
-On 30 out of 480 to analyze.
-On 20 out of 480 to analyze.
-On 278 out of 480 to analyze.
-On 31 out of 480 to analyze.
-On 21 out of 480 to analyze.
-On 91 out of 480 to analyze.
-On 291 out of 480 to analyze.
-On 274 out of 480 to analyze.
-On 32 out of 480 to analyze.
-On 22 out of 480 to analyze.
-On 279 out of 480 to analyze.
-On 33 out of 480 to analyze.
-On 23 out of 480 to analyze.
-On 292 out of 480 to analyze.
-On 275 out of 480 to analyze.
-On 34 out of 480 to analyze.
-On 24 out of 480 to analyze.
-On 280 out of 480 to analyze.
-On 90 out of 480 to analyze.
-On 293 out of 480 to analyze.
-On 90 out of 480 to analyze.
-On 35 out of 480 to analyze.
-On 276 out of 480 to analyze.
-On 25 out of 480 to analyze.
-On 36 out of 480 to analyze.
-On 281 out of 480 to analyze.
-On 26 out of 480 to analyze.
-On 37 out of 480 to analyze.
-On 294 out of 480 to analyze.
-On 277 out of 480 to analyze.
-On 92 out of 480 to analyze.
-On 38 out of 480 to analyze.
-On 27 out of 480 to analyze.
-On 282 out of 480 to analyze.
-On 39 out of 480 to analyze.
-On 278 out of 480 to analyze.
-On 295 out of 480 to analyze.
-On 28 out of 480 to analyze.
-On 283 out of 480 to analyze.
-On 29 out of 480 to analyze.
-On 40 out of 480 to analyze.
-On 296 out of 480 to analyze.
-On 30 out of 480 to analyze.
-On 41 out of 480 to analyze.
-On 91 out of 480 to analyze.
-On 279 out of 480 to analyze.
-On 91 out of 480 to analyze.
-On 284 out of 480 to analyze.
-On 31 out of 480 to analyze.
-On 42 out of 480 to analyze.
-On 297 out of 480 to analyze.
-On 280 out of 480 to analyze.
-On 43 out of 480 to analyze.
-On 32 out of 480 to analyze.
-On 94 out of 480 to analyze.
-On 285 out of 480 to analyze.
-On 44 out of 480 to analyze.
-On 33 out of 480 to analyze.
-On 298 out of 480 to analyze.
-On 286 out of 480 to analyze.
-On 281 out of 480 to analyze.
-On 34 out of 480 to analyze.
-On 92 out of 480 to analyze.
-On 45 out of 480 to analyze.
-On 35 out of 480 to analyze.
-On 299 out of 480 to analyze.
-On 287 out of 480 to analyze.
-On 46 out of 480 to analyze.
-On 282 out of 480 to analyze.
-On 36 out of 480 to analyze.
-On 300 out of 480 to analyze.
-On 47 out of 480 to analyze.
-On 92 out of 480 to analyze.
-On 288 out of 480 to analyze.
-On 37 out of 480 to analyze.
-On 48 out of 480 to analyze.
-On 95 out of 480 to analyze.
-On 283 out of 480 to analyze.
-On 38 out of 480 to analyze.
-On 49 out of 480 to analyze.
-On 50 out of 480 to analyze.
-On 301 out of 480 to analyze.
-On 289 out of 480 to analyze.
-On 39 out of 480 to analyze.
-On 51 out of 480 to analyze.
-On 93 out of 480 to analyze.
-On 40 out of 480 to analyze.
-On 284 out of 480 to analyze.
-On 52 out of 480 to analyze.
-On 290 out of 480 to analyze.
-On 302 out of 480 to analyze.
-On 41 out of 480 to analyze.
-On 53 out of 480 to analyze.
-On 285 out of 480 to analyze.
-On 42 out of 480 to analyze.
-On 54 out of 480 to analyze.
-On 291 out of 480 to analyze.
-On 43 out of 480 to analyze.
-On 303 out of 480 to analyze.
-On 55 out of 480 to analyze.
-On 56 out of 480 to analyze.
-On 44 out of 480 to analyze.
-On 292 out of 480 to analyze.
-On 286 out of 480 to analyze.
-On 93 out of 480 to analyze.
-On 96 out of 480 to analyze.
-On 45 out of 480 to analyze.
-On 305 out of 480 to analyze.
-On 57 out of 480 to analyze.
-On 293 out of 480 to analyze.
-On 94 out of 480 to analyze.
-On 287 out of 480 to analyze.
-On 46 out of 480 to analyze.
-On 58 out of 480 to analyze.
-On 47 out of 480 to analyze.
-On 306 out of 480 to analyze.
-On 59 out of 480 to analyze.
-On 48 out of 480 to analyze.
-On 294 out of 480 to analyze.
-On 288 out of 480 to analyze.
-On 60 out of 480 to analyze.
-On 49 out of 480 to analyze.
-On 307 out of 480 to analyze.
-On 61 out of 480 to analyze.
-On 50 out of 480 to analyze.
-On 94 out of 480 to analyze.
-On 308 out of 480 to analyze.
-On 62 out of 480 to analyze.
-On 289 out of 480 to analyze.
-On 295 out of 480 to analyze.
-On 51 out of 480 to analyze.
-On 97 out of 480 to analyze.
-On 63 out of 480 to analyze.
-On 309 out of 480 to analyze.
-On 296 out of 480 to analyze.
-On 52 out of 480 to analyze.
-On 95 out of 480 to analyze.
-On 290 out of 480 to analyze.
-On 64 out of 480 to analyze.
-On 53 out of 480 to analyze.
-On 65 out of 480 to analyze.
-On 310 out of 480 to analyze.
-On 291 out of 480 to analyze.
-On 54 out of 480 to analyze.
-On 297 out of 480 to analyze.
-On 66 out of 480 to analyze.
-On 55 out of 480 to analyze.
-On 67 out of 480 to analyze.
-On 311 out of 480 to analyze.
-On 292 out of 480 to analyze.
-On 56 out of 480 to analyze.
-On 298 out of 480 to analyze.
-On 95 out of 480 to analyze.
-On 68 out of 480 to analyze.
-On 98 out of 480 to analyze.
-On 57 out of 480 to analyze.
-On 69 out of 480 to analyze.
-On 312 out of 480 to analyze.
-On 58 out of 480 to analyze.
-On 299 out of 480 to analyze.
-On 293 out of 480 to analyze.
-On 70 out of 480 to analyze.
-On 59 out of 480 to analyze.
-On 96 out of 480 to analyze.
-On 60 out of 480 to analyze.
-On 313 out of 480 to analyze.
-On 71 out of 480 to analyze.
-On 300 out of 480 to analyze.
-On 61 out of 480 to analyze.
-On 72 out of 480 to analyze.
-On 294 out of 480 to analyze.
-On 314 out of 480 to analyze.
-On 62 out of 480 to analyze.
-On 301 out of 480 to analyze.
-On 73 out of 480 to analyze.
-On 99 out of 480 to analyze.
-On 63 out of 480 to analyze.
-On 295 out of 480 to analyze.
-On 96 out of 480 to analyze.
-On 315 out of 480 to analyze.
-On 74 out of 480 to analyze.
-On 302 out of 480 to analyze.
-On 64 out of 480 to analyze.
-On 75 out of 480 to analyze.
-On 296 out of 480 to analyze.
-On 65 out of 480 to analyze.
-On 303 out of 480 to analyze.
-On 316 out of 480 to analyze.
-On 66 out of 480 to analyze.
-On 76 out of 480 to analyze.
-On 97 out of 480 to analyze.
-On 297 out of 480 to analyze.
-On 77 out of 480 to analyze.
-On 67 out of 480 to analyze.
-On 317 out of 480 to analyze.
-On 68 out of 480 to analyze.
-On 304 out of 480 to analyze.
-On 78 out of 480 to analyze.
-On 298 out of 480 to analyze.
-On 69 out of 480 to analyze.
-On 79 out of 480 to analyze.
-On 318 out of 480 to analyze.
-On 70 out of 480 to analyze.
-On 100 out of 480 to analyze.
-On 80 out of 480 to analyze.
-On 305 out of 480 to analyze.
-On 299 out of 480 to analyze.
-On 97 out of 480 to analyze.
-On 71 out of 480 to analyze.
-On 81 out of 480 to analyze.
-On 319 out of 480 to analyze.
-On 72 out of 480 to analyze.
-On 82 out of 480 to analyze.
-On 300 out of 480 to analyze.
-On 306 out of 480 to analyze.
-On 83 out of 480 to analyze.
-On 320 out of 480 to analyze.
-On 98 out of 480 to analyze.
-On 73 out of 480 to analyze.
-On 84 out of 480 to analyze.
-On 301 out of 480 to analyze.
-On 74 out of 480 to analyze.
-On 307 out of 480 to analyze.
-On 321 out of 480 to analyze.
-On 85 out of 480 to analyze.
-On 101 out of 480 to analyze.
-On 75 out of 480 to analyze.
-On 302 out of 480 to analyze.
-On 86 out of 480 to analyze.
-On 308 out of 480 to analyze.
-On 76 out of 480 to analyze.
-On 322 out of 480 to analyze.
-On 87 out of 480 to analyze.
-On 98 out of 480 to analyze.
-On 303 out of 480 to analyze.
-On 77 out of 480 to analyze.
-On 309 out of 480 to analyze.
-On 88 out of 480 to analyze.
-On 78 out of 480 to analyze.
-On 323 out of 480 to analyze.
-On 89 out of 480 to analyze.
-On 305 out of 480 to analyze.
-On 310 out of 480 to analyze.
-On 99 out of 480 to analyze.
-On 79 out of 480 to analyze.
-On 90 out of 480 to analyze.
-On 324 out of 480 to analyze.
-On 80 out of 480 to analyze.
-On 306 out of 480 to analyze.
-On 102 out of 480 to analyze.
-On 91 out of 480 to analyze.
-On 311 out of 480 to analyze.
-On 81 out of 480 to analyze.
-On 325 out of 480 to analyze.
-On 92 out of 480 to analyze.
-On 82 out of 480 to analyze.
-On 307 out of 480 to analyze.
-On 99 out of 480 to analyze.
-On 312 out of 480 to analyze.
-On 83 out of 480 to analyze.
-On 93 out of 480 to analyze.
-On 308 out of 480 to analyze.
-On 326 out of 480 to analyze.
-On 84 out of 480 to analyze.
-On 94 out of 480 to analyze.
-On 313 out of 480 to analyze.
-On 85 out of 480 to analyze.
-On 95 out of 480 to analyze.
-On 309 out of 480 to analyze.
-On 100 out of 480 to analyze.
-On 327 out of 480 to analyze.
-On 86 out of 480 to analyze.
-On 96 out of 480 to analyze.
-On 314 out of 480 to analyze.
-On 103 out of 480 to analyze.
-On 97 out of 480 to analyze.
-On 87 out of 480 to analyze.
-On 310 out of 480 to analyze.
-On 98 out of 480 to analyze.
-On 101 out of 480 to analyze.
-On 328 out of 480 to analyze.
-On 315 out of 480 to analyze.
-On 88 out of 480 to analyze.
-On 99 out of 480 to analyze.
-On 89 out of 480 to analyze.
-On 311 out of 480 to analyze.
-On 90 out of 480 to analyze.
-On 316 out of 480 to analyze.
-On 100 out of 480 to analyze.
-On 329 out of 480 to analyze.
-On 101 out of 480 to analyze.
-On 101 out of 480 to analyze.
-On 91 out of 480 to analyze.
-On 312 out of 480 to analyze.
-On 102 out of 480 to analyze.
-On 317 out of 480 to analyze.
-On 330 out of 480 to analyze.
-On 92 out of 480 to analyze.
-On 105 out of 480 to analyze.
-On 103 out of 480 to analyze.
-On 93 out of 480 to analyze.
-On 313 out of 480 to analyze.
-On 104 out of 480 to analyze.
-On 331 out of 480 to analyze.
-On 102 out of 480 to analyze.
-On 318 out of 480 to analyze.
-On 94 out of 480 to analyze.
-On 105 out of 480 to analyze.
-On 314 out of 480 to analyze.
-On 95 out of 480 to analyze.
-On 320 out of 480 to analyze.
-On 332 out of 480 to analyze.
-On 106 out of 480 to analyze.
-On 96 out of 480 to analyze.
-On 102 out of 480 to analyze.
-On 107 out of 480 to analyze.
-On 315 out of 480 to analyze.
-On 333 out of 480 to analyze.
-On 321 out of 480 to analyze.
-On 97 out of 480 to analyze.
-On 108 out of 480 to analyze.
-On 106 out of 480 to analyze.
-On 98 out of 480 to analyze.
-On 109 out of 480 to analyze.
-On 99 out of 480 to analyze.
-On 322 out of 480 to analyze.
-On 316 out of 480 to analyze.
-On 334 out of 480 to analyze.
-On 110 out of 480 to analyze.
-On 103 out of 480 to analyze.
-On 100 out of 480 to analyze.
-On 111 out of 480 to analyze.
-On 323 out of 480 to analyze.
-On 101 out of 480 to analyze.
-On 335 out of 480 to analyze.
-On 317 out of 480 to analyze.
-On 103 out of 480 to analyze.
-On 112 out of 480 to analyze.
-On 102 out of 480 to analyze.
-On 324 out of 480 to analyze.
-On 103 out of 480 to analyze.
-On 113 out of 480 to analyze.
-On 337 out of 480 to analyze.
-On 318 out of 480 to analyze.
-On 325 out of 480 to analyze.
-On 104 out of 480 to analyze.
-On 107 out of 480 to analyze.
-On 114 out of 480 to analyze.
-On 105 out of 480 to analyze.
-On 115 out of 480 to analyze.
-On 319 out of 480 to analyze.
-On 338 out of 480 to analyze.
-On 326 out of 480 to analyze.
-On 106 out of 480 to analyze.
-On 116 out of 480 to analyze.
-On 104 out of 480 to analyze.
-On 117 out of 480 to analyze.
-On 107 out of 480 to analyze.
-On 339 out of 480 to analyze.
-On 320 out of 480 to analyze.
-On 327 out of 480 to analyze.
-On 108 out of 480 to analyze.
-On 104 out of 480 to analyze.
-On 118 out of 480 to analyze.
-On 109 out of 480 to analyze.
-On 321 out of 480 to analyze.
-On 340 out of 480 to analyze.
-On 328 out of 480 to analyze.
-On 108 out of 480 to analyze.
-On 119 out of 480 to analyze.
-On 110 out of 480 to analyze.
-On 111 out of 480 to analyze.
-On 120 out of 480 to analyze.
-On 322 out of 480 to analyze.
-On 341 out of 480 to analyze.
-On 329 out of 480 to analyze.
-On 121 out of 480 to analyze.
-On 112 out of 480 to analyze.
-On 122 out of 480 to analyze.
-On 323 out of 480 to analyze.
-On 105 out of 480 to analyze.
-On 113 out of 480 to analyze.
-On 123 out of 480 to analyze.
-On 342 out of 480 to analyze.
-On 330 out of 480 to analyze.
-On 124 out of 480 to analyze.
-On 324 out of 480 to analyze.
-On 105 out of 480 to analyze.
-On 114 out of 480 to analyze.
-On 125 out of 480 to analyze.
-On 343 out of 480 to analyze.
-On 115 out of 480 to analyze.
-On 109 out of 480 to analyze.
-On 331 out of 480 to analyze.
-On 116 out of 480 to analyze.
-On 325 out of 480 to analyze.
-On 126 out of 480 to analyze.
-On 344 out of 480 to analyze.
-On 117 out of 480 to analyze.
-On 118 out of 480 to analyze.
-On 332 out of 480 to analyze.
-On 127 out of 480 to analyze.
-On 326 out of 480 to analyze.
-On 128 out of 480 to analyze.
-On 119 out of 480 to analyze.
-On 106 out of 480 to analyze.
-On 345 out of 480 to analyze.
-On 333 out of 480 to analyze.
-On 129 out of 480 to analyze.
-On 328 out of 480 to analyze.
-On 120 out of 480 to analyze.
-On 106 out of 480 to analyze.
-On 121 out of 480 to analyze.
-On 130 out of 480 to analyze.
-On 346 out of 480 to analyze.
-On 334 out of 480 to analyze.
-On 122 out of 480 to analyze.
-On 329 out of 480 to analyze.
-On 131 out of 480 to analyze.
-On 110 out of 480 to analyze.
-On 123 out of 480 to analyze.
-On 348 out of 480 to analyze.
-On 124 out of 480 to analyze.
-On 335 out of 480 to analyze.
-On 132 out of 480 to analyze.
-On 330 out of 480 to analyze.
-On 108 out of 480 to analyze.
-On 125 out of 480 to analyze.
-On 133 out of 480 to analyze.
-On 336 out of 480 to analyze.
-On 349 out of 480 to analyze.
-On 126 out of 480 to analyze.
-On 134 out of 480 to analyze.
-On 331 out of 480 to analyze.
-On 107 out of 480 to analyze.
-On 127 out of 480 to analyze.
-On 337 out of 480 to analyze.
-On 135 out of 480 to analyze.
-On 350 out of 480 to analyze.
-On 128 out of 480 to analyze.
-On 332 out of 480 to analyze.
-On 136 out of 480 to analyze.
-On 338 out of 480 to analyze.
-On 129 out of 480 to analyze.
-On 111 out of 480 to analyze.
-On 351 out of 480 to analyze.
-On 109 out of 480 to analyze.
-On 137 out of 480 to analyze.
-On 130 out of 480 to analyze.
-On 334 out of 480 to analyze.
-On 339 out of 480 to analyze.
-On 131 out of 480 to analyze.
-On 138 out of 480 to analyze.
-On 352 out of 480 to analyze.
-On 139 out of 480 to analyze.
-On 132 out of 480 to analyze.
-On 108 out of 480 to analyze.
-On 140 out of 480 to analyze.
-On 335 out of 480 to analyze.
-On 340 out of 480 to analyze.
-On 133 out of 480 to analyze.
-On 353 out of 480 to analyze.
-On 141 out of 480 to analyze.
-On 134 out of 480 to analyze.
-On 337 out of 480 to analyze.
-On 341 out of 480 to analyze.
-On 142 out of 480 to analyze.
-On 135 out of 480 to analyze.
-On 354 out of 480 to analyze.
-On 143 out of 480 to analyze.
-On 110 out of 480 to analyze.
-On 338 out of 480 to analyze.
-On 113 out of 480 to analyze.
-On 136 out of 480 to analyze.
-On 342 out of 480 to analyze.
-On 144 out of 480 to analyze.
-On 355 out of 480 to analyze.
-On 137 out of 480 to analyze.
-On 339 out of 480 to analyze.
-On 145 out of 480 to analyze.
-On 109 out of 480 to analyze.
-On 343 out of 480 to analyze.
-On 138 out of 480 to analyze.
-On 147 out of 480 to analyze.
-On 356 out of 480 to analyze.
-On 139 out of 480 to analyze.
-On 340 out of 480 to analyze.
-On 148 out of 480 to analyze.
-On 344 out of 480 to analyze.
-On 140 out of 480 to analyze.
-On 149 out of 480 to analyze.
-On 357 out of 480 to analyze.
-On 341 out of 480 to analyze.
-On 114 out of 480 to analyze.
-On 141 out of 480 to analyze.
-On 150 out of 480 to analyze.
-On 111 out of 480 to analyze.
-On 345 out of 480 to analyze.
-On 151 out of 480 to analyze.
-On 142 out of 480 to analyze.
-On 342 out of 480 to analyze.
-On 358 out of 480 to analyze.
-On 152 out of 480 to analyze.
-On 143 out of 480 to analyze.
-On 346 out of 480 to analyze.
-On 110 out of 480 to analyze.
-On 343 out of 480 to analyze.
-On 153 out of 480 to analyze.
-On 144 out of 480 to analyze.
-On 359 out of 480 to analyze.
-On 154 out of 480 to analyze.
-On 347 out of 480 to analyze.
-On 145 out of 480 to analyze.
-On 344 out of 480 to analyze.
-On 155 out of 480 to analyze.
-On 146 out of 480 to analyze.
-On 156 out of 480 to analyze.
-On 112 out of 480 to analyze.
-On 345 out of 480 to analyze.
-On 116 out of 480 to analyze.
-On 348 out of 480 to analyze.
-On 360 out of 480 to analyze.
-On 147 out of 480 to analyze.
-On 157 out of 480 to analyze.
-On 148 out of 480 to analyze.
-On 361 out of 480 to analyze.
-On 349 out of 480 to analyze.
-On 346 out of 480 to analyze.
-On 111 out of 480 to analyze.
-On 158 out of 480 to analyze.
-On 149 out of 480 to analyze.
-On 159 out of 480 to analyze.
-On 362 out of 480 to analyze.
-On 347 out of 480 to analyze.
-On 350 out of 480 to analyze.
-On 150 out of 480 to analyze.
-On 160 out of 480 to analyze.
-On 363 out of 480 to analyze.
-On 151 out of 480 to analyze.
-On 117 out of 480 to analyze.
-On 161 out of 480 to analyze.
-On 348 out of 480 to analyze.
-On 351 out of 480 to analyze.
-On 113 out of 480 to analyze.
-On 152 out of 480 to analyze.
-On 162 out of 480 to analyze.
-On 364 out of 480 to analyze.
-On 349 out of 480 to analyze.
-On 353 out of 480 to analyze.
-On 112 out of 480 to analyze.
-On 153 out of 480 to analyze.
-On 163 out of 480 to analyze.
-On 154 out of 480 to analyze.
-On 164 out of 480 to analyze.
-On 350 out of 480 to analyze.
-On 365 out of 480 to analyze.
-On 354 out of 480 to analyze.
-On 155 out of 480 to analyze.
-On 165 out of 480 to analyze.
-On 156 out of 480 to analyze.
-On 351 out of 480 to analyze.
-On 166 out of 480 to analyze.
-On 119 out of 480 to analyze.
-On 355 out of 480 to analyze.
-On 366 out of 480 to analyze.
-On 157 out of 480 to analyze.
-On 114 out of 480 to analyze.
-On 167 out of 480 to analyze.
-On 158 out of 480 to analyze.
-On 352 out of 480 to analyze.
-On 168 out of 480 to analyze.
-On 113 out of 480 to analyze.
-On 367 out of 480 to analyze.
-On 356 out of 480 to analyze.
-On 159 out of 480 to analyze.
-On 169 out of 480 to analyze.
-On 353 out of 480 to analyze.
-On 368 out of 480 to analyze.
-On 160 out of 480 to analyze.
-On 170 out of 480 to analyze.
-On 357 out of 480 to analyze.
-On 171 out of 480 to analyze.
-On 369 out of 480 to analyze.
-On 354 out of 480 to analyze.
-On 161 out of 480 to analyze.
-On 120 out of 480 to analyze.
-On 172 out of 480 to analyze.
-On 162 out of 480 to analyze.
-On 358 out of 480 to analyze.
-On 115 out of 480 to analyze.
-On 355 out of 480 to analyze.
-On 370 out of 480 to analyze.
-On 173 out of 480 to analyze.
-On 163 out of 480 to analyze.
-On 114 out of 480 to analyze.
-On 174 out of 480 to analyze.
-On 164 out of 480 to analyze.
-On 359 out of 480 to analyze.
-On 371 out of 480 to analyze.
-On 175 out of 480 to analyze.
-On 356 out of 480 to analyze.
-On 165 out of 480 to analyze.
-On 176 out of 480 to analyze.
-On 166 out of 480 to analyze.
-On 357 out of 480 to analyze.
-On 360 out of 480 to analyze.
-On 177 out of 480 to analyze.
-On 121 out of 480 to analyze.
-On 372 out of 480 to analyze.
-On 167 out of 480 to analyze.
-On 178 out of 480 to analyze.
-On 361 out of 480 to analyze.
-On 358 out of 480 to analyze.
-On 168 out of 480 to analyze.
-On 373 out of 480 to analyze.
-On 179 out of 480 to analyze.
-On 180 out of 480 to analyze.
-On 169 out of 480 to analyze.
-On 115 out of 480 to analyze.
-On 374 out of 480 to analyze.
-On 359 out of 480 to analyze.
-On 116 out of 480 to analyze.
-On 362 out of 480 to analyze.
-On 170 out of 480 to analyze.
-On 181 out of 480 to analyze.
-On 360 out of 480 to analyze.
-On 182 out of 480 to analyze.
-On 171 out of 480 to analyze.
-On 363 out of 480 to analyze.
-On 375 out of 480 to analyze.
-On 183 out of 480 to analyze.
-On 361 out of 480 to analyze.
-On 172 out of 480 to analyze.
-On 122 out of 480 to analyze.
-On 184 out of 480 to analyze.
-On 364 out of 480 to analyze.
-On 173 out of 480 to analyze.
-On 185 out of 480 to analyze.
-On 363 out of 480 to analyze.
-On 376 out of 480 to analyze.
-On 174 out of 480 to analyze.
-On 186 out of 480 to analyze.
-On 365 out of 480 to analyze.
-On 175 out of 480 to analyze.
-On 116 out of 480 to analyze.
-On 364 out of 480 to analyze.
-On 117 out of 480 to analyze.
-On 187 out of 480 to analyze.
-On 176 out of 480 to analyze.
-On 377 out of 480 to analyze.
-On 366 out of 480 to analyze.
-On 188 out of 480 to analyze.
-On 177 out of 480 to analyze.
-On 365 out of 480 to analyze.
-On 189 out of 480 to analyze.
-On 378 out of 480 to analyze.
-On 178 out of 480 to analyze.
-On 367 out of 480 to analyze.
-On 123 out of 480 to analyze.
-On 190 out of 480 to analyze.
-On 179 out of 480 to analyze.
-On 366 out of 480 to analyze.
-On 191 out of 480 to analyze.
-On 180 out of 480 to analyze.
-On 192 out of 480 to analyze.
-On 368 out of 480 to analyze.
-On 379 out of 480 to analyze.
-On 181 out of 480 to analyze.
-On 193 out of 480 to analyze.
-On 367 out of 480 to analyze.
-On 117 out of 480 to analyze.
-On 369 out of 480 to analyze.
-On 194 out of 480 to analyze.
-On 380 out of 480 to analyze.
-On 182 out of 480 to analyze.
-On 118 out of 480 to analyze.
-On 368 out of 480 to analyze.
-On 195 out of 480 to analyze.
-On 183 out of 480 to analyze.
-On 370 out of 480 to analyze.
-On 381 out of 480 to analyze.
-On 184 out of 480 to analyze.
-On 196 out of 480 to analyze.
-On 369 out of 480 to analyze.
-On 124 out of 480 to analyze.
-On 185 out of 480 to analyze.
-On 197 out of 480 to analyze.
-On 371 out of 480 to analyze.
-On 382 out of 480 to analyze.
-On 198 out of 480 to analyze.
-On 186 out of 480 to analyze.
-On 370 out of 480 to analyze.
-On 372 out of 480 to analyze.
-On 199 out of 480 to analyze.
-On 187 out of 480 to analyze.
-On 118 out of 480 to analyze.
-On 384 out of 480 to analyze.
-On 119 out of 480 to analyze.
-On 188 out of 480 to analyze.
-On 200 out of 480 to analyze.
-On 371 out of 480 to analyze.
-On 373 out of 480 to analyze.
-On 189 out of 480 to analyze.
-On 201 out of 480 to analyze.
-On 386 out of 480 to analyze.
-On 190 out of 480 to analyze.
-On 202 out of 480 to analyze.
-On 372 out of 480 to analyze.
-On 375 out of 480 to analyze.
-On 125 out of 480 to analyze.
-On 191 out of 480 to analyze.
-On 203 out of 480 to analyze.
-On 387 out of 480 to analyze.
-On 192 out of 480 to analyze.
-On 204 out of 480 to analyze.
-On 373 out of 480 to analyze.
-On 376 out of 480 to analyze.
-On 119 out of 480 to analyze.
-On 205 out of 480 to analyze.
-On 388 out of 480 to analyze.
-On 193 out of 480 to analyze.
-On 194 out of 480 to analyze.
-On 120 out of 480 to analyze.
-On 206 out of 480 to analyze.
-On 377 out of 480 to analyze.
-On 195 out of 480 to analyze.
-On 390 out of 480 to analyze.
-On 374 out of 480 to analyze.
-On 207 out of 480 to analyze.
-On 208 out of 480 to analyze.
-On 196 out of 480 to analyze.
-On 391 out of 480 to analyze.
-On 378 out of 480 to analyze.
-On 126 out of 480 to analyze.
-On 209 out of 480 to analyze.
-On 375 out of 480 to analyze.
-On 197 out of 480 to analyze.
-On 210 out of 480 to analyze.
-On 198 out of 480 to analyze.
-On 211 out of 480 to analyze.
-On 392 out of 480 to analyze.
-On 379 out of 480 to analyze.
-On 199 out of 480 to analyze.
-On 376 out of 480 to analyze.
-On 212 out of 480 to analyze.
-On 120 out of 480 to analyze.
-On 393 out of 480 to analyze.
-On 200 out of 480 to analyze.
-On 213 out of 480 to analyze.
-On 377 out of 480 to analyze.
-On 380 out of 480 to analyze.
-On 201 out of 480 to analyze.
-On 121 out of 480 to analyze.
-On 214 out of 480 to analyze.
-On 394 out of 480 to analyze.
-On 378 out of 480 to analyze.
-On 202 out of 480 to analyze.
-On 215 out of 480 to analyze.
-On 382 out of 480 to analyze.
-On 127 out of 480 to analyze.
-On 203 out of 480 to analyze.
-On 216 out of 480 to analyze.
-On 395 out of 480 to analyze.
-On 379 out of 480 to analyze.
-On 204 out of 480 to analyze.
-On 217 out of 480 to analyze.
-On 383 out of 480 to analyze.
-On 205 out of 480 to analyze.
-On 121 out of 480 to analyze.
-On 218 out of 480 to analyze.
-On 380 out of 480 to analyze.
-On 396 out of 480 to analyze.
-On 206 out of 480 to analyze.
-On 219 out of 480 to analyze.
-On 384 out of 480 to analyze.
-On 381 out of 480 to analyze.
-On 207 out of 480 to analyze.
-On 122 out of 480 to analyze.
-On 220 out of 480 to analyze.
-On 397 out of 480 to analyze.
-On 208 out of 480 to analyze.
-On 385 out of 480 to analyze.
-On 382 out of 480 to analyze.
-On 221 out of 480 to analyze.
-On 128 out of 480 to analyze.
-On 209 out of 480 to analyze.
-On 222 out of 480 to analyze.
-On 386 out of 480 to analyze.
-On 398 out of 480 to analyze.
-On 210 out of 480 to analyze.
-On 122 out of 480 to analyze.
-On 383 out of 480 to analyze.
-On 223 out of 480 to analyze.
-On 211 out of 480 to analyze.
-On 399 out of 480 to analyze.
-On 387 out of 480 to analyze.
-On 224 out of 480 to analyze.
-On 384 out of 480 to analyze.
-On 212 out of 480 to analyze.
-On 225 out of 480 to analyze.
-On 400 out of 480 to analyze.
-On 213 out of 480 to analyze.
-On 123 out of 480 to analyze.
-On 388 out of 480 to analyze.
-On 385 out of 480 to analyze.
-On 129 out of 480 to analyze.
-On 214 out of 480 to analyze.
-On 226 out of 480 to analyze.
-On 401 out of 480 to analyze.
-On 227 out of 480 to analyze.
-On 215 out of 480 to analyze.
-On 389 out of 480 to analyze.
-On 386 out of 480 to analyze.
-On 228 out of 480 to analyze.
-On 216 out of 480 to analyze.
-On 123 out of 480 to analyze.
-On 402 out of 480 to analyze.
-On 229 out of 480 to analyze.
-On 390 out of 480 to analyze.
-On 217 out of 480 to analyze.
-On 230 out of 480 to analyze.
-On 387 out of 480 to analyze.
-On 231 out of 480 to analyze.
-On 218 out of 480 to analyze.
-On 403 out of 480 to analyze.
-On 391 out of 480 to analyze.
-On 219 out of 480 to analyze.
-On 124 out of 480 to analyze.
-On 232 out of 480 to analyze.
-On 388 out of 480 to analyze.
-On 130 out of 480 to analyze.
-On 404 out of 480 to analyze.
-On 233 out of 480 to analyze.
-On 392 out of 480 to analyze.
-On 220 out of 480 to analyze.
-On 389 out of 480 to analyze.
-On 234 out of 480 to analyze.
-On 221 out of 480 to analyze.
-On 405 out of 480 to analyze.
-On 393 out of 480 to analyze.
-On 222 out of 480 to analyze.
-On 235 out of 480 to analyze.
-On 124 out of 480 to analyze.
-On 223 out of 480 to analyze.
-On 390 out of 480 to analyze.
-On 236 out of 480 to analyze.
-On 394 out of 480 to analyze.
-On 406 out of 480 to analyze.
-On 224 out of 480 to analyze.
-On 237 out of 480 to analyze.
-On 391 out of 480 to analyze.
-On 225 out of 480 to analyze.
-On 238 out of 480 to analyze.
-On 407 out of 480 to analyze.
-On 126 out of 480 to analyze.
-On 131 out of 480 to analyze.
-On 395 out of 480 to analyze.
-On 226 out of 480 to analyze.
-On 392 out of 480 to analyze.
-On 239 out of 480 to analyze.
-On 227 out of 480 to analyze.
-On 396 out of 480 to analyze.
-On 408 out of 480 to analyze.
-On 240 out of 480 to analyze.
-On 125 out of 480 to analyze.
-On 393 out of 480 to analyze.
-On 241 out of 480 to analyze.
-On 228 out of 480 to analyze.
-On 242 out of 480 to analyze.
-On 397 out of 480 to analyze.
-On 229 out of 480 to analyze.
-On 409 out of 480 to analyze.
-On 394 out of 480 to analyze.
-On 243 out of 480 to analyze.
-On 230 out of 480 to analyze.
-On 398 out of 480 to analyze.
-On 410 out of 480 to analyze.
-On 127 out of 480 to analyze.
-On 395 out of 480 to analyze.
-On 244 out of 480 to analyze.
-On 231 out of 480 to analyze.
-On 132 out of 480 to analyze.
-On 232 out of 480 to analyze.
-On 245 out of 480 to analyze.
-On 396 out of 480 to analyze.
-On 399 out of 480 to analyze.
-On 411 out of 480 to analyze.
-On 233 out of 480 to analyze.
-On 126 out of 480 to analyze.
-On 246 out of 480 to analyze.
-On 234 out of 480 to analyze.
-On 400 out of 480 to analyze.
-On 397 out of 480 to analyze.
-On 247 out of 480 to analyze.
-On 412 out of 480 to analyze.
-On 235 out of 480 to analyze.
-On 248 out of 480 to analyze.
-On 398 out of 480 to analyze.
-On 236 out of 480 to analyze.
-On 401 out of 480 to analyze.
-On 249 out of 480 to analyze.
-On 133 out of 480 to analyze.
-On 128 out of 480 to analyze.
-On 413 out of 480 to analyze.
-On 237 out of 480 to analyze.
-On 250 out of 480 to analyze.
-On 402 out of 480 to analyze.
-On 414 out of 480 to analyze.
-On 399 out of 480 to analyze.
-On 238 out of 480 to analyze.
-On 251 out of 480 to analyze.
-On 239 out of 480 to analyze.
-On 127 out of 480 to analyze.
-On 252 out of 480 to analyze.
-On 240 out of 480 to analyze.
-On 415 out of 480 to analyze.
-On 403 out of 480 to analyze.
-On 400 out of 480 to analyze.
-On 253 out of 480 to analyze.
-On 241 out of 480 to analyze.
-On 254 out of 480 to analyze.
-On 404 out of 480 to analyze.
-On 129 out of 480 to analyze.
-On 242 out of 480 to analyze.
-On 401 out of 480 to analyze.
-On 255 out of 480 to analyze.
-On 416 out of 480 to analyze.
-On 243 out of 480 to analyze.
-On 134 out of 480 to analyze.
-On 256 out of 480 to analyze.
-On 244 out of 480 to analyze.
-On 405 out of 480 to analyze.
-On 403 out of 480 to analyze.
-On 257 out of 480 to analyze.
-On 245 out of 480 to analyze.
-On 258 out of 480 to analyze.
-On 418 out of 480 to analyze.
-On 246 out of 480 to analyze.
-On 128 out of 480 to analyze.
-On 406 out of 480 to analyze.
-On 259 out of 480 to analyze.
-On 404 out of 480 to analyze.
-On 419 out of 480 to analyze.
-On 247 out of 480 to analyze.
-On 260 out of 480 to analyze.
-On 248 out of 480 to analyze.
-On 407 out of 480 to analyze.
-On 405 out of 480 to analyze.
-On 249 out of 480 to analyze.
-On 130 out of 480 to analyze.
-On 261 out of 480 to analyze.
-On 420 out of 480 to analyze.
-On 262 out of 480 to analyze.
-On 250 out of 480 to analyze.
-On 408 out of 480 to analyze.
-On 135 out of 480 to analyze.
-On 421 out of 480 to analyze.
-On 263 out of 480 to analyze.
-On 251 out of 480 to analyze.
-On 264 out of 480 to analyze.
-On 406 out of 480 to analyze.
-On 409 out of 480 to analyze.
-On 265 out of 480 to analyze.
-On 252 out of 480 to analyze.
-On 129 out of 480 to analyze.
-On 422 out of 480 to analyze.
-On 407 out of 480 to analyze.
-On 410 out of 480 to analyze.
-On 253 out of 480 to analyze.
-On 266 out of 480 to analyze.
-On 267 out of 480 to analyze.
-On 423 out of 480 to analyze.
-On 131 out of 480 to analyze.
-On 254 out of 480 to analyze.
-On 408 out of 480 to analyze.
-On 136 out of 480 to analyze.
-On 411 out of 480 to analyze.
-On 268 out of 480 to analyze.
-On 255 out of 480 to analyze.
-On 424 out of 480 to analyze.
-On 269 out of 480 to analyze.
-On 412 out of 480 to analyze.
-On 256 out of 480 to analyze.
-On 409 out of 480 to analyze.
-On 257 out of 480 to analyze.
-On 270 out of 480 to analyze.
-On 425 out of 480 to analyze.
-On 130 out of 480 to analyze.
-On 258 out of 480 to analyze.
-On 271 out of 480 to analyze.
-On 413 out of 480 to analyze.
-On 410 out of 480 to analyze.
-On 259 out of 480 to analyze.
-On 426 out of 480 to analyze.
-On 260 out of 480 to analyze.
-On 272 out of 480 to analyze.
-On 411 out of 480 to analyze.
-On 414 out of 480 to analyze.
-On 261 out of 480 to analyze.
-On 132 out of 480 to analyze.
-On 273 out of 480 to analyze.
-On 137 out of 480 to analyze.
-On 427 out of 480 to analyze.
-On 262 out of 480 to analyze.
-On 274 out of 480 to analyze.
-On 412 out of 480 to analyze.
-On 415 out of 480 to analyze.
-On 275 out of 480 to analyze.
-On 263 out of 480 to analyze.
-On 428 out of 480 to analyze.
-On 264 out of 480 to analyze.
-On 276 out of 480 to analyze.
-On 413 out of 480 to analyze.
-On 416 out of 480 to analyze.
-On 131 out of 480 to analyze.
-On 277 out of 480 to analyze.
-On 265 out of 480 to analyze.
-On 429 out of 480 to analyze.
-On 414 out of 480 to analyze.
-On 266 out of 480 to analyze.
-On 278 out of 480 to analyze.
-On 417 out of 480 to analyze.
-On 267 out of 480 to analyze.
-On 430 out of 480 to analyze.
-On 133 out of 480 to analyze.
-On 279 out of 480 to analyze.
-On 138 out of 480 to analyze.
-On 415 out of 480 to analyze.
-On 268 out of 480 to analyze.
-On 280 out of 480 to analyze.
-On 431 out of 480 to analyze.
-On 418 out of 480 to analyze.
-On 269 out of 480 to analyze.
-On 281 out of 480 to analyze.
-On 416 out of 480 to analyze.
-On 282 out of 480 to analyze.
-On 419 out of 480 to analyze.
-On 432 out of 480 to analyze.
-On 270 out of 480 to analyze.
-On 283 out of 480 to analyze.
-On 271 out of 480 to analyze.
-On 132 out of 480 to analyze.
-On 417 out of 480 to analyze.
-On 420 out of 480 to analyze.
-On 433 out of 480 to analyze.
-On 284 out of 480 to analyze.
-On 272 out of 480 to analyze.
-On 285 out of 480 to analyze.
-On 134 out of 480 to analyze.
-On 139 out of 480 to analyze.
-On 418 out of 480 to analyze.
-On 421 out of 480 to analyze.
-On 434 out of 480 to analyze.
-On 286 out of 480 to analyze.
-On 273 out of 480 to analyze.
-On 287 out of 480 to analyze.
-On 422 out of 480 to analyze.
-On 274 out of 480 to analyze.
-On 435 out of 480 to analyze.
-On 288 out of 480 to analyze.
-On 419 out of 480 to analyze.
-On 275 out of 480 to analyze.
-On 133 out of 480 to analyze.
-On 289 out of 480 to analyze.
-On 276 out of 480 to analyze.
-On 423 out of 480 to analyze.
-On 436 out of 480 to analyze.
-On 290 out of 480 to analyze.
-On 420 out of 480 to analyze.
-On 277 out of 480 to analyze.
-On 291 out of 480 to analyze.
-On 135 out of 480 to analyze.
-On 278 out of 480 to analyze.
-On 140 out of 480 to analyze.
-On 424 out of 480 to analyze.
-On 437 out of 480 to analyze.
-On 292 out of 480 to analyze.
-On 422 out of 480 to analyze.
-On 279 out of 480 to analyze.
-On 293 out of 480 to analyze.
-On 425 out of 480 to analyze.
-On 134 out of 480 to analyze.
-On 280 out of 480 to analyze.
-On 423 out of 480 to analyze.
-On 438 out of 480 to analyze.
-On 294 out of 480 to analyze.
-On 426 out of 480 to analyze.
-On 281 out of 480 to analyze.
-On 439 out of 480 to analyze.
-On 424 out of 480 to analyze.
-On 295 out of 480 to analyze.
-On 142 out of 480 to analyze.
-On 282 out of 480 to analyze.
-On 427 out of 480 to analyze.
-On 296 out of 480 to analyze.
-On 136 out of 480 to analyze.
-On 283 out of 480 to analyze.
-On 440 out of 480 to analyze.
-On 297 out of 480 to analyze.
-On 284 out of 480 to analyze.
-On 425 out of 480 to analyze.
-On 428 out of 480 to analyze.
-On 298 out of 480 to analyze.
-On 285 out of 480 to analyze.
-On 299 out of 480 to analyze.
-On 441 out of 480 to analyze.
-On 286 out of 480 to analyze.
-On 429 out of 480 to analyze.
-On 287 out of 480 to analyze.
-On 135 out of 480 to analyze.
-On 426 out of 480 to analyze.
-On 300 out of 480 to analyze.
-On 143 out of 480 to analyze.
-On 288 out of 480 to analyze.
-On 442 out of 480 to analyze.
-On 301 out of 480 to analyze.
-On 289 out of 480 to analyze.
-On 430 out of 480 to analyze.
-On 137 out of 480 to analyze.
-On 427 out of 480 to analyze.
-On 290 out of 480 to analyze.
-On 302 out of 480 to analyze.
 ----------------------------------------
-Begin PBS Epilogue Thu Oct 20 06:39:59 EDT 2016 1476959999
-Job ID:		2058190.mgt
+Begin PBS Epilogue Fri Oct 21 11:40:02 EDT 2016 1477064402
+Job ID:		2077668.mgt
 Username:	ali
 Group:		sarma
 Job Name:	compute_adjacency_mat
-Session:	3205
+Session:	30406
 Limits:		neednodes=3:ppn=8,nodes=3:ppn=8,walltime=14:00:00
-Resources:	cput=112:03:28,mem=2962636kb,vmem=9085988kb,walltime=14:01:25
+Resources:	cput=00:27:20,mem=6624840kb,vmem=8769000kb,walltime=00:10:08
 Queue:		dque
 Account:		
-Nodes:	node090 node091 node092
+Nodes:	node067 node124 node240
 Killing leftovers...
 
-End PBS Epilogue Thu Oct 20 06:39:59 EDT 2016 1476959999
+End PBS Epilogue Fri Oct 21 11:40:03 EDT 2016 1477064403
 ----------------------------------------

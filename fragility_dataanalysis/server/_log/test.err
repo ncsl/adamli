@@ -1,6 +1,39 @@
-{Undefined function or variable "ezone_labels".
+Error in <a href="matlab:helpUtils.errorDocCallback('determineClinicalAnnotations', '/home/ali/adamli/fragility_dataanalysis/determineClinicalAnnotations.m', 3)" style="font-weight:bold">determineClinicalAnnotations</a> (<a href="matlab: opentoline('/home/ali/adamli/fragility_dataanalysis/determineClinicalAnnotations.m',3,0)">line 3</a>)
+    if strcmp(patient_id, 'EZT007')
 
-Error in serverPerturbationScript (line 107)
-clinicalLabels.ezone_labels = ezone_labels;
+{Output argument "included_channels" (and maybe others) not assigned during call
+to
+"/home/ali/adamli/fragility_dataanalysis/determineClinicalAnnotations.m>determineClinicalAnnotations".
+
+Error in serverAdjMainScript (line 25)
+    [included_channels, ezone_labels, earlyspread_labels, latespread_labels]
+    ...
 } 
-=>> PBS: job killed: walltime 50445 exceeded limit 50400
+{Undefined function or variable "winSize".
+
+Error in computePerturbations (line 78)
+        fprintf(fid, '%6s, %f \n', ['This patient has eigenvalue == radius,
+        check it!', ...
+
+Error in serverPerturbationScript (line 122)
+        computePerturbations(patient_id, seizure_id, perturb_args);
+} 
+{Undefined function or variable "winSize".
+
+Error in computePerturbations (line 78)
+        fprintf(fid, '%6s, %f \n', ['This patient has eigenvalue == radius,
+        check it!', ...
+
+Error in serverPerturbationScript (line 122)
+        computePerturbations(patient_id, seizure_id, perturb_args);
+} 
+{Undefined function or variable "winSize".
+
+Error in computePerturbations (line 78)
+        fprintf(fid, '%6s, %f \n', ['This patient has eigenvalue == radius,
+        check it!', ...
+
+Error in serverPerturbationScript (line 122)
+        computePerturbations(patient_id, seizure_id, perturb_args);
+} 
+
