@@ -18,7 +18,7 @@
 function runPlotsAndDOA(frequency_sampling, winSize, stepSize, radius)
 
 % settings to run
-patients = {'JH104sz1', 'JH104sz2', 'JH104sz3',...
+patients = {'JH104sz1', 'JH104sz2', 'JH104sz3'...
 %     'pt1sz2', 'pt1sz3', 'pt2sz1', 'pt2sz3', 'JH105sz1', ...
 %     'pt7sz19', 'pt7sz21', 'pt7sz22',  ...
 %     'EZT005_seiz001', 'EZT005_seiz002', 'EZT007_seiz001', 'EZT007_seiz002', ...
@@ -28,11 +28,14 @@ patients = {'JH104sz1', 'JH104sz2', 'JH104sz3',...
 % patients = {'Pat2sz1p', 'Pat2sz2p', 'Pat2sz3p'};%, 'Pat16sz1p', 'Pat16sz2p', 'Pat16sz3p'};
 perturbationTypes = ['R', 'C'];
 w_space = linspace(-1, 1, 101);
-% radius = 1.1;             % spectral radius
 threshold = 0.8;          % threshold on fragility metric
-% winSize = 500;            % 500 milliseconds
-% stepSize = 500; 
-% frequency_sampling = 1000; % in Hz
+if nargin==0
+radius = 1.5;             % spectral radius
+
+winSize = 500;            % 500 milliseconds
+stepSize = 500; 
+frequency_sampling = 1000; % in Hz
+end
 timeRange = [60 0];
 
 % add libraries of functions

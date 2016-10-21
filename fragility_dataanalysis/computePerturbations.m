@@ -35,6 +35,8 @@ toSaveFinalDataDir = perturb_args.toSaveFinalDataDir;
 included_channels = perturb_args.included_channels;
 num_channels = perturb_args.num_channels
 frequency_sampling = perturb_args.frequency_sampling;
+% winSize = perturb_args.winSize;
+% stepSize = perturb_args.
 
 sigma = sqrt(radius^2 - w_space.^2); % move to the unit circle 1, for a plethora of different radial frequencies
 b = [0; 1];                          % initialize for perturbation computation later
@@ -64,7 +66,17 @@ for i=1:length(matFiles) % loop through each adjacency matrix
     data = data.data;
     
     theta_adj = data.theta_adj;
+    timewrtSz = data.timewrtSz / 1000; % in seconds
     
+    index = data.index;
+    if (i == 1) % only set these variables once -> save time in seconds
+        timeStart = data.timeStart / frequency_sampling;
+        timeEnd = data.timeEnd / frequency_sampling;
+        seizureStart = data.seizureStart / frequency_sampling;
+        seizureEnd = data.seizureEnd / frequency_sampling;
+        winSize = data.winSize;
+        stepSize = data.stepSize;
+    end
     if max(abs(eig(theta_adj))) > radius
         logfile = strcat(patient, '_perturbation_log.txt');
         fid = fopen(logfile, 'w');
@@ -79,18 +91,6 @@ for i=1:length(matFiles) % loop through each adjacency matrix
             patient, '_', num2str(frequency_sampling), '_', num2str(winSize), '_', num2str(stepSize)]);
         fprintf(fid, '%6s \n', ['on this number of the mat files, ' num2str(i)]);
         fclose(fid);
-    end
-    
-    timewrtSz = data.timewrtSz / 1000; % in seconds
-    
-    index = data.index;
-    if (i == 1) % only set these variables once -> save time in seconds
-        timeStart = data.timeStart / frequency_sampling;
-        timeEnd = data.timeEnd / frequency_sampling;
-        seizureStart = data.seizureStart / frequency_sampling;
-        seizureEnd = data.seizureEnd / frequency_sampling;
-        winSize = data.winSize;
-        stepSize = data.stepSize;
     end
     % store all the time indices with respect to seizure
     timeIndices = [timeIndices; timewrtSz];
