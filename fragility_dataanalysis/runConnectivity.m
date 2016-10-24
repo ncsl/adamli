@@ -3,7 +3,10 @@ close all;
 clc;
 
 % settings to run
-patients = {'pt1sz2', 'pt1sz3', 'pt2sz1', 'pt2sz3', 'JH105sz1', 'pt7sz19', 'pt7sz21', 'pt7sz22',  ...
+patients = { 'EZT030seiz002' 'EZT037seiz001' 'EZT037seiz002',...
+	'EZT070seiz001' 'EZT070seiz002', ...
+	'JH104sz1' 'JH104sz2' 'JH104sz3',...
+%     'pt1sz2', 'pt1sz3', 'pt2sz1', 'pt2sz3', 'JH105sz1', 'pt7sz19', 'pt7sz21', 'pt7sz22',  ...
 %     'EZT005_seiz001', 'EZT005_seiz002', 'EZT007_seiz001', 'EZT007_seiz002', ...
 %     'EZT019_seiz001', 'EZT019_seiz002', 'EZT090_seiz002', 'EZT090_seiz003', ...
     };
@@ -11,11 +14,11 @@ patients = {'pt1sz2', 'pt1sz3', 'pt2sz1', 'pt2sz3', 'JH105sz1', 'pt7sz19', 'pt7s
 % patients = {'Pat2sz1p', 'Pat2sz2p', 'Pat2sz3p'};%, 'Pat16sz1p', 'Pat16sz2p', 'Pat16sz3p'};
 perturbationTypes = ['R', 'C'];
 w_space = linspace(-1, 1, 101);
-radius = 1.1;             % spectral radius
+radius = 1.5;             % spectral radius
 threshold = 0.8;          % threshold on fragility metric
 winSize = 500;            % 500 milliseconds
 stepSize = 500; 
-frequency_sampling = 500; % in Hz
+frequency_sampling = 1000; % in Hz
 timeRange = [60 0];
 
 
@@ -28,7 +31,7 @@ addpath(genpath('/home/WIN/ali39/Documents/adamli/fragility_dataanalysis/eeg_too
 for p=1:length(patients)
     patient = patients{p};
    
-    patient_id = patient(1:strfind(patient, 'seiz')-2);
+    patient_id = patient(1:strfind(patient, 'seiz')-1);
     seizure_id = strcat('_', patient(strfind(patient, 'seiz'):end));
     seeg = 1;
     if isempty(patient_id)
@@ -50,13 +53,6 @@ for p=1:length(patients)
     %% DEFINE COMPUTATION PARAMETERS AND DIRECTORIES TO SAVE DATA
     patient = strcat(patient_id, seizure_id);
     disp(['Looking at patient: ',patient]);
-
-    % create the adjacency file directory to store the computed adj. mats
-    toSaveAdjDir = fullfile(strcat('.adj_mats_win', num2str(winSize), ...
-    '_step', num2str(stepSize), '_freq', num2str(frequency_sampling), '_radius', num2str(radius)), patient);
-    if ~exist(toSaveAdjDir, 'dir')
-        mkdir(toSaveAdjDir);
-    end
 
     %%- grab eeg data in different ways... depending on who we got it from
     if ~seeg
@@ -138,6 +134,18 @@ for p=1:length(patients)
         seizureStart
         seizureEnd
     end
+    
+    % only take included_channels
+    if ~isempty(included_channels)
+        num_channels = num_channels;
+    end
+    
+    % create the adjacency file directory to store the computed adj. mats
+    toSaveAdjDir = fullfile(strcat('./adj_mats_win', num2str(winSize), ...
+        '_step', num2str(stepSize), '_freq', num2str(frequency_sampling)), patient);
+    if ~exist(toSaveAdjDir, 'dir')
+        mkdir(toSaveAdjDir);
+    end
 
     %% 01: RUN FUNCTIONAL CONNECTIVITY COMPUTATION
     % define args for computing the functional connectivity
@@ -166,8 +174,8 @@ for p=1:length(patients)
         perturbationType = perturbationTypes(j);
         
         toSaveFinalDataDir = fullfile(strcat('./adj_mats_win', num2str(winSize), ...
-        '_step', num2str(stepSize), '_freq', num2str(frequency_sampling), '_radius', num2str(radius)),...
-            strcat(perturbationType, '_finaldata'));
+        '_step', num2str(stepSize), '_freq', num2str(frequency_sampling)), strcat(perturbationType, '_finaldata', ...
+            '_radius', num2str(radius)));
         if ~exist(toSaveFinalDataDir, 'dir')
             mkdir(toSaveFinalDataDir);
         end
@@ -176,6 +184,7 @@ for p=1:length(patients)
         perturb_args.perturbationType = perturbationType;
         perturb_args.w_space = w_space;
         perturb_args.radius = radius;
+        perturb_args.frequency_sampling = frequency_sampling;
         perturb_args.adjDir = toSaveAdjDir;
         perturb_args.toSaveFinalDataDir = toSaveFinalDataDir;
         perturb_args.labels = labels;
