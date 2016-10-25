@@ -19,15 +19,12 @@
 
 % settings to run
 patients = {...
-<<<<<<< HEAD
 	'JH104sz1' 'JH104sz2' 'JH104sz3'...
 %     'JH104sz1', 'JH104sz2', 'JH104sz3'...
-=======
 %     'EZT030seiz001', 'EZT030seiz002', 'EZT037seiz001', 'EZT037seiz002',...
 % 	'EZT070seiz001', 'EZT070seiz002', 'EZT005seiz001', 'EZT005seiz002', 'EZT007seiz001', 'EZT007seiz002', ...
 %     'EZT019seiz001', 'EZT019seiz002', 'EZT090seiz002', 'EZT090seiz003' ...
-	'JH104sz1' 'JH104sz2' 'JH104sz3',...
->>>>>>> cb1bc07e2f14d035043ce01bad7c7c6edcdedc18
+% 	'JH104sz1' 'JH104sz2' 'JH104sz3',...
 %     'pt1sz2', 'pt1sz3', 'pt2sz1', 'pt2sz3', 'JH105sz1', ...
 %     'pt7sz19', 'pt7sz21', 'pt7sz22',  ...
     };
@@ -97,12 +94,7 @@ for p=1:length(patients)
         fid = fopen(patient_label_path); % open up labels to get all the channels
         labels = textscan(fid, '%s', 'Delimiter', ',');
         labels = labels{:}; 
-        try
-            labels = labels(included_channels);
-        catch
-            disp('labels already clipped');
-            length(labels) == length(included_channels)
-        end
+
         fclose(fid);
     else
         %% EZT/SEEG PATIENTS
@@ -121,9 +113,11 @@ for p=1:length(patients)
         num_channels = size(data.data, 1);
     end
 
+    if ~isempty(included_channels)
+        labels = labels(included_channels);
+    end
+    
 %% 03: PLOT PERTURBATION RESULTS
-<<<<<<< HEAD
-=======
     for j=1:length(perturbationTypes)
         perturbationType = perturbationTypes(j);
 
@@ -170,82 +164,35 @@ for p=1:length(patients)
 %             perturbationType
 %         end
     end
->>>>>>> cb1bc07e2f14d035043ce01bad7c7c6edcdedc18
+
+    %% 04: Compute Jaccard Index
 %     for j=1:length(perturbationTypes)
 %         perturbationType = perturbationTypes(j);
 % 
 %         toSaveFinalDataDir = fullfile(strcat('./adj_mats_win', num2str(winSize), ...
-%         '_step', num2str(stepSize), '_freq', num2str(frequency_sampling)), strcat(perturbationType, '_finaldata', ...
-%             '_radius', num2str(radius)));
+%         '_step', num2str(stepSize), '_freq', num2str(frequency_sampling), '_radius', num2str(radius)),...
+%             strcat(perturbationType, '_finaldata'));
+%         if ~exist(toSaveFinalDataDir, 'dir')
+%             mkdir(toSaveFinalDataDir);
+%         end
 %         
-%         toSaveFigDir = fullfile('./figures/', perturbationType, strcat(patient, '_win', num2str(winSize), ...
+%         toSaveFigDir = fullfile('./figures/', strcat(perturbationType, '_electrode_weights'), strcat(patient, num2str(winSize), ...
 %             '_step', num2str(stepSize), '_freq', num2str(frequency_sampling), '_radius', num2str(radius)));
 %         if ~exist(toSaveFigDir, 'dir')
 %             mkdir(toSaveFigDir);
 %         end
+%         stats_args = struct();
+%         stats_args.perturbationType = perturbationType;
+%         stats_args.w_space = w_space;
+%         stats_args.radius = radius;
+%         stats_args.adjDir = toSaveAdjDir;
+%         stats_args.toSaveFinalDataDir = toSaveFinalDataDir;
+%         stats_args.labels = labels;
+%         stats_args.included_channels = included_channels;
+%         stats_args.num_channels = size(eeg, 1);
 %         
-%         toSaveWeightsDir = fullfile('./figures/', strcat(perturbationType, '_electrode_weights'), strcat(patient, num2str(winSize), ...
-%             '_step', num2str(stepSize), '_freq', num2str(frequency_sampling), '_radius', num2str(radius)));
-%         if ~exist(toSaveWeightsDir, 'dir')
-%             mkdir(toSaveWeightsDir);
-%         end
-% 
-%         plot_args = struct();
-%         plot_args.perturbationType = perturbationType;
-%         plot_args.radius = radius;
-%         plot_args.winSize = winSize;
-%         plot_args.stepSize = stepSize;
-%         plot_args.finalDataDir = toSaveFinalDataDir;
-%         plot_args.toSaveFigDir = toSaveFigDir;
-%         plot_args.toSaveWeightsDir = toSaveWeightsDir;
-%         plot_args.labels = labels;
-%         plot_args.seizureStart = seizureStart;
-%         plot_args.dataStart = seizureStart - timeRange(1)*frequency_sampling;
-%         plot_args.dataEnd = seizureStart + timeRange(2)*frequency_sampling;
-%         plot_args.FONTSIZE = 22;
-%         plot_args.YAXFontSize = 9;
-%         plot_args.LT = 1.5;
-%         plot_args.threshold = threshold;
-%         plot_args.frequency_sampling = frequency_sampling;
 %         
-%         close all
-%         try
-%             analyzePerturbations(patient_id, seizure_id, plot_args, clinicalLabels);
-%         catch e
-%             disp(e)
-%             patient
-%             perturbationType
-%         end
+%         
 %     end
-
-    %% 04: Compute Jaccard Index
-    for j=1:length(perturbationTypes)
-        perturbationType = perturbationTypes(j);
-
-        toSaveFinalDataDir = fullfile(strcat('./adj_mats_win', num2str(winSize), ...
-        '_step', num2str(stepSize), '_freq', num2str(frequency_sampling), '_radius', num2str(radius)),...
-            strcat(perturbationType, '_finaldata'));
-        if ~exist(toSaveFinalDataDir, 'dir')
-            mkdir(toSaveFinalDataDir);
-        end
-        
-        toSaveFigDir = fullfile('./figures/', strcat(perturbationType, '_electrode_weights'), strcat(patient, num2str(winSize), ...
-            '_step', num2str(stepSize), '_freq', num2str(frequency_sampling), '_radius', num2str(radius)));
-        if ~exist(toSaveFigDir, 'dir')
-            mkdir(toSaveFigDir);
-        end
-        stats_args = struct();
-        stats_args.perturbationType = perturbationType;
-        stats_args.w_space = w_space;
-        stats_args.radius = radius;
-        stats_args.adjDir = toSaveAdjDir;
-        stats_args.toSaveFinalDataDir = toSaveFinalDataDir;
-        stats_args.labels = labels;
-        stats_args.included_channels = included_channels;
-        stats_args.num_channels = size(eeg, 1);
-        
-        
-        
-    end
 end
 % end

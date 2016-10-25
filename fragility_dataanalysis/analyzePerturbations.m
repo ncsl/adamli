@@ -113,6 +113,11 @@ if strcmp(patient_id, 'EZT005') & strcmp(seizure_id, 'seiz001')
     ignoredTimes(1) = (60-ignoredTimes(1)) * frequency_sampling/winSize;
     ignoredTimes(2) = (60-ignoredTimes(2)) * frequency_sampling/winSize;
     fragility_rankings = fragility_rankings(:,[1:ignoredTimes(1), ignoredTimes(2)+1:120]);
+elseif strcmp(patient_id, 'JH104')
+    ignoredTimes = [60 57];
+    ignoredTimes(1) = (60-ignoredTimes(1)) * frequency_sampling/winSize;
+    ignoredTimes(2) = (60-ignoredTimes(2)) * frequency_sampling/winSize;
+    fragility_rankings = fragility_rankings(:,[1:ignoredTimes(1), ignoredTimes(2)+1:120]);
 end
 
 num_channels = size(fragility_rankings,1);
