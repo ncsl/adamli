@@ -138,3 +138,13 @@ Elapsed time is 5.067164 seconds.
 Saved file: EZT037_seiz002_61_before30000.mat
 Elapsed time is 4.853399 seconds.
 Saved file: EZT037_seiz002_62_before29500.mat
+Elapsed time is 4.663853 seconds.
+Saved file: EZT037_seiz002_63_before29000.mat
+Elapsed time is 4.466039 seconds.
+Saved file: EZT037_seiz002_64_before28500.mat
+Elapsed time is 4.699758 seconds.
+Saved file: EZT037_seiz002_65_before28000.mat
+Elapsed time is 4.710772 seconds.
+Saved file: EZT037_seiz002_66_before27500.mat
+Elapsed time is 4.893837 seconds.
+Saved file: EZT037_seiz002_67_before27000.mat
