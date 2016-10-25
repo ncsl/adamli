@@ -108,6 +108,13 @@ rowsum_time_chan = final_data.rowsum_time_chan;
 colsum_time_chan = final_data.colsum_time_chan;
 metadata = final_data.metadata;
 
+if strcmp(patient_id, 'EZT005') & strcmp(seizure_id, 'seiz001')
+    ignoredTimes = [44 39];
+    ignoredTimes(1) = (60-ignoredTimes(1)) * frequency_sampling/winSize;
+    ignoredTimes(2) = (60-ignoredTimes(2)) * frequency_sampling/winSize;
+    fragility_rankings = fragility_rankings(:,[1:ignoredTimes(1), ignoredTimes(2)+1:120]);
+end
+
 num_channels = size(fragility_rankings,1);
 num_windows = size(fragility_rankings,2);
 
@@ -300,7 +307,7 @@ plotOptions = struct();
 plotOptions.YAXFontSize = YAXFontSize;
 plotOptions.FONTSIZE = FONTSIZE;
 plotOptions.LT = LT;
-plotIndices(currfig, plotOptions, yticks, labels, ...
+plotIndices(currfig, plotOptions, yticks, labels(ind_sorted_weights), ...
                             ezone_ticks, ...
                             earlyspread_ticks, ...
                             latespread_ticks)
@@ -329,7 +336,8 @@ set(ax, 'XTick', ax.XLim(1):ax.XLim(2), 'XTickLabels', sorted_labels, 'XTickLabe
 
 print(fullfile(toSaveFigDir, strcat(patient, 'electrodeRanks')), '-dpng', '-r0')
 
-catch
+catch e
+    disp(e)
     disp('cant make weights');
 end
 end
