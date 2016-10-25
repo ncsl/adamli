@@ -19,12 +19,17 @@
 
 % settings to run
 patients = {...
+<<<<<<< HEAD
 	'JH104sz1' 'JH104sz2' 'JH104sz3'...
 %     'JH104sz1', 'JH104sz2', 'JH104sz3'...
+=======
+%     'EZT030seiz001', 'EZT030seiz002', 'EZT037seiz001', 'EZT037seiz002',...
+% 	'EZT070seiz001', 'EZT070seiz002', 'EZT005seiz001', 'EZT005seiz002', 'EZT007seiz001', 'EZT007seiz002', ...
+%     'EZT019seiz001', 'EZT019seiz002', 'EZT090seiz002', 'EZT090seiz003' ...
+	'JH104sz1' 'JH104sz2' 'JH104sz3',...
+>>>>>>> cb1bc07e2f14d035043ce01bad7c7c6edcdedc18
 %     'pt1sz2', 'pt1sz3', 'pt2sz1', 'pt2sz3', 'JH105sz1', ...
 %     'pt7sz19', 'pt7sz21', 'pt7sz22',  ...
-%     'EZT005_seiz001', 'EZT005_seiz002', 'EZT007_seiz001', 'EZT007_seiz002', ...
-%     'EZT019_seiz001', 'EZT019_seiz002', 'EZT090_seiz002', 'EZT090_seiz003', ...
     };
 % patients = { 'EZT108_seiz002', 'EZT120_seiz001', 'EZT120_seiz002'}; %,
 % patients = {'Pat2sz1p', 'Pat2sz2p', 'Pat2sz3p'};%, 'Pat16sz1p', 'Pat16sz2p', 'Pat16sz3p'};
@@ -33,7 +38,6 @@ w_space = linspace(-1, 1, 101);
 threshold = 0.8;          % threshold on fragility metric
 % if nargin==0
 radius = 1.5;             % spectral radius
-
 winSize = 500;            % 500 milliseconds
 stepSize = 500; 
 frequency_sampling = 1000; % in Hz
@@ -49,7 +53,7 @@ addpath(genpath('/home/WIN/ali39/Documents/adamli/fragility_dataanalysis/eeg_too
 for p=1:length(patients)
     patient = patients{p};
    
-    patient_id = patient(1:strfind(patient, 'seiz')-2);
+    patient_id = patient(1:strfind(patient, 'seiz')-1);
     seizure_id = strcat('_', patient(strfind(patient, 'seiz'):end));
     seeg = 1;
     if isempty(patient_id)
@@ -118,6 +122,55 @@ for p=1:length(patients)
     end
 
 %% 03: PLOT PERTURBATION RESULTS
+<<<<<<< HEAD
+=======
+    for j=1:length(perturbationTypes)
+        perturbationType = perturbationTypes(j);
+
+        toSaveFinalDataDir = fullfile(strcat('./adj_mats_win', num2str(winSize), ...
+        '_step', num2str(stepSize), '_freq', num2str(frequency_sampling)), strcat(perturbationType, '_finaldata', ...
+            '_radius', num2str(radius)));
+        
+        toSaveFigDir = fullfile('./figures/', perturbationType, strcat(patient, '_win', num2str(winSize), ...
+            '_step', num2str(stepSize), '_freq', num2str(frequency_sampling), '_radius', num2str(radius)));
+        if ~exist(toSaveFigDir, 'dir')
+            mkdir(toSaveFigDir);
+        end
+        
+        toSaveWeightsDir = fullfile('./figures/', strcat(perturbationType, '_electrode_weights'), strcat(patient, num2str(winSize), ...
+            '_step', num2str(stepSize), '_freq', num2str(frequency_sampling), '_radius', num2str(radius)));
+        if ~exist(toSaveWeightsDir, 'dir')
+            mkdir(toSaveWeightsDir);
+        end
+
+        plot_args = struct();
+        plot_args.perturbationType = perturbationType;
+        plot_args.radius = radius;
+        plot_args.winSize = winSize;
+        plot_args.stepSize = stepSize;
+        plot_args.finalDataDir = toSaveFinalDataDir;
+        plot_args.toSaveFigDir = toSaveFigDir;
+        plot_args.toSaveWeightsDir = toSaveWeightsDir;
+        plot_args.labels = labels;
+        plot_args.seizureStart = seizureStart;
+        plot_args.dataStart = seizureStart - timeRange(1)*frequency_sampling;
+        plot_args.dataEnd = seizureStart + timeRange(2)*frequency_sampling;
+        plot_args.FONTSIZE = 22;
+        plot_args.YAXFontSize = 9;
+        plot_args.LT = 1.5;
+        plot_args.threshold = threshold;
+        plot_args.frequency_sampling = frequency_sampling;
+        
+        close all
+%         try
+            analyzePerturbations(patient_id, seizure_id, plot_args, clinicalLabels);
+%         catch e
+%             disp(e)
+%             patient
+%             perturbationType
+%         end
+    end
+>>>>>>> cb1bc07e2f14d035043ce01bad7c7c6edcdedc18
 %     for j=1:length(perturbationTypes)
 %         perturbationType = perturbationTypes(j);
 % 
