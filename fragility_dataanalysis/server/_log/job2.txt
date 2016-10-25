@@ -150,3 +150,122 @@ Elapsed time is 4.713987 seconds.
 Saved file: EZT037_seiz001_67_before27000.mat
 Elapsed time is 3.988230 seconds.
 Saved file: EZT037_seiz001_68_before26500.mat
+Elapsed time is 4.938185 seconds.
+Saved file: EZT037_seiz001_69_before26000.mat
+Elapsed time is 4.123321 seconds.
+Saved file: EZT037_seiz001_70_before25500.mat
+Elapsed time is 4.911679 seconds.
+Saved file: EZT037_seiz001_71_before25000.mat
+Elapsed time is 5.166650 seconds.
+Saved file: EZT037_seiz001_72_before24500.mat
+Elapsed time is 3.830877 seconds.
+Saved file: EZT037_seiz001_73_before24000.mat
+Elapsed time is 3.952625 seconds.
+Saved file: EZT037_seiz001_74_before23500.mat
+Elapsed time is 4.101586 seconds.
+Saved file: EZT037_seiz001_75_before23000.mat
+Elapsed time is 3.863922 seconds.
+Saved file: EZT037_seiz001_76_before22500.mat
+Elapsed time is 4.408665 seconds.
+Saved file: EZT037_seiz001_77_before22000.mat
+Elapsed time is 3.836823 seconds.
+Saved file: EZT037_seiz001_78_before21500.mat
+Elapsed time is 3.867370 seconds.
+Saved file: EZT037_seiz001_79_before21000.mat
+Elapsed time is 5.491766 seconds.
+Saved file: EZT037_seiz001_80_before20500.mat
+Elapsed time is 3.827485 seconds.
+Saved file: EZT037_seiz001_81_before20000.mat
+Elapsed time is 3.886000 seconds.
+Saved file: EZT037_seiz001_82_before19500.mat
+Elapsed time is 5.035963 seconds.
+Saved file: EZT037_seiz001_83_before19000.mat
+Elapsed time is 5.009584 seconds.
+Saved file: EZT037_seiz001_84_before18500.mat
+Elapsed time is 4.552313 seconds.
+Saved file: EZT037_seiz001_85_before18000.mat
+Elapsed time is 5.217396 seconds.
+Saved file: EZT037_seiz001_86_before17500.mat
+Elapsed time is 4.197058 seconds.
+Saved file: EZT037_seiz001_87_before17000.mat
+Elapsed time is 3.894106 seconds.
+Saved file: EZT037_seiz001_88_before16500.mat
+Elapsed time is 5.002220 seconds.
+Saved file: EZT037_seiz001_89_before16000.mat
+Elapsed time is 5.180641 seconds.
+Saved file: EZT037_seiz001_90_before15500.mat
+Elapsed time is 5.272280 seconds.
+Saved file: EZT037_seiz001_91_before15000.mat
+Elapsed time is 3.883480 seconds.
+Saved file: EZT037_seiz001_92_before14500.mat
+Elapsed time is 3.867912 seconds.
+Saved file: EZT037_seiz001_93_before14000.mat
+Elapsed time is 3.908526 seconds.
+Saved file: EZT037_seiz001_94_before13500.mat
+Elapsed time is 3.816261 seconds.
+Saved file: EZT037_seiz001_95_before13000.mat
+Elapsed time is 4.862982 seconds.
+Saved file: EZT037_seiz001_96_before12500.mat
+Elapsed time is 3.843296 seconds.
+Saved file: EZT037_seiz001_97_before12000.mat
+Elapsed time is 4.128607 seconds.
+Saved file: EZT037_seiz001_98_before11500.mat
+Elapsed time is 5.298949 seconds.
+Saved file: EZT037_seiz001_99_before11000.mat
+Elapsed time is 4.255655 seconds.
+Saved file: EZT037_seiz001_100_before10500.mat
+Elapsed time is 4.196425 seconds.
+Saved file: EZT037_seiz001_101_before10000.mat
+Elapsed time is 5.156339 seconds.
+Saved file: EZT037_seiz001_102_before9500.mat
+Elapsed time is 4.008155 seconds.
+Saved file: EZT037_seiz001_103_before9000.mat
+Elapsed time is 3.998688 seconds.
+Saved file: EZT037_seiz001_104_before8500.mat
+Elapsed time is 4.226384 seconds.
+Saved file: EZT037_seiz001_105_before8000.mat
+Elapsed time is 3.792478 seconds.
+Saved file: EZT037_seiz001_106_before7500.mat
+Elapsed time is 3.970269 seconds.
+Saved file: EZT037_seiz001_107_before7000.mat
+Elapsed time is 5.170611 seconds.
+Saved file: EZT037_seiz001_108_before6500.mat
+Elapsed time is 3.851066 seconds.
+Saved file: EZT037_seiz001_109_before6000.mat
+Elapsed time is 4.355449 seconds.
+Saved file: EZT037_seiz001_110_before5500.mat
+Elapsed time is 3.857989 seconds.
+Saved file: EZT037_seiz001_111_before5000.mat
+Elapsed time is 4.113456 seconds.
+Saved file: EZT037_seiz001_112_before4500.mat
+Elapsed time is 3.845638 seconds.
+Saved file: EZT037_seiz001_113_before4000.mat
+Elapsed time is 3.849930 seconds.
+Saved file: EZT037_seiz001_114_before3500.mat
+Elapsed time is 3.873270 seconds.
+Saved file: EZT037_seiz001_115_before3000.mat
+Elapsed time is 3.844287 seconds.
+Saved file: EZT037_seiz001_116_before2500.mat
+Elapsed time is 3.791775 seconds.
+Saved file: EZT037_seiz001_117_before2000.mat
+Elapsed time is 3.891000 seconds.
+Saved file: EZT037_seiz001_118_before1500.mat
+Elapsed time is 3.903604 seconds.
+Saved file: EZT037_seiz001_119_before1000.mat
+Elapsed time is 4.065451 seconds.
+Saved file: EZT037_seiz001_120_before500.mat
+Looking at patient: EZT037_seiz001
+
+num_channels =
+
+     0
+
+{Subscripted assignment dimension mismatch.
+
+Error in computePerturbations (line 154)
+        colsum_time_chan(:, iTime) = sum(theta_adj, 1);
+
+Error in serverPerturbationScript (line 122)
+        computePerturbations(patient_id, seizure_id, perturb_args);
+} 
+
