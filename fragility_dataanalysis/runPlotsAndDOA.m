@@ -15,10 +15,13 @@
 % runPlotsAndDOA(1000, 500, 500, 2.0);
 
 
-function runPlotsAndDOA(frequency_sampling, winSize, stepSize, radius)
+% function runPlotsAndDOA(frequency_sampling, winSize, stepSize, radius)
 
 % settings to run
-patients = {'JH104sz1', 'JH104sz2', 'JH104sz3'...
+patients = {...
+%     'EZT030seiz001' 'EZT030seiz002' 'EZT037seiz001' 'EZT037seiz002',...
+% 	'EZT070seiz001' 'EZT070seiz002', ...
+	'JH104sz1' 'JH104sz2' 'JH104sz3',...
 %     'pt1sz2', 'pt1sz3', 'pt2sz1', 'pt2sz3', 'JH105sz1', ...
 %     'pt7sz19', 'pt7sz21', 'pt7sz22',  ...
 %     'EZT005_seiz001', 'EZT005_seiz002', 'EZT007_seiz001', 'EZT007_seiz002', ...
@@ -29,13 +32,12 @@ patients = {'JH104sz1', 'JH104sz2', 'JH104sz3'...
 perturbationTypes = ['R', 'C'];
 w_space = linspace(-1, 1, 101);
 threshold = 0.8;          % threshold on fragility metric
-if nargin==0
+% if nargin==0
 radius = 1.5;             % spectral radius
-
 winSize = 500;            % 500 milliseconds
 stepSize = 500; 
 frequency_sampling = 1000; % in Hz
-end
+% end
 timeRange = [60 0];
 
 % add libraries of functions
@@ -47,7 +49,7 @@ addpath(genpath('/home/WIN/ali39/Documents/adamli/fragility_dataanalysis/eeg_too
 for p=1:length(patients)
     patient = patients{p};
    
-    patient_id = patient(1:strfind(patient, 'seiz')-2);
+    patient_id = patient(1:strfind(patient, 'seiz')-1);
     seizure_id = strcat('_', patient(strfind(patient, 'seiz'):end));
     seeg = 1;
     if isempty(patient_id)
@@ -154,13 +156,13 @@ for p=1:length(patients)
         plot_args.frequency_sampling = frequency_sampling;
         
         close all
-        try
+%         try
             analyzePerturbations(patient_id, seizure_id, plot_args, clinicalLabels);
-        catch e
-            disp(e)
-            patient
-            perturbationType
-        end
+%         catch e
+%             disp(e)
+%             patient
+%             perturbationType
+%         end
     end
 %     for j=1:length(perturbationTypes)
 %         perturbationType = perturbationTypes(j);
@@ -190,4 +192,4 @@ for p=1:length(patients)
 %         
 %     end
 end
-end
+% end
