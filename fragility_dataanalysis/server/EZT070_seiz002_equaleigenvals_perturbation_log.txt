@@ -1,1 +1,1 @@
-This patient has eigenvalue == radius, check it!EZT070_seiz002_1000_500_500, on this number of the mat files, 120 
+This patient has eigenvalue == radius, check it!EZT070_seiz002_1000_500_500, on this number of the mat files, 1 
