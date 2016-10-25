@@ -94,6 +94,12 @@ for p=1:length(patients)
         % extract eeg 
         eeg = csv2eeg(patient_eeg_path, filename, num_values, num_channels);
         
+        try
+            eeg = eeg(included_channels,:);
+        catch e
+            disp(e)
+        end
+        
         data = eeg;
         elec_labels = labels;
         seiz_end_mark = seizureEnd;
