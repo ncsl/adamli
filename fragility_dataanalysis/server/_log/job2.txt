@@ -14,258 +14,127 @@ Total number of channels 115
 Length of to be included channels 0
 Seizure starts at 120001 milliseconds
 Running analysis for 60000 milliseconds
-Elapsed time is 5.312013 seconds.
+Elapsed time is 7.597522 seconds.
 Saved file: EZT037_seiz001_1_before60000.mat
-Elapsed time is 5.854038 seconds.
+Elapsed time is 6.244253 seconds.
 Saved file: EZT037_seiz001_2_before59500.mat
-Elapsed time is 5.840849 seconds.
+Elapsed time is 6.370943 seconds.
 Saved file: EZT037_seiz001_3_before59000.mat
-Elapsed time is 5.706214 seconds.
+Elapsed time is 6.631326 seconds.
 Saved file: EZT037_seiz001_4_before58500.mat
-Elapsed time is 5.945295 seconds.
+Elapsed time is 6.355052 seconds.
 Saved file: EZT037_seiz001_5_before58000.mat
-Elapsed time is 6.025119 seconds.
+Elapsed time is 6.113392 seconds.
 Saved file: EZT037_seiz001_6_before57500.mat
-Elapsed time is 6.121527 seconds.
+Elapsed time is 6.071919 seconds.
 Saved file: EZT037_seiz001_7_before57000.mat
-Elapsed time is 6.020800 seconds.
+Elapsed time is 5.920019 seconds.
 Saved file: EZT037_seiz001_8_before56500.mat
-Elapsed time is 6.024257 seconds.
+Elapsed time is 5.805544 seconds.
 Saved file: EZT037_seiz001_9_before56000.mat
-Elapsed time is 5.666077 seconds.
+Elapsed time is 5.962439 seconds.
 Saved file: EZT037_seiz001_10_before55500.mat
-Elapsed time is 6.059335 seconds.
+Elapsed time is 5.950606 seconds.
 Saved file: EZT037_seiz001_11_before55000.mat
-Elapsed time is 6.795578 seconds.
+Elapsed time is 5.609153 seconds.
 Saved file: EZT037_seiz001_12_before54500.mat
-Elapsed time is 5.958496 seconds.
+Elapsed time is 6.080000 seconds.
 Saved file: EZT037_seiz001_13_before54000.mat
-Elapsed time is 6.301219 seconds.
+Elapsed time is 5.941329 seconds.
 Saved file: EZT037_seiz001_14_before53500.mat
-Elapsed time is 5.984148 seconds.
+Elapsed time is 6.189725 seconds.
 Saved file: EZT037_seiz001_15_before53000.mat
-Elapsed time is 5.971733 seconds.
+Elapsed time is 6.071316 seconds.
 Saved file: EZT037_seiz001_16_before52500.mat
-Elapsed time is 6.022916 seconds.
+Elapsed time is 6.622065 seconds.
 Saved file: EZT037_seiz001_17_before52000.mat
-Elapsed time is 6.160574 seconds.
+Elapsed time is 6.228838 seconds.
 Saved file: EZT037_seiz001_18_before51500.mat
-Elapsed time is 5.965904 seconds.
+Elapsed time is 5.574550 seconds.
 Saved file: EZT037_seiz001_19_before51000.mat
-Elapsed time is 6.562286 seconds.
+Elapsed time is 5.774079 seconds.
 Saved file: EZT037_seiz001_20_before50500.mat
-Elapsed time is 5.617705 seconds.
+Elapsed time is 5.782613 seconds.
 Saved file: EZT037_seiz001_21_before50000.mat
-Elapsed time is 5.941858 seconds.
+Elapsed time is 5.780293 seconds.
 Saved file: EZT037_seiz001_22_before49500.mat
-Elapsed time is 6.146253 seconds.
+Elapsed time is 6.431483 seconds.
 Saved file: EZT037_seiz001_23_before49000.mat
-Elapsed time is 6.232144 seconds.
+Elapsed time is 6.081936 seconds.
 Saved file: EZT037_seiz001_24_before48500.mat
-Elapsed time is 5.521966 seconds.
+Elapsed time is 6.216881 seconds.
 Saved file: EZT037_seiz001_25_before48000.mat
-Elapsed time is 5.912428 seconds.
+Elapsed time is 6.259412 seconds.
 Saved file: EZT037_seiz001_26_before47500.mat
-Elapsed time is 6.454977 seconds.
+Elapsed time is 6.073181 seconds.
 Saved file: EZT037_seiz001_27_before47000.mat
-Elapsed time is 6.240642 seconds.
+Elapsed time is 5.520354 seconds.
 Saved file: EZT037_seiz001_28_before46500.mat
-Elapsed time is 5.437593 seconds.
+Elapsed time is 5.772574 seconds.
 Saved file: EZT037_seiz001_29_before46000.mat
-Elapsed time is 5.841538 seconds.
+Elapsed time is 5.948261 seconds.
 Saved file: EZT037_seiz001_30_before45500.mat
-Elapsed time is 5.745254 seconds.
+Elapsed time is 6.163084 seconds.
 Saved file: EZT037_seiz001_31_before45000.mat
-Elapsed time is 5.485460 seconds.
+Elapsed time is 5.843069 seconds.
 Saved file: EZT037_seiz001_32_before44500.mat
-Elapsed time is 5.630145 seconds.
+Elapsed time is 6.127494 seconds.
 Saved file: EZT037_seiz001_33_before44000.mat
-Elapsed time is 5.442573 seconds.
+Elapsed time is 6.352878 seconds.
 Saved file: EZT037_seiz001_34_before43500.mat
-Elapsed time is 5.788652 seconds.
+Elapsed time is 5.062010 seconds.
 Saved file: EZT037_seiz001_35_before43000.mat
-Elapsed time is 6.328926 seconds.
+Elapsed time is 6.342316 seconds.
 Saved file: EZT037_seiz001_36_before42500.mat
-Elapsed time is 6.686115 seconds.
+Elapsed time is 6.650064 seconds.
 Saved file: EZT037_seiz001_37_before42000.mat
-Elapsed time is 5.781848 seconds.
+Elapsed time is 5.851184 seconds.
 Saved file: EZT037_seiz001_38_before41500.mat
-Elapsed time is 5.796458 seconds.
+Elapsed time is 5.854321 seconds.
 Saved file: EZT037_seiz001_39_before41000.mat
-Elapsed time is 4.981478 seconds.
+Elapsed time is 5.854894 seconds.
 Saved file: EZT037_seiz001_40_before40500.mat
-Elapsed time is 5.127300 seconds.
+Elapsed time is 5.095560 seconds.
 Saved file: EZT037_seiz001_41_before40000.mat
-Elapsed time is 4.954754 seconds.
+Elapsed time is 5.471959 seconds.
 Saved file: EZT037_seiz001_42_before39500.mat
-Elapsed time is 5.508575 seconds.
+Elapsed time is 6.456657 seconds.
 Saved file: EZT037_seiz001_43_before39000.mat
-Elapsed time is 5.461650 seconds.
+Elapsed time is 5.349871 seconds.
 Saved file: EZT037_seiz001_44_before38500.mat
-Elapsed time is 5.613822 seconds.
+Elapsed time is 6.167241 seconds.
 Saved file: EZT037_seiz001_45_before38000.mat
-Elapsed time is 5.887350 seconds.
+Elapsed time is 5.543310 seconds.
 Saved file: EZT037_seiz001_46_before37500.mat
-Elapsed time is 5.477650 seconds.
+Elapsed time is 5.544717 seconds.
 Saved file: EZT037_seiz001_47_before37000.mat
-Elapsed time is 5.318867 seconds.
+Elapsed time is 4.020612 seconds.
 Saved file: EZT037_seiz001_48_before36500.mat
-Elapsed time is 5.052044 seconds.
+Elapsed time is 4.405074 seconds.
 Saved file: EZT037_seiz001_49_before36000.mat
-Elapsed time is 4.326789 seconds.
+Elapsed time is 5.636614 seconds.
 Saved file: EZT037_seiz001_50_before35500.mat
-Elapsed time is 5.561067 seconds.
+Elapsed time is 4.749268 seconds.
 Saved file: EZT037_seiz001_51_before35000.mat
-Elapsed time is 6.226798 seconds.
+Elapsed time is 6.636957 seconds.
 Saved file: EZT037_seiz001_52_before34500.mat
-Elapsed time is 4.774595 seconds.
+Elapsed time is 4.859852 seconds.
 Saved file: EZT037_seiz001_53_before34000.mat
-Elapsed time is 7.171372 seconds.
+Elapsed time is 4.084915 seconds.
 Saved file: EZT037_seiz001_54_before33500.mat
-Elapsed time is 4.329210 seconds.
+Elapsed time is 5.303201 seconds.
 Saved file: EZT037_seiz001_55_before33000.mat
-Elapsed time is 5.734889 seconds.
+Elapsed time is 5.202761 seconds.
 Saved file: EZT037_seiz001_56_before32500.mat
-Elapsed time is 5.231388 seconds.
+Elapsed time is 5.281415 seconds.
 Saved file: EZT037_seiz001_57_before32000.mat
-Elapsed time is 4.982381 seconds.
+Elapsed time is 4.965982 seconds.
 Saved file: EZT037_seiz001_58_before31500.mat
-Elapsed time is 6.364325 seconds.
+Elapsed time is 4.357169 seconds.
 Saved file: EZT037_seiz001_59_before31000.mat
-Elapsed time is 4.912378 seconds.
+Elapsed time is 4.804531 seconds.
 Saved file: EZT037_seiz001_60_before30500.mat
-Elapsed time is 3.843829 seconds.
+Elapsed time is 4.538153 seconds.
 Saved file: EZT037_seiz001_61_before30000.mat
-Elapsed time is 3.760887 seconds.
+Elapsed time is 4.904144 seconds.
 Saved file: EZT037_seiz001_62_before29500.mat
-Elapsed time is 3.774576 seconds.
-Saved file: EZT037_seiz001_63_before29000.mat
-Elapsed time is 4.846823 seconds.
-Saved file: EZT037_seiz001_64_before28500.mat
-Elapsed time is 4.580511 seconds.
-Saved file: EZT037_seiz001_65_before28000.mat
-Elapsed time is 3.805538 seconds.
-Saved file: EZT037_seiz001_66_before27500.mat
-Elapsed time is 4.791190 seconds.
-Saved file: EZT037_seiz001_67_before27000.mat
-Elapsed time is 4.295494 seconds.
-Saved file: EZT037_seiz001_68_before26500.mat
-Elapsed time is 5.132640 seconds.
-Saved file: EZT037_seiz001_69_before26000.mat
-Elapsed time is 3.877224 seconds.
-Saved file: EZT037_seiz001_70_before25500.mat
-Elapsed time is 3.827075 seconds.
-Saved file: EZT037_seiz001_71_before25000.mat
-Elapsed time is 4.895938 seconds.
-Saved file: EZT037_seiz001_72_before24500.mat
-Elapsed time is 3.891767 seconds.
-Saved file: EZT037_seiz001_73_before24000.mat
-Elapsed time is 5.325382 seconds.
-Saved file: EZT037_seiz001_74_before23500.mat
-Elapsed time is 5.191819 seconds.
-Saved file: EZT037_seiz001_75_before23000.mat
-Elapsed time is 3.875944 seconds.
-Saved file: EZT037_seiz001_76_before22500.mat
-Elapsed time is 3.972498 seconds.
-Saved file: EZT037_seiz001_77_before22000.mat
-Elapsed time is 5.256978 seconds.
-Saved file: EZT037_seiz001_78_before21500.mat
-Elapsed time is 3.930515 seconds.
-Saved file: EZT037_seiz001_79_before21000.mat
-Elapsed time is 3.881829 seconds.
-Saved file: EZT037_seiz001_80_before20500.mat
-Elapsed time is 4.223752 seconds.
-Saved file: EZT037_seiz001_81_before20000.mat
-Elapsed time is 3.877272 seconds.
-Saved file: EZT037_seiz001_82_before19500.mat
-Elapsed time is 3.840541 seconds.
-Saved file: EZT037_seiz001_83_before19000.mat
-Elapsed time is 4.570130 seconds.
-Saved file: EZT037_seiz001_84_before18500.mat
-Elapsed time is 4.882207 seconds.
-Saved file: EZT037_seiz001_85_before18000.mat
-Elapsed time is 4.466947 seconds.
-Saved file: EZT037_seiz001_86_before17500.mat
-Elapsed time is 3.994388 seconds.
-Saved file: EZT037_seiz001_87_before17000.mat
-Elapsed time is 4.159489 seconds.
-Saved file: EZT037_seiz001_88_before16500.mat
-Elapsed time is 3.897768 seconds.
-Saved file: EZT037_seiz001_89_before16000.mat
-Elapsed time is 3.799315 seconds.
-Saved file: EZT037_seiz001_90_before15500.mat
-Elapsed time is 3.911880 seconds.
-Saved file: EZT037_seiz001_91_before15000.mat
-Elapsed time is 4.102555 seconds.
-Saved file: EZT037_seiz001_92_before14500.mat
-Elapsed time is 3.845944 seconds.
-Saved file: EZT037_seiz001_93_before14000.mat
-Elapsed time is 4.349114 seconds.
-Saved file: EZT037_seiz001_94_before13500.mat
-Elapsed time is 3.937183 seconds.
-Saved file: EZT037_seiz001_95_before13000.mat
-Elapsed time is 4.036856 seconds.
-Saved file: EZT037_seiz001_96_before12500.mat
-Elapsed time is 4.004974 seconds.
-Saved file: EZT037_seiz001_97_before12000.mat
-Elapsed time is 4.013424 seconds.
-Saved file: EZT037_seiz001_98_before11500.mat
-Elapsed time is 4.167659 seconds.
-Saved file: EZT037_seiz001_99_before11000.mat
-Elapsed time is 4.409530 seconds.
-Saved file: EZT037_seiz001_100_before10500.mat
-Elapsed time is 3.861234 seconds.
-Saved file: EZT037_seiz001_101_before10000.mat
-Elapsed time is 4.169410 seconds.
-Saved file: EZT037_seiz001_102_before9500.mat
-Elapsed time is 3.888868 seconds.
-Saved file: EZT037_seiz001_103_before9000.mat
-Elapsed time is 4.477096 seconds.
-Saved file: EZT037_seiz001_104_before8500.mat
-Elapsed time is 3.801412 seconds.
-Saved file: EZT037_seiz001_105_before8000.mat
-Elapsed time is 4.221610 seconds.
-Saved file: EZT037_seiz001_106_before7500.mat
-Elapsed time is 4.262945 seconds.
-Saved file: EZT037_seiz001_107_before7000.mat
-Elapsed time is 3.886667 seconds.
-Saved file: EZT037_seiz001_108_before6500.mat
-Elapsed time is 4.075147 seconds.
-Saved file: EZT037_seiz001_109_before6000.mat
-Elapsed time is 4.080445 seconds.
-Saved file: EZT037_seiz001_110_before5500.mat
-Elapsed time is 4.178015 seconds.
-Saved file: EZT037_seiz001_111_before5000.mat
-Elapsed time is 4.190828 seconds.
-Saved file: EZT037_seiz001_112_before4500.mat
-Elapsed time is 4.230927 seconds.
-Saved file: EZT037_seiz001_113_before4000.mat
-Elapsed time is 4.417103 seconds.
-Saved file: EZT037_seiz001_114_before3500.mat
-Elapsed time is 4.021787 seconds.
-Saved file: EZT037_seiz001_115_before3000.mat
-Elapsed time is 4.384996 seconds.
-Saved file: EZT037_seiz001_116_before2500.mat
-Elapsed time is 3.828566 seconds.
-Saved file: EZT037_seiz001_117_before2000.mat
-Elapsed time is 4.183005 seconds.
-Saved file: EZT037_seiz001_118_before1500.mat
-Elapsed time is 4.020880 seconds.
-Saved file: EZT037_seiz001_119_before1000.mat
-Elapsed time is 3.827487 seconds.
-Saved file: EZT037_seiz001_120_before500.mat
-Looking at patient: EZT037_seiz001
-
-num_channels =
-
-     0
-
-{Subscripted assignment dimension mismatch.
-
-Error in computePerturbations (line 154)
-        colsum_time_chan(:, iTime) = sum(theta_adj, 1);
-
-Error in serverPerturbationScript (line 122)
-        computePerturbations(patient_id, seizure_id, perturb_args);
-} 
-
