@@ -9,36 +9,4 @@ Error in serverAdjMainScript (line 25)
     [included_channels, ezone_labels, earlyspread_labels, latespread_labels]
     ...
 } 
-{Subscripted assignment dimension mismatch.
-
-Error in computePerturbations (line 154)
-        colsum_time_chan(:, iTime) = sum(theta_adj, 1);
-
-Error in serverPerturbationScript (line 122)
-        computePerturbations(patient_id, seizure_id, perturb_args);
-} 
-{Subscripted assignment dimension mismatch.
-
-Error in computePerturbations (line 154)
-        colsum_time_chan(:, iTime) = sum(theta_adj, 1);
-
-Error in serverPerturbationScript (line 122)
-        computePerturbations(patient_id, seizure_id, perturb_args);
-} 
-{Subscripted assignment dimension mismatch.
-
-Error in computePerturbations (line 154)
-        colsum_time_chan(:, iTime) = sum(theta_adj, 1);
-
-Error in serverPerturbationScript (line 122)
-        computePerturbations(patient_id, seizure_id, perturb_args);
-} 
-{Subscripted assignment dimension mismatch.
-
-Error in computePerturbations (line 154)
-        colsum_time_chan(:, iTime) = sum(theta_adj, 1);
-
-Error in serverPerturbationScript (line 122)
-        computePerturbations(patient_id, seizure_id, perturb_args);
-} 
 
