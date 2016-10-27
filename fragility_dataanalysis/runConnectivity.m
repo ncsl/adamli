@@ -3,7 +3,8 @@ close all;
 clc;
 
 % settings to run
-patients = {'EZT030seiz001' ...
+patients = {'JH102sz1',...
+    %'EZT030seiz001' ...
 %     'EZT030seiz002' 'EZT037seiz001' 'EZT037seiz002',...
 % 	'EZT070seiz001' 'EZT070seiz002', ...
 % 	'JH104sz1' 'JH104sz2' 'JH104sz3',...
@@ -149,6 +150,9 @@ for p=1:length(patients)
     end
 
     %% 01: RUN FUNCTIONAL CONNECTIVITY COMPUTATION
+    if seizureStart < 60 * frequency_sampling
+        timeRange(1) = seizureStart/frequency_sampling;
+    end
     % define args for computing the functional connectivity
     adj_args = struct();
     adj_args.BP_FILTER_RAW = 1; % apply notch filter or not?
@@ -161,11 +165,11 @@ for p=1:length(patients)
     adj_args.seizureStart = seizureStart;
     adj_args.seizureEnd = seizureEnd;
     adj_args.labels = labels;
-
-    if seizureStart < 60 * frequency_sampling
-        disp('not 60 seconds of preseizure data');
-        waitforbuttonpress;
-    end
+    
+%     if seizureStart < 60 * frequency_sampling
+%         disp('not 60 seconds of preseizure data');
+%         waitforbuttonpress;
+%     end
     
     % compute connectivity
     computeConnectivity(patient_id, seizure_id, eeg, clinicalLabels, adj_args);

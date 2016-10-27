@@ -14,7 +14,6 @@ if nargin == 0 % testing purposes
     stepSize = 250; 
     frequency_sampling = 1000; % in Hz
 end
-timeRange = [60 0];
 
 patient_id = patient(1:strfind(patient, 'seiz')-1);
 seizure_id = strcat('_', patient(strfind(patient, 'seiz'):end));

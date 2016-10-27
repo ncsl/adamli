@@ -79,6 +79,12 @@ function [included_channels, ezone_labels, earlyspread_labels, latespread_labels
         ezone_labels = {'POLLAT1', 'POLLAT2', 'POLMBT5', 'POLMBT6', 'POLPBT4'};
         earlyspread_labels = {'POLLPF5', 'POLLPF6', 'POLLFP2', 'POLLFP3', 'POLLFP4'};
         latespread_labels = {};
+    elseif strcmp(patient_id, 'JH102') % strip dual seizure patient
+        included_channels = [1:12 14:36 41:42 45:62 66:123];
+        ezone_labels = {'POLRAT1', 'POLRAT2', 'POLLBT1', 'POLLBT2', 'POLLBT3', ...
+            'POLLAT1', 'POLLAT2', 'POLLAT3'}; % uncertain still on lat/lbts
+        earlyspread_labels = {};
+        latespread_labels = {};
     elseif strcmp(patient_id, 'EZT030')
         included_channels = [];
         ezone_labels = {'Q11', 'L6', 'M9', 'N9', 'W9'};

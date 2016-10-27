@@ -22,8 +22,8 @@ if isempty(patient_id)
 end
 
 %% DEFINE CHANNELS AND CLINICAL ANNOTATIONS
-    [included_channels, ezone_labels, earlyspread_labels, latespread_labels] ...
-                = determineClinicalAnnotations(patient_id);
+[included_channels, ezone_labels, earlyspread_labels, latespread_labels] ...
+            = determineClinicalAnnotations(patient_id);
 
 % put clinical annotations into a struct
 clinicalLabels = struct();
@@ -92,6 +92,9 @@ if frequency_sampling ~=1000
 end
 
 %% 01: RUN FUNCTIONAL CONNECTIVITY COMPUTATION
+if seizureStart < 60 * frequency_sampling
+        timeRange(1) = seizureStart/frequency_sampling;
+end
 % define args for computing the functional connectivity
 adj_args = struct();
 adj_args.BP_FILTER_RAW = 1; % apply notch filter or not?
@@ -104,12 +107,6 @@ adj_args.included_channels = included_channels;
 adj_args.seizureStart = seizureStart;
 adj_args.seizureEnd = seizureEnd;
 adj_args.labels = labels;
-
-if seizureStart < 60 * frequency_sampling
-    disp('not 60 seconds of preseizure data');
-    disp(patient);
-    waitforbuttonpress;
-end
 
 if size(eeg, 1) < winSize
     % compute connectivity
