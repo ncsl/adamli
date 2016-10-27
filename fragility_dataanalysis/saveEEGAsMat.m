@@ -81,12 +81,12 @@ for p=1:length(patients)
         fid = fopen(patient_label_path); % open up labels to get all the channels
         labels = textscan(fid, '%s', 'Delimiter', ',');
         labels = labels{:}; 
-        try
-            labels = labels(included_channels);
-        catch
-            disp('labels already clipped');
-            length(labels) == length(included_channels)
-        end
+%         try
+%             labels = labels(included_channels);
+%         catch
+%             disp('labels already clipped');
+%             length(labels) == length(included_channels)
+%         end
         fclose(fid);
         
         %- Extract EEG and Perform Analysis
