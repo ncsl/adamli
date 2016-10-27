@@ -80,9 +80,9 @@ else
 end
 
 % only take included_channels
-if ~isempty(included_channels)
-    eeg = eeg(included_channels, :);
-end
+% if ~isempty(included_channels)
+%     eeg = eeg(included_channels, :);
+% end
 
 if frequency_sampling ~=1000
     eeg = eeg(:, 1:(1000/frequency_sampling):end);
