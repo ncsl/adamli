@@ -3,7 +3,8 @@ close all;
 clc;
 
 % settings to run
-patients = {'JH104sz1', 'JH104sz2', 'JH104sz3'};
+patients = {'JH102sz1', 'JH102sz2', 'JH102sz3', 'JH102sz4', 'JH102sz5', 'JH102sz6'};
+%     'JH104sz1', 'JH104sz2', 'JH104sz3'};
 %     'pt1sz2', 'pt1sz3', 'pt2sz1', 'pt2sz3', 'pt7sz19', 'pt7sz21', 'pt7sz22', 'JH105sz1', ...
 %             'Pat2sz1p', 'Pat2sz2p', 'Pat2sz3p'};%, 'Pat16sz1p', 'Pat16sz2p', 'Pat16sz3p'};
 

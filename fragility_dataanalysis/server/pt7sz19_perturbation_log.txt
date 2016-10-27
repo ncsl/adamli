@@ -1,1 +1,0 @@
-This patient has eigenvalue > radius, check it!pt7sz19_1000_125_125, 

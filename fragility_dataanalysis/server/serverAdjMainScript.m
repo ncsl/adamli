@@ -5,10 +5,11 @@ addpath('../');
 
 if nargin == 0 % testing purposes
     patient='EZT005seiz001';
+    patient='JH102sz6';
     % window paramters
-    winSize = 250; % 500 milliseconds
-    stepSize = 250; 
-    frequency_sampling = 500; % in Hz
+    winSize = 500; % 500 milliseconds
+    stepSize = 500; 
+    frequency_sampling = 1000; % in Hz
 end
 timeRange = [60 0];
 
