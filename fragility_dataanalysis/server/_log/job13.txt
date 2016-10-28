@@ -232,3 +232,40 @@ Elapsed time is 4.349843 seconds.
 Saved file: pt11sz4_108_before6500.mat
 Elapsed time is 5.550101 seconds.
 Saved file: pt11sz4_109_before6000.mat
+Elapsed time is 4.307086 seconds.
+Saved file: pt11sz4_110_before5500.mat
+Elapsed time is 4.319389 seconds.
+Saved file: pt11sz4_111_before5000.mat
+Elapsed time is 4.259192 seconds.
+Saved file: pt11sz4_112_before4500.mat
+Elapsed time is 4.371417 seconds.
+Saved file: pt11sz4_113_before4000.mat
+Elapsed time is 5.552805 seconds.
+Saved file: pt11sz4_114_before3500.mat
+Elapsed time is 6.158734 seconds.
+Saved file: pt11sz4_115_before3000.mat
+Elapsed time is 4.792778 seconds.
+Saved file: pt11sz4_116_before2500.mat
+Elapsed time is 4.771435 seconds.
+Saved file: pt11sz4_117_before2000.mat
+Elapsed time is 4.684801 seconds.
+Saved file: pt11sz4_118_before1500.mat
+Elapsed time is 4.769373 seconds.
+Saved file: pt11sz4_119_before1000.mat
+Elapsed time is 4.374838 seconds.
+Saved file: pt11sz4_120_before500.mat
+Looking at patient: pt11sz4
+
+num_channels =
+
+   117
+
+On 1 out of 120 to analyze.
+On 2 out of 120 to analyze.
+On 3 out of 120 to analyze.
+On 4 out of 120 to analyze.
+On 5 out of 120 to analyze.
+On 6 out of 120 to analyze.
+On 7 out of 120 to analyze.
+On 8 out of 120 to analyze.
+On 9 out of 120 to analyze.

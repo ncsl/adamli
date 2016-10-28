@@ -21,8 +21,9 @@ Saved file: pt1sz4_2_before59500.On 12 out of 118 to analyze.
 On 13 out of 118 to analyze.
 On 14 out of 118 to analyze.
 On 15 out of 118 to analyze.
-ile: pt1sz4_4_before58500.mat
-Elapsed time is 2.866631 seconds.
+On 16 out of 118 to analyze.
+On 17 out of 118 to analyze.
+onds.
 Saved file: pt1sz4_5_before58000.mat
 Elapsed time is 2.951487 seconds.
 Saved file: pt1sz4_6_before57500.mat
@@ -274,3 +275,23 @@ On 11 out of 120 to analyze.
 On 12 out of 120 to analyze.
 On 13 out of 120 to analyze.
 On 14 out of 120 to analyze.
+On 15 out of 120 to analyze.
+On 16 out of 120 to analyze.
+On 17 out of 120 to analyze.
+On 18 out of 120 to analyze.
+On 19 out of 120 to analyze.
+On 20 out of 120 to analyze.
+On 21 out of 120 to analyze.
+On 22 out of 120 to analyze.
+On 23 out of 120 to analyze.
+On 24 out of 120 to analyze.
+On 25 out of 120 to analyze.
+On 26 out of 120 to analyze.
+On 27 out of 120 to analyze.
+On 28 out of 120 to analyze.
+On 29 out of 120 to analyze.
+On 30 out of 120 to analyze.
+On 31 out of 120 to analyze.
+On 32 out of 120 to analyze.
+On 33 out of 120 to analyze.
+On 34 out of 120 to analyze.
