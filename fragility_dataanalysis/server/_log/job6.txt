@@ -15,7 +15,7 @@ Error in <a href="matlab:helpUtils.errorDocCallback('determineClinicalAnnotation
 to
 "/home/ali/adamli/fragility_dataanalysis/determineClinicalAnnotations.m>determineClinicalAnnotations".
 
-Error in serverAdjMainScript (line 26)
+Error in serverPerturbationScript (line 28)
 [included_channels, ezone_labels, earlyspread_labels, latespread_labels] ...
 } 
 
