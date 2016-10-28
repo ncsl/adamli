@@ -8,15 +8,18 @@
 To get started, type one of these: helpwin, helpdesk, or demo.
 For product information, visit www.mathworks.com.
  
-Error in <a href="matlab:helpUtils.errorDocCallback('determineClinicalAnnotations', '/home/ali/adamli/fragility_dataanalysis/determineClinicalAnnotations.m', 3)" style="font-weight:bold">determineClinicalAnnotations</a> (<a href="matlab: opentoline('/home/ali/adamli/fragility_dataanalysis/determineClinicalAnnotations.m',3,0)">line 3</a>)
-    if strcmp(patient_id, 'EZT007')
+Looking at patient: pt10sz3
+The range locked to seizure to look over is -60 until 0
+Total number of channels 73
+Length of to be included channels 73
+Seizure starts at 96000 milliseconds
+Running analysis for 60000 milliseconds
+{Subscripted assignment dimension mismatch.
 
-{Output argument "included_channels" (and maybe others) not assigned during call
-to
-"/home/ali/adamli/fragility_dataanalysis/determineClinicalAnnotations.m>determineClinicalAnnotations".
+Error in computeConnectivity (line 104)
+    A(N, 1:num_channels) = tmpdata(1:end-1,:);
 
-Error in serverAdjMainScript (line 25)
-    [included_channels, ezone_labels, earlyspread_labels, latespread_labels]
-    ...
+Error in serverAdjMainScript (line 114)
+    computeConnectivity(patient_id, seizure_id, eeg, clinicalLabels, adj_args);
 } 
 

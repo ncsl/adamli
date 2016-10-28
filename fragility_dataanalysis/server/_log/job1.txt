@@ -8,14 +8,17 @@
 To get started, type one of these: helpwin, helpdesk, or demo.
 For product information, visit www.mathworks.com.
  
-Looking at patient: JH102sz2
+Looking at patient: pt2sz4
+The range locked to seizure to look over is -60 until 0
+Total number of channels 64
+Length of to be included channels 64
+Seizure starts at 188000 milliseconds
+Running analysis for 60000 millisecoOn 7 out of 118 to analyze.
+On 8 out of 118 to analyze.
+in computeConnectivity (line 104)
+    A(N, 1:num_channels) = tmpdata(1:end-1,:);
 
-num_channels =
-
-   113
-
-On 1 out of 118 to analyze.
-On 2 out of 118 to analyze.
-On 3 out of 118 to analyze.
-On 4 out of 118 to analyze.
-On 5 out of 118 to analyze.
+Error in serverAdjMainScript (line 114)
+    computeConnectivity(patient_id, seizure_id, eeg, clinicalLabels, adj_args);
+} 
+
