@@ -94,9 +94,14 @@ for i=1:dataRange/stepSize
     tmpdata = tmpdata';
 
     % build up A matrix with a loop modifying #time_samples points and #chans at a time
-    A = zeros(length(b), num_channels^2);               % initialize A for speed
-    N = 1:num_channels:size(A,1);                       % set the indices through rows
-    A(N, 1:num_channels) = tmpdata(1:end-1,:);          % set the first loop
+    try 
+        A = zeros(length(b), num_channels^2);
+    catch e
+        disp(e)
+        A = sparse(length(b), num_channels^2);
+    end
+    N = 1:num_channels:size(A,1);
+    A(N, 1:num_channels) = tmpdata(1:end-1,:);
     
     for iChan=2 : num_channels % loop through columns #channels per loop
         rowInds = N+(iChan-1);
