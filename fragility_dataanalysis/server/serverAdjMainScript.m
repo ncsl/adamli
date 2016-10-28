@@ -6,6 +6,7 @@ addpath('../');
 if nargin == 0 % testing purposes
     patient='EZT005seiz001';
     patient='JH102sz6';
+    patient='pt1sz4';
     % window paramters
     winSize = 500; % 500 milliseconds
     stepSize = 500; 
@@ -80,9 +81,14 @@ else
 end
 
 % only take included_channels
-% if ~isempty(included_channels)
-%     eeg = eeg(included_channels, :);
-% end
+if ~isempty(included_channels)
+    try
+        eeg = eeg(included_channels, :);
+    catch e
+        disp(e)
+        disp('server adj main script.')
+    end
+end
 
 if frequency_sampling ~=1000
     eeg = eeg(:, 1:(1000/frequency_sampling):end);

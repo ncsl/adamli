@@ -3,7 +3,9 @@ close all;
 clc;
 
 % settings to run
-patients = {'JH102sz1', 'JH102sz2', 'JH102sz3', 'JH102sz4', 'JH102sz5', 'JH102sz6'};
+patients = {'pt1sz4' 'pt2sz4' 'pt3sz2' 'pt3sz4' 'pt8sz1' 'pt8sz2' 'pt8sz3'...
+		'pt10sz1' 'pt10sz2' 'pt10sz3' 'pt11sz1' 'pt11sz2' 'pt11sz3' 'pt11sz4'};
+%     'JH102sz1', 'JH102sz2', 'JH102sz3', 'JH102sz4', 'JH102sz5', 'JH102sz6'};
 %     'JH104sz1', 'JH104sz2', 'JH104sz3'};
 %     'pt1sz2', 'pt1sz3', 'pt2sz1', 'pt2sz3', 'pt7sz19', 'pt7sz21', 'pt7sz22', 'JH105sz1', ...
 %             'Pat2sz1p', 'Pat2sz2p', 'Pat2sz3p'};%, 'Pat16sz1p', 'Pat16sz2p', 'Pat16sz3p'};
@@ -44,13 +46,6 @@ for p=1:length(patients)
     patient = strcat(patient_id, seizure_id);
     disp(['Looking at patient: ',patient]);
 
-    % create the adjacency file directory to store the computed adj. mats
-    toSaveAdjDir = fullfile(strcat('./adj_mats_win', num2str(winSize), ...
-        '_step', num2str(stepSize)), patient);
-    if ~exist(toSaveAdjDir, 'dir')
-        mkdir(toSaveAdjDir);
-    end
-
     %%- grab eeg data in different ways... depending on who we got it from
     if ~seeg
         %% NIH, JHU PATIENTS
@@ -81,12 +76,6 @@ for p=1:length(patients)
         fid = fopen(patient_label_path); % open up labels to get all the channels
         labels = textscan(fid, '%s', 'Delimiter', ',');
         labels = labels{:}; 
-%         try
-%             labels = labels(included_channels);
-%         catch
-%             disp('labels already clipped');
-%             length(labels) == length(included_channels)
-%         end
         fclose(fid);
         
         %- Extract EEG and Perform Analysis
@@ -94,13 +83,7 @@ for p=1:length(patients)
         num_values = patient_files(patient_file_names{1});
         % extract eeg 
         eeg = csv2eeg(patient_eeg_path, filename, num_values, num_channels);
-        
-%         try
-%             eeg = eeg(included_channels,:);
-%         catch e
-%             disp(e)
-%         end
-        
+
         data = eeg;
         elec_labels = labels;
         seiz_end_mark = seizureEnd;
