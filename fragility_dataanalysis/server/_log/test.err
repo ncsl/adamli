@@ -5,8 +5,18 @@ Error in <a href="matlab:helpUtils.errorDocCallback('determineClinicalAnnotation
 to
 "/home/ali/adamli/fragility_dataanalysis/determineClinicalAnnotations.m>determineClinicalAnnotations".
 
-Error in serverAdjMainScript (line 25)
-    [included_channels, ezone_labels, earlyspread_labels, latespread_labels]
-    ...
+Error in serverAdjMainScript (line 26)
+[included_channels, ezone_labels, earlyspread_labels, latespread_labels] ...
 } 
-
+/home/ali/adamli/fragility_dataanalysis/server/runAnalysis.sh: line 64:  7447 Killed                  matlab -logfile /home/ali/adamli/fragility_dataanalysis/server/_log/job$1.txt -nojvm -nodisplay -nosplash -r "currentpatient='$patient'; 		serverAdjMainScript(currentpatient, $winSize, $stepSize, $frequency_sampling);		serverPerturbationScript(currentpatient, $radius, $winSize, $stepSize, $frequency_sampling);		exit"
+pbsdsh: task 4 exit status 137
+/home/ali/adamli/fragility_dataanalysis/server/runAnalysis.sh: line 64:  7383 Killed                  matlab -logfile /home/ali/adamli/fragility_dataanalysis/server/_log/job$1.txt -nojvm -nodisplay -nosplash -r "currentpatient='$patient'; 		serverAdjMainScript(currentpatient, $winSize, $stepSize, $frequency_sampling);		serverPerturbationScript(currentpatient, $radius, $winSize, $stepSize, $frequency_sampling);		exit"
+pbsdsh: task 0 exit status 137
+/home/ali/adamli/fragility_dataanalysis/server/runAnalysis.sh: line 64:  7441 Killed                  matlab -logfile /home/ali/adamli/fragility_dataanalysis/server/_log/job$1.txt -nojvm -nodisplay -nosplash -r "currentpatient='$patient'; 		serverAdjMainScript(currentpatient, $winSize, $stepSize, $frequency_sampling);		serverPerturbationScript(currentpatient, $radius, $winSize, $stepSize, $frequency_sampling);		exit"
+pbsdsh: task 5 exit status 137
+/home/ali/adamli/fragility_dataanalysis/server/runAnalysis.sh: line 64:  7450 Killed                  matlab -logfile /home/ali/adamli/fragility_dataanalysis/server/_log/job$1.txt -nojvm -nodisplay -nosplash -r "currentpatient='$patient'; 		serverAdjMainScript(currentpatient, $winSize, $stepSize, $frequency_sampling);		serverPerturbationScript(currentpatient, $radius, $winSize, $stepSize, $frequency_sampling);		exit"
+pbsdsh: task 1 exit status 137
+/home/ali/adamli/fragility_dataanalysis/server/runAnalysis.sh: line 64:  7445 Killed                  matlab -logfile /home/ali/adamli/fragility_dataanalysis/server/_log/job$1.txt -nojvm -nodisplay -nosplash -r "currentpatient='$patient'; 		serverAdjMainScript(currentpatient, $winSize, $stepSize, $frequency_sampling);		serverPerturbationScript(currentpatient, $radius, $winSize, $stepSize, $frequency_sampling);		exit"
+pbsdsh: task 3 exit status 137
+/home/ali/adamli/fragility_dataanalysis/server/runAnalysis.sh: line 64:  7410 Killed                  matlab -logfile /home/ali/adamli/fragility_dataanalysis/server/_log/job$1.txt -nojvm -nodisplay -nosplash -r "currentpatient='$patient'; 		serverAdjMainScript(currentpatient, $winSize, $stepSize, $frequency_sampling);		serverPerturbationScript(currentpatient, $radius, $winSize, $stepSize, $frequency_sampling);		exit"
+pbsdsh: task 2 exit status 137
