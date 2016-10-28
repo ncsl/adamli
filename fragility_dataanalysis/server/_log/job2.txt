@@ -14,11 +14,201 @@ Total number of channels 126
 Length of to be included channels 126
 Seizure starts at 131000 milliseconds
 Running analysis for 60000 milliseconds
-{Subscripted assignmeOn 8 out of 118 to analyze.
-r in computeConnectivity (line 104)
-    A(N, 1:num_channels) = tmpdata(1:end-1,:);
-
-Error in serverAdjMainScript (line 114)
-    computeConnectivity(patient_id, seizure_id, eeg, clinicalLabels, adj_args);
-} 
-
+Elapsed time is 7.373124 seconds.
+Saved file: pt3sz2_1_before60000.mat
+Elapsed time is 7.694579 seconds.
+Saved file: pt3sz2_2_before5950On 12 out of 118 to analyze.
+On 13 out of 118 to analyze.
+On 14 out of 118 to analyze.
+On 15 out of 118 to analyze.
+ file: pt3sz2_4_before58500.mat
+Elapsed time is 7.490906 seconds.
+Saved file: pt3sz2_5_before58000.mat
+Elapsed time is 7.731305 seconds.
+Saved file: pt3sz2_6_before57500.mat
+Elapsed time is 7.389104 seconds.
+Saved file: pt3sz2_7_before57000.mat
+Elapsed time is 7.400484 seconds.
+Saved file: pt3sz2_8_before56500.mat
+Elapsed time is 7.796320 seconds.
+Saved file: pt3sz2_9_before56000.mat
+Elapsed time is 7.311430 seconds.
+Saved file: pt3sz2_10_before55500.mat
+Elapsed time is 7.357054 seconds.
+Saved file: pt3sz2_11_before55000.mat
+Elapsed time is 7.841812 seconds.
+Saved file: pt3sz2_12_before54500.mat
+Elapsed time is 7.433633 seconds.
+Saved file: pt3sz2_13_before54000.mat
+Elapsed time is 7.221282 seconds.
+Saved file: pt3sz2_14_before53500.mat
+Elapsed time is 7.780792 seconds.
+Saved file: pt3sz2_15_before53000.mat
+Elapsed time is 7.354015 seconds.
+Saved file: pt3sz2_16_before52500.mat
+Elapsed time is 7.238938 seconds.
+Saved file: pt3sz2_17_before52000.mat
+Elapsed time is 7.849563 seconds.
+Saved file: pt3sz2_18_before51500.mat
+Elapsed time is 6.546614 seconds.
+Saved file: pt3sz2_19_before51000.mat
+Elapsed time is 7.186404 seconds.
+Saved file: pt3sz2_20_before50500.mat
+Elapsed time is 8.146643 seconds.
+Saved file: pt3sz2_21_before50000.mat
+Elapsed time is 5.875139 seconds.
+Saved file: pt3sz2_22_before49500.mat
+Elapsed time is 5.822886 seconds.
+Saved file: pt3sz2_23_before49000.mat
+Elapsed time is 6.092054 seconds.
+Saved file: pt3sz2_24_before48500.mat
+Elapsed time is 7.041687 seconds.
+Saved file: pt3sz2_25_before48000.mat
+Elapsed time is 5.061297 seconds.
+Saved file: pt3sz2_26_before47500.mat
+Elapsed time is 5.152813 seconds.
+Saved file: pt3sz2_27_before47000.mat
+Elapsed time is 6.128060 seconds.
+Saved file: pt3sz2_28_before46500.mat
+Elapsed time is 6.016835 seconds.
+Saved file: pt3sz2_29_before46000.mat
+Elapsed time is 5.532167 seconds.
+Saved file: pt3sz2_30_before45500.mat
+Elapsed time is 6.708070 seconds.
+Saved file: pt3sz2_31_before45000.mat
+Elapsed time is 5.081951 seconds.
+Saved file: pt3sz2_32_before44500.mat
+Elapsed time is 5.898967 seconds.
+Saved file: pt3sz2_33_before44000.mat
+Elapsed time is 6.142334 seconds.
+Saved file: pt3sz2_34_before43500.mat
+Elapsed time is 4.761271 seconds.
+Saved file: pt3sz2_35_before43000.mat
+Elapsed time is 5.764840 seconds.
+Saved file: pt3sz2_36_before42500.mat
+Elapsed time is 5.924487 seconds.
+Saved file: pt3sz2_37_before42000.mat
+Elapsed time is 4.914734 seconds.
+Saved file: pt3sz2_38_before41500.mat
+Elapsed time is 6.795742 seconds.
+Saved file: pt3sz2_39_before41000.mat
+Elapsed time is 5.156940 seconds.
+Saved file: pt3sz2_40_before40500.mat
+Elapsed time is 5.038665 seconds.
+Saved file: pt3sz2_41_before40000.mat
+Elapsed time is 4.985126 seconds.
+Saved file: pt3sz2_42_before39500.mat
+Elapsed time is 5.161009 seconds.
+Saved file: pt3sz2_43_before39000.mat
+Elapsed time is 5.478772 seconds.
+Saved file: pt3sz2_44_before38500.mat
+Elapsed time is 4.999435 seconds.
+Saved file: pt3sz2_45_before38000.mat
+Elapsed time is 5.249499 seconds.
+Saved file: pt3sz2_46_before37500.mat
+Elapsed time is 4.828900 seconds.
+Saved file: pt3sz2_47_before37000.mat
+Elapsed time is 4.989797 seconds.
+Saved file: pt3sz2_48_before36500.mat
+Elapsed time is 5.221478 seconds.
+Saved file: pt3sz2_49_before36000.mat
+Elapsed time is 5.374972 seconds.
+Saved file: pt3sz2_50_before35500.mat
+Elapsed time is 5.248555 seconds.
+Saved file: pt3sz2_51_before35000.mat
+Elapsed time is 4.961315 seconds.
+Saved file: pt3sz2_52_before34500.mat
+Elapsed time is 5.388431 seconds.
+Saved file: pt3sz2_53_before34000.mat
+Elapsed time is 4.763959 seconds.
+Saved file: pt3sz2_54_before33500.mat
+Elapsed time is 5.205588 seconds.
+Saved file: pt3sz2_55_before33000.mat
+Elapsed time is 5.212314 seconds.
+Saved file: pt3sz2_56_before32500.mat
+Elapsed time is 5.152940 seconds.
+Saved file: pt3sz2_57_before32000.mat
+Elapsed time is 4.747458 seconds.
+Saved file: pt3sz2_58_before31500.mat
+Elapsed time is 5.174258 seconds.
+Saved file: pt3sz2_59_before31000.mat
+Elapsed time is 4.985657 seconds.
+Saved file: pt3sz2_60_before30500.mat
+Elapsed time is 5.046520 seconds.
+Saved file: pt3sz2_61_before30000.mat
+Elapsed time is 5.237531 seconds.
+Saved file: pt3sz2_62_before29500.mat
+Elapsed time is 5.332295 seconds.
+Saved file: pt3sz2_63_before29000.mat
+Elapsed time is 5.289870 seconds.
+Saved file: pt3sz2_64_before28500.mat
+Elapsed time is 5.350039 seconds.
+Saved file: pt3sz2_65_before28000.mat
+Elapsed time is 5.292925 seconds.
+Saved file: pt3sz2_66_before27500.mat
+Elapsed time is 5.815331 seconds.
+Saved file: pt3sz2_67_before27000.mat
+Elapsed time is 6.209579 seconds.
+Saved file: pt3sz2_68_before26500.mat
+Elapsed time is 4.950400 seconds.
+Saved file: pt3sz2_69_before26000.mat
+Elapsed time is 6.009817 seconds.
+Saved file: pt3sz2_70_before25500.mat
+Elapsed time is 4.882848 seconds.
+Saved file: pt3sz2_71_before25000.mat
+Elapsed time is 5.201622 seconds.
+Saved file: pt3sz2_72_before24500.mat
+Elapsed time is 5.310717 seconds.
+Saved file: pt3sz2_73_before24000.mat
+Elapsed time is 6.265885 seconds.
+Saved file: pt3sz2_74_before23500.mat
+Elapsed time is 5.073209 seconds.
+Saved file: pt3sz2_75_before23000.mat
+Elapsed time is 5.124063 seconds.
+Saved file: pt3sz2_76_before22500.mat
+Elapsed time is 4.883521 seconds.
+Saved file: pt3sz2_77_before22000.mat
+Elapsed time is 5.552778 seconds.
+Saved file: pt3sz2_78_before21500.mat
+Elapsed time is 4.761983 seconds.
+Saved file: pt3sz2_79_before21000.mat
+Elapsed time is 5.401146 seconds.
+Saved file: pt3sz2_80_before20500.mat
+Elapsed time is 5.170932 seconds.
+Saved file: pt3sz2_81_before20000.mat
+Elapsed time is 5.030629 seconds.
+Saved file: pt3sz2_82_before19500.mat
+Elapsed time is 5.505813 seconds.
+Saved file: pt3sz2_83_before19000.mat
+Elapsed time is 5.073125 seconds.
+Saved file: pt3sz2_84_before18500.mat
+Elapsed time is 4.872424 seconds.
+Saved file: pt3sz2_85_before18000.mat
+Elapsed time is 4.767613 seconds.
+Saved file: pt3sz2_86_before17500.mat
+Elapsed time is 4.733506 seconds.
+Saved file: pt3sz2_87_before17000.mat
+Elapsed time is 4.752031 seconds.
+Saved file: pt3sz2_88_before16500.mat
+Elapsed time is 4.917874 seconds.
+Saved file: pt3sz2_89_before16000.mat
+Elapsed time is 5.103381 seconds.
+Saved file: pt3sz2_90_before15500.mat
+Elapsed time is 5.165179 seconds.
+Saved file: pt3sz2_91_before15000.mat
+Elapsed time is 5.089529 seconds.
+Saved file: pt3sz2_92_before14500.mat
+Elapsed time is 4.952347 seconds.
+Saved file: pt3sz2_93_before14000.mat
+Elapsed time is 5.227367 seconds.
+Saved file: pt3sz2_94_before13500.mat
+Elapsed time is 5.602171 seconds.
+Saved file: pt3sz2_95_before13000.mat
+Elapsed time is 4.987104 seconds.
+Saved file: pt3sz2_96_before12500.mat
+Elapsed time is 5.268870 seconds.
+Saved file: pt3sz2_97_before12000.mat
+Elapsed time is 4.829297 seconds.
+Saved file: pt3sz2_98_before11500.mat
+Elapsed time is 4.827010 seconds.
+Saved file: pt3sz2_99_before11000.mat
