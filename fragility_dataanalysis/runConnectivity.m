@@ -44,7 +44,7 @@ for p=1:length(patients)
 
     %% DEFINE CHANNELS AND CLINICAL ANNOTATIONS
     [included_channels, ezone_labels, earlyspread_labels, latespread_labels] ...
-                = determineClinicalAnnotations(patient_id);
+                = determineClinicalAnnotations(patient_id, seizure_id);
 
     % put clinical annotations into a struct
     clinicalLabels = struct();

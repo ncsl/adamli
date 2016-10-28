@@ -26,7 +26,7 @@ end
 
 %% DEFINE CHANNELS AND CLINICAL ANNOTATIONS
 [included_channels, ezone_labels, earlyspread_labels, latespread_labels] ...
-            = determineClinicalAnnotations(patient_id);
+            = determineClinicalAnnotations(patient_id, seizure_id);
 
 % put clinical annotations into a struct
 clinicalLabels = struct();
@@ -78,12 +78,6 @@ if frequency_sampling ~=1000
 end
 
 %% 01:  RUN PERTURBATION ANALYSIS
-if seizureStart < 60 * frequency_sampling
-    disp('not 60 seconds of preseizure data');
-    disp(patient);
-    waitforbuttonpress;
-end
-
 % only take included_channels
 if ~isempty(included_channels)
     num_channels = num_channels;

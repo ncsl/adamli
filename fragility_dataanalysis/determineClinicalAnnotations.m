@@ -1,5 +1,5 @@
 function [included_channels, ezone_labels, earlyspread_labels, latespread_labels] ...
-                = determineClinicalAnnotations(patient_id)
+                = determineClinicalAnnotations(patient_id, seizure_id)
     if strcmp(patient_id, 'EZT007')
         included_channels = [1:16 18:53 55:71 74:78 81:94];
         ezone_labels = {'O7', 'E8', 'E7', 'I5', 'E9', 'I6', 'E3', 'E2',...
@@ -81,8 +81,11 @@ function [included_channels, ezone_labels, earlyspread_labels, latespread_labels
         latespread_labels = {};
     elseif strcmp(patient_id, 'JH102') % strip dual seizure patient
         included_channels = [1:12 14:36 41:42 45:62 66:123];
-        ezone_labels = {'POLRAT1', 'POLRAT2', 'POLLBT1', 'POLLBT2', 'POLLBT3', ...
-            'POLLAT1', 'POLLAT2', 'POLLAT3'}; % uncertain still on lat/lbts
+        ezone_labels = {'POLRAT1', 'POLRAT2'};
+        if strcmp(seizure_id, 'sz3') || strcmp(seizure_id, 'sz6')
+            ezone_labels = {'POLLBT1', 'POLLBT2', 'POLLBT3', ...
+                'POLLAT1', 'POLLAT2', 'POLLAT3'}; % uncertain still on lat/lbts
+        end
         earlyspread_labels = {};
         latespread_labels = {};
     elseif strcmp(patient_id, 'EZT030')
