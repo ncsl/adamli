@@ -1,149 +1,53 @@
 ----------------------------------------
-Begin PBS Prologue Fri Oct 28 14:43:14 EDT 2016 1477680194
-Job ID:		2154390.mgt
+Begin PBS Prologue Fri Oct 28 12:42:55 EDT 2016 1477672975
+Job ID:		2154384.mgt
 Username:	ali
 Group:		sarma
-Nodes:		node014 node015 node017
-End PBS Prologue Fri Oct 28 14:43:14 EDT 2016 1477680194
+Nodes:		node010 node067 node124
+End PBS Prologue Fri Oct 28 12:42:55 EDT 2016 1477672975
 ----------------------------------------
 500
 500
-1000
 500
 500
 1000
-1.5
-1
-1.5
-1
-Running connectivity computation.
-Running connectivity computation.
-500
-500
 1000
 1.5
-1
-Running connectivity computation.
+1.5
+0
+0
+Running perturbation computation.
+Running perturbation computation.
 500
 500
 1000
 1.5
-1
-Running connectivity computation.
+0
 500
-500
-1000
-500
-1.5
-1
+Running perturbation computation.
 500
 1000
 1.5
-1
-Running connectivity computation.
-Running connectivity computation.
-500
+0
+Running perturbation computation.
 500
 500
 1000
 1.5
-1
-500
-1000
-1.5
-1
-500
-500
+0
+Running perturbation computation.
 500
 500
 1000
 1.5
-1
-500
-1000
-1.5
-1
-Running connectivity computation.
-500
-1000
-1.5
-1
+0
+Running perturbation computation.
 500
 500
 1000
 1.5
-1
-Running connectivity computation.
-Running connectivity computation.
-Running connectivity computation.
-Running connectivity computation.
-500
-500
-1000
-1.5
-1
-Running connectivity computation.
-Running connectivity computation.
-500
-500
-1000
-1.5
-1
-Running connectivity computation.
-500
-500
-1000
-1.5
-1
-Running connectivity computation.
-
-                            < M A T L A B (R) >
-                  Copyright 1984-2013 The MathWorks, Inc.
-                    R2013a (8.1.0.604) 64-bit (glnxa64)
-                             February 15, 2013
-
-
-                            < M A T L A B (R) >
-                  Copyright 1984-2013 The MathWorks, Inc.
-                    R2013a (8.1.0.604) 64-bit (glnxa64)
-                             February 15, 2013
-
-
-                            < M A T L A B (R) >
-                  Copyright 1984-2013 The MathWorks, Inc.
-                    R2013a (8.1.0.604) 64-bit (glnxa64)
-                             February 15, 2013
-
-
-                            < M A T L A B (R) >
-                  Copyright 1984-2013 The MathWorks, Inc.
-                    R2013a (8.1.0.604) 64-bit (glnxa64)
-                             February 15, 2013
-
-
-                            < M A T L A B (R) >
-                  Copyright 1984-2013 The MathWorks, Inc.
-                    R2013a (8.1.0.604) 64-bit (glnxa64)
-                             February 15, 2013
-
-
-                            < M A T L A B (R) >
-                  Copyright 1984-2013 The MathWorks, Inc.
-                    R2013a (8.1.0.604) 64-bit (glnxa64)
-                             February 15, 2013
-
-
-                            < M A T L A B (R) >
-                  Copyright 1984-2013 The MathWorks, Inc.
-                    R2013a (8.1.0.604) 64-bit (glnxa64)
-                             February 15, 2013
-
-
-                            < M A T L A B (R) >
-                  Copyright 1984-2013 The MathWorks, Inc.
-                    R2013a (8.1.0.604) 64-bit (glnxa64)
-                             February 15, 2013
-
+0
+Running perturbation computation.
 
                             < M A T L A B (R) >
                   Copyright 1984-2013 The MathWorks, Inc.
@@ -201,148 +105,620 @@ To get started, type one of these: helpwin, helpdesk, or demo.
 To get started, type one of these: helpwin, helpdesk, or demo.
 To get started, type one of these: helpwin, helpdesk, or demo.
 For product information, visit www.mathworks.com.
-For product information, visit www.mathworks.com.
-For product information, visit www.mathworks.com.
- 
- 
  
 For product information, visit www.mathworks.com.
 For product information, visit www.mathworks.com.
- 
- 
-For product information, visit www.mathworks.com.
-For product information, visit www.mathworks.com.
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
-To get started, type one of these: helpwin, helpdesk, or demo.
-To get started, type one of these: helpwin, helpdesk, or demo.
-For product information, visit www.mathworks.com.
-To get started, type one of these: helpwin, helpdesk, or demo.
-To get started, type one of these: helpwin, helpdesk, or demo.
-To get started, type one of these: helpwin, helpdesk, or demo.
- 
-To get started, type one of these: helpwin, helpdesk, or demo.
-To get started, type one of these: helpwin, helpdesk, or demo.
-To get started, type one of these: helpwin, helpdesk, or demo.
 For product information, visit www.mathworks.com.
 For product information, visit www.mathworks.com.
 For product information, visit www.mathworks.com.
 For product information, visit www.mathworks.com.
  
  
-For product information, visit www.mathworks.com.
  
  
  
-For product information, visit www.mathworks.com.
-For product information, visit www.mathworks.com.
  
- 
-Looking at patient: pt11sz3
-Looking at patient: pt11sz4
-Looking at patient: pt10sz2
-Looking at patient: pt11sz1
-Looking at patient: pt10sz3
-Looking at patient: pt11sz2
->> Looking at patient: pt3sz2
-Looking at patient: pt2sz4
-Looking at patient: pt10sz1
-Looking at patient: pt8sz2
-Looking at patient: pt8sz1
-Looking at patient: pt3sz4
-Looking at patient: pt8sz3
-Looking at patient: pt1sz4
-The range locked to seizure to look over is -60 until 0
-Total number of channels 68
-Length of to be included channels 68
-Seizure starts at 65000 milliseconds
-Running analysis for 60000 milliseconds
-The range locked to seizure to look over is -60 until 0
-Total number of channels 68
-Length of to be included channels 68
-Seizure starts at 65000 milliseconds
-Running analysis for 60000 milliseconds
-The range locked to seizure to look over is -60 until 0
-Total number of channels 68
-Length of to be included channels 68
-Seizure starts at 65000 milliseconds
-Running analysis for 60000 milliseconds
-The range locked to seizure to look over is -60 until 0
-Total number of channels 117
-Length of to be included channels 117
-Seizure starts at 65000 milliseconds
-Running analysis for 60000 milliseconds
-The range locked to seizure to look over is -60 until 0
-Total number of channels 117
-Length of to be included channels 117
-Seizure starts at 67000 milliseconds
-Running analysis for 60000 milliseconds
-The range locked to seizure to look over is -60 until 0
-Total number of channels 117
-Length of to be included channels 117
-Seizure starts at 67000 milliseconds
-Running analysis for 60000 milliseconds
->> >> >> The range locked to seizure to look over is -60 until 0
-Total number of channels 117
-Length of to be included channels 117
-Seizure starts at 75000 milliseconds
-Running analysis for 60000 milliseconds
-The range locked to seizure to look over is -60 until 0
-Total number of channels 73
-Length of to be included channels 73
-Seizure starts at 96000 milliseconds
-Running analysis for 60000 milliseconds
-The range locked to seizure to look over is -60 until 0
-Total number of channels 126
-Length of to be included channels 126
-Seizure starts at 109000 milliseconds
-Running analysis for 60000 milliseconds
-The range locked to seizure to look over is -60 until 0
-Total number of channels 86
-Length of to be included channels 86
-Seizure starts at 117000 milliseconds
-Running analysis for 60000 milliseconds
-The range locked to seizure to look over is -60 until 0
-Total number of channels 73
-Length of to be included channels 73
-Seizure starts at 65000 milliseconds
-Running analysis for 60000 milliseconds
-The range locked to seizure to look over is -60 until 0
-Total number of channels 126
-Length of to be included channels 126
-Seizure starts at 131000 milliseconds
-Running analysis for 60000 milliseconds
-The range locked to seizure to look over is -60 until 0
-Total number of channels 73
-Length of to be included channels 73
-Seizure starts at 65000 milliseconds
-Running analysis for 60000 milliseconds
->> >> >> >> The range locked to seizure to look over is -60 until 0
-Total number of channels 64
-Length of to be included channels 64
-Seizure starts at 188000 milliseconds
-Running analysis for 60000 milliseconds
+Looking at patient: JH102sz6
+Looking at patient: JH102sz4
+Looking at patient: JH102sz1
+Looking at patient: JH102sz2
+Looking at patient: JH102sz3
+Looking at patient: JH102sz5
+>> 
+num_channels =
+
+   113
+
+
+num_channels =
+
+   113
+
+
+num_channels =
+
+   113
+
+
+num_channels =
+
+   113
+
+
+num_channels =
+
+   113
+
+
+num_channels =
+
+   113
+
+On 1 out of 118 to analyze.
+On 1 out of 118 to analyze.
+On 1 out of 118 to analyze.
+On 1 out of 118 to analyze.
+On 1 out of 118 to analyze.
+On 1 out of 118 to analyze.
+On 2 out of 118 to analyze.
+On 2 out of 118 to analyze.
+On 2 out of 118 to analyze.
+On 2 out of 118 to analyze.
+On 2 out of 118 to analyze.
+On 2 out of 118 to analyze.
+On 3 out of 118 to analyze.
+On 3 out of 118 to analyze.
+On 3 out of 118 to analyze.
+On 3 out of 118 to analyze.
+On 3 out of 118 to analyze.
+On 3 out of 118 to analyze.
+On 4 out of 118 to analyze.
+On 4 out of 118 to analyze.
+On 4 out of 118 to analyze.
+On 4 out of 118 to analyze.
+On 4 out of 118 to analyze.
+On 4 out of 118 to analyze.
+On 5 out of 118 to analyze.
+On 5 out of 118 to analyze.
+On 5 out of 118 to analyze.
+On 5 out of 118 to analyze.
+On 5 out of 118 to analyze.
+On 5 out of 118 to analyze.
+On 6 out of 118 to analyze.
+On 6 out of 118 to analyze.
+On 6 out of 118 to analyze.
+On 6 out of 118 to analyze.
+On 6 out of 118 to analyze.
+On 6 out of 118 to analyze.
+On 7 out of 118 to analyze.
+On 7 out of 118 to analyze.
+On 7 out of 118 to analyze.
+On 7 out of 118 to analyze.
+On 7 out of 118 to analyze.
+On 7 out of 118 to analyze.
+On 8 out of 118 to analyze.
+On 8 out of 118 to analyze.
+On 8 out of 118 to analyze.
+On 8 out of 118 to analyze.
+On 8 out of 118 to analyze.
+On 8 out of 118 to analyze.
+On 9 out of 118 to analyze.
+On 9 out of 118 to analyze.
+On 9 out of 118 to analyze.
+On 9 out of 118 to analyze.
+On 9 out of 118 to analyze.
+On 9 out of 118 to analyze.
+On 10 out of 118 to analyze.
+On 10 out of 118 to analyze.
+On 10 out of 118 to analyze.
+On 10 out of 118 to analyze.
+On 10 out of 118 to analyze.
+On 10 out of 118 to analyze.
+On 11 out of 118 to analyze.
+On 11 out of 118 to analyze.
+On 11 out of 118 to analyze.
+On 11 out of 118 to analyze.
+On 11 out of 118 to analyze.
+On 11 out of 118 to analyze.
+On 12 out of 118 to analyze.
+On 12 out of 118 to analyze.
+On 12 out of 118 to analyze.
+On 12 out of 118 to analyze.
+On 12 out of 118 to analyze.
+On 12 out of 118 to analyze.
+On 13 out of 118 to analyze.
+On 13 out of 118 to analyze.
+On 13 out of 118 to analyze.
+On 13 out of 118 to analyze.
+On 13 out of 118 to analyze.
+On 13 out of 118 to analyze.
+On 14 out of 118 to analyze.
+On 14 out of 118 to analyze.
+On 14 out of 118 to analyze.
+On 14 out of 118 to analyze.
+On 14 out of 118 to analyze.
+On 14 out of 118 to analyze.
+On 15 out of 118 to analyze.
+On 15 out of 118 to analyze.
+On 15 out of 118 to analyze.
+On 15 out of 118 to analyze.
+On 15 out of 118 to analyze.
+On 15 out of 118 to analyze.
+On 16 out of 118 to analyze.
+On 16 out of 118 to analyze.
+On 16 out of 118 to analyze.
+On 16 out of 118 to analyze.
+On 16 out of 118 to analyze.
+On 16 out of 118 to analyze.
+On 17 out of 118 to analyze.
+On 17 out of 118 to analyze.
+On 17 out of 118 to analyze.
+On 17 out of 118 to analyze.
+On 17 out of 118 to analyze.
+On 17 out of 118 to analyze.
+On 18 out of 118 to analyze.
+On 18 out of 118 to analyze.
+On 18 out of 118 to analyze.
+On 18 out of 118 to analyze.
+On 18 out of 118 to analyze.
+On 18 out of 118 to analyze.
+On 19 out of 118 to analyze.
+On 19 out of 118 to analyze.
+On 19 out of 118 to analyze.
+On 19 out of 118 to analyze.
+On 19 out of 118 to analyze.
+On 19 out of 118 to analyze.
+On 20 out of 118 to analyze.
+On 20 out of 118 to analyze.
+On 20 out of 118 to analyze.
+On 20 out of 118 to analyze.
+On 20 out of 118 to analyze.
+On 20 out of 118 to analyze.
+On 21 out of 118 to analyze.
+On 21 out of 118 to analyze.
+On 21 out of 118 to analyze.
+On 21 out of 118 to analyze.
+On 21 out of 118 to analyze.
+On 21 out of 118 to analyze.
+On 22 out of 118 to analyze.
+On 22 out of 118 to analyze.
+On 22 out of 118 to analyze.
+On 22 out of 118 to analyze.
+On 22 out of 118 to analyze.
+On 22 out of 118 to analyze.
+On 23 out of 118 to analyze.
+On 23 out of 118 to analyze.
+On 23 out of 118 to analyze.
+On 23 out of 118 to analyze.
+On 23 out of 118 to analyze.
+On 23 out of 118 to analyze.
+On 24 out of 118 to analyze.
+On 24 out of 118 to analyze.
+On 24 out of 118 to analyze.
+On 24 out of 118 to analyze.
+On 24 out of 118 to analyze.
+On 24 out of 118 to analyze.
+On 25 out of 118 to analyze.
+On 25 out of 118 to analyze.
+On 25 out of 118 to analyze.
+On 25 out of 118 to analyze.
+On 25 out of 118 to analyze.
+On 25 out of 118 to analyze.
+On 26 out of 118 to analyze.
+On 26 out of 118 to analyze.
+On 26 out of 118 to analyze.
+On 26 out of 118 to analyze.
+On 26 out of 118 to analyze.
+On 26 out of 118 to analyze.
+On 27 out of 118 to analyze.
+On 27 out of 118 to analyze.
+On 27 out of 118 to analyze.
+On 27 out of 118 to analyze.
+On 27 out of 118 to analyze.
+On 27 out of 118 to analyze.
+On 28 out of 118 to analyze.
+On 28 out of 118 to analyze.
+On 28 out of 118 to analyze.
+On 28 out of 118 to analyze.
+On 28 out of 118 to analyze.
+On 28 out of 118 to analyze.
+On 29 out of 118 to analyze.
+On 29 out of 118 to analyze.
+On 29 out of 118 to analyze.
+On 29 out of 118 to analyze.
+On 29 out of 118 to analyze.
+On 29 out of 118 to analyze.
+On 30 out of 118 to analyze.
+On 30 out of 118 to analyze.
+On 30 out of 118 to analyze.
+On 30 out of 118 to analyze.
+On 30 out of 118 to analyze.
+On 30 out of 118 to analyze.
+On 31 out of 118 to analyze.
+On 31 out of 118 to analyze.
+On 31 out of 118 to analyze.
+On 31 out of 118 to analyze.
+On 31 out of 118 to analyze.
+On 31 out of 118 to analyze.
+On 32 out of 118 to analyze.
+On 32 out of 118 to analyze.
+On 32 out of 118 to analyze.
+On 32 out of 118 to analyze.
+On 32 out of 118 to analyze.
+On 32 out of 118 to analyze.
+On 33 out of 118 to analyze.
+On 33 out of 118 to analyze.
+On 33 out of 118 to analyze.
+On 33 out of 118 to analyze.
+On 33 out of 118 to analyze.
+On 33 out of 118 to analyze.
+On 34 out of 118 to analyze.
+On 34 out of 118 to analyze.
+On 34 out of 118 to analyze.
+On 34 out of 118 to analyze.
+On 34 out of 118 to analyze.
+On 34 out of 118 to analyze.
+On 35 out of 118 to analyze.
+On 35 out of 118 to analyze.
+On 35 out of 118 to analyze.
+On 35 out of 118 to analyze.
+On 35 out of 118 to analyze.
+On 35 out of 118 to analyze.
+On 36 out of 118 to analyze.
+On 36 out of 118 to analyze.
+On 36 out of 118 to analyze.
+On 36 out of 118 to analyze.
+On 36 out of 118 to analyze.
+On 36 out of 118 to analyze.
+On 37 out of 118 to analyze.
+On 37 out of 118 to analyze.
+On 37 out of 118 to analyze.
+On 37 out of 118 to analyze.
+On 37 out of 118 to analyze.
+On 37 out of 118 to analyze.
+On 38 out of 118 to analyze.
+On 38 out of 118 to analyze.
+On 38 out of 118 to analyze.
+On 38 out of 118 to analyze.
+On 38 out of 118 to analyze.
+On 39 out of 118 to analyze.
+On 38 out of 118 to analyze.
+On 39 out of 118 to analyze.
+On 39 out of 118 to analyze.
+On 39 out of 118 to analyze.
+On 39 out of 118 to analyze.
+On 40 out of 118 to analyze.
+On 39 out of 118 to analyze.
+On 40 out of 118 to analyze.
+On 40 out of 118 to analyze.
+On 40 out of 118 to analyze.
+On 40 out of 118 to analyze.
+On 41 out of 118 to analyze.
+On 40 out of 118 to analyze.
+On 41 out of 118 to analyze.
+On 41 out of 118 to analyze.
+On 41 out of 118 to analyze.
+On 41 out of 118 to analyze.
+On 42 out of 118 to analyze.
+On 41 out of 118 to analyze.
+On 42 out of 118 to analyze.
+On 42 out of 118 to analyze.
+On 42 out of 118 to analyze.
+On 42 out of 118 to analyze.
+On 43 out of 118 to analyze.
+On 42 out of 118 to analyze.
+On 43 out of 118 to analyze.
+On 43 out of 118 to analyze.
+On 43 out of 118 to analyze.
+On 43 out of 118 to analyze.
+On 44 out of 118 to analyze.
+On 43 out of 118 to analyze.
+On 44 out of 118 to analyze.
+On 44 out of 118 to analyze.
+On 44 out of 118 to analyze.
+On 44 out of 118 to analyze.
+On 45 out of 118 to analyze.
+On 44 out of 118 to analyze.
+On 45 out of 118 to analyze.
+On 45 out of 118 to analyze.
+On 45 out of 118 to analyze.
+On 45 out of 118 to analyze.
+On 45 out of 118 to analyze.
+On 46 out of 118 to analyze.
+On 46 out of 118 to analyze.
+On 46 out of 118 to analyze.
+On 46 out of 118 to analyze.
+On 46 out of 118 to analyze.
+On 47 out of 118 to analyze.
+On 46 out of 118 to analyze.
+On 47 out of 118 to analyze.
+On 47 out of 118 to analyze.
+On 47 out of 118 to analyze.
+On 47 out of 118 to analyze.
+On 48 out of 118 to analyze.
+On 47 out of 118 to analyze.
+On 48 out of 118 to analyze.
+On 48 out of 118 to analyze.
+On 48 out of 118 to analyze.
+On 48 out of 118 to analyze.
+On 48 out of 118 to analyze.
+On 49 out of 118 to analyze.
+On 49 out of 118 to analyze.
+On 49 out of 118 to analyze.
+On 49 out of 118 to analyze.
+On 49 out of 118 to analyze.
+On 49 out of 118 to analyze.
+On 50 out of 118 to analyze.
+On 50 out of 118 to analyze.
+On 50 out of 118 to analyze.
+On 50 out of 118 to analyze.
+On 50 out of 118 to analyze.
+On 51 out of 118 to analyze.
+On 50 out of 118 to analyze.
+On 51 out of 118 to analyze.
+On 51 out of 118 to analyze.
+On 51 out of 118 to analyze.
+On 51 out of 118 to analyze.
+On 51 out of 118 to analyze.
+On 52 out of 118 to analyze.
+On 52 out of 118 to analyze.
+On 52 out of 118 to analyze.
+On 52 out of 118 to analyze.
+On 52 out of 118 to analyze.
+On 53 out of 118 to analyze.
+On 52 out of 118 to analyze.
+On 53 out of 118 to analyze.
+On 53 out of 118 to analyze.
+On 53 out of 118 to analyze.
+On 53 out of 118 to analyze.
+On 53 out of 118 to analyze.
+On 54 out of 118 to analyze.
+On 54 out of 118 to analyze.
+On 54 out of 118 to analyze.
+On 54 out of 118 to analyze.
+On 55 out of 118 to analyze.
+On 54 out of 118 to analyze.
+On 54 out of 118 to analyze.
+On 55 out of 118 to analyze.
+On 55 out of 118 to analyze.
+On 55 out of 118 to analyze.
+On 55 out of 118 to analyze.
+On 55 out of 118 to analyze.
+On 56 out of 118 to analyze.
+On 56 out of 118 to analyze.
+On 56 out of 118 to analyze.
+On 56 out of 118 to analyze.
+On 56 out of 118 to analyze.
+On 56 out of 118 to analyze.
+On 57 out of 118 to analyze.
+On 57 out of 118 to analyze.
+On 57 out of 118 to analyze.
+On 57 out of 118 to analyze.
+On 57 out of 118 to analyze.
+On 58 out of 118 to analyze.
+On 57 out of 118 to analyze.
+On 58 out of 118 to analyze.
+On 58 out of 118 to analyze.
+On 58 out of 118 to analyze.
+On 58 out of 118 to analyze.
+On 58 out of 118 to analyze.
+On 59 out of 118 to analyze.
+On 59 out of 118 to analyze.
+On 59 out of 118 to analyze.
+On 59 out of 118 to analyze.
+On 59 out of 118 to analyze.
+On 59 out of 118 to analyze.
+On 60 out of 118 to analyze.
+On 60 out of 118 to analyze.
+On 60 out of 118 to analyze.
+On 60 out of 118 to analyze.
+On 60 out of 118 to analyze.
+On 60 out of 118 to analyze.
+On 61 out of 118 to analyze.
+On 61 out of 118 to analyze.
+On 61 out of 118 to analyze.
+On 61 out of 118 to analyze.
+On 61 out of 118 to analyze.
+On 61 out of 118 to analyze.
+On 62 out of 118 to analyze.
+On 62 out of 118 to analyze.
+On 62 out of 118 to analyze.
+On 62 out of 118 to analyze.
+On 62 out of 118 to analyze.
+On 62 out of 118 to analyze.
+On 63 out of 118 to analyze.
+On 63 out of 118 to analyze.
+On 63 out of 118 to analyze.
+On 63 out of 118 to analyze.
+On 63 out of 118 to analyze.
+On 63 out of 118 to analyze.
+On 64 out of 118 to analyze.
+On 64 out of 118 to analyze.
+On 64 out of 118 to analyze.
+On 64 out of 118 to analyze.
+On 64 out of 118 to analyze.
+On 64 out of 118 to analyze.
+On 65 out of 118 to analyze.
+On 65 out of 118 to analyze.
+On 65 out of 118 to analyze.
+On 65 out of 118 to analyze.
+On 65 out of 118 to analyze.
+On 66 out of 118 to analyze.
+On 65 out of 118 to analyze.
+On 66 out of 118 to analyze.
+On 66 out of 118 to analyze.
+On 66 out of 118 to analyze.
+On 66 out of 118 to analyze.
+On 66 out of 118 to analyze.
+On 67 out of 118 to analyze.
+On 67 out of 118 to analyze.
+On 67 out of 118 to analyze.
+On 67 out of 118 to analyze.
+On 67 out of 118 to analyze.
+On 67 out of 118 to analyze.
+On 68 out of 118 to analyze.
+On 68 out of 118 to analyze.
+On 68 out of 118 to analyze.
+On 68 out of 118 to analyze.
+On 68 out of 118 to analyze.
+On 69 out of 118 to analyze.
+On 68 out of 118 to analyze.
+On 69 out of 118 to analyze.
+On 69 out of 118 to analyze.
+On 69 out of 118 to analyze.
+On 69 out of 118 to analyze.
+On 69 out of 118 to analyze.
+On 70 out of 118 to analyze.
+On 70 out of 118 to analyze.
+On 70 out of 118 to analyze.
+On 70 out of 118 to analyze.
+On 70 out of 118 to analyze.
+On 70 out of 118 to analyze.
+On 71 out of 118 to analyze.
+On 71 out of 118 to analyze.
+On 71 out of 118 to analyze.
+On 71 out of 118 to analyze.
+On 71 out of 118 to analyze.
+On 71 out of 118 to analyze.
+On 72 out of 118 to analyze.
+On 72 out of 118 to analyze.
+On 72 out of 118 to analyze.
+On 72 out of 118 to analyze.
+On 72 out of 118 to analyze.
+On 73 out of 118 to analyze.
+On 72 out of 118 to analyze.
+On 73 out of 118 to analyze.
+On 73 out of 118 to analyze.
+On 73 out of 118 to analyze.
+On 73 out of 118 to analyze.
+On 74 out of 118 to analyze.
+On 73 out of 118 to analyze.
+On 74 out of 118 to analyze.
+On 74 out of 118 to analyze.
+On 74 out of 118 to analyze.
+On 74 out of 118 to analyze.
+On 75 out of 118 to analyze.
+On 74 out of 118 to analyze.
+On 75 out of 118 to analyze.
+On 75 out of 118 to analyze.
+On 75 out of 118 to analyze.
+On 75 out of 118 to analyze.
+On 75 out of 118 to analyze.
+On 76 out of 118 to analyze.
+On 76 out of 118 to analyze.
+On 76 out of 118 to analyze.
+On 76 out of 118 to analyze.
+On 76 out of 118 to analyze.
+On 76 out of 118 to analyze.
+On 77 out of 118 to analyze.
+On 77 out of 118 to analyze.
+On 77 out of 118 to analyze.
+On 77 out of 118 to analyze.
+On 77 out of 118 to analyze.
+On 78 out of 118 to analyze.
+On 77 out of 118 to analyze.
+On 78 out of 118 to analyze.
+On 78 out of 118 to analyze.
+On 78 out of 118 to analyze.
+On 78 out of 118 to analyze.
+On 79 out of 118 to analyze.
+On 78 out of 118 to analyze.
+On 79 out of 118 to analyze.
+On 79 out of 118 to analyze.
+On 79 out of 118 to analyze.
+On 79 out of 118 to analyze.
+On 79 out of 118 to analyze.
+On 80 out of 118 to analyze.
+On 80 out of 118 to analyze.
+On 80 out of 118 to analyze.
+On 80 out of 118 to analyze.
+On 81 out of 118 to analyze.
+On 80 out of 118 to analyze.
+On 80 out of 118 to analyze.
+On 81 out of 118 to analyze.
+On 81 out of 118 to analyze.
+On 81 out of 118 to analyze.
+On 82 out of 118 to analyze.
+On 81 out of 118 to analyze.
+On 81 out of 118 to analyze.
+On 82 out of 118 to analyze.
+On 82 out of 118 to analyze.
+On 82 out of 118 to analyze.
+On 82 out of 118 to analyze.
+On 83 out of 118 to analyze.
+On 82 out of 118 to analyze.
+On 83 out of 118 to analyze.
+On 83 out of 118 to analyze.
+On 83 out of 118 to analyze.
+On 83 out of 118 to analyze.
+On 84 out of 118 to analyze.
+On 83 out of 118 to analyze.
+On 84 out of 118 to analyze.
+On 84 out of 118 to analyze.
+On 84 out of 118 to analyze.
+On 84 out of 118 to analyze.
+On 85 out of 118 to analyze.
+On 84 out of 118 to analyze.
+On 85 out of 118 to analyze.
+On 85 out of 118 to analyze.
+On 85 out of 118 to analyze.
+On 86 out of 118 to analyze.
+On 85 out of 118 to analyze.
+On 85 out of 118 to analyze.
+On 86 out of 118 to analyze.
+On 86 out of 118 to analyze.
+On 86 out of 118 to analyze.
+On 87 out of 118 to analyze.
+On 86 out of 118 to analyze.
+On 86 out of 118 to analyze.
+On 87 out of 118 to analyze.
+On 87 out of 118 to analyze.
+On 87 out of 118 to analyze.
+On 88 out of 118 to analyze.
+On 87 out of 118 to analyze.
+On 87 out of 118 to analyze.
+On 88 out of 118 to analyze.
+On 88 out of 118 to analyze.
+On 88 out of 118 to analyze.
+On 89 out of 118 to analyze.
+On 88 out of 118 to analyze.
+On 88 out of 118 to analyze.
+On 89 out of 118 to analyze.
+On 89 out of 118 to analyze.
+On 89 out of 118 to analyze.
+On 90 out of 118 to analyze.
+On 89 out of 118 to analyze.
+On 90 out of 118 to analyze.
+On 89 out of 118 to analyze.
+On 90 out of 118 to analyze.
+On 90 out of 118 to analyze.
+On 91 out of 118 to analyze.
+On 90 out of 118 to analyze.
+On 91 out of 118 to analyze.
+On 90 out of 118 to analyze.
+On 91 out of 118 to analyze.
+On 91 out of 118 to analyze.
+On 92 out of 118 to analyze.
+On 91 out of 118 to analyze.
+On 92 out of 118 to analyze.
+On 91 out of 118 to analyze.
+On 92 out of 118 to analyze.
+On 92 out of 118 to analyze.
+On 93 out of 118 to analyze.
+On 92 out of 118 to analyze.
 ----------------------------------------
-Begin PBS Epilogue Fri Oct 28 14:43:47 EDT 2016 1477680227
-Job ID:		2154390.mgt
+Begin PBS Epilogue Sat Oct 29 02:43:34 EDT 2016 1477723414
+Job ID:		2154384.mgt
 Username:	ali
 Group:		sarma
 Job Name:	compute_adjacency_mat
-Session:	31765
+Session:	23330
 Limits:		neednodes=3:ppn=8,nodes=3:ppn=8,walltime=14:00:00
-Resources:	cput=00:02:42,mem=39682520kb,vmem=60406628kb,walltime=00:00:27
+Resources:	cput=111:57:28,mem=2464200kb,vmem=7299540kb,walltime=14:00:04
 Queue:		dque
 Account:		
-Nodes:	node014 node015 node017
+Nodes:	node010 node067 node124
 Killing leftovers...
 
-End PBS Epilogue Fri Oct 28 14:43:47 EDT 2016 1477680227
+End PBS Epilogue Sat Oct 29 02:43:35 EDT 2016 1477723415
 ----------------------------------------
