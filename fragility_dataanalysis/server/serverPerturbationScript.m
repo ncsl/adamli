@@ -8,10 +8,11 @@ w_space = linspace(-1, 1, 101);
 if nargin == 0 % testing purposes
     patient='EZT007seiz001';
     patient ='pt7sz19';
+    patient = 'JH102sz1';
     % window paramters
-    radius = 1.1;
-    winSize = 250; % 500 milliseconds
-    stepSize = 250; 
+    radius = 1.5;
+    winSize = 500; % 500 milliseconds
+    stepSize = 500; 
     frequency_sampling = 1000; % in Hz
 end
 

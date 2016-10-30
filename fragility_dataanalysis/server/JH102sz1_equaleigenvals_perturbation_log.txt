@@ -1,1 +1,9 @@
+<<<<<<< HEAD
 This patient has eigenvalue == radius, check it!JH102sz1_1000_500_500, on this number of the mat files, 30 
+=======
+<<<<<<< HEAD
+This patient has eigenvalue == radius, check it!JH102sz1_1000_500_500, on this number of the mat files, 84 
+=======
+This patient has eigenvalue == radius, check it!JH102sz1_1000_500_500, on this number of the mat files, 22 
+>>>>>>> 7b65b5f33670e5229235e79b2b3640362ca6b603
+>>>>>>> 67adda68ea583c854229a6422f4c1ea016a161d9
