@@ -8,16 +8,496 @@
 To get started, type one of these: helpwin, helpdesk, or demo.
 For product information, visit www.mathworks.com.
  
-Looking at patient: JH102sz1
+Looking at patient: pt14sz1
+The range locked to seizure to look over is -60 until 0
+Total number of channels 66
+Length of to be included channels 66
+Seizure starts at 80000 milliseconds
+Running analysis for 60000 milliseconds
+Elapsed time is 1.376610On 8 out of 118 to analyze.
+On 9 out of 118 to analyze.
+On 10 out of 118 to analyze.
+On 11 out of 118 to analyze.
+On 12 out of 118 to analyze.
+On 13 out of 118 to analyze.
+1_3_before59000.mat
+Elapsed time is 1.712357 seconds.
+Saved file: pt14sz1_4_before58500.mat
+Elapsed time is 1.767364 seconds.
+Saved file: pt14sz1_5_before58000.mat
+Elapsed time is 1.644495 seconds.
+Saved file: pt14sz1_6_before57500.mat
+Elapsed time is 1.570029 seconds.
+Saved file: pt14sz1_7_before57000.mat
+Elapsed time is 1.222743 seconds.
+Saved file: pt14sz1_8_before56500.mat
+Elapsed time is 1.269956 seconds.
+Saved file: pt14sz1_9_before56000.mat
+Elapsed time is 1.263166 seconds.
+Saved file: pt14sz1_10_before55500.mat
+Elapsed time is 1.532082 seconds.
+Saved file: pt14sz1_11_before55000.mat
+Elapsed time is 1.519354 seconds.
+Saved file: pt14sz1_12_before54500.mat
+Elapsed time is 1.373470 seconds.
+Saved file: pt14sz1_13_before54000.mat
+Elapsed time is 1.179764 seconds.
+Saved file: pt14sz1_14_before53500.mat
+Elapsed time is 1.815363 seconds.
+Saved file: pt14sz1_15_before53000.mat
+Elapsed time is 1.592775 seconds.
+Saved file: pt14sz1_16_before52500.mat
+Elapsed time is 1.357451 seconds.
+Saved file: pt14sz1_17_before52000.mat
+Elapsed time is 1.755507 seconds.
+Saved file: pt14sz1_18_before51500.mat
+Elapsed time is 1.616468 seconds.
+Saved file: pt14sz1_19_before51000.mat
+Elapsed time is 1.398615 seconds.
+Saved file: pt14sz1_20_before50500.mat
+Elapsed time is 1.844614 seconds.
+Saved file: pt14sz1_21_before50000.mat
+Elapsed time is 1.653440 seconds.
+Saved file: pt14sz1_22_before49500.mat
+Elapsed time is 1.455535 seconds.
+Saved file: pt14sz1_23_before49000.mat
+Elapsed time is 1.720163 seconds.
+Saved file: pt14sz1_24_before48500.mat
+Elapsed time is 1.536701 seconds.
+Saved file: pt14sz1_25_before48000.mat
+Elapsed time is 1.620442 seconds.
+Saved file: pt14sz1_26_before47500.mat
+Elapsed time is 1.647410 seconds.
+Saved file: pt14sz1_27_before47000.mat
+Elapsed time is 1.417032 seconds.
+Saved file: pt14sz1_28_before46500.mat
+Elapsed time is 1.886240 seconds.
+Saved file: pt14sz1_29_before46000.mat
+Elapsed time is 1.767848 seconds.
+Saved file: pt14sz1_30_before45500.mat
+Elapsed time is 1.378164 seconds.
+Saved file: pt14sz1_31_before45000.mat
+Elapsed time is 1.887178 seconds.
+Saved file: pt14sz1_32_before44500.mat
+Elapsed time is 1.344278 seconds.
+Saved file: pt14sz1_33_before44000.mat
+Elapsed time is 1.208407 seconds.
+Saved file: pt14sz1_34_before43500.mat
+Elapsed time is 1.361130 seconds.
+Saved file: pt14sz1_35_before43000.mat
+Elapsed time is 1.291155 seconds.
+Saved file: pt14sz1_36_before42500.mat
+Elapsed time is 1.237293 seconds.
+Saved file: pt14sz1_37_before42000.mat
+Elapsed time is 1.255706 seconds.
+Saved file: pt14sz1_38_before41500.mat
+Elapsed time is 1.160896 seconds.
+Saved file: pt14sz1_39_before41000.mat
+Elapsed time is 1.304914 seconds.
+Saved file: pt14sz1_40_before40500.mat
+Elapsed time is 1.504244 seconds.
+Saved file: pt14sz1_41_before40000.mat
+Elapsed time is 1.358504 seconds.
+Saved file: pt14sz1_42_before39500.mat
+Elapsed time is 1.202836 seconds.
+Saved file: pt14sz1_43_before39000.mat
+Elapsed time is 1.324124 seconds.
+Saved file: pt14sz1_44_before38500.mat
+Elapsed time is 1.097712 seconds.
+Saved file: pt14sz1_45_before38000.mat
+Elapsed time is 1.369166 seconds.
+Saved file: pt14sz1_46_before37500.mat
+Elapsed time is 1.311785 seconds.
+Saved file: pt14sz1_47_before37000.mat
+Elapsed time is 1.381622 seconds.
+Saved file: pt14sz1_48_before36500.mat
+Elapsed time is 1.251416 seconds.
+Saved file: pt14sz1_49_before36000.mat
+Elapsed time is 1.289222 seconds.
+Saved file: pt14sz1_50_before35500.mat
+Elapsed time is 1.205106 seconds.
+Saved file: pt14sz1_51_before35000.mat
+Elapsed time is 1.426959 seconds.
+Saved file: pt14sz1_52_before34500.mat
+Elapsed time is 1.297888 seconds.
+Saved file: pt14sz1_53_before34000.mat
+Elapsed time is 1.445477 seconds.
+Saved file: pt14sz1_54_before33500.mat
+Elapsed time is 1.679530 seconds.
+Saved file: pt14sz1_55_before33000.mat
+Elapsed time is 1.609576 seconds.
+Saved file: pt14sz1_56_before32500.mat
+Elapsed time is 1.709189 seconds.
+Saved file: pt14sz1_57_before32000.mat
+Elapsed time is 1.689638 seconds.
+Saved file: pt14sz1_58_before31500.mat
+Elapsed time is 1.228406 seconds.
+Saved file: pt14sz1_59_before31000.mat
+Elapsed time is 1.532139 seconds.
+Saved file: pt14sz1_60_before30500.mat
+Elapsed time is 1.363645 seconds.
+Saved file: pt14sz1_61_before30000.mat
+Elapsed time is 1.331536 seconds.
+Saved file: pt14sz1_62_before29500.mat
+Elapsed time is 1.217022 seconds.
+Saved file: pt14sz1_63_before29000.mat
+Elapsed time is 1.246736 seconds.
+Saved file: pt14sz1_64_before28500.mat
+Elapsed time is 1.562701 seconds.
+Saved file: pt14sz1_65_before28000.mat
+Elapsed time is 1.390349 seconds.
+Saved file: pt14sz1_66_before27500.mat
+Elapsed time is 1.403858 seconds.
+Saved file: pt14sz1_67_before27000.mat
+Elapsed time is 1.478401 seconds.
+Saved file: pt14sz1_68_before26500.mat
+Elapsed time is 1.725876 seconds.
+Saved file: pt14sz1_69_before26000.mat
+Elapsed time is 1.596994 seconds.
+Saved file: pt14sz1_70_before25500.mat
+Elapsed time is 1.607737 seconds.
+Saved file: pt14sz1_71_before25000.mat
+Elapsed time is 1.587370 seconds.
+Saved file: pt14sz1_72_before24500.mat
+Elapsed time is 1.492931 seconds.
+Saved file: pt14sz1_73_before24000.mat
+Elapsed time is 1.655403 seconds.
+Saved file: pt14sz1_74_before23500.mat
+Elapsed time is 1.211571 seconds.
+Saved file: pt14sz1_75_before23000.mat
+Elapsed time is 1.221986 seconds.
+Saved file: pt14sz1_76_before22500.mat
+Elapsed time is 1.770508 seconds.
+Saved file: pt14sz1_77_before22000.mat
+Elapsed time is 1.677356 seconds.
+Saved file: pt14sz1_78_before21500.mat
+Elapsed time is 1.917842 seconds.
+Saved file: pt14sz1_79_before21000.mat
+Elapsed time is 1.808691 seconds.
+Saved file: pt14sz1_80_before20500.mat
+Elapsed time is 1.434085 seconds.
+Saved file: pt14sz1_81_before20000.mat
+Elapsed time is 1.969962 seconds.
+Saved file: pt14sz1_82_before19500.mat
+Elapsed time is 1.346431 seconds.
+Saved file: pt14sz1_83_before19000.mat
+Elapsed time is 1.353982 seconds.
+Saved file: pt14sz1_84_before18500.mat
+Elapsed time is 1.259334 seconds.
+Saved file: pt14sz1_85_before18000.mat
+Elapsed time is 1.265132 seconds.
+Saved file: pt14sz1_86_before17500.mat
+Elapsed time is 1.234625 seconds.
+Saved file: pt14sz1_87_before17000.mat
+Elapsed time is 1.321900 seconds.
+Saved file: pt14sz1_88_before16500.mat
+Elapsed time is 1.281093 seconds.
+Saved file: pt14sz1_89_before16000.mat
+Elapsed time is 1.207833 seconds.
+Saved file: pt14sz1_90_before15500.mat
+Elapsed time is 1.250975 seconds.
+Saved file: pt14sz1_91_before15000.mat
+Elapsed time is 1.131945 seconds.
+Saved file: pt14sz1_92_before14500.mat
+Elapsed time is 1.521004 seconds.
+Saved file: pt14sz1_93_before14000.mat
+Elapsed time is 1.451149 seconds.
+Saved file: pt14sz1_94_before13500.mat
+Elapsed time is 1.290538 seconds.
+Saved file: pt14sz1_95_before13000.mat
+Elapsed time is 1.704861 seconds.
+Saved file: pt14sz1_96_before12500.mat
+Elapsed time is 1.427304 seconds.
+Saved file: pt14sz1_97_before12000.mat
+Elapsed time is 1.304744 seconds.
+Saved file: pt14sz1_98_before11500.mat
+Elapsed time is 1.561874 seconds.
+Saved file: pt14sz1_99_before11000.mat
+Elapsed time is 1.556683 seconds.
+Saved file: pt14sz1_100_before10500.mat
+Elapsed time is 1.567130 seconds.
+Saved file: pt14sz1_101_before10000.mat
+Elapsed time is 1.319510 seconds.
+Saved file: pt14sz1_102_before9500.mat
+Elapsed time is 1.376586 seconds.
+Saved file: pt14sz1_103_before9000.mat
+Elapsed time is 1.760213 seconds.
+Saved file: pt14sz1_104_before8500.mat
+Elapsed time is 1.305641 seconds.
+Saved file: pt14sz1_105_before8000.mat
+Elapsed time is 1.339083 seconds.
+Saved file: pt14sz1_106_before7500.mat
+Elapsed time is 1.246771 seconds.
+Saved file: pt14sz1_107_before7000.mat
+Elapsed time is 1.654012 seconds.
+Saved file: pt14sz1_108_before6500.mat
+Elapsed time is 1.652600 seconds.
+Saved file: pt14sz1_109_before6000.mat
+Elapsed time is 1.604733 seconds.
+Saved file: pt14sz1_110_before5500.mat
+Elapsed time is 1.723799 seconds.
+Saved file: pt14sz1_111_before5000.mat
+Elapsed time is 1.605616 seconds.
+Saved file: pt14sz1_112_before4500.mat
+Elapsed time is 1.720497 seconds.
+Saved file: pt14sz1_113_before4000.mat
+Elapsed time is 1.653671 seconds.
+Saved file: pt14sz1_114_before3500.mat
+Elapsed time is 1.509914 seconds.
+Saved file: pt14sz1_115_before3000.mat
+Elapsed time is 1.697690 seconds.
+Saved file: pt14sz1_116_before2500.mat
+Elapsed time is 1.417142 seconds.
+Saved file: pt14sz1_117_before2000.mat
+Elapsed time is 1.433559 seconds.
+Saved file: pt14sz1_118_before1500.mat
+Elapsed time is 1.455691 seconds.
+Saved file: pt14sz1_119_before1000.mat
+Elapsed time is 1.303067 seconds.
+Saved file: pt14sz1_120_before500.mat
+Looking at patient: pt14sz1
 
 num_channels =
 
-   113
+    66
 
-On 1 out of 118 to analyze.
-On 2 out of 118 to analyze.
-On 3 out of 118 to analyze.
-On 4 out of 118 to analyze.
-On 5 out of 118 to analyze.
-On 6 out of 118 to analyze.
-On 7 out of 118 to analyze.
+On 1 out of 120 to analyze.
+On 2 out of 120 to analyze.
+On 3 out of 120 to analyze.
+On 4 out of 120 to analyze.
+On 5 out of 120 to analyze.
+On 6 out of 120 to analyze.
+On 7 out of 120 to analyze.
+On 8 out of 120 to analyze.
+On 9 out of 120 to analyze.
+On 10 out of 120 to analyze.
+On 11 out of 120 to analyze.
+On 12 out of 120 to analyze.
+On 13 out of 120 to analyze.
+On 14 out of 120 to analyze.
+On 15 out of 120 to analyze.
+On 16 out of 120 to analyze.
+On 17 out of 120 to analyze.
+On 18 out of 120 to analyze.
+On 19 out of 120 to analyze.
+On 20 out of 120 to analyze.
+On 21 out of 120 to analyze.
+On 22 out of 120 to analyze.
+On 23 out of 120 to analyze.
+On 24 out of 120 to analyze.
+On 25 out of 120 to analyze.
+On 26 out of 120 to analyze.
+On 27 out of 120 to analyze.
+On 28 out of 120 to analyze.
+On 29 out of 120 to analyze.
+On 30 out of 120 to analyze.
+On 31 out of 120 to analyze.
+On 32 out of 120 to analyze.
+On 33 out of 120 to analyze.
+On 34 out of 120 to analyze.
+On 35 out of 120 to analyze.
+On 36 out of 120 to analyze.
+On 37 out of 120 to analyze.
+On 38 out of 120 to analyze.
+On 39 out of 120 to analyze.
+On 40 out of 120 to analyze.
+On 41 out of 120 to analyze.
+On 42 out of 120 to analyze.
+On 43 out of 120 to analyze.
+On 44 out of 120 to analyze.
+On 45 out of 120 to analyze.
+On 46 out of 120 to analyze.
+On 47 out of 120 to analyze.
+On 48 out of 120 to analyze.
+On 49 out of 120 to analyze.
+On 50 out of 120 to analyze.
+On 51 out of 120 to analyze.
+On 52 out of 120 to analyze.
+On 53 out of 120 to analyze.
+On 54 out of 120 to analyze.
+On 55 out of 120 to analyze.
+On 56 out of 120 to analyze.
+On 57 out of 120 to analyze.
+On 58 out of 120 to analyze.
+On 59 out of 120 to analyze.
+On 60 out of 120 to analyze.
+On 61 out of 120 to analyze.
+On 62 out of 120 to analyze.
+On 63 out of 120 to analyze.
+On 64 out of 120 to analyze.
+On 65 out of 120 to analyze.
+On 66 out of 120 to analyze.
+On 67 out of 120 to analyze.
+On 68 out of 120 to analyze.
+On 69 out of 120 to analyze.
+On 70 out of 120 to analyze.
+On 71 out of 120 to analyze.
+On 72 out of 120 to analyze.
+On 73 out of 120 to analyze.
+On 74 out of 120 to analyze.
+On 75 out of 120 to analyze.
+On 76 out of 120 to analyze.
+On 77 out of 120 to analyze.
+On 78 out of 120 to analyze.
+On 79 out of 120 to analyze.
+On 80 out of 120 to analyze.
+On 81 out of 120 to analyze.
+On 82 out of 120 to analyze.
+On 83 out of 120 to analyze.
+On 84 out of 120 to analyze.
+On 85 out of 120 to analyze.
+On 86 out of 120 to analyze.
+On 87 out of 120 to analyze.
+On 88 out of 120 to analyze.
+On 89 out of 120 to analyze.
+On 90 out of 120 to analyze.
+On 91 out of 120 to analyze.
+On 92 out of 120 to analyze.
+On 93 out of 120 to analyze.
+On 94 out of 120 to analyze.
+On 95 out of 120 to analyze.
+On 96 out of 120 to analyze.
+On 97 out of 120 to analyze.
+On 98 out of 120 to analyze.
+On 99 out of 120 to analyze.
+On 100 out of 120 to analyze.
+On 101 out of 120 to analyze.
+On 102 out of 120 to analyze.
+On 103 out of 120 to analyze.
+On 104 out of 120 to analyze.
+On 105 out of 120 to analyze.
+On 106 out of 120 to analyze.
+On 107 out of 120 to analyze.
+On 108 out of 120 to analyze.
+On 109 out of 120 to analyze.
+On 110 out of 120 to analyze.
+On 111 out of 120 to analyze.
+On 112 out of 120 to analyze.
+On 113 out of 120 to analyze.
+On 114 out of 120 to analyze.
+On 115 out of 120 to analyze.
+On 116 out of 120 to analyze.
+On 117 out of 120 to analyze.
+On 118 out of 120 to analyze.
+On 119 out of 120 to analyze.
+On 120 out of 120 to analyze.
+Elapsed time is 1248.370261 seconds.
+
+num_channels =
+
+    66
+
+On 1 out of 120 to analyze.
+On 2 out of 120 to analyze.
+On 3 out of 120 to analyze.
+On 4 out of 120 to analyze.
+On 5 out of 120 to analyze.
+On 6 out of 120 to analyze.
+On 7 out of 120 to analyze.
+On 8 out of 120 to analyze.
+On 9 out of 120 to analyze.
+On 10 out of 120 to analyze.
+On 11 out of 120 to analyze.
+On 12 out of 120 to analyze.
+On 13 out of 120 to analyze.
+On 14 out of 120 to analyze.
+On 15 out of 120 to analyze.
+On 16 out of 120 to analyze.
+On 17 out of 120 to analyze.
+On 18 out of 120 to analyze.
+On 19 out of 120 to analyze.
+On 20 out of 120 to analyze.
+On 21 out of 120 to analyze.
+On 22 out of 120 to analyze.
+On 23 out of 120 to analyze.
+On 24 out of 120 to analyze.
+On 25 out of 120 to analyze.
+On 26 out of 120 to analyze.
+On 27 out of 120 to analyze.
+On 28 out of 120 to analyze.
+On 29 out of 120 to analyze.
+On 30 out of 120 to analyze.
+On 31 out of 120 to analyze.
+On 32 out of 120 to analyze.
+On 33 out of 120 to analyze.
+On 34 out of 120 to analyze.
+On 35 out of 120 to analyze.
+On 36 out of 120 to analyze.
+On 37 out of 120 to analyze.
+On 38 out of 120 to analyze.
+On 39 out of 120 to analyze.
+On 40 out of 120 to analyze.
+On 41 out of 120 to analyze.
+On 42 out of 120 to analyze.
+On 43 out of 120 to analyze.
+On 44 out of 120 to analyze.
+On 45 out of 120 to analyze.
+On 46 out of 120 to analyze.
+On 47 out of 120 to analyze.
+On 48 out of 120 to analyze.
+On 49 out of 120 to analyze.
+On 50 out of 120 to analyze.
+On 51 out of 120 to analyze.
+On 52 out of 120 to analyze.
+On 53 out of 120 to analyze.
+On 54 out of 120 to analyze.
+On 55 out of 120 to analyze.
+On 56 out of 120 to analyze.
+On 57 out of 120 to analyze.
+On 58 out of 120 to analyze.
+On 59 out of 120 to analyze.
+On 60 out of 120 to analyze.
+On 61 out of 120 to analyze.
+On 62 out of 120 to analyze.
+On 63 out of 120 to analyze.
+On 64 out of 120 to analyze.
+On 65 out of 120 to analyze.
+On 66 out of 120 to analyze.
+On 67 out of 120 to analyze.
+On 68 out of 120 to analyze.
+On 69 out of 120 to analyze.
+On 70 out of 120 to analyze.
+On 71 out of 120 to analyze.
+On 72 out of 120 to analyze.
+On 73 out of 120 to analyze.
+On 74 out of 120 to analyze.
+On 75 out of 120 to analyze.
+On 76 out of 120 to analyze.
+On 77 out of 120 to analyze.
+On 78 out of 120 to analyze.
+On 79 out of 120 to analyze.
+On 80 out of 120 to analyze.
+On 81 out of 120 to analyze.
+On 82 out of 120 to analyze.
+On 83 out of 120 to analyze.
+On 84 out of 120 to analyze.
+On 85 out of 120 to analyze.
+On 86 out of 120 to analyze.
+On 87 out of 120 to analyze.
+On 88 out of 120 to analyze.
+On 89 out of 120 to analyze.
+On 90 out of 120 to analyze.
+On 91 out of 120 to analyze.
+On 92 out of 120 to analyze.
+On 93 out of 120 to analyze.
+On 94 out of 120 to analyze.
+On 95 out of 120 to analyze.
+On 96 out of 120 to analyze.
+On 97 out of 120 to analyze.
+On 98 out of 120 to analyze.
+On 99 out of 120 to analyze.
+On 100 out of 120 to analyze.
+On 101 out of 120 to analyze.
+On 102 out of 120 to analyze.
+On 103 out of 120 to analyze.
+On 104 out of 120 to analyze.
+On 105 out of 120 to analyze.
+On 106 out of 120 to analyze.
+On 107 out of 120 to analyze.
+On 108 out of 120 to analyze.
+On 109 out of 120 to analyze.
+On 110 out of 120 to analyze.
+On 111 out of 120 to analyze.
+On 112 out of 120 to analyze.
+On 113 out of 120 to analyze.
+On 114 out of 120 to analyze.
