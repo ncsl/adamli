@@ -31,11 +31,12 @@ On 21 out of 118 to analyze.
 On 22 out of 118 to analyze.
 On 23 out of 118 to analyze.
 On 24 out of 118 to analyze.
-e is 1.922650 seconds.
-Saved file: pt14sz3_8_before56500.mat
-Elapsed time is 1.790271 seconds.
-Saved file: pt14sz3_9_before56000.mat
-Elapsed time is 1.418986 seconds.
+On 25 out of 118 to analyze.
+On 26 out of 118 to analyze.
+On 27 out of 118 to analyze.
+On 28 out of 118 to analyze.
+On 29 out of 118 to analyze.
+ is 1.418986 seconds.
 Saved file: pt14sz3_10_before55500.mat
 Elapsed time is 1.799448 seconds.
 Saved file: pt14sz3_11_before55000.mat
