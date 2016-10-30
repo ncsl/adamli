@@ -20,13 +20,15 @@ On 10 out of 118 to analyze.
 On 11 out of 118 to analyze.
 On 12 out of 118 to analyze.
 On 13 out of 118 to analyze.
-z2_3_before59000.mat
-Elapsed time is 1.222771 seconds.
-Saved file: pt14sz2_4_before58500.mat
-Elapsed time is 1.462552 seconds.
-Saved file: pt14sz2_5_before58000.mat
-Elapsed time is 1.561532 seconds.
-Saved file: pt14sz2_6_before57500.mat
+On 14 out of 118 to analyze.
+On 15 out of 118 to analyze.
+On 16 out of 118 to analyze.
+On 17 out of 118 to analyze.
+On 18 out of 118 to analyze.
+On 19 out of 118 to analyze.
+On 20 out of 118 to analyze.
+On 21 out of 118 to analyze.
+.mat
 Elapsed time is 1.400301 seconds.
 Saved file: pt14sz2_7_before57000.mat
 Elapsed time is 1.260754 seconds.
@@ -498,3 +500,13 @@ On 108 out of 120 to analyze.
 On 109 out of 120 to analyze.
 On 110 out of 120 to analyze.
 On 111 out of 120 to analyze.
+On 112 out of 120 to analyze.
+On 113 out of 120 to analyze.
+On 114 out of 120 to analyze.
+On 115 out of 120 to analyze.
+On 116 out of 120 to analyze.
+On 117 out of 120 to analyze.
+On 118 out of 120 to analyze.
+On 119 out of 120 to analyze.
+On 120 out of 120 to analyze.
+Elapsed time is 1207.206984 seconds.
