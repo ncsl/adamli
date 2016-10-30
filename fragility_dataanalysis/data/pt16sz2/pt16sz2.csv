@@ -1,0 +1,2 @@
+patient_id,date,recording_start,onset_time,offset_time,recording_duration,num_channels,included_channels
+pt16sz2,2/12/12,8:13:34,8:15:06,8:16:59,330,60,[1:19 21:37 42:43 46:53 56:60]
