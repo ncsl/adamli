@@ -5,25 +5,7 @@ Error in <a href="matlab:helpUtils.errorDocCallback('determineClinicalAnnotation
 to
 "/home/ali/adamli/fragility_dataanalysis/determineClinicalAnnotations.m>determineClinicalAnnotations".
 
-Error in serverAdjMainScript (line 27)
+Error in serverPerturbationScript (line 28)
 [included_channels, ezone_labels, earlyspread_labels, latespread_labels] ...
-} 
-{Error using load
-Unable to read file '../data/pt16sz1/pt16sz1': no such file or directory.
-
-Error in serverAdjMainScript (line 55)
-    data = load(fullfile(patient_eeg_path, patient));
-} 
-{Error using load
-Unable to read file '../data/pt16sz2/pt16sz2': no such file or directory.
-
-Error in serverAdjMainScript (line 55)
-    data = load(fullfile(patient_eeg_path, patient));
-} 
-{Error using load
-Unable to read file '../data/pt16sz3/pt16sz3': no such file or directory.
-
-Error in serverAdjMainScript (line 55)
-    data = load(fullfile(patient_eeg_path, patient));
 } 
 
