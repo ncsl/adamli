@@ -77,7 +77,8 @@ function [included_channels, ezone_labels, earlyspread_labels, latespread_labels
         earlyspread_labels = {};
         latespread_labels = {};
     elseif strcmp(patient_id, 'pt10')
-        included_channels = [1:3 5:22 24:35 48:85 88 89];
+        included_channels = [1:3 5:10 12:19 21:22 24:35 48:85 88 89];
+%         [1:3 5:22 24:35 48:85 88 89];
         ezone_labels = {};
         earlyspread_labels = {};
          latespread_labels = {};
