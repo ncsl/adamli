@@ -94,12 +94,12 @@ latespread_indices(latespread_indices==0) = [];
 %% 1: Extract Processed Data and Begin Plotting and Save in finalDataDir
 final_data = load(fullfile(finalDataDir, strcat(patient, 'final_data.mat'))); % load in final data mat
 
-try
-    patient = [patient(1:6), patient(8:end)];
-catch
-    patient
-end
-patient
+% try
+%     patient = [patient(1:6), patient(8:end)];
+% catch
+%     patient
+% end
+% patient
 
 % set data to local variables
 minPerturb_time_chan = final_data.minPerturb_time_chan;
