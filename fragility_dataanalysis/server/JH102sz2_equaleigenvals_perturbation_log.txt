@@ -1,1 +1,0 @@
-This patient has eigenvalue == radius, check it!JH102sz2_1000_500_500, on this number of the mat files, 30 
