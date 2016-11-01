@@ -9,7 +9,7 @@ function [included_channels, ezone_labels, earlyspread_labels, latespread_labels
         latespread_labels = {};
     elseif strcmp(patient_id, 'EZT005')
         included_channels = [1:21 23:60 63:88];
-        ezone_labels = {'U4', 'U3', 'U5', 'U6', 'U8', 'U7'}; 
+        ezone_labels = {'U3', 'U4','U5', 'U6', 'U7', 'U8'}; 
         earlyspread_labels = {};
          latespread_labels = {};
     elseif strcmp(patient_id, 'EZT019')
