@@ -94,13 +94,6 @@ latespread_indices(latespread_indices==0) = [];
 %% 1: Extract Processed Data and Begin Plotting and Save in finalDataDir
 final_data = load(fullfile(finalDataDir, strcat(patient, 'final_data.mat'))); % load in final data mat
 
-% try
-%     patient = [patient(1:6), patient(8:end)];
-% catch
-%     patient
-% end
-% patient
-
 % set data to local variables
 minPerturb_time_chan = final_data.minPerturb_time_chan;
 fragility_rankings = final_data.fragility_rankings;
@@ -123,10 +116,19 @@ elseif strcmp(patient_id, 'pt8')
     ignoredTimes(1) = (60-ignoredTimes(1)) * frequency_sampling/winSize;
     ignoredTimes(2) = (60-ignoredTimes(2)) * frequency_sampling/winSize;
     fragility_rankings = fragility_rankings(:,[1:ignoredTimes(1), ignoredTimes(2)+1:120]);
+    minPerturb_time_chan = minPerturb_time_chan(:,[1:ignoredTimes(1), ignoredTimes(2)+1:120]);
+    xticks = -45:5:0;
+elseif strcmp(patient_id, 'pt10')
+    ignoredTimes = [60 44];
+    ignoredTimes(1) = (60-ignoredTimes(1)) * frequency_sampling/winSize;
+    ignoredTimes(2) = (60-ignoredTimes(2)) * frequency_sampling/winSize;
+    fragility_rankings = fragility_rankings(:,[1:ignoredTimes(1), ignoredTimes(2)+1:120]);
+    minPerturb_time_chan = minPerturb_time_chan(:,[1:ignoredTimes(1), ignoredTimes(2)+1:120]);
 end
 
 num_channels = size(fragility_rankings,1);
 num_windows = size(fragility_rankings,2);
+
 
 % only get -60 to 0 seconds of data
 % if (size(fragility_rankings,2) > 121)
@@ -160,6 +162,34 @@ y_earlyspreadindices = sort(earlyspread_indices);
 y_latespreadindices = sort(latespread_indices);
 
 fig = {};
+
+if strcmp(patient_id, 'EZT005') & strcmp(seizure_id, 'seiz001')
+    ignoredTimes = [44 39];
+    ignoredTimes(1) = (60-ignoredTimes(1)) * frequency_sampling/winSize;
+    ignoredTimes(2) = (60-ignoredTimes(2)) * frequency_sampling/winSize;
+    fragility_rankings = fragility_rankings(:,[1:ignoredTimes(1), ignoredTimes(2)+1:120]);
+elseif strcmp(patient_id, 'JH104')
+    ignoredTimes = [60 57];
+    ignoredTimes(1) = (60-ignoredTimes(1)) * frequency_sampling/winSize;
+    ignoredTimes(2) = (60-ignoredTimes(2)) * frequency_sampling/winSize;
+    fragility_rankings = fragility_rankings(:,[1:ignoredTimes(1), ignoredTimes(2)+1:120]);
+elseif strcmp(patient_id, 'pt8')
+    ignoredTimes = [60 44];
+%     ignoredTimes(1) = (60-ignoredTimes(1)) * frequency_sampling/winSize;
+%     ignoredTimes(2) = (60-ignoredTimes(2)) * frequency_sampling/winSize;
+%     fragility_rankings = fragility_rankings(:,[1:ignoredTimes(1), ignoredTimes(2)+1:120]);
+    xticks = -45:5:0;
+elseif strcmp(patient_id, 'pt10')
+    ignoredTimes = [60 44];
+%     ignoredTimes(1) = (60-ignoredTimes(1)) * frequency_sampling/winSize;
+%     ignoredTimes(2) = (60-ignoredTimes(2)) * frequency_sampling/winSize;
+%     fragility_rankings = fragility_rankings(:,[1:ignoredTimes(1), ignoredTimes(2)+1:120]);
+    xticks = -45:5:0;
+end
+
+num_channels = size(fragility_rankings,1);
+num_windows = size(fragility_rankings,2);
+
 
 %% 2b) minimum perturbation over time and channels:
 fig{end+1} = figure;
@@ -226,7 +256,7 @@ currfig.PaperPosition = [-3.7448   -0.3385   15.9896   11.6771];
 currfig.Position = [1986           1        1535        1121];
 % move ylabel to the left
 ylab.Position = ylab.Position + [-.25 0 0];
-
+XLim = get(gca, 'xlim'); XLowerLim = XLim(1); XUpperLim = XLim(2);
 % plot start star's for the different clinical annotations
 xlim([XLowerLim, XUpperLim+1]);
 plot(repmat(XUpperLim+1, length(ezone_indices),1), ezone_indices, '*r');
