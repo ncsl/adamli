@@ -88,7 +88,7 @@ function [included_channels, ezone_labels, earlyspread_labels, latespread_labels
 %         if REGION_ONLY
             included_channels = [11:19 21:37 39:40 43:62];
 %         end
-        ezone_labels = {};
+        ezone_labels = {'POLRG24', 'POLRG32', 'POLRG40', 'POLRG39'};
         earlyspread_labels = {};
          latespread_labels = {};
     elseif strcmp(patient_id, 'pt14')
