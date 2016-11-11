@@ -4,6 +4,8 @@ clc;
 
 % settings to run
 patients = {...
+%     'pt16sz1', 'pt16sz2', 'pt16sz3',...
+%     'pt17sz1', 'pt17sz2',...
     'pt11sz1', 'pt11sz2', 'pt11sz3','pt11sz4',...
 %     'pt3sz2' 'pt3sz4' 'pt8sz1' 'pt8sz2' 'pt8sz3'...
 % 		'pt10sz1' 'pt10sz2' 'pt10sz3'  'pt11sz2' 'pt11sz3' 'pt11sz4'...
@@ -122,6 +124,12 @@ for p=1:length(patients)
         num_channels = size(data.data, 1);
     end
 
+    %%%%% TAKE OUT LATER --> TRYING to normalize each channel
+    for i=1:size(eeg,1)
+        eeg(i,1:seizureStart) = eeg(i,1:seizureStart) / max(eeg(i,1:seizureStart));
+    end
+    
+    
     % only take included_channels
     if ~isempty(included_channels)
         eeg = eeg(included_channels, :);
@@ -148,7 +156,7 @@ for p=1:length(patients)
     end
     
     % create the adjacency file directory to store the computed adj. mats
-    toSaveAdjDir = fullfile(strcat('./adj_mats_win', num2str(winSize), ...
+    toSaveAdjDir = fullfile(strcat('./normalized/adj_mats_win', num2str(winSize), ...
         '_step', num2str(stepSize), '_freq', num2str(frequency_sampling)), patient);
     if ~exist(toSaveAdjDir, 'dir')
         mkdir(toSaveAdjDir);
