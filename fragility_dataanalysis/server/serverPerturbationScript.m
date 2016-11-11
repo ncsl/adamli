@@ -26,7 +26,7 @@ if isempty(patient_id)
 end
 
 %% DEFINE CHANNELS AND CLINICAL ANNOTATIONS
-[included_channels, ezone_labels, earlyspread_labels, latespread_labels] ...
+[included_channels, ezone_labels, earlyspread_labels, latespread_labels, frequency_sampling] ...
             = determineClinicalAnnotations(patient_id, seizure_id);
 
 % put clinical annotations into a struct

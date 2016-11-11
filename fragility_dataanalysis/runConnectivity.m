@@ -5,8 +5,8 @@ clc;
 % settings to run
 patients = {...
 %     'pt16sz1', 'pt16sz2', 'pt16sz3',...
-%     'pt17sz1', 'pt17sz2',...
-    'pt11sz1', 'pt11sz2', 'pt11sz3','pt11sz4',...
+    'pt17sz1', 'pt17sz2',...
+%     'pt11sz1', 'pt11sz2', 'pt11sz3','pt11sz4',...
 %     'pt3sz2' 'pt3sz4' 'pt8sz1' 'pt8sz2' 'pt8sz3'...
 % 		'pt10sz1' 'pt10sz2' 'pt10sz3'  'pt11sz2' 'pt11sz3' 'pt11sz4'...
 %     'JH102sz1',
@@ -50,7 +50,7 @@ for p=1:length(patients)
     end
 
     %% DEFINE CHANNELS AND CLINICAL ANNOTATIONS
-    [included_channels, ezone_labels, earlyspread_labels, latespread_labels] ...
+    [included_channels, ezone_labels, earlyspread_labels, latespread_labels, frequency_sampling] ...
                 = determineClinicalAnnotations(patient_id, seizure_id);
 
     % put clinical annotations into a struct
@@ -125,9 +125,9 @@ for p=1:length(patients)
     end
 
     %%%%% TAKE OUT LATER --> TRYING to normalize each channel
-    for i=1:size(eeg,1)
-        eeg(i,1:seizureStart) = eeg(i,1:seizureStart) / max(eeg(i,1:seizureStart));
-    end
+%     for i=1:size(eeg,1)
+%         eeg(i,1:seizureStart) = eeg(i,1:seizureStart) / max(eeg(i,1:seizureStart));
+%     end
     
     
     % only take included_channels
@@ -185,13 +185,13 @@ for p=1:length(patients)
 %     end
     
     % compute connectivity
-    computeConnectivity(patient_id, seizure_id, eeg, clinicalLabels, adj_args);
+%     computeConnectivity(patient_id, seizure_id, eeg, clinicalLabels, adj_args);
     
     %% 02: RUN PERTURBATION ANALYSIS
     for j=1:length(perturbationTypes)
         perturbationType = perturbationTypes(j);
         
-        toSaveFinalDataDir = fullfile(strcat('./adj_mats_win', num2str(winSize), ...
+        toSaveFinalDataDir = fullfile(strcat('./normalized/adj_mats_win', num2str(winSize), ...
         '_step', num2str(stepSize), '_freq', num2str(frequency_sampling)), strcat(perturbationType, '_finaldata', ...
             '_radius', num2str(radius)));
         if ~exist(toSaveFinalDataDir, 'dir')
