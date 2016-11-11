@@ -8,12 +8,10 @@ to
 Error in serverAdjMainScript (line 27)
 [included_channels, ezone_labels, earlyspread_labels, latespread_labels] ...
 } 
-{Subscripted assignment dimension mismatch.
+{Error using load
+Unable to read file '../data/pt17sz3/pt17sz3': no such file or directory.
 
-Error in computePerturbations (line 154)
-        colsum_time_chan(:, iTime) = sum(theta_adj, 1);
-
-Error in serverPerturbationScript (line 116)
-        computePerturbations(patient_id, seizure_id, perturb_args);
+Error in serverAdjMainScript (line 55)
+    data = load(fullfile(patient_eeg_path, patient));
 } 
 
