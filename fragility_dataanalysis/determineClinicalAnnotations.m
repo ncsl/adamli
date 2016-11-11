@@ -79,14 +79,16 @@ function [included_channels, ezone_labels, earlyspread_labels, latespread_labels
         latespread_labels = {};
     elseif strcmp(patient_id, 'pt10')
         included_channels = [1:3 5:10 12:19 21:22 24:35 48:85 88 89];
+        
+        included_channels = [1:3 5:10 12:19 21:22 24:35 48:69 88 89]; %w/o hfreq noise electrodes
 %         [1:3 5:22 24:35 48:85 88 89];
         ezone_labels = {};
         earlyspread_labels = {};
          latespread_labels = {};
     elseif strcmp(patient_id, 'pt11')
-%         included_channels = [1:19 21:37 39 40 43:74 76:81 83:87 89:94 101:130];
+        included_channels = [1:19 21:37 39 40 43:74 76:81 83:87 89:94 101:130];
 %         if REGION_ONLY
-            included_channels = [11:19 21:37 39:40 43:62];
+%             included_channels = [11:19 21:37 39:40 43:62];
 %         end
         ezone_labels = {'POLRG24', 'POLRG32', 'POLRG40', 'POLRG39'};
         earlyspread_labels = {};
