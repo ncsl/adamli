@@ -12,8 +12,9 @@
 cd /home/ali/adamli/fragility_dataanalysis/server
 
 # patients listed 5 per row
-patients=('pt15sz2' 'pt15sz3' 'pt11sz1' 'pt11sz2' 'pt11sz3' 'pt11sz4'\
-	'pt17sz1' 'pt17sz2')
+patients=('pt17sz2')
+	# 'pt15sz2' 'pt15sz3' 'pt11sz1' 'pt11sz2' 'pt11sz3' 'pt11sz4'\
+	# 'pt17sz1' 'pt17sz2')
 	# 'pt15sz1' 'pt16sz2' 'pt17sz1' 'pt17sz2' 'pt17sz3')
 	# 'EZT005seiz003' 'EZT007seiz003' 'EZT007seiz005' 'EZT019seiz003'\
 	# 'EZT030seiz003' 'EZT070seiz003')
