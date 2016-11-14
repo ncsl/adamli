@@ -1,17 +1,12 @@
 Error in <a href="matlab:helpUtils.errorDocCallback('determineClinicalAnnotations', '/home/ali/adamli/fragility_dataanalysis/determineClinicalAnnotations.m', 3)" style="font-weight:bold">determineClinicalAnnotations</a> (<a href="matlab: opentoline('/home/ali/adamli/fragility_dataanalysis/determineClinicalAnnotations.m',3,0)">line 3</a>)
-    if strcmp(patient_id, 'EZT007')
+    frequency_sampling = 1000; % general default sampling frequency
 
 {Output argument "included_channels" (and maybe others) not assigned during call
 to
 "/home/ali/adamli/fragility_dataanalysis/determineClinicalAnnotations.m>determineClinicalAnnotations".
 
 Error in serverAdjMainScript (line 27)
-[included_channels, ezone_labels, earlyspread_labels, latespread_labels] ...
-} 
-{Error using load
-Unable to read file '../data/pt17sz3/pt17sz3': no such file or directory.
-
-Error in serverAdjMainScript (line 55)
-    data = load(fullfile(patient_eeg_path, patient));
+[included_channels, ezone_labels, earlyspread_labels, latespread_labels,
+frequency_sampling] ...
 } 
 

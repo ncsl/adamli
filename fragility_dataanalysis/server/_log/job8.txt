@@ -8,11 +8,15 @@
 To get started, type one of these: helpwin, helpdesk, or demo.
 For product information, visit www.mathworks.com.
  
-Looking at patient: pt16sz2
-{Error using load
-Unable to read file '../data/pt16sz2/pt16sz2': no such file or directory.
+Error in <a href="matlab:helpUtils.errorDocCallback('determineClinicalAnnotations', '/home/ali/adamli/fragility_dataanalysis/determineClinicalAnnotations.m', 3)" style="font-weight:bold">determineClinicalAnnotations</a> (<a href="matlab: opentoline('/home/ali/adamli/fragility_dataanalysis/determineClinicalAnnotations.m',3,0)">line 3</a>)
+    frequency_sampling = 1000; % general default sampling frequency
 
-Error in serverAdjMainScript (line 55)
-    data = load(fullfile(patient_eeg_path, patient));
+{Output argument "included_channels" (and maybe others) not assigned during call
+to
+"/home/ali/adamli/fragility_dataanalysis/determineClinicalAnnotations.m>determineClinicalAnnotations".
+
+Error in serverAdjMainScript (line 27)
+[included_channels, ezone_labels, earlyspread_labels, latespread_labels,
+frequency_sampling] ...
 } 
 
