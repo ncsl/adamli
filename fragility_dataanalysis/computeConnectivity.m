@@ -20,6 +20,7 @@ seizureStart = adj_args.seizureStart; % time seizure starts
 seizureEnd = adj_args.seizureEnd; % time seizure ends
 included_channels = adj_args.included_channels;
 labels = adj_args.labels;
+l2regularization = adj_args.l2regularization;
 
 ezone_labels = clinicalLabels.ezone_labels;
 earlyspread_labels = clinicalLabels.earlyspread_labels;
@@ -115,7 +116,13 @@ for i=1:dataRange/stepSize
 
     % create the reshaped adjacency matrix
     tic;
-    theta = A\b;                                                % solve for x, connectivity
+    if l2regularization == 0
+        theta = A\b;                                                % solve for x, connectivity
+    else
+        symmetricA = A'*A;
+        theta = (symmetricA+l2regularization*eye(length(symmetricA)))\(A'*b);
+    end
+       
     theta_adj = reshape(theta, num_channels, num_channels)';    % reshape fills in columns first, so must transpose
     toc;
     
