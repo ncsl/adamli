@@ -82,7 +82,6 @@ function [included_channels, ezone_labels, earlyspread_labels, latespread_labels
         included_channels = [1:3 5:10 12:19 21:22 24:35 48:85 88 89];
         
         included_channels = [1:3 5:10 12:19 21:22 24:35 48:69 88 89]; %w/o hfreq noise electrodes
-%         [1:3 5:22 24:35 48:85 88 89];
         ezone_labels = {'POLP57', 'POLP58', 'POLFP43', 'POLFP44', 'POLFP45', 'POLFP46'};
         earlyspread_labels = {'POLOF1', 'POLOF2', 'POLOF3', 'POLOF4', ...
             'POLG7', 'POLG8', 'POLG28', 'POLG29', 'POLG30', 'POLG31', 'POLFP35', 'POLFP36', ...
