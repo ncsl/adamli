@@ -57,6 +57,7 @@ for p=1:length(patients)
     adj_args.seizureStart = seizureStart;
     adj_args.seizureEnd = seizureEnd;
     adj_args.labels = labels;
+    adj_args.l2regularization = l2regularization;
     
     % compute connectivity
     computeConnectivity(patient_id, seizure_id, eeg, clinicalLabels, adj_args);
