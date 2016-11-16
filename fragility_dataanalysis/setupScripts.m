@@ -1,6 +1,6 @@
 
 l2regularization = 0.0;
-adjMat = '../regularized_adj_mats_win';
+adjMat = '../adj_mats_win';
 timeRange = [60 0];
 
 patient_id = patient(1:strfind(patient, 'seiz')-1);
