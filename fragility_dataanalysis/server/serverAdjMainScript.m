@@ -2,7 +2,7 @@ function serverAdjMainScript(patient, winSize, stepSize, frequency_sampling)
 addpath('../fragility_library/');
 addpath(genpath('../eeg_toolbox/'));
 addpath('../');
-
+IS_SERVER = 1;
 if nargin == 0 % testing purposes
     patient='EZT005seiz001';
     patient='JH102sz6';

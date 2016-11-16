@@ -4,7 +4,7 @@ addpath(genpath('../eeg_toolbox/'));
 addpath('../');
 perturbationTypes = ['R', 'C'];
 w_space = linspace(-1, 1, 101);
-
+IS_SERVER = 1;
 if nargin == 0 % testing purposes
     patient='EZT007seiz001';
     patient ='pt7sz19';

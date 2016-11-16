@@ -97,6 +97,10 @@ function [included_channels, ezone_labels, earlyspread_labels, latespread_labels
          latespread_labels = {};
     elseif strcmp(patient_id, 'pt14')
         included_channels = [1:19 21:37 41:42 45:61 68:78];
+        
+        if strcmp(seizure_id, 'sz3')
+            included_channels = [1:17 19 21:37 41:42 45:61 68:78];
+        end
         ezone_labels = {'POLMST1', 'POLMST2', 'POLTT1', 'POLTT2', 'POLTT3', ...
                         'POLAST1', 'POLAST2'};
         earlyspread_labels = {'POLOF1', 'POLOF2', 'POLOF3', 'POLOF4', 'POLPT4', 'POLPT5', ...

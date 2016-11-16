@@ -1,6 +1,12 @@
 
 l2regularization = 0.0;
-adjMat = '../adj_mats_win';
+adjMat = './adj_mats_win';
+dataDir = './data/';
+if IS_SERVER
+    adjMat = '../adj_mats_win';
+    dataDir = '../data/';
+end
+
 timeRange = [60 0];
 
 patient_id = patient(1:strfind(patient, 'seiz')-1);
@@ -37,7 +43,7 @@ end
 if ~seeg
     %% NIH, JHU PATIENTS
     %- set file path for the patient file 
-    patient_eeg_path = strcat('../data/', patient);
+    patient_eeg_path = strcat(dataDir, patient);
 
     % READ EEG FILE Mat File
     % files to process
@@ -53,7 +59,7 @@ if ~seeg
     num_channels = size(data.data, 1);
 else
     %% EZT/SEEG PATIENTS
-    patient_eeg_path = strcat('../data/Seiz_Data/', patient_id);
+    patient_eeg_path = strcat(dataDir, 'Seiz_Data/', patient_id);
 
     % READ EEG FILE Mat File
     % files to process

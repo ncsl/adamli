@@ -4,9 +4,11 @@ clc;
 
 % settings to run
 patients = {...
+    'pt10sz1', 'pt10sz2', 'pt10sz3',...
+%      'pt15sz2', 'pt15sz3', 'pt15sz1',...
 %     'pt16sz1', 'pt16sz2', 'pt16sz3',...
 %     'pt17sz1', 
-    'pt17sz2',...
+%     'pt17sz2',...
 %     'pt11sz1', 'pt11sz2', 'pt11sz3','pt11sz4',...
 %     'pt3sz2' 'pt3sz4' 'pt8sz1' 'pt8sz2' 'pt8sz3'...
 % 		'pt10sz1' 'pt10sz2' 'pt10sz3'  'pt11sz2' 'pt11sz3' 'pt11sz4'...
@@ -30,7 +32,7 @@ winSize = 500;            % 500 milliseconds
 stepSize = 500; 
 frequency_sampling = 1000; % in Hz
 timeRange = [60 0];
-
+IS_SERVER = 0;
 
 % add libraries of functions
 addpath('./fragility_library/');
@@ -41,132 +43,8 @@ addpath(genpath('/home/WIN/ali39/Documents/adamli/fragility_dataanalysis/eeg_too
 for p=1:length(patients)
     patient = patients{p};
    
-    patient_id = patient(1:strfind(patient, 'seiz')-1);
-    seizure_id = strcat('_', patient(strfind(patient, 'seiz'):end));
-    seeg = 1;
-    if isempty(patient_id)
-        patient_id = patient(1:strfind(patient, 'sz')-1);
-        seizure_id = patient(strfind(patient, 'sz'):end);
-        seeg = 0;
-    end
+    setupScripts;
 
-    %% DEFINE CHANNELS AND CLINICAL ANNOTATIONS
-    [included_channels, ezone_labels, earlyspread_labels, latespread_labels, frequency_sampling] ...
-                = determineClinicalAnnotations(patient_id, seizure_id);
-
-    % put clinical annotations into a struct
-    clinicalLabels = struct();
-    clinicalLabels.ezone_labels = ezone_labels;
-    clinicalLabels.earlyspread_labels = earlyspread_labels;
-    clinicalLabels.latespread_labels = latespread_labels;
-
-    %% DEFINE COMPUTATION PARAMETERS AND DIRECTORIES TO SAVE DATA
-    patient = strcat(patient_id, seizure_id);
-    disp(['Looking at patient: ',patient]);
-
-    %%- grab eeg data in different ways... depending on who we got it from
-    if ~seeg
-        %% NIH, JHU PATIENTS
-        %- set file path for the patient file 
-        dataDir = './data/';
-        patient_eeg_path = strcat('./data/', patient);
-        patient_file_path = fullfile(dataDir, patient, strcat(patient, '.csv'));
-
-        %- set the meta data using the patient input file
-        [~, ~, recording_start, ...
-         onset_time, offset_time, ...
-         recording_duration, num_channels] = readLabels(patient_file_path);
-        number_of_samples = frequency_sampling * recording_duration;
-        seizureStart = milliseconds(onset_time - recording_start); % time seizure starts
-        seizureEnd = milliseconds(offset_time - recording_start); % time seizure ends
-
-        % extract labels
-        patient_label_path = fullfile(dataDir, patient, strcat(patient, '_labels.csv'));
-        fid = fopen(patient_label_path); % open up labels to get all the channels
-        labels = textscan(fid, '%s', 'Delimiter', ',');
-        labels = labels{:}; 
-        try
-            labels = labels(included_channels);
-        catch
-            disp('labels already clipped');
-            length(labels) == length(included_channels)
-        end
-        fclose(fid);
-
-        % READ EEG FILE
-        % files to process
-        f = dir([patient_eeg_path '/*eeg.csv']);
-        patient_file_names = cell(1, length(f));
-        for iChan=1:length(f)
-            patient_file_names{iChan} = f(iChan).name;
-        end
-        patient_files = containers.Map(patient_file_names, number_of_samples)
-        
-        %- Extract EEG and Perform Analysis
-        filename = patient_file_names{1};
-        num_values = patient_files(patient_file_names{1});
-        % extract eeg 
-        eeg = csv2eeg(patient_eeg_path, filename, num_values, num_channels);
-    else
-        %% EZT/SEEG PATIENTS
-        patient_eeg_path = strcat('./data/Seiz_Data/', patient_id);
-
-        % READ EEG FILE Mat File
-        % files to process
-        data = load(fullfile(patient_eeg_path, patient));
-        eeg = data.data;
-        labels = data.elec_labels;
-        onset_time = data.seiz_start_mark;
-        offset_time = data.seiz_end_mark;
-        recording_start = 0; % since they dont' give absolute time of starting the recording
-        seizureStart = (onset_time - recording_start); % time seizure starts
-        seizureEnd = (offset_time - recording_start); % time seizure ends
-        recording_duration = size(data.data, 2);
-        num_channels = size(data.data, 1);
-    end
-
-    %%%%% TAKE OUT LATER --> TRYING to normalize each channel
-%     for i=1:size(eeg,1)
-%         eeg(i,1:seizureStart) = eeg(i,1:seizureStart) / max(eeg(i,1:seizureStart));
-%     end
-    
-    
-    % only take included_channels
-    if ~isempty(included_channels)
-        eeg = eeg(included_channels, :);
-    end
-    
-    if frequency_sampling ~=1000
-        disp('downsampling to ');
-        frequency_sampling
-        size(eeg)
-        seizureStart
-        seizureEnd
-        eeg = eeg(:, 1:(1000/frequency_sampling):end);
-        seizureStart = seizureStart * frequency_sampling/1000;
-        seizureEnd = seizureEnd * frequency_sampling/1000;
-
-        size(eeg)
-        seizureStart
-        seizureEnd
-    end
-    
-    % only take included_channels
-    if ~isempty(included_channels)
-        num_channels = num_channels;
-    end
-    
-    % create the adjacency file directory to store the computed adj. mats
-    toSaveAdjDir = fullfile(strcat('./adj_mats_win', num2str(winSize), ...
-        '_step', num2str(stepSize), '_freq', num2str(frequency_sampling)), patient);
-    if ~exist(toSaveAdjDir, 'dir')
-        mkdir(toSaveAdjDir);
-    end
-
-    %% 01: RUN FUNCTIONAL CONNECTIVITY COMPUTATION
-    if seizureStart < 60 * frequency_sampling
-        timeRange(1) = seizureStart/frequency_sampling;
-    end
     % define args for computing the functional connectivity
     adj_args = struct();
     adj_args.BP_FILTER_RAW = 1; % apply notch filter or not?
@@ -179,11 +57,6 @@ for p=1:length(patients)
     adj_args.seizureStart = seizureStart;
     adj_args.seizureEnd = seizureEnd;
     adj_args.labels = labels;
-    
-%     if seizureStart < 60 * frequency_sampling
-%         disp('not 60 seconds of preseizure data');
-%         waitforbuttonpress;
-%     end
     
     % compute connectivity
     computeConnectivity(patient_id, seizure_id, eeg, clinicalLabels, adj_args);
