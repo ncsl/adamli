@@ -116,7 +116,7 @@ function [included_channels, ezone_labels, earlyspread_labels, latespread_labels
     elseif strcmp(patient_id, 'pt16')
         included_channels = [1:19 21:37 42:43 46:53 56:60];
         if strcmp(seizure_id, 'sz2')
-            included_channels = [1:19 21:37 42:43 46:53 56:57];
+            included_channels = [1:19 21:37 42:43 46:53 56:57]; % get rid of R3,R4,R5 with high freq noise
         end
         
         ezone_labels = {'POLTT5', 'POLTT3', 'POLTT2', 'POLAST1'};
