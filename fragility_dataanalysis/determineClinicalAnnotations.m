@@ -133,7 +133,7 @@ function [included_channels, ezone_labels, earlyspread_labels, latespread_labels
         if strcmp(seizure_id, 'sz2') % get rid of G7,6,4 with high frequency noises
             included_channels = [1:19 21 23:25 28:37 42:43 46:51 53];
         end
-        ezone_labels = {'POLTT1', 'POLTT2'};
+        ezone_labels = {'POLTT', 'POLTT2'};
         earlyspread_labels = {'POLPST1', 'POLPST2', 'POLPST3', 'POLTT3'};
         latespread_labels = {'POLMST1', 'POLMST2', 'POLAST1'};
         frequency_sampling = 2000;
