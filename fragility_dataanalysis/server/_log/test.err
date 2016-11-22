@@ -5,8 +5,35 @@ Error in <a href="matlab:helpUtils.errorDocCallback('determineClinicalAnnotation
 to
 "/home/ali/adamli/fragility_dataanalysis/determineClinicalAnnotations.m>determineClinicalAnnotations".
 
-Error in serverAdjMainScript (line 27)
+Error in setupScripts (line 22)
 [included_channels, ezone_labels, earlyspread_labels, latespread_labels,
 frequency_sampling] ...
+
+Error in serverAdjMainScript (line 16)
+setupScripts;
+} 
+{Subscripted assignment dimension mismatch.
+
+Error in computePerturbations (line 154)
+        colsum_time_chan(:, iTime) = sum(theta_adj, 1);
+
+Error in serverPerturbationScript (line 42)
+    computePerturbations(patient_id, seizure_id, perturb_args);
+} 
+{Subscripted assignment dimension mismatch.
+
+Error in computePerturbations (line 154)
+        colsum_time_chan(:, iTime) = sum(theta_adj, 1);
+
+Error in serverPerturbationScript (line 42)
+    computePerturbations(patient_id, seizure_id, perturb_args);
+} 
+{Subscripted assignment dimension mismatch.
+
+Error in computePerturbations (line 154)
+        colsum_time_chan(:, iTime) = sum(theta_adj, 1);
+
+Error in serverPerturbationScript (line 42)
+    computePerturbations(patient_id, seizure_id, perturb_args);
 } 
 
