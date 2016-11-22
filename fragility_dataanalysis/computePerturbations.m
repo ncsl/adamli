@@ -101,6 +101,8 @@ for i=1:length(matFiles) % loop through each adjacency matrix
     if (max_eig < radius) % this is a stable eigenspectrum
         N = size(theta_adj, 1); % number of rows
         del_size = zeros(N, length(w_space));
+        del_temp = cell(length(w_space));
+        del_table = cell(N, timeRange);
         
         %%- grid search over sigma and w for each row to determine, what is
         %%- the min norm perturbation
@@ -144,9 +146,12 @@ for i=1:length(matFiles) % loop through each adjacency matrix
                 
                 % store the l2-norm of the perturbation
                 del_size(iNode, iW) = norm(del); 
+                del_temp(iW) = del;
             end
             % store minimum perturbation, for each node at a certain time point
-            minPerturb_time_chan(iNode, iTime) = min(del_size(iNode,:));
+            min_index = find(del_size(iNode,:) == min(del_size(iNode, :)));
+            minPerturb_time_chan(iNode, iTime) = del_size(iNode, min_index);
+            del_table(iNode, iTime) = del_temp(min_index);
         end % end of loop through channels
         
         %%- 03: Store Results (colsum, rowsum, perturbation,
@@ -179,6 +184,7 @@ metadata.winSize = winSize;
 metadata.stepSize = stepSize;
 metadata.radius = radius;
 metadata.patient = patient;
+metadata.del_table = del_table;
 
 save(fullfile(toSaveFinalDataDir, strcat(patient,'final_data.mat')),...
  'minPerturb_time_chan', 'colsum_time_chan', 'rowsum_time_chan', 'fragility_rankings', 'metadata');
