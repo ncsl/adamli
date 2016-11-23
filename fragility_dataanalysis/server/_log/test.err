@@ -1,9 +1,0 @@
-{Subscripted assignment dimension mismatch.
-
-Error in computePerturbations (line 159)
-        colsum_time_chan(:, iTime) = sum(theta_adj, 1);
-
-Error in serverPerturbationScript (line 42)
-    computePerturbations(patient_id, seizure_id, perturb_args);
-} 
-
