@@ -71,7 +71,8 @@ if [[ "$RUNSLEEP" -eq 1 ]]; then
 	qsub -l walltime=24:00:00,nodes=node232 run_b_sleep.sh
 fi
 
-## 02: Call pbs job, which in turn calls run_all_pbs (put nodes to sleep) and runAnalysis
+## 02: Call pbs job, runAnalysis
 for patient in $patients; do
-	qsub -v RUNCONNECTIVITY=$RUNCONNECTIVITY, patient=$patient, radius=$radius,frequency_sampling=$frequency_sampling,winSize=$winSize,stepSize=$stepSize run_job.pbs
+	echo $patient
+	qsub -v RUNCONNECTIVITY=$RUNCONNECTIVITY,patient=$patient,radius=$radius,frequency_sampling=$frequency_sampling,winSize=$winSize,stepSize=$stepSize run_job.pbs
 done
