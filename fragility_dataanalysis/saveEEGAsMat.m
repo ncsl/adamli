@@ -5,9 +5,11 @@ clc;
 INTERICTAL = 1;
 % settings to run
 patients = {...
-    'pt1aw1', 'pt1aw2', ...
-    'pt2aslp1', 'pt2aslp2', 'pt2aw1', 'pt2aw2', ...
-    'pt3aslp1', 'pt3aslp2', 'pt3aw1'};
+    'pt1aslp1', 'pt1aslp2', ...
+%     'pt1aw1', 'pt1aw2', ...
+%     'pt2aslp1', 'pt2aslp2', 'pt2aw1', 'pt2aw2', ...
+%     'pt3aslp1', 'pt3aslp2', 'pt3aw1',...
+    };
 %     'pt6sz3', 'pt6sz4', 'pt6sz5'};
 %     'pt17sz1', 'pt17sz2'};
 %     'pt14sz1', 'pt14sz2', 'pt14sz3', 'pt15sz1', 'pt15sz2', 'pt15sz3', 'pt15sz4', ...
@@ -89,8 +91,10 @@ if INTERICTAL
 
         data = eeg;
         elec_labels = labels;
+        seiz_end_mark = seizureEnd;
+        seiz_start_mark = seizureStart;
 
-        save(fullfile(patient_eeg_path, patient), 'data', 'elec_labels');
+        save(fullfile(patient_eeg_path, patient), 'data', 'elec_labels', 'seiz_end_mark', 'seiz_start_mark');
     end
 else
     %%- Begin Loop Through Different Patients Here
@@ -166,8 +170,8 @@ else
 
             data = eeg;
             elec_labels = labels;
-            seiz_end_mark = seizureEnd;
-            seiz_start_mark = seizureStart;
+            seiz_end_mark = 0;
+            seiz_start_mark = length(eeg);
 
             save(fullfile(patient_eeg_path, patient), 'data', 'elec_labels', 'seiz_end_mark', 'seiz_start_mark');
         end

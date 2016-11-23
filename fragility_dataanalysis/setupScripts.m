@@ -1,4 +1,3 @@
-
 l2regularization = 0.0;
 adjMat = './adj_mats_win';
 dataDir = './data/';
@@ -16,6 +15,18 @@ if isempty(patient_id)
     patient_id = patient(1:strfind(patient, 'sz')-1);
     seizure_id = patient(strfind(patient, 'sz'):end);
     seeg = 0;
+end
+if isempty(patient_id)
+    patient_id = patient(1:strfind(patient, 'aslp')-1);
+    seizure_id = patient(strfind(patient, 'aslp'):end);
+    dataDir= './data/interictal_data/';
+    if IS_SERVER
+        dataDir = '../data/interictal_data/';
+    end
+end
+if isempty(patient_id)
+    patient_id = patient(1:strfind(patient, 'aw')-1);
+    seizure_id = patient(strfind(patient, 'aw'):end);
 end
 
 %% DEFINE CHANNELS AND CLINICAL ANNOTATIONS

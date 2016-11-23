@@ -146,7 +146,7 @@ for i=1:length(matFiles) % loop through each adjacency matrix
                 
                 % store the l2-norm of the perturbation
                 del_size(iNode, iW) = norm(del); 
-                del_temp(iW) = del;
+                del_temp{iW} = del;
             end
             % store minimum perturbation, for each node at a certain time point
             min_index = find(del_size(iNode,:) == min(del_size(iNode, :)));
