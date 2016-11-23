@@ -144,18 +144,10 @@ function [included_channels, ezone_labels, earlyspread_labels, latespread_labels
         earlyspread_labels = {'POLPST1', 'POLPST2', 'POLPST3', 'POLTT3'};
         latespread_labels = {'POLMST1', 'POLMST2', 'POLAST1'};
         frequency_sampling = 2000;
-    elseif strcmp(patient_id, 'JH105')
-        included_channels = [1:4 7:12 14:19 21:37 42 43 46:49 51:53 55:75 78:99]; % JH105
-        ezone_labels = {'POLRPG4', 'POLRPG5', 'POLRPG6', 'POLRPG12', 'POLRPG13', 'POLG14',...
-            'POLAPD1', 'POLAPD2', 'POLAPD3', 'POLAPD4', 'POLAPD5', 'POLAPD6', 'POLAPD7', 'POLAPD8', ...
-            'POLPPD1', 'POLPPD2', 'POLPPD3', 'POLPPD4', 'POLPPD5', 'POLPPD6', 'POLPPD7', 'POLPPD8', ...
-            'POLASI3', 'POLPSI5', 'POLPSI6', 'POLPDI2'}; % JH105
+    elseif strcmp(patient_id, 'JH101')
+        included_channels = [1:4 7:19 21:37 42:43 46 48:63 72 75:86 90:119 122:135];
+        ezone_labels = {'POLLAD1', 'POLLAD2', 'POLLAD3', 'POLLAD4', 'POLLAD5', 'POLLAD6'};
         earlyspread_labels = {};
-         latespread_labels = {};
-     elseif strcmp(patient_id, 'JH104') % strip patient
-        included_channels = [1:12 14:19 21:37 42:43 46:69 72:74];
-        ezone_labels = {'POLLAT1', 'POLLAT2', 'POLMBT5', 'POLMBT6', 'POLPBT4'};
-        earlyspread_labels = {'POLLPF5', 'POLLPF6', 'POLLFP2', 'POLLFP3', 'POLLFP4'};
         latespread_labels = {};
     elseif strcmp(patient_id, 'JH102') % strip dual seizure patient
         included_channels = [1:12 14:36 41:42 45:62 66:123];
@@ -165,6 +157,39 @@ function [included_channels, ezone_labels, earlyspread_labels, latespread_labels
                 'POLLAT1', 'POLLAT2', 'POLLAT3'}; % uncertain still on lat/lbts
         end
         earlyspread_labels = {};
+        latespread_labels = {};
+    elseif strcmp(patient_id, 'JH103')
+        included_channels = [1:4 7:12 15:23 25:33 47:63 65:66 69:71 73:110];
+        ezone_labels = {};
+        earlyspread_labels = {'POLRTG48', 'POLRTG40'};
+        latespread_labels = {};
+    elseif strcmp(patient_id, 'JH104') % strip patient
+        included_channels = [1:12 14:19 21:37 42:43 46:69 72:74];
+        ezone_labels = {'POLLAT1', 'POLLAT2', 'POLMBT5', 'POLMBT6', 'POLPBT4'};
+        earlyspread_labels = {'POLLPF5', 'POLLPF6', 'POLLFP2', 'POLLFP3', 'POLLFP4'};
+        latespread_labels = {};
+    elseif strcmp(patient_id, 'JH105')
+        included_channels = [1:4 7:12 14:19 21:37 42 43 46:49 51:53 55:75 78:99]; % JH105
+        ezone_labels = {'POLRPG4', 'POLRPG5', 'POLRPG6', 'POLRPG12', 'POLRPG13', 'POLG14',...
+            'POLAPD1', 'POLAPD2', 'POLAPD3', 'POLAPD4', 'POLAPD5', 'POLAPD6', 'POLAPD7', 'POLAPD8', ...
+            'POLPPD1', 'POLPPD2', 'POLPPD3', 'POLPPD4', 'POLPPD5', 'POLPPD6', 'POLPPD7', 'POLPPD8', ...
+            'POLASI3', 'POLPSI5', 'POLPSI6', 'POLPDI2'}; % JH105
+        earlyspread_labels = {'POLLAT1' 'POLLAT2', 'POLLAT6', 'POLLAT7', 'POLLAT8'};
+         latespread_labels = {};
+    elseif strcmp(patient_id, 'JH106')
+        included_channels = [1:4 7:12 14:19 21:37 42:75 77:80 82:102 104:133 138:147 150:181 184:196 198:213];
+        ezone_labels = {};
+        earlyspread_labels = {};
+        latespread_labels = {};
+    elseif strcmp(patient_id, 'JH107')
+        included_channels = [1:7 9:19 21:31 34:37 42:43 45 47:83];
+        ezone_labels = {};
+        earlyspread_labels = {};
+        latespread_labels = {};
+    elseif strcmp(patient_id, 'JH108')
+        included_channels = [1:4 7:12 14:16 18:19 21:37 42:43 46:47 51:69 71:147];
+        ezone_labels = {'POLRDI1', 'POLRDI2', 'POLRDI3', 'POLRDI4', 'POLRSI1', 'POLRSI2', 'POLRSI3', 'POLRSI4'};
+        earlyspread_labels = {'POLRPP1', 'POLRPP2'};
         latespread_labels = {};
     elseif strcmp(patient_id, 'EZT030')
         included_channels = [];
