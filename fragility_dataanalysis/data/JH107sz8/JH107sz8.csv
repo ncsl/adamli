@@ -1,0 +1,2 @@
+patient_id,date,recording_start,onset_time,offset_time,recording_duration,num_channels,included_channels
+JH107sz8,7/29/16,16:18:55,16:20:15,16:24:33,403,91,[1:7 9:19 21:31 34:37 42:43 45 47:83]
