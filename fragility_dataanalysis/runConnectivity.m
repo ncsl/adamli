@@ -34,6 +34,7 @@ stepSize = 500;
 frequency_sampling = 1000; % in Hz
 timeRange = [60 0];
 IS_SERVER = 0;
+IS_INTERICTAL = 1;
 
 % add libraries of functions
 addpath('./fragility_library/');
