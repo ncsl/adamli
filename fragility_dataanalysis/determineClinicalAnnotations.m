@@ -61,23 +61,30 @@ function [included_channels, ezone_labels, earlyspread_labels, latespread_labels
         included_channels = [1:14 16:19 21:25 27:37 43 44 47:74];
         ezone_labels = {'POLMST1', 'POLPST1', 'POLTT1'}; %pt2
         earlyspread_labels = {'POLTT2', 'POLAST2', 'POLMST2', 'POLPST2', 'POLALEX1', 'POLALEX5'};
-         latespread_labels = {};
+        latespread_labels = {};
     elseif strcmp(patient_id, 'pt3')
-       included_channels = [1:19 21:37 42 43 46:69 71:133 135];
+        included_channels = [1:19 21:37 42 43 46:69 71:133 135];
+        included_channels = [1:19 21:37 42:43 46:69 71:107]; % removing left hemisphere electrodes
         ezone_labels = {'POLSFP2', 'POLSFP3', 'POLOF4'}; % 'POLOF1', 'POLOF2', 'POLOF3'
         earlyspread_labels = {'POLSFP5', 'POLSFP6', 'POLIFP1', 'POLIFP2', 'POLIFP3'};
         latespread_labels = {}; 
-    elseif strcmp(patient_id, 'pt8')
-        included_channels = [1:19 21:37 39:40 43:64 71:76 79 80];
-        ezone_labels = {'POLG22','POLG23', 'POLG29', 'POLG30', 'POLG31', 'POLTO6', 'POLTO5', ...
-                        'POLMST3', 'POLMST4'};
+    elseif strcmp(patient_id, 'pt6')
+        included_channels = [1:36 42:43 46 52:56 58:71 73:95];
+        ezone_labels = {'POLLA1', 'POLLA2', 'POLLA3', 'POLLA4', 'POLLAH1', ...
+            'POLLAH2', 'POLLAH3', 'POLLAH4', 'POLLPH1', 'POLLPH2', 'POLLPH3', 'POLLPH4'};
         earlyspread_labels = {};
-         latespread_labels = {};
+        latespread_labels = {};
      elseif strcmp(patient_id, 'pt7')
         included_channels = [1:17 19:35 37:38 41:62 67:109];
         ezone_labels = {};
         earlyspread_labels = {};
         latespread_labels = {};
+    elseif strcmp(patient_id, 'pt8')
+        included_channels = [1:19 21 23 30:37 39:40 43:64 71:76 79 80];
+        ezone_labels = {'POLG22','POLG23', 'POLG29', 'POLG30', 'POLG31', 'POLTO6', 'POLTO5', ...
+                        'POLMST3', 'POLMST4'};
+        earlyspread_labels = {};
+         latespread_labels = {};
     elseif strcmp(patient_id, 'pt10')
         included_channels = [1:3 5:10 12:19 21:22 24:35 48:85 88 89];
         

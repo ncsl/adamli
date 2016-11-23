@@ -1,4 +1,4 @@
-*_eeg.csv
+*eeg.csv
 /fragility_dataanalysis/data/*_eeg.csv
 *EEG.mat
 fragility_dataanalysis/data/Seiz_Data/
@@ -10,3 +10,4 @@ _log/*
 /fragility_dataanalysis/simulated_data/EEG.mat
 *.edf
 /fragility_dataanalysis/data/*/*.mat
+/fragility_dataanalysis/data/interictal_data/*/*.mat
