@@ -1,10 +1,10 @@
 ----------------------------------------
-Begin PBS Prologue Wed Nov 23 12:36:40 EST 2016 1479922600
-Job ID:		2373536.mgt
+Begin PBS Prologue Wed Nov 23 14:30:19 EST 2016 1479929419
+Job ID:		2373518.mgt
 Username:	ali
 Group:		sarma
-Nodes:		node122
-End PBS Prologue Wed Nov 23 12:36:40 EST 2016 1479922600
+Nodes:		node102
+End PBS Prologue Wed Nov 23 14:30:19 EST 2016 1479929419
 ----------------------------------------
 500
 500
@@ -22,271 +22,271 @@ Running connectivity computation.
 To get started, type one of these: helpwin, helpdesk, or demo.
 For product information, visit www.mathworks.com.
  
-Looking at patient: JH108sz7
+Looking at patient: JH106sz4
 The range locked to seizure to look over is -60 until 0
-Total number of channels 132
-Length of to be included channels 132
-Seizure starts at 172000 milliseconds
+Total number of channels 193
+Length of to be included channels 193
+Seizure starts at 151000 milliseconds
 Running analysis for 60000 milliseconds
-Elapsed time is 5.216468 seconds.
-Saved file: JH108sz7_1_before60000.mat
-Elapsed time is 5.275530 seconds.
-Saved file: JH108sz7_2_before59500.mat
-Elapsed time is 5.260104 seconds.
-Saved file: JH108sz7_3_before59000.mat
-Elapsed time is 5.264234 seconds.
-Saved file: JH108sz7_4_before58500.mat
-Elapsed time is 5.268617 seconds.
-Saved file: JH108sz7_5_before58000.mat
-Elapsed time is 5.265673 seconds.
-Saved file: JH108sz7_6_before57500.mat
-Elapsed time is 5.218463 seconds.
-Saved file: JH108sz7_7_before57000.mat
-Elapsed time is 5.222581 seconds.
-Saved file: JH108sz7_8_before56500.mat
-Elapsed time is 5.229158 seconds.
-Saved file: JH108sz7_9_before56000.mat
-Elapsed time is 5.230896 seconds.
-Saved file: JH108sz7_10_before55500.mat
-Elapsed time is 5.232025 seconds.
-Saved file: JH108sz7_11_before55000.mat
-Elapsed time is 5.232598 seconds.
-Saved file: JH108sz7_12_before54500.mat
-Elapsed time is 5.240683 seconds.
-Saved file: JH108sz7_13_before54000.mat
-Elapsed time is 5.230407 seconds.
-Saved file: JH108sz7_14_before53500.mat
-Elapsed time is 5.278875 seconds.
-Saved file: JH108sz7_15_before53000.mat
-Elapsed time is 5.283840 seconds.
-Saved file: JH108sz7_16_before52500.mat
-Elapsed time is 5.231591 seconds.
-Saved file: JH108sz7_17_before52000.mat
-Elapsed time is 5.204624 seconds.
-Saved file: JH108sz7_18_before51500.mat
-Elapsed time is 5.220733 seconds.
-Saved file: JH108sz7_19_before51000.mat
-Elapsed time is 5.254861 seconds.
-Saved file: JH108sz7_20_before50500.mat
-Elapsed time is 5.247498 seconds.
-Saved file: JH108sz7_21_before50000.mat
-Elapsed time is 5.221240 seconds.
-Saved file: JH108sz7_22_before49500.mat
-Elapsed time is 5.203878 seconds.
-Saved file: JH108sz7_23_before49000.mat
-Elapsed time is 5.213706 seconds.
-Saved file: JH108sz7_24_before48500.mat
-Elapsed time is 5.213008 seconds.
-Saved file: JH108sz7_25_before48000.mat
-Elapsed time is 5.208278 seconds.
-Saved file: JH108sz7_26_before47500.mat
-Elapsed time is 5.218122 seconds.
-Saved file: JH108sz7_27_before47000.mat
-Elapsed time is 5.214820 seconds.
-Saved file: JH108sz7_28_before46500.mat
-Elapsed time is 5.213369 seconds.
-Saved file: JH108sz7_29_before46000.mat
-Elapsed time is 5.210840 seconds.
-Saved file: JH108sz7_30_before45500.mat
-Elapsed time is 5.213338 seconds.
-Saved file: JH108sz7_31_before45000.mat
-Elapsed time is 5.214067 seconds.
-Saved file: JH108sz7_32_before44500.mat
-Elapsed time is 5.214484 seconds.
-Saved file: JH108sz7_33_before44000.mat
-Elapsed time is 5.212565 seconds.
-Saved file: JH108sz7_34_before43500.mat
-Elapsed time is 5.195024 seconds.
-Saved file: JH108sz7_35_before43000.mat
-Elapsed time is 5.174836 seconds.
-Saved file: JH108sz7_36_before42500.mat
-Elapsed time is 5.213117 seconds.
-Saved file: JH108sz7_37_before42000.mat
-Elapsed time is 5.227895 seconds.
-Saved file: JH108sz7_38_before41500.mat
-Elapsed time is 5.228664 seconds.
-Saved file: JH108sz7_39_before41000.mat
-Elapsed time is 5.228098 seconds.
-Saved file: JH108sz7_40_before40500.mat
-Elapsed time is 5.245143 seconds.
-Saved file: JH108sz7_41_before40000.mat
-Elapsed time is 5.244861 seconds.
-Saved file: JH108sz7_42_before39500.mat
-Elapsed time is 5.242229 seconds.
-Saved file: JH108sz7_43_before39000.mat
-Elapsed time is 5.248101 seconds.
-Saved file: JH108sz7_44_before38500.mat
-Elapsed time is 5.244411 seconds.
-Saved file: JH108sz7_45_before38000.mat
-Elapsed time is 5.243236 seconds.
-Saved file: JH108sz7_46_before37500.mat
-Elapsed time is 5.240779 seconds.
-Saved file: JH108sz7_47_before37000.mat
-Elapsed time is 5.243799 seconds.
-Saved file: JH108sz7_48_before36500.mat
-Elapsed time is 5.244490 seconds.
-Saved file: JH108sz7_49_before36000.mat
-Elapsed time is 5.248450 seconds.
-Saved file: JH108sz7_50_before35500.mat
-Elapsed time is 5.241123 seconds.
-Saved file: JH108sz7_51_before35000.mat
-Elapsed time is 5.248695 seconds.
-Saved file: JH108sz7_52_before34500.mat
-Elapsed time is 5.241715 seconds.
-Saved file: JH108sz7_53_before34000.mat
-Elapsed time is 5.257644 seconds.
-Saved file: JH108sz7_54_before33500.mat
-Elapsed time is 5.250932 seconds.
-Saved file: JH108sz7_55_before33000.mat
-Elapsed time is 5.254389 seconds.
-Saved file: JH108sz7_56_before32500.mat
-Elapsed time is 5.257500 seconds.
-Saved file: JH108sz7_57_before32000.mat
-Elapsed time is 5.253407 seconds.
-Saved file: JH108sz7_58_before31500.mat
-Elapsed time is 5.255068 seconds.
-Saved file: JH108sz7_59_before31000.mat
-Elapsed time is 5.264730 seconds.
-Saved file: JH108sz7_60_before30500.mat
-Elapsed time is 5.256991 seconds.
-Saved file: JH108sz7_61_before30000.mat
-Elapsed time is 5.256390 seconds.
-Saved file: JH108sz7_62_before29500.mat
-Elapsed time is 5.257055 seconds.
-Saved file: JH108sz7_63_before29000.mat
-Elapsed time is 5.253725 seconds.
-Saved file: JH108sz7_64_before28500.mat
-Elapsed time is 5.245409 seconds.
-Saved file: JH108sz7_65_before28000.mat
-Elapsed time is 5.192662 seconds.
-Saved file: JH108sz7_66_before27500.mat
-Elapsed time is 5.188202 seconds.
-Saved file: JH108sz7_67_before27000.mat
-Elapsed time is 5.190152 seconds.
-Saved file: JH108sz7_68_before26500.mat
-Elapsed time is 5.196910 seconds.
-Saved file: JH108sz7_69_before26000.mat
-Elapsed time is 5.185516 seconds.
-Saved file: JH108sz7_70_before25500.mat
-Elapsed time is 5.185028 seconds.
-Saved file: JH108sz7_71_before25000.mat
-Elapsed time is 5.193944 seconds.
-Saved file: JH108sz7_72_before24500.mat
-Elapsed time is 5.210115 seconds.
-Saved file: JH108sz7_73_before24000.mat
-Elapsed time is 5.210487 seconds.
-Saved file: JH108sz7_74_before23500.mat
-Elapsed time is 5.201926 seconds.
-Saved file: JH108sz7_75_before23000.mat
-Elapsed time is 5.203405 seconds.
-Saved file: JH108sz7_76_before22500.mat
-Elapsed time is 5.204177 seconds.
-Saved file: JH108sz7_77_before22000.mat
-Elapsed time is 5.203982 seconds.
-Saved file: JH108sz7_78_before21500.mat
-Elapsed time is 5.202941 seconds.
-Saved file: JH108sz7_79_before21000.mat
-Elapsed time is 5.204004 seconds.
-Saved file: JH108sz7_80_before20500.mat
-Elapsed time is 5.204801 seconds.
-Saved file: JH108sz7_81_before20000.mat
-Elapsed time is 5.203434 seconds.
-Saved file: JH108sz7_82_before19500.mat
-Elapsed time is 5.205107 seconds.
-Saved file: JH108sz7_83_before19000.mat
-Elapsed time is 5.202437 seconds.
-Saved file: JH108sz7_84_before18500.mat
-Elapsed time is 5.203238 seconds.
-Saved file: JH108sz7_85_before18000.mat
-Elapsed time is 5.204973 seconds.
-Saved file: JH108sz7_86_before17500.mat
-Elapsed time is 5.202964 seconds.
-Saved file: JH108sz7_87_before17000.mat
-Elapsed time is 5.204140 seconds.
-Saved file: JH108sz7_88_before16500.mat
-Elapsed time is 5.202519 seconds.
-Saved file: JH108sz7_89_before16000.mat
-Elapsed time is 5.204844 seconds.
-Saved file: JH108sz7_90_before15500.mat
-Elapsed time is 5.204743 seconds.
-Saved file: JH108sz7_91_before15000.mat
-Elapsed time is 5.221878 seconds.
-Saved file: JH108sz7_92_before14500.mat
-Elapsed time is 5.219178 seconds.
-Saved file: JH108sz7_93_before14000.mat
-Elapsed time is 5.218311 seconds.
-Saved file: JH108sz7_94_before13500.mat
-Elapsed time is 5.219677 seconds.
-Saved file: JH108sz7_95_before13000.mat
-Elapsed time is 5.219240 seconds.
-Saved file: JH108sz7_96_before12500.mat
-Elapsed time is 5.220373 seconds.
-Saved file: JH108sz7_97_before12000.mat
-Elapsed time is 5.219400 seconds.
-Saved file: JH108sz7_98_before11500.mat
-Elapsed time is 5.218550 seconds.
-Saved file: JH108sz7_99_before11000.mat
-Elapsed time is 5.217719 seconds.
-Saved file: JH108sz7_100_before10500.mat
-Elapsed time is 5.219759 seconds.
-Saved file: JH108sz7_101_before10000.mat
-Elapsed time is 5.220350 seconds.
-Saved file: JH108sz7_102_before9500.mat
-Elapsed time is 5.220197 seconds.
-Saved file: JH108sz7_103_before9000.mat
-Elapsed time is 5.222574 seconds.
-Saved file: JH108sz7_104_before8500.mat
-Elapsed time is 5.222264 seconds.
-Saved file: JH108sz7_105_before8000.mat
-Elapsed time is 5.220345 seconds.
-Saved file: JH108sz7_106_before7500.mat
-Elapsed time is 5.221689 seconds.
-Saved file: JH108sz7_107_before7000.mat
-Elapsed time is 5.219834 seconds.
-Saved file: JH108sz7_108_before6500.mat
-Elapsed time is 5.221645 seconds.
-Saved file: JH108sz7_109_before6000.mat
-Elapsed time is 5.221003 seconds.
-Saved file: JH108sz7_110_before5500.mat
-Elapsed time is 5.221247 seconds.
-Saved file: JH108sz7_111_before5000.mat
-Elapsed time is 5.221348 seconds.
-Saved file: JH108sz7_112_before4500.mat
-Elapsed time is 5.221919 seconds.
-Saved file: JH108sz7_113_before4000.mat
-Elapsed time is 5.221563 seconds.
-Saved file: JH108sz7_114_before3500.mat
-Elapsed time is 5.222268 seconds.
-Saved file: JH108sz7_115_before3000.mat
-Elapsed time is 5.223524 seconds.
-Saved file: JH108sz7_116_before2500.mat
-Elapsed time is 5.194082 seconds.
-Saved file: JH108sz7_117_before2000.mat
-Elapsed time is 5.198231 seconds.
-Saved file: JH108sz7_118_before1500.mat
-Elapsed time is 5.198686 seconds.
-Saved file: JH108sz7_119_before1000.mat
-Elapsed time is 5.193316 seconds.
-Saved file: JH108sz7_120_before500.mat
-Looking at patient: JH108sz7
+Elapsed time is 14.084272 seconds.
+Saved file: JH106sz4_1_before60000.mat
+Elapsed time is 13.981469 seconds.
+Saved file: JH106sz4_2_before59500.mat
+Elapsed time is 13.995481 seconds.
+Saved file: JH106sz4_3_before59000.mat
+Elapsed time is 14.011424 seconds.
+Saved file: JH106sz4_4_before58500.mat
+Elapsed time is 13.990413 seconds.
+Saved file: JH106sz4_5_before58000.mat
+Elapsed time is 13.983611 seconds.
+Saved file: JH106sz4_6_before57500.mat
+Elapsed time is 13.981462 seconds.
+Saved file: JH106sz4_7_before57000.mat
+Elapsed time is 13.982313 seconds.
+Saved file: JH106sz4_8_before56500.mat
+Elapsed time is 13.977493 seconds.
+Saved file: JH106sz4_9_before56000.mat
+Elapsed time is 13.990389 seconds.
+Saved file: JH106sz4_10_before55500.mat
+Elapsed time is 13.991772 seconds.
+Saved file: JH106sz4_11_before55000.mat
+Elapsed time is 13.991025 seconds.
+Saved file: JH106sz4_12_before54500.mat
+Elapsed time is 13.985523 seconds.
+Saved file: JH106sz4_13_before54000.mat
+Elapsed time is 13.986158 seconds.
+Saved file: JH106sz4_14_before53500.mat
+Elapsed time is 13.977675 seconds.
+Saved file: JH106sz4_15_before53000.mat
+Elapsed time is 13.979327 seconds.
+Saved file: JH106sz4_16_before52500.mat
+Elapsed time is 13.968390 seconds.
+Saved file: JH106sz4_17_before52000.mat
+Elapsed time is 14.047270 seconds.
+Saved file: JH106sz4_18_before51500.mat
+Elapsed time is 14.111754 seconds.
+Saved file: JH106sz4_19_before51000.mat
+Elapsed time is 14.105704 seconds.
+Saved file: JH106sz4_20_before50500.mat
+Elapsed time is 14.111457 seconds.
+Saved file: JH106sz4_21_before50000.mat
+Elapsed time is 14.103186 seconds.
+Saved file: JH106sz4_22_before49500.mat
+Elapsed time is 14.106845 seconds.
+Saved file: JH106sz4_23_before49000.mat
+Elapsed time is 14.109537 seconds.
+Saved file: JH106sz4_24_before48500.mat
+Elapsed time is 14.105524 seconds.
+Saved file: JH106sz4_25_before48000.mat
+Elapsed time is 14.103945 seconds.
+Saved file: JH106sz4_26_before47500.mat
+Elapsed time is 14.112691 seconds.
+Saved file: JH106sz4_27_before47000.mat
+Elapsed time is 14.103884 seconds.
+Saved file: JH106sz4_28_before46500.mat
+Elapsed time is 14.079309 seconds.
+Saved file: JH106sz4_29_before46000.mat
+Elapsed time is 14.012321 seconds.
+Saved file: JH106sz4_30_before45500.mat
+Elapsed time is 14.031684 seconds.
+Saved file: JH106sz4_31_before45000.mat
+Elapsed time is 14.017727 seconds.
+Saved file: JH106sz4_32_before44500.mat
+Elapsed time is 14.003382 seconds.
+Saved file: JH106sz4_33_before44000.mat
+Elapsed time is 13.980952 seconds.
+Saved file: JH106sz4_34_before43500.mat
+Elapsed time is 13.978669 seconds.
+Saved file: JH106sz4_35_before43000.mat
+Elapsed time is 13.989634 seconds.
+Saved file: JH106sz4_36_before42500.mat
+Elapsed time is 13.976206 seconds.
+Saved file: JH106sz4_37_before42000.mat
+Elapsed time is 13.979062 seconds.
+Saved file: JH106sz4_38_before41500.mat
+Elapsed time is 13.996751 seconds.
+Saved file: JH106sz4_39_before41000.mat
+Elapsed time is 13.976730 seconds.
+Saved file: JH106sz4_40_before40500.mat
+Elapsed time is 13.980236 seconds.
+Saved file: JH106sz4_41_before40000.mat
+Elapsed time is 13.981403 seconds.
+Saved file: JH106sz4_42_before39500.mat
+Elapsed time is 14.097019 seconds.
+Saved file: JH106sz4_43_before39000.mat
+Elapsed time is 14.062747 seconds.
+Saved file: JH106sz4_44_before38500.mat
+Elapsed time is 14.026883 seconds.
+Saved file: JH106sz4_45_before38000.mat
+Elapsed time is 14.018458 seconds.
+Saved file: JH106sz4_46_before37500.mat
+Elapsed time is 14.021297 seconds.
+Saved file: JH106sz4_47_before37000.mat
+Elapsed time is 14.024684 seconds.
+Saved file: JH106sz4_48_before36500.mat
+Elapsed time is 14.021628 seconds.
+Saved file: JH106sz4_49_before36000.mat
+Elapsed time is 14.030018 seconds.
+Saved file: JH106sz4_50_before35500.mat
+Elapsed time is 14.039722 seconds.
+Saved file: JH106sz4_51_before35000.mat
+Elapsed time is 14.032783 seconds.
+Saved file: JH106sz4_52_before34500.mat
+Elapsed time is 13.989476 seconds.
+Saved file: JH106sz4_53_before34000.mat
+Elapsed time is 13.961556 seconds.
+Saved file: JH106sz4_54_before33500.mat
+Elapsed time is 13.954781 seconds.
+Saved file: JH106sz4_55_before33000.mat
+Elapsed time is 13.957266 seconds.
+Saved file: JH106sz4_56_before32500.mat
+Elapsed time is 13.961188 seconds.
+Saved file: JH106sz4_57_before32000.mat
+Elapsed time is 14.013970 seconds.
+Saved file: JH106sz4_58_before31500.mat
+Elapsed time is 13.986473 seconds.
+Saved file: JH106sz4_59_before31000.mat
+Elapsed time is 14.104947 seconds.
+Saved file: JH106sz4_60_before30500.mat
+Elapsed time is 14.045865 seconds.
+Saved file: JH106sz4_61_before30000.mat
+Elapsed time is 14.042956 seconds.
+Saved file: JH106sz4_62_before29500.mat
+Elapsed time is 14.111486 seconds.
+Saved file: JH106sz4_63_before29000.mat
+Elapsed time is 14.115012 seconds.
+Saved file: JH106sz4_64_before28500.mat
+Elapsed time is 14.113667 seconds.
+Saved file: JH106sz4_65_before28000.mat
+Elapsed time is 13.991868 seconds.
+Saved file: JH106sz4_66_before27500.mat
+Elapsed time is 13.980250 seconds.
+Saved file: JH106sz4_67_before27000.mat
+Elapsed time is 14.130888 seconds.
+Saved file: JH106sz4_68_before26500.mat
+Elapsed time is 14.152918 seconds.
+Saved file: JH106sz4_69_before26000.mat
+Elapsed time is 14.125668 seconds.
+Saved file: JH106sz4_70_before25500.mat
+Elapsed time is 14.145544 seconds.
+Saved file: JH106sz4_71_before25000.mat
+Elapsed time is 14.151069 seconds.
+Saved file: JH106sz4_72_before24500.mat
+Elapsed time is 14.156722 seconds.
+Saved file: JH106sz4_73_before24000.mat
+Elapsed time is 14.147822 seconds.
+Saved file: JH106sz4_74_before23500.mat
+Elapsed time is 14.138424 seconds.
+Saved file: JH106sz4_75_before23000.mat
+Elapsed time is 14.148906 seconds.
+Saved file: JH106sz4_76_before22500.mat
+Elapsed time is 14.122316 seconds.
+Saved file: JH106sz4_77_before22000.mat
+Elapsed time is 14.123966 seconds.
+Saved file: JH106sz4_78_before21500.mat
+Elapsed time is 14.142965 seconds.
+Saved file: JH106sz4_79_before21000.mat
+Elapsed time is 14.149328 seconds.
+Saved file: JH106sz4_80_before20500.mat
+Elapsed time is 14.093706 seconds.
+Saved file: JH106sz4_81_before20000.mat
+Elapsed time is 14.084725 seconds.
+Saved file: JH106sz4_82_before19500.mat
+Elapsed time is 14.083473 seconds.
+Saved file: JH106sz4_83_before19000.mat
+Elapsed time is 14.104578 seconds.
+Saved file: JH106sz4_84_before18500.mat
+Elapsed time is 14.111679 seconds.
+Saved file: JH106sz4_85_before18000.mat
+Elapsed time is 14.092576 seconds.
+Saved file: JH106sz4_86_before17500.mat
+Elapsed time is 14.111892 seconds.
+Saved file: JH106sz4_87_before17000.mat
+Elapsed time is 14.088455 seconds.
+Saved file: JH106sz4_88_before16500.mat
+Elapsed time is 14.102911 seconds.
+Saved file: JH106sz4_89_before16000.mat
+Elapsed time is 14.094798 seconds.
+Saved file: JH106sz4_90_before15500.mat
+Elapsed time is 14.105681 seconds.
+Saved file: JH106sz4_91_before15000.mat
+Elapsed time is 14.079648 seconds.
+Saved file: JH106sz4_92_before14500.mat
+Elapsed time is 14.087339 seconds.
+Saved file: JH106sz4_93_before14000.mat
+Elapsed time is 14.030567 seconds.
+Saved file: JH106sz4_94_before13500.mat
+Elapsed time is 13.982962 seconds.
+Saved file: JH106sz4_95_before13000.mat
+Elapsed time is 13.973083 seconds.
+Saved file: JH106sz4_96_before12500.mat
+Elapsed time is 13.969183 seconds.
+Saved file: JH106sz4_97_before12000.mat
+Elapsed time is 13.984129 seconds.
+Saved file: JH106sz4_98_before11500.mat
+Elapsed time is 13.983889 seconds.
+Saved file: JH106sz4_99_before11000.mat
+Elapsed time is 13.980658 seconds.
+Saved file: JH106sz4_100_before10500.mat
+Elapsed time is 13.978217 seconds.
+Saved file: JH106sz4_101_before10000.mat
+Elapsed time is 13.980870 seconds.
+Saved file: JH106sz4_102_before9500.mat
+Elapsed time is 13.980543 seconds.
+Saved file: JH106sz4_103_before9000.mat
+Elapsed time is 14.117704 seconds.
+Saved file: JH106sz4_104_before8500.mat
+Elapsed time is 14.117817 seconds.
+Saved file: JH106sz4_105_before8000.mat
+Elapsed time is 14.126363 seconds.
+Saved file: JH106sz4_106_before7500.mat
+Elapsed time is 14.117020 seconds.
+Saved file: JH106sz4_107_before7000.mat
+Elapsed time is 14.126994 seconds.
+Saved file: JH106sz4_108_before6500.mat
+Elapsed time is 14.140189 seconds.
+Saved file: JH106sz4_109_before6000.mat
+Elapsed time is 14.124901 seconds.
+Saved file: JH106sz4_110_before5500.mat
+Elapsed time is 14.133071 seconds.
+Saved file: JH106sz4_111_before5000.mat
+Elapsed time is 14.130650 seconds.
+Saved file: JH106sz4_112_before4500.mat
+Elapsed time is 14.119436 seconds.
+Saved file: JH106sz4_113_before4000.mat
+Elapsed time is 14.136646 seconds.
+Saved file: JH106sz4_114_before3500.mat
+Elapsed time is 14.119788 seconds.
+Saved file: JH106sz4_115_before3000.mat
+Elapsed time is 14.121439 seconds.
+Saved file: JH106sz4_116_before2500.mat
+Elapsed time is 14.114418 seconds.
+Saved file: JH106sz4_117_before2000.mat
+Elapsed time is 14.099711 seconds.
+Saved file: JH106sz4_118_before1500.mat
+Elapsed time is 14.084076 seconds.
+Saved file: JH106sz4_119_before1000.mat
+Elapsed time is 14.096590 seconds.
+Saved file: JH106sz4_120_before500.mat
+Looking at patient: JH106sz4
 
 num_channels =
 
-   147
+   216
 
 >> ----------------------------------------
-Begin PBS Epilogue Wed Nov 23 13:17:41 EST 2016 1479925061
-Job ID:		2373536.mgt
+Begin PBS Epilogue Wed Nov 23 16:32:08 EST 2016 1479936728
+Job ID:		2373518.mgt
 Username:	ali
 Group:		sarma
 Job Name:	compute_adjacency_mat
-Session:	17965
+Session:	15811
 Limits:		neednodes=1:ppn=8,nodes=1:ppn=8,walltime=14:00:00
-Resources:	cput=00:43:54,mem=9819160kb,vmem=10597220kb,walltime=00:40:56
+Resources:	cput=02:12:20,mem=29199620kb,vmem=30031736kb,walltime=02:01:44
 Queue:		dque
 Account:		
-Nodes:	node122
+Nodes:	node102
 Killing leftovers...
 
-End PBS Epilogue Wed Nov 23 13:17:42 EST 2016 1479925062
+End PBS Epilogue Wed Nov 23 16:32:08 EST 2016 1479936728
 ----------------------------------------

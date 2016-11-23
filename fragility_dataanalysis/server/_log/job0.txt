@@ -182,81 +182,82 @@ Elapsed time is 13.973884 seconds.
 Saved file: JH106sz2_83_before19000.mat
 Elapsed time is 13.984354 seconds.
 Saved file: JH106sz2_84_before18500.mat
-me is 5.204973 seconds.
-Saved file: JH108sz7_86_before17500.mat
-Elapsed time is 5.202964 seconds.
-Saved file: JH108sz7_87_before17000.mat
-Elapsed time is 5.204140 seconds.
-Saved file: JH108sz7_88_before16500.mat
-Elapsed time is 5.202519 seconds.
-Saved file: JH108sz7_89_before16000.mat
-Elapsed time is 5.204844 seconds.
-Saved file: JH108sz7_90_before15500.mat
-Elapsed time is 5.204743 seconds.
-Saved file: JH108sz7_91_before15000.mat
-Elapsed time is 5.221878 seconds.
-Saved file: JH108sz7_92_before14500.mat
-Elapsed time is 5.219178 seconds.
-Saved file: JH108sz7_93_before14000.mat
-Elapsed time is 5.218311 seconds.
-Saved file: JH108sz7_94_before13500.mat
-Elapsed time is 5.219677 seconds.
-Saved file: JH108sz7_95_before13000.mat
-Elapsed time is 5.219240 seconds.
-Saved file: JH108sz7_96_before12500.mat
-Elapsed time is 5.220373 seconds.
-Saved file: JH108sz7_97_before12000.mat
-Elapsed time is 5.219400 seconds.
-Saved file: JH108sz7_98_before11500.mat
-Elapsed time is 5.218550 seconds.
-Saved file: JH108sz7_99_before11000.mat
-Elapsed time is 5.217719 seconds.
-Saved file: JH108sz7_100_before10500.mat
-Elapsed time is 5.219759 seconds.
-Saved file: JH108sz7_101_before10000.mat
-Elapsed time is 5.220350 seconds.
-Saved file: JH108sz7_102_before9500.mat
-Elapsed time is 5.220197 seconds.
-Saved file: JH108sz7_103_before9000.mat
-Elapsed time is 5.222574 seconds.
-Saved file: JH108sz7_104_before8500.mat
-Elapsed time is 5.222264 seconds.
-Saved file: JH108sz7_105_before8000.mat
-Elapsed time is 5.220345 seconds.
-Saved file: JH108sz7_106_before7500.mat
-Elapsed time is 5.221689 seconds.
-Saved file: JH108sz7_107_before7000.mat
-Elapsed time is 5.219834 seconds.
-Saved file: JH108sz7_108_before6500.mat
-Elapsed time is 5.221645 seconds.
-Saved file: JH108sz7_109_before6000.mat
-Elapsed time is 5.221003 seconds.
-Saved file: JH108sz7_110_before5500.mat
-Elapsed time is 5.221247 seconds.
-Saved file: JH108sz7_111_before5000.mat
-Elapsed time is 5.221348 seconds.
-Saved file: JH108sz7_112_before4500.mat
-Elapsed time is 5.221919 seconds.
-Saved file: JH108sz7_113_before4000.mat
-Elapsed time is 5.221563 seconds.
-Saved file: JH108sz7_114_before3500.mat
-Elapsed time is 5.222268 seconds.
-Saved file: JH108sz7_115_before3000.mat
-Elapsed time is 5.223524 seconds.
-Saved file: JH108sz7_116_before2500.mat
-Elapsed time is 5.194082 seconds.
-Saved file: JH108sz7_117_before2000.mat
-Elapsed time is 5.198231 seconds.
-Saved file: JH108sz7_118_before1500.mat
-Elapsed time is 5.198686 seconds.
-Saved file: JH108sz7_119_before1000.mat
-Elapsed time is 5.193316 seconds.
-Saved file: JH108sz7_120_before500.mat
-Looking at patient: JH108sz7
+Elapsed time is 14.029042 seconds.
+Saved file: JH106sz2_85_before18000.mat
+Elapsed time is 14.022205 seconds.
+Saved file: JH106sz2_86_before17500.mat
+Elapsed time is 14.039426 seconds.
+Saved file: JH106sz2_87_before17000.mat
+Elapsed time is 14.037748 seconds.
+Saved file: JH106sz2_88_before16500.mat
+Elapsed time is 14.051763 seconds.
+Saved file: JH106sz2_89_before16000.mat
+Elapsed time is 13.937521 seconds.
+Saved file: JH106sz2_90_before15500.mat
+Elapsed time is 13.937226 seconds.
+Saved file: JH106sz2_91_before15000.mat
+Elapsed time is 13.928450 seconds.
+Saved file: JH106sz2_92_before14500.mat
+Elapsed time is 13.984608 seconds.
+Saved file: JH106sz2_93_before14000.mat
+Elapsed time is 13.988668 seconds.
+Saved file: JH106sz2_94_before13500.mat
+Elapsed time is 14.026758 seconds.
+Saved file: JH106sz2_95_before13000.mat
+Elapsed time is 13.974395 seconds.
+Saved file: JH106sz2_96_before12500.mat
+Elapsed time is 13.980810 seconds.
+Saved file: JH106sz2_97_before12000.mat
+Elapsed time is 13.991906 seconds.
+Saved file: JH106sz2_98_before11500.mat
+Elapsed time is 13.995002 seconds.
+Saved file: JH106sz2_99_before11000.mat
+Elapsed time is 13.979332 seconds.
+Saved file: JH106sz2_100_before10500.mat
+Elapsed time is 14.000259 seconds.
+Saved file: JH106sz2_101_before10000.mat
+Elapsed time is 13.991818 seconds.
+Saved file: JH106sz2_102_before9500.mat
+Elapsed time is 13.989156 seconds.
+Saved file: JH106sz2_103_before9000.mat
+Elapsed time is 13.990612 seconds.
+Saved file: JH106sz2_104_before8500.mat
+Elapsed time is 13.974837 seconds.
+Saved file: JH106sz2_105_before8000.mat
+Elapsed time is 14.017886 seconds.
+Saved file: JH106sz2_106_before7500.mat
+Elapsed time is 14.157877 seconds.
+Saved file: JH106sz2_107_before7000.mat
+Elapsed time is 14.113944 seconds.
+Saved file: JH106sz2_108_before6500.mat
+Elapsed time is 14.121249 seconds.
+Saved file: JH106sz2_109_before6000.mat
+Elapsed time is 14.110608 seconds.
+Saved file: JH106sz2_110_before5500.mat
+Elapsed time is 14.112068 seconds.
+Saved file: JH106sz2_111_before5000.mat
+Elapsed time is 14.127681 seconds.
+Saved file: JH106sz2_112_before4500.mat
+Elapsed time is 14.116895 seconds.
+Saved file: JH106sz2_113_before4000.mat
+Elapsed time is 14.108812 seconds.
+Saved file: JH106sz2_114_before3500.mat
+Elapsed time is 14.074046 seconds.
+Saved file: JH106sz2_115_before3000.mat
+Elapsed time is 14.142414 seconds.
+Saved file: JH106sz2_116_before2500.mat
+[Warning: Rank deficient, rank = 579, tol =  1.799754e-07.] 
+[> In compuElapsed time is 14.099711 seconds.
+Saved file: JH106sz4_118_before1500.mat
+Elapsed time is 14.084076 seconds.
+Saved file: JH106sz4_119_before1000.mat
+Elapsed time is 14.096590 seconds.
+Saved file: JH106sz4_120_before500.mat
+Looking at patient: JH106sz4
 
 num_channels =
 
-   147
+   216
 
 {Subscripted assignment dimension mismatch.
 
@@ -266,26 +267,27 @@ Error in computePerturbations (line 159)
 Error in serverPerturbationScript (line 42)
     computePerturbations(patient_id, seizure_id, perturb_args);
 } 
-sum(theta_adj, 1);
+216
+
+{Subscripted assignment dimension mismatch.
+
+Error in computePerturbations (line 159)
+        colsum_time_chan(:, iTime) = sum(theta_adj, 1);
 
 Error in serverPerturbationScript (line 42)
     computePerturbations(patient_id, seizure_id, perturb_args);
 } 
-9000.mat
-Elapsed time is 3.570093 seconds.
-Saved file: JH102sz2_84_before18500.mat
-Elapsed time is 3.561306 seconds.
-Saved file: JH102sz2_85_before18000.mat
-Elapsed time is 3.561336 seconds.
-Saved file: JH102sz2_86_before17500.mat
-Elapsed time is 3.563016 seconds.
-Saved file: JH102sz2_87_before17000.mat
-Elapsed time is 3.562091 seconds.
-Saved file: JH102sz2_88_before16500.mat
-Elapsed time is 3.560842 seconds.
-Saved file: JH102sz2_89_before16000.mat
-Elapsed time is 3.567308 seconds.
-Saved file: JH102sz2_90_before15500.mat
+216
+
+{Subscripted assignment dimension mismatch.
+
+Error in computePerturbations (line 159)
+        colsum_time_chan(:, iTime) = sum(theta_adj, 1);
+
+Error in serverPerturbationScript (line 42)
+    computePerturbations(patient_id, seizure_id, perturb_args);
+} 
+before15500.mat
 Elapsed time is 3.567443 seconds.
 Saved file: JH102sz2_91_before15000.mat
 Elapsed time is 3.561951 seconds.
