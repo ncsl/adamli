@@ -66,6 +66,8 @@ patients=('pt1aslp1 pt1aslp2 pt1aw1 pt1aw2
  # 'EZT007seiz001' 'EZT007seiz002' 'EZT019seiz001' 'EZT019seiz002' 'EZT045seiz001'\
  # 'EZT045seiz002' 'EZT090seiz002' 'EZT090seiz003')
 
+printf "About to run on patients (press enter to continue): $patients" # prompt for patient_id {pt1, pt2, ..., JH105, EZT005}
+
 if [[ "$RUNSLEEP" -eq 1 ]]; then
 	# runs the sleep function on all faulty nodes 
 	qsub -l walltime=24:00:00,nodes=node054 run_b_sleep.sh
