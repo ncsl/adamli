@@ -14,8 +14,9 @@ cd /home/ali/adamli/fragility_dataanalysis/server
 # for proc in `seq 0 ${#patients[@]}`; do
 # 	patient=${patients[proc]}
 # 	pbsdsh -n $proc /home/ali/adamli/fragility_dataanalysis/server/runAnalysis.sh $proc $patient $frequency_sampling $winSize $stepSize $radius $RUNCONNECTIVITY &
-# done
-proc=0
+# done 
+echo "Here"
+proc=0 
 pbsdsh -n $proc /home/ali/adamli/fragility_dataanalysis/server/runAnalysis.sh $proc $patient $frequency_sampling $winSize $stepSize $radius $RUNCONNECTIVITY &
 wait
 
