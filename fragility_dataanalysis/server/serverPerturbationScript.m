@@ -36,7 +36,7 @@ for j=1:length(perturbationTypes)
     perturb_args.toSaveFinalDataDir = toSaveFinalDataDir;
     perturb_args.labels = labels;
     perturb_args.included_channels = included_channels;
-    perturb_args.num_channels = num_channels;
+    perturb_args.num_channels = size(eeg, 1);
     perturb_args.frequency_sampling = frequency_sampling;
 
     computePerturbations(patient_id, seizure_id, perturb_args);
