@@ -62,7 +62,7 @@ for p=1:length(patients)
     adj_args.l2regularization = l2regularization;
     
     % compute connectivity
-    computeConnectivity(patient_id, seizure_id, eeg, clinicalLabels, adj_args);
+%     computeConnectivity(patient_id, seizure_id, eeg, clinicalLabels, adj_args);
     
     %% 02: RUN PERTURBATION ANALYSIS
     for j=1:length(perturbationTypes)
