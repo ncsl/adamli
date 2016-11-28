@@ -90,10 +90,15 @@ end
 if ~isempty(included_channels)
     try
         eeg = eeg(included_channels, :);
+        labels = labels(included_channels);
     catch e
         disp(e)
         disp('server adj main script.')
     end
+end
+
+if length(labels) ~= size(eeg,1)
+    disp('Something wrong here...!!!!');
 end
 
 if frequency_sampling ~=1000

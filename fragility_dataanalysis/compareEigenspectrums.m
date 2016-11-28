@@ -30,21 +30,21 @@ patients = {,...
 
     };
 
-
 figDir = fullfile('./figures/eigenspectrums/');
 if ~exist(figDir, 'dir')
     mkdir(figDir);
 end
 finalRowDataDir = './adj_mats_win500_step500_freq1000/R_finaldata_radius1.5/';
 finalColDataDir = './adj_mats_win500_step500_freq1000/C_finaldata_radius1.5/';
+
 %% Output Spectral Map Per Patient
 for iPat=1:length(patients) % loop through each patient
     % load in the fragility data for row and column
     patient = patients{iPat};
+    
     patRowFragilityDir = fullfile(finalRowDataDir, strcat(patient, 'final_data.mat'));
     finalRowData = load(patRowFragilityDir);
     rowFragility = finalRowData.fragility_rankings; % load in fragility matrix
-    
     patColFragilityDir = fullfile(finalColDataDir, strcat(patient, 'final_data.mat'));
     finalColData = load(patColFragilityDir);
     colFragility = finalColData.fragility_rankings; % load in fragility matrix

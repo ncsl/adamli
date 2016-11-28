@@ -87,13 +87,19 @@ function [included_channels, ezone_labels, earlyspread_labels, latespread_labels
          latespread_labels = {};
     elseif strcmp(patient_id, 'pt10')
         included_channels = [1:3 5:10 12:19 21:22 24:35 48:85 88 89];
-        
-        included_channels = [1:3 5:10 12:19 21:22 24:35 48:69 88 89]; %w/o hfreq noise electrodes
-        ezone_labels = {'POLP57', 'POLP58', 'POLFP43', 'POLFP44', 'POLFP45', 'POLFP46'};
-        earlyspread_labels = {'POLOF1', 'POLOF2', 'POLOF3', 'POLOF4', ...
-            'POLG7', 'POLG8', 'POLG28', 'POLG29', 'POLG30', 'POLG31', 'POLFP35', 'POLFP36', ...
-            'POLFP37', 'POLFP38', 'POLFP39', 'POLFP47'};
-         latespread_labels = {};
+        included_channels = [1:3 5:10 12:19 21:22 24:35 48:69 88 89]; %w/o p ELECTRODES hfreq noise electrodes
+        ezone_labels = {'POLTT4', 'POLTT6', 'POLTT1', 'POLTT2', 'POLMST1'};
+        earlyspread_labels = {'POLMST2', 'POLAST2', 'POLTT3', 'POLTT5'};
+        latespread_labels = {'POLPST1', 'POLPST2', 'POLPST3', 'POLPST4', ...
+            'POLMST3', 'POLMST4', 'POLAST3', 'POLAST4', 'POLOF1', 'POLOF2', 'POLOF3', 'POLOF4', ...
+            'POLG3', 'POLG4', 'POLG5', 'POLG6', 'POLG11', 'POLG12', 'POLG13', ...
+            'POLG14', 'POLG15', 'POLG16', 'POLG20', 'POLG21', 'POLG22', 'POLG23', ...
+            'POLG25', 'POLG28', 'POLG29', 'POLG30', 'POLG31', 'POLG32'};
+%         ezone_labels = {'POLP57', 'POLP58', 'POLFP43', 'POLFP44', 'POLFP45', 'POLFP46'};      
+%         earlyspread_labels = {'POLOF1', 'POLOF2', 'POLOF3', 'POLOF4', ...
+%             'POLG7', 'POLG8', 'POLG28', 'POLG29', 'POLG30', 'POLG31', 'POLFP35', 'POLFP36', ...
+%             'POLFP37', 'POLFP38', 'POLFP39', 'POLFP47'};
+%          latespread_labels = {};
     elseif strcmp(patient_id, 'pt11')
         included_channels = [1:19 21:37 39 40 43:74 76:81 83:87 89:94 101:130];
 %         if REGION_ONLY
