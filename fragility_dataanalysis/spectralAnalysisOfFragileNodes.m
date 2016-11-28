@@ -22,10 +22,15 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Initialization
 % initialize variables
-patients = {...
-    'pt1sz2', 'pt1sz3', 'pt1sz4',...
-    'pt2sz1' 'pt2sz3' 'pt2sz4',...
-%     'pt3sz2' 'pt3sz4', ...
+patients = {,...
+%     'pt1sz2', 'pt1sz3', 'pt1sz4',...
+%     'pt2sz1', 'pt2sz3', 'pt2sz4',...
+%     'pt3sz2', 'pt3sz4', ... 
+    'pt1aw1', 'pt1aw2', ...
+    'pt1aslp1', 'pt1aslp2', ...
+    'pt2aw1', 'pt2aw2', ...
+    'pt2aslp1', 'pt2aslp2', ...
+    'pt3aw1', 'pt3aslp1', 'pt3aslp2',...
 %     'pt8sz1' 'pt8sz2' 'pt8sz3',...
 %     'pt10sz1' 'pt10sz2' 'pt10sz3', ...
 %     'pt11sz1' 'pt11sz2' 'pt11sz3' 'pt11sz4', ...
@@ -51,24 +56,33 @@ patients = {...
     };
 
 perturbationType = 'R';
-threshold = 0.6;
+threshold = 0.7;
 timeRange = [60 0];
 winSize = 500;
 stepSize = 500;
 freq = 1000;
+overlap = (winSize - stepSize) / winSize; % in percentage
+mtBandWidth = 4;        % number of times to avge the FFT
+mtFreqs = [];
 
 % initialize directories
 figDir = fullfile('./figures/spectralAnalysis/', perturbationType);
 if ~exist(figDir, 'dir')
     mkdir(figDir);
 end
-dataDir = fullfile('./data/');
+
 finalDataDir = './adj_mats_win500_step500_freq1000/R_finaldata_radius1.5/';
 
 %% Output Spectral Map Per Patient
 for iPat=1:length(patients) % loop through each patient
     % load in the fragility data
     patient = patients{iPat};
+    
+    dataDir = fullfile('./data/');
+    if ~isempty(strfind(patient, 'aw')) || ~isempty(strfind(patient, 'aslp'))
+        dataDir = fullfile('./data/interictal_data/');
+    end
+    
     patFragilityDir = fullfile(finalDataDir, strcat(patient, 'final_data.mat'));
     finalData = load(patFragilityDir);
     fragility = finalData.fragility_rankings; % load in fragility matrix
@@ -95,14 +109,30 @@ for iPat=1:length(patients) % loop through each patient
     % only get the relevant time Window EEG 
     eeg = eeg(:, seiz_start-timeRange(1)*freq+1 : seiz_start-timeRange(2)*freq);
     
+    % perform multi tapering FT with Welch method
+    [rawPowBase, freqs_FFT, t_sec,rawPhaseBase] = eeg_mtwelch2(eeg, freq, winSize/freq, overlap, mtBandWidth, mtFreqs, 'eigen');
+    t_ms = t_sec * 1000; % the time windows of the FT in milliseconds
+    t_ms(:,1) = t_ms(:,1)+1;
     % go through each channel/time window and access the significant freqs
     significant_freqs = cell(length(highFragilityRow),1);
     for iChan=1:length(highFragilityRow) % loop through each high fragility channel
         % access the channel's time/freq maximal point
-        tempeeg = eeg(highFragilityRow(iChan), highFragilityCol+1 - winSize:highFragilityCol);
-        freqs = abs(fft(tempeeg)); % perform the FFT on signal
+%         tempeeg = eeg(highFragilityRow(iChan), highFragilityCol+1 - winSize:highFragilityCol);
+%         freqs = abs(fft(tempeeg)); % perform the FFT on signal        
+
+        % find time window for this fragile electrode
+        [row, col] = find(t_ms == (highFragilityCol(iChan)));
         
-        significant_freqs{iChan} = find(abs(freqs) > mean(abs(freqs)) + 3*std(abs(freqs)));
+        % get the power band for this electrode/time point
+        power = rawPowBase(highFragilityRow(iChan), :, row);
+        maxpower_index = find(max(power) == power);
+        maxfreq_band = freqs_FFT(maxpower_index);
+        
+%         significant_freqs{iChan} = find(abs(freqs) > mean(abs(freqs)) + 3*std(abs(freqs)));
+        significant_freqs{iChan} = maxfreq_band;
+        
+        maxpower_indices = find(abs(power) > mean(abs(power)) + 3*std(abs(power)));
+        significant_freqs{iChan} = freqs_FFT(maxpower_indices);
     end
     
     % PLOT FRAGILITY METRIC VS SIGNIFICANT FREQ BANDS
