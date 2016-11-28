@@ -18,8 +18,23 @@ figDir = './figures/';
 % function runPlotsAndDOA(frequency_sampling, winSize, stepSize, radius)
 
 % settings to run
-patients = {...
-    
+patients = {...,
+%     'pt3sz2', 'pt3sz4', ...
+%     'pt8sz1', 'pt8sz2', 'pt8sz3', ...
+%     'pt10sz1', 'pt10sz2', 'pt10sz3', ...
+%     'JH101sz1', 'JH101sz2',...
+%     'JH103sz1',...
+%     'JH104sz1', 'JH104sz2', 'JH104sz3', ...
+%     'JH105sz1', 'JH105sz2', 'JH105sz3', 'JH105sz4', 'JH105sz5',...
+%     'JH106sz1', 'JH106sz2', 'JH106sz3', 'JH106sz4', 'JH106sz5', 'JH106sz6',...
+%     'JH107sz1', 'JH107sz2', 'JH107sz3', 'JH107sz4', 'JH107sz5', 'JH107sz6', 'JH107sz7', 'JH107sz8', ...
+%     'JH108sz1', 'JH108sz2', 'JH108sz3', 'JH108sz4', 'JH108sz5', 'JH108sz6', 'JH108sz7', ...
+    'pt1aw1', 'pt1aw2', ...
+    'pt1aslp1', 'pt1aslp2', ...
+    'pt2aw1', 'pt2aw2', ...
+    'pt2aslp1', 'pt2aslp2', ...
+    'pt3aw1', ...
+    'pt3aslp1', 'pt3aslp2', ...
 %     'JH102sz1', 'JH102sz2', 'JH102sz3', 'JH102sz4', 'JH102sz5', 'JH102sz6',...
 % %     'pt1sz4', 'pt2sz4', 
 %         'pt3sz2', 'pt3sz4', ...
@@ -29,7 +44,7 @@ patients = {...
 %     'pt11sz1', 'pt11sz2', 'pt11sz3', 'pt11sz4', 
 %     'pt17sz1', 
 %     'pt17sz2',
-    'pt10sz1', 'pt10sz2', 'pt10sz3','pt15sz1', 'pt15sz2', 'pt15sz3'...
+%     'pt10sz1', 'pt10sz2', 'pt10sz3','pt15sz1', 'pt15sz2', 'pt15sz3'...
 %     'pt16sz1', 
 %     'pt16sz2',... 
 %     'pt16sz3',...
@@ -65,76 +80,7 @@ addpath(genpath('/home/WIN/ali39/Documents/adamli/fragility_dataanalysis/eeg_too
 for p=1:length(patients)
     patient = patients{p};
    
-    patient_id = patient(1:strfind(patient, 'seiz')-1);
-    seizure_id = strcat('_', patient(strfind(patient, 'seiz'):end));
-    seeg = 1;
-    if isempty(patient_id)
-        patient_id = patient(1:strfind(patient, 'sz')-1);
-        seizure_id = patient(strfind(patient, 'sz'):end);
-        seeg = 0;
-    end
-
-    %% DEFINE CHANNELS AND CLINICAL ANNOTATIONS
-     [included_channels, ezone_labels, earlyspread_labels, latespread_labels, frequency_sampling] ...
-                = determineClinicalAnnotations(patient_id, seizure_id);
-
-    % put clinical annotations into a struct
-    clinicalLabels = struct();
-    clinicalLabels.ezone_labels = ezone_labels;
-    clinicalLabels.earlyspread_labels = earlyspread_labels;
-    clinicalLabels.latespread_labels = latespread_labels;
-
-    %% DEFINE COMPUTATION PARAMETERS AND DIRECTORIES TO SAVE DATA
-    patient = strcat(patient_id, seizure_id);
-    disp(['Looking at patient: ',patient]);
-
-    %%- grab eeg data in different ways... depending on who we got it from
-    if ~seeg
-        %% NIH, JHU PATIENTS
-        %- set file path for the patient file 
-        dataDir = './data/';
-        patient_eeg_path = strcat('./data/', patient);
-        patient_file_path = fullfile(dataDir, patient, strcat(patient, '.csv'));
-
-        %- set the meta data using the patient input file
-        [~, ~, recording_start, ...
-         onset_time, offset_time, ...
-         recording_duration, num_channels] = readLabels(patient_file_path);
-        number_of_samples = frequency_sampling * recording_duration;
-        seizureStart = milliseconds(onset_time - recording_start); % time seizure starts
-        seizureEnd = milliseconds(offset_time - recording_start); % time seizure ends
-
-        % extract labels
-        patient_label_path = fullfile(dataDir, patient, strcat(patient, '_labels.csv'));
-        fid = fopen(patient_label_path); % open up labels to get all the channels
-        labels = textscan(fid, '%s', 'Delimiter', ',');
-        labels = labels{:}; 
-
-        fclose(fid);
-    else
-        %% EZT/SEEG PATIENTS
-        patient_eeg_path = strcat('./data/Seiz_Data/', patient_id);
-
-        % READ EEG FILE Mat File
-        % files to process
-        data = load(fullfile(patient_eeg_path, patient));
-        labels = data.elec_labels;
-        onset_time = data.seiz_start_mark;
-        offset_time = data.seiz_end_mark;
-        recording_start = 0; % since they dont' give absolute time of starting the recording
-        seizureStart = (onset_time - recording_start); % time seizure starts
-        seizureEnd = (offset_time - recording_start); % time seizure ends
-        recording_duration = size(data.data, 2);
-        num_channels = size(data.data, 1);
-    end
-
-    try
-    if ~isempty(included_channels)
-        labels = labels(included_channels);
-    end
-    catch e
-        disp(e)
-    end
+    setupScripts;
     
 %% 03: PLOT PERTURBATION RESULTS
     for j=1:length(perturbationTypes)
