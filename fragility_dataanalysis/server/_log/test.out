@@ -1,10 +1,10 @@
 ----------------------------------------
-Begin PBS Prologue Sun Nov 27 16:05:31 EST 2016 1480280731
-Job ID:		2376268.mgt
+Begin PBS Prologue Sun Nov 27 15:34:18 EST 2016 1480278858
+Job ID:		2376307.mgt
 Username:	ali
 Group:		sarma
-Nodes:		node066
-End PBS Prologue Sun Nov 27 16:05:31 EST 2016 1480280731
+Nodes:		node115
+End PBS Prologue Sun Nov 27 15:34:18 EST 2016 1480278858
 ----------------------------------------
 500
 500
@@ -22,11 +22,11 @@ Running perturbation computation.
 To get started, type one of these: helpwin, helpdesk, or demo.
 For product information, visit www.mathworks.com.
  
-Looking at patient: pt11sz2
+Looking at patient: JH106sz3
 
 num_channels =
 
-   117
+   193
 
 On 1 out of 120 to analyze.
 On 2 out of 120 to analyze.
@@ -148,11 +148,11 @@ On 117 out of 120 to analyze.
 On 118 out of 120 to analyze.
 On 119 out of 120 to analyze.
 On 120 out of 120 to analyze.
-Elapsed time is 2773.886444 seconds.
+Elapsed time is 20455.214434 seconds.
 
 num_channels =
 
-   117
+   193
 
 On 1 out of 120 to analyze.
 On 2 out of 120 to analyze.
@@ -160,60 +160,19 @@ On 3 out of 120 to analyze.
 On 4 out of 120 to analyze.
 On 5 out of 120 to analyze.
 On 6 out of 120 to analyze.
-On 7 out of 120 to analyze.
-On 8 out of 120 to analyze.
-On 9 out of 120 to analyze.
-On 10 out of 120 to analyze.
-On 11 out of 120 to analyze.
-On 12 out of 120 to analyze.
-On 13 out of 120 to analyze.
-On 14 out of 120 to analyze.
-On 15 out of 120 to analyze.
-On 16 out of 120 to analyze.
-On 17 out of 120 to analyze.
-On 18 out of 120 to analyze.
-On 19 out of 120 to analyze.
-On 20 out of 120 to analyze.
-On 21 out of 120 to analyze.
-On 22 out of 120 to analyze.
-On 23 out of 120 to analyze.
-On 24 out of 120 to analyze.
-On 25 out of 120 to analyze.
-On 26 out of 120 to analyze.
-On 27 out of 120 to analyze.
-On 28 out of 120 to analyze.
-On 29 out of 120 to analyze.
-On 30 out of 120 to analyze.
-On 31 out of 120 to analyze.
-On 32 out of 120 to analyze.
-On 33 out of 120 to analyze.
-On 34 out of 120 to analyze.
-On 35 out of 120 to analyze.
-On 36 out of 120 to analyze.
-On 37 out of 120 to analyze.
-On 38 out of 120 to analyze.
-On 39 out of 120 to analyze.
-On 40 out of 120 to analyze.
-On 41 out of 120 to analyze.
-On 42 out of 120 to analyze.
-On 43 out of 120 to analyze.
-On 44 out of 120 to analyze.
-On 45 out of 120 to analyze.
-On 46 out of 120 to analyze.
-On 47 out of 120 to analyze.
 >> ----------------------------------------
-Begin PBS Epilogue Sun Nov 27 17:10:10 EST 2016 1480284610
-Job ID:		2376268.mgt
+Begin PBS Epilogue Sun Nov 27 21:34:39 EST 2016 1480300479
+Job ID:		2376307.mgt
 Username:	ali
 Group:		sarma
 Job Name:	compute_adjacency_mat
-Session:	11685
+Session:	12497
 Limits:		neednodes=1:ppn=8,nodes=1:ppn=8,walltime=14:00:00
-Resources:	cput=08:35:16,mem=630320kb,vmem=1587800kb,walltime=01:04:34
+Resources:	cput=20:03:15,mem=691748kb,vmem=1826624kb,walltime=06:00:16
 Queue:		dque
 Account:		
-Nodes:	node066
+Nodes:	node115
 Killing leftovers...
 
-End PBS Epilogue Sun Nov 27 17:10:10 EST 2016 1480284610
+End PBS Epilogue Sun Nov 27 21:34:40 EST 2016 1480300480
 ----------------------------------------
