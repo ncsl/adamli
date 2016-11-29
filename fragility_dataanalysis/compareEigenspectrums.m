@@ -34,6 +34,7 @@ figDir = fullfile('./figures/eigenspectrums/');
 if ~exist(figDir, 'dir')
     mkdir(figDir);
 end
+adjMat = './adj_mats_win500_step500_freq1000/';
 finalRowDataDir = './adj_mats_win500_step500_freq1000/R_finaldata_radius1.5/';
 finalColDataDir = './adj_mats_win500_step500_freq1000/C_finaldata_radius1.5/';
 
@@ -42,6 +43,7 @@ for iPat=1:length(patients) % loop through each patient
     % load in the fragility data for row and column
     patient = patients{iPat};
     
+    % get the perturbation structures
     patRowFragilityDir = fullfile(finalRowDataDir, strcat(patient, 'final_data.mat'));
     finalRowData = load(patRowFragilityDir);
     rowFragility = finalRowData.fragility_rankings; % load in fragility matrix
@@ -49,18 +51,33 @@ for iPat=1:length(patients) % loop through each patient
     finalColData = load(patColFragilityDir);
     colFragility = finalColData.fragility_rankings; % load in fragility matrix
     
+    rowPerturbations = finalRowData.metadata.del_table{:,end};
+    colPerturbations = finalColData.metadata.del_table{:,end};
+    
+    % get the original adjacency matrix
+    patient_adjMats = dir(fullfile(adjmat, strcat(patient, '*.mat')));
+    patient_adjMats = {patient_adjMats.name};
+    
+    for iFile=1:length(patient_adjMats)
+        matFile = fullfile(adjMat, patient, patient_adjMats{iFile};
+        load(matFile);
+        originalAdjMat = data.theta_adj;
+        
+%         perturbedAdjMat = originalAdjMat 
+    end
+    
     % PLOT FRAGILITY METRIC VS SIGNIFICANT FREQ BANDS
-    figure;
-    plot(rowFragility(:), colFragility(:), 'ko')
-    hold on;
-    title(['Row and Column Fragility For ', patient]);
-    xlabel('Row Pert. Fragility');
-    ylabel('Col Pert. Fragility');
-    
-    currfig = gcf;
-    currfig.PaperPosition = [-3.7448   -0.3385   15.9896   11.6771];
-    currfig.Position = [1986           1        1535        1121];
-    
-    %- save the figure
-    print(fullfile(figDir, strcat(patient, 'rowvscolfragility')), '-dpng', '-r0')
+%     figure;
+%     plot(rowFragility(:), colFragility(:), 'ko')
+%     hold on;
+%     title(['Row and Column Fragility For ', patient]);
+%     xlabel('Row Pert. Fragility');
+%     ylabel('Col Pert. Fragility');
+%     
+%     currfig = gcf;
+%     currfig.PaperPosition = [-3.7448   -0.3385   15.9896   11.6771];
+%     currfig.Position = [1986           1        1535        1121];
+%     
+%     %- save the figure
+%     print(fullfile(figDir, strcat(patient, 'rowvscolfragility')), '-dpng', '-r0')
 end

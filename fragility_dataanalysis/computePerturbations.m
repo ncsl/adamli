@@ -149,7 +149,7 @@ for i=1:length(matFiles) % loop through each adjacency matrix
                 del_temp{iW} = del;
             end
             % store minimum perturbation, for each node at a certain time point
-            min_index = find(del_size(iNode,:) == min(del_size(iNode, :)));
+            min_index = find(del_size(iNode,:) == min(del_size(iNode, :)),1);
             minPerturb_time_chan(iNode, iTime) = del_size(iNode, min_index);
             del_table(iNode, iTime) = del_temp(min_index);
         end % end of loop through channels
