@@ -56,7 +56,6 @@ patients=(
 	# pt14sz1 pt14sz2 pt14sz3 pt15sz1 pt15sz2 pt15sz3 pt15sz4
 	# pt16sz1 pt16sz2 pt16sz3 
 	# pt17sz1 pt17sz2 pt17sz3 
-	)
 	
 	# 'EZT005seiz003' 'EZT007seiz003' 'EZT007seiz005' 'EZT019seiz003'\
 	# 'EZT030seiz003' 'EZT070seiz003')
