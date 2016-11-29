@@ -1,10 +1,10 @@
 ----------------------------------------
-Begin PBS Prologue Sun Nov 27 15:34:18 EST 2016 1480278858
-Job ID:		2376307.mgt
+Begin PBS Prologue Mon Nov 28 12:48:17 EST 2016 1480355297
+Job ID:		2377874.mgt
 Username:	ali
 Group:		sarma
-Nodes:		node115
-End PBS Prologue Sun Nov 27 15:34:18 EST 2016 1480278858
+Nodes:		node217
+End PBS Prologue Mon Nov 28 12:48:18 EST 2016 1480355298
 ----------------------------------------
 500
 500
@@ -148,7 +148,7 @@ On 117 out of 120 to analyze.
 On 118 out of 120 to analyze.
 On 119 out of 120 to analyze.
 On 120 out of 120 to analyze.
-Elapsed time is 20455.214434 seconds.
+Elapsed time is 20628.823182 seconds.
 
 num_channels =
 
@@ -161,18 +161,18 @@ On 4 out of 120 to analyze.
 On 5 out of 120 to analyze.
 On 6 out of 120 to analyze.
 >> ----------------------------------------
-Begin PBS Epilogue Sun Nov 27 21:34:39 EST 2016 1480300479
-Job ID:		2376307.mgt
+Begin PBS Epilogue Mon Nov 28 18:51:49 EST 2016 1480377109
+Job ID:		2377874.mgt
 Username:	ali
 Group:		sarma
 Job Name:	compute_adjacency_mat
-Session:	12497
+Session:	16781
 Limits:		neednodes=1:ppn=8,nodes=1:ppn=8,walltime=14:00:00
-Resources:	cput=20:03:15,mem=691748kb,vmem=1826624kb,walltime=06:00:16
+Resources:	cput=20:04:53,mem=692680kb,vmem=1885960kb,walltime=06:03:27
 Queue:		dque
 Account:		
-Nodes:	node115
+Nodes:	node217
 Killing leftovers...
 
-End PBS Epilogue Sun Nov 27 21:34:40 EST 2016 1480300480
+End PBS Epilogue Mon Nov 28 18:51:49 EST 2016 1480377109
 ----------------------------------------
