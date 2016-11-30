@@ -1,5 +1,5 @@
 function serverAdjMainScript(patient, winSize, stepSize, frequency_sampling)
-addpath('../fragility_library/');
+addpath(genpath('../fragility_library/'));
 addpath(genpath('../eeg_toolbox/'));
 addpath('../');
 IS_SERVER = 1;

@@ -1,5 +1,5 @@
 function serverPerturbationScript(patient, radius, winSize, stepSize, frequency_sampling)
-addpath('../fragility_library/');
+addpath(genpath('../fragility_library/'));
 addpath(genpath('../eeg_toolbox/'));
 addpath('../');
 perturbationTypes = ['R', 'C'];

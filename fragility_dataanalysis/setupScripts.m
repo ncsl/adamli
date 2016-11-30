@@ -1,13 +1,29 @@
 l2regularization = 0.0;
-adjMat = './adj_mats_win';
-dataDir = './data/';
-if IS_SERVER
-    adjMat = '../adj_mats_win';
-    dataDir = '../data/';
-end
+LEASTSQUARES = 0;
+CORRELATION = 1;
+SPEARMAN = 1;
+PEARSON = ~SPEARMAN;
 
 timeRange = [60 0];
 
+connectivity = struct();
+connectivity.LEASTSQUARES =LEASTSQUARES;
+connectivity.CORRELATION = CORRELATION;
+connectivity.SPEARMAN = SPEARMAN;
+connectivity.PEARSON = PEARSON;
+
+adjMat = './adj_mats_win';
+dataDir = './data/';
+if CORRELATION
+    if(SPEARMAN); corrType = 'spearman'; elseif(PEARSON); corrType = 'pearson'; end
+    adjMat = strcat('./', corrType, '/adj_mats_win');
+end
+if IS_SERVER
+    adjMat = strcat('.', adjMat);
+    dataDir = strcat('.', dataDir);
+end
+
+% set patientID and seizureID
 patient_id = patient(1:strfind(patient, 'seiz')-1);
 seizure_id = strcat('_', patient(strfind(patient, 'seiz'):end));
 seeg = 1;

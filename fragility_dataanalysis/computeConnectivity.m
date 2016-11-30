@@ -22,6 +22,16 @@ included_channels = adj_args.included_channels;
 labels = adj_args.labels;
 l2regularization = adj_args.l2regularization;
 
+LEASTSQUARES = adj_args.connectivity.LEASTSQUARES;
+CORRELATION = adj_args.connectivity.CORRELATION;
+SPEARMAN = adj_args.connectivity.SPEARMAN;
+PEARSON = adj_args.connectivity.PEARSON;
+
+% set options for connectivity measurements
+OPTIONS.l2regularization = l2regularization;
+OPTIONS.SPEARMAN = SPEARMAN;
+OPTIONS.PEARSON = PEARSON;
+
 ezone_labels = clinicalLabels.ezone_labels;
 earlyspread_labels = clinicalLabels.earlyspread_labels;
 latespread_labels = clinicalLabels.latespread_labels;
@@ -80,54 +90,27 @@ for i=1:dataRange/stepSize
     % initialize the file name to save the adjacency matrix as
     fileName = strcat(patient, '_', num2str(i), '_before', ...
         num2str((seizureStart-dataWindow)*(1000/frequency_sampling)), '.mat');
-    
-    
+
     % step 1: extract the data and apply the notch filter. Note that column
     %         #i in the extracted matrix is filled by data samples from the
     %         recording channel #i.
     tmpdata = eeg(:, dataWindow + 1:dataWindow + winSize);
-
-    % step 2: compute some functional connectivity 
-    % linear model: Ax = b; A\b -> x
-    b = tmpdata(:); % define b as vectorized by stacking columns on top of another
-    b = b(num_channels+1:end); % only get the time points after the first one
     
-    tmpdata = tmpdata';
+    if LEASTSQUARES
+        % step 2: compute some functional connectivity 
+        % linear model: Ax = b; A\b -> x
+        b = tmpdata(:); % define b as vectorized by stacking columns on top of another
+        b = b(num_channels+1:end); % only get the time points after the first one
 
-    % build up A matrix with a loop modifying #time_samples points and #chans at a time
-    try 
-        A = zeros(length(b), num_channels^2);
-    catch e
-        disp(e)
-        A = sparse(length(b), num_channels^2);
+        % - use least square computation
+        theta = computeLeastSquares(tmpdata, b, OPTIONS);
+        theta_adj = reshape(theta, num_channels, num_channels)';    % reshape fills in columns first, so must transpose
+    elseif CORRELATION
+        theta_adj = computePairwiseCorrelation(tmpdata, OPTIONS);
     end
-    N = 1:num_channels:size(A,1);
-    A(N, 1:num_channels) = tmpdata(1:end-1,:);
     
-    for iChan=2 : num_channels % loop through columns #channels per loop
-        rowInds = N+(iChan-1);
-        colInds = (iChan-1)*num_channels+1:iChan*num_channels;
-        A(rowInds, colInds) = tmpdata(1:end-1,:);
-    end
-
-    % A is a sparse matrix, so store it as such
-    A = sparse(A);
-    b = double(b);
-
-    % create the reshaped adjacency matrix
-    tic;
-    if l2regularization == 0
-        theta = A\b;                                                % solve for x, connectivity
-    else
-        symmetricA = A'*A;
-        theta = (symmetricA+l2regularization*eye(length(symmetricA)))\(A'*b);
-    end
-       
-    theta_adj = reshape(theta, num_channels, num_channels)';    % reshape fills in columns first, so must transpose
-    toc;
     
     %% save the theta_adj made
-
     %- save the data into a struct into a mat file milliseconds
     data = struct();
     data.theta_adj = theta_adj;
@@ -149,5 +132,4 @@ for i=1:dataRange/stepSize
     
     disp(['Saved file: ', fileName]);
 end
-
 end
