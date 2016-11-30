@@ -87,7 +87,7 @@ else
 end
 
 % only take included_channels
-if ~isempty(included_channels)
+if ~isempty(included_channels) && ~exist('ECG', 'var')
     try
         eeg = eeg(included_channels, :);
         labels = labels(included_channels);
