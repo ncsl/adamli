@@ -1,10 +1,10 @@
 ----------------------------------------
-Begin PBS Prologue Tue Nov 29 16:23:34 EST 2016 1480454614
-Job ID:		2382596.mgt
+Begin PBS Prologue Tue Nov 29 17:43:47 EST 2016 1480459427
+Job ID:		2382621.mgt
 Username:	ali
 Group:		sarma
-Nodes:		node188
-End PBS Prologue Tue Nov 29 16:23:35 EST 2016 1480454615
+Nodes:		node198
+End PBS Prologue Tue Nov 29 17:43:47 EST 2016 1480459427
 ----------------------------------------
 500
 500
@@ -22,11 +22,11 @@ Running perturbation computation.
 To get started, type one of these: helpwin, helpdesk, or demo.
 For product information, visit www.mathworks.com.
  
-Looking at patient: pt3aw1
+Looking at patient: JH106sz4
 
 num_channels =
 
-    99
+   193
 
 On 1 out of 120 to analyze.
 On 2 out of 120 to analyze.
@@ -148,11 +148,11 @@ On 117 out of 120 to analyze.
 On 118 out of 120 to analyze.
 On 119 out of 120 to analyze.
 On 120 out of 120 to analyze.
-Elapsed time is 1734.844631 seconds.
+Elapsed time is 20888.204714 seconds.
 
 num_channels =
 
-    99
+   193
 
 On 1 out of 120 to analyze.
 On 2 out of 120 to analyze.
@@ -274,20 +274,20 @@ On 117 out of 120 to analyze.
 On 118 out of 120 to analyze.
 On 119 out of 120 to analyze.
 On 120 out of 120 to analyze.
-Elapsed time is 1706.934086 seconds.
+Elapsed time is 21210.741352 seconds.
 ----------------------------------------
-Begin PBS Epilogue Tue Nov 29 17:21:09 EST 2016 1480458069
-Job ID:		2382596.mgt
+Begin PBS Epilogue Wed Nov 30 05:25:39 EST 2016 1480501539
+Job ID:		2382621.mgt
 Username:	ali
 Group:		sarma
 Job Name:	compute_adjacency_mat
-Session:	11192
+Session:	26234
 Limits:		neednodes=1:ppn=8,nodes=1:ppn=8,walltime=14:00:00
-Resources:	cput=07:38:13,mem=808692kb,vmem=1766884kb,walltime=00:57:30
+Resources:	cput=38:31:02,mem=634676kb,vmem=1771720kb,walltime=11:41:47
 Queue:		dque
 Account:		
-Nodes:	node188
+Nodes:	node198
 Killing leftovers...
 
-End PBS Epilogue Tue Nov 29 17:21:09 EST 2016 1480458069
+End PBS Epilogue Wed Nov 30 05:25:39 EST 2016 1480501539
 ----------------------------------------
