@@ -1,9 +1,0 @@
-{Subscripted assignment dimension mismatch.
-
-Error in computePerturbations (line 153)
-            minPerturb_time_chan(iNode, iTime) = del_size(iNode, min_index);
-
-Error in serverPerturbationScript (line 42)
-    computePerturbations(patient_id, seizure_id, perturb_args);
-} 
-
