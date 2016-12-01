@@ -55,7 +55,7 @@ rowsum_time_chan = zeros(num_channels, ... % rowsum at each time/channel
 minPerturb_time_chan = zeros(num_channels, ... % fragility at each time/channel
                                                 timeRange);
 timeIndices = [];             % vector to store time indices (secs) of each window of data
-del_table = cell(N, timeRange);
+del_table = cell(num_channels, timeRange);
 
 % loop through mat files and open them upbcd
 iTime = 1; % time pointer for heatmaps
