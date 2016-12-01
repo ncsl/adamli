@@ -79,6 +79,7 @@ FONTSIZE = 18;
 
 %% Output Spectral Map Per Patient
 for iPat=1:length(patients) % loop through each patient
+    close all
     % load in the fragility data
     patient = patients{iPat};
     
@@ -135,8 +136,8 @@ for iPat=1:length(patients) % loop through each patient
 %         significant_freqs{iChan} = find(abs(freqs) > mean(abs(freqs)) + 3*std(abs(freqs)));
         significant_freqs{iChan} = maxfreq_band;
         
-        maxpower_indices = find(abs(power) > mean(abs(power)) + 3*std(abs(power)));
-        significant_freqs{iChan} = freqs_FFT(maxpower_indices);
+%         maxpower_indices = find(abs(power) > mean(abs(power)) + 3*std(abs(power)));
+%         significant_freqs{iChan} = freqs_FFT(maxpower_indices);
     end
     
     % PLOT FRAGILITY METRIC VS SIGNIFICANT FREQ BANDS
@@ -146,9 +147,9 @@ for iPat=1:length(patients) % loop through each patient
         hold on;
     end
     axes = gca;
-    titleStr = ['Fragility Metric vs. Significant Frequency Bands For ', patient];
+    titleStr = ['Fragility Metric vs. Max Frequency Bands For ', patient];
     xlabel = 'Fragility Metric';
-    ylabel = 'Significant Freq. Bands';
+    ylabel = 'Max Freq. Bands';
     labelBasicAxes(axes, titleStr, ylabel, xlabel, FONTSIZE);
     
     currfig = gcf;
@@ -156,6 +157,6 @@ for iPat=1:length(patients) % loop through each patient
     currfig.Position = [1986           1        1535        1121];
     
     %- save the figure
-    print(fullfile(figDir, strcat(patient, 'FragilityVsFreq')), '-dpng', '-r0')
+    print(fullfile(figDir, strcat(patient, 'FragilityVsMaxFreq')), '-dpng', '-r0')
 end
 

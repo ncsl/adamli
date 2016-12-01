@@ -11,3 +11,4 @@ _log/*
 *.edf
 /fragility_dataanalysis/data/*/*.mat
 /fragility_dataanalysis/data/interictal_data/*/*.mat
+*job0.txt

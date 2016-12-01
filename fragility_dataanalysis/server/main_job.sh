@@ -33,8 +33,8 @@ printf "Run Connectivity (Enter 1, or 0)? "
 read RUNCONNECTIVITY
 printf "run sleep (Enter 1, or 0)? "
 read RUNSLEEP
-printf "run for different radii: "
-read radius
+# printf "run for different radii: "
+# read radius
 
 # patients listed 5 per row
 patients=(
