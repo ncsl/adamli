@@ -1,7 +1,7 @@
 l2regularization = 0.0;
-LEASTSQUARES = 1;
-CORRELATION = 0;
-SPEARMAN = 0;
+LEASTSQUARES = 0;
+CORRELATION = 1;
+SPEARMAN = 1;
 PEARSON = ~SPEARMAN;
 
 timeRange = [60 0];
