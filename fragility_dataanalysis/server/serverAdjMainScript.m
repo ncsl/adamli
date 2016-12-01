@@ -28,6 +28,7 @@ adj_args.seizureStart = seizureStart;
 adj_args.seizureEnd = seizureEnd;
 adj_args.labels = labels;
 adj_args.l2regularization = l2regularization;
+adj_args.connectivity = connectivity;
 
 if size(eeg, 1) < winSize
     % compute connectivity
