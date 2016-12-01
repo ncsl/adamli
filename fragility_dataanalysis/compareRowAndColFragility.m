@@ -19,6 +19,9 @@
 %
 % Ver.: 1.0 - Date: 11/23/2016
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+close all;
+clear all;
+
 %% Initialization
 % initialize variables
 patients = {,...
@@ -27,6 +30,12 @@ patients = {,...
     'pt3sz2' 'pt3sz4', ...
     'pt8sz1' 'pt8sz2' 'pt8sz3',...
     'pt10sz1' 'pt10sz2' 'pt10sz3', ...
+    'pt1aslp1', 'pt1aslp2', ...
+    'pt1aw1', 'pt1aw2', ...
+    'pt2aw1', 'pt2aw2', ...
+    'pt2aslp1', 'pt2aslp2', ...
+    'pt3aw1', ...
+    'pt3aslp1', 'pt3aslp2', ...
 %     'pt11sz1' 'pt11sz2' 'pt11sz3' 'pt11sz4', ...
 %     'pt14sz1' 'pt14sz2' 'pt14sz3' 'pt15sz1' 'pt15sz2' 'pt15sz3' 'pt15sz4',...
 %     'pt16sz1' 'pt16sz2' 'pt16sz3',...
@@ -48,6 +57,7 @@ patients = {,...
 %     'EZT005_seiz001', 'EZT005_seiz002', 'EZT007_seiz001', 'EZT007_seiz002', ...
 %     'EZT019_seiz001', 'EZT019_seiz002', 'EZT090_seiz002', 'EZT090_seiz003', ...
     };
+addpath(genpath('./fragility_library'));
 
 figDir = fullfile('./figures/rowvscol/');
 if ~exist(figDir, 'dir')
@@ -55,6 +65,14 @@ if ~exist(figDir, 'dir')
 end
 finalRowDataDir = './adj_mats_win500_step500_freq1000/R_finaldata_radius1.5/';
 finalColDataDir = './adj_mats_win500_step500_freq1000/C_finaldata_radius1.5/';
+
+% figure variables
+FONTSIZE = 18;
+
+regressionFit = cell(length(patients), 3);
+regressionFitFile = 'regressionFits.txt';
+fid = fopen(fullfile(figDir, regressionFitFile), 'w');
+
 %% Output Spectral Map Per Patient
 for iPat=1:length(patients) % loop through each patient
     % load in the fragility data for row and column
@@ -67,13 +85,24 @@ for iPat=1:length(patients) % loop through each patient
     finalColData = load(patColFragilityDir);
     colFragility = finalColData.fragility_rankings; % load in fragility matrix
     
+    % compute linear regression and save it
+    X = [ones(length(rowFragility(:)), 1) rowFragility(:)];
+    regressCoeff = X\colFragility(:);
+    yCalc = regressCoeff(1) + regressCoeff(2) * rowFragility(:);
+    rsq = 1 - sum((colFragility(:) - yCalc).^2) / ...
+        sum((colFragility(:) - mean(colFragility(:))).^2);
+    fprintf(fid, [patient, ',', num2str(regressCoeff(2)), ',', num2str(rsq), '\n']);
+    
+    
     % PLOT FRAGILITY METRIC VS SIGNIFICANT FREQ BANDS
     figure;
-    plot(rowFragility(:), colFragility(:), 'ko')
-    hold on;
-    title(['Row and Column Fragility For ', patient]);
-    xlabel('Row Pert. Fragility');
-    ylabel('Col Pert. Fragility');
+    plot(rowFragility(:), colFragility(:), 'ko'); hold on;
+    axes = gca;
+    titleStr = ['Row and Column Fragility For ', patient];
+    ylabel = 'Col Pert. Fragility';
+    xlabel = 'Row Pert. Fragility';
+    
+    labelBasicAxes(axes, titleStr, ylabel, xlabel, FONTSIZE);
     
     currfig = gcf;
     currfig.PaperPosition = [-3.7448   -0.3385   15.9896   11.6771];

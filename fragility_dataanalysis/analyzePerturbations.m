@@ -129,17 +129,6 @@ end
 num_channels = size(fragility_rankings,1);
 num_windows = size(fragility_rankings,2);
 
-
-% only get -60 to 0 seconds of data
-% if (size(fragility_rankings,2) > 121)
-%     fragility_rankings = fragility_rankings(:,1:119);
-%     minPerturb_time_chan = minPerturb_time_chan(:,1:119);
-% end
-% if isnan(fragility_rankings(1,120))
-%     fragility_rankings = fragility_rankings(:,1:119);
-%     minPerturb_time_chan = minPerturb_time_chan(:,1:119);
-% end
-
 %%- 1a) Apply thresholding to fragility_rankings
 threshold_fragility = fragility_rankings;
 threshold_fragility(threshold_fragility > threshold) = 1;
@@ -191,18 +180,22 @@ num_channels = size(fragility_rankings,1);
 num_windows = size(fragility_rankings,2);
 
 
+% figure options
+colorbarLabel = 'Fragility Ranking';
+xlabelStr = 'Time (sec)';
+ylabelStr = 'Channels';
+
 %% 2b) minimum perturbation over time and channels:
 fig{end+1} = figure;
 imagesc(minPerturb_time_chan); hold on;
+c = colorbar(); colormap('jet'); set(gca,'box','off'); set(gca,'YDir','normal');
+labelColorbar(c, 'Minimum Norm Perturbation', FONTSIZE);
 
-c = colorbar(); colormap('jet'); set(gca,'box','off')
-set(gca,'YDir','normal');
 XLim = get(gca, 'xlim'); XLowerLim = XLim(1); XUpperLim = XLim(2);
 % set title, labels and ticks
 titleStr = {'Minimum Norm Perturbation For All Channels', ...
     'Time Locked To Seizure'};
 title(titleStr, 'FontSize', FONTSIZE+2);
-ylabel(c, 'Minimum L2-Norm Perturbation');
 xlabel('Time (sec)', 'FontSize', FONTSIZE);  
 ylab = ylabel('Electrode Channels', 'FontSize', FONTSIZE);
 
@@ -238,32 +231,36 @@ print(fullfile(toSaveFigDir, strcat(patient, 'minPerturbation')), '-dpng', '-r0'
 
 %% 2c) fragility_ranking over time and channels
 fig{end+1} = figure;
-imagesc(fragility_rankings); hold on;
-set(gca,'YDir','normal');
-c = colorbar(); set(c, 'fontsize', FONTSIZE); colormap('jet'); set(gca,'box','off')
+imagesc(fragility_rankings); hold on; axes = gca; currfig = gcf;
+set(axes,'YDir','normal'); set(axes,'box','off'); colormap('jet'); 
+c = colorbar(); labelColorbar(c, colorbarLabel, FONTSIZE); % label and initialize colorbar
+
+% create title string and label the axes of plot
 titleStr = {['Fragility Metric (', patient, ')'], ...
     [perturbationType, ' perturbation: ', ' Time Locked to Seizure']};
-ylabel(c, 'Fragility Ranking', 'FontSize', FONTSIZE);
-title(titleStr, 'FontSize', FONTSIZE+2);
+labelBasicAxes(axes, titleStr, ylabelStr, xlabelStr, FONTSIZE);
+ylab = axes.YLabel;
 
-xlabel('Time (sec)', 'FontSize', FONTSIZE);  
-ylab = ylabel('Electrode Channels', 'FontSize', FONTSIZE);
-set(gca, 'FontSize', FONTSIZE-3, 'LineWidth', LT);
+% set x/y ticks and increment xlim by 1
 set(gca, 'XTick', (XLowerLim+0.5 : 10*500/stepSize : XUpperLim+0.5)); set(gca, 'XTickLabel', xticks); % set xticks and their labels
 set(gca, 'YTick', [1, 5:5:num_channels]);
-currfig = gcf;
+XLim = get(gca, 'xlim'); XLowerLim = XLim(1); XUpperLim = XLim(2);
+xlim([XLowerLim, XUpperLim+1]);
+
+% plot start star's for the different clinical annotations
+figNum = currfig.Number;
+figIndices = {ezone_indices, earlyspread_indices, latespread_indices};
+colors = {[1 0 0], [1 .5 0], [0 0 1]};
+for i=1:length(figIndices)
+    if sum(figIndices{i})>0
+        xLocations = repmat(XUpperLim+1, length(figIndices{i}), 1);
+        plotAnnotatedStars(fig{figNum}, xLocations, figIndices{i}, colors{i});
+    end
+end
+
 currfig.PaperPosition = [-3.7448   -0.3385   15.9896   11.6771];
 currfig.Position = [1986           1        1535        1121];
-% move ylabel to the left
-ylab.Position = ylab.Position + [-.25 0 0];
-XLim = get(gca, 'xlim'); XLowerLim = XLim(1); XUpperLim = XLim(2);
-% plot start star's for the different clinical annotations
-xlim([XLowerLim, XUpperLim+1]);
-plot(repmat(XUpperLim+1, length(ezone_indices),1), ezone_indices, '*r');
-plot(repmat(XUpperLim+1, length(earlyspread_indices), 1), earlyspread_indices, '*', 'color', [1 .5 0]);
-if sum(latespread_indices) > 0
-    plot(repmat(XUpperLim+1, length(latespread_indices),1), latespread_indices, '*', 'color', 'blue');
-end
+ylab.Position = ylab.Position + [-.25 0 0]; % move ylabel to the left
 
 % plot the different labels on different axes to give different colors
 plotOptions = struct();
