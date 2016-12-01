@@ -34,6 +34,9 @@ figDir = fullfile('./figures/eigenspectrums/');
 if ~exist(figDir, 'dir')
     mkdir(figDir);
 end
+
+channel = 1;
+
 adjMat = './adj_mats_win500_step500_freq1000/';
 finalRowDataDir = './adj_mats_win500_step500_freq1000/R_finaldata_radius1.5/';
 finalColDataDir = './adj_mats_win500_step500_freq1000/C_finaldata_radius1.5/';
@@ -47,22 +50,39 @@ for iPat=1:length(patients) % loop through each patient
     patRowFragilityDir = fullfile(finalRowDataDir, strcat(patient, 'final_data.mat'));
     finalRowData = load(patRowFragilityDir);
     rowFragility = finalRowData.fragility_rankings; % load in fragility matrix
+    rowPerturbations = finalRowData.metadata.del_table;
+    
     patColFragilityDir = fullfile(finalColDataDir, strcat(patient, 'final_data.mat'));
     finalColData = load(patColFragilityDir);
     colFragility = finalColData.fragility_rankings; % load in fragility matrix
+    colPerturbations = finalColData.metadata.del_table;
     
+    num_chans = size(rowFragility,1);
     rowPerturbations = finalRowData.metadata.del_table{:,end};
     colPerturbations = finalColData.metadata.del_table{:,end};
     
-    % get the original adjacency matrix
-    patient_adjMats = dir(fullfile(adjmat, strcat(patient, '*.mat')));
+    % get the original adjacency matrix lists
+    patient_adjMats = dir(fullfile(adjMat, strcat(patient, '/*.mat')));
     patient_adjMats = {patient_adjMats.name};
     
     for iFile=1:length(patient_adjMats)
-        matFile = fullfile(adjMat, patient, patient_adjMats{iFile};
+        matFile = fullfile(adjMat, patient, patient_adjMats{iFile});
         load(matFile);
         originalAdjMat = data.theta_adj;
+        originalEigs = eig(originalAdjMat);
         
+        perturbedRowAdjMat = originalAdjMat + [zeros(1:channel, num_chans); ...
+                                            rowPerturbations{channels, iFile};
+                                               zeros(channel+2, num_chans)];
+        perturbedColAdjMat = originalAdjMat + [zeros(1:channel, num_chans); ...
+                                            colPerturbations{channels, iFile};
+                                               zeros(channel+2, num_chans)]';
+        
+        close all;
+        figure;
+        plot(real(originalEigs), imag(originalEigs), 'ko');
+        hold on;
+%         plot(
 %         perturbedAdjMat = originalAdjMat 
     end
     

@@ -107,6 +107,13 @@ for i=1:dataRange/stepSize
         theta_adj = reshape(theta, num_channels, num_channels)';    % reshape fills in columns first, so must transpose
     elseif CORRELATION
         theta_adj = computePairwiseCorrelation(tmpdata, OPTIONS);
+    elseif PDC
+        A = theta_adj; 
+        p_opt = 1;
+        Nf = 250;
+        [~, PDC] = computeDTFandPDC(A, p_opt, frequency_sampling, Nf);
+    elseif DTF
+        [DTF, ~] = computeDTFandPDC(A, p_opt, frequency_sampling, Nf);
     end
     
     

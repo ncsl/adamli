@@ -55,6 +55,7 @@ rowsum_time_chan = zeros(num_channels, ... % rowsum at each time/channel
 minPerturb_time_chan = zeros(num_channels, ... % fragility at each time/channel
                                                 timeRange);
 timeIndices = [];             % vector to store time indices (secs) of each window of data
+del_table = cell(N, timeRange);
 
 % loop through mat files and open them upbcd
 iTime = 1; % time pointer for heatmaps
@@ -102,7 +103,6 @@ for i=1:length(matFiles) % loop through each adjacency matrix
         N = size(theta_adj, 1); % number of rows
         del_size = zeros(N, length(w_space));
         del_temp = cell(length(w_space));
-        del_table = cell(N, timeRange);
         
         %%- grid search over sigma and w for each row to determine, what is
         %%- the min norm perturbation

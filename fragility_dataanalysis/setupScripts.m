@@ -16,7 +16,7 @@ adjMat = './adj_mats_win';
 dataDir = './data/';
 if CORRELATION
     if(SPEARMAN); corrType = 'spearman'; elseif(PEARSON); corrType = 'pearson'; end
-    adjMat = strcat('./', corrType, '/adj_mats_win');
+    adjMat = strcat('./', corrType, 'adj_mats_win');
 end
 if IS_SERVER
     adjMat = strcat('.', adjMat);
