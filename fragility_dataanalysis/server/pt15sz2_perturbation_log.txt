@@ -1,0 +1,1 @@
+This patient has eigenvalue > radius, check it!pt15sz2_1000_500_500, on this number of the mat files, 120 
