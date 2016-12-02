@@ -1,6 +1,10 @@
-function [included_channels, ezone_labels, earlyspread_labels, latespread_labels, frequency_sampling] ...
+function [included_channels, ezone_labels, ...
+    earlyspread_labels, latespread_labels, ...
+    resection_labels, frequency_sampling] ...
                 = determineClinicalAnnotations(patient_id, seizure_id)
     frequency_sampling = 1000; % general default sampling frequency
+    resection_labels = {};     % initialize resection labels
+    
     if strcmp(patient_id, 'EZT007')
         included_channels = [1:16 18:53 55:71 74:78 81:94];
         ezone_labels = {'O7', 'E8', 'E7', 'I5', 'E9', 'I6', 'E3', 'E2',...
@@ -14,12 +18,29 @@ function [included_channels, ezone_labels, earlyspread_labels, latespread_labels
         earlyspread_labels = {};
          latespread_labels = {};
     elseif strcmp(patient_id, 'EZT019')
+        % resections: A,B,C,E,I AND likely T
         included_channels = [1:5 7:22 24:79];
-        ezone_labels = {'I5', 'I6', 'B9', 'I9', 'T10', 'I10', 'B6', 'I4', ...
-            'T9', 'I7', 'B3', 'B5', 'B4', 'I8', 'T6', 'B10', 'T3', ...
-            'B1', 'T8', 'T7', 'B7', 'I3', 'B2', 'I2', 'T4', 'T2'}; 
+%         ezone_labels = {'I5', 'I6', 'B9', 'I9', 'T10', 'I10', 'B6', 'I4', ...
+%             'T9', 'I7', 'B3', 'B5', 'B4', 'I8', 'T6', 'B10', 'T3', ...
+%             'B1', 'T8', 'T7', 'B7', 'I3', 'B2', 'I2', 'T4', 'T2'}; 
+        ezone_labels = {'B3', 'B4', 'C1', 'C2'}; 
         earlyspread_labels = {};
-         latespread_labels = {}; 
+        latespread_labels = {}; 
+        resection_labels = {'A', 'B', 'C', 'E', 'I'}
+    elseif strcmp(patient_id, 'EZT030')
+        included_channels = [];
+        ezone_labels = {'Q11', 'L6', 'M9', 'N9', 'W9'};
+        earlyspread_labels = {};
+        latespread_labels = {};
+    elseif strcmp(patient_id, 'EZT037')
+        % resections: A,B,C
+        included_channels = [];
+%         ezone_labels = {'C1', 'C2', 'I1', 'I2', 'I3', 'I4', 'I5', 'B1', 'B2', 'E1', 'E2', 'E3', 'E4', ...
+%             'E5', 'E6', 'E7', 'E8', 'E9', 'E10'};
+        ezone_labels = {'A1', 'B1', 'B2'}; % clinical notes of onset
+        earlyspread_labels = {};
+        latespread_labels = {};
+        resection_labels = {'A', 'B', 'C'};
      elseif strcmp(patient_id, 'EZT045') % FAILURES 2 EZONE LABELS?
         included_channels = [1 3:14 16:20 24:28 30:65];
         ezone_labels = {'X2', 'X1'}; %pt2
@@ -197,17 +218,6 @@ function [included_channels, ezone_labels, earlyspread_labels, latespread_labels
         included_channels = [1:4 7:12 14:16 18:19 21:37 42:43 46:47 51:69 71:147];
         ezone_labels = {'POLRDI1', 'POLRDI2', 'POLRDI3', 'POLRDI4', 'POLRSI1', 'POLRSI2', 'POLRSI3', 'POLRSI4'};
         earlyspread_labels = {'POLRPP1', 'POLRPP2'};
-        latespread_labels = {};
-    elseif strcmp(patient_id, 'EZT030')
-        included_channels = [];
-        ezone_labels = {'Q11', 'L6', 'M9', 'N9', 'W9'};
-        earlyspread_labels = {};
-        latespread_labels = {};
-    elseif strcmp(patient_id, 'EZT037')
-        included_channels = [];
-        ezone_labels = {'C1', 'C2', 'I1', 'I2', 'I3', 'I4', 'I5', 'B1', 'B2', 'E1', 'E2', 'E3', 'E4', ...
-            'E5', 'E6', 'E7', 'E8', 'E9', 'E10'};
-        earlyspread_labels = {};
         latespread_labels = {};
     elseif strcmp(patient_id, 'EZT070')
         included_channels = [1:82 84:94];
