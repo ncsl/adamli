@@ -21,7 +21,9 @@ seizureEnd = adj_args.seizureEnd; % time seizure ends
 included_channels = adj_args.included_channels;
 labels = adj_args.labels;
 l2regularization = adj_args.l2regularization;
+num_channels = adj_args.num_channels;
 
+TYPE_CONNECTIVITY = adj_args.TYPE_CONNECTIVITY;
 LEASTSQUARES = adj_args.connectivity.LEASTSQUARES;
 CORRELATION = adj_args.connectivity.CORRELATION;
 SPEARMAN = adj_args.connectivity.SPEARMAN;
@@ -35,6 +37,7 @@ OPTIONS.PEARSON = PEARSON;
 ezone_labels = clinicalLabels.ezone_labels;
 earlyspread_labels = clinicalLabels.earlyspread_labels;
 latespread_labels = clinicalLabels.latespread_labels;
+resection_labels = clinicalLabels.resection_labels;
 
 % patient identification
 patient = strcat(patient_id, seizure_id); 
@@ -53,51 +56,43 @@ else
     preFiltStr       = 'Unfiltered raw traces';
     preFiltStrShort  = '_noFilt';
 end
+
 % apply band notch filter to eeg data
 eeg = buttfilt(eeg,[59.5 60.5], frequency_sampling,'stop',1);
-
-% initialize metadata describing the seizure and the recording
-if ~isempty(included_channels)
-    num_channels = length(included_channels);
-else
-    num_channels = size(eeg, 1);
-end
-
-% paramters describing the data to be saved
-% window parameters - overlap, #samples, stepsize, window pointer
-preseizureTime = timeRange(1); % e.g. 60 seconds 
-postseizureTime = timeRange(2); % e.g. 10 seconds
-dataStart = seizureStart - preseizureTime*frequency_sampling;  % current data window                      % where to grab data (milliseconds)
-limit = seizureStart + postseizureTime*frequency_sampling; % go to seizure start, or + 10 seconds
-currentWindow = dataStart;
-dataRange = limit-currentWindow;
-
-
-disp(['The range locked to seizure to look over is ', num2str(-timeRange(1)), ...
-    ' until ', num2str(timeRange(2))]); 
-disp(['Total number of channels ', num2str(num_channels)]);
-disp(['Length of to be included channels ', num2str(length(included_channels))]);
-disp(['Seizure starts at ', num2str(limit), ' milliseconds']);
-disp(['Running analysis for ', num2str(dataRange), ' milliseconds']);
 
 % set stepsize and window size to reflect sampling rate (milliseconds)
 stepSize = stepSize * frequency_sampling/1000; 
 winSize = winSize * frequency_sampling/1000;
 
-for i=1:dataRange/stepSize  
-    dataWindow = dataStart + (i-1)*stepSize; % get step size as function of current step
-    
-    % initialize the file name to save the adjacency matrix as
-    fileName = strcat(patient, '_', num2str(i), '_before', ...
-        num2str((seizureStart-dataWindow)*(1000/frequency_sampling)), '.mat');
+% paramters describing the data to be saved
+% window parameters - overlap, #samples, stepsize, window pointer
+dataRange = 60000;
+startWindow = seizureStart-dataRange;
+currentWindow = startWindow;
 
+lenData = dataRange;
+lenData = size(eeg,2); % length of data in seconds
+numWindows = lenData/stepSize;
+fileName = strcat(patient, '_adjmats_', TYPE_CONNECTIVITY, '.mat');
+
+% initialize timePoints vector and adjacency matrices
+timePoints = [1:stepSize:lenData-winSize+1; winSize:stepSize:lenData]';
+adjMats = zeros(size(timePoints,1), num_channels, num_channels);
+
+% display data 
+disp(['Total number of channels ', num2str(num_channels)]);
+disp(['Length of to be included channels ', num2str(length(included_channels))]);
+disp(['Seizure starts at ', num2str(seizureStart), ' milliseconds']);
+disp(['Running analysis for ', num2str(lenData), ' windows']);
+
+for i=1:numWindows
     % step 1: extract the data and apply the notch filter. Note that column
     %         #i in the extracted matrix is filled by data samples from the
     %         recording channel #i.
-    tmpdata = eeg(:, dataWindow + 1:dataWindow + winSize);
+    tmpdata = eeg(:, timePoints(i,1):timePoints(i,2));
     
+    % step 2: compute some functional connectivity 
     if LEASTSQUARES
-        % step 2: compute some functional connectivity 
         % linear model: Ax = b; A\b -> x
         b = tmpdata(:); % define b as vectorized by stacking columns on top of another
         b = b(num_channels+1:end); % only get the time points after the first one
@@ -116,27 +111,27 @@ for i=1:dataRange/stepSize
         [DTF, ~] = computeDTFandPDC(A, p_opt, frequency_sampling, Nf);
     end
     
-    
-    %% save the theta_adj made
-    %- save the data into a struct into a mat file milliseconds
-    data = struct();
-    data.theta_adj = theta_adj;
-    data.seizureStart = seizureStart;
-    data.seizureEnd = seizureEnd;
-    data.winSize = winSize;
-    data.stepSize = stepSize;
-    data.timewrtSz = dataWindow - seizureStart;
-    data.timeStart = seizureStart - preseizureTime*frequency_sampling;
-    data.timeEnd = seizureStart + postseizureTime*frequency_sampling;
-    data.index = i;
-    data.included_channels = included_channels;
-    data.ezone_labels = ezone_labels;
-    data.earlyspread_labels = earlyspread_labels;
-    data.latespread_labels = latespread_labels;
-    data.labels = labels;
-    
-    save(fullfile(toSaveAdjDir, fileName), 'data');
-    
-    disp(['Saved file: ', fileName]);
+    % step 3: store the computed adjacency matrix
+    adjMats(i, :, :) = theta_adj;
+
+    % display a message for the user
+    disp(['Finished: ', num2str(i), ' out of ', num2str(dataRange/stepSize)]);
 end
+
+%%- Create the structure for the adjacency matrices for this patient/seizure
+adjmat_struct = struct();
+adjmat_struct.ezone_labels = ezone_labels;
+adjmat_struct.earlyspread_labels = earlyspread_labels;
+adjmat_struct.latespread_labels = latespread_labels;
+adjmat_struct.resection_labels = resection_labels;
+adjmat_struct.all_labels = labels;
+adjmat_struct.seizure_start = seizureStart;
+adjmat_struct.seizure_end = seizureEnd;
+adjmat_struct.winSize = winSize;
+adjmat_struct.stepSize = stepSize;
+adjmat_struct.timePoints = timePoints;
+adjmat_struct.adjMats = adjMats;
+
+save('test', 'adjmat_struct')
+save(fullfile(toSaveAdjDir, fileName), 'adjmat_struct', '-v7.3');
 end

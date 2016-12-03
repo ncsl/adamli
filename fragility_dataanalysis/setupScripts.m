@@ -3,11 +3,12 @@ LEASTSQUARES = 1;
 CORRELATION = 0;
 SPEARMAN = 1;
 PEARSON = ~SPEARMAN;
+TYPE_CONNECTIVITY = 'LEASTSQUARES';
 
 timeRange = [60 0];
 
 connectivity = struct();
-connectivity.LEASTSQUARES =LEASTSQUARES;
+connectivity.LEASTSQUARES = LEASTSQUARES;
 connectivity.CORRELATION = CORRELATION;
 connectivity.SPEARMAN = SPEARMAN;
 connectivity.PEARSON = PEARSON;
@@ -54,6 +55,7 @@ clinicalLabels = struct();
 clinicalLabels.ezone_labels = ezone_labels;
 clinicalLabels.earlyspread_labels = earlyspread_labels;
 clinicalLabels.latespread_labels = latespread_labels;
+clinicalLabels.resection_labels = resection_labels;
 
 %% DEFINE COMPUTATION PARAMETERS AND DIRECTORIES TO SAVE DATA
 patient = strcat(patient_id, seizure_id);
@@ -71,23 +73,9 @@ if ~seeg
     %% NIH, JHU PATIENTS
     %- set file path for the patient file 
     patient_eeg_path = strcat(dataDir, patient);
-    
-    try
-        % READ EEG FILE Mat File
-        % files to process
-        data = load(fullfile(patient_eeg_path, patient));
-        eeg = data.data;
-        labels = data.elec_labels;
-        onset_time = data.seiz_start_mark;
-        offset_time = data.seiz_end_mark;
-        recording_start = 0; % since they dont' give absolute time of starting the recording
-        seizureStart = (onset_time - recording_start); % time seizure starts
-        seizureEnd = (offset_time - recording_start); % time seizure ends
-        recording_duration = size(data.data, 2);
-        num_channels = size(data.data, 1);
-    catch
-        patient_file_path = fullfile(dataDir, patient, strcat(patient, '.csv'));
+    patient_file_path = fullfile(dataDir, patient, strcat(patient, '.csv'));
 
+    try
         %- set the meta data using the patient input file
         [~, ~, recording_start, ...
          onset_time, offset_time, ...
@@ -99,10 +87,6 @@ if ~seeg
         if length(number_of_samples) > 1
             number_of_samples = number_of_samples(1);
         end
-        if length(num_channels) > 1
-            num_channels = num_channels(1);
-        end
-        num_channels = length(included_channels);
 
         % extract labels
         patient_label_path = fullfile(dataDir, patient, strcat(patient, '_labels.csv'));
@@ -111,8 +95,8 @@ if ~seeg
         labels = labels{:}; 
         fclose(fid);
         
-        
-        labels = labels(included_channels);
+        data = load(fullfile(patient_eeg_path, patient));
+        eeg = data.data;
 %         eeg = eeg(included_channels,:);
         % READ EEG FILE
         % files to process
@@ -128,6 +112,19 @@ if ~seeg
 %         num_values = patient_files(patient_file_names{1});
 %         % extract eeg 
 %         eeg = csv2eeg(patient_eeg_path, filename, num_values, num_channels);
+    catch
+        % READ EEG FILE Mat File
+        % files to process
+        data = load(fullfile(patient_eeg_path, patient));
+        eeg = data.data;
+        labels = data.elec_labels;
+        onset_time = data.seiz_start_mark;
+        offset_time = data.seiz_end_mark;
+        recording_start = 0; % since they dont' give absolute time of starting the recording
+        seizureStart = (onset_time - recording_start); % time seizure starts
+        seizureEnd = (offset_time - recording_start); % time seizure ends
+        recording_duration = size(data.data, 2);
+        num_channels = size(data.data, 1);
     end
 else
     %% EZT/SEEG PATIENTS
@@ -147,19 +144,19 @@ else
     num_channels = size(data.data, 1);
 end
 
-% only take included_channels
-if ~isempty(included_channels) && ~exist('ECG', 'var')
-    try
-        eeg = eeg(included_channels, :);
-        labels = labels(included_channels);
-    catch e
-        disp(e)
-        disp('server adj main script.')
-    end
-end
+% % only take included_channels
+% if ~isempty(included_channels) && ~exist('ECG', 'var')
+%     try
+%         eeg = eeg(included_channels, :);
+% %         labels = labels(included_channels);
+%     catch e
+%         disp(e)
+%         disp('server adj main script.')
+%     end
+% end
 
 try
-    if length(labels) ~= size(eeg,1)
+    if length(labels(included_channels)) ~= size(eeg(included_channels,:),1)
         disp('Something wrong here...!!!!');
     end
 catch e
@@ -174,7 +171,6 @@ if frequency_sampling ~=1000
 %     stepSize = stepSize*frequency_sampling/1000;
 end
 
-%% 01: RUN FUNCTIONAL CONNECTIVITY COMPUTATION
 if seizureStart < 60 * frequency_sampling
         timeRange(1) = seizureStart/frequency_sampling;
 end

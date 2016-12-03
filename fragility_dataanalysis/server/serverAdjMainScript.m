@@ -15,6 +15,12 @@ end
 
 setupScripts;
 
+% apply included channels to eeg and labels
+if ~isempty(included_channels)
+    eeg = eeg(included_channels, :);
+    labels = labels(included_channels);
+end
+
 % define args for computing the functional connectivity
 adj_args = struct();
 adj_args.BP_FILTER_RAW = 1; % apply notch filter or not?
@@ -29,6 +35,8 @@ adj_args.seizureEnd = seizureEnd;
 adj_args.labels = labels;
 adj_args.l2regularization = l2regularization;
 adj_args.connectivity = connectivity;
+adj_args.TYPE_CONNECTIVITY = TYPE_CONNECTIVITY;
+adj_args.num_channels = size(eeg,1);    
 
 if size(eeg, 1) < winSize
     % compute connectivity

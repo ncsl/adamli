@@ -79,17 +79,21 @@ function [included_channels, ezone_labels, ...
         latespread_labels = {'POLATT4', 'POLATT5', 'POLATT6', ...
                             'POLSLT2', 'POLSLT3', 'POLSLT4', ...
                             'POLMLT2', 'POLMLT3', 'POLMLT4', 'POLG8', 'POLG16'};
+        resection_labels = {'POLATT', 'POLAST', 'POLPST', 'POLAD', 'POLPD', 'POLPLT5', 'POLPLT6', 'POLSLT1'};
     elseif strcmp(patient_id, 'pt2')
         included_channels = [1:14 16:19 21:25 27:37 43 44 47:74];
         ezone_labels = {'POLMST1', 'POLPST1', 'POLTT1'}; %pt2
         earlyspread_labels = {'POLTT2', 'POLAST2', 'POLMST2', 'POLPST2', 'POLALEX1', 'POLALEX5'};
         latespread_labels = {};
+        resection_labels = {'POLTT', 'POLMST', 'POLAST', 'POLG1-4', 'POLG9-12', 'POLG18-20', 'POLG26', 'POLG27'};
     elseif strcmp(patient_id, 'pt3')
         included_channels = [1:19 21:37 42 43 46:69 71:133 135];
         included_channels = [1:19 21:37 42:43 46:69 71:107]; % removing left hemisphere electrodes
         ezone_labels = {'POLSFP2', 'POLSFP3', 'POLOF4'}; % 'POLOF1', 'POLOF2', 'POLOF3'
         earlyspread_labels = {'POLSFP5', 'POLSFP6', 'POLIFP1', 'POLIFP2', 'POLIFP3'};
-        latespread_labels = {}; 
+        latespread_labels = {};
+        resection_labels = {'POLSFP', 'POLMFP', 'POLIFP', 'POLOF3', 'POLOF4', ...
+                'POLFG1', 'POLFG2', 'POLFG9', 'POLFG10', 'POLFG17', 'POLFG18', 'POLFG25'};
     elseif strcmp(patient_id, 'pt6')
         included_channels = [1:36 42:43 46 52:56 58:71 73:95];
         ezone_labels = {'POLLA1', 'POLLA2', 'POLLA3', 'POLLA4', 'POLLAH1', ...
