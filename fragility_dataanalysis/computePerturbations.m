@@ -32,11 +32,6 @@ w_space = perturb_args.w_space;
 radius = perturb_args.radius;
 adjDir = perturb_args.adjDir;
 toSaveFinalDataDir = perturb_args.toSaveFinalDataDir;
-included_channels = perturb_args.included_channels;
-num_channels = perturb_args.num_channels
-frequency_sampling = perturb_args.frequency_sampling;
-% winSize = perturb_args.winSize;
-% stepSize = perturb_args.
 
 sigma = sqrt(radius^2 - w_space.^2); % move to the unit circle 1, for a plethora of different radial frequencies
 b = [0; 1];                          % initialize for perturbation computation later

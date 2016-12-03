@@ -17,6 +17,11 @@ if nargin == 0 % testing purposes
 end
 
 setupScripts;
+% apply included channels to eeg and labels
+if ~isempty(included_channels)
+    eeg = eeg(included_channels, :);
+    labels = labels(included_channels);
+end
 
 for j=1:length(perturbationTypes)
     perturbationType = perturbationTypes(j);
@@ -34,10 +39,6 @@ for j=1:length(perturbationTypes)
     perturb_args.radius = radius;
     perturb_args.adjDir = toSaveAdjDir;
     perturb_args.toSaveFinalDataDir = toSaveFinalDataDir;
-    perturb_args.labels = labels;
-    perturb_args.included_channels = included_channels;
-    perturb_args.num_channels = size(eeg, 1);
-    perturb_args.frequency_sampling = frequency_sampling;
 
     computePerturbations(patient_id, seizure_id, perturb_args);
 end

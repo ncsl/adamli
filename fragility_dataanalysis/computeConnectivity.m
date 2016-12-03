@@ -73,7 +73,7 @@ currentWindow = startWindow;
 lenData = dataRange;
 lenData = size(eeg,2); % length of data in seconds
 numWindows = lenData/stepSize;
-fileName = strcat(patient, '_adjmats_', TYPE_CONNECTIVITY, '.mat');
+fileName = strcat(patient, '_adjmats_', lower(TYPE_CONNECTIVITY), '.mat');
 
 % initialize timePoints vector and adjacency matrices
 timePoints = [1:stepSize:lenData-winSize+1; winSize:stepSize:lenData]';
@@ -131,6 +131,7 @@ adjmat_struct.winSize = winSize;
 adjmat_struct.stepSize = stepSize;
 adjmat_struct.timePoints = timePoints;
 adjmat_struct.adjMats = adjMats;
+adjmat_struct.included_channels = included_channels;
 
 save('test', 'adjmat_struct')
 save(fullfile(toSaveAdjDir, fileName), 'adjmat_struct', '-v7.3');
