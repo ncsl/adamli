@@ -1,0 +1,9 @@
+{Undefined function or variable 'num_channels'.
+
+Error in computePerturbations (line 46)
+colsum_time_chan = zeros(num_channels, ... % colsum at each time/channel
+
+Error in serverPerturbationScript (line 43)
+    computePerturbations(patient_id, seizure_id, perturb_args);
+} 
+
