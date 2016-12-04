@@ -1,24 +1,18 @@
 l2regularization = 0.0;
-LEASTSQUARES = 1;
-CORRELATION = 0;
-SPEARMAN = 1;
-PEARSON = ~SPEARMAN;
+TYPES_OF_CONNECTIVITY = {'LEASTSQUARES', 'SPEARMAN', 'PEARSON', 'PINV'};
 TYPE_CONNECTIVITY = 'LEASTSQUARES';
 
 timeRange = [60 0];
 
-connectivity = struct();
-connectivity.LEASTSQUARES = LEASTSQUARES;
-connectivity.CORRELATION = CORRELATION;
-connectivity.SPEARMAN = SPEARMAN;
-connectivity.PEARSON = PEARSON;
-
 adjMat = './adj_mats_win';
 dataDir = './data/';
-if CORRELATION
-    if(SPEARMAN); corrType = 'spearman'; elseif(PEARSON); corrType = 'pearson'; end
-    adjMat = strcat('./', corrType, 'adj_mats_win');
-end
+% corrType = '';
+% if strcmp(TYPE_CONNECTIVITY, 'SPEARMAN')
+%     corrType = 'spearman';
+% elseif strcmp(TYPE_CONNECTIVITY, 'PEARSON')
+%     corrType = 'pearson'; 
+% end
+% adjMat = strcat('./', corrType, 'adj_mats_win');
 if IS_SERVER
     adjMat = strcat('.', adjMat);
     dataDir = strcat('.', dataDir);
@@ -97,21 +91,6 @@ if ~seeg
         
         data = load(fullfile(patient_eeg_path, patient));
         eeg = data.data;
-%         eeg = eeg(included_channels,:);
-        % READ EEG FILE
-        % files to process
-%         f = dir([patient_eeg_path '/*eeg.csv']);
-%         patient_file_names = cell(1, length(f));
-%         for iChan=1:length(f)
-%             patient_file_names{iChan} = f(iChan).name;
-%         end
-%         patient_files = containers.Map(patient_file_names, number_of_samples)
-%         
-%         %- Extract EEG and Perform Analysis
-%         filename = patient_file_names{1};
-%         num_values = patient_files(patient_file_names{1});
-%         % extract eeg 
-%         eeg = csv2eeg(patient_eeg_path, filename, num_values, num_channels);
     catch
                 [~, ~, recording_start, ...
          onset_time, offset_time, ...
@@ -143,19 +122,6 @@ if ~seeg
         num_values = patient_files(patient_file_names{1});
         % extract eeg 
         eeg = csv2eeg(patient_eeg_path, filename, num_values, num_channels);
-        
-        % READ EEG FILE Mat File
-        % files to process
-%         data = load(fullfile(patient_eeg_path, patient));
-%         eeg = data.data;
-%         labels = data.elec_labels;
-%         onset_time = data.seiz_start_mark;
-%         offset_time = data.seiz_end_mark;
-%         recording_start = 0; % since they dont' give absolute time of starting the recording
-%         seizureStart = (onset_time - recording_start); % time seizure starts
-%         seizureEnd = (offset_time - recording_start); % time seizure ends
-%         recording_duration = size(data.data, 2);
-%         num_channels = size(data.data, 1);
     end
 else
     %% EZT/SEEG PATIENTS

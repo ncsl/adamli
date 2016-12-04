@@ -9,6 +9,7 @@ if nargin == 0 % testing purposes
     patient='EZT007seiz001';
     patient ='pt7sz19';
     patient = 'JH102sz1';
+    patient = 'pt1sz2';
     % window paramters
     radius = 1.5;
     winSize = 500; % 500 milliseconds

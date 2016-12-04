@@ -27,16 +27,10 @@
 %
 % Ver.: 1.0 - Date: 11/23/2016
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-function theta_adj = computePairwiseCorrelation(eegMat, OPTIONS)
-    PEARSON = OPTIONS.PEARSON;
-    SPEARMAN = OPTIONS.SPEARMAN;
-    if PEARSON == SPEARMAN
-        error('Pick 1 correlation metric!');
-    end
-
-    if PEARSON
+function theta_adj = computePairwiseCorrelation(eegMat, TYPE_CONNECTIVITY)
+    if strcmp(TYPE_CONNECTIVITY, 'PEARSON')
         theta_adj = corr(eegMat'); % compute pairwise correlations among all channels
-    else
+    elseif strcmp(TYPE_CONNECTIVITY, 'SPEARMAN')
         theta_adj = corr(eegMat', 'type', 'Spearman');
     end
 end

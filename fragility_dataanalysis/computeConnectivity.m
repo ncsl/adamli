@@ -24,15 +24,9 @@ l2regularization = adj_args.l2regularization;
 num_channels = adj_args.num_channels;
 
 TYPE_CONNECTIVITY = adj_args.TYPE_CONNECTIVITY;
-LEASTSQUARES = adj_args.connectivity.LEASTSQUARES;
-CORRELATION = adj_args.connectivity.CORRELATION;
-SPEARMAN = adj_args.connectivity.SPEARMAN;
-PEARSON = adj_args.connectivity.PEARSON;
 
 % set options for connectivity measurements
 OPTIONS.l2regularization = l2regularization;
-OPTIONS.SPEARMAN = SPEARMAN;
-OPTIONS.PEARSON = PEARSON;
 
 ezone_labels = clinicalLabels.ezone_labels;
 earlyspread_labels = clinicalLabels.earlyspread_labels;
@@ -92,7 +86,7 @@ for i=1:numWindows
     tmpdata = eeg(:, timePoints(i,1):timePoints(i,2));
     
     % step 2: compute some functional connectivity 
-    if LEASTSQUARES
+    if strcmp(TYPE_CONNECTIVITY, 'LEASTSQUARES')
         % linear model: Ax = b; A\b -> x
         b = tmpdata(:); % define b as vectorized by stacking columns on top of another
         b = b(num_channels+1:end); % only get the time points after the first one
@@ -100,8 +94,16 @@ for i=1:numWindows
         % - use least square computation
         theta = computeLeastSquares(tmpdata, b, OPTIONS);
         theta_adj = reshape(theta, num_channels, num_channels)';    % reshape fills in columns first, so must transpose
-    elseif CORRELATION
-        theta_adj = computePairwiseCorrelation(tmpdata, OPTIONS);
+    elseif strcmp(TYPE_CONNECTIVITY, 'PINV')
+        % linear model: Ax = b; (A'*A)*A'*b -> x
+        b = tmpdata(:); % define b as vectorized by stacking columns on top of another
+        b = b(num_channels+1:end); % only get the time points after the first one
+
+        % - use least square computation
+        theta = pinv(tmpdata)*b;
+        theta_adj = reshape(theta, num_channels, num_channels)';    % reshape fills in columns first, so must transpose
+    elseif strcmp(TYPE_CONNECTIVITY, 'SPEARMAN') || strcmp(TYPE_CONNECTIVITY, 'PEARSON')
+        theta_adj = computePairwiseCorrelation(tmpdata, TYPE_CONNECTIVITY);
     elseif PDC
         A = theta_adj; 
         p_opt = 1;
@@ -134,6 +136,5 @@ adjmat_struct.adjMats = adjMats;
 adjmat_struct.included_channels = included_channels;
 adjmat_struct.frequency_sampling = frequency_sampling;
 
-save('test', 'adjmat_struct')
 save(fullfile(toSaveAdjDir, fileName), 'adjmat_struct', '-v7.3');
 end

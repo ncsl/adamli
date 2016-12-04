@@ -34,7 +34,6 @@ adj_args.seizureStart = seizureStart;
 adj_args.seizureEnd = seizureEnd;
 adj_args.labels = labels;
 adj_args.l2regularization = l2regularization;
-adj_args.connectivity = connectivity;
 adj_args.TYPE_CONNECTIVITY = TYPE_CONNECTIVITY;
 adj_args.num_channels = size(eeg,1);    
 
