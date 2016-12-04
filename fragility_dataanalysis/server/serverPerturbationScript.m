@@ -39,7 +39,8 @@ for j=1:length(perturbationTypes)
     perturb_args.radius = radius;
     perturb_args.adjDir = toSaveAdjDir;
     perturb_args.toSaveFinalDataDir = toSaveFinalDataDir;
-
+    perturb_args.TYPE_CONNECTIVITY = TYPE_CONNECTIVITY;
+    
     computePerturbations(patient_id, seizure_id, perturb_args);
 end
 end

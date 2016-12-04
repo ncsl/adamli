@@ -75,4 +75,5 @@ function x = computeLeastSquares(eegMat, observationVector, OPTIONS)
         x = (symmetricH+l2regularization*eye(length(symmetricH))) \ ...
             (H'*observationVector);
     end
+    x = pinv(H)*observationVector;
 end

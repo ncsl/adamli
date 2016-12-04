@@ -132,6 +132,7 @@ adjmat_struct.stepSize = stepSize;
 adjmat_struct.timePoints = timePoints;
 adjmat_struct.adjMats = adjMats;
 adjmat_struct.included_channels = included_channels;
+adjmat_struct.frequency_sampling = frequency_sampling;
 
 save('test', 'adjmat_struct')
 save(fullfile(toSaveAdjDir, fileName), 'adjmat_struct', '-v7.3');
