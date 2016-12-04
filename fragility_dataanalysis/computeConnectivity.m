@@ -117,7 +117,7 @@ for i=1:numWindows
     adjMats(i, :, :) = theta_adj;
 
     % display a message for the user
-    disp(['Finished: ', num2str(i), ' out of ', num2str(dataRange/stepSize)]);
+    disp(['Finished: ', num2str(i), ' out of ', num2str(numWindows)]);
 end
 
 %%- Create the structure for the adjacency matrices for this patient/seizure
