@@ -67,6 +67,7 @@ info.stepSize = stepSize;
 info.frequency_sampling = frequency_sampling;
 
 num_channels = size(adjmat_struct.adjMat, 3);
+N = num_channels;
 num_times = size(adjmat_struct.adjMat, 1);
 
 %% 1: Begin Perturbation Analysis
@@ -78,7 +79,6 @@ colsum_time_chan = zeros(num_channels, num_times);
 rowsum_time_chan = zeros(num_channels, num_times);
 
 % loop through mat files and open them upbcd
-iTime = 1; % time pointer for heatmaps
 tic; % start counter
 for i=1:length(matFiles) % loop through each adjacency matrix
     %%- 01: Extract File and Information
@@ -86,8 +86,8 @@ for i=1:length(matFiles) % loop through each adjacency matrix
     adjmat_struct = data.adjmat_struct;
     adjMats = adjmat_struct.adjMats;
     
-    for j=1:num_times % loop through each time window of adjacency matrix
-        adjMat = adjMats(j,:,:); % get current adjacency matrix
+    for iTime=1:num_times % loop through each time window of adjacency matrix
+        adjMat = adjMats(iTime,:,:); % get current adjacency matrix
         
         if max(abs(eig(adjMat))) > radius
             logfile = strcat(patient, '_perturbation_log.txt');
@@ -109,20 +109,20 @@ for i=1:length(matFiles) % loop through each adjacency matrix
         % determine which indices have eigenspectrums that are stable
         max_eig = max(abs(eig(adjMat)));
         if (max_eig < radius) % this is a stable eigenspectrum
-            N = size(adjMat, 1); % number of rows
-            del_size = zeros(N, length(w_space));
-            del_temp = cell(length(w_space));
+            % store min delta for each electrode X w
+            del_size = zeros(N, length(w_space));   % store min_norms
+            del_temp = cell(length(w_space));       % store all min_norm vectors
 
             %%- grid search over sigma and w for each row to determine, what is
             %%- the min norm perturbation
-            for iNode=1:N
+            for iNode=1:N % 1st loop through each electrode
                 ek = [zeros(iNode-1, 1); 1; zeros(N-iNode,1)]; % unit column vector at this node
                 A = adjMat; 
 
-                for iW=1:length(w_space) % loop through frequencies
+                for iW=1:length(w_space) % 2nd loop through frequencies
                     lambda = sigma(iW) + 1i*w_space(iW);
 
-                    % row perturbation inversion
+                    % compute row, or column perturbation
                     if (perturbationType == 'R')
                         C = ek'*inv(A - lambda*eye(N));  
 
@@ -133,12 +133,16 @@ for i=1:length(matFiles) % loop through each adjacency matrix
                         end
                     elseif (perturbationType == 'C')
                         C = inv(A - lambda*eye(N))*ek; 
+                        
                         if size(C,2) > 1
                             size(C)
                             disp('Could be an error in setting Row and Col Pert.');
                             k = waitforbuttonpress
                         end
                     end
+                    
+                    %- extract real and imaginary components
+                    %- create B vector of constraints
                     Cr = real(C);  Ci = imag(C);
                     if strcmp(perturbationType, 'R')
                         B = [Ci; Cr];
@@ -146,8 +150,8 @@ for i=1:length(matFiles) % loop through each adjacency matrix
                         B = [Ci, Cr]';
                     end
 
+                    % compute perturbation necessary
                     if w_space(iW) ~= 0
-                        % compute perturbation necessary
                         del = B'*inv(B*B')*b;
                     else
                         del = C./(norm(C)^2);
@@ -157,25 +161,21 @@ for i=1:length(matFiles) % loop through each adjacency matrix
                     del_size(iNode, iW) = norm(del); 
                     del_temp{iW} = del;
                 end
+                
+                %%- 03: Store Results min norm perturbation
                 % store minimum perturbation, for each node at a certain time point
                 min_index = find(del_size(iNode,:) == min(del_size(iNode, :)),1);
                 minPerturb_time_chan(iNode, iTime) = del_size(iNode, min_index);
                 del_table(iNode, iTime) = del_temp(min_index);
             end % end of loop through channels
 
-            %%- 03: Store Results (colsum, rowsum, perturbation,
-            % store col/row sum of adjacency matrix
-            colsum_time_chan(:, iTime) = sum(adjMat, 1);
-            rowsum_time_chan(:, iTime) = sum(adjMat, 2);
-
             % update pointer for the fragility heat map
-            iTime = iTime+1;
-            disp(['On ', num2str(i), ' out of ', num2str(length(matFiles)), ' to analyze.']);
+            disp(['On ', num2str(iTime), ' out of ', num2str(num_times), ' to analyze.']);
         else
-            disp(['max eigenvalue for ']);
+            disp(['max eigenvalue problem for ', num2str(iTime), ' time point.']);
         end
-    end
-end
+    end % end of loop through time
+end % end of loop through mat files
 toc
 
 %% 3. Compute fragility rankings per column by normalization
@@ -187,17 +187,14 @@ for i=1:size(minPerturb_time_chan,1)      % loop through each channel
     end
 end
 
-% save some sort of metadata
-metadata = struct();
-metadata.frequency_sampling = frequency_sampling;
-metadata.seizureStart = seizureStart;
-metadata.seizureEnd = seizureEnd;
-metadata.winSize = winSize;
-metadata.stepSize = stepSize;
-metadata.radius = radius;
-metadata.patient = patient;
-metadata.del_table = del_table;
+info.del_table = del_table;
 
-save(fullfile(toSaveFinalDataDir, strcat(patient,'final_data.mat')),...
- 'minPerturb_time_chan', 'colsum_time_chan', 'rowsum_time_chan', 'fragility_rankings', 'metadata');
+% initialize struct to save
+perturbation_struct = struct();
+perturbation_struct.info = info; % meta data info
+perturbation_struct.minNormPertMat = minPerturb_time_chan;
+perturbation_struct.timePoints = timePoints;
+
+filename = strcat(patient, '_perturbation_', lower(TYPE_CONNECTIVITY), '.mat');
+save(fullfile(toSaveFinalDataDir, filename), 'perturbation_struct');
 end

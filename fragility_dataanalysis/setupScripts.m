@@ -113,18 +113,49 @@ if ~seeg
 %         % extract eeg 
 %         eeg = csv2eeg(patient_eeg_path, filename, num_values, num_channels);
     catch
+                [~, ~, recording_start, ...
+         onset_time, offset_time, ...
+         recording_duration, num_channels] = readLabels(patient_file_path);
+        number_of_samples = frequency_sampling * recording_duration;
+        seizureStart = milliseconds(onset_time - recording_start); % time seizure starts
+        seizureEnd = milliseconds(offset_time - recording_start); % time seizure ends
+
+        if length(number_of_samples) > 1
+            number_of_samples = number_of_samples(1);
+        end
+
+        % extract labels
+        patient_label_path = fullfile(dataDir, patient, strcat(patient, '_labels.csv'));
+        fid = fopen(patient_label_path); % open up labels to get all the channels
+        labels = textscan(fid, '%s', 'Delimiter', ',');
+        labels = labels{:}; 
+        fclose(fid);
+        
+        f = dir([patient_eeg_path '/*eeg.csv']);
+        patient_file_names = cell(1, length(f));
+        for iChan=1:length(f)
+            patient_file_names{iChan} = f(iChan).name;
+        end
+        patient_files = containers.Map(patient_file_names, number_of_samples)
+        
+        %- Extract EEG and Perform Analysis
+        filename = patient_file_names{1};
+        num_values = patient_files(patient_file_names{1});
+        % extract eeg 
+        eeg = csv2eeg(patient_eeg_path, filename, num_values, num_channels);
+        
         % READ EEG FILE Mat File
         % files to process
-        data = load(fullfile(patient_eeg_path, patient));
-        eeg = data.data;
-        labels = data.elec_labels;
-        onset_time = data.seiz_start_mark;
-        offset_time = data.seiz_end_mark;
-        recording_start = 0; % since they dont' give absolute time of starting the recording
-        seizureStart = (onset_time - recording_start); % time seizure starts
-        seizureEnd = (offset_time - recording_start); % time seizure ends
-        recording_duration = size(data.data, 2);
-        num_channels = size(data.data, 1);
+%         data = load(fullfile(patient_eeg_path, patient));
+%         eeg = data.data;
+%         labels = data.elec_labels;
+%         onset_time = data.seiz_start_mark;
+%         offset_time = data.seiz_end_mark;
+%         recording_start = 0; % since they dont' give absolute time of starting the recording
+%         seizureStart = (onset_time - recording_start); % time seizure starts
+%         seizureEnd = (offset_time - recording_start); % time seizure ends
+%         recording_duration = size(data.data, 2);
+%         num_channels = size(data.data, 1);
     end
 else
     %% EZT/SEEG PATIENTS
