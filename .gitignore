@@ -12,8 +12,6 @@ _log/*
 /fragility_dataanalysis/data/*/*.mat
 /fragility_dataanalysis/data/interictal_data/*/*.mat
 *job0.txt
-<<<<<<< HEAD
 *test.out
-=======
 /fragility_dataanalysis/serverdata/*
->>>>>>> 7d5b3950c283802f1e1b8ce39e65fff1bd49eb7e
+*/tempdata/*

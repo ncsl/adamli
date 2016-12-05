@@ -1,20 +1,4 @@
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% FUNCTION: computePerturbations
-% DESCRIPTION: This function takes adjacency matrices and computes the
-% minimum l2-norm perturbation required to destabilize the system.
-% 
-% INPUT:
-% - patient_id = The id of the patient (e.g. pt1, JH105, UMMC001)
-% - seizure_id = the id of the seizure (e.g. sz1, sz3)
-% - w_space = the frequency space on unit disc that we want to search over
-% - radius = the radius of disc that we want to perturb eigenvalues to
-% - perturbationType = 'R', or 'C' for row or column perturbation
-% 
-% OUTPUT:
-% - None, but it saves a mat file for the patient/seizure over all windows
-% in the time range -> adjDir/final_data
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-function computePerturbations(patient_id, seizure_id, perturb_args)%, clinicalLabels)
+function computePerturbation(patient_id, seizure_id, perturb_args)%, clinicalLabels)
 if nargin == 0
     patient_id = 'pt1';
     seizure_id = 'sz2';
@@ -87,7 +71,7 @@ data = load(matFile);
 adjmat_struct = data.adjmat_struct;
 adjMats = adjmat_struct.adjMats;
 
-for iTime=1:num_times % loop through each time window of adjacency matrix
+parfor iTime=1:num_times % loop through each time window of adjacency matrix
     adjMat = squeeze(adjMats(iTime,:,:)); % get current adjacency matrix
 
     if max(abs(eig(adjMat))) > radius
