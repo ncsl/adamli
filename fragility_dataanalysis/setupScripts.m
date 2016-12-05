@@ -94,6 +94,11 @@ if ~seeg
         labels = data.elec_labels;
         seizureStart = data.seiz_start_mark;
         seizureEnd = data.seiz_end_mark;
+        
+        if length(seizureStart) > 1
+            seizureStart = seizureStart(1);
+            seizureEnd = seizureEnd(1);
+        end
     catch e
         disp(e)
          [~, ~, recording_start, ...
