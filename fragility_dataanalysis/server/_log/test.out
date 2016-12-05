@@ -1,10 +1,10 @@
 ----------------------------------------
-Begin PBS Prologue Sat Dec  3 17:43:35 EST 2016 1480805015
-Job ID:		2392497.mgt
+Begin PBS Prologue Mon Dec  5 10:22:04 EST 2016 1480951324
+Job ID:		2393143.mgt
 Username:	ali
 Group:		sarma
-Nodes:		node043
-End PBS Prologue Sat Dec  3 17:43:36 EST 2016 1480805016
+Nodes:		node230
+End PBS Prologue Mon Dec  5 10:22:04 EST 2016 1480951324
 ----------------------------------------
 500
 500
@@ -18,335 +18,30 @@ Running connectivity computation.
                     R2013a (8.1.0.604) 64-bit (glnxa64)
                              February 15, 2013
 
+Error occurred loading: /home/ali/.matlab/R2013a/toolbox_cache-8.1.0-3347771634-glnxa64.xml
+Cache file ignored.
  
 To get started, type one of these: helpwin, helpdesk, or demo.
 For product information, visit www.mathworks.com.
  
-Looking at patient: JH101sz4
-Total number of channels 110
-Length of to be included channels 110
-Seizure starts at 153000 milliseconds
-Running analysis for 153000 windows
-Finished: 1 out of 120
-Finished: 2 out of 120
-Finished: 3 out of 120
-Finished: 4 out of 120
-Finished: 5 out of 120
-Finished: 6 out of 120
-Finished: 7 out of 120
-Finished: 8 out of 120
-Finished: 9 out of 120
-Finished: 10 out of 120
-Finished: 11 out of 120
-Finished: 12 out of 120
-Finished: 13 out of 120
-Finished: 14 out of 120
-Finished: 15 out of 120
-Finished: 16 out of 120
-Finished: 17 out of 120
-Finished: 18 out of 120
-Finished: 19 out of 120
-Finished: 20 out of 120
-Finished: 21 out of 120
-Finished: 22 out of 120
-Finished: 23 out of 120
-Finished: 24 out of 120
-Finished: 25 out of 120
-Finished: 26 out of 120
-Finished: 27 out of 120
-Finished: 28 out of 120
-Finished: 29 out of 120
-Finished: 30 out of 120
-Finished: 31 out of 120
-Finished: 32 out of 120
-Finished: 33 out of 120
-Finished: 34 out of 120
-Finished: 35 out of 120
-Finished: 36 out of 120
-Finished: 37 out of 120
-Finished: 38 out of 120
-Finished: 39 out of 120
-Finished: 40 out of 120
-Finished: 41 out of 120
-Finished: 42 out of 120
-Finished: 43 out of 120
-Finished: 44 out of 120
-Finished: 45 out of 120
-Finished: 46 out of 120
-Finished: 47 out of 120
-Finished: 48 out of 120
-Finished: 49 out of 120
-Finished: 50 out of 120
-Finished: 51 out of 120
-Finished: 52 out of 120
-Finished: 53 out of 120
-Finished: 54 out of 120
-Finished: 55 out of 120
-Finished: 56 out of 120
-Finished: 57 out of 120
-Finished: 58 out of 120
-Finished: 59 out of 120
-Finished: 60 out of 120
-Finished: 61 out of 120
-Finished: 62 out of 120
-Finished: 63 out of 120
-Finished: 64 out of 120
-Finished: 65 out of 120
-Finished: 66 out of 120
-Finished: 67 out of 120
-Finished: 68 out of 120
-Finished: 69 out of 120
-Finished: 70 out of 120
-Finished: 71 out of 120
-Finished: 72 out of 120
-Finished: 73 out of 120
-Finished: 74 out of 120
-Finished: 75 out of 120
-Finished: 76 out of 120
-Finished: 77 out of 120
-Finished: 78 out of 120
-Finished: 79 out of 120
-Finished: 80 out of 120
-Finished: 81 out of 120
-Finished: 82 out of 120
-Finished: 83 out of 120
-Finished: 84 out of 120
-Finished: 85 out of 120
-Finished: 86 out of 120
-Finished: 87 out of 120
-Finished: 88 out of 120
-Finished: 89 out of 120
-Finished: 90 out of 120
-Finished: 91 out of 120
-Finished: 92 out of 120
-Finished: 93 out of 120
-Finished: 94 out of 120
-Finished: 95 out of 120
-Finished: 96 out of 120
-Finished: 97 out of 120
-Finished: 98 out of 120
-Finished: 99 out of 120
-Finished: 100 out of 120
-Finished: 101 out of 120
-Finished: 102 out of 120
-Finished: 103 out of 120
-Finished: 104 out of 120
-Finished: 105 out of 120
-Finished: 106 out of 120
-Finished: 107 out of 120
-Finished: 108 out of 120
-Finished: 109 out of 120
-Finished: 110 out of 120
-Finished: 111 out of 120
-Finished: 112 out of 120
-Finished: 113 out of 120
-Finished: 114 out of 120
-Finished: 115 out of 120
-Finished: 116 out of 120
-Finished: 117 out of 120
-Finished: 118 out of 120
-Finished: 119 out of 120
-Finished: 120 out of 120
-Finished: 121 out of 120
-Finished: 122 out of 120
-Finished: 123 out of 120
-Finished: 124 out of 120
-Finished: 125 out of 120
-Finished: 126 out of 120
-Finished: 127 out of 120
-Finished: 128 out of 120
-Finished: 129 out of 120
-Finished: 130 out of 120
-Finished: 131 out of 120
-Finished: 132 out of 120
-Finished: 133 out of 120
-Finished: 134 out of 120
-Finished: 135 out of 120
-Finished: 136 out of 120
-Finished: 137 out of 120
-Finished: 138 out of 120
-Finished: 139 out of 120
-Finished: 140 out of 120
-Finished: 141 out of 120
-Finished: 142 out of 120
-Finished: 143 out of 120
-Finished: 144 out of 120
-Finished: 145 out of 120
-Finished: 146 out of 120
-Finished: 147 out of 120
-Finished: 148 out of 120
-Finished: 149 out of 120
-Finished: 150 out of 120
-Finished: 151 out of 120
-Finished: 152 out of 120
-Finished: 153 out of 120
-Finished: 154 out of 120
-Finished: 155 out of 120
-Finished: 156 out of 120
-Finished: 157 out of 120
-Finished: 158 out of 120
-Finished: 159 out of 120
-Finished: 160 out of 120
-Finished: 161 out of 120
-Finished: 162 out of 120
-Finished: 163 out of 120
-Finished: 164 out of 120
-Finished: 165 out of 120
-Finished: 166 out of 120
-Finished: 167 out of 120
-Finished: 168 out of 120
-Finished: 169 out of 120
-Finished: 170 out of 120
-Finished: 171 out of 120
-Finished: 172 out of 120
-Finished: 173 out of 120
-Finished: 174 out of 120
-Finished: 175 out of 120
-Finished: 176 out of 120
-Finished: 177 out of 120
-Finished: 178 out of 120
-Finished: 179 out of 120
-Finished: 180 out of 120
-Finished: 181 out of 120
-Finished: 182 out of 120
-Finished: 183 out of 120
-Finished: 184 out of 120
-Finished: 185 out of 120
-Finished: 186 out of 120
-Finished: 187 out of 120
-Finished: 188 out of 120
-Finished: 189 out of 120
-Finished: 190 out of 120
-Finished: 191 out of 120
-Finished: 192 out of 120
-Finished: 193 out of 120
-Finished: 194 out of 120
-Finished: 195 out of 120
-Finished: 196 out of 120
-Finished: 197 out of 120
-Finished: 198 out of 120
-Finished: 199 out of 120
-Finished: 200 out of 120
-Finished: 201 out of 120
-Finished: 202 out of 120
-Finished: 203 out of 120
-Finished: 204 out of 120
-Finished: 205 out of 120
-Finished: 206 out of 120
-Finished: 207 out of 120
-Finished: 208 out of 120
-Finished: 209 out of 120
-Finished: 210 out of 120
-Finished: 211 out of 120
-Finished: 212 out of 120
-Finished: 213 out of 120
-Finished: 214 out of 120
-Finished: 215 out of 120
-Finished: 216 out of 120
-Finished: 217 out of 120
-Finished: 218 out of 120
-Finished: 219 out of 120
-Finished: 220 out of 120
-Finished: 221 out of 120
-Finished: 222 out of 120
-Finished: 223 out of 120
-Finished: 224 out of 120
-Finished: 225 out of 120
-Finished: 226 out of 120
-Finished: 227 out of 120
-Finished: 228 out of 120
-Finished: 229 out of 120
-Finished: 230 out of 120
-Finished: 231 out of 120
-Finished: 232 out of 120
-Finished: 233 out of 120
-Finished: 234 out of 120
-Finished: 235 out of 120
-Finished: 236 out of 120
-Finished: 237 out of 120
-Finished: 238 out of 120
-Finished: 239 out of 120
-Finished: 240 out of 120
-Finished: 241 out of 120
-Finished: 242 out of 120
-Finished: 243 out of 120
-Finished: 244 out of 120
-Finished: 245 out of 120
-Finished: 246 out of 120
-Finished: 247 out of 120
-Finished: 248 out of 120
-Finished: 249 out of 120
-Finished: 250 out of 120
-Finished: 251 out of 120
-Finished: 252 out of 120
-Finished: 253 out of 120
-Finished: 254 out of 120
-Finished: 255 out of 120
-Finished: 256 out of 120
-Finished: 257 out of 120
-Finished: 258 out of 120
-Finished: 259 out of 120
-Finished: 260 out of 120
-Finished: 261 out of 120
-Finished: 262 out of 120
-Finished: 263 out of 120
-Finished: 264 out of 120
-Finished: 265 out of 120
-Finished: 266 out of 120
-Finished: 267 out of 120
-Finished: 268 out of 120
-Finished: 269 out of 120
-Finished: 270 out of 120
-Finished: 271 out of 120
-Finished: 272 out of 120
-Finished: 273 out of 120
-Finished: 274 out of 120
-Finished: 275 out of 120
-Finished: 276 out of 120
-Finished: 277 out of 120
-Finished: 278 out of 120
-Finished: 279 out of 120
-Finished: 280 out of 120
-Finished: 281 out of 120
-Finished: 282 out of 120
-Finished: 283 out of 120
-Finished: 284 out of 120
-Finished: 285 out of 120
-Finished: 286 out of 120
-Finished: 287 out of 120
-Finished: 288 out of 120
-Finished: 289 out of 120
-Finished: 290 out of 120
-Finished: 291 out of 120
-Finished: 292 out of 120
-Finished: 293 out of 120
-Finished: 294 out of 120
-Finished: 295 out of 120
-Finished: 296 out of 120
-Finished: 297 out of 120
-Finished: 298 out of 120
-Finished: 299 out of 120
-Finished: 300 out of 120
-Finished: 301 out of 120
-Finished: 302 out of 120
-Finished: 303 out of 120
-Finished: 304 out of 120
-Finished: 305 out of 120
-Finished: 306 out of 120
-Looking at patient: JH101sz4
+Looking at patient: JH102sz2
+Total number of channels 113
+Length of to be included channels 113
+Seizure starts at 59000 milliseconds
+Running analysis for 292000 windows
 >> ----------------------------------------
-Begin PBS Epilogue Sat Dec  3 18:44:44 EST 2016 1480808684
-Job ID:		2392497.mgt
+Begin PBS Epilogue Mon Dec  5 10:23:29 EST 2016 1480951409
+Job ID:		2393143.mgt
 Username:	ali
 Group:		sarma
 Job Name:	compute_adjacency_mat
-Session:	18819
+Session:	6979
 Limits:		neednodes=1:ppn=8,nodes=1:ppn=8,walltime=14:00:00
-Resources:	cput=01:02:28,mem=5890464kb,vmem=6664372kb,walltime=01:01:04
+Resources:	cput=00:00:09,mem=138772kb,vmem=1111108kb,walltime=00:01:20
 Queue:		dque
 Account:		
-Nodes:	node043
+Nodes:	node230
 Killing leftovers...
 
-End PBS Epilogue Sat Dec  3 18:44:44 EST 2016 1480808684
+End PBS Epilogue Mon Dec  5 10:23:29 EST 2016 1480951409
 ----------------------------------------

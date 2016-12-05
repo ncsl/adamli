@@ -1,9 +1,10 @@
-{Undefined function or variable 'num_channels'.
+{Error using *
+Inner matrix dimensions must agree.
 
-Error in computePerturbations (line 46)
-colsum_time_chan = zeros(num_channels, ... % colsum at each time/channel
+Error in computeConnectivity (line 103)
+        theta = pinv(tmpdata)*b;
 
-Error in serverPerturbationScript (line 43)
-    computePerturbations(patient_id, seizure_id, perturb_args);
+Error in serverAdjMainScript (line 42)
+    computeConnectivity(patient_id, seizure_id, eeg, clinicalLabels, adj_args);
 } 
 
