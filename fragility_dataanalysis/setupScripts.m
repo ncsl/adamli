@@ -14,7 +14,8 @@ dataDir = './data/';
 % end
 % adjMat = strcat('./', corrType, 'adj_mats_win');
 if IS_SERVER
-    adjMat = strcat('.', adjMat);
+    adjMat = strcat('.',  adjMat);
+    adjMat = fullfile('..', 'serverdata', adjMat);
     dataDir = strcat('.', dataDir);
 end
 
