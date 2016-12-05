@@ -122,6 +122,7 @@ end
 
 %%- Create the structure for the adjacency matrices for this patient/seizure
 adjmat_struct = struct();
+adjmat_struct.type_connectivity = TYPE_CONNECTIVITY;
 adjmat_struct.ezone_labels = ezone_labels;
 adjmat_struct.earlyspread_labels = earlyspread_labels;
 adjmat_struct.latespread_labels = latespread_labels;
