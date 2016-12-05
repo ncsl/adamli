@@ -19,7 +19,7 @@ figDir = './figures/';
 
 % settings to run
 patients = {,...,
-%      'pt1aw1', 'pt1aw2', ...
+     'pt1aw1', 'pt1aw2', ...
 %     'pt1aslp1', 'pt1aslp2', ...
 %     'pt2aw1', 'pt2aw2', ...
 %     'pt2aslp1', 
@@ -56,7 +56,7 @@ patients = {,...,
 perturbationTypes = ['R', 'C'];
 w_space = linspace(-1, 1, 101);
 threshold = 0.8;          % threshold on fragility metric
-% if nargin==0
+
 radius = 1.5;             % spectral radius
 winSize = 500;            % 500 milliseconds
 stepSize = 500; 

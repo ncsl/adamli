@@ -45,7 +45,6 @@ earlyspread_labels = clinicalLabels.earlyspread_labels;
 latespread_labels = clinicalLabels.latespread_labels;
 resection_labels = clinicalLabels.resection_labels;               
 
-
 %%- Get Indices for All Clinical Annotations
 % define cell function to search for the EZ labels
 cellfind = @(string)(@(cell_contents)(strcmp(string,cell_contents)));

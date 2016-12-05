@@ -34,7 +34,7 @@ function x = computePinv(eegMat, observationVector, OPTIONS)
     % step 3: Perform least squares - with/without regularization
     % create the reshaped adjacency matrix
     if l2regularization == 0
-        x = pinv(H)*observationVector;                                              
+        x = (H'*H)\H'*observationVector;  
     else
         symmetricH = H'*H;
         x = (symmetricH+l2regularization*eye(length(symmetricH))) \ ...
