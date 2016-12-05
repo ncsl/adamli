@@ -1,6 +1,6 @@
 l2regularization = 0.0;
 TYPES_OF_CONNECTIVITY = {'LEASTSQUARES', 'SPEARMAN', 'PEARSON', 'PINV'};
-TYPE_CONNECTIVITY = TYPES_OF_CONNECTIVITY{4};
+TYPE_CONNECTIVITY = TYPES_OF_CONNECTIVITY{1};
 
 timeRange = [60 0];
 
@@ -71,28 +71,32 @@ if ~seeg
 
     try
         %- set the meta data using the patient input file
-        [~, ~, recording_start, ...
-         onset_time, offset_time, ...
-         recording_duration, num_channels] = readLabels(patient_file_path);
-        number_of_samples = frequency_sampling * recording_duration;
-        seizureStart = milliseconds(onset_time - recording_start); % time seizure starts
-        seizureEnd = milliseconds(offset_time - recording_start); % time seizure ends
-
-        if length(number_of_samples) > 1
-            number_of_samples = number_of_samples(1);
-        end
-
-        % extract labels
-        patient_label_path = fullfile(dataDir, patient, strcat(patient, '_labels.csv'));
-        fid = fopen(patient_label_path); % open up labels to get all the channels
-        labels = textscan(fid, '%s', 'Delimiter', ',');
-        labels = labels{:}; 
-        fclose(fid);
+%         [~, ~, recording_start, ...
+%          onset_time, offset_time, ...
+%          recording_duration, num_channels] = readLabels(patient_file_path);
+%         number_of_samples = frequency_sampling * recording_duration;
+%         seizureStart = milliseconds(onset_time - recording_start); % time seizure starts
+%         seizureEnd = milliseconds(offset_time - recording_start); % time seizure ends
+% 
+%         if length(number_of_samples) > 1
+%             number_of_samples = number_of_samples(1);
+%         end
+% 
+%         % extract labels
+%         patient_label_path = fullfile(dataDir, patient, strcat(patient, '_labels.csv'));
+%         fid = fopen(patient_label_path); % open up labels to get all the channels
+%         labels = textscan(fid, '%s', 'Delimiter', ',');
+%         labels = labels{:}; 
+%         fclose(fid);
         
         data = load(fullfile(patient_eeg_path, patient));
         eeg = data.data;
-    catch
-                [~, ~, recording_start, ...
+        labels = data.elec_labels;
+        seizureStart = data.seiz_start_mark;
+        seizureEnd = data.seiz_end_mark;
+    catch e
+        disp(e)
+         [~, ~, recording_start, ...
          onset_time, offset_time, ...
          recording_duration, num_channels] = readLabels(patient_file_path);
         number_of_samples = frequency_sampling * recording_duration;
