@@ -100,7 +100,7 @@ for i=1:numWindows
         b = b(num_channels+1:end); % only get the time points after the first one
 
         % - use least square computation
-        theta = pinv(tmpdata)*b;
+        theta = computePinv(tmpdata, b, OPTIONS);
         theta_adj = reshape(theta, num_channels, num_channels)';    % reshape fills in columns first, so must transpose
     elseif strcmp(TYPE_CONNECTIVITY, 'SPEARMAN') || strcmp(TYPE_CONNECTIVITY, 'PEARSON')
         theta_adj = computePairwiseCorrelation(tmpdata, TYPE_CONNECTIVITY);

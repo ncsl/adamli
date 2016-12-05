@@ -77,6 +77,8 @@ for p=1:length(patients)
     
 %% 03: PLOT PERTURBATION RESULTS
     for j=1:length(perturbationTypes)
+%         adjMat = './serverdata/adj_mats_win';
+        
         perturbationType = perturbationTypes(j);
        
         toSaveFinalDataDir = fullfile(strcat(adjMat, num2str(winSize), ...
