@@ -1,6 +1,6 @@
 l2regularization = 0.0;
 TYPES_OF_CONNECTIVITY = {'LEASTSQUARES', 'SPEARMAN', 'PEARSON', 'PINV'};
-TYPE_CONNECTIVITY = TYPES_OF_CONNECTIVITY{4};
+TYPE_CONNECTIVITY = TYPES_OF_CONNECTIVITY{1};
 
 timeRange = [60 0];
 
@@ -15,7 +15,7 @@ dataDir = './data/';
 % adjMat = strcat('./', corrType, 'adj_mats_win');
 if IS_SERVER
     adjMat = strcat('.',  adjMat);
-    adjMat = fullfile('..', 'serverdata', adjMat);
+    adjMat = fullfile('..', 'serverdata', 'adj_mats_win');
     dataDir = strcat('.', dataDir);
 end
 
@@ -62,6 +62,8 @@ toSaveAdjDir = fullfile(strcat(adjMat, num2str(winSize), ...
 if ~exist(toSaveAdjDir, 'dir')
     mkdir(toSaveAdjDir);
 end
+
+toSaveAdjDir
 
 %%- grab eeg data in different ways... depending on who we got it from
 if ~seeg
