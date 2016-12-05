@@ -1,10 +1,14 @@
-{Error using *
-Inner matrix dimensions must agree.
+{Error using textscan
+Invalid file identifier.  Use fopen to generate a valid file identifier.
 
-Error in computeConnectivity (line 103)
-        theta = pinv(tmpdata)*b;
+Error in readLabels (line 11)
+    dataArray = textscan(fileID, formatSpec, 'Delimiter',',', 'HeaderLines' ,1
+    , 'ReturnOnError', false);
 
-Error in serverAdjMainScript (line 42)
-    computeConnectivity(patient_id, seizure_id, eeg, clinicalLabels, adj_args);
+Error in setupScripts (line 105)
+         [~, ~, recording_start, ...
+
+Error in serverAdjMainScript (line 16)
+setupScripts;
 } 
 

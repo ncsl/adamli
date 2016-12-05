@@ -1,10 +1,10 @@
 ----------------------------------------
-Begin PBS Prologue Mon Dec  5 10:22:04 EST 2016 1480951324
-Job ID:		2393143.mgt
+Begin PBS Prologue Mon Dec  5 12:43:46 EST 2016 1480959826
+Job ID:		2393318.mgt
 Username:	ali
 Group:		sarma
-Nodes:		node230
-End PBS Prologue Mon Dec  5 10:22:04 EST 2016 1480951324
+Nodes:		node151
+End PBS Prologue Mon Dec  5 12:43:47 EST 2016 1480959827
 ----------------------------------------
 500
 500
@@ -18,30 +18,31 @@ Running connectivity computation.
                     R2013a (8.1.0.604) 64-bit (glnxa64)
                              February 15, 2013
 
-Error occurred loading: /home/ali/.matlab/R2013a/toolbox_cache-8.1.0-3347771634-glnxa64.xml
-Cache file ignored.
  
 To get started, type one of these: helpwin, helpdesk, or demo.
 For product information, visit www.mathworks.com.
  
-Looking at patient: JH102sz2
-Total number of channels 113
-Length of to be included channels 113
-Seizure starts at 59000 milliseconds
-Running analysis for 292000 windows
+Looking at patient: pt17sz3
+  MException with properties:
+
+    identifier: 'MATLAB:load:couldNotReadFile'
+       message: [1x73 char]
+         cause: {0x1 cell}
+         stack: [2x1 struct]
+
 >> ----------------------------------------
-Begin PBS Epilogue Mon Dec  5 10:23:29 EST 2016 1480951409
-Job ID:		2393143.mgt
+Begin PBS Epilogue Mon Dec  5 12:43:55 EST 2016 1480959835
+Job ID:		2393318.mgt
 Username:	ali
 Group:		sarma
 Job Name:	compute_adjacency_mat
-Session:	6979
-Limits:		neednodes=1:ppn=8,nodes=1:ppn=8,walltime=14:00:00
-Resources:	cput=00:00:09,mem=138772kb,vmem=1111108kb,walltime=00:01:20
+Session:	363
+Limits:		neednodes=1:ppn=8,nodes=1:ppn=8,walltime=20:00:00
+Resources:	cput=00:00:01,mem=3276kb,vmem=140608kb,walltime=00:00:04
 Queue:		dque
 Account:		
-Nodes:	node230
+Nodes:	node151
 Killing leftovers...
 
-End PBS Epilogue Mon Dec  5 10:23:29 EST 2016 1480951409
+End PBS Epilogue Mon Dec  5 12:43:56 EST 2016 1480959836
 ----------------------------------------

@@ -1,0 +1,1 @@
+This patient has eigenvalue == radius, check it!pt3sz4_1000_500_500, 
