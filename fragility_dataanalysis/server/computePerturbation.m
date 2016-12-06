@@ -10,7 +10,10 @@ if nargin == 0
     included_channels = 0;
 end
 frequency_sampling = 1000;
-patient = strcat(patient_id, seizure_id);
+patient = strcat(patient_id, seizure_id);%     'pt14sz1' 'pt14sz2' 'pt14sz3' 'pt15sz1' 'pt15sz2' 'pt15sz3' 'pt15sz4',...
+%     'pt16sz1' 'pt16sz2' 'pt16sz3',...
+%     'pt17sz1' 'pt17sz2',...
+
 %% 0: Extract Vars and Initialize Parameters
 perturbationType = perturb_args.perturbationType;
 w_space = perturb_args.w_space;
@@ -27,7 +30,10 @@ matFile = fullfile(adjDir, strcat(patient, '_adjmats_', lower(TYPE_CONNECTIVITY)
 matFiles = [matFile];
 
 data = load(matFile);
-adjmat_struct = data.adjmat_struct;
+adjmat_struct = data.adjmat_struct;%     'pt14sz1' 'pt14sz2' 'pt14sz3' 'pt15sz1' 'pt15sz2' 'pt15sz3' 'pt15sz4',...
+%     'pt16sz1' 'pt16sz2' 'pt16sz3',...
+%     'pt17sz1' 'pt17sz2',...
+
 
 timePoints = adjmat_struct.timePoints;
 ezone_labels = adjmat_struct.ezone_labels;
@@ -39,8 +45,11 @@ seizure_start = adjmat_struct.seizure_start;
 seizure_end = adjmat_struct.seizure_end;
 winSize = adjmat_struct.winSize;
 stepSize = adjmat_struct.stepSize;
+try
 frequency_sampling = adjmat_struct.frequency_sampling;
-
+catch e
+    disp(e)
+end
 info.ezone_labels = ezone_labels;
 info.earlyspread_labels = earlyspread_labels;
 info.latespread_labels = latespread_labels;

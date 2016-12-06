@@ -1,1 +1,0 @@
-This patient has eigenvalue == radius, check it!pt1aslp1_1000_500_500, 
