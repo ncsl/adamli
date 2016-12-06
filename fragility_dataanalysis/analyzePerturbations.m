@@ -34,6 +34,7 @@ dataEnd = plot_args.dataEnd;
 threshold = plot_args.threshold;
 seizureStart = plot_args.seizureStart;
 frequency_sampling = plot_args.frequency_sampling;
+TYPE_CONNECTIVITY = plot_args.TYPE_CONNECTIVITY;
 
 dataStart = dataStart / 1000;
 dataEnd  = dataEnd / 1000;
@@ -93,7 +94,8 @@ earlyspread_indices(earlyspread_indices==0) =  [];
 latespread_indices(latespread_indices==0) = [];
 
 %% 1: Extract Processed Data and Begin Plotting and Save in finalDataDir
-final_data = load(fullfile(finalDataDir, strcat(patient, 'final_data.mat'))); % load in final data mat
+final_data = load(fullfile(finalDataDir, strcat(patient, ...
+    '_', perturbationType, 'perturbation_', lower(TYPE_CONNECTIVITY), '.mat')));
 
 % set data to local variables
 minPerturb_time_chan = final_data.minPerturb_time_chan;

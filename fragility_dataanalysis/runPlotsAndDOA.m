@@ -1,20 +1,3 @@
-% clear all;
-% close all;
-% clc;
-
-adjMat = './adj_mats_win';
-figDir = './figures/';
-% runPlotsAndDOA(1000, 500, 500, 1.1);
-% runPlotsAndDOA(500, 500, 500, 1.1);
-% runPlotsAndDOA(250, 500, 500, 1.1);
-% runPlotsAndDOA(1000, 250, 250, 1.1);
-% runPlotsAndDOA(1000, 125, 125, 1.1);
-% 
-% runPlotsAndDOA(1000, 500, 500, 1.2);
-% runPlotsAndDOA(1000, 500, 500, 1.5);
-% runPlotsAndDOA(1000, 500, 500, 2.0);
-
-
 % function runPlotsAndDOA(frequency_sampling, winSize, stepSize, radius)
 
 % settings to run
@@ -64,6 +47,9 @@ frequency_sampling = 1000; % in Hz
 IS_SERVER = 0;
 timeRange = [60 0];
 
+figDir = './figures/';
+
+
 % add libraries of functions
 addpath(genpath('./fragility_library/'));
 addpath(genpath('/Users/adam2392/Dropbox/eeg_toolbox'));
@@ -81,12 +67,12 @@ for p=1:length(patients)
     setupScripts;
 %% 03: PLOT PERTURBATION RESULTS
     for j=1:length(perturbationTypes)
-%         adjMat = './serverdata/adj_mats_win';
+        adjMat = './serverdata/adj_mats_win';
         
         perturbationType = perturbationTypes(j);
        
         toSaveFinalDataDir = fullfile(strcat(adjMat, num2str(winSize), ...
-        '_step', num2str(stepSize), '_freq', num2str(frequency_sampling)), strcat(perturbationType, '_finaldata', ...
+        '_step', num2str(stepSize), '_freq', num2str(frequency_sampling)), strcat(perturbationType, '_perturbations', ...
             '_radius', num2str(radius)));
         
         toSaveFigDir = fullfile(figDir, perturbationType, strcat(patient, '_win', num2str(winSize), ...
@@ -115,6 +101,7 @@ for p=1:length(patients)
         plot_args.dataEnd = seizureStart + timeRange(2)*frequency_sampling;
         plot_args.FONTSIZE = 22;
         plot_args.YAXFontSize = 9;
+        plot_args.TYPE_CONNECTIVITY = TYPE_CONNECTIVITY;
         plot_args.LT = 1.5;
         plot_args.threshold = threshold;
         plot_args.frequency_sampling = frequency_sampling;
