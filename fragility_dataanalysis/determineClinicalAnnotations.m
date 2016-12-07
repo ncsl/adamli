@@ -73,6 +73,9 @@ function [included_channels, ezone_labels, ...
         latespread_labels = {};
     elseif strcmp(patient_id, 'pt1')
         included_channels = [1:36 42 43 46:69 72:95];
+        
+        included_channels = [1:36 42:69 72:95]; % to test automatic rejection
+        
         ezone_labels = {'POLATT1', 'POLATT2', 'POLAD1', 'POLAD2', 'POLAD3', ...
             'POLAD4', 'POLPD1', 'POLPD2', 'POLPD3', 'POLPD4'}; %pt1
         earlyspread_labels = {'POLATT3', 'POLAST1', 'POLAST2'};
@@ -82,6 +85,9 @@ function [included_channels, ezone_labels, ...
         resection_labels = {'POLATT', 'POLAST', 'POLPST', 'POLAD', 'POLPD', 'POLPLT5', 'POLPLT6', 'POLSLT1'};
     elseif strcmp(patient_id, 'pt2')
         included_channels = [1:14 16:19 21:25 27:37 43 44 47:74];
+        
+        included_channels = [1:19 21:37 43:74];
+        
         ezone_labels = {'POLMST1', 'POLPST1', 'POLTT1'}; %pt2
         earlyspread_labels = {'POLTT2', 'POLAST2', 'POLMST2', 'POLPST2', 'POLALEX1', 'POLALEX5'};
         latespread_labels = {};
@@ -89,6 +95,9 @@ function [included_channels, ezone_labels, ...
     elseif strcmp(patient_id, 'pt3')
         included_channels = [1:19 21:37 42 43 46:69 71:133 135];
         included_channels = [1:19 21:37 42:43 46:69 71:107]; % removing left hemisphere electrodes
+        
+        included_channels = [1:37 42:69 71:107]; % testing
+        
         ezone_labels = {'POLSFP2', 'POLSFP3', 'POLOF4'}; % 'POLOF1', 'POLOF2', 'POLOF3'
         earlyspread_labels = {'POLSFP5', 'POLSFP6', 'POLIFP1', 'POLIFP2', 'POLIFP3'};
         latespread_labels = {};
