@@ -47,62 +47,19 @@ latespread_labels = clinicalLabels.latespread_labels;
 resection_labels = clinicalLabels.resection_labels;               
 
 %%- Get Indices for All Clinical Annotations
-% define cell function to search for the EZ labels
-cellfind = @(string)(@(cell_contents)(strcmp(string,cell_contents)));
-ezone_indices = zeros(length(ezone_labels),1);
-for i=1:length(ezone_labels)
-    indice = cellfun(cellfind(ezone_labels{i}), labels, 'UniformOutput', 0);
-    indice = [indice{:}];
-    test = 1:length(labels);
-    if ~isempty(test(indice))
-        ezone_indices(i) = test(indice);
-    end
-end
-
-earlyspread_indices = zeros(length(earlyspread_labels),1);
-for i=1:length(earlyspread_labels)
-    indice = cellfun(cellfind(earlyspread_labels{i}), labels, 'UniformOutput', 0);
-    indice = [indice{:}];
-    test = 1:length(labels);
-    if ~isempty(test(indice))
-        earlyspread_indices(i) = test(indice);
-    end
-end
-
-latespread_indices = zeros(length(latespread_labels),1);
-for i=1:length(latespread_labels)
-    indice = cellfun(cellfind(latespread_labels{i}), labels, 'UniformOutput', 0);
-    indice = [indice{:}];
-    test = 1:length(labels);
-    if ~isempty(test(indice))
-        latespread_indices(i) = test(indice);
-    end
-end
-
-if(length(find(ezone_indices==0)) > 0)
-    disp('some ezone labels not included labels');
-end
-if(length(find(earlyspread_indices==0)) > 0)
-    disp('some earlyspread labels not included labels');
-end
-if(length(find(latespread_indices==0)) > 0)
-    disp('some latespread labels not included labels');
-end
-
-ezone_indices(ezone_indices==0) = [];
-earlyspread_indices(earlyspread_indices==0) =  [];
-latespread_indices(latespread_indices==0) = [];
+ezone_indices = findElectrodeIndices(ezone_labels, labels);
+earlyspread_indices = findElectrodeIndices(earlyspread_labels, labels);
+latespread_indices = findElectrodeIndices(latespread_labels, labels);
 
 %% 1: Extract Processed Data and Begin Plotting and Save in finalDataDir
 final_data = load(fullfile(finalDataDir, strcat(patient, ...
     '_', perturbationType, 'perturbation_', lower(TYPE_CONNECTIVITY), '.mat')));
 
+final_data = final_data.perturbation_struct;
 % set data to local variables
-minPerturb_time_chan = final_data.minPerturb_time_chan;
+minPerturb_time_chan = final_data.minNormPertMat;
 fragility_rankings = final_data.fragility_rankings;
-rowsum_time_chan = final_data.rowsum_time_chan;
-colsum_time_chan = final_data.colsum_time_chan;
-metadata = final_data.metadata;
+info = final_data.info;
 
 if strcmp(patient_id, 'EZT005') & strcmp(seizure_id, 'seiz001')
     ignoredTimes = [44 39];
