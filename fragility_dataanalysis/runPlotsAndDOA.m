@@ -106,6 +106,18 @@ for p=1:length(patients)
         plot_args.threshold = threshold;
         plot_args.frequency_sampling = frequency_sampling;
         
+        patient = strcat(patient_id, seizure_id);
+        
+        %% 1: Extract Processed Data and Begin Plotting and Save in finalDataDir
+        final_data = load(fullfile(finalDataDir, strcat(patient, ...
+            '_', perturbationType, 'perturbation_', lower(TYPE_CONNECTIVITY), '.mat')));
+
+        final_data = final_data.perturbation_struct;
+        % set data to local variables
+        minPerturb_time_chan = final_data.minNormPertMat;
+        fragility_rankings = final_data.fragility_rankings;
+        info = final_data.info;
+
         close all
         analyzePerturbations(patient_id, seizure_id, plot_args, clinicalLabels);
     end
