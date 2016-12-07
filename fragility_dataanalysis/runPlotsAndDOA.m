@@ -1,5 +1,4 @@
 % function runPlotsAndDOA(frequency_sampling, winSize, stepSize, radius)
-
 % settings to run
 patients = {,...,
      'pt1aw1', 'pt1aw2', ...
@@ -9,9 +8,9 @@ patients = {,...,
     'pt2aslp2', ...
     'pt3aw1', ...
     'pt3aslp1', 'pt3aslp2', ...
-    'pt1sz2', 'pt1sz3', 'pt1sz4',...
-    'pt2sz1' 'pt2sz3' 'pt2sz4', ...
-    'pt3sz2' 'pt3sz4', ...
+%     'pt1sz2', 'pt1sz3', 'pt1sz4',...
+%     'pt2sz1' 'pt2sz3' 'pt2sz4', ...
+%     'pt3sz2' 'pt3sz4', ...
 %       'pt6sz3', 'pt6sz4', 'pt6sz5','JH108sz1', 'JH108sz2', 'JH108sz3', 'JH108sz4', 'JH108sz5', 'JH108sz6', 'JH108sz7',...
 %     'pt8sz1' 'pt8sz2' 'pt8sz3',...
 %     'pt10sz1' 'pt10sz2' 'pt10sz3', ...
@@ -34,8 +33,7 @@ patients = {,...,
 %     'EZT019seiz001', 'EZT019seiz002',
 % 'EZT090seiz002', 'EZT090seiz003' ...
     };
-% patients = { 'EZT108_seiz002', 'EZT120_seiz001', 'EZT120_seiz002'}; %,
-% patients = {'Pat2sz1p', 'Pat2sz2p', 'Pat2sz3p'};%, 'Pat16sz1p', 'Pat16sz2p', 'Pat16sz3p'};
+
 perturbationTypes = ['R', 'C'];
 w_space = linspace(-1, 1, 101);
 threshold = 0.8;          % threshold on fragility metric
@@ -46,81 +44,119 @@ stepSize = 500;
 frequency_sampling = 1000; % in Hz
 IS_SERVER = 0;
 timeRange = [60 0];
-
 figDir = './figures/';
-
 
 % add libraries of functions
 addpath(genpath('./fragility_library/'));
 addpath(genpath('/Users/adam2392/Dropbox/eeg_toolbox'));
 addpath(genpath('/home/WIN/ali39/Documents/adamli/fragility_dataanalysis/eeg_toolbox/'));
 
-% for p=1:length(patients)
-%     patient = patients{p};
-%     serverPerturbationScript(patient, radius, winSize, stepSize, frequency_sampling)
-% end
-
 %%- Begin Loop Through Different Patients Here
 for p=1:length(patients)
     patient = patients{p};
    
     setupScripts;
-%% 03: PLOT PERTURBATION RESULTS
+    adjMat = './serverdata/adj_mats_win';       % get the new data place
+    
+    %%- Extract an example
+    finalDataDir = fullfile(strcat(adjMat, num2str(winSize), ...
+        '_step', num2str(stepSize), '_freq', num2str(frequency_sampling)), strcat('R', '_perturbations', ...
+            '_radius', num2str(radius)));
+    final_data = load(fullfile(finalDataDir, strcat(patient, ...
+        '_', 'R', 'perturbation_', lower(TYPE_CONNECTIVITY), '.mat')));
+
+    final_data = final_data.perturbation_struct;
+    % set data to local variables
+    minPerturb_time_chan = final_data.minNormPertMat;
+    fragility_rankings = final_data.fragility_rankings;
+    timePoints = final_data.timePoints;
+    info = final_data.info;
+    num_channels = size(minPerturb_time_chan,1);
+    
+    %%- Get Indices for All Clinical Annotations
+    included_labels = labels(included_channels);
+    ezone_indices = findElectrodeIndices(ezone_labels, included_labels);
+    earlyspread_indices = findElectrodeIndices(earlyspread_labels, included_labels);
+    latespread_indices = findElectrodeIndices(latespread_labels, included_labels);
+
+    allYTicks = 1:num_channels; 
+    y_indices = setdiff(allYTicks, [ezone_indices; earlyspread_indices]);
+    if sum(latespread_indices > 0)
+        latespread_indices(latespread_indices ==0) = [];
+        y_indices = setdiff(allYTicks, [ezone_indices; earlyspread_indices; latespread_indices]);
+    end
+    y_ezoneindices = sort(ezone_indices);
+    y_earlyspreadindices = sort(earlyspread_indices);
+    y_latespreadindices = sort(latespread_indices);
+
+    % create struct for clinical indices
+    clinicalIndices.all_indices = y_indices;
+    clinicalIndices.ezone_indices = y_ezoneindices;
+    clinicalIndices.earlyspread_indices = y_earlyspreadindices;
+    clinicalIndices.latespread_indices = y_latespreadindices;
+    clinicalIndices.included_labels = included_labels;
+    
+    %% PLOT PERTURBATION RESULTS
     for j=1:length(perturbationTypes)
-        adjMat = './serverdata/adj_mats_win';
-        
         perturbationType = perturbationTypes(j);
-       
+        
+        %- initialize directories to save things and where to get
+        %- perturbation structs
         toSaveFinalDataDir = fullfile(strcat(adjMat, num2str(winSize), ...
         '_step', num2str(stepSize), '_freq', num2str(frequency_sampling)), strcat(perturbationType, '_perturbations', ...
             '_radius', num2str(radius)))
-        
         toSaveFigDir = fullfile(figDir, perturbationType, strcat(patient, '_win', num2str(winSize), ...
             '_step', num2str(stepSize), '_freq', num2str(frequency_sampling), '_radius', num2str(radius)))
         if ~exist(toSaveFigDir, 'dir')
             mkdir(toSaveFigDir);
         end
-        
         toSaveWeightsDir = fullfile(figDir, strcat(perturbationType, '_electrode_weights'), strcat(patient, num2str(winSize), ...
             '_step', num2str(stepSize), '_freq', num2str(frequency_sampling), '_radius', num2str(radius)))
         if ~exist(toSaveWeightsDir, 'dir')
             mkdir(toSaveWeightsDir);
         end
-
-        plot_args = struct();
-        plot_args.perturbationType = perturbationType;
-        plot_args.radius = radius;
-        plot_args.winSize = winSize;
-        plot_args.stepSize = stepSize;
-        plot_args.finalDataDir = toSaveFinalDataDir;
-        plot_args.toSaveFigDir = toSaveFigDir;
-        plot_args.toSaveWeightsDir = toSaveWeightsDir;
-        plot_args.labels = labels;
-        plot_args.seizureStart = seizureStart;
-        % if want to plot a time range pre seizure
-        plot_args.dataStart = seizureStart - timeRange(1)*frequency_sampling; 
-        plot_args.dataEnd = seizureStart + timeRange(2)*frequency_sampling;
-        
-        plot_args.FONTSIZE = 22;
-        plot_args.YAXFontSize = 9;
-        plot_args.TYPE_CONNECTIVITY = TYPE_CONNECTIVITY;
-        plot_args.LT = 1.5;
-        plot_args.threshold = threshold;
-        plot_args.frequency_sampling = frequency_sampling;
-        
-        patient = strcat(patient_id, seizure_id);
-        
-        %% 1: Extract Processed Data and Begin Plotting and Save in finalDataDir
+           
+         %%- Extract an example
+        finalDataDir = toSaveFinalDataDir;
         final_data = load(fullfile(finalDataDir, strcat(patient, ...
             '_', perturbationType, 'perturbation_', lower(TYPE_CONNECTIVITY), '.mat')));
-
         final_data = final_data.perturbation_struct;
+        
         % set data to local variables
         minPerturb_time_chan = final_data.minNormPertMat;
         fragility_rankings = final_data.fragility_rankings;
         info = final_data.info;
-
+        
+        %% 1: Extract Processed Data and Begin Plotting and Save in finalDataDir
+        %%- initialize plotting args
+        FONTSIZE = 20;
+        PLOTARGS = struct();
+        PLOTARGS.SAVEFIG = 1;
+        PLOTARGS.toSaveFigFile = fullfile(toSaveFigDir, strcat(patient, '_minPerturbation'));
+        PLOTARGS.YAXFontSize = 9;
+        PLOTARGS.FONTSIZE = FONTSIZE;
+        PLOTARGS.xlabelStr = 'Time (sec)';
+        PLOTARGS.colorbarStr = 'Minimum 2-Induced Norm Perturbation';
+        PLOTARGS.ylabelStr = 'Electrode Channels';
+        PLOTARGS.xTickStep = 10*winSize/stepSize;
+        PLOTARGS.titleStr = {['Minimum Norm Perturbation (', patient, ')'], ...
+            [perturbationType, ' perturbation: ', ' Time Locked to Seizure']};
+        seizureStart = info.seizure_start;
+        if seizureStart == size(eeg,2)
+            timeStart = 1;
+            timeEnd = timePoints(size(minPerturb_time_chan,2),1) / frequency_sampling;
+        end
+        
+        %% 2. Plot Min 2-Induced Norm Perturbation and Fragility Ranking
+        plotMinimumPerturbation(minPerturb_time_chan, clinicalIndices, timeStart, timeEnd, PLOTARGS);
+        
+        PLOTARGS.toSaveFigFile = fullfile(toSaveFigDir, strcat(patient, '_fragilityMetric'));
+        PLOTARGS.colorbarStr = 'Fragility Metric';
+        PLOTARGS.titleStr = {['Fragility Metric (', patient, ')'], ...
+            [perturbationType, ' perturbation: ', ' Time Locked to Seizure']};
+        plotFragilityMetric(fragility_rankings, clinicalIndices, timeStart, timeEnd, PLOTARGS);
+        
         close all
-        analyzePerturbations(patient_id, seizure_id, plot_args, clinicalLabels);
+%         analyzePerturbations(patient_id, seizure_id, plot_args, clinicalLabels);
     end
 end
