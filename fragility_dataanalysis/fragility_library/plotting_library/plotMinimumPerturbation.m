@@ -17,10 +17,16 @@ function plotMinimumPerturbation(minPerturb_time_chan, clinicalIndices,...
     SAVEFIG = PLOTARGS.SAVEFIG;
     toSaveFigFile = PLOTARGS.toSaveFigFile;
     YAXFontSize = 9;
+    if isfield(PLOTARGS, 'seizureIndex')
+        seizureIndex = PLOTARGS.seizureIndex;
+    end
+    if isfield(PLOTARGS, 'seizureEnd')
+        seizureEnd = PLOTARGS.seizureEnd;
+    end
     
     %% Step 1: Plot Heatmap
     fig = figure;
-    imagesc(minPerturb_time_chan(:, timeStart:timeEnd)); hold on;
+    imagesc(minPerturb_time_chan); hold on;
     axes = gca; currfig = gcf;
     cbar = colorbar(); colormap('jet'); set(axes, 'box', 'off'); set(axes, 'YDir', 'normal');
     labelColorbar(cbar, colorbarStr, FONTSIZE);
@@ -49,6 +55,13 @@ function plotMinimumPerturbation(minPerturb_time_chan, clinicalIndices,...
             xLocations = repmat(XUpperLim+1, length(figIndices{i}), 1);
             plotAnnotatedStars(fig, xLocations, figIndices{i}, colors{i});
         end
+    end
+    
+    if exist('seizureIndex', 'var') 
+        plot([seizureIndex seizureIndex], get(gca, 'YLim'), 'Color', 'black', 'LineWidth', 2);
+    end
+    if exist('seizureEnd', 'var')
+        plot([seizureEnd seizureEnd], get(gca, 'YLim'), 'Color', 'black', 'LineWidth', 2);
     end
 
     currfig.PaperPosition = [-3.7448   -0.3385   15.9896   11.6771];

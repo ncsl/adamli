@@ -17,6 +17,12 @@ function plotFragilityMetric(fragility_mat, clinicalIndices,...
     SAVEFIG = PLOTARGS.SAVEFIG;
     toSaveFigFile = PLOTARGS.toSaveFigFile;
     YAXFontSize = 9;
+    if isfield(PLOTARGS, 'seizureIndex')
+        seizureIndex = PLOTARGS.seizureIndex;
+    end
+    if isfield(PLOTARGS, 'seizureEnd')
+        seizureEnd = PLOTARGS.seizureEnd;
+    end
     
     %- create rowsum of fragility_mat
     rowsum = sum(fragility_mat, 2);
@@ -27,7 +33,7 @@ function plotFragilityMetric(fragility_mat, clinicalIndices,...
     firstplot = 1:24;
     firstplot([6,12,18,24]) = []; hold on;
     firstfig = subplot(4,6, firstplot);
-    imagesc(fragility_mat(:, timeStart:timeEnd)); hold on; axis tight;
+    imagesc(fragility_mat); hold on; axis tight;
     axes = gca; currfig = gcf;
     cbar = colorbar(); colormap('jet'); set(axes, 'box', 'off'); set(axes, 'YDir', 'normal');
     labelColorbar(cbar, colorbarStr, FONTSIZE);
@@ -58,6 +64,13 @@ function plotFragilityMetric(fragility_mat, clinicalIndices,...
         end
     end
 
+    if exist('seizureIndex', 'var') 
+        plot([seizureIndex seizureIndex], get(gca, 'YLim'), 'Color', 'black', 'LineWidth', 2);
+    end
+    if exist('seizureEnd', 'var')
+        plot([seizureEnd seizureEnd], get(gca, 'YLim'), 'Color', 'black', 'LineWidth', 2);
+    end
+    
     currfig.PaperPosition = [-3.7448   -0.3385   15.9896   11.6771];
     currfig.Position = [1986           1        1535        1121];
     ylab.Position = ylab.Position + [-.15 0 0]; % move ylabel to the left
