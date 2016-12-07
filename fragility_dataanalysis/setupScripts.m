@@ -57,7 +57,7 @@ patient = strcat(patient_id, seizure_id);
 disp(['Looking at patient: ',patient]);
 
 % create the adjacency file directory to store the computed adj. mats
-toSaveAdjDir = fullfile('test', strcat(adjMat, num2str(winSize), ...
+toSaveAdjDir = fullfile(strcat(adjMat, num2str(winSize), ...
     '_step', num2str(stepSize), '_freq', num2str(frequency_sampling)), patient);
 if ~exist(toSaveAdjDir, 'dir')
     mkdir(toSaveAdjDir);
