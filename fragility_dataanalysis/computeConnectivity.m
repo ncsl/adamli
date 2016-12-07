@@ -137,5 +137,10 @@ adjmat_struct.adjMats = adjMats;
 adjmat_struct.included_channels = included_channels;
 adjmat_struct.frequency_sampling = frequency_sampling;
 
-save(fullfile(toSaveAdjDir, fileName), 'adjmat_struct', '-v7.3');
+try
+    save(fullfile(toSaveAdjDir, fileName), 'adjmat_struct');
+catch e
+    disp(e);
+    save(fullfile(toSaveAdjDir, fileName), 'adjmat_struct', '-v7.3');
+end
 end

@@ -194,6 +194,7 @@ perturbation_struct.minNormPertMat = minPerturb_time_chan;
 perturbation_struct.timePoints = timePoints;
 perturbation_struct.fragility_rankings = fragility_rankings;
 
-filename = strcat(patient, '_', perturbationType, 'perturbation_', lower(TYPE_CONNECTIVITY), '.mat');
+filename = strcat(patient, '_', perturbationType, 'perturbation_', ...
+    lower(TYPE_CONNECTIVITY), '_radius', num2str(radius), '.mat');
 save(fullfile(toSaveFinalDataDir, filename), 'perturbation_struct');
 end
