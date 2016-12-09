@@ -18,7 +18,8 @@ patients = {,...,
 %     'pt14sz1' 'pt14sz2' 'pt14sz3' 'pt15sz1' 'pt15sz2' 'pt15sz3' 'pt15sz4',...
 %     'pt16sz1' 'pt16sz2' 'pt16sz3',...
 %     'pt17sz1' 'pt17sz2',...
-%     'JH101sz1' 'JH101sz2' 'JH102sz3' 'JH102sz4',...
+%     'JH101sz1' 'JH101sz2'
+%     'JH101sz3' 'JH101sz4',...
 % 	'JH102sz1' 'JH102sz2' 'JH102sz3' 'JH102sz4' 'JH102sz5' 'JH102sz6',...
 % 	'JH103sz1' 'JH102sz2' 'JH102sz3',...
 % 	'JH104sz1' 'JH104sz2' 'JH104sz3',...
@@ -81,7 +82,11 @@ for p=1:length(patients)
     num_channels = size(minPerturb_time_chan,1);
     
     %%- Get Indices for All Clinical Annotations
-    included_labels = labels(included_channels);
+    if ~isempty(included_channels)
+        included_labels = labels(included_channels);
+    else
+        included_labels = labels;
+    end
     ezone_indices = findElectrodeIndices(ezone_labels, included_labels);
     earlyspread_indices = findElectrodeIndices(earlyspread_labels, included_labels);
     latespread_indices = findElectrodeIndices(latespread_labels, included_labels);
@@ -95,12 +100,16 @@ for p=1:length(patients)
     y_ezoneindices = sort(ezone_indices);
     y_earlyspreadindices = sort(earlyspread_indices);
     y_latespreadindices = sort(latespread_indices);
+    
+    % find resection indices
+    y_resectionindices = [];
 
     % create struct for clinical indices
     clinicalIndices.all_indices = y_indices;
     clinicalIndices.ezone_indices = y_ezoneindices;
     clinicalIndices.earlyspread_indices = y_earlyspreadindices;
     clinicalIndices.latespread_indices = y_latespreadindices;
+    clinicalIndices.resection_indices = y_resectionindices;
     clinicalIndices.included_labels = included_labels;
     
     %% PLOT PERTURBATION RESULTS
