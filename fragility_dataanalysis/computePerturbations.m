@@ -25,8 +25,9 @@ if nargin == 0
     stepSize = 500;
     included_channels = 0;
 end
-frequency_sampling = 1000;
+
 patient = strcat(patient_id, seizure_id);
+
 %% 0: Extract Vars and Initialize Parameters
 perturbationType = perturb_args.perturbationType;
 w_space = perturb_args.w_space;
@@ -40,11 +41,12 @@ b = [0; 1];                          % initialize for perturbation computation l
 
 % get list of mat files
 matFile = fullfile(adjDir, strcat(patient, '_adjmats_', lower(TYPE_CONNECTIVITY), '.mat'));
-matFiles = [matFile];
 
+% load the adjacency matrix mat file
 data = load(matFile);
 adjmat_struct = data.adjmat_struct;
 
+%- extract meta data
 timePoints = adjmat_struct.timePoints;
 ezone_labels = adjmat_struct.ezone_labels;
 earlyspread_labels = adjmat_struct.earlyspread_labels;
@@ -57,6 +59,7 @@ winSize = adjmat_struct.winSize;
 stepSize = adjmat_struct.stepSize;
 frequency_sampling = adjmat_struct.frequency_sampling;
 
+%- set meta data struct
 info.ezone_labels = ezone_labels;
 info.earlyspread_labels = earlyspread_labels;
 info.latespread_labels = latespread_labels;
@@ -68,6 +71,7 @@ info.winSize = winSize;
 info.stepSize = stepSize;
 info.frequency_sampling = frequency_sampling;
 
+% get the number of channels and time points
 num_channels = size(adjmat_struct.adjMats, 3);
 N = num_channels;
 num_times = size(adjmat_struct.adjMats, 1);
@@ -76,9 +80,6 @@ num_times = size(adjmat_struct.adjMats, 1);
 %- initialize matrices for colsum, rowsum, and minimum perturbation\
 minPerturb_time_chan = zeros(num_channels, num_times);
 del_table = cell(num_channels, num_times);
-
-colsum_time_chan = zeros(num_channels, num_times);
-rowsum_time_chan = zeros(num_channels, num_times);
 
 % loop through mat files and open them upbcd
 tic; % start counter
@@ -194,6 +195,7 @@ perturbation_struct.minNormPertMat = minPerturb_time_chan;
 perturbation_struct.timePoints = timePoints;
 perturbation_struct.fragility_rankings = fragility_rankings;
 
+% save the perturbation results
 filename = strcat(patient, '_', perturbationType, 'perturbation_', ...
     lower(TYPE_CONNECTIVITY), '_radius', num2str(radius), '.mat');
 save(fullfile(toSaveFinalDataDir, filename), 'perturbation_struct');
