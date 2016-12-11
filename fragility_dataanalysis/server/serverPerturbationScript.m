@@ -1,4 +1,25 @@
 function serverPerturbationScript(patient, radius, winSize, stepSize, frequency_sampling)
+    
+    addpath(genpath('../fragility_library/'));
+    addpath(genpath('../eeg_toolbox/'));
+    addpath('../');
+    perturbationTypes = ['R', 'C'];
+    w_space = linspace(-1, 1, 101);
+    IS_SERVER = 1;
+
+    if nargin == 0 % testing purposes
+        patient='EZT007seiz001';
+        patient ='pt7sz19';
+        patient = 'JH102sz1';
+        % window paramters
+        radius = 1.5;
+        winSize = 500; % 500 milliseconds
+        stepSize = 500; 
+        frequency_sampling = 1000; % in Hz
+    end
+
+    setupScripts;
+    
     for j=1:length(perturbationTypes)
         perturbationType = perturbationTypes(j);
 
