@@ -88,7 +88,7 @@ for i=1:numWindows
     % step 2: compute some functional connectivity 
     if strcmp(TYPE_CONNECTIVITY, 'LEASTSQUARES')
         % linear model: Ax = b; A\b -> x
-        b = tmpdata(:); % define b as vectorized by stacking columns on top of another
+        b = double(tmpdata(:)); % define b as vectorized by stacking columns on top of another
         b = b(num_channels+1:end); % only get the time points after the first one
 
         % - use least square computation
