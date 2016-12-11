@@ -2,8 +2,6 @@ l2regularization = 0.0;
 TYPES_OF_CONNECTIVITY = {'LEASTSQUARES', 'SPEARMAN', 'PEARSON'};
 TYPE_CONNECTIVITY = TYPES_OF_CONNECTIVITY{1};
 
-timeRange = [60 0];
-
 adjMat = './adj_mats_win';
 dataDir = './data/';
 % corrType = '';
@@ -74,24 +72,6 @@ if ~seeg
 
     try
         %- set the meta data using the patient input file
-%         [~, ~, recording_start, ...
-%          onset_time, offset_time, ...
-%          recording_duration, num_channels] = readLabels(patient_file_path);
-%         number_of_samples = frequency_sampling * recording_duration;
-%         seizureStart = milliseconds(onset_time - recording_start); % time seizure starts
-%         seizureEnd = milliseconds(offset_time - recording_start); % time seizure ends
-% 
-%         if length(number_of_samples) > 1
-%             number_of_samples = number_of_samples(1);
-%         end
-% 
-%         % extract labels
-%         patient_label_path = fullfile(dataDir, patient, strcat(patient, '_labels.csv'));
-%         fid = fopen(patient_label_path); % open up labels to get all the channels
-%         labels = textscan(fid, '%s', 'Delimiter', ',');
-%         labels = labels{:}; 
-%         fclose(fid);
-        
         data = load(fullfile(patient_eeg_path, patient));
         eeg = data.data;
         labels = data.elec_labels;
@@ -153,17 +133,7 @@ else
     num_channels = size(data.data, 1);
 end
 
-% % only take included_channels
-% if ~isempty(included_channels) && ~exist('ECG', 'var')
-%     try
-%         eeg = eeg(included_channels, :);
-% %         labels = labels(included_channels);
-%     catch e
-%         disp(e)
-%         disp('server adj main script.')
-%     end
-% end
-
+% check included channels length and how big eeg is
 try
     if length(labels(included_channels)) ~= size(eeg(included_channels,:),1)
         disp('Something wrong here...!!!!');
@@ -181,5 +151,5 @@ if frequency_sampling ~=1000
 end
 
 if seizureStart < 60 * frequency_sampling
-        timeRange(1) = seizureStart/frequency_sampling;
+    timeRange(1) = seizureStart/frequency_sampling;
 end

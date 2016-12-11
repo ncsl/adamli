@@ -43,7 +43,7 @@ for j=1:length(perturbationTypes)
     perturb_args.TYPE_CONNECTIVITY = TYPE_CONNECTIVITY;
     
 %     serverSetupComputePert(patient_id, seizure_id, perturb_args);
-%     computePerturbations(patient_id, seizure_id, perturb_args);
-    computePerturbation(patient_id, seizure_id, perturb_args);
+    computePerturbations(patient_id, seizure_id, perturb_args);
+%     computePerturbation(patient_id, seizure_id, perturb_args);
 end
 end

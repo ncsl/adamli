@@ -27,7 +27,6 @@ adj_args.BP_FILTER_RAW = 1; % apply notch filter or not?
 adj_args.frequency_sampling = frequency_sampling; % frequency that this eeg data was sampled at
 adj_args.winSize = winSize;
 adj_args.stepSize = stepSize;
-adj_args.timeRange = timeRange;
 adj_args.toSaveAdjDir = toSaveAdjDir;
 adj_args.included_channels = included_channels;
 adj_args.seizureStart = seizureStart;

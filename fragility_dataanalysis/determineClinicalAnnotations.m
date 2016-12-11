@@ -106,7 +106,7 @@ function [included_channels, ezone_labels, ...
         included_channels = [1:19 21:37 42 43 46:69 71:133 135];
         included_channels = [1:19 21:37 42:43 46:69 71:107]; % removing left hemisphere electrodes
         
-%         included_channels = [1:37 42:69 71:107]; % testing
+%         included_channels = [1:37 42:69 71:107]; % testing test automatic rejection
         
         ezone_labels = {'POLSFP2', 'POLSFP3', 'POLOF4'}; % 'POLOF1', 'POLOF2', 'POLOF3'
         earlyspread_labels = {'POLSFP5', 'POLSFP6', 'POLIFP1', 'POLIFP2', 'POLIFP3'};
