@@ -96,7 +96,7 @@ function [included_channels, ezone_labels, ...
         if strcmp(seizure_id, 'aw2')
             included_channels = [1:14 16:19 21:25 27:37 43 44 47:68 70:74];
         end
-%         included_channels = [1:19 21:37 43:74];
+%         included_channels = [1:19 21:37 43:74]; % to test automatic rejection
         
         ezone_labels = {'POLMST1', 'POLPST1', 'POLTT1'}; %pt2
         earlyspread_labels = {'POLTT2', 'POLAST2', 'POLMST2', 'POLPST2', 'POLALEX1', 'POLALEX5'};

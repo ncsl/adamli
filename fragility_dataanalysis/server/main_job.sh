@@ -38,7 +38,7 @@ read RUNSLEEP
 
 # patients listed 5 per row
 patients=(
-	'pt1aslp1 pt8sz1 pt8sz2 pt10sz1 pt10sz2')
+	'pt1aslp1 pt2aslp2 pt2aw2 pt8sz1 pt8sz2 pt10sz1 pt10sz2')
 
 	# 'pt1aslp1 pt1aslp2 pt1aw1 pt1aw2
 	# pt2aslp1 pt2aslp2 pt2aw1 pt2aw2
