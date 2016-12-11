@@ -39,6 +39,7 @@ function x = computeLeastSquares(eegMat, observationVector, OPTIONS)
     l2regularization = OPTIONS.l2regularization;
     [num_chans, num_times] = size(eegMat);
     
+    observationVector = double(observationVector);
     tmpdata = eegMat'; % store transpose of eeg matrix
     
     % step 1: either initialize new H matrix with sparse, or full matrix.
