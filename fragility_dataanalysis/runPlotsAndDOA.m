@@ -36,15 +36,15 @@ patients = {,...,
     };
 
 perturbationTypes = ['R', 'C'];
-w_space = linspace(-1, 1, 101);
-threshold = 0.8;          % threshold on fragility metric
+PLOTALL = 1;
 
+% data parameters to find correct directory
 radius = 1.5;             % spectral radius
 winSize = 500;            % 500 milliseconds
 stepSize = 500; 
 frequency_sampling = 1000; % in Hz
 IS_SERVER = 0;
-timeRange = [60 0];
+
 figDir = './figures/';
 
 % add libraries of functions
@@ -155,7 +155,6 @@ for p=1:length(patients)
         FONTSIZE = 20;
         PLOTARGS = struct();
         PLOTARGS.SAVEFIG = 1;
-        PLOTARGS.toSaveFigFile = fullfile(toSaveFigDir, strcat(patient, '_minPerturbation_alldata'));
         PLOTARGS.YAXFontSize = 9;
         PLOTARGS.FONTSIZE = FONTSIZE;
         PLOTARGS.xlabelStr = 'Time (sec)';
@@ -166,30 +165,40 @@ for p=1:length(patients)
             [perturbationType, ' perturbation: ', ' Time Locked to Seizure']};
         seizureStart = info.seizure_start;
         seizureEnd = info.seizure_end;
-        if seizureStart == size(eeg,2)
+        if seizureStart == size(eeg,2) % interictal data
             timeStart = 1;
             timeEnd = timePoints(size(minPerturb_time_chan,2),1) / frequency_sampling;
-        else
-            % find index of seizureStart
+        else % some seizure data
             timeIndex = find(seizureStart<timePoints(:,2),1) - 1;
-            timeStart = timeIndex - 60 - timeIndex; 
-            timeEnd = timeIndex - timeIndex;
-            
-            seizureIndex = timeIndex;
-            seizureEndIndex = find(seizureEnd < timePoints(:,2),1) + 1;
-            seizureTime = timePoints(find(seizureStart<timePoints(:,2),1) - 1) / frequency_sampling;
-            timeStart = 1;
-            timeEnd = timePoints(size(minPerturb_time_chan,2),1) / frequency_sampling;
-            PLOTARGS.seizureIndex = seizureIndex;
-            PLOTARGS.seizureEnd = seizureEndIndex;
-%             minPerturb_time_chan = minPerturb_time_chan(:, timeIndex-60:timeIndex);
-%             fragility_rankings = fragility_rankings(:, timeIndex-60:timeIndex);
+            if PLOTALL % plot entire data series
+                seizureIndex = timeIndex;
+                seizureEndIndex = find(seizureEnd < timePoints(:,2),1) + 1;
+                seizureTime = timePoints(find(seizureStart<timePoints(:,2),1) - 1) / frequency_sampling;
+                timeStart = 1;
+                timeEnd = timePoints(size(minPerturb_time_chan,2),1) / frequency_sampling;
+                PLOTARGS.seizureIndex = seizureIndex;
+                PLOTARGS.seizureEnd = seizureEndIndex;
+                PLOTARGS.toSaveFigFile = fullfile(toSaveFigDir, strcat(patient, '_minPerturbation_alldata'));
+            else % only plot window of data
+                % find index of seizureStart
+                timeStart = timeIndex - 60 - timeIndex; 
+                timeEnd = timeIndex - timeIndex;
+                minPerturb_time_chan = minPerturb_time_chan(:, timeIndex-60:timeIndex);
+                fragility_rankings = fragility_rankings(:, timeIndex-60:timeIndex);
+                PLOTARGS.seizureIndex = 1;
+                PLOTARGS.seizureEnd = 1;
+                PLOTARGS.toSaveFigFile = fullfile(toSaveFigDir, strcat(patient, '_minPerturbation'));
+            end
         end
         
         %% 2. Plot Min 2-Induced Norm Perturbation and Fragility Ranking
         plotMinimumPerturbation(minPerturb_time_chan, clinicalIndices, timeStart, timeEnd, PLOTARGS);
         
-        PLOTARGS.toSaveFigFile = fullfile(toSaveFigDir, strcat(patient, '_fragilityMetric_alldata'));
+        if PLOTALL
+            PLOTARGS.toSaveFigFile = fullfile(toSaveFigDir, strcat(patient, '_fragilityMetric_alldata'));
+        else
+            PLOTARGS.toSaveFigFile = fullfile(toSaveFigDir, strcat(patient, '_fragilityMetric'));
+        end
         PLOTARGS.colorbarStr = 'Fragility Metric';
         PLOTARGS.titleStr = {['Fragility Metric (', patient, ')'], ...
             [perturbationType, ' perturbation: ', ' Time Locked to Seizure']};
