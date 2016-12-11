@@ -64,6 +64,13 @@ function plotFragilityMetric(fragility_mat, clinicalIndices,...
         end
     end
 
+    leg = legend('EZ', 'Early Onset', 'Late Onset');
+    try
+        leg.Position = [0.8792    0.0103    0.1021    0.0880];
+    catch
+        disp('Legend not set yet for patient');
+    end
+    
     if exist('seizureIndex', 'var') 
         plot([seizureIndex seizureIndex], get(gca, 'YLim'), 'Color', 'black', 'LineWidth', 2);
     end
