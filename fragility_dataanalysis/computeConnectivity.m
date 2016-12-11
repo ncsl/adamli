@@ -50,7 +50,6 @@ else
     preFiltStr       = 'Unfiltered raw traces';
     preFiltStrShort  = '_noFilt';
 end
-
 % apply band notch filter to eeg data
 eeg = buttfilt(eeg,[59.5 60.5], frequency_sampling,'stop',1);
 
