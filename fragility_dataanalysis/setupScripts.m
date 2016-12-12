@@ -2,7 +2,7 @@ l2regularization = 0.0;
 TYPES_OF_CONNECTIVITY = {'LEASTSQUARES', 'SPEARMAN', 'PEARSON'};
 TYPE_CONNECTIVITY = TYPES_OF_CONNECTIVITY{1};
 
-adjMat = './adj_mats_win';
+adjMat = './testing_adj_mats_win';
 dataDir = './data/';
 % corrType = '';
 % if strcmp(TYPE_CONNECTIVITY, 'SPEARMAN')
@@ -12,8 +12,7 @@ dataDir = './data/';
 % end
 % adjMat = strcat('./', corrType, 'adj_mats_win');
 if IS_SERVER
-    adjMat = strcat('.',  adjMat);
-    adjMat = fullfile('..', 'serverdata', 'adj_mats_win');
+    adjMat = fullfile('..', 'serverdata', adjMat);
     dataDir = strcat('.', dataDir);
 end
 
