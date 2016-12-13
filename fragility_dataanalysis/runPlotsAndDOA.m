@@ -175,12 +175,17 @@ for p=1:length(patients)
                 seizureTime = timePoints(find(seizureStart<timePoints(:,2),1) - 1) / frequency_sampling;
                 timeStart = 1;
                 timeEnd = timePoints(size(minPerturb_time_chan,2),1) / frequency_sampling;
+                
+                % make timeStart and timeEnd wrt seizure
+                timeStart = -timeIndex;
+                timeEnd = size(minPerturb_time_chan,2) - timeIndex;
+                
                 PLOTARGS.seizureIndex = seizureIndex;
                 PLOTARGS.seizureEnd = seizureEndIndex;
                 PLOTARGS.toSaveFigFile = fullfile(toSaveFigDir, strcat(patient, '_minPerturbation_alldata'));
             else % only plot window of data
-postWindow = 10;
-preWindow = 60;
+                postWindow = 10;
+                preWindow = 60;
                 % find index of seizureStart
                 timeStart = timeIndex - preWindow - timeIndex; 
                 timeEnd = timeIndex - timeIndex + postWindow;
