@@ -20,5 +20,8 @@ _log/*
 /fragility_dataanalysis/data/JHU Updated/*
 /fragility_dataanalysis/data/JHU Original/*
 /fragility_dataanalysis/data/JHU Old/*
+<<<<<<< HEAD
 *test.out
 *test.err
+=======
+>>>>>>> f613c118aa6446da420a4d76c15af9468b448e05
