@@ -15,3 +15,8 @@ _log/*
 *test.out
 /fragility_dataanalysis/serverdata/*
 */tempdata/*
+/fragility_dataanalysis/data/*/*/*.mat
+*/JHU\ Updated/*
+/fragility_dataanalysis/data/JHU Updated/*
+/fragility_dataanalysis/data/JHU Original/*
+/fragility_dataanalysis/data/JHU Old/*
