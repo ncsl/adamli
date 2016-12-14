@@ -47,18 +47,35 @@ for iPat=1:length(patients) % loop through each patient
     patient = patients{iPat};
     
     % get the perturbation structures
-    patRowFragilityDir = fullfile(finalRowDataDir, strcat(patient, 'final_data.mat'));
+    patRowFragilityDir = fullfile(finalRowDataDir, strcat(patient, '_Rperturbation_leastsquares_radius1.5.mat'));
     finalRowData = load(patRowFragilityDir);
-    rowFragility = finalRowData.fragility_rankings; % load in fragility matrix
-    rowPerturbations = finalRowData.metadata.del_table;
+    rowFragility = finalRowData.perturbation_struct.fragility_rankings; % load in fragility matrix
+    rowPerturbations = finalRowData.perturbation_struct.info.del_table;
     
-    patColFragilityDir = fullfile(finalColDataDir, strcat(patient, 'final_data.mat'));
+    patColFragilityDir = fullfile(finalColDataDir, strcat(patient, '_Cperturbation_leastsquares_radius1.5.mat'));
     finalColData = load(patColFragilityDir);
-    colFragility = finalColData.fragility_rankings; % load in fragility matrix
-    colPerturbations = finalColData.metadata.del_table;
+    colFragility = finalColData.perturbation_struct.fragility_rankings; % load in fragility matrix
+    colPerturbations = finalColData.perturbation_struct.info.del_table;
     
     % get the adjacency mat strcutures
-    adjMats = fullfile(adjMat);
+    adjMatFile = fullfile(adjMat, patient, strcat(patient, '_adjmats_leastsquares.mat'));
+    adjMats = load(adjMatFile);
+    adjMats = adjMats.adjmat_struct.adjMats;
+    
+    [T, numChans, ~] = size(adjMats);
+    
+    channel = 3;
+    index = 50;
+    adjMat = squeeze(adjMats(index, :, :));
+    evals = eig(adjMat);
+    
+    rowPerturbation = rowPerturbations{channel, index};
+    rowPertMat = [zeros(index-1, numChans); rowPerturbation; zeros(numChans-index, numChans)];
+    perturbedMat = adjMat + rowPertMat;
+    pertEVals = eig(perturbedMat);
+    
+    figure;
+    plot(real(evals), imag(evals), 'ko'); hold on;
     
 %     num_chans = size(rowFragility,1);
 %     rowPerturbations = finalRowData.metadata.del_table{:,end};
