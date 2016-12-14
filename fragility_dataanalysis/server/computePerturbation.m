@@ -70,9 +70,6 @@ num_times = size(adjmat_struct.adjMats, 1);
 minPerturb_time_chan = zeros(num_channels, num_times);
 del_table = cell(num_channels, num_times);
 
-colsum_time_chan = zeros(num_channels, num_times);
-rowsum_time_chan = zeros(num_channels, num_times);
-
 % loop through mat files and open them upbcd
 tic; % start counter
 %%- 01: Extract File and Information

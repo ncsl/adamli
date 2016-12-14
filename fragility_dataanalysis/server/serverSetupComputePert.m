@@ -12,8 +12,8 @@ patients = {,...,
 %     'pt3sz2' 'pt3sz4', ...
 %       'pt6sz3', 'pt6sz4', 'pt6sz5',...
 %       'JH108sz1', 'JH108sz2', 'JH108sz3', 'JH108sz4', 'JH108sz5', 'JH108sz6', 'JH108sz7',...
-%     'pt8sz1' % haven't run
-%     'pt8sz2' 'pt8sz3',...
+    'pt8sz1' 
+% 'pt8sz2' 'pt8sz3',...
 %     'pt10sz1' 'pt10sz2' 'pt10sz3', ...
 %     'pt11sz1' 'pt11sz2' 'pt11sz3' 'pt11sz4', ...
 %     'pt14sz1' 'pt14sz2' 'pt14sz3' 'pt15sz1' 'pt15sz2' 'pt15sz3' 'pt15sz4',...
@@ -56,36 +56,3 @@ for p=1:length(patients)
     patient = patients{p};
     serverPerturbationScript(patient, radius, winSize, stepSize, frequency_sampling)
 end
-
-% function numtimes = serverSetupComputePert(patient_id, seizure_id, perturb_args)%, clinicalLabels)
-% if nargin == 0
-%     patient_id = 'pt1';
-%     seizure_id = 'sz2';
-%     radius = 1.1;
-%     w_space = linspace(-1, 1, 101);
-%     perturbationType = 'R';
-%     winSize = 500;
-%     stepSize = 500;
-%     included_channels = 0;
-% end
-% frequency_sampling = 1000;
-% patient = strcat(patient_id, seizure_id);
-% %% 0: Extract Vars and Initialize Parameters
-% perturbationType = perturb_args.perturbationType;
-% w_space = perturb_args.w_space;
-% radius = perturb_args.radius;
-% adjDir = perturb_args.adjDir;
-% toSaveFinalDataDir = perturb_args.toSaveFinalDataDir;
-% TYPE_CONNECTIVITY = perturb_args.TYPE_CONNECTIVITY;
-% 
-% sigma = sqrt(radius^2 - w_space.^2); % move to the unit circle 1, for a plethora of different radial frequencies
-% b = [0; 1];                          % initialize for perturbation computation later
-% 
-% % get list of mat files
-% matFile = fullfile(adjDir, strcat(patient, '_adjmats_', lower(TYPE_CONNECTIVITY), '.mat'));
-% matFiles = [matFile];
-% 
-% data = load(matFile);
-% adjmat_struct = data.adjmat_struct;
-% numtimes = size(adjmat_struct.adjMats,1);
-% end

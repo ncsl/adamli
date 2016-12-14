@@ -39,6 +39,6 @@ function serverPerturbationScript(patient, radius, winSize, stepSize, frequency_
         perturb_args.TYPE_CONNECTIVITY = TYPE_CONNECTIVITY;
 
         computePerturbations(patient_id, seizure_id, perturb_args); % the icm server perturbation func
-    %     computePerturbation(patient_id, seizure_id, perturb_args); % the local parallelized perturbation
+%         computePerturbation(patient_id, seizure_id, perturb_args); % the local parallelized perturbation
     end
 end
