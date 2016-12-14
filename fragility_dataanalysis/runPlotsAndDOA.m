@@ -35,7 +35,7 @@ patients = {,...,
     };
 
 perturbationTypes = ['R', 'C'];
-PLOTALL = 0;
+PLOTALL = 1;
 
 % data parameters to find correct directory
 radius = 1.5;             % spectral radius
