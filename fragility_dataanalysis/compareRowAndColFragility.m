@@ -77,11 +77,11 @@ fid = fopen(fullfile(figDir, regressionFitFile), 'w');
 for iPat=1:length(patients) % loop through each patient
     % load in the fragility data for row and column
     patient = patients{iPat};
-    patRowFragilityDir = fullfile(finalRowDataDir, strcat(patient, '_Rperturbation_leastsquares.mat'));
+    patRowFragilityDir = fullfile(finalRowDataDir, strcat(patient, '_Rperturbation_leastsquares_radius1.5.mat'));
     finalRowData = load(patRowFragilityDir);
     rowFragility = finalRowData.perturbation_struct.fragility_rankings; % load in fragility matrix
     
-    patColFragilityDir = fullfile(finalColDataDir, strcat(patient,  '_Cperturbation_leastsquares.mat'));
+    patColFragilityDir = fullfile(finalColDataDir, strcat(patient,  '_Cperturbation_leastsquares_radius1.5.mat'));
     finalColData = load(patColFragilityDir);
     colFragility = finalColData.perturbation_struct.fragility_rankings; % load in fragility matrix
     
