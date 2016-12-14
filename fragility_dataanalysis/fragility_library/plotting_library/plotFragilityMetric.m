@@ -1,4 +1,4 @@
-function plotFragilityMetric(fragility_mat, clinicalIndices,...
+function plotFragilityMetric(fragility_mat, minPert_mat, clinicalIndices,...
           timeStart, timeEnd, PLOTARGS)
     %% Step 0: Extract Metadata from Structs
     %- extract clinical indices from EZ, spread regions
@@ -25,6 +25,7 @@ function plotFragilityMetric(fragility_mat, clinicalIndices,...
     end
     
     %- create rowsum of fragility_mat
+    minpertsum = sum(minPert_mat, 2);
     rowsum = sum(fragility_mat, 2);
     xoffset = 0.05;
     
@@ -93,7 +94,8 @@ function plotFragilityMetric(fragility_mat, clinicalIndices,...
                             
     % plot the second figure
     secfig = subplot(4,6, [6,12,18,24]);
-    plot(rowsum, 1:size(fragility_mat,1), 'k'); hold on; set(axes, 'box', 'off');
+    plot(rowsum, 1:size(fragility_mat,1), 'r'); hold on; set(axes, 'box', 'off');
+    plot(minpertsum, 1:size(minPert_mat, 1), 'k'); 
     pos = get(gca, 'Position');
     pos(1) = pos(1) + xoffset;
     ylim([1 size(fragility_mat,1)]);
@@ -101,7 +103,10 @@ function plotFragilityMetric(fragility_mat, clinicalIndices,...
     set(gca, 'Position', pos);
     set(gca, 'YTick', []); set(gca, 'YTickLabel', []);
     set(gca, 'yaxislocation', 'right');
-                            
+    rowsumleg = legend('Fragility Row Sum', 'Min Perturb Row Sum');
+    
+    rowsumleg.Position = [0.8493    0.9297    0.1114    0.0308];
+    
     % save the figure                 
     if SAVEFIG
         print(toSaveFigFile, '-dpng', '-r0')
