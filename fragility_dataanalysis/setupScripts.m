@@ -53,7 +53,6 @@ clinicalLabels.resection_labels = resection_labels;
 patient = strcat(patient_id, seizure_id);
 disp(['Looking at patient: ',patient]);
 
-adjMat = fullfile('..', 'serverdata', 'new', adjMat);
 % create the adjacency file directory to store the computed adj. mats
 toSaveAdjDir = fullfile(strcat(adjMat, num2str(winSize), ...
     '_step', num2str(stepSize), '_freq', num2str(frequency_sampling)), patient);
