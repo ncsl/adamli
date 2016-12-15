@@ -1,0 +1,120 @@
+function serverComputeConnectivity(patient_id, seizure_id, currentWin, eeg, clinicalLabels, adj_args)
+ 
+% add libraries of functions
+addpath(genpath('/Users/adam2392/Dropbox/eeg_toolbox'));
+addpath(genpath('/home/WIN/ali39/Documents/adamli/fragility_dataanalysis/eeg_toolbox/'));
+
+% extract arguments and clinical annotations
+frequency_sampling = adj_args.frequency_sampling; % frequency that this eeg data was sampled at
+winSize = adj_args.winSize;
+stepSize = adj_args.stepSize;
+toSaveAdjDir = adj_args.toSaveAdjDir;
+seizureStart = adj_args.seizureStart; % time seizure starts
+seizureEnd = adj_args.seizureEnd; % time seizure ends
+included_channels = adj_args.included_channels;
+labels = adj_args.labels;
+l2regularization = adj_args.l2regularization;
+num_channels = adj_args.num_channels;
+
+TYPE_CONNECTIVITY = adj_args.TYPE_CONNECTIVITY;
+
+% set options for connectivity measurements
+OPTIONS.l2regularization = l2regularization;
+
+ezone_labels = clinicalLabels.ezone_labels;
+earlyspread_labels = clinicalLabels.earlyspread_labels;
+latespread_labels = clinicalLabels.latespread_labels;
+resection_labels = clinicalLabels.resection_labels;
+
+% patient identification
+patient = strcat(patient_id, seizure_id); 
+
+% set stepsize and window size to reflect sampling rate (milliseconds)
+stepSize = stepSize * frequency_sampling/1000; 
+winSize = winSize * frequency_sampling/1000;
+
+% paramters describing the data to be saved
+% window parameters - overlap, #samples, stepsize, window pointer
+lenData = size(eeg,2); % length of data in seconds
+numWindows = lenData/stepSize;
+fileName = strcat(patient, '_adjmats_', lower(TYPE_CONNECTIVITY), '_', num2str(currentWin), '.mat');
+
+% initialize timePoints vector and adjacency matrices
+timePoints = [1:stepSize:lenData-winSize+1; winSize:stepSize:lenData]';
+adjMats = zeros(size(timePoints,1), num_channels, num_channels);
+
+% display data 
+disp(['Total number of channels ', num2str(num_channels)]);
+disp(['Length of to be included channels ', num2str(length(included_channels))]);
+disp(['Seizure starts at ', num2str(seizureStart), ' milliseconds']);
+disp(['Running analysis for ', num2str(lenData), ' windows']);
+
+for i=1:numWindows
+    % step 1: extract the data and apply the notch filter. Note that column
+    %         #i in the extracted matrix is filled by data samples from the
+    %         recording channel #i.
+    tmpdata = eeg(:, timePoints(i,1):timePoints(i,2));
+    
+    % step 2: compute some functional connectivity 
+    if strcmp(TYPE_CONNECTIVITY, 'LEASTSQUARES')
+        % linear model: Ax = b; A\b -> x
+        b = double(tmpdata(:)); % define b as vectorized by stacking columns on top of another
+        b = b(num_channels+1:end); % only get the time points after the first one
+
+        % - use least square computation
+        theta = computeLeastSquares(tmpdata, b, OPTIONS);
+        theta_adj = reshape(theta, num_channels, num_channels)';    % reshape fills in columns first, so must transpose
+    elseif strcmp(TYPE_CONNECTIVITY, 'PINV')
+        % linear model: Ax = b; (A'*A)*A'*b -> x
+        b = tmpdata(:); % define b as vectorized by stacking columns on top of another
+        b = b(num_channels+1:end); % only get the time points after the first one
+
+        % - use least square computation
+        theta = computePinv(tmpdata, b, OPTIONS);
+        theta_adj = reshape(theta, num_channels, num_channels)';    % reshape fills in columns first, so must transpose
+    elseif strcmp(TYPE_CONNECTIVITY, 'SPEARMAN') || strcmp(TYPE_CONNECTIVITY, 'PEARSON')
+        theta_adj = computePairwiseCorrelation(tmpdata, TYPE_CONNECTIVITY);
+    elseif PDC
+        A = theta_adj; 
+        p_opt = 1;
+        Nf = 250;
+        [~, PDC] = computeDTFandPDC(A, p_opt, frequency_sampling, Nf);
+    elseif DTF
+        [DTF, ~] = computeDTFandPDC(A, p_opt, frequency_sampling, Nf);
+    end
+    
+    % step 3: store the computed adjacency matrix
+    adjMats(i, :, :) = theta_adj;
+
+    % display a message for the user
+    disp(['Finished: ', num2str(i), ' out of ', num2str(numWindows)]);
+end
+
+%%- Create the structure for the adjacency matrices for this patient/seizure
+adjmat_struct = struct();
+adjmat_struct.type_connectivity = TYPE_CONNECTIVITY;
+adjmat_struct.ezone_labels = ezone_labels;
+adjmat_struct.earlyspread_labels = earlyspread_labels;
+adjmat_struct.latespread_labels = latespread_labels;
+adjmat_struct.resection_labels = resection_labels;
+adjmat_struct.all_labels = labels;
+adjmat_struct.seizure_start = seizureStart;
+adjmat_struct.seizure_end = seizureEnd;
+adjmat_struct.winSize = winSize;
+adjmat_struct.stepSize = stepSize;
+adjmat_struct.timePoints = timePoints;
+adjmat_struct.adjMats = adjMats;
+adjmat_struct.included_channels = included_channels;
+adjmat_struct.frequency_sampling = frequency_sampling;
+
+try
+    save(fullfile(toSaveAdjDir, fileName), 'adjmat_struct');
+catch e
+    disp(e);
+    save(fullfile(toSaveAdjDir, fileName), 'adjmat_struct', '-v7.3');
+end
+
+
+
+
+end

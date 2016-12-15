@@ -1,14 +1,12 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % FUNCTION: computePerturbations
 % DESCRIPTION: This function takes adjacency matrices and computes the
-% minimum l2-norm perturbation required to destabilize the system.
+% minimum l2-induced-norm perturbation required to destabilize the system.
 % 
 % INPUT:
 % - patient_id = The id of the patient (e.g. pt1, JH105, UMMC001)
 % - seizure_id = the id of the seizure (e.g. sz1, sz3)
-% - w_space = the frequency space on unit disc that we want to search over
-% - radius = the radius of disc that we want to perturb eigenvalues to
-% - perturbationType = 'R', or 'C' for row or column perturbation
+% - perturb_args = struct of different argument parameters
 % 
 % OUTPUT:
 % - None, but it saves a mat file for the patient/seizure over all windows
