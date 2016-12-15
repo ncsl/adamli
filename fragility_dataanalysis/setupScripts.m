@@ -2,7 +2,7 @@ l2regularization = 0.0;
 TYPES_OF_CONNECTIVITY = {'LEASTSQUARES', 'SPEARMAN', 'PEARSON'};
 TYPE_CONNECTIVITY = TYPES_OF_CONNECTIVITY{1};
 
-adjMat = './adj_mats_win';
+adjMat = './new/adj_mats_win';
 dataDir = './data/';
 % corrType = '';
 % if strcmp(TYPE_CONNECTIVITY, 'SPEARMAN')
