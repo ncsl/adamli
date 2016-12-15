@@ -150,14 +150,16 @@ for iTime=1:num_times % loop through each time window of adjacency matrix
                     B = [Ci, Cr]';
                 end
 
+                
+                del = B'*inv(B*B')*b;
                 % compute perturbation necessary
-                if w_space(iW) ~= 0
-                    del = B'*inv(B*B')*b;
-                else
-                    del = C./(norm(C)^2);
-                end
+%                 if w_space(iW) ~= 0
+%                     del = B'*inv(B*B')*b;
+%                 else
+%                     del = C./(norm(C)^2);
+%                 end
 
-                % store the l2-norm of the perturbation
+                % store the l2-norm of the perturbation vector
                 del_size(iNode, iW) = norm(del); 
                 del_temp{iW} = del;
             end
