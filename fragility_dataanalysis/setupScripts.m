@@ -2,7 +2,7 @@ l2regularization = 0.0;
 TYPES_OF_CONNECTIVITY = {'LEASTSQUARES', 'SPEARMAN', 'PEARSON'};
 TYPE_CONNECTIVITY = TYPES_OF_CONNECTIVITY{1};
 
-adjMat = './new/adj_mats_win';
+adjMat = './adj_mats_win';
 dataDir = './data/';
 % corrType = '';
 % if strcmp(TYPE_CONNECTIVITY, 'SPEARMAN')
@@ -53,6 +53,7 @@ clinicalLabels.resection_labels = resection_labels;
 patient = strcat(patient_id, seizure_id);
 disp(['Looking at patient: ',patient]);
 
+adjMat = fullfile('..', 'serverdata', 'new', adjMat);
 % create the adjacency file directory to store the computed adj. mats
 toSaveAdjDir = fullfile(strcat(adjMat, num2str(winSize), ...
     '_step', num2str(stepSize), '_freq', num2str(frequency_sampling)), patient);
