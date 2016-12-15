@@ -37,7 +37,7 @@ end
 
 channel = 1;
 
-adjMat = './serverdata/adj_mats_win500_step500_freq1000/';
+adjMatDir = './serverdata/adj_mats_win500_step500_freq1000/';
 finalRowDataDir = './serverdata/adj_mats_win500_step500_freq1000/R_perturbations_radius1.5/';
 finalColDataDir = './serverdata/adj_mats_win500_step500_freq1000/C_perturbations_radius1.5/';
 
@@ -45,6 +45,10 @@ finalColDataDir = './serverdata/adj_mats_win500_step500_freq1000/C_perturbations
 for iPat=1:length(patients) % loop through each patient
     % load in the fragility data for row and column
     patient = patients{iPat};
+    
+    if ~exist(fullfile(figDir, patient), 'dir')
+        mkdir(fullfile(figDir, patient));
+    end
     
     % get the perturbation structures
     patRowFragilityDir = fullfile(finalRowDataDir, strcat(patient, '_Rperturbation_leastsquares_radius1.5.mat'));
@@ -58,28 +62,54 @@ for iPat=1:length(patients) % loop through each patient
     colPerturbations = finalColData.perturbation_struct.info.del_table;
     
     % get the adjacency mat strcutures
-    adjMatFile = fullfile(adjMat, patient, strcat(patient, '_adjmats_leastsquares.mat'));
+    adjMatFile = fullfile(adjMatDir, patient, strcat(patient, '_adjmats_leastsquares.mat'));
     adjMats = load(adjMatFile);
     adjMats = adjMats.adjmat_struct.adjMats;
     
     [T, numChans, ~] = size(adjMats);
     
     channel = 3;
-    index = 50;
-    adjMat = squeeze(adjMats(index, :, :));
-    evals = eig(adjMat);
-    
-    rowPerturbation = rowPerturbations{channel, index};
-    rowPertMat = [zeros(index-1, numChans); rowPerturbation; zeros(numChans-index, numChans)];
-    perturbedMat = adjMat + rowPertMat;
-    pertEVals = eig(perturbedMat);
-    
-    figure;
-    plot(real(evals), imag(evals), 'ko'); hold on;
-    
-%     num_chans = size(rowFragility,1);
-%     rowPerturbations = finalRowData.metadata.del_table{:,end};
-%     colPerturbations = finalColData.metadata.del_table{:,end};
-    
-    
+    for i=1:5
+        index = i;
+        adjMat = squeeze(adjMats(index, :, :));
+        evals = eig(adjMat);
+
+        colPerturbation = colPerturbations{channel, index};
+        colPertMat = [zeros(channel-1, numChans); colPerturbation'; zeros(numChans-channel, numChans)]';
+        colPerturbedMat = adjMat + colPertMat;
+        colPertEVals = eig(colPerturbedMat);
+        
+        rowPerturbation = rowPerturbations{channel, index};
+        rowPertMat = [zeros(channel-1, numChans); rowPerturbation; zeros(numChans-channel, numChans)];
+        perturbedMat = adjMat + rowPertMat;
+        pertEVals = eig(perturbedMat);
+
+%         max(abs(evals))
+%         max(abs(pertEVals))
+%         max(abs(colPertEVals))
+
+        close all
+        figure;
+        subplot(311);
+        plot(real(evals), imag(evals), 'ko'); hold on;
+        plot(real(pertEVals), imag(pertEVals), 'ro');
+        plot(real(colPertEVals), imag(colPertEVals), 'go');
+        xlabel('Real Part');
+        ylabel('Imag Part');
+        title(['Eigenspectrum of ', patient, ' channel ', num2str(channel)]);
+        legend('Before', 'After Row', 'After Col');
+        subplot(312);
+        imagesc(colPertMat);
+        title('Col Perturbations');
+        colorbar();
+        subplot(313);
+        imagesc(rowPertMat);
+        title('Row Perturbations');
+        colorbar();
+        
+        currfig = gcf;
+        currfig.PaperPosition = [ -3.7448   -0.3385   15.9896   11.6771];
+        
+        print(fullfile(figDir, patient, strcat(patient, '_chan', num2str(channel), '_index', num2str(index))), '-dpng', '-r0')
+    end
 end

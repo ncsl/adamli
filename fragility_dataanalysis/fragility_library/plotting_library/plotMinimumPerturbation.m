@@ -44,7 +44,6 @@ function plotMinimumPerturbation(minPerturb_time_chan, clinicalIndices,...
     
     set(gca, 'XTick', (XLowerLim+0.5 : xTickStep : XUpperLim+0.5)); set(gca, 'XTickLabel', xTicks); % set xticks and their labels
     set(gca, 'YTick', yTicks);
-    XLim = get(gca, 'xlim'); XLowerLim = XLim(1); XUpperLim = XLim(2);
     xlim([XLowerLim, XUpperLim+1]);
 
     % plot start star's for the different clinical annotations
