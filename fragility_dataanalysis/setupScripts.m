@@ -18,6 +18,17 @@ end
 
 disp(['Looking at patient: ',patient]);
 
+%% DEFINE CHANNELS AND CLINICAL ANNOTATIONS
+[included_channels, ezone_labels, earlyspread_labels, latespread_labels, resection_labels, frequency_sampling] ...
+            = determineClinicalAnnotations(patient_id, seizure_id);
+
+% put clinical annotations into a struct
+clinicalLabels = struct();
+clinicalLabels.ezone_labels = ezone_labels;
+clinicalLabels.earlyspread_labels = earlyspread_labels;
+clinicalLabels.latespread_labels = latespread_labels;
+clinicalLabels.resection_labels = resection_labels;
+
 % create the adjacency file directory to store the computed adj. mats
 toSaveAdjDir = fullfile(strcat(adjMat, num2str(winSize), ...
     '_step', num2str(stepSize), '_freq', num2str(frequency_sampling)), patient);
@@ -48,17 +59,6 @@ if isempty(patient_id)
     patient_id = patient(1:strfind(patient, 'aw')-1);
     seizure_id = patient(strfind(patient, 'aw'):end);
 end
-
-%% DEFINE CHANNELS AND CLINICAL ANNOTATIONS
-[included_channels, ezone_labels, earlyspread_labels, latespread_labels, resection_labels, frequency_sampling] ...
-            = determineClinicalAnnotations(patient_id, seizure_id);
-
-% put clinical annotations into a struct
-clinicalLabels = struct();
-clinicalLabels.ezone_labels = ezone_labels;
-clinicalLabels.earlyspread_labels = earlyspread_labels;
-clinicalLabels.latespread_labels = latespread_labels;
-clinicalLabels.resection_labels = resection_labels;
 
 %% DEFINE COMPUTATION PARAMETERS AND DIRECTORIES TO SAVE DATA
 %%- grab eeg data in different ways... depending on who we got it from
