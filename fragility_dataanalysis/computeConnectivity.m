@@ -92,14 +92,6 @@ for i=1:numWindows
         % - use least square computation
         theta = computeLeastSquares(tmpdata, b, OPTIONS);
         theta_adj = reshape(theta, num_channels, num_channels)';    % reshape fills in columns first, so must transpose
-    elseif strcmp(TYPE_CONNECTIVITY, 'PINV')
-        % linear model: Ax = b; (A'*A)*A'*b -> x
-        b = tmpdata(:); % define b as vectorized by stacking columns on top of another
-        b = b(num_channels+1:end); % only get the time points after the first one
-
-        % - use least square computation
-        theta = computePinv(tmpdata, b, OPTIONS);
-        theta_adj = reshape(theta, num_channels, num_channels)';    % reshape fills in columns first, so must transpose
     elseif strcmp(TYPE_CONNECTIVITY, 'SPEARMAN') || strcmp(TYPE_CONNECTIVITY, 'PEARSON')
         theta_adj = computePairwiseCorrelation(tmpdata, TYPE_CONNECTIVITY);
     elseif PDC
