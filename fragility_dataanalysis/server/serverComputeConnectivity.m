@@ -48,7 +48,7 @@ elseif DTF
 end
 
 % display a message for the user
-disp(['Finished: ', num2str(currentWin), ' out of ', num2str(numWindows)]);
+disp(['Finished: ', num2str(currentWin)]);
 
 % save the file in temporary dir
 save(fullfile(toSaveAdjDir, fileName), 'theta_adj');

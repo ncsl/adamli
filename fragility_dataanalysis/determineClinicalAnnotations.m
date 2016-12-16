@@ -74,9 +74,9 @@ function [included_channels, ezone_labels, ...
     elseif strcmp(patient_id, 'pt1')
         included_channels = [1:36 42 43 46:69 72:95];
         
-%         if strcmp(seizure_id, 'aslp1')
-%             included_channels = [1:36 42 43 46:54 56:60 62:69 72:95];
-%         end
+        if strcmp(seizure_id, 'aslp1')
+            included_channels = [1:36 42 43 46:54 56:60 62:69 72:95];
+        end
         
 %         included_channels = [1:36 42:69 72:95]; % to test automatic rejection
         
@@ -90,12 +90,12 @@ function [included_channels, ezone_labels, ...
     elseif strcmp(patient_id, 'pt2')
         included_channels = [1:14 16:19 21:25 27:37 43 44 47:74];
         
-%         if strcmp(seizure_id, 'aslp2')
-%             included_channels = [1:14 16:19 21:25 27:37 43 44 47:68];
-%         end
-%         if strcmp(seizure_id, 'aw2')
-%             included_channels = [1:14 16:19 21:25 27:37 43 44 47:68 70:74];
-%         end
+        if strcmp(seizure_id, 'aslp2')
+            included_channels = [1:14 16:19 21:25 27:37 43 44 47:68];
+        end
+        if strcmp(seizure_id, 'aw2')
+            included_channels = [1:14 16:19 21:25 27:37 43 44 47:68 70:74];
+        end
 %         included_channels = [1:19 21:37 43:74]; % to test automatic rejection
         
         ezone_labels = {'POLMST1', 'POLPST1', 'POLTT1'}; %pt2

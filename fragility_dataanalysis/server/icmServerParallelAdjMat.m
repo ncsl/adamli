@@ -1,7 +1,7 @@
 function icmServerParallelAdjMat(patient, currentWin, winSize, stepSize)
     addpath(genpath('../fragility_library/'));
     addpath(genpath('../eeg_toolbox/'));
-    addpath(genpath('../'));
+    addpath(('../'));
     IS_SERVER = 1;
     if nargin == 0 % testing purposes
         patient='EZT005seiz001';
@@ -11,7 +11,7 @@ function icmServerParallelAdjMat(patient, currentWin, winSize, stepSize)
         winSize = 500; % 500 milliseconds
         stepSize = 500; 
         frequency_sampling = 1000; % in Hz
-        currentWin = 2;
+        currentWin = 1;
     end
 
     setupScripts;
@@ -91,5 +91,5 @@ function icmServerParallelAdjMat(patient, currentWin, winSize, stepSize)
     adj_args.TYPE_CONNECTIVITY = TYPE_CONNECTIVITY;
     adj_args.num_channels = size(eeg,1);    
 
-    serverComputeConnectivity(patient_id, seizure_id, currentWin, tempeeg, clinicalLabels, adj_args);
+    serverComputeConnectivity(patient_id, seizure_id, currentWin, tempeeg, adj_args);
 end

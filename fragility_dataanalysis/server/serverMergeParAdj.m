@@ -1,5 +1,14 @@
 function serverMergeParAdj(patient)
+    if nargin==0
+        patient = 'pt1sz4';
+    end
     tempDir = fullfile('../tempdata/', patient);
+    fullDir = fullfile('../serverdata/icm_computed/', patient);
+    fileName = strcat(patient, '_adjmats_leastsquares.mat');
+    
+    if ~exist(fullDir, 'dir')
+        mkdir(fullDir);
+    end
     
     % load in the meta data file
     info = load(fullfile(tempDir, 'infoAdjMat'));
@@ -23,14 +32,20 @@ function serverMergeParAdj(patient)
     matFiles = {matFiles.name};
     
     % get rid of info mat file
+    matFiles(strcmp(matFiles, 'infoAdjMat.mat')) = [];
     
     % loop through each one and load it and construct it
-    [T,N] = size(timePoints);
+    [T,~] = size(timePoints);
     
-    adjMats = zeros(T, N, N);
     for i=1:length(matFiles)
         % load in mat file and then save the corresponding index in adjMats
-        
+        adjMat = load(fullfile(tempDir, matFiles{i}));
+        adjMat = adjMat.theta_adj;
+        if i==1
+            N = size(adjMat,1);
+            adjMats = zeros(T, N, N); 
+        end
+        adjMats(i,:,:) = adjMat;
     end
     
     adjmat_struct = struct();
@@ -51,11 +66,11 @@ function serverMergeParAdj(patient)
     
     flag = 0;
     try
-        save(fullfile(toSaveAdjDir, fileName), 'adjmat_struct');
+        save(fullfile(fullDir, fileName), 'adjmat_struct');
         flag = 1
     catch e
         disp(e);
-        save(fullfile(toSaveAdjDir, fileName), 'adjmat_struct', '-v7.3');
+        save(fullfile(fullDir, fileName), 'adjmat_struct', '-v7.3');
         flag = 1;
     end
     

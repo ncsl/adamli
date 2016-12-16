@@ -16,6 +16,17 @@ if IS_SERVER
     dataDir = strcat('.', dataDir);
 end
 
+disp(['Looking at patient: ',patient]);
+
+% create the adjacency file directory to store the computed adj. mats
+toSaveAdjDir = fullfile(strcat(adjMat, num2str(winSize), ...
+    '_step', num2str(stepSize), '_freq', num2str(frequency_sampling)), patient);
+if ~exist(toSaveAdjDir, 'dir')
+    mkdir(toSaveAdjDir);
+end
+
+toSaveAdjDir
+
 % set patientID and seizureID
 patient_id = patient(1:strfind(patient, 'seiz')-1);
 seizure_id = strcat('_', patient(strfind(patient, 'seiz'):end));
@@ -50,18 +61,6 @@ clinicalLabels.latespread_labels = latespread_labels;
 clinicalLabels.resection_labels = resection_labels;
 
 %% DEFINE COMPUTATION PARAMETERS AND DIRECTORIES TO SAVE DATA
-patient = strcat(patient_id, seizure_id);
-disp(['Looking at patient: ',patient]);
-
-% create the adjacency file directory to store the computed adj. mats
-toSaveAdjDir = fullfile(strcat(adjMat, num2str(winSize), ...
-    '_step', num2str(stepSize), '_freq', num2str(frequency_sampling)), patient);
-if ~exist(toSaveAdjDir, 'dir')
-    mkdir(toSaveAdjDir);
-end
-
-toSaveAdjDir
-
 %%- grab eeg data in different ways... depending on who we got it from
 if ~seeg
     %% NIH, JHU PATIENTS

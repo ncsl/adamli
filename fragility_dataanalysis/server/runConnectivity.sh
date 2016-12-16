@@ -17,7 +17,7 @@ echo "Running connectivity computation inside."
 # 	exit 1;
 # }
 
-# run perturbation analysis /home/ali/adamli/fragility_dataanalysis/server/_log/
-matlab -logfile /home/WIN/ali39/Documents/adamli/fragility_dataanalysis/server/dev/_log/$patient.txt -nojvm -nodisplay -nosplash -r "currentPatient='$patient';\
+# run perturbation analysis 
+matlab -logfile /home/ali/adamli/fragility_dataanalysis/server/_log/$patient.txt -nojvm -nodisplay -nosplash -r "currentPatient='$patient';\
 serverSetupAdjComputation(currentPatient, $radius, $winSize, $stepSize);\
 exit;"
