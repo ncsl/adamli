@@ -1,7 +1,8 @@
-function icmServerParallelPerturbation(patient, currentWin, winSize, stepSize)
+function icmServerParallelPerturbation(patient, currentWin, winSize, stepSize, radius)
     addpath(genpath('../fragility_library/'));
     addpath(genpath('../eeg_toolbox/'));
-    addpath(genpath('../'));
+    addpath(genpath('../../'));
+    cd ..
     IS_SERVER = 1;
     if nargin == 0 % testing purposes
         patient='EZT005seiz001';
@@ -10,6 +11,7 @@ function icmServerParallelPerturbation(patient, currentWin, winSize, stepSize)
         % window paramters
         winSize = 500; % 500 milliseconds
         stepSize = 500; 
+        radius = 1.5;
         frequency_sampling = 1000; % in Hz
         currentWin = 2;
     end
@@ -19,65 +21,63 @@ function icmServerParallelPerturbation(patient, currentWin, winSize, stepSize)
     IS_SERVER = 1;
     setupScripts;
 
+    %%- temporary directory to save the perturbation computations
     tempDir = fullfile('../tempdata/', patient);
     if ~exist(tempDir, 'dir')
         mkdir(tempDir);
     end
     
-    
-     for j=1:length(perturbationTypes)
-        perturbationType = perturbationTypes(j);
+    %%- get the adjacency mat
+    matFile = fullfile(adjDir, strcat(patient, '_adjmats_', lower(TYPE_CONNECTIVITY), '.mat'));
 
-        toSaveFinalDataDir = fullfile(strcat(adjMat, num2str(winSize), ...
-        '_step', num2str(stepSize), '_freq', num2str(frequency_sampling)), strcat(perturbationType, '_perturbations', ...
-            '_radius', num2str(radius)));
-        if ~exist(toSaveFinalDataDir, 'dir')
-            mkdir(toSaveFinalDataDir);
-        end
+    % load the adjacency matrix mat file
+    data = load(matFile);
+    adjmat_struct = data.adjmat_struct;
+    adjMat = adjmat_struct.adjMats(currentWin,:,:);
+    
+    [T,N,~] = size(adjmat_struct.adjMats);
+    
+    if currentWin == 1
+        %- extract meta data
+        timePoints = adjmat_struct.timePoints;
+        ezone_labels = adjmat_struct.ezone_labels;
+        earlyspread_labels = adjmat_struct.earlyspread_labels;
+        latespread_labels = adjmat_struct.latespread_labels;
+        resection_labels = adjmat_struct.resection_labels;
+        all_labels = adjmat_struct.all_labels;
+        seizure_start = adjmat_struct.seizure_start;
+        seizure_end = adjmat_struct.seizure_end;
+        winSize = adjmat_struct.winSize;
+        stepSize = adjmat_struct.stepSize;
+        frequency_sampling = adjmat_struct.frequency_sampling;
+
+        %- set meta data struct
+        info.ezone_labels = ezone_labels;
+        info.earlyspread_labels = earlyspread_labels;
+        info.latespread_labels = latespread_labels;
+        info.resection_labels = resection_labels;
+        info.all_labels = all_labels;
+        info.seizure_start = seizure_start;
+        info.seizure_end = seizure_end;
+        info.winSize = winSize;
+        info.stepSize = stepSize;
+        info.frequency_sampling = frequency_sampling;
+        info.timePoints = timePoints;
+        info.radius = radius;
+        
+        %- save here the info meta data temporarily
+        save(fullfile(tempDir, 'infoPert'), 'info');
+    end
+    
+    for j=1:length(perturbationTypes)
+        perturbationType = perturbationTypes(j);
 
         perturb_args = struct();
         perturb_args.perturbationType = perturbationType;
         perturb_args.w_space = w_space;
         perturb_args.radius = radius;
-        perturb_args.adjDir = toSaveAdjDir;
-        perturb_args.toSaveFinalDataDir = toSaveFinalDataDir;
-        perturb_args.TYPE_CONNECTIVITY = TYPE_CONNECTIVITY;
-
-        computePerturbations(patient_id, seizure_id, perturb_args); % the icm server perturbation func
-%         computePerturbation(patient_id, seizure_id, perturb_args); % the local parallelized perturbation
-    end
-    
-    if currentWin == 1
-        info = struct();
-        info.type_connectivity = TYPE_CONNECTIVITY;
-        info.ezone_labels = ezone_labels;
-        info.earlyspread_labels = earlyspread_labels;
-        info.latespread_labels = latespread_labels;
-        info.resection_labels = resection_labels;
-        info.all_labels = labels;
-        info.seizure_start = seizureStart;
-        info.seizure_end = seizureEnd;
-        info.winSize = winSize;
-        info.stepSize = stepSize;
-        info.timePoints = timePoints;
-        info.included_channels = included_channels;
-        info.frequency_sampling = frequency_sampling;
+        perturb_args.toSaveFinalDataDir = tempDir;
         
-        save(fullfile(tempDir, 'tempinfo'), 'info');
-    end
-    % define args for computing the functional connectivity
-    adj_args = struct();
-    adj_args.frequency_sampling = frequency_sampling; % frequency that this eeg data was sampled at
-    adj_args.winSize = winSize;
-    adj_args.stepSize = stepSize;
-    adj_args.toSaveAdjDir = tempDir;
-    adj_args.included_channels = included_channels;
-    adj_args.seizureStart = seizureStart;
-    adj_args.seizureEnd = seizureEnd;
-    adj_args.labels = labels;
-    adj_args.l2regularization = l2regularization;
-    adj_args.TYPE_CONNECTIVITY = TYPE_CONNECTIVITY;
-    adj_args.num_channels = size(eeg,1);    
-
-    serverComputePerturbation(patient_id, seizure_id, currentWin, tempeeg, clinicalLabels, adj_args);
+        serverComputePerturbations(patient_id, seizure_id, currentWin, adjMat, perturb_args); % the icm server perturbation func
+    end    
 end

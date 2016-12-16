@@ -1,19 +1,17 @@
-function serverMergeParAdj(patient)
+function serverMergeParPert(patient, perturbationType)
     if nargin==0
         patient = 'pt1sz4';
     end
     tempDir = fullfile('../tempdata/', patient);
     fullDir = fullfile('../serverdata/icm_computed/', patient);
     
-    %- set file name of merged parallelized adjacency matrix
-    fileName = strcat(patient, '_adjmats_leastsquares.mat');
-    
+    %- set file name of merged parallelized perturbation matrix
     if ~exist(fullDir, 'dir')
         mkdir(fullDir);
     end
     
     % load in the meta data file
-    info = load(fullfile(tempDir, 'infoAdjMat'));
+    info = load(fullfile(tempDir, 'infoPertMat'));
     info = info.info;
     TYPE_CONNECTIVITY = info.type_connectivity;
     ezone_labels = info.ezone_labels;
@@ -28,43 +26,51 @@ function serverMergeParAdj(patient)
     timePoints = info.timePoints;
     included_channels = info.included_channels;
     frequency_sampling = info.frequency_sampling;
+    timePoints = info.timePoints;
+    radius = info.radius;
+    
+    %- final filename to save merged data as
+    filename = strcat(patient, '_', perturbationType, 'perturbation_', lower(TYPE_CONNECTIVITY), '_radius', num2str(radius), '.mat');
     
     % get list of mat files in order and merge them
-    matFiles = dir(fullfile(tempDir, '*.mat'));
-    matFiles = {matFiles.name};
+    pertFiles = dir(fullfile(tempDir, '*.mat'));
+    pertFiles = {pertFiles.name};
     
     % get rid of info mat file
-    matFiles(strcmp(matFiles, 'infoAdjMat.mat')) = [];
+    pertFiles(strcmp(pertFiles, 'infoPertMat.mat')) = [];
     
     % loop through each one and load it and construct it
     [T,~] = size(timePoints);
     
-    for i=1:length(matFiles)
+    for i=1:length(pertFiles)
         % load in mat file and then save the corresponding index in adjMats
-        adjMat = load(fullfile(tempDir, matFiles{i}));
-        adjMat = adjMat.theta_adj;
+        pertMat = load(fullfile(tempDir, pertFiles{i}));
+        pertMat = pertMat.perturbation_struct;
+        minPerturb = pertMat.minPerturb_time_chan;
+        fragility = pertMat.fragility_rankings;
+        del = pertMat.del_table;
         if i==1
-            N = size(adjMat,1);
+            N = size(minPerturb,1);
             adjMats = zeros(T, N, N); 
+            
+            minPerturb_time_chan = zeros(N, T);
+            del_table = cell(N,T);
+            fragility_rankings = zeros(N,T);
         end
-        adjMats(i,:,:) = adjMat;
+        minPerturb_time_chan(:,i) = minPerturb;
+        del_table(:,i) = del;
+        fragility_rankings(:,i) = fragility;
     end
     
-    adjmat_struct = struct();
-    adjmat_struct.type_connectivity = TYPE_CONNECTIVITY;
-    adjmat_struct.ezone_labels = ezone_labels;
-    adjmat_struct.earlyspread_labels = earlyspread_labels;
-    adjmat_struct.latespread_labels = latespread_labels;
-    adjmat_struct.resection_labels = resection_labels;
-    adjmat_struct.all_labels = labels;
-    adjmat_struct.seizure_start = seizureStart;
-    adjmat_struct.seizure_end = seizureEnd;
-    adjmat_struct.winSize = winSize;
-    adjmat_struct.stepSize = stepSize;
-    adjmat_struct.timePoints = timePoints;
-    adjmat_struct.adjMats = adjMats;
-    adjmat_struct.included_channels = included_channels;
-    adjmat_struct.frequency_sampling = frequency_sampling;
+    info.del_table = del_table;
+    
+    % initialize struct to save
+    perturbation_struct = struct();
+    perturbation_struct.info = info; % meta data info
+    perturbation_struct.minNormPertMat = minPerturb_time_chan;
+    perturbation_struct.timePoints = timePoints;
+    perturbation_struct.fragility_rankings = fragility_rankings;
+
     
     flag = 0;
     try
