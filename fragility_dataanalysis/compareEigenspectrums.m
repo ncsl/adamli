@@ -22,11 +22,13 @@
 %% Initialization
 % initialize variables
 patients = {,...
-%     'pt1sz2', 'pt1sz3', 'pt1sz4',...
+%     'EZT019_seiz002'...
+%     'pt1sz2', 'pt1sz3', 
+% 'pt1sz4',...
 %     'pt2sz1' 'pt2sz3' 'pt2sz4', ...
 %     'pt3sz2' 'pt3sz4', ...
     'pt8sz1' 'pt8sz2' 'pt8sz3',...
-    'pt10sz1' 'pt10sz2' 'pt10sz3', ...
+%     'pt10sz1' 'pt10sz2' 'pt10sz3', ...
 
     };
 
@@ -37,9 +39,10 @@ end
 
 channel = 1;
 
-adjMatDir = './serverdata/adj_mats_win500_step500_freq1000/';
-finalRowDataDir = './serverdata/adj_mats_win500_step500_freq1000/R_perturbations_radius1.5/';
-finalColDataDir = './serverdata/adj_mats_win500_step500_freq1000/C_perturbations_radius1.5/';
+serverDataDir = './serverdata/fixed_adj_mats_win500_step500_freq1000/';
+adjMatDir = serverDataDir;
+finalRowDataDir = fullfile(serverDataDir, 'R_perturbations_radius1.5/')
+finalColDataDir = fullfile(serverDataDir, 'C_perturbations_radius1.5/')
 
 %% Output Spectral Map Per Patient
 for iPat=1:length(patients) % loop through each patient
@@ -68,8 +71,10 @@ for iPat=1:length(patients) % loop through each patient
     
     [T, numChans, ~] = size(adjMats);
     
-    channel = 3;
+    channel = 6;
     for i=1:5
+        for j=1:numChans
+            channel = j;
         index = i;
         adjMat = squeeze(adjMats(index, :, :));
         evals = eig(adjMat);
@@ -84,10 +89,13 @@ for iPat=1:length(patients) % loop through each patient
         perturbedMat = adjMat + rowPertMat;
         pertEVals = eig(perturbedMat);
 
-%         max(abs(evals))
-%         max(abs(pertEVals))
-%         max(abs(colPertEVals))
-
+        max(abs(evals))
+        max(abs(pertEVals))
+        max(abs(colPertEVals))
+        
+        if max(abs(pertEVals)) > 1.3 || max(abs(colPertEVals)) > 1.3
+            pause
+        end
         close all
         figure;
         subplot(311);
@@ -110,6 +118,8 @@ for iPat=1:length(patients) % loop through each patient
         currfig = gcf;
         currfig.PaperPosition = [ -3.7448   -0.3385   15.9896   11.6771];
         
-        print(fullfile(figDir, patient, strcat(patient, '_chan', num2str(channel), '_index', num2str(index))), '-dpng', '-r0')
+%         print(fullfile(figDir, patient, strcat(patient, '_chan', num2str(channel), '_index', num2str(index))), '-dpng', '-r0')
+ 
+        end
     end
 end
