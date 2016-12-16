@@ -21,5 +21,5 @@ matlab_jvm="matlab -nojvm -nodesktop -nosplash -r"
 
 echo "Running connectivity computation."
 matlab -logfile /home/ali/adamli/fragility_dataanalysis/server/_log/job$1.txt -nojvm -nodisplay -nosplash -r "currentpatient='$patient'; \
-	icmServerParallelPerturbation($patient, $winSize, $stepSize);\
+	icmServerParallelPerturbation($patient, $currWin, $winSize, $stepSize, $radius);\
 	exit;"

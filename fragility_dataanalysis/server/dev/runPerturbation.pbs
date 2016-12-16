@@ -12,6 +12,7 @@
 cd /home/ali/adamli/fragility_dataanalysis/server
 
 for i in `seq 0 $numWins`; do
-	proc=[`expr $i % 8`]
-	pbsdsh -n $proc /home/ali/adamli/fragility_dataanalysis/server/computePerturbation.sh $proc $patient $radius $winSize $stepSize &
+	proc=$(($i%8))
+	tempi=$(($i+1))
+	pbsdsh -n $proc /home/ali/adamli/fragility_dataanalysis/server/computePerturbation.sh $proc $patient $radius $winSize $stepSize $tempi &
 done
