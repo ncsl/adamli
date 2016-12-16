@@ -26,7 +26,7 @@ function serverSetupAdjComputation(patient, radius, winSize, stepSize)
     
     %- compute number of windows there are based on length of eeg,
     %- winSize and stepSize
-    numWins = size(eeg,2) / stepSize;
+    numWins = size(eeg,2) / stepSize - 1;
     unix('echo "Hi"');
     %% Create Unix Command
     pbsCommand = sprintf('qsub -v numWins=%d,patient=%s,radius=%.1f,winSize=%d,stepSize=%d runConnectivity.pbs',...

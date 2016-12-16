@@ -5,9 +5,20 @@ patients=('pt1sz2' 'pt1sz3' 'pt2sz1' 'pt2sz3' 'pt7sz19'\
  'EZT045seiz002' 'EZT090seiz002' 'EZT090seiz003')
 echo ${#patients[@]}
 
-for proc in `seq 0 ${#patients[@]}`; do
-	patient=${patients[proc]}
+# for proc in `seq 0 ${#patients[@]}`; do
+# 	patient=${patients[proc]}
+# 	echo $proc
+# 	echo $patient
+# done
+# wait
+
+numWins=200
+
+for i in `seq 0 $numWins`; do
+	proc=$(($i%8))
+	tempi=$(($i+1))
+
 	echo $proc
-	echo $patient
+	echo $tempi
+	# pbsdsh -n $proc /home/ali/adamli/fragility_dataanalysis/server/computeConnectivity.sh $proc $patient $radius $winSize $stepSize $tempi &
 done
-wait
