@@ -32,6 +32,6 @@ function serverSetupAdjComputation(patient, radius, winSize, stepSize)
     pbsCommand = sprintf('qsub -v numWins=%d,patient=%s,radius=%.1f,winSize=%d,stepSize=%d runConnectivity.pbs',...
                     numWins, patient, radius, winSize, stepSize);
     
-    pbsCommand
+
     unix(pbsCommand);
 end
