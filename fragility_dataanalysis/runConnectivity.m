@@ -34,7 +34,7 @@ IS_INTERICTAL = 1;
 addpath(genpath('./fragility_library/'));
 addpath(genpath('/Users/adam2392/Dropbox/eeg_toolbox'));
 addpath(genpath('/home/WIN/ali39/Documents/adamli/fragility_dataanalysis/eeg_toolbox/'));
-
+fixed_adj_mats_win500_step500_freq1000
 %%- Begin Loop Through Different Patients Here
 for p=1:length(patients)
     patient = patients{p};

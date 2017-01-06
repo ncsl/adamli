@@ -95,7 +95,7 @@ for iTime=1:num_times % loop through each time window of adjacency matrix
         fprintf(fid, '%6s, %f \n', ['This patient has eigenvalue > radius, check it!', ...
             patient, '_', num2str(frequency_sampling), '_', num2str(winSize), '_', num2str(stepSize)]);
         fclose(fid);
-    elseif max(abs(eig(adjMat))) - radius < 1e-8
+    elseif abs(max(abs(eig(adjMat))) - radius) < 1e-8
         logfile = strcat(patient, '_equaleigenvals_perturbation_log.txt');
         fid = fopen(logfile, 'w');
         fprintf(fid, '%6s, %f \n', ['This patient has eigenvalue == radius, check it!', ...
