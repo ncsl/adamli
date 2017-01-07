@@ -4,11 +4,11 @@ clc;
 
 % settings to run
 patients = {,...
-     'pt1sz2', 
-%      'pt1sz3',...
+     'pt1sz2',...
+     'pt1sz3',...
 };
 
-perturbationTypes = ['C','R'];
+perturbationTypes = ['C', 'R'];
 radius = 1.5;             % spectral radius
 w_space = linspace(-radius, radius, 101);
 winSize = 500;            % 500 milliseconds
@@ -88,18 +88,16 @@ for p=1:length(patients)
         perturb_args.w_space = w_space;
         perturb_args.radius = radius;
         
-        for iTime=1:T % loop through each window of adjacency mats
+        parfor iTime=1:T % loop through each window of adjacency mats
             adjMat = squeeze(adjMats(iTime,:,:));
-            
-            % testing
-%             test = eig(adjMat);
-%             plot(real(test), imag(test), 'ko')
             
             [minNormPert, del_vecs, ERRORS] = minNormPerturbation(patient, adjMat, perturb_args);
         
             % store results
-            minNormPerturbMat(:, iTime) = minNormPert;u
-            del_table{:, iTime} = del_vecs;
+            minNormPerturbMat(:, iTime) = minNormPert;
+            del_table(:, iTime) = del_vecs;
+            
+            disp(['Finished time: ', num2str(iTime)]);
         end
         
         % Compute fragility rankings per column by normalization
@@ -121,6 +119,7 @@ for p=1:length(patients)
         
         % save the perturbation struct result
         save(fullfile(toSavePertDir, filename), 'perturbation_struct');
+        disp(['Saved file: ', filename]);
     end
     
     

@@ -36,8 +36,12 @@ radius = pertArgs.radius;
 sigma = sqrt(radius^2 - w_space.^2); % move to the unit circle 1, for a plethora of different radial frequencies
 b = [0; -1];                          % initialize for perturbation computation later
 
-N = size(A,1);
-minPerturbation = zeros(N,1);
+% add to sigma and w to create a whole circle search
+w_space = [w_space, w_space];
+sigma = [-sigma, sigma];
+
+N = size(A,1); % get the Number of Electrodes
+minPerturbation = zeros(N,1); % initialize minPerturbation Matrix
 
 %% Error Checking/Logging
 if max(abs(eig(A))) > radius
@@ -102,7 +106,7 @@ for iNode=1:N % 1st loop through each electrode
         if w_space(iW) ~= 0
             del = B'*inv(B*B')*b;
         else
-            del = C./(norm(C)^2);
+            del = -C./(norm(C)^2);
             del = del';
         end
 
@@ -124,27 +128,39 @@ for iNode=1:N % 1st loop through each electrode
         
         % test to make sure things are working...
         if strcmp(perturbationType, 'C')
-            temp = del*ek';
+            try
+                temp = del*ek';
+            catch e
+                disp(e)
+                temp = del'*ek'; 
+            end
         else
             temp = ek*del';
         end
         test = A + temp;
-        if (max(abs(eig(test))) - radius > 1e-8)
-            disp('Wtf')
+        plot(real(eig(test)), imag(eig(test)), 'ko')
+        if isempty(find(abs(radius - abs(eig(test))) < 1e-8))
+            disp('Max eigenvalue is not displaced to correct location')
         end
-%         try            
+        
+%         try    
+% %             temp = squeeze(adjmat_struct.adjMats(1,:,:));
+% %             del = perturbation_struct.info.del_table{1,1};
+% %             ek = [1; zeros(85,1)]; % unit column vector at this node
+% %             adelt = del'*ek';
+% %             
 %             temp = del*ek';
 %             test = A + temp;
 %             max(abs(eig(test)))
 %             if max(abs(eig(test))) ~= radius
 %                 disp('Wtf')
 %             end
-% %             figure;
-% %             plot(real(eig(test)), imag(eig(test)), 'ko'); hold on;
-% %             plot(real(eig(A)), imag(eig(A)), 'ro')
+%             figure;
+%             plot(real(eig(test)), imag(eig(test)), 'ko'); hold on;
+%             plot(real(eig(A)), imag(eig(A)), 'ro')
 % %             plot(sigma(iW), w_space(iW), 'go'); 
-% %             title(['Eigenspectrum of ', num2str(iW), ' channel ', num2str(iNode)]);
-% %             legend('perturbed', 'unperturbed', 'sigma+jw');
+%             title(['Eigenspectrum of ', num2str(iW), ' channel ', num2str(iNode)]);
+%             legend('perturbed', 'unperturbed', 'sigma+jw');
 %         catch e
 %             disp(e)
 %             iW

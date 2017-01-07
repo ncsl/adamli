@@ -198,5 +198,11 @@ else
 
             save(fullfile(patient_eeg_path, patient), 'data', 'elec_labels', 'seiz_end_mark', 'seiz_start_mark');
         end
+        
+        % check if the eeg and labels are correct sizes 
+        % given the included channels
+        if length(labels(included_channels)) ~= size(eeg(included_channels,:),1)
+            disp('Something wrong here...!!!!');
+        end
     end
 end
