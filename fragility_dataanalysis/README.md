@@ -41,12 +41,19 @@ For every patient, we need to create a file outlining when the seizure starts, e
 
 3. Put data into correct directories
 
-4. Compute adjacency matrices:
-Using the function documented, compute an adjacency matrix.
+4. Resave all data as .mat files
+- Run "saveEEGAsMat.m"
 
-5. Compute the minimum perturbation to instability.
+5. Compute functional connectivity / state transition matrices
+- Run "runConnectivity.m"
 
-6. Compute fragility metric and rank electrodes.
+6. Compute minimum norm perturbation analysis
+- Run "runPerturbation.m"
+
+7. 
+
+
+
 
 ## Documentation:
 File descriptions:
