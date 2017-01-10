@@ -23,11 +23,12 @@
 % initialize variables
 patients = {,...
 %     'EZT019_seiz002'...
+    'pt1aw1',...
 %     'pt1sz2', 'pt1sz3', 
 % 'pt1sz4',...
 %     'pt2sz1' 'pt2sz3' 'pt2sz4', ...
 %     'pt3sz2' 'pt3sz4', ...
-    'pt8sz1' 'pt8sz2' 'pt8sz3',...
+%     'pt8sz1' 'pt8sz2' 'pt8sz3',...
 %     'pt10sz1' 'pt10sz2' 'pt10sz3', ...
 
     };
@@ -59,10 +60,10 @@ for iPat=1:length(patients) % loop through each patient
     rowFragility = finalRowData.perturbation_struct.fragility_rankings; % load in fragility matrix
     rowPerturbations = finalRowData.perturbation_struct.info.del_table;
     
-    patColFragilityDir = fullfile(finalColDataDir, strcat(patient, '_Cperturbation_leastsquares_radius1.5.mat'));
-    finalColData = load(patColFragilityDir);
-    colFragility = finalColData.perturbation_struct.fragility_rankings; % load in fragility matrix
-    colPerturbations = finalColData.perturbation_struct.info.del_table;
+%     patColFragilityDir = fullfile(finalColDataDir, strcat(patient, '_Cperturbation_leastsquares_radius1.5.mat'));
+%     finalColData = load(patColFragilityDir);
+%     colFragility = finalColData.perturbation_struct.fragility_rankings; % load in fragility matrix
+%     colPerturbations = finalColData.perturbation_struct.info.del_table;
     
     % get the adjacency mat strcutures
     adjMatFile = fullfile(adjMatDir, patient, strcat(patient, '_adjmats_leastsquares.mat'));
@@ -78,11 +79,11 @@ for iPat=1:length(patients) % loop through each patient
         index = i;
         adjMat = squeeze(adjMats(index, :, :));
         evals = eig(adjMat);
-
-        colPerturbation = colPerturbations{channel, index};
-        colPertMat = [zeros(channel-1, numChans); colPerturbation'; zeros(numChans-channel, numChans)]';
-        colPerturbedMat = adjMat + colPertMat;
-        colPertEVals = eig(colPerturbedMat);
+% 
+%         colPerturbation = colPerturbations{channel, index};
+%         colPertMat = [zeros(channel-1, numChans); colPerturbation'; zeros(numChans-channel, numChans)]';
+%         colPerturbedMat = adjMat + colPertMat;
+%         colPertEVals = eig(colPerturbedMat);
         
         rowPerturbation = rowPerturbations{channel, index};
         rowPertMat = [zeros(channel-1, numChans); rowPerturbation; zeros(numChans-channel, numChans)];
@@ -91,9 +92,9 @@ for iPat=1:length(patients) % loop through each patient
 
         max(abs(evals))
         max(abs(pertEVals))
-        max(abs(colPertEVals))
+%         max(abs(colPertEVals))
         
-        if max(abs(pertEVals)) > 1.3 || max(abs(colPertEVals)) > 1.3
+        if max(abs(pertEVals)) > 1.3 %|| max(abs(colPertEVals)) > 1.3
             pause
         end
         close all
@@ -101,15 +102,15 @@ for iPat=1:length(patients) % loop through each patient
         subplot(311);
         plot(real(evals), imag(evals), 'ko'); hold on;
         plot(real(pertEVals), imag(pertEVals), 'ro');
-        plot(real(colPertEVals), imag(colPertEVals), 'go');
+%         plot(real(colPertEVals), imag(colPertEVals), 'go');
         xlabel('Real Part');
         ylabel('Imag Part');
         title(['Eigenspectrum of ', patient, ' channel ', num2str(channel)]);
         legend('Before', 'After Row', 'After Col');
-        subplot(312);
-        imagesc(colPertMat);
-        title('Col Perturbations');
-        colorbar();
+%         subplot(312);
+%         imagesc(colPertMat);
+%         title('Col Perturbations');
+%         colorbar();
         subplot(313);
         imagesc(rowPertMat);
         title('Row Perturbations');
