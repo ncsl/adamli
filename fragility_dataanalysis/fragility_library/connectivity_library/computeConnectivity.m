@@ -80,12 +80,12 @@ function adjMats = computeConnectivity(eeg, adj_args)
             theta_adj = reshape(theta, num_channels, num_channels)';    % reshape fills in columns first, so must transpose
         elseif strcmp(TYPE_CONNECTIVITY, 'SPEARMAN') || strcmp(TYPE_CONNECTIVITY, 'PEARSON')
             theta_adj = computePairwiseCorrelation(tmpdata, TYPE_CONNECTIVITY);
-        elseif PDC
+        elseif strcmp(TYPE_CONNNECTIVITY, 'PDC')
             A = theta_adj; 
             p_opt = 1;
             Nf = 250;
             [~, PDC] = computeDTFandPDC(A, p_opt, frequency_sampling, Nf);
-        elseif DTF
+        elseif strcmp(TYPE_CONNECTIVITY, 'DTF')
             [DTF, ~] = computeDTFandPDC(A, p_opt, frequency_sampling, Nf);
         end
 
