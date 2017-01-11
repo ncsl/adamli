@@ -11,6 +11,7 @@ if nargin == 0 % testing purposes
     winSize = 500; % 500 milliseconds
     stepSize = 500; 
     frequency_sampling = 1000; % in Hz
+    IS_SERVER = 0;
 end
 
 % setupScripts;
@@ -22,8 +23,17 @@ TYPE_CONNECTIVITY = 'leastsquares';
 IS_INTERICTAL = 1;
 l2regularization = 0;
 
+% set directory to find adjacency matrix data
+toSaveAdjDir = fullfile(strcat('./fixed_adj_mats_win', num2str(winSize), ...
+    '_step', num2str(stepSize), '_freq', num2str(frequency_sampling))); % at lab
+dataDir = './data/';
+
+% toSaveAdjDir = fullfile(strcat('/Volumes/NIL_PASS/serverdata/fixed_adj_mats_win', num2str(winSize), ...
+%     '_step', num2str(stepSize), '_freq', num2str(frequency_sampling))); % at home
+% dataDir = '/Volumes/NIL_PASS/data/';
+
 if IS_SERVER
-    adjMat = fullfile('..', 'serverdata', adjMat);
+    toSaveAdjDir = fullfile('..', 'serverdata', toSaveAdjDir);
     dataDir = strcat('.', dataDir);
 end
 
@@ -75,12 +85,14 @@ eeg = data.data;
 labels = data.elec_labels;
 onset_time = data.seiz_start_mark;
 offset_time = data.seiz_end_mark;
-recording_start = 0; % since they dont' give absolute time of starting the recording
-seizureStart = (onset_time - recording_start); % time seizure starts
-seizureEnd = (offset_time - recording_start); % time seizure ends
-recording_duration = size(data.data, 2);
-num_channels = size(data.data, 1);
+seizureStart = (onset_time); % time seizure starts
+seizureEnd = (offset_time); % time seizure ends
 
+% check to make sure eeg mat file was saved correctly with the right meta
+% data
+if seizureStart == 0 || seizureEnd == 0
+    disp('Mat file from .csv was not saved correctly.');
+end
 
 % check included channels length and how big eeg is
 if length(labels(included_channels)) ~= size(eeg(included_channels,:),1)
