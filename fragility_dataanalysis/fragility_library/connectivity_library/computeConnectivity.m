@@ -70,7 +70,7 @@ function adjMats = computeConnectivity(eeg, adj_args)
         tmpdata = eeg(:, timePoints(i,1):timePoints(i,2));
 
         % step 2: compute some functional connectivity 
-        if strcmp(TYPE_CONNECTIVITY, 'LEASTSQUARES')
+        if strcmp(TYPE_CONNECTIVITY, 'leastsquares')
             % linear model: Ax = b; A\b -> x
             b = double(tmpdata(:)); % define b as vectorized by stacking columns on top of another
             b = b(num_channels+1:end); % only get the time points after the first one
@@ -78,7 +78,7 @@ function adjMats = computeConnectivity(eeg, adj_args)
             % - use least square computation
             theta = computeLeastSquares(tmpdata, b, OPTIONS);
             theta_adj = reshape(theta, num_channels, num_channels)';    % reshape fills in columns first, so must transpose
-        elseif strcmp(TYPE_CONNECTIVITY, 'SPEARMAN') || strcmp(TYPE_CONNECTIVITY, 'PEARSON')
+        elseif strcmp(TYPE_CONNECTIVITY, 'spearman') || strcmp(TYPE_CONNECTIVITY, 'pearson')
             theta_adj = computePairwiseCorrelation(tmpdata, TYPE_CONNECTIVITY);
         elseif strcmp(TYPE_CONNECTIVITY, 'PDC')
             A = theta_adj; 
