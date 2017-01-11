@@ -50,7 +50,7 @@ function adjMats = computeConnectivity(eeg, adj_args)
     winSize = winSize * frequency_sampling/1000;
 
     % window parameters - overlap, #samples, stepsize, window pointer
-    lenData = size(eeg,2); % length of data in seconds
+    [num_channels, lenData] = size(eeg); % length of data in seconds
     numWindows = lenData/stepSize;
 
     % initialize timePoints vector and adjacency matrices
