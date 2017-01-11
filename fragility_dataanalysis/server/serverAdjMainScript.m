@@ -36,6 +36,10 @@ if IS_SERVER
     dataDir = strcat('.', dataDir);
 end
 
+if ~exist(toSaveAdjDir, 'dir')
+    mkdir(toSaveAdjDir);
+end
+
 % set patientID and seizureID
 patient_id = patient(1:strfind(patient, 'seiz')-1);
 seizure_id = strcat('_', patient(strfind(patient, 'seiz'):end));
