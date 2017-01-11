@@ -18,7 +18,6 @@ end
 disp(['Looking at patient: ',patient]);
 
 %% New Setup Scripts
-IS_SERVER = 0;
 TYPE_CONNECTIVITY = 'leastsquares';
 IS_INTERICTAL = 1;
 l2regularization = 0;
