@@ -18,12 +18,13 @@ end
 disp(['Looking at patient: ',patient]);
 
 %% New Setup Scripts
-TYPE_CONNECTIVITY = 'leastsquares';
-IS_INTERICTAL = 1;
-l2regularization = 0;
+TYPE_CONNECTIVITY = 'leastsquares';     % type of functional conn.?
+BP_FILTER_RAW = 0;                      % apply notch filter before functional conn. computation?
+IS_INTERICTAL = 1;                      % is this interictal data?
+l2regularization = 0;                   % apply l2 regularization to estimation of functional conn.?
 
 % set directory to find adjacency matrix data
-toSaveAdjDir = fullfile(strcat('./fixed_adj_mats_win', num2str(winSize), ...
+toSaveAdjDir = fullfile(strcat('./nofilter_adj_mats_win', num2str(winSize), ...
     '_step', num2str(stepSize), '_freq', num2str(frequency_sampling))); % at lab
 dataDir = './data/';
 
@@ -36,6 +37,7 @@ if IS_SERVER
     dataDir = strcat('.', dataDir);
 end
 
+% create directory if it does not exist
 if ~exist(toSaveAdjDir, 'dir')
     mkdir(toSaveAdjDir);
 end
@@ -118,7 +120,7 @@ end
 
 % define args for computing the functional connectivity
 adj_args = struct();
-adj_args.BP_FILTER_RAW = 1;                         % apply notch filter or not?
+adj_args.BP_FILTER_RAW = BP_FILTER_RAW;                         % apply notch filter or not?
 adj_args.frequency_sampling = frequency_sampling;   % frequency that this eeg data was sampled at
 adj_args.winSize = winSize;                         % window size
 adj_args.stepSize = stepSize;                       % step size
