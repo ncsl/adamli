@@ -23,5 +23,5 @@ matlab_jvm="matlab -nojvm -nodesktop -nosplash -r"
 
 # run connectivity estimation
 matlab -logfile /home/ali/adamli/fragility_dataanalysis/server/_log/$patient.txt -nojvm -nodisplay -nosplash -r "currentPatient='$patient';\
-serverSetupAdjComputation(currentPatient, $winSize, $stepSize);\
+serverSetupAdjComputation($patient, $winSize, $stepSize);\
 exit;"
