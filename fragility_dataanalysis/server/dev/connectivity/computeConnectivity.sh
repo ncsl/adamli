@@ -8,10 +8,9 @@ module load matlab/matlab2013a
 ## 00: Load in input parameters
 proc="$1"
 patient="$2"
-radius="$3"
-winSize="$4"
-stepSize="$5" 
-currWin="$6"
+winSize="$3"
+stepSize="$4" 
+currWin="$5"
 
 ## 01: Set parameters for matlab to run, and check if matlab is on path
 matlab_jvm="matlab -nojvm -nodesktop -nosplash -r"

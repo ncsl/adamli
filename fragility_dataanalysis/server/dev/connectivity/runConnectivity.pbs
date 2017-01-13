@@ -14,5 +14,5 @@ cd /home/ali/adamli/fragility_dataanalysis/server
 for i in `seq 0 $numWins`; do
 	proc=$(($i%8))
 	tempi=$(($i+1))
-	pbsdsh -n $proc /home/ali/adamli/fragility_dataanalysis/server/dev/connectivity/computeConnectivity.sh $proc $patient $radius $winSize $stepSize $tempi &
+	pbsdsh -n $proc /home/ali/adamli/fragility_dataanalysis/server/dev/connectivity/computeConnectivity.sh $proc $patient $winSize $stepSize $tempi &
 done

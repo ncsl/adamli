@@ -56,7 +56,7 @@ for patient in $patients; do
 	echo $patient
 	if [[ "$RUNCONNECTIVITY" -eq 1 ]]; then
 		# runAdjMat.sh patient
-		sh ./connectivity/srunConnectivity.sh $patient $winSize $stepSize $radius
+		sh ./connectivity/runConnectivity.sh $patient $winSize $stepSize
 	else
 		echo "Running perturbation computation."
 		# run perturbation analysis only
