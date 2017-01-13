@@ -5,6 +5,7 @@ function serverSetupAdjComputation(patient, winSize, stepSize)
     IS_SERVER = 1;
 %     setupScripts; 
     
+    unix('echo inside.');
     if nargin == 0 % testing purposes
         patient='EZT007seiz001';
         patient ='pt1sz2';
