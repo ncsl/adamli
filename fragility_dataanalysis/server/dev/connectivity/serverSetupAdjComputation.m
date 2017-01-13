@@ -5,7 +5,6 @@ function serverSetupAdjComputation(patient, winSize, stepSize)
     IS_SERVER = 1;
 %     setupScripts; 
     
-    unix('echo inside.');
     if nargin == 0 % testing purposes
         patient='EZT007seiz001';
         patient ='pt1sz2';
@@ -23,7 +22,7 @@ function serverSetupAdjComputation(patient, winSize, stepSize)
 
     % set directory to find adjacency matrix data
     adjMatDir = fullfile(strcat('./serverdata/fixed_adj_mats_win', num2str(winSize), ...
-        '_step', nu2str(stepSize), '_freq', num2str(frequency_sampling))); % at lab
+        '_step', num2str(stepSize), '_freq', num2str(frequency_sampling))); % at lab
     dataDir = './data/';
     
     if ~exist(adjMatDir, 'dir')
