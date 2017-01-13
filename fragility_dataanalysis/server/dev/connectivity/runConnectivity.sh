@@ -1,3 +1,6 @@
+# Example Call of runConnectivity.sh:
+# sh ./connectivity/srunConnectivity.sh $patient $winSize $stepSize $radius
+
 source /etc/profile.modules
 module load matlab/matlab2013a
 
@@ -20,7 +23,7 @@ matlab_jvm="matlab -nojvm -nodesktop -nosplash -r"
 	exit 1;
 }
 
-# run perturbation analysis 
+# run connectivity estimation
 matlab -logfile /home/ali/adamli/fragility_dataanalysis/server/_log/$patient.txt -nojvm -nodisplay -nosplash -r "currentPatient='$patient';\
 serverSetupAdjComputation(currentPatient, $radius, $winSize, $stepSize);\
 exit;"

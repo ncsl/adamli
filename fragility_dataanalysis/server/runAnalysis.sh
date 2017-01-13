@@ -6,7 +6,7 @@ module load matlab/matlab2013a
 ## 00: Load in input parameters
 proc="$1"
 patient="$2"
-stepSize=$winSize
+# stepSize=$winSize
 
 ## 01: Set parameters for matlab to run, and check if matlab is on path
 matlab_jvm="matlab -nojvm -nodesktop -nosplash -r"
@@ -16,8 +16,8 @@ matlab_jvm="matlab -nojvm -nodesktop -nosplash -r"
 		exit 1;
 	}
 
-# winSize=500
-# stepSize=500
+winSize=500
+stepSize=500
 frequency_sampling=1000
 radius=1.5
 

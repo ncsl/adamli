@@ -3,6 +3,8 @@
 source /etc/profile.modules
 module load matlab/matlab2013a
 
+#### This script is called by the pbs file. ####
+
 ## 00: Load in input parameters
 proc="$1"
 patient="$2"
@@ -21,5 +23,6 @@ matlab_jvm="matlab -nojvm -nodesktop -nosplash -r"
 
 echo "Running connectivity computation."
 matlab -logfile /home/ali/adamli/fragility_dataanalysis/server/_log/job$1.txt -nojvm -nodisplay -nosplash -r "currentpatient='$patient'; \
+	disp('testing....')
 	serverComputeConnectivity($patient, $currWin, $winSize, $stepSize);\
 	exit;"
