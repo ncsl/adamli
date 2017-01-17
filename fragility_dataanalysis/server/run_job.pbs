@@ -1,5 +1,5 @@
 #!/bin/bash -l
-#PBS -N compute_adjacency_mat_ezt
+#PBS -N compute_adjacency_mat_seeg
 #PBS -l nodes=1:ppn=8
 #PBS -l walltime=22:00:00
 #PBS -M ali39@jhu.edu
