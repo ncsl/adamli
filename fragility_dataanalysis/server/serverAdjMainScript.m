@@ -24,7 +24,7 @@ IS_INTERICTAL = 1;                      % is this interictal data?
 l2regularization = 0;                   % apply l2 regularization to estimation of functional conn.?
 
 % set directory to find adjacency matrix data
-toSaveAdjDir = fullfile(strcat('./fixed_adj_mats_win', num2str(winSize), ...
+toSaveAdjDir = fullfile(strcat('./nofilter_adj_mats_win', num2str(winSize), ...
     '_step', num2str(stepSize), '_freq', num2str(frequency_sampling))); % at lab
 dataDir = './data/';
 
