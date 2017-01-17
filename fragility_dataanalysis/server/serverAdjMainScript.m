@@ -19,12 +19,12 @@ disp(['Looking at patient: ',patient]);
 
 %% New Setup Scripts
 TYPE_CONNECTIVITY = 'leastsquares';     % type of functional conn.?
-BP_FILTER_RAW = 0;                      % apply notch filter before functional conn. computation?
+BP_FILTER_RAW = 1;                      % apply notch filter before functional conn. computation?
 IS_INTERICTAL = 1;                      % is this interictal data?
 l2regularization = 0;                   % apply l2 regularization to estimation of functional conn.?
 
 % set directory to find adjacency matrix data
-toSaveAdjDir = fullfile(strcat('./nofilter_adj_mats_win', num2str(winSize), ...
+toSaveAdjDir = fullfile(strcat('./fixed_adj_mats_win', num2str(winSize), ...
     '_step', num2str(stepSize), '_freq', num2str(frequency_sampling))); % at lab
 dataDir = './data/';
 
@@ -131,7 +131,7 @@ adj_args.TYPE_CONNECTIVITY = TYPE_CONNECTIVITY;
 
 if size(eeg, 1) < winSize
     % compute connectivity
-    adjMats = computeConnectivity(eeg, adj_args);
+    [adjMats, timePoints] = computeConnectivity(eeg, adj_args);
 else
     disp([patient, ' is underdetermined, must use optimization techniques']);
 end

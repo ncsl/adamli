@@ -13,7 +13,7 @@
 %
 % Outputs:
 % 1. adjMats: 3D matrix that is N x N x T 
-function adjMats = computeConnectivity(eeg, adj_args)
+function [adjMats, timePoints] = computeConnectivity(eeg, adj_args)
     % extract arguments and clinical annotations
     BP_FILTER_RAW = adj_args.BP_FILTER_RAW; % apply notch filter or not?
     frequency_sampling = adj_args.frequency_sampling; % frequency that this eeg data was sampled at

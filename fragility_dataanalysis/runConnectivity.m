@@ -139,7 +139,7 @@ for p=1:length(patients)
     adj_args.TYPE_CONNECTIVITY = TYPE_CONNECTIVITY;
 
     % compute connectivity
-    adjMats = computeConnectivity(eeg, adj_args);
+    [adjMats, timePoints] = computeConnectivity(eeg, adj_args);
     
     %%- Create the structure for the adjacency matrices for this patient/seizure
     adjmat_struct = struct();
