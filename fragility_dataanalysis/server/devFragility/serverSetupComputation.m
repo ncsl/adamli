@@ -1,9 +1,10 @@
-function serverSetupAdjComputation(patient, winSize, stepSize)
-    addpath(genpath('../fragility_library/'));
-    addpath(genpath('../eeg_toolbox/'));
-    addpath('../');
+% function that writes to a text file the number of windows for 
+% a specific patient/seizure recording dataset
+function serverSetupComputation(patient, winSize, stepSize)
+    addpath(genpath('../../fragility_library/'));
+    addpath(genpath('../../eeg_toolbox/'));
+    addpath('../../');
     IS_SERVER = 1;
-%     setupScripts; 
     
     if nargin == 0 % testing purposes
         patient='EZT007seiz001';
@@ -21,23 +22,22 @@ function serverSetupAdjComputation(patient, winSize, stepSize)
         stepSize = 500;
     end
     
-    IS_INTERICTAL = 1; % need to change per run of diff data
+%     IS_INTERICTAL = 1; % need to change per run of diff data
     TYPE_CONNECTIVITY = 'leastsquares';
     l2regularization = 0;
 
-    % set directory to find adjacency matrix data
-    adjMatDir = fullfile(strcat('./serverdata/fixed_adj_mats_win', num2str(winSize), ...
-        '_step', num2str(stepSize), '_freq', num2str(frequency_sampling))); % at lab
-    dataDir = './data/';
-    
-    if ~exist(adjMatDir, 'dir')
-        mkdir(adjMatDir);
+    % to save temp text file data dir
+    toSaveDir = './patientMeta/';
+    fileName = fullfile(toSaveDir, strcat(patient, '.txt'));
+    if ~exist(toSaveDir, 'dir')
+        mkdir(toSaveDir);
     end
+    
+    % set directory to find dataset
+    dataDir = './data/';
     patient
-    adjMatDir
     
     patient_id = [];
-   
     seeg = 1;
     if isempty(patient_id)
         patient_id = patient(1:strfind(patient, 'sz')-1);
@@ -49,14 +49,21 @@ function serverSetupAdjComputation(patient, winSize, stepSize)
         seizure_id = patient(strfind(patient, 'aslp'):end);
         dataDir= './data/interictal_data/';
         if IS_SERVER
-            dataDir = '../data/interictal_data/';
+            dataDir = '../../data/interictal_data/';
         end
     end
+   
     if isempty(patient_id)
         patient_id = patient(1:strfind(patient, 'aw')-1);
         seizure_id = patient(strfind(patient, 'aw'):end);
+        
+        dataDir= './data/interictal_data/';
+        if IS_SERVER
+            dataDir = '../../data/interictal_data/';
+        end
     end
     
+    dataDir = '/Volumes/NIL_PASS/data/interictal_data/';
     %% DEFINE CHANNELS AND CLINICAL ANNOTATIONS
     %- Edit this file if new patients are added.
     [included_channels, ezone_labels, earlyspread_labels, latespread_labels, resection_labels, frequency_sampling] ...
@@ -96,7 +103,7 @@ function serverSetupAdjComputation(patient, winSize, stepSize)
     end
 
     if frequency_sampling ~=1000
-        eeg = eeg(:, 1:(1000/frequency_sampling):end);
+        eeg = eeg(:, 1:(frequency_sampling/1000):end);
         seizureStart = seizureStart * frequency_sampling/1000;
         seizureEnd = seizureEnd * frequency_sampling/1000;
         winSize = winSize*frequency_sampling/1000;
@@ -113,13 +120,7 @@ function serverSetupAdjComputation(patient, winSize, stepSize)
     %- winSize and stepSize
     numWins = size(eeg,2) / stepSize - 1;
     
-    
-    
-    unix('echo "Hi"');
-    %% Create Unix Command
-    pbsCommand = sprintf('qsub -v numWins=%d,patient=%s,winSize=%d,stepSize=%d runConnectivity.pbs',...
-                    numWins, patient, winSize, stepSize);
-    
-
-    unix(pbsCommand);
+    fid = fopen(fileName, 'w');
+    fprintf(fid, '%i\n', numWins);
+    fclose(fid);
 end

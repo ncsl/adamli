@@ -1,4 +1,4 @@
-function serverComputePerturbations(patient_id, seizure_id, currentWin, adjMat, perturb_args)
+function serverComputePerturbations(patient, currentWin)
 patient = strcat(patient_id, seizure_id);
 
 %% 0: Extract Vars and Initialize Parameters

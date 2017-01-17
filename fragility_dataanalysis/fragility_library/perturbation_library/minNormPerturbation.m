@@ -58,17 +58,7 @@ end
 %%- Compute Minimum Norm Perturbation
 % store min delta for each electrode X w
 del_size = zeros(N, length(w_space));   % store min_norms
-del_table = cell(N, 1);
-
-% %- plot check of sigma + w
-% theta = linspace(-pi, pi, 360);
-% w_space = linspace(-radius,radius,360);
-% sigma = tanh(theta).*w_space;
-% 
-% % sigma = [-sigma, sigma];
-% % w_space = [w_space, w_space];
-% figure;
-% plot(sigma, w_space, 'ko')
+del_table = cell(N, 1);                 % store min_norm vector for each node
 
 %%- grid search over sigma and w for each row to determine, what is
 %%- the min norm perturbation
@@ -86,9 +76,16 @@ for iNode=1:N % 1st loop through each electrode
 %             C = ek'*inv(A - lambda*eye(N));  
 %             C = ek'/(A - lambda*eye(N));
 %             C = (A - lambda*eye(N))\ek;
-            C = inv(A-lambda*eye(N))*ek;
+
+            % new after 1/13
+%             C = inv(A-lambda*eye(N))*ek;
+            C = (A-lambda*eye(N))\ek;
         elseif (perturbationType == 'C')
-            C = ek'*inv(A-lambda*eye(N));
+            % new after 1/13
+%             C = ek'*inv(A-lambda*eye(N));
+            C = ek'/(A-lambda*eye(N));
+            
+            % old
 %             C = ek/(A - lambda*eye(N)); 
         end
 
@@ -107,7 +104,6 @@ for iNode=1:N % 1st loop through each electrode
             del = B'*inv(B*B')*b;
         else
             del = -C./(norm(C)^2);
-            del = del';
         end
 
         % Paper way of computing this?...
@@ -128,6 +124,7 @@ for iNode=1:N % 1st loop through each electrode
         
         % test to make sure things are working...
         if strcmp(perturbationType, 'C')
+            del = del';
             try
                 temp = del*ek';
             catch e
@@ -138,34 +135,10 @@ for iNode=1:N % 1st loop through each electrode
             temp = ek*del';
         end
         test = A + temp;
-        plot(real(eig(test)), imag(eig(test)), 'ko')
+%         plot(real(eig(test)), imag(eig(test)), 'ko')
         if isempty(find(abs(radius - abs(eig(test))) < 1e-8))
             disp('Max eigenvalue is not displaced to correct location')
         end
-        
-%         try    
-% %             temp = squeeze(adjmat_struct.adjMats(1,:,:));
-% %             del = perturbation_struct.info.del_table{1,1};
-% %             ek = [1; zeros(85,1)]; % unit column vector at this node
-% %             adelt = del'*ek';
-% %             
-%             temp = del*ek';
-%             test = A + temp;
-%             max(abs(eig(test)))
-%             if max(abs(eig(test))) ~= radius
-%                 disp('Wtf')
-%             end
-%             figure;
-%             plot(real(eig(test)), imag(eig(test)), 'ko'); hold on;
-%             plot(real(eig(A)), imag(eig(A)), 'ro')
-% %             plot(sigma(iW), w_space(iW), 'go'); 
-%             title(['Eigenspectrum of ', num2str(iW), ' channel ', num2str(iNode)]);
-%             legend('perturbed', 'unperturbed', 'sigma+jw');
-%         catch e
-%             disp(e)
-%             iW
-% %             waitforbuttonpress
-%         end
 %         close all
     end
 
@@ -175,6 +148,15 @@ for iNode=1:N % 1st loop through each electrode
     
     % store the min-norm perturbation vector for this node
     del_table(iNode) = del_vecs(min_index);
+    
+    % test on the min norm perturbation vector
+%     if strcmp(perturbationType, 'C')
+%         pertTest = del_vecs{min_index} * ek';
+%     else
+%         pertTest = ek*del_vecs{min_index};
+%     end
+%     test = A + pertTest;
+%     plot(real(eig(test)), imag(eig(test)), 'ko')
     
     % store the min-norm perturbation for this node
     minPerturbation(iNode) = del_size(iNode, min_index);

@@ -1,3 +1,24 @@
+%% set up and test adjmat
+% adjMats = adjmat_struct.adjMats;
+% pertMats = perturbation_struct.del_table;
+% 
+% iTime = 1;
+% iNode = 1;
+% N = size(adjMats,3);
+% 
+% for iNode=1:N
+%     ek = [zeros(iNode-1, 1); 1; zeros(N-iNode,1)]; % unit column vector at this node
+%     adjMat = squeeze(adjMats(iTime,:,:));
+%     pertMat = pertMats{iNode,iTime};
+% 
+%     pert = pertMat*ek';
+%     test = adjMat + pert;
+%     figure;
+%     plot(real(eig(test)), imag(eig(test)), 'ko')
+%     
+%     close all
+% end
+
 clear all;
 close all;
 clc;
@@ -5,10 +26,10 @@ clc;
 % settings to run
 patients = {,...
      'pt1sz2',...
-     'pt1sz3',...
+%      'pt1sz3',...
 };
 
-perturbationTypes = ['C', 'R'];
+perturbationTypes = ['R'];
 radius = 1.5;             % spectral radius
 w_space = linspace(-radius, radius, 101);
 winSize = 500;            % 500 milliseconds
@@ -97,6 +118,15 @@ for p=1:length(patients)
             minNormPerturbMat(:, iTime) = minNormPert;
             del_table(:, iTime) = del_vecs;
             
+            % test on adjMat
+%             iNode = 86;
+%             ek = [zeros(iNode-1, 1); 1; zeros(N-iNode,1)];
+%             if strcmp(perturbationType, 'C')
+%                 pertMat = del_table{iNode, iTime} * ek';
+%             end
+%             test = adjMat+pertMat;
+%             plot(real(eig(test)), imag(eig(test)), 'ko')
+                
             disp(['Finished time: ', num2str(iTime)]);
         end
         
@@ -108,14 +138,13 @@ for p=1:length(patients)
             end
         end
         
-        info.del_table = del_table;
-        
         % initialize struct to save
         perturbation_struct = struct();
         perturbation_struct.info = info; % meta data info
         perturbation_struct.minNormPertMat = minNormPerturbMat;
         perturbation_struct.timePoints = timePoints;
         perturbation_struct.fragilityMat = fragilityMat;
+        perturbation_struct.del_table = del_table;
         
         % save the perturbation struct result
         save(fullfile(toSavePertDir, filename), 'perturbation_struct');

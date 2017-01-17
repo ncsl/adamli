@@ -9,15 +9,10 @@ TYPE_CONNECTIVITY = 'leastsquares';
 l2regularization = 0;
 
 % set directory to find adjacency matrix data
-adjMatDir = fullfile(strcat('./serverdata/fixed_adj_mats_win', num2str(winSize), ...
-    '_step', nu2str(stepSize), '_freq', num2str(frequency_sampling))); % at lab
 dataDir = './data/';
 
-if ~exist(adjMatDir, 'dir')
-    mkdir(adjMatDir);
-end
 patient
-adjMatDir
+
 
 seeg = 1;
 if isempty(patient_id)
@@ -178,5 +173,5 @@ end
 disp(['Finished: ', num2str(currentWin)]);
 
 % save the file in temporary dir
-save(fullfile(tempDir, fileName), 'theta_adj');
+save(fullfile(tempDir, patient, fileName), 'theta_adj');
 end
