@@ -30,7 +30,7 @@ dataDir = './data/';
 
 % toSaveAdjDir = fullfile(strcat('/Volumes/NIL_PASS/serverdata/fixed_adj_mats_win', num2str(winSize), ...
 %     '_step', num2str(stepSize), '_freq', num2str(frequency_sampling))); % at home
-dataDir = '/Volumes/NIL_PASS/data/';
+% dataDir = '/Volumes/NIL_PASS/data/';
 
 if IS_SERVER
     toSaveAdjDir = fullfile('../..', 'serverdata', toSaveAdjDir);
