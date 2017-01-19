@@ -9,6 +9,8 @@
 #PBS -d /home/ali/adamli/fragility_dataanalysis/server
 #PBS -e /home/ali/adamli/fragility_dataanalysis/server/_log/test.err
 #PBS -o /home/ali/adamli/fragility_dataanalysis/server/_log/test.out
+
+# make sure to cd to the correct directory.
 cd /home/ali/adamli/fragility_dataanalysis/server/devVaryingWindows/
 
 proc=0 
