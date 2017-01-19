@@ -11,7 +11,7 @@ if nargin == 0 % testing purposes
     winSize = 500; % 500 milliseconds
     stepSize = 500; 
     frequency_sampling = 1000; % in Hz
-    IS_SERVER = 1;
+    IS_SERVER = 0;
 end
 
 % setupScripts;
