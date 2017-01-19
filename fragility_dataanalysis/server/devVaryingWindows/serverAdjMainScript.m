@@ -83,10 +83,12 @@ if seeg
 else
     patient_eeg_path = strcat(dataDir, patient);
 end
+disp(patient_eeg_path)
+disp(patient)
 
 % READ EEG FILE Mat File
 % files to process
-data = load(fullfile(patient_eeg_path, patient));
+data = load(fullfile(patient_eeg_path, strcat(patient, '.mat')));
 eeg = data.data;
 labels = data.elec_labels;
 onset_time = data.seiz_start_mark;
