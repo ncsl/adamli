@@ -6,7 +6,7 @@
 #PBS -m abe
 #PBS -q dque
 #PBS -S /bin/bash
-#PBS -d /home/ali/adamli/fragility_dataanalysis/server
+#PBS -d /home/ali/adamli/fragility_dataanalysis/server/devVaryingWindows/
 #PBS -e /home/ali/adamli/fragility_dataanalysis/server/_log/test.err
 #PBS -o /home/ali/adamli/fragility_dataanalysis/server/_log/test.out
 
