@@ -25,7 +25,7 @@ l2regularization = 0;                   % apply l2 regularization to estimation 
 
 % set directory to find adjacency matrix data
 toSaveAdjDir = fullfile(strcat('./fixed_adj_mats_win', num2str(winSize), ...
-    '_step', num2str(stepSize), '_freq', num2str(frequency_sampling))); % at lab
+    '_step', num2str(stepSize), '_freq', num2str(frequency_sampling)), patient); % at lab
 dataDir = './data/';
 
 % toSaveAdjDir = fullfile(strcat('/Volumes/NIL_PASS/serverdata/fixed_adj_mats_win', num2str(winSize), ...

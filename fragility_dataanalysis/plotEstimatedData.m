@@ -12,8 +12,13 @@
 close all; clear all; clc;
 %% Estimate A for different windowsizes, then use a reduced order observer to estimate signals from some of the channels, using A_hat
 
+% only use these two if working from external hard drive
 path1 = genpath('/Volumes/NIL_PASS/data/');
 path2 = genpath('/Volumes/NIL_PASS/serverdata/fixed_adj_mats_win500_step500_freq1000/');
+
+winSize = 500;
+path1 = genpath(strcat('./serverdata/fixed_adj_mats_win', num2str(winSize), '_step', num2str(winSize), '_freq1000/'));
+path2 = genpath('./data/');
 addpath(path1, path2);
 
 %% Load in data
@@ -56,6 +61,14 @@ preSeizA = adjmat_struct.adjMats(seizureStartMark-60*fs/winSize:seizureStartMark
 postSeizData = data(:, seizureStart:seizureStart+30*fs-1);
 postSeizA = adjmat_struct.adjMats(seizureStartMark:seizureStartMark+30*fs/winSize-1,:,:);
 
+%% Reconstruct preseizure data
+preSeiz_hat = zeros(size(preSeizData));
+for iTime=1:size(preSeizA,1) % loop through time windows 
+    timeRange = (iTime-1)*winSize + 1: iTime*winSize;
+%     preSeiz_hat = 
+    
+end
+
 %% Define actual measured and unmeasured variables for plotting
 numX = size(A_hat,1);           % number of variables
 indM = find(sum(C_hat,1)>0);   % measured variables
@@ -67,7 +80,6 @@ numU = size(indU,2);
 
 %% Plot subplots of estimated vs. actual
 % Define parameters for plotting 
-
 p_winsize = 0.5*fs;        % in samples (here: plotting 500 msec at a time)
 chOff = 100;
 channelOffset = repmat(chOff*(1:numU)',1,size(data,2));
