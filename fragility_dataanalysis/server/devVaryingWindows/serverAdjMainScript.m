@@ -19,12 +19,12 @@ disp(['Looking at patient: ',patient]);
 
 %% New Setup Scripts
 TYPE_CONNECTIVITY = 'leastsquares';     % type of functional conn.?
-BP_FILTER_RAW = 1;                      % apply notch filter before functional conn. computation?
+BP_FILTER_RAW = 0;                      % apply notch filter before functional conn. computation?
 IS_INTERICTAL = 0;                      % is this interictal data?
 l2regularization = 0;                   % apply l2 regularization to estimation of functional conn.?
 
 % set directory to find adjacency matrix data
-toSaveAdjDir = fullfile(strcat('./fixed_adj_mats_win', num2str(winSize), ...
+toSaveAdjDir = fullfile(strcat('./nofilter_adj_mats_win', num2str(winSize), ...
     '_step', num2str(stepSize), '_freq', num2str(frequency_sampling))); % at lab
 dataDir = './data/';
 
@@ -83,10 +83,19 @@ if seeg
 else
     patient_eeg_path = strcat(dataDir, patient);
 end
+patient_eeg_path
+patient
+% disp(patient_eeg_path)
+% disp(patient)
 
 % READ EEG FILE Mat File
 % files to process
-data = load(fullfile(patient_eeg_path, patient));
+try
+    data = load(fullfile(patient_eeg_path, strcat(patient, '.mat')));
+catch e
+    disp(e)
+    data = load(fullfile(patient_eeg_path, strcat(patient_id, seizure_id, '.mat')));
+end
 eeg = data.data;
 labels = data.elec_labels;
 onset_time = data.seiz_start_mark;
