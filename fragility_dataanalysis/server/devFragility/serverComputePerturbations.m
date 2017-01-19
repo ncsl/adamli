@@ -97,6 +97,7 @@ for iPert=1:length(perturbationTypes)
 
                 % compute perturbation necessary
                 if w_space(iW) ~= 0
+                    w_space(iW)
                     del = B'*inv(B*B')*b;
                 else
                     del = C./(norm(C)^2);

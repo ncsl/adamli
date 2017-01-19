@@ -18,7 +18,7 @@ addpath(path1, path2);
 
 %% Load in data
 nihadjmat = load('pt1sz2_adjmats_leastsquares.mat');            % Patient NIH linear models A 3D matrix with all A matrices for 500 msec wins (numWins x numChannels x numChannels)
-ccadjmat = load('EZT019_seiz002_adjmats_leastsquares.mat');    % Patient CC linear models
+ccadjmat = load('EZT019_seiz002_adjmats_leastsquares.mat');     % Patient CC linear models
 
 ecogdata = load('pt1sz2.mat')          % Patient ECoG raw data
 seegdata = load('EZT019_seiz002.mat'); % Patient SEEG raw data
