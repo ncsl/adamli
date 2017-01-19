@@ -9,7 +9,7 @@
 #PBS -d /home/ali/adamli/fragility_dataanalysis/server/devFragility/
 #PBS -e /home/ali/adamli/fragility_dataanalysis/server/_log/test.err
 #PBS -o /home/ali/adamli/fragility_dataanalysis/server/_log/test.out
-cd /home/ali/adamli/fragility_dataanalysis/server
+cd /home/ali/adamli/fragility_dataanalysis/server/devFragility/
 
 for i in `seq 0 $numWins`; do
 	proc=$(($i%8))

@@ -1,7 +1,15 @@
 function serverComputePerturbations(patient, currentWin)
+if nargin==0
+    patient = 'JH101sz2';
+    currentWin = 3;
+end
+
 %% 0: Extract Vars and Initialize Parameters
 perturbationTypes = ['C', 'R'];
 radius = 1.5;
+frequency_sampling = 1000;
+winSize = 500;
+stepSize = 500;
 w_space = linspace(-radius, radius, 60);
 sigma = sqrt(radius^2 - w_space.^2); % move to the unit circle 1, for a plethora of different radial frequencies
 b = [0; 1];                          % initialize for perturbation computation later
@@ -14,7 +22,7 @@ end
 %% extract adjMat for this patient
 adjMatDir = fullfile('../../serverdata/fixed_adj_mats_win500_step500_freq1000/', patient);
 load(fullfile(adjMatDir, strcat(patient, '_adjmats_leastsquares')));
-adjMat = adjmat_struct.adjMats(currentWin, :, :);
+adjMat = squeeze(adjmat_struct.adjMats(currentWin, :, :));
 
 N = size(adjMat, 1);
 %% 1: Begin Perturbation Analysis
@@ -107,11 +115,11 @@ for iPert=1:length(perturbationTypes)
         end % end of loop through channels
 
         % update pointer for the fragility heat map
-        disp(['On ', num2str(iTime), ' out of ', num2str(num_times), ' to analyze.']);
+        disp(['On ', num2str(currentWin)]);
     else
         disp(['max eigenvalue problem for ', num2str(iTime), ' time point.']);
     end
-end
+
 
 %% 3. Compute fragility rankings per column by normalization
 fragility_rankings = zeros(size(minPerturb_time_chan,1),1);
@@ -130,6 +138,7 @@ perturbation_struct.fragility_rankings = fragility_rankings;
 disp(['Finished: ', num2str(currentWin)]);
 
 % save the file in temporary dir
-fileName = strcat(patient, '_pert_', num2str(currentWin));
+fileName = strcat(patient, '_', perturbationType, '_pert_', num2str(currentWin));
 save(fullfile(tempDir, fileName), 'perturbation_struct');
+end
 end

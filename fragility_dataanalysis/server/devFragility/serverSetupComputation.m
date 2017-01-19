@@ -34,7 +34,7 @@ function serverSetupComputation(patient, winSize, stepSize)
     end
     
     % set directory to find dataset
-    dataDir = './data/';
+    dataDir = '../../data/';
     patient
     
     patient_id = [];
@@ -63,7 +63,7 @@ function serverSetupComputation(patient, winSize, stepSize)
         end
     end
     
-    dataDir = '/Volumes/NIL_PASS/data/interictal_data/';
+%     dataDir = '/Volumes/NIL_PASS/data/interictal_data/';
     %% DEFINE CHANNELS AND CLINICAL ANNOTATIONS
     %- Edit this file if new patients are added.
     [included_channels, ezone_labels, earlyspread_labels, latespread_labels, resection_labels, frequency_sampling] ...
