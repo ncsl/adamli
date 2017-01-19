@@ -9,7 +9,7 @@
 #PBS -d /home/ali/adamli/fragility_dataanalysis/server
 #PBS -e /home/ali/adamli/fragility_dataanalysis/server/_log/test.err
 #PBS -o /home/ali/adamli/fragility_dataanalysis/server/_log/test.out
-cd /home/ali/adamli/fragility_dataanalysis/server
+cd /home/ali/adamli/fragility_dataanalysis/server/devVaryingWindows/
 
 proc=0 
 pbsdsh -n $proc /home/ali/adamli/fragility_dataanalysis/server/devVaryingWindows/runAnalysis.sh $proc $patient $RUNCONNECTIVITY $winSize &
