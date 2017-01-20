@@ -21,12 +21,17 @@ path1 = genpath(strcat('./serverdata/nofilter_adj_mats_win', num2str(winSize), '
 path2 = genpath('./data/');
 addpath(path1, path2);
 
-%% Load in data
-nihadjmat = load('pt1sz4_adjmats_leastsquares.mat');            % Patient NIH linear models A 3D matrix with all A matrices for 500 msec wins (numWins x numChannels x numChannels)
-ccadjmat = load('EZT019_seiz002_adjmats_leastsquares.mat');     % Patient CC linear models
+dataDir = './data/';
+adjDir = strcat('./serverdata/nofilter_adj_mats_win', num2str(winSize), '_step', num2str(winSize), '_freq1000/');
 
-ecogdata = load('pt1sz4.mat')          % Patient ECoG raw data
-seegdata = load('EZT019_seiz002.mat'); % Patient SEEG raw data
+nihpat = 'pt1sz4';
+ccpat = 'EZT019';
+%% Load in data
+nihadjmat = load(fullfile(adjDir, 'pt1sz4_adjmats_leastsquares.mat'));            % Patient NIH linear models A 3D matrix with all A matrices for 500 msec wins (numWins x numChannels x numChannels)
+ccadjmat = load(fullfile(adjDir, 'EZT019_seiz002_adjmats_leastsquares.mat'));     % Patient CC linear models
+
+ecogdata = load(fullfile(dataDir, nihpat, 'pt1sz4.mat'));          % Patient ECoG raw data
+seegdata = load(fullfile(dataDir, 'Seiz_Data', ccpat, 'EZT019_seiz002.mat')); % Patient SEEG raw data
 
 %% Define parameters
 data = ecogdata.data;
@@ -55,13 +60,13 @@ winSize = adjmat_struct.winSize;
 
 % only get -60 seconds to seizure
 % preSeizData = data(:, seizureStart-60*fs:seizureStart-1);
-% preSeizA = adjmat_struct.adjMats(seizureStartMark-60*fs/winSize:seizureStartMark-1,:,:);
+% preSeizA = adjmat_struct.adjMats(seizureStartMark-60*fs/winSize-1:seizureStartMark,:,:);
 
-preSeizData = data(:, 1:60*fs);
-preSeizA = adjmat_struct.adjMats(1:60*fs/winSize,:,:);
+preSeizData = data(:, 1:seizureStart);
+preSeizA = adjmat_struct.adjMats(1:seizureStartMark,:,:);
 
 % only get seizure to +30 seconds
-postSeizData = data(:, seizureStart:seizureStart+30*fs-1);
+postSeizData = data(:, seizureStart:seizureStart+30*fs);
 postSeizA = adjmat_struct.adjMats(seizureStartMark:seizureStartMark+30*fs/winSize-1,:,:);
 
 %% Reconstruct preseizure data
@@ -72,30 +77,57 @@ if numWins ~= size(preSeizA, 1);
     disp('There is an error in the number of windows!');
 end
 
+tic;
 for iWin=1:numWins              % loop through number of windows
     initialTime = (iWin-1)*winSize + 1;
     preSeiz_hat(:, initialTime) = preSeizData(:, initialTime);
     
     currentA = squeeze(preSeizA(iWin, :, :));
     for iTime=initialTime+1:initialTime+winSize-1   % loop through time points to estimate data
-        iTime
+%         iTime
         preSeiz_hat(:, iTime) = currentA*preSeiz_hat(:, iTime-1);
+        
+        
     end
-    
-    exChan = 2;
-    chanData = preSeizData(exChan, :);
-    chanHat = preSeiz_hat(exChan, :);
-    figure;
-    plot(chanData(1:2000), 'k'); hold on;
-    plot(chanHat(1:2000), 'r')
-    
+    max(abs(eig(currentA)))
+    pause(0.01)
+end
+toc;
+
+exChan = 2;
+chanData = preSeizData(exChan, :);
+chanHat = preSeiz_hat(exChan, :);
+figure;
+plot(chanData(1:10000), 'k'); hold on;
+plot(chanHat(1:10000), 'r')
+
+%% Reconstruct postseizure data
+postSeiz_hat = zeros(size(postSeizData));
+[numChans, numTimes] = size(postSeizData);
+numWins = numTimes / winSize;
+
+if numWins ~= size(postSeizA, 1);
+    disp('There is an error in the number of windows!');
 end
 
-for iTime=1:size(preSeizA,1) % loop through time windows 
-    timeRange = (iTime-1)*winSize + 1: iTime*winSize;
-%     preSeiz_hat(:, timeRange) = 
+for iWin=1:numWins              % loop through number of windows
+    initialTime = (iWin-1)*winSize + 1;
+    postSeiz_hat(:, initialTime) = postSeizData(:, initialTime);
     
+    currentA = squeeze(postSeizA(iWin, :, :));
+    for iTime=initialTime+1:initialTime+winSize-1   % loop through time points to estimate data
+        iTime
+        postSeiz_hat(:, iTime) = currentA*postSeiz_hat(:, iTime-1);
+    end
+    
+%     exChan = 2;
+%     chanData = preSeizData(exChan, :);
+%     chanHat = preSeiz_hat(exChan, :);
+%     figure;
+%     plot(chanData(1:2000), 'k'); hold on;
+%     plot(chanHat(1:2000), 'r')
 end
+
 
 %% Define actual measured and unmeasured variables for plotting
 numX = size(A_hat,1);           % number of variables

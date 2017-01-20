@@ -16,7 +16,8 @@ IS_SERVER = 1;
 IS_INTERICTAL = 1; % need to change per run of diff data
 TYPE_CONNECTIVITY = 'leastsquares';
 l2regularization = 0;
-
+winSize = 500;
+stepSize = 500;
 % set directory to find adjacency matrix data
 dataDir = './data/';
 
