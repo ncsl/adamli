@@ -9,6 +9,7 @@ end
 % add libraries of functions
 addpath(('../../'));
 addpath(genpath('../../eeg_toolbox/'));
+addpath(genpath('../../fragility_library/'));
 % addpath(genpath('/Users/adam2392/Dropbox/eeg_toolbox/'));
 % addpath(genpath('/home/WIN/ali39/Documents/adamli/fragility_dataanalysis/eeg_toolbox/'));
 
