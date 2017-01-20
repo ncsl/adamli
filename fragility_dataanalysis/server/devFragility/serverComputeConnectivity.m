@@ -81,7 +81,7 @@ seizureStart = (onset_time - recording_start); % time seizure starts
 seizureEnd = (offset_time - recording_start); % time seizure ends
 recording_duration = size(data.data, 2);
 num_channels = size(data.data, 1);
-
+clear data
 % check included channels length and how big eeg is
 if length(labels(included_channels)) ~= size(eeg(included_channels,:),1)
         disp('Something wrong here...!!!!');
@@ -141,7 +141,7 @@ timePoints = [1:stepSize:lenData-winSize+1; winSize:stepSize:lenData]';
 tempeeg = eeg(:, timePoints(currentWin,1):timePoints(currentWin,2));
 
 % clear eeg from RAM after usage
-clear eeg   
+clear eeg data
 
 % save meta data for the computation 
 if currentWin == 1
