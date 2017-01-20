@@ -12,27 +12,38 @@
 close all; clear all; clc;
 %% Estimate A for different windowsizes, then use a reduced order observer to estimate signals from some of the channels, using A_hat
 
+BP_FILTER = 1;
 % only use these two if working from external hard drive
-path1 = genpath('/Volumes/NIL_PASS/data/');
-path2 = genpath('/Volumes/NIL_PASS/serverdata/nofilter_adj_mats_win500_step500_freq1000/');
+% path1 = genpath('/Volumes/NIL_PASS/data/');
+% path2 = genpath('/Volumes/NIL_PASS/serverdata/nofilter_adj_mats_win500_step500_freq1000/');
+% 
+% path1 = genpath(strcat('./serverdata/nofilter_adj_mats_win', num2str(winSize), '_step', num2str(winSize), '_freq1000/'));
+% path2 = genpath('./data/');
+% addpath(path1, path2);
+
+addpath(genpath('./eeg_toolbox'));
 
 winSize = 500;
-path1 = genpath(strcat('./serverdata/nofilter_adj_mats_win', num2str(winSize), '_step', num2str(winSize), '_freq1000/'));
-path2 = genpath('./data/');
-addpath(path1, path2);
-
+frequency_sampling = 1000;
 dataDir = './data/';
-adjDir = strcat('./serverdata/nofilter_adj_mats_win', num2str(winSize), '_step', num2str(winSize), '_freq1000/');
-
+if BP_FILTER
+    adjDir = strcat('./serverdata/fixed_adj_mats_win', num2str(winSize), '_step', num2str(winSize), '_freq1000/');
+else
+    adjDir = strcat('./serverdata/nofilter_adj_mats_win', num2str(winSize), '_step', num2str(winSize), '_freq1000/');
+end
 nihpat = 'pt1sz4';
 ccpat = 'EZT019';
 %% Load in data
-nihadjmat = load(fullfile(adjDir, 'pt1sz4_adjmats_leastsquares.mat'));            % Patient NIH linear models A 3D matrix with all A matrices for 500 msec wins (numWins x numChannels x numChannels)
-ccadjmat = load(fullfile(adjDir, 'EZT019_seiz002_adjmats_leastsquares.mat'));     % Patient CC linear models
+nihadjmat = load(fullfile(adjDir, nihpat, 'pt1sz4_adjmats_leastsquares.mat'));            % Patient NIH linear models A 3D matrix with all A matrices for 500 msec wins (numWins x numChannels x numChannels)
+ccadjmat = load(fullfile(adjDir, strcat(ccpat, '_seiz002'), 'EZT019_seiz002_adjmats_leastsquares.mat'));     % Patient CC linear models
 
 ecogdata = load(fullfile(dataDir, nihpat, 'pt1sz4.mat'));          % Patient ECoG raw data
 seegdata = load(fullfile(dataDir, 'Seiz_Data', ccpat, 'EZT019_seiz002.mat')); % Patient SEEG raw data
 
+if BP_FILTER
+    ecogdata.data = buttfilt(ecogdata.data,[59.5 60.5], frequency_sampling,'stop',1);
+    seegdata.data = buttfilt(seegdata.data,[59.5 60.5], frequency_sampling,'stop',1);
+end
 %% Define parameters
 data = ecogdata.data;
 seizureStart = ecogdata.seiz_start_mark;
@@ -98,8 +109,8 @@ exChan = 2;
 chanData = preSeizData(exChan, :);
 chanHat = preSeiz_hat(exChan, :);
 figure;
-plot(chanData(1:8500), 'k'); hold on;
-plot(chanHat(1:8500), 'r')
+plot(chanData(1:9000), 'k'); hold on;
+plot(chanHat(1:9000), 'r')
 
 figure;
 plot(evals, 'ko')
