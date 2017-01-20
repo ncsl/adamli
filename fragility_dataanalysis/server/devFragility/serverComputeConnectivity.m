@@ -23,6 +23,10 @@ dataDir = './data/';
 
 patient
 
+% set options for connectivity measurements
+OPTIONS.l2regularization = l2regularization;
+
+
 patient_id = [];
 seeg = 1;
 if isempty(patient_id)
