@@ -13,7 +13,7 @@ dataDir = './data/';
 
 patient
 
-
+patient_id = [];
 seeg = 1;
 if isempty(patient_id)
     patient_id = patient(1:strfind(patient, 'sz')-1);

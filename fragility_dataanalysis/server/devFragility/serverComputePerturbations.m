@@ -21,6 +21,7 @@ end
 
 %% extract adjMat for this patient
 adjMatDir = fullfile('../../serverdata/fixed_adj_mats_win500_step500_freq1000/', patient);
+adjMatDir = fullfile('../../serverdata/fixed_adj_mats_win500_step500_freq1000/');
 load(fullfile(adjMatDir, strcat(patient, '_adjmats_leastsquares')));
 adjMat = squeeze(adjmat_struct.adjMats(currentWin, :, :));
 
