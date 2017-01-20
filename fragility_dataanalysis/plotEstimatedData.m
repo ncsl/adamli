@@ -47,23 +47,16 @@ end
 %% Define parameters
 data = ecogdata.data;
 seizureStart = ecogdata.seiz_start_mark;
+adjmat_struct = nihadjmat.adjmat_struct;
+
+data = seegdata.data;
+seizureStart = seegdata.seiz_start_mark-1;
+adjmat_struct = ccadjmat.adjmat_struct;
 
 numCh = size(data,1);
 fs = 1000;
 nSample = 5;       % how many different times we want to sample when using the observer for each number of missing channels
-
-winsizes = 250:50:500;       % Size of window in samples
-% time = linspace(0,winsize/fs*1000,winsize); % msec
-% n = winsize;    % number of points
-
-X_name = cell(numCh,1);
-Xhat_name = X_name;
-for i = 1:numCh
-    X_name{i} = ['x',num2str(i)];
-    Xhat_name{i} = ['x',num2str(i),'hat'];
-end
 %% Use A and reconstruct raw data
-adjmat_struct = nihadjmat.adjmat_struct;
 seizureStartMark = adjmat_struct.seizure_start/adjmat_struct.winSize;
 
 data = data(adjmat_struct.included_channels,:);
