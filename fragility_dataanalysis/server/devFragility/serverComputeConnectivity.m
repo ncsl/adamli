@@ -1,5 +1,12 @@
 function serverComputeConnectivity(patient, currentWin)
+if nargin==0
+    patient = 'pt3sz2';
+    currentWin = 3;
+end
+
+
 % add libraries of functions
+addpath(('../../'));
 addpath(genpath('/Users/adam2392/Dropbox/eeg_toolbox'));
 addpath(genpath('/home/WIN/ali39/Documents/adamli/fragility_dataanalysis/eeg_toolbox/'));
 
@@ -24,19 +31,19 @@ if isempty(patient_id)
     patient_id = patient(1:strfind(patient, 'aslp')-1);
     seizure_id = patient(strfind(patient, 'aslp'):end);
     dataDir= './data/interictal_data/';
-    if IS_SERVER
-        dataDir = '../data/interictal_data/';
-    end
 end
 if isempty(patient_id)
     patient_id = patient(1:strfind(patient, 'aw')-1);
     seizure_id = patient(strfind(patient, 'aw'):end);
+    dataDir = './data/interictal_data/';
+end
+
+if IS_SERVER
+    dataDir = strcat('../.', dataDir);
 end
 
 %% DEFINE CHANNELS AND CLINICAL ANNOTATIONS
 %- Edit this file if new patients are added.
-patient_id
-seizure_id
 [included_channels, ezone_labels, earlyspread_labels, latespread_labels, resection_labels, frequency_sampling] ...
             = determineClinicalAnnotations(patient_id, seizure_id);
 

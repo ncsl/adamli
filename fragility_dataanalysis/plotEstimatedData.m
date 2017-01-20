@@ -63,6 +63,23 @@ postSeizA = adjmat_struct.adjMats(seizureStartMark:seizureStartMark+30*fs/winSiz
 
 %% Reconstruct preseizure data
 preSeiz_hat = zeros(size(preSeizData));
+[numChans, numTimes] = size(preSeizData);
+numWins = numTimes / winSize;
+if numWins ~= size(preSeizA, 1);
+    disp('There is an error in the number of windows!');
+end
+
+for iWin=1:numWins              % loop through number of windows
+    initialTime = (iWin-1)*winSize + 1;
+    preSeiz_hat(:, initialTime) = preSeizData(:, initialTime);
+    
+    currentA = squeeze(preSeizA(iWin, :, :));
+    for iTime=initialTime+1:initialTime+winSize-1   % loop through time points to estimate data
+        preSeiz_hat(:, iTime) = preSeiz_hat(:, iTime-1) * currentA;
+    end
+    
+end
+
 for iTime=1:size(preSeizA,1) % loop through time windows 
     timeRange = (iTime-1)*winSize + 1: iTime*winSize;
 %     preSeiz_hat(:, timeRange) = 
