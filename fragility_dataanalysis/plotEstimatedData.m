@@ -77,6 +77,7 @@ if numWins ~= size(preSeizA, 1);
     disp('There is an error in the number of windows!');
 end
 
+evals = zeros(numWins, 1);
 tic;
 for iWin=1:numWins              % loop through number of windows
     initialTime = (iWin-1)*winSize + 1;
@@ -89,8 +90,7 @@ for iWin=1:numWins              % loop through number of windows
         
         
     end
-    max(abs(eig(currentA)))
-    pause(0.01)
+    evals(iWin) = max(abs(eig(currentA)));
 end
 toc;
 
@@ -98,9 +98,11 @@ exChan = 2;
 chanData = preSeizData(exChan, :);
 chanHat = preSeiz_hat(exChan, :);
 figure;
-plot(chanData(1:10000), 'k'); hold on;
-plot(chanHat(1:10000), 'r')
+plot(chanData(1:8500), 'k'); hold on;
+plot(chanHat(1:8500), 'r')
 
+figure;
+plot(evals, 'ko')
 %% Reconstruct postseizure data
 postSeiz_hat = zeros(size(postSeizData));
 [numChans, numTimes] = size(postSeizData);

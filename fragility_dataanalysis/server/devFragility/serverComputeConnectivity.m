@@ -96,7 +96,7 @@ if ~isempty(included_channels)
     labels = labels(included_channels);
 end
     
-tempDir = fullfile('../tempdata/', patient);
+tempDir = fullfile('./tempData/', patient);
 if ~exist(tempDir, 'dir')
     mkdir(tempDir);
 end
