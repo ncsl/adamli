@@ -98,6 +98,10 @@ for iWin=1:numWins              % loop through number of windows
 end
 toc;
 
+% compute difference metric between observed and estimated
+error = norm(preSeiz_hat(exChan, :) - preSeizData(exChan,:)) / numWins;
+
+
 exChan = 2;
 chanData = preSeizData(exChan, :);
 chanHat = preSeiz_hat(exChan, :);
