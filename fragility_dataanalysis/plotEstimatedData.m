@@ -65,7 +65,7 @@ postSeizA = adjmat_struct.adjMats(seizureStartMark:seizureStartMark+30*fs/winSiz
 preSeiz_hat = zeros(size(preSeizData));
 for iTime=1:size(preSeizA,1) % loop through time windows 
     timeRange = (iTime-1)*winSize + 1: iTime*winSize;
-    preSeiz_hat(:, timeRange) = 
+%     preSeiz_hat(:, timeRange) = 
     
 end
 

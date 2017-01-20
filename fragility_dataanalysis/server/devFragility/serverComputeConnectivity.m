@@ -35,6 +35,8 @@ end
 
 %% DEFINE CHANNELS AND CLINICAL ANNOTATIONS
 %- Edit this file if new patients are added.
+patient_id
+seizure_id
 [included_channels, ezone_labels, earlyspread_labels, latespread_labels, resection_labels, frequency_sampling] ...
             = determineClinicalAnnotations(patient_id, seizure_id);
 
