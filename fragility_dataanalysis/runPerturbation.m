@@ -52,7 +52,7 @@
 % };
 
 function runPerturbation(patients)
-perturbationTypes = ['R'];
+perturbationTypes = ['C'];
 radius = 1.5;             % spectral radius
 w_space = linspace(-radius, radius, 101);
 winSize = 500;            % 500 milliseconds

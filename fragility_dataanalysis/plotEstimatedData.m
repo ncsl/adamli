@@ -14,18 +14,18 @@ close all; clear all; clc;
 
 % only use these two if working from external hard drive
 path1 = genpath('/Volumes/NIL_PASS/data/');
-path2 = genpath('/Volumes/NIL_PASS/serverdata/fixed_adj_mats_win500_step500_freq1000/');
+path2 = genpath('/Volumes/NIL_PASS/serverdata/nofilter_adj_mats_win500_step500_freq1000/');
 
 winSize = 500;
-path1 = genpath(strcat('./serverdata/fixed_adj_mats_win', num2str(winSize), '_step', num2str(winSize), '_freq1000/'));
+path1 = genpath(strcat('./serverdata/nofilter_adj_mats_win', num2str(winSize), '_step', num2str(winSize), '_freq1000/'));
 path2 = genpath('./data/');
 addpath(path1, path2);
 
 %% Load in data
-nihadjmat = load('pt1sz2_adjmats_leastsquares.mat');            % Patient NIH linear models A 3D matrix with all A matrices for 500 msec wins (numWins x numChannels x numChannels)
+nihadjmat = load('pt1sz4_adjmats_leastsquares.mat');            % Patient NIH linear models A 3D matrix with all A matrices for 500 msec wins (numWins x numChannels x numChannels)
 ccadjmat = load('EZT019_seiz002_adjmats_leastsquares.mat');     % Patient CC linear models
 
-ecogdata = load('pt1sz2.mat')          % Patient ECoG raw data
+ecogdata = load('pt1sz4.mat')          % Patient ECoG raw data
 seegdata = load('EZT019_seiz002.mat'); % Patient SEEG raw data
 
 %% Define parameters
@@ -54,8 +54,11 @@ data = data(adjmat_struct.included_channels,:);
 winSize = adjmat_struct.winSize;
 
 % only get -60 seconds to seizure
-preSeizData = data(:, seizureStart-60*fs:seizureStart-1);
-preSeizA = adjmat_struct.adjMats(seizureStartMark-60*fs/winSize:seizureStartMark-1,:,:);
+% preSeizData = data(:, seizureStart-60*fs:seizureStart-1);
+% preSeizA = adjmat_struct.adjMats(seizureStartMark-60*fs/winSize:seizureStartMark-1,:,:);
+
+preSeizData = data(:, 1:60*fs);
+preSeizA = adjmat_struct.adjMats(1:60*fs/winSize,:,:);
 
 % only get seizure to +30 seconds
 postSeizData = data(:, seizureStart:seizureStart+30*fs-1);
@@ -75,8 +78,16 @@ for iWin=1:numWins              % loop through number of windows
     
     currentA = squeeze(preSeizA(iWin, :, :));
     for iTime=initialTime+1:initialTime+winSize-1   % loop through time points to estimate data
-        preSeiz_hat(:, iTime) = preSeiz_hat(:, iTime-1) * currentA;
+        iTime
+        preSeiz_hat(:, iTime) = currentA*preSeiz_hat(:, iTime-1);
     end
+    
+    exChan = 2;
+    chanData = preSeizData(exChan, :);
+    chanHat = preSeiz_hat(exChan, :);
+    figure;
+    plot(chanData(1:2000), 'k'); hold on;
+    plot(chanHat(1:2000), 'r')
     
 end
 

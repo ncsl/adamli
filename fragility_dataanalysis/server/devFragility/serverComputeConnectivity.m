@@ -1,14 +1,16 @@
 function serverComputeConnectivity(patient, currentWin)
 if nargin==0
     patient = 'pt3sz2';
+    patient = 'pt1sz2';
     currentWin = 3;
 end
 
 
 % add libraries of functions
 addpath(('../../'));
-addpath(genpath('/Users/adam2392/Dropbox/eeg_toolbox'));
-addpath(genpath('/home/WIN/ali39/Documents/adamli/fragility_dataanalysis/eeg_toolbox/'));
+addpath(genpath('../../eeg_toolbox/'));
+% addpath(genpath('/Users/adam2392/Dropbox/eeg_toolbox/'));
+% addpath(genpath('/home/WIN/ali39/Documents/adamli/fragility_dataanalysis/eeg_toolbox/'));
 
 IS_SERVER = 1;
 IS_INTERICTAL = 1; % need to change per run of diff data
@@ -74,7 +76,6 @@ seizureEnd = (offset_time - recording_start); % time seizure ends
 recording_duration = size(data.data, 2);
 num_channels = size(data.data, 1);
 
-
 % check included channels length and how big eeg is
 if length(labels(included_channels)) ~= size(eeg(included_channels,:),1)
         disp('Something wrong here...!!!!');
@@ -108,6 +109,7 @@ if BP_FILTER_RAW==1,
     preFiltStr       = sprintf('%s filter raw; %.1f - %.1f Hz',preFiltType,preFiltFreq);
     preFiltStrShort  = '_BPfilt';
     eeg = buttfilt(eeg,[59.5 60.5], frequency_sampling,'stop',1);
+%     eeg = buttfilt(eeg,[59.5 60.5], frequency_sampling,'stop',1);
 else
     preFiltFreq      = []; %keep this empty to avoid any filtering of the raw data
     preFiltType      = 'stop';
