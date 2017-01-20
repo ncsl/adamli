@@ -24,6 +24,10 @@ BP_FILTER = 1;
 addpath(genpath('./eeg_toolbox'));
 
 winSize = 500;
+winSizes = [100, 125, 200, 250, 500, 1000];
+% for i=1:length(winSizes)
+%     winSize = winSizes(i);
+
 frequency_sampling = 1000;
 dataDir = './data/';
 if BP_FILTER
@@ -33,6 +37,7 @@ else
 end
 nihpat = 'pt1sz4';
 ccpat = 'EZT019';
+
 %% Load in data
 nihadjmat = load(fullfile(adjDir, nihpat, 'pt1sz4_adjmats_leastsquares.mat'));            % Patient NIH linear models A 3D matrix with all A matrices for 500 msec wins (numWins x numChannels x numChannels)
 ccadjmat = load(fullfile(adjDir, strcat(ccpat, '_seiz002'), 'EZT019_seiz002_adjmats_leastsquares.mat'));     % Patient CC linear models
@@ -112,41 +117,31 @@ plot(chanHat(1:9000), 'r')
 figure;
 plot(evals, 'ko')
 %% Reconstruct postseizure data
-postSeiz_hat = zeros(size(postSeizData));
-[numChans, numTimes] = size(postSeizData);
-numWins = numTimes / winSize;
-
-if numWins ~= size(postSeizA, 1);
-    disp('There is an error in the number of windows!');
-end
-
-for iWin=1:numWins              % loop through number of windows
-    initialTime = (iWin-1)*winSize + 1;
-    postSeiz_hat(:, initialTime) = postSeizData(:, initialTime);
-    
-    currentA = squeeze(postSeizA(iWin, :, :));
-    for iTime=initialTime+1:initialTime+winSize-1   % loop through time points to estimate data
-        iTime
-        postSeiz_hat(:, iTime) = currentA*postSeiz_hat(:, iTime-1);
-    end
-    
-%     exChan = 2;
-%     chanData = preSeizData(exChan, :);
-%     chanHat = preSeiz_hat(exChan, :);
-%     figure;
-%     plot(chanData(1:2000), 'k'); hold on;
-%     plot(chanHat(1:2000), 'r')
-end
-
-
-%% Define actual measured and unmeasured variables for plotting
-numX = size(A_hat,1);           % number of variables
-indM = find(sum(C_hat,1)>0);   % measured variables
-indU = 1:numX;          % unmeasured variables
-indU(indM) = [];
-xu = data(indU,:);  % unmeasured, t = 0:n
-xm = data(indM,:);  % measured, t = 0:n
-numU = size(indU,2);
+% postSeiz_hat = zeros(size(postSeizData));
+% [numChans, numTimes] = size(postSeizData);
+% numWins = numTimes / winSize;
+% 
+% if numWins ~= size(postSeizA, 1);
+%     disp('There is an error in the number of windows!');
+% end
+% 
+% for iWin=1:numWins              % loop through number of windows
+%     initialTime = (iWin-1)*winSize + 1;
+%     postSeiz_hat(:, initialTime) = postSeizData(:, initialTime);
+%     
+%     currentA = squeeze(postSeizA(iWin, :, :));
+%     for iTime=initialTime+1:initialTime+winSize-1   % loop through time points to estimate data
+%         iTime
+%         postSeiz_hat(:, iTime) = currentA*postSeiz_hat(:, iTime-1);
+%     end
+%     
+% %     exChan = 2;
+% %     chanData = preSeizData(exChan, :);
+% %     chanHat = preSeiz_hat(exChan, :);
+% %     figure;
+% %     plot(chanData(1:2000), 'k'); hold on;
+% %     plot(chanHat(1:2000), 'r')
+% end
 
 %% Plot subplots of estimated vs. actual
 % Define parameters for plotting 

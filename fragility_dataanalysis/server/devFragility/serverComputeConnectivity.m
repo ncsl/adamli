@@ -165,7 +165,7 @@ end
 
 % filename to be saved temporarily
 fileName = strcat(patient, '_adjmats_', num2str(currentWin));
-disp(fileName);
+fileName
 
 % step 2: compute some functional connectivity 
 if strcmp(TYPE_CONNECTIVITY, 'leastsquares')
