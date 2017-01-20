@@ -132,6 +132,7 @@ winSize = winSize * frequency_sampling/1000;
 % window parameters - overlap, #samples, stepsize, window pointer
 lenData = size(eeg,2); % length of data in seconds
 numWindows = lenData/stepSize;
+numChans = size(eeg,1);
 
 % initialize timePoints vector and adjacency matrices
 timePoints = [1:stepSize:lenData-winSize+1; winSize:stepSize:lenData]';
@@ -170,11 +171,11 @@ disp(fileName);
 if strcmp(TYPE_CONNECTIVITY, 'leastsquares')
     % linear model: Ax = b; A\b -> x
     b = double(tempeeg(:)); % define b as vectorized by stacking columns on top of another
-    b = b(num_channels+1:end); % only get the time points after the first one
+    b = b(numChans+1:end); % only get the time points after the first one
 
     % - use least square computation
     theta = computeLeastSquares(tempeeg, b, OPTIONS);
-    theta_adj = reshape(theta, num_channels, num_channels)';    % reshape fills in columns first, so must transpose
+    theta_adj = reshape(theta, numChans, numChans)';    % reshape fills in columns first, so must transpose
 elseif strcmp(TYPE_CONNECTIVITY, 'spearman') || strcmp(TYPE_CONNECTIVITY, 'pearson')
     theta_adj = computePairwiseCorrelation(tmpdata, TYPE_CONNECTIVITY);
 elseif strcmp(TYPE_CONNECTIVITY, 'PDC')
