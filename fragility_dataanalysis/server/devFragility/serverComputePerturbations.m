@@ -14,7 +14,7 @@ w_space = linspace(-radius, radius, 60);
 sigma = sqrt(radius^2 - w_space.^2); % move to the unit circle 1, for a plethora of different radial frequencies
 b = [0; 1];                          % initialize for perturbation computation later
 
-tempDir = fullfile('./tempData/', patient);
+tempDir = fullfile('./tempData/', patient, 'perturbation');
 if ~exist(tempDir, 'dir')
     mkdir(tempDir);
 end

@@ -142,7 +142,7 @@ if currentWin == 1
     info.included_channels = included_channels;
     info.frequency_sampling = frequency_sampling;
 
-    save(fullfile(tempDir, 'infoAdjMat'), 'info');
+    save(fullfile(tempDir, ,patient, 'connectivity', 'infoAdjMat'), 'info');
 end
 
 % filename to be saved temporarily
@@ -173,5 +173,5 @@ end
 disp(['Finished: ', num2str(currentWin)]);
 
 % save the file in temporary dir
-save(fullfile(tempDir, patient, fileName), 'theta_adj');
+save(fullfile(tempDir, patient, 'connectivity', fileName), 'theta_adj');
 end
