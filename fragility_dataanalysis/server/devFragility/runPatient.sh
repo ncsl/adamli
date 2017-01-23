@@ -7,7 +7,7 @@ numWins="$3"
 
 NprocperNode=8    					# number of processors per node
 Nnode=$((${3}/${NprocperNode}+1)) 	# the node to compute on
-walltime=06:00:00					# the walltime for each computation
+walltime=00:01:00					# the walltime for each computation
 
 echo $Nnode
 for inode in `seq 1 $Nnode`; do
