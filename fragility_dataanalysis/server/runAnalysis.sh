@@ -15,8 +15,8 @@ matlab_jvm="matlab -nojvm -nodesktop -nosplash -r"
 		exit 1;
 	}
 
-# winSize=500
-# stepSize=500
+winSize=500
+stepSize=500
 frequency_sampling=1000
 radius=1.5
 
