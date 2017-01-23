@@ -12,7 +12,7 @@
 cd /home/ali/adamli/fragility_dataanalysis/server/devFragility/
 
 for i in `seq 0 $numWins`; do
-	proc=$(($i%4))
+	proc=$(($i%3))
 	tempi=$(($i+1))
 	pbsdsh -n $proc /home/ali/adamli/fragility_dataanalysis/server/devFragility/computeAnalysis.sh $proc $patient $tempi $RUNCONNECTIVITY &
 done
