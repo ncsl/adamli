@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -l
 
 ## 00: Load in input parameters
 patient="$1"
@@ -7,7 +7,7 @@ numWins="$3"
 
 NprocperNode=8    					# number of processors per node
 Nnode=$((${3}/${NprocperNode}+1)) 	# the node to compute on
-walltime=01:00:00					# the walltime for each computation
+walltime=06:00:00					# the walltime for each computation
 
 echo $Nnode
 for inode in `seq 1 $Nnode`; do
@@ -20,7 +20,13 @@ for inode in `seq 1 $Nnode`; do
 		jobname="compute_perturbation_${patient}_${inode}"
 	fi
 	
+	echo "Submit job ${inode}"
+	# for proc in `seq 0 7`; do
+	# 	currentWin=$(($currentNode+$proc+1))
+	# 	echo $currentWin
+	# 	echo $proc
+	# done
 	# run a pbs batch job. Make sure there are no spaces in between the parameters passed
-	qsub -v RUNCONNECTIVITY=$RUNCONNECTIVITY,patient=$patient,currentNode=$currentNode -N ${jobname} -l nodes=1:ppn=${NprocperNode},walltime=${walltime} run_job.pbs
+	qsub -v RUNCONNECTIVITY=${RUNCONNECTIVITY},patient=${patient},currentNode=${currentNode} -N ${jobname} -l nodes=1:ppn=${NprocperNode},walltime=${walltime} run_job.pbs
 done
 

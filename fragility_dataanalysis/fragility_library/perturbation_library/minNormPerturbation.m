@@ -123,22 +123,22 @@ for iNode=1:N % 1st loop through each electrode
         del_vecs{iW} = del;
         
         % test to make sure things are working...
-        if strcmp(perturbationType, 'C')
-            del = del';
-            try
-                temp = del*ek';
-            catch e
-%                 disp(e)
-                temp = del'*ek'; 
-            end
-        else
-            temp = ek*del';
-        end
-        test = A + temp;
-%         plot(real(eig(test)), imag(eig(test)), 'ko')
-        if isempty(find(abs(radius - abs(eig(test))) < 1e-8))
-            disp('Max eigenvalue is not displaced to correct location')
-        end
+%         if strcmp(perturbationType, 'C')
+%             del = del';
+%             try
+%                 temp = del*ek';
+%             catch e
+% %                 disp(e)
+%                 temp = del'*ek'; 
+%             end
+%         else
+%             temp = ek*del';
+%         end
+%         test = A + temp;
+% %         plot(real(eig(test)), imag(eig(test)), 'ko')
+%         if isempty(find(abs(radius - abs(eig(test))) < 1e-8))
+%             disp('Max eigenvalue is not displaced to correct location')
+%         end
 %         close all
     end
 

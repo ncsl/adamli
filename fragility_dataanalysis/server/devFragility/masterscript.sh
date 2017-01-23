@@ -57,7 +57,4 @@ for patient in $patients; do
 	echo $patient
 	
 	sh ./runPatient.sh $patient $RUNCONNECTIVITY $numWins
-
-	# run a pbs batch job. Make sure there are no spaces in between the parameters passed
-	# qsub -v RUNCONNECTIVITY=$RUNCONNECTIVITY,patient=$patient,numWins=$numWins run_job.pbs
 done

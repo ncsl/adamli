@@ -30,13 +30,13 @@ for i=1:length(winSizes)
 
     frequency_sampling = 1000;
     dataDir = './data/';
-    dataDir = '/Volumes/NIL_PASS/data/';
+%     dataDir = '/Volumes/NIL_PASS/data/';
     if BP_FILTER
         adjDir = strcat('./serverdata/fixed_adj_mats_win', num2str(winSize), '_step', num2str(winSize), '_freq1000/');
-        adjDir = strcat('/Volumes/NIL_PASS/serverdata/fixed_adj_mats_win', num2str(winSize), '_step', num2str(winSize), '_freq1000/');
+%         adjDir = strcat('/Volumes/NIL_PASS/serverdata/fixed_adj_mats_win', num2str(winSize), '_step', num2str(winSize), '_freq1000/');
     else
         adjDir = strcat('./serverdata/nofilter_adj_mats_win', num2str(winSize), '_step', num2str(winSize), '_freq1000/');
-        adjDir = strcat('/Volumes/NIL_PASS/serverdata/nofilter_adj_mats_win', num2str(winSize), '_step', num2str(winSize), '_freq1000/');
+%         adjDir = strcat('/Volumes/NIL_PASS/serverdata/nofilter_adj_mats_win', num2str(winSize), '_step', num2str(winSize), '_freq1000/');
     end
     nihpat = 'pt1sz2';
     ccpat = 'EZT019';
@@ -113,7 +113,7 @@ for i=1:length(winSizes)
     end
     toc;
 
-    exChans = [2, 5, 10, 15];
+    exChans = [2, 3, 4, 5];
     exChan = 2;
     
     % compute difference metric between observed and estimated
@@ -123,24 +123,43 @@ for i=1:length(winSizes)
     %% Plotting
     FONTSIZE = 18;
     timePoints = 1:500;
+    offset = 0;
 
-    titleStr = {strcat('Estimated ECoG Data Vs. Actual Data'), ...
-        strcat('For Window Size ', num2str(winSize))};
+    titleStr = {'Estimated ECoG Data Vs. Actual Data', ...
+        strcat('For Window Size (', num2str(winSize), ')')};
     
     figure;
     subplot(211);
+    yticklocs = zeros(length(exChans),1);
     for iChan=1:length(exChans)
         exChan = exChans(iChan);
         
-        % add an offset 
-        offset = 1.2*max(preSeizData(exChan, timePoints));
+        if iChan==1
+        avge = mean(preSeizData(exChan, timePoints));
+        else
+            avge=0;
+        end
+        plot(preSeiz_hat(exChan, timePoints) - avge + offset, 'k'); hold on;
+        plot(preSeizData(exChan, timePoints) - avge + offset, 'r'); 
         
-        plot(preSeiz_hat(exChan, timePoints) + offset, 'k'); hold on;
-        plot(preSeizData(exChan, timePoints) + offset, 'r'); 
+        yticklocs(iChan) = mean(preSeizData(exChan, timePoints) + offset);
+        
+        % add an offset 
+        offset = offset + 2*max(preSeizData(exChan, timePoints));
     end
+    axes = gca; currfig = gcf;
+    set(axes, 'box', 'off');
     xlabel('Time (seconds)', 'FontSize', FONTSIZE);
     ylabel('Electrodes', 'FontSize', FONTSIZE);
     title(titleStr, 'FontSize', FONTSIZE);
+    legend('LTV Model', 'Actual Data');
+    
+    % set y axes
+    set(axes, 'YTick', yticklocs);
+    set(axes, 'YTickLabel', {adjmat_struct.all_labels{exChans}});
+    % set x axes
+    set(axes, 'XTick', 1:200:length(timePoints));
+    set(axes, 'XTickLabel', 0:0.2:length(timePoints)/frequency_sampling);
 
     subplot(212); % plot errors
     hist(error);
