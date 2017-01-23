@@ -6,10 +6,10 @@
 #PBS -m abe
 #PBS -q dque
 #PBS -S /bin/bash
-#PBS -d /home/ali/adamli/fragility_dataanalysis/server
+#PBS -d /home/ali/adamli/fragility_dataanalysis/server/
 #PBS -e /home/ali/adamli/fragility_dataanalysis/server/_log/test.err
 #PBS -o /home/ali/adamli/fragility_dataanalysis/server/_log/test.out
-cd /home/ali/adamli/fragility_dataanalysis/server
+cd /home/ali/adamli/fragility_dataanalysis/server/
 
 proc=0 
 pbsdsh -n $proc /home/ali/adamli/fragility_dataanalysis/server/runAnalysis.sh $proc $patient $RUNCONNECTIVITY &

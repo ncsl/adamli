@@ -1,0 +1,18 @@
+#!/bin/bash -l
+#PBS -N compute_adjacency_mat
+#PBS -l nodes=1:ppn=3
+#PBS -l walltime=22:00:00
+#PBS -M ali39@jhu.edu
+#PBS -m abe
+#PBS -q dque
+#PBS -S /bin/bash
+#PBS -d /home/ali/adamli/fragility_dataanalysis/server/devPerPatient/
+#PBS -e /home/ali/adamli/fragility_dataanalysis/server/devPerPatient/_log/test.err
+#PBS -o /home/ali/adamli/fragility_dataanalysis/server/devPerPatient/_log/test.out
+cd /home/ali/adamli/fragility_dataanalysis/server/devPerPatient/
+
+# loop through the points to check
+for i in `seq 0 101`; do
+	proc=$(($i%3))
+	pbsdsh -n $proc /home/ali/adamli/fragility_dataanalysis/server/devPerPatient/computeAnalysis.sh $proc $patient $i &
+done

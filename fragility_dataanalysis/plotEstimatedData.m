@@ -181,70 +181,70 @@ for i=1:length(winSizes)
 
     %% Plot subplots of estimated vs. actual
     % Define parameters for plotting 
-    p_winsize = 0.5*fs;        % in samples (here: plotting 500 msec at a time)
-    chOff = 100;
-    channelOffset = repmat(chOff*(1:numU)',1,size(data,2));
-
-    for pwin = 6%1:p_numWin
-        time = linspace(0,p_winsize,p_winsize);       % msec
-    %     time = linspace((pwin-1)*p_winsize+1,pwin*p_winsize,p_winsize);       % msec
-        p_data = data(indU,(pwin-1)*p_winsize+1:pwin*p_winsize);
-        p_xu_est = xu_est(:,(pwin-1)*p_winsize+1:pwin*p_winsize);
-
-        f1 = figure;
-        for u = 1:5
-            subplot(5,1,u)
-            plot(time,p_data(u,:),'b','LineWidth',1.2)
-            hold on
-            plot(time,p_xu_est(u,:),'m')
-            legend('actual','observer estimate')
-    %         ylabel([X_name{indU(u)},' (unmeasured)'])
-            ylabel(elec_labels(indU(u)))
-            axis('tight')
-            if u == 1
-                title('$$x^u$$[t] vs. $$\hat{x}^u$$[t]','Interpreter','Latex')
-            end
-            if u == 5
-                xlabel('t (msec)')
-            end
-        end
-    %     pause;
-
-        f2 = figure;
-        for u = 6:10
-            subplot(5,1,u-5)
-            plot(time,p_data(u,:),'b','LineWidth',1.2)
-            hold on
-            plot(time,p_xu_est(u,:),'m')
-            legend('actual','observer estimate')
-    %         ylabel([X_name{indU(u)},' (unmeasured)'])
-            ylabel(elec_labels(indU(u)))
-            axis('tight')
-            if u == 1+5
-                title('$$x^u$$[t] vs. $$\hat{x}^u$$[t]','Interpreter','Latex')
-            end
-            if u == 5+5
-                xlabel('t (msec)')
-            end
-        end
-
-        f3 = figure;
-        for u = 11:15
-            subplot(5,1,u-10)
-            plot(time,p_data(u,:),'b','LineWidth',1.2)
-            hold on
-            plot(time,p_xu_est(u,:),'m')
-            legend('actual','observer estimate')
-    %         ylabel([X_name{indU(u)},' (unmeasured)'])
-            ylabel(elec_labels(indU(u)))
-            axis('tight')
-            if u == 1+10
-                title('$$x^u$$[t] vs. $$\hat{x}^u$$[t]','Interpreter','Latex')
-            end
-            if u == 5+10
-                xlabel('t (msec)')
-            end
-        end
-
-    end
+%     p_winsize = 0.5*fs;        % in samples (here: plotting 500 msec at a time)
+%     chOff = 100;
+%     channelOffset = repmat(chOff*(1:numU)',1,size(data,2));
+% 
+%     for pwin = 6%1:p_numWin
+%         time = linspace(0,p_winsize,p_winsize);       % msec
+%     %     time = linspace((pwin-1)*p_winsize+1,pwin*p_winsize,p_winsize);       % msec
+%         p_data = data(indU,(pwin-1)*p_winsize+1:pwin*p_winsize);
+%         p_xu_est = xu_est(:,(pwin-1)*p_winsize+1:pwin*p_winsize);
+% 
+%         f1 = figure;
+%         for u = 1:5
+%             subplot(5,1,u)
+%             plot(time,p_data(u,:),'b','LineWidth',1.2)
+%             hold on
+%             plot(time,p_xu_est(u,:),'m')
+%             legend('actual','observer estimate')
+%     %         ylabel([X_name{indU(u)},' (unmeasured)'])
+%             ylabel(elec_labels(indU(u)))
+%             axis('tight')
+%             if u == 1
+%                 title('$$x^u$$[t] vs. $$\hat{x}^u$$[t]','Interpreter','Latex')
+%             end
+%             if u == 5
+%                 xlabel('t (msec)')
+%             end
+%         end
+%     %     pause;
+% 
+%         f2 = figure;
+%         for u = 6:10
+%             subplot(5,1,u-5)
+%             plot(time,p_data(u,:),'b','LineWidth',1.2)
+%             hold on
+%             plot(time,p_xu_est(u,:),'m')
+%             legend('actual','observer estimate')
+%     %         ylabel([X_name{indU(u)},' (unmeasured)'])
+%             ylabel(elec_labels(indU(u)))
+%             axis('tight')
+%             if u == 1+5
+%                 title('$$x^u$$[t] vs. $$\hat{x}^u$$[t]','Interpreter','Latex')
+%             end
+%             if u == 5+5
+%                 xlabel('t (msec)')
+%             end
+%         end
+% 
+%         f3 = figure;
+%         for u = 11:15
+%             subplot(5,1,u-10)
+%             plot(time,p_data(u,:),'b','LineWidth',1.2)
+%             hold on
+%             plot(time,p_xu_est(u,:),'m')
+%             legend('actual','observer estimate')
+%     %         ylabel([X_name{indU(u)},' (unmeasured)'])
+%             ylabel(elec_labels(indU(u)))
+%             axis('tight')
+%             if u == 1+10
+%                 title('$$x^u$$[t] vs. $$\hat{x}^u$$[t]','Interpreter','Latex')
+%             end
+%             if u == 5+10
+%                 xlabel('t (msec)')
+%             end
+%         end
+% 
+%     end
 end
