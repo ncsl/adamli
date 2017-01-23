@@ -24,7 +24,7 @@ function serverPerturbationScript(patient, radius, winSize, stepSize, frequency_
     setupScripts;
     
     % set directory to find adjacency matrix data
-    adjMatDir = './serverdata/fixed_adj_mats_win500_step500_freq1000/'; % at lab
+    adjMatDir = '../serverdata/fixed_adj_mats_win500_step500_freq1000/'; % at lab
 
     patDir = fullfile(adjMatDir, patient);
     fileName = strcat(patient, '_adjmats_leastsquares.mat');
