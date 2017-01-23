@@ -14,6 +14,11 @@ w_space = linspace(-radius, radius, 60);
 sigma = sqrt(radius^2 - w_space.^2); % move to the unit circle 1, for a plethora of different radial frequencies
 b = [0; 1];                          % initialize for perturbation computation later
 
+% add to sigma and w to create a whole circle search
+w_space = [w_space, w_space];
+sigma = [-sigma, sigma];
+
+
 tempDir = fullfile('./tempData/', patient, 'perturbation');
 if ~exist(tempDir, 'dir')
     mkdir(tempDir);
@@ -68,32 +73,30 @@ for iPert=1:length(perturbationTypes)
             for iW=1:length(w_space) % 2nd loop through frequencies
                 lambda = sigma(iW) + 1i*w_space(iW);
 
-                % compute row, or column perturbation
                 if (perturbationType == 'R')
-                    C = ek'*inv(A - lambda*eye(N));  
+        %             C = ek'*inv(A - lambda*eye(N));  
+        %             C = ek'/(A - lambda*eye(N));
+        %             C = (A - lambda*eye(N))\ek;
 
-                    if size(C,1) > 1
-                        size(C)
-                        disp('Could be an error in setting Row and Col Pert.');
-                        k = waitforbuttonpress
-                    end
+                    % new after 1/13
+        %             C = inv(A-lambda*eye(N))*ek;
+                    C = (A-lambda*eye(N))\ek;
                 elseif (perturbationType == 'C')
-                    C = inv(A - lambda*eye(N))*ek; 
+                    % new after 1/13
+        %             C = ek'*inv(A-lambda*eye(N));
+                    C = ek'/(A-lambda*eye(N));
 
-                    if size(C,2) > 1
-                        size(C)
-                        disp('Could be an error in setting Row and Col Pert.');
-                        k = waitforbuttonpress
-                    end
+                    % old
+        %             C = ek/(A - lambda*eye(N)); 
                 end
 
                 %- extract real and imaginary components
                 %- create B vector of constraints
                 Cr = real(C);  Ci = imag(C);
                 if strcmp(perturbationType, 'R')
-                    B = [Ci; Cr];
+                    B = [Ci; Cr]';
                 else
-                    B = [Ci, Cr]';
+                    B = [Ci, Cr];
                 end
 
                 % compute perturbation necessary
@@ -101,7 +104,7 @@ for iPert=1:length(perturbationTypes)
                     w_space(iW)
                     del = B'*inv(B*B')*b;
                 else
-                    del = C./(norm(C)^2);
+                    del = -C./(norm(C)^2);
                 end
 
                 % store the l2-norm of the perturbation vector

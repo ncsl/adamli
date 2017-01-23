@@ -128,7 +128,7 @@ for iNode=1:N % 1st loop through each electrode
             try
                 temp = del*ek';
             catch e
-                disp(e)
+%                 disp(e)
                 temp = del'*ek'; 
             end
         else

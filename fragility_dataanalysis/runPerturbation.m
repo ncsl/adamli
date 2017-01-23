@@ -24,7 +24,7 @@
 % clc;
 % 
 % % settings to run
-% patients = {...
+patients = {...
 %      'pt1aw1', 'pt1aw2', ...
 %     'pt1aslp1', 'pt1aslp2', ...
 %     'pt2aw1', 'pt2aw2', ...
@@ -41,7 +41,8 @@
 % %     'pt14sz1' 'pt14sz2' 'pt14sz3' 'pt15sz1' 'pt15sz2' 'pt15sz3' 'pt15sz4',...
 % %     'pt16sz1' 'pt16sz2' 'pt16sz3',...
 % %     'pt17sz1' 'pt17sz2',...
-% %   'JH101sz1' 'JH101sz2' 'JH101sz3' 'JH101sz4',...
+%   'JH101sz1' 'JH101sz2' 'JH101sz3' 
+%     'JH101sz4',...
 % % 	'JH102sz1' 'JH102sz2' 'JH102sz3' 'JH102sz4' 'JH102sz5' 'JH102sz6',...
 % % 	'JH103sz1' 'JH103sz2' 'JH103sz3',...
 % % 	'JH104sz1' 'JH104sz2' 'JH104sz3',...
@@ -49,12 +50,12 @@
 % % 	'JH106sz1' 'JH106sz2' 'JH106sz3' 'JH106sz4' 'JH106sz5' 'JH106sz6',...
 % % 	'JH107sz1' 'JH107sz2' 'JH107sz3' 'JH107sz4' 'JH107sz5' 'JH107sz6' 'JH107sz7' 'JH107sz8' 'JH107sz8', 'JH107sz9'...
 % %   'JH108sz1', 'JH108sz2', 'JH108sz3', 'JH108sz4', 'JH108sz5', 'JH108sz6', 'JH108sz7',...
-% };
+};
 
-function runPerturbation(patients)
-perturbationTypes = ['C'];
+% function runPerturbation(patients)
+perturbationTypes = ['C', 'R'];
 radius = 1.5;             % spectral radius
-w_space = linspace(-radius, radius, 101);
+w_space = linspace(-radius, radius, 50);
 winSize = 500;            % 500 milliseconds
 stepSize = 500; 
 frequency_sampling = 1000; % in Hz
@@ -68,7 +69,7 @@ addpath(genpath('/home/WIN/ali39/Documents/adamli/fragility_dataanalysis/eeg_too
 
 % set directory to find adjacency matrix data
 adjMatDir = './serverdata/fixed_adj_mats_win500_step500_freq1000/'; % at lab
-% adjMatDir = '/Volumes/NIL_PASS/serverdata/fixed_adj_mats_win500_step500_freq1000/'; % on ext HD
+adjMatDir = '/Volumes/NIL_PASS/serverdata/fixed_adj_mats_win500_step500_freq1000/'; % on ext HD
 
 %%- Begin Loop Through Different Patients Here
 for p=1:length(patients)
@@ -173,7 +174,5 @@ for p=1:length(patients)
         save(fullfile(toSavePertDir, filename), 'perturbation_struct');
         disp(['Saved file: ', filename]);
     end
-    
-    
 end
-end
+% end
