@@ -1,7 +1,4 @@
 #!/bin/bash -l
-#PBS -N compute_adjacency_mat
-#PBS -l nodes=135:ppn=8
-#PBS -l walltime=1:00:00
 #PBS -M ali39@jhu.edu
 #PBS -m abe
 #PBS -q dque
@@ -11,8 +8,7 @@
 #PBS -o /home/ali/adamli/fragility_dataanalysis/server/devFragility/_log/test.out
 cd /home/ali/adamli/fragility_dataanalysis/server/devFragility/
 
-for proc in `seq 0 $numWins`; do
-	# proc=$(($i%3))
-	tempi=$(($i+1))
-	pbsdsh -n $proc /home/ali/adamli/fragility_dataanalysis/server/devFragility/computeAnalysis.sh $proc $patient $tempi $RUNCONNECTIVITY &
+for proc in `seq 1 8`; do
+	currentWin=$(($currentNode+$proc))
+	pbsdsh -n $proc /home/ali/adamli/fragility_dataanalysis/server/devFragility/computeAnalysis.sh $proc $patient $currentWin $RUNCONNECTIVITY &
 done

@@ -4,12 +4,13 @@ clc;
 
 % settings to run
 patients = {,...
-     'pt1sz2',...
-     'pt1sz3',...
+    'EZT019seiz002',...
+%      'pt1sz2',...
+%      'pt1sz3',...
 };
 
-winSize = 500;            % 500 milliseconds
-stepSize = 500; 
+winSize = 100;            % 500 milliseconds
+stepSize = 100; 
 frequency_sampling = 1000; % in Hz
 IS_SERVER = 0;
 TYPE_CONNECTIVITY = 'leastsquares';
@@ -23,12 +24,12 @@ addpath(genpath('/home/WIN/ali39/Documents/adamli/fragility_dataanalysis/eeg_too
 
 % set directory to find adjacency matrix data
 adjMatDir = fullfile(strcat('./serverdata/fixed_adj_mats_win', num2str(winSize), ...
-    '_step', nu2str(stepSize), '_freq', num2str(frequency_sampling))); % at lab
-adjMatDir = fullfile(strcat('./Volumes/NIL_PASS/serverdata/fixed_adj_mats_win', num2str(winSize), ...
-    '_step', nu2str(stepSize), '_freq', num2str(frequency_sampling))); % at home
+    '_step', num2str(stepSize), '_freq', num2str(frequency_sampling))); % at lab
+% adjMatDir = fullfile(strcat('./Volumes/NIL_PASS/serverdata/fixed_adj_mats_win', num2str(winSize), ...
+%     '_step', nu2str(stepSize), '_freq', num2str(frequency_sampling))); % at home
 
 dataDir = './data/';
-dataDir = './Volumes/NIL_PASS/data/';
+% dataDir = './Volumes/NIL_PASS/data/';
 
 if ~exist(adjMatDir, 'dir')
     mkdir(adjMatDir);
@@ -43,7 +44,7 @@ for p=1:length(patients)
     patDir = fullfile(adjMatDir, patient);
     fileName = strcat(patient, '_adjmats_leastsquares.mat');
     
-    setupScripts;
+%     setupScripts;
 
     %% New Setup Scripts
     
@@ -89,6 +90,7 @@ for p=1:length(patients)
     %% EZT/SEEG PATIENTS
     if seeg
         patient_eeg_path = strcat(dataDir, 'Seiz_Data/', patient_id);
+        patient = strcat(patient_id, seizure_id);
     else
         patient_eeg_path = strcat(dataDir, patient);
     end
@@ -125,6 +127,15 @@ for p=1:length(patients)
     if ~isempty(included_channels)
         eeg = eeg(included_channels, :);
         labels = labels(included_channels);
+    end
+    
+    % set directory to find adjacency matrix data
+    toSaveAdjDir = fullfile(strcat('./serverdata/fixed_adj_mats_win', num2str(winSize), ...
+        '_step', num2str(stepSize), '_freq', num2str(frequency_sampling))); % at lab
+
+    % create directory if it does not exist
+    if ~exist(toSaveAdjDir, 'dir')
+        mkdir(toSaveAdjDir);
     end
     
     % define args for computing the functional connectivity

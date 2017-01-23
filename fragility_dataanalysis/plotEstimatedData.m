@@ -131,8 +131,12 @@ for i=1:length(winSizes)
     subplot(211);
     for iChan=1:length(exChans)
         exChan = exChans(iChan);
-        plot(preSeiz_hat(exChan, timePoints), 'k'); hold on;
-        plot(preSeizData(exChan, timePoints), 'r'); 
+        
+        % add an offset 
+        offset = 1.2*max(preSeizData(exChan, timePoints));
+        
+        plot(preSeiz_hat(exChan, timePoints) + offset, 'k'); hold on;
+        plot(preSeizData(exChan, timePoints) + offset, 'r'); 
     end
     xlabel('Time (seconds)', 'FontSize', FONTSIZE);
     ylabel('Electrodes', 'FontSize', FONTSIZE);
