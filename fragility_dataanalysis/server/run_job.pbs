@@ -12,5 +12,5 @@
 cd /home/ali/adamli/fragility_dataanalysis/server
 
 proc=0 
-pbsdsh -n $proc /home/ali/adamli/fragility_dataanalysis/server/runAnalysis.sh $proc $patient $RUNCONNECTIVITY $winSize &
+pbsdsh -n $proc /home/ali/adamli/fragility_dataanalysis/server/runAnalysis.sh $proc $patient $RUNCONNECTIVITY &
 wait

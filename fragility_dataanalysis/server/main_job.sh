@@ -23,8 +23,8 @@
 echo "Begin analysis." # print beginning statement
 # printf "Enter frequency sampling: " # prompt for patient_id {pt1, pt2, ..., JH105, EZT005}
 # read frequency_sampling
-printf "Enter window size: " # prompt for seizure_id {sz1, sz2, ..., seiz001, seiz003}
-read winSize
+# printf "Enter window size: " # prompt for seizure_id {sz1, sz2, ..., seiz001, seiz003}
+# read winSize
 # printf "Enter step size: "
 # read stepSize
 # printf "Enter radius: "
@@ -51,18 +51,18 @@ patients=(
 	# pt16sz1 pt16sz2 pt16sz3 
 	# pt17sz1 pt17sz2')
 	# 'JH101sz1 JH101sz2 JH101sz3 JH101sz4
-	# JH102sz1 JH102sz2 JH102sz3 JH102sz4 JH102sz5 JH102sz6
-	# JH103sz1 JH103sz2 JH103sz3
-	# JH104sz1 JH104sz2 JH104sz3
-	# JH105sz1 JH105sz2 JH105sz3 JH105sz4 JH105sz5
-	# JH106sz1 JH106sz2 JH106sz3 JH106sz4 JH106sz5 JH106sz6
-	# JH107sz1 JH107sz2 JH107sz3 JH107sz4 JH107sz5 JH107sz6 JH107sz7 JH107sz8 JH107sz8 JH107sz9
-	# JH108sz1 JH108sz2 JH108sz3 JH108sz4 JH108sz5 JH108sz6 JH108sz7')
-	'EZT019seiz001 EZT019seiz002 EZT019seiz003
-	EZT037seiz001 EZT037seiz002
-	EZT005seiz001 EZT005seiz002 EZT005seiz003
-	EZT007seiz001 EZT007seiz002 EZT007seiz003
-	EZT070seiz001 EZT070seiz002')
+	'JH102sz1 JH102sz2 JH102sz3 JH102sz4 JH102sz5 JH102sz6
+	JH103sz1 JH103sz2 JH103sz3
+	JH104sz1 JH104sz2 JH104sz3
+	JH105sz1 JH105sz2 JH105sz3 JH105sz4 JH105sz5
+	JH106sz1 JH106sz2 JH106sz3 JH106sz4 JH106sz5 JH106sz6
+	JH107sz1 JH107sz2 JH107sz3 JH107sz4 JH107sz5 JH107sz6 JH107sz7 JH107sz8 JH107sz8 JH107sz9
+	JH108sz1 JH108sz2 JH108sz3 JH108sz4 JH108sz5 JH108sz6 JH108sz7')
+	# 'EZT019seiz001 EZT019seiz002 EZT019seiz003
+	# EZT037seiz001 EZT037seiz002
+	# EZT005seiz001 EZT005seiz002 EZT005seiz003
+	# EZT007seiz001 EZT007seiz002 EZT007seiz003
+	# EZT070seiz001 EZT070seiz002')
 
 printf "About to run on patients (press enter to continue): $patients" # prompt for patient_id {pt1, pt2, ..., JH105, EZT005}
 read answer

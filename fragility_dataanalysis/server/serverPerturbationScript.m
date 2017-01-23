@@ -16,7 +16,8 @@ function serverPerturbationScript(patient, radius, winSize, stepSize, frequency_
 
     % analysis parameters
     perturbationTypes = ['C', 'R'];
-    w_space = linspace(-radius, radius, 101);
+    w_space = linspace(-radius, radius, 51);
+
     TYPE_CONNECTIVITY = 'leastsquares';
     IS_SERVER = 1;
     

@@ -6,7 +6,6 @@ module load matlab/matlab2013a
 ## 00: Load in input parameters
 proc="$1"
 patient="$2"
-stepSize=$winSize
 
 ## 01: Set parameters for matlab to run, and check if matlab is on path
 matlab_jvm="matlab -nojvm -nodesktop -nosplash -r"

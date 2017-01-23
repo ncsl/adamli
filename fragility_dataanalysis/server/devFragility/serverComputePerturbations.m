@@ -10,7 +10,7 @@ radius = 1.5;
 frequency_sampling = 1000;
 winSize = 500;
 stepSize = 500;
-w_space = linspace(-radius, radius, 60);
+w_space = linspace(-radius, radius, 50);
 sigma = sqrt(radius^2 - w_space.^2); % move to the unit circle 1, for a plethora of different radial frequencies
 b = [0; 1];                          % initialize for perturbation computation later
 
