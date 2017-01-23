@@ -34,7 +34,7 @@ patients = {,...
 %     serverSetupComputation(patient);
 % end
 
-metaDir = './patientMeta/';
+metaDir = './patientMeta/jhu/';
 metaFiles = dir(fullfile(metaDir, '*.txt'));
 metaFiles = {metaFiles.name};
 data = 0;
