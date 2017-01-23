@@ -4,11 +4,13 @@
 #PBS -q dque
 #PBS -S /bin/bash
 #PBS -d /home/ali/adamli/fragility_dataanalysis/server/devFragility/
-#PBS -e /home/ali/adamli/fragility_dataanalysis/server/devFragility/_log/test.err
-#PBS -o /home/ali/adamli/fragility_dataanalysis/server/devFragility/_log/test.out
+#PBS -e localhost:${PBS_O_WORKDIR}/_log/${PBS_JOBNAME}.e${PBS_JOBID}
+#PBS -o localhost:${PBS_O_WORKDIR}/_log/${PBS_JOBNAME}.o${PBS_JOBID}
+
 cd /home/ali/adamli/fragility_dataanalysis/server/devFragility/
 
-for proc in `seq 1 8`; do
-	currentWin=$(($currentNode+$proc))
+for proc in `seq 0 7`; do
+	currentWin=$(($currentNode+$proc+1))
+	echo $currentWin
 	pbsdsh -n $proc /home/ali/adamli/fragility_dataanalysis/server/devFragility/computeAnalysis.sh $proc $patient $currentWin $RUNCONNECTIVITY &
 done
