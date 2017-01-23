@@ -84,7 +84,7 @@ num_channels = size(data.data, 1);
 clear data
 % check included channels length and how big eeg is
 if length(labels(included_channels)) ~= size(eeg(included_channels,:),1)
-        disp('Something wrong here...!!!!');
+    disp('Something wrong here...!!!!');
 end
 
 if frequency_sampling ~=1000
@@ -188,7 +188,7 @@ elseif strcmp(TYPE_CONNECTIVITY, 'DTF')
 end
 
 % display a message for the user
-disp(['Finished: ', num2str(currentWin)]);
+fprintf(['Finished: ', num2str(currentWin)]);
 
 % save the file in temporary dir
 save(fullfile(tempDir, fileName), 'theta_adj');
