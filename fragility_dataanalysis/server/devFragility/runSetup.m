@@ -29,7 +29,25 @@ patients = {,...
 %     'JH108sz1', 'JH108sz2', 'JH108sz3', 'JH108sz4', 'JH108sz5', 'JH108sz6', 'JH108sz7',...
 };
 
-for iPat=1:length(patients)
-    patient = patients{iPat};
-    serverSetupComputation(patient);
+% for iPat=1:length(patients)
+%     patient = patients{iPat};
+%     serverSetupComputation(patient);
+% end
+
+metaDir = './patientMeta/';
+metaFiles = dir(fullfile(metaDir, '*.txt'));
+metaFiles = {metaFiles.name};
+data = 0;
+maxData = '0';
+for iFile=1:length(metaFiles)
+%     metaFiles{iFile}
+    fid = fopen(fullfile(metaDir, metaFiles{iFile}));
+    data = fgetl(fid);
+    fclose(fid);
+    
+    if str2num(data) > str2num(maxData)
+        data
+        maxData = data;
+    end
 end
+maxData
