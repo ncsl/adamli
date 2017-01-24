@@ -7,7 +7,7 @@ patients = {,...,
 %     'pt2aslp1', 'pt2aslp2', ...
 %     'pt3aw1', ...
 %     'pt3aslp1', 'pt3aslp2', ...
-%     'pt1sz2', 'pt1sz3', 'pt1sz4',...
+    'pt1sz2', 'pt1sz3', 'pt1sz4',...
 %     'pt2sz1' 'pt2sz3' 'pt2sz4', ...
 %     'pt3sz2' 'pt3sz4', ...
 %     'pt6sz3', 'pt6sz4', 'pt6sz5',...
@@ -23,7 +23,7 @@ patients = {,...,
 % 	'JH104sz1' 'JH104sz2' 'JH104sz3',...
 % 	'JH105sz1' 'JH105sz2' 'JH105sz3' 'JH105sz4' 'JH105sz5',...
 % 	'JH106sz1' 'JH106sz2' 'JH106sz3' 'JH106sz4' 'JH106sz5' 'JH106sz6',...
-	'JH107sz7' ,...
+% 	'JH107sz7' ,...
 %     'JH107sz2' 'JH107sz3' 'JH107sz5' 'JH107sz8',...
 %     'JH107sz4' 'JH107sz5' 'JH107sz6' 'JH107sz7' 'JH107sz8' 'JH107sz8',...
 %    'JH108sz1', 'JH108sz2', 'JH108sz3', 'JH108sz4', 'JH108sz5', 'JH108sz6', 'JH108sz7',...
@@ -47,6 +47,7 @@ winSize = 500;            % 500 milliseconds
 stepSize = 500; 
 frequency_sampling = 1000; % in Hz
 IS_SERVER = 0;
+TEST_DESCRIP = [];
 
 figDir = './figures/fixedperts/';
 
@@ -73,9 +74,9 @@ for p=1:length(patients)
             '_radius', num2str(radius)));
     
     % temp dir until I get everything fixed.
-%     finalDataDir = fullfile(strcat(adjMat, num2str(winSize), ...
-%         '_step', num2str(stepSize), '_freq', num2str(frequency_sampling)), strcat(perturbationType, '_perturbations', ...
-%             '_radius', num2str(radius)), '_newfixedalg');
+    finalDataDir = fullfile(strcat(adjMat, num2str(winSize), ...
+        '_step', num2str(stepSize), '_freq', num2str(frequency_sampling)), strcat(perturbationType, '_perturbations', ...
+            '_radius', num2str(radius)), '_newfixedalg');
         
     try
         final_data = load(fullfile(finalDataDir, strcat(patient, ...
@@ -150,8 +151,8 @@ for p=1:length(patients)
             '_step', num2str(stepSize), '_freq', num2str(frequency_sampling)), strcat(perturbationType, '_perturbations', ...
                 '_radius', num2str(radius)), '_newfixedalg');
         
-        finalDataDir = fullfile(adjMatDir, strcat(perturbationType, '_perturbations', ...
-            '_radius', num2str(radius)));
+%         finalDataDir = fullfile(adjMatDir, strcat(perturbationType, '_perturbations', ...
+%             '_radius', num2str(radius)));
             
          %%- Extract an example
 %         finalDataDir = toSaveFinalDataDir;
@@ -172,9 +173,10 @@ for p=1:length(patients)
         info = final_data.info;
         timePoints = final_data.timePoints;
         
-%         minPerturb_time_chan = minPerturb_time_chan(:, 1:seizureMarkStart+60);
-%         fragility_rankings = fragility_rankings(:, 1:seizureMarkStart+60);
-%         timePoints = timePoints(1:seizureMarkStart+60,:);
+        seizureMarkStart = seizureStart/winSize;
+        minPerturb_time_chan = minPerturb_time_chan(:, 1:seizureMarkStart+60);
+        fragility_rankings = fragility_rankings(:, 1:seizureMarkStart+60);
+        timePoints = timePoints(1:seizureMarkStart+60,:);
         
         %% 1: Extract Processed Data and Begin Plotting and Save in finalDataDir
         %%- initialize plotting args
@@ -228,7 +230,7 @@ for p=1:length(patients)
             end
         end
         
-%         PLOTARGS.seizureEnd = 1;
+        PLOTARGS.seizureEnd = 1;
         %% 2. Plot Min 2-Induced Norm Perturbation and Fragility Ranking
         plotMinimumPerturbation(minPerturb_time_chan, clinicalIndices, timeStart, timeEnd, PLOTARGS);
         
@@ -243,6 +245,5 @@ for p=1:length(patients)
         plotFragilityMetric(fragility_rankings, minPerturb_time_chan, clinicalIndices, timeStart, timeEnd, PLOTARGS);
         
 %          close all
-%         analyzePerturbations(patient_id, seizure_id, plot_args, clinicalLabels);
     end
 end
