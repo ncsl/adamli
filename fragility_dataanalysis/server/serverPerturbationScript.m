@@ -103,7 +103,7 @@ function serverPerturbationScript(patient, radius, winSize, stepSize, frequency_
             end
         end
         
-        info.del_table = del_table;
+%         info.del_table = del_table;
         
         % initialize struct to save
         perturbation_struct = struct();
@@ -111,6 +111,7 @@ function serverPerturbationScript(patient, radius, winSize, stepSize, frequency_
         perturbation_struct.minNormPertMat = minNormPerturbMat;
         perturbation_struct.timePoints = timePoints;
         perturbation_struct.fragilityMat = fragilityMat;
+        perturbation_struct.del_table = del_table;
         
         % save the perturbation struct result
         save(fullfile(toSavePertDir, filename), 'perturbation_struct');
