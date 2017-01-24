@@ -93,22 +93,22 @@ for iNode=1:N % 1st loop through each electrode
         end
         
         % compute perturbation necessary
-        if w_space(iW) ~= 0
-            del = B'*inv(B*B')*b;
-        else
-            del = -C./(norm(C)^2);
-        end
+%         if w_space(iW) ~= 0
+%             del = B'*inv(B*B')*b;
+%         else
+%             del = -C./(norm(C)^2);
+%         end
 
         % Paper way of computing this?...
-%         Cr = real(C);  Ci = imag(C);
-%         Cr = Cr'; Ci = Ci';
-%         if (norm(Ci) < tol)
-%             B = eye(N);
-%         else
-%             B = null(orth([Ci])'); 
-%         end
-%         
-%         del = -(B*inv(B'*B)*B'*Cr)/(Cr'*B*inv(B'*B)*B'*Cr);
+        Cr = real(C);  Ci = imag(C);
+        Cr = Cr'; Ci = Ci';
+        if (norm(Ci) < tol)
+            B = eye(N);
+        else
+            B = null(orth([Ci])'); 
+        end
+        
+        del = -(B*inv(B'*B)*B'*Cr)/(Cr'*B*inv(B'*B)*B'*Cr);
         
         % store the l2-norm of the perturbation vector
         del_size(iNode, iW) = norm(del); 
