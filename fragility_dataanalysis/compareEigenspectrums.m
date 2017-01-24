@@ -40,6 +40,7 @@ end
 perturbations = ['C', 'R'];
 
 exChan = 1;
+FONTSIZE = 18;
 
 serverDataDir = './serverdata/fixed_adj_mats_win500_step500_freq1000/';
 adjMatDir = serverDataDir;
@@ -103,18 +104,19 @@ for iPat=1:length(patients) % loop through each patient
         max(abs(rowPertEVals))
         
         figure;
-        plot(real(evals), imag(evals), 'ko'); hold on;
+        plot(real(evals), imag(evals), 'ko'); hold on; set(gca, 'box', 'off')
         plot(real(rowPertEVals), imag(rowPertEVals), 'ro');
-        plot(real(colPertEVals), imag(colPertEVals), 'g*');
-        xlabel('Real Part');
-        ylabel('Imag Part');
-        title(['Eigenspectrum of ', patient, ' channel ', num2str(exChan)]);
+        plot(real(colPertEVals), imag(colPertEVals), 'g*', 'MarkerSize', 12);
+        xlabel('Real Part', 'FontSize', FONTSIZE);
+        ylabel('Imag Part', 'FontSize', FONTSIZE);
+        title(['Eigenspectrum of ', patient, ' channel ', num2str(exChan)], 'FontSize', FONTSIZE);
         legend('Before', 'After Row', 'After Col');
         
         xlim([-0.5 1.6]);
         ylim([-0.85 0.85]);
         
         currfig = gcf;
+        currfig.Position = [1666 1 1535 1121];
         currfig.PaperPosition = [ -3.7448   -0.3385   15.9896   11.6771];
         print(fullfile(figDir, patient, strcat(patient, '_chan', num2str(exChan), '_index', num2str(iTime))), '-dpng', '-r0')
     end
