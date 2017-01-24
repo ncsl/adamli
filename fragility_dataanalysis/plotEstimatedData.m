@@ -225,9 +225,9 @@ for i=1:length(winSizes)
     % end
 end
 
-% winSizes(winSizes==125) = [];
-% errors(2) = [];
-% mses(2) = [];
+winSizes(winSizes==250) = [];
+errors(4) = [];
+mses(4) = [];
 
 figure;
 subplot(211); % plot errors
@@ -240,5 +240,5 @@ title('Mean Squared Error', 'FontSize', FONTSIZE);
 currfig = gcf;
 currfig.PaperPosition = [-3.7448   -0.3385   15.9896   11.6771];
 currfig.Position = [1666 1 1535 1121];
-toSaveFigFile = fullfile(toSaveFigDir, strcat(patient, '_seegerrors_', num2str(winSize)));
+toSaveFigFile = fullfile(toSaveFigDir, strcat(patient, '_seegerrorswithout250_', num2str(winSize)));
 print(toSaveFigFile, '-dpng', '-r0')
