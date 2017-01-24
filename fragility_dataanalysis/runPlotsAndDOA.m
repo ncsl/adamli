@@ -142,6 +142,11 @@ for p=1:length(patients)
             mkdir(toSaveWeightsDir);
         end
            
+        % temp dir until I get everything fixed.
+        finalDataDir = fullfile(strcat(adjMat, num2str(winSize), ...
+            '_step', num2str(stepSize), '_freq', num2str(frequency_sampling)), strcat(perturbationType, '_perturbations', ...
+                '_radius', num2str(radius)), '_newfixedalg');
+        
          %%- Extract an example
 %         finalDataDir = toSaveFinalDataDir;
         try
@@ -159,6 +164,11 @@ for p=1:length(patients)
         minPerturb_time_chan = final_data.minNormPertMat;
         fragility_rankings = final_data.fragilityMat;
         info = final_data.info;
+        timePoints = final_data.timePoints;
+        
+        minPerturb_time_chan = minPerturb_time_chan(:, 1:seizureMarkStart+60);
+        fragility_rankings = fragility_rankings(:, 1:seizureMarkStart+60);
+        timePoints = timePoints(1:seizureMarkStart+60,:);
         
         %% 1: Extract Processed Data and Begin Plotting and Save in finalDataDir
         %%- initialize plotting args
@@ -212,6 +222,7 @@ for p=1:length(patients)
             end
         end
         
+        PLOTARGS.seizureEnd = 1;
         %% 2. Plot Min 2-Induced Norm Perturbation and Fragility Ranking
         plotMinimumPerturbation(minPerturb_time_chan, clinicalIndices, timeStart, timeEnd, PLOTARGS);
         
@@ -225,7 +236,7 @@ for p=1:length(patients)
             [perturbationType, ' perturbation: ', ' Time Locked to Seizure']};
         plotFragilityMetric(fragility_rankings, minPerturb_time_chan, clinicalIndices, timeStart, timeEnd, PLOTARGS);
         
-         close all
+%          close all
 %         analyzePerturbations(patient_id, seizure_id, plot_args, clinicalLabels);
     end
 end
