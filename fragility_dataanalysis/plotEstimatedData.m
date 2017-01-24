@@ -47,26 +47,26 @@ for i=1:length(winSizes)
 
     %% Load in data
     try
-        nihadjmat = load(fullfile(adjDir, nihpat, 'pt1sz2_adjmats_leastsquares.mat'));            % Patient NIH linear models A 3D matrix with all A matrices for 500 msec wins (numWins x numChannels x numChannels)
+%         nihadjmat = load(fullfile(adjDir, nihpat, 'pt1sz2_adjmats_leastsquares.mat'));            % Patient NIH linear models A 3D matrix with all A matrices for 500 msec wins (numWins x numChannels x numChannels)
         ccadjmat = load(fullfile(adjDir, strcat(ccpat, '_seiz002'), 'EZT019_seiz002_adjmats_leastsquares.mat'));     % Patient CC linear models
     catch e
         disp(e)
-        nihadjmat = load(fullfile(adjDir, 'pt1sz2_adjmats_leastsquares.mat'));            % Patient NIH linear models A 3D matrix with all A matrices for 500 msec wins (numWins x numChannels x numChannels)
+%         nihadjmat = load(fullfile(adjDir, 'pt1sz2_adjmats_leastsquares.mat'));            % Patient NIH linear models A 3D matrix with all A matrices for 500 msec wins (numWins x numChannels x numChannels)
         ccadjmat = load(fullfile(adjDir, 'EZT019_seiz002_adjmats_leastsquares.mat'));     % Patient CC linear models
     end
     
     
-    ecogdata = load(fullfile(dataDir, nihpat, 'pt1sz2.mat'));          % Patient ECoG raw data
+%     ecogdata = load(fullfile(dataDir, nihpat, 'pt1sz2.mat'));          % Patient ECoG raw data
     seegdata = load(fullfile(dataDir, 'Seiz_Data', ccpat, 'EZT019_seiz002.mat')); % Patient SEEG raw data
 
     if BP_FILTER
-        ecogdata.data = buttfilt(ecogdata.data,[59.5 60.5], frequency_sampling,'stop',1);
+%         ecogdata.data = buttfilt(ecogdata.data,[59.5 60.5], frequency_sampling,'stop',1);
         seegdata.data = buttfilt(seegdata.data,[59.5 60.5], frequency_sampling,'stop',1);
     end
     %% Define parameters
-    data = ecogdata.data;
-    seizureStart = ecogdata.seiz_start_mark;
-    adjmat_struct = nihadjmat.adjmat_struct;
+%     data = ecogdata.data;
+%     seizureStart = ecogdata.seiz_start_mark;
+%     adjmat_struct = nihadjmat.adjmat_struct;
 
     data = seegdata.data;
     seizureStart = seegdata.seiz_start_mark-1;
@@ -85,11 +85,11 @@ for i=1:length(winSizes)
     % preSeizData = data(:, seizureStart-60*fs:seizureStart-1);
     % preSeizA = adjmat_struct.adjMats(seizureStartMark-60*fs/winSize-1:seizureStartMark,:,:);
 
-    preSeizData = data(:, 1:seizureStart);
+    preSeizData = double(data(:, 1:seizureStart));
     preSeizA = adjmat_struct.adjMats(1:seizureStartMark,:,:);
 
     % only get seizure to +30 seconds
-    postSeizData = data(:, seizureStart:seizureStart+30*fs);
+    postSeizData = double(data(:, seizureStart:seizureStart+30*fs));
     postSeizA = adjmat_struct.adjMats(seizureStartMark:seizureStartMark+30*fs/winSize-1,:,:);
 
     %% Reconstruct preseizure data
@@ -115,7 +115,7 @@ for i=1:length(winSizes)
     end
     toc;
 
-    exChans = [3, 4, 5, 6, 7];
+    exChans = [2, 3, 5, 6, 7];
     exChan = 2;
     
     % compute difference metric between observed and estimated
@@ -126,6 +126,8 @@ for i=1:length(winSizes)
     FONTSIZE = 18;
     timePoints = 1:700;
     offset = 0;
+    temp = preSeizData(exChans,timePoints);
+    maxoffset = 1.5 * max(abs(temp(:)));
 
     titleStr = {'Estimated ECoG Data Vs. Actual Data', ...
         strcat('For Window Size (', num2str(winSize), ')')};
@@ -139,18 +141,32 @@ for i=1:length(winSizes)
     for iChan=1:length(exChans)
         exChan = exChans(iChan);
         
-        if iChan==1
-        avge = mean(preSeizData(exChan, timePoints));
+        % get the data for this channel
+        if iChan == 1
+            datahat = preSeiz_hat(exChan, timePoints);
+            datatrue = preSeizData(exChan, timePoints);
+            
+            prevdatahat = datahat;
+            prevdatatrue = datatrue;
         else
-            avge=0;
+            datahat = preSeiz_hat(exChan, timePoints) + offset;
+            datatrue = preSeizData(exChan, timePoints) + offset;
+            
+            while(max(prevdatatrue) > min(datatrue))
+                datatrue = datatrue + offset;
+                datahat = datahat + offset;
+            end
+            
+            prevdatahat = datahat;
+            prevdatatrue = datatrue;
         end
-        plot(preSeiz_hat(exChan, timePoints) - avge + offset, 'k'); hold on;
-        plot(preSeizData(exChan, timePoints) - avge + offset, 'r'); 
         
-        yticklocs(iChan) = mean(preSeizData(exChan, timePoints) + offset);
+        offset = 50;
         
-        % add an offset 
-        offset = offset + 2*max(preSeizData(exChan, timePoints));
+        plot(datahat, 'k'); hold on;
+        plot(datatrue, 'r'); 
+        
+        yticklocs(iChan) = mean(datatrue);
     end
     axes = gca; currfig = gcf;
     set(axes, 'box', 'off');
@@ -172,7 +188,7 @@ for i=1:length(winSizes)
     if ~exist(toSaveFigFile, 'dir')
         mkdir(toSaveFigFile);
     end
-    toSaveFigFile = fullfile(toSaveFigFile, strcat('seegdata_', num2str(winSize)));
+    toSaveFigFile = fullfile(toSaveFigFile, strcat(patient, '_seegdata_', num2str(winSize)));
     print(toSaveFigFile, '-dpng', '-r0')
     
     error = norm(preSeiz_hat(exChans, timePoints) - preSeizData(exChans,timePoints)) / (length(timePoints));
