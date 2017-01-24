@@ -238,11 +238,17 @@ function [included_channels, ezone_labels, ...
         latespread_labels = {};
     elseif strcmp(patient_id, 'JH107')
         included_channels = [1:7 9:19 21:31 34:37 42:43 45 47:83];
+        
+        included_channels = [1:4 7 9:19 21:31 34:37 42 47:83]; % removal of noise electrodes 1/27/17
         ezone_labels = {};
         earlyspread_labels = {};
         latespread_labels = {};
     elseif strcmp(patient_id, 'JH108')
-        included_channels = [1:4 7:12 14:16 18:19 21:37 42:43 46:47 51:69 71:147];
+        included_channels = [1:4 7:12 14:16 18:19 21:37 42:43 46:47 51:69 72:147];
+        
+        included_channels = [1:4 7:12 14:16 18:19 21:37 42:43 46:47 51:69 72:82]; % w/o left hemisphere electrodes
+        
+        included_channels = [1:4 7:12 14:16 18:19 21:33 37 42:43 46:47 51:69 72:82]; % w/o left hemisphere electrodes & RPP electrodes
         ezone_labels = {'POLRDI1', 'POLRDI2', 'POLRDI3', 'POLRDI4', 'POLRSI1', 'POLRSI2', 'POLRSI3', 'POLRSI4'};
         earlyspread_labels = {'POLRPP1', 'POLRPP2'};
         latespread_labels = {};

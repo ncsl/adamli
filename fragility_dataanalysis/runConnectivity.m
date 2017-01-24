@@ -4,7 +4,9 @@ clc;
 
 % settings to run
 patients = {,...
-    'JH101sz1' 'JH101sz2' 'JH101sz3' 'JH101sz4',...
+    'JH107sz1' 'JH107sz2' 'JH107sz3' 'JH107sz4' 'JH107sz5' 'JH107sz6' 'JH107sz7' 'JH107sz8' 'JH107sz8', 'JH107sz9'...
+%     'JH108sz1', 'JH108sz2', 'JH108sz3', 'JH108sz4', 'JH108sz5', 'JH108sz6', 'JH108sz7',...
+%     'JH101sz1' 'JH101sz2' 'JH101sz3' 'JH101sz4',...
 %     'EZT019seiz002',...
 %      'pt1sz2',...
 %      'pt1sz3',...
@@ -23,7 +25,7 @@ addpath(genpath('./fragility_library/'));
 addpath(genpath('/Users/adam2392/Dropbox/eeg_toolbox'));
 addpath(genpath('/home/WIN/ali39/Documents/adamli/fragility_dataanalysis/eeg_toolbox/'));
 
-TEST_DESCRIP = 'noltg';
+TEST_DESCRIP = 'noleftandrpp';
 
 % set directory to find adjacency matrix data
 adjMatDir = fullfile(strcat('./serverdata/fixed_adj_mats_win', num2str(winSize), ...
@@ -173,7 +175,7 @@ for p=1:length(patients)
     adjmat_struct.frequency_sampling = frequency_sampling;
 
     fileName = strcat(patient, '_adjmats_', lower(TYPE_CONNECTIVITY), '.mat');
-    
+%     saveAdj(toSaveAdjDir, fileName, adjmat_struct);
     try
         save(fullfile(toSaveAdjDir, fileName), 'adjmat_struct');
     catch e
@@ -181,3 +183,4 @@ for p=1:length(patients)
         save(fullfile(toSaveAdjDir, fileName), 'adjmat_struct', '-v7.3');
     end
 end
+
