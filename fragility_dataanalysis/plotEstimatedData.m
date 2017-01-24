@@ -29,6 +29,8 @@ winSizes = [100, 125, 200, 250, 500, 1000];
 errors = zeros(length(winSizes), 1);
 mses = zeros(length(winSizes), 1);
 
+patient = 'pt1sz4';
+
 for i=1:length(winSizes)
     winSize = winSizes(i);
 
@@ -42,35 +44,35 @@ for i=1:length(winSizes)
         adjDir = strcat('./serverdata/nofilter_adj_mats_win', num2str(winSize), '_step', num2str(winSize), '_freq1000/');
 %         adjDir = strcat('/Volumes/NIL_PASS/serverdata/nofilter_adj_mats_win', num2str(winSize), '_step', num2str(winSize), '_freq1000/');
     end
-    nihpat = 'pt1sz2';
+    nihpat = 'pt1sz4';
     ccpat = 'EZT019';
 
     %% Load in data
     try
-%         nihadjmat = load(fullfile(adjDir, nihpat, 'pt1sz2_adjmats_leastsquares.mat'));            % Patient NIH linear models A 3D matrix with all A matrices for 500 msec wins (numWins x numChannels x numChannels)
-        ccadjmat = load(fullfile(adjDir, strcat(ccpat, '_seiz002'), 'EZT019_seiz002_adjmats_leastsquares.mat'));     % Patient CC linear models
+        nihadjmat = load(fullfile(adjDir, nihpat, 'pt1sz4_adjmats_leastsquares.mat'));            % Patient NIH linear models A 3D matrix with all A matrices for 500 msec wins (numWins x numChannels x numChannels)
+%         ccadjmat = load(fullfile(adjDir, strcat(ccpat, '_seiz003'), 'EZT019_seiz003_adjmats_leastsquares.mat'));     % Patient CC linear models
     catch e
         disp(e)
-%         nihadjmat = load(fullfile(adjDir, 'pt1sz2_adjmats_leastsquares.mat'));            % Patient NIH linear models A 3D matrix with all A matrices for 500 msec wins (numWins x numChannels x numChannels)
-        ccadjmat = load(fullfile(adjDir, 'EZT019_seiz002_adjmats_leastsquares.mat'));     % Patient CC linear models
+        nihadjmat = load(fullfile(adjDir, 'pt1sz4_adjmats_leastsquares.mat'));            % Patient NIH linear models A 3D matrix with all A matrices for 500 msec wins (numWins x numChannels x numChannels)
+%         ccadjmat = load(fullfile(adjDir, 'EZT019_seiz003_adjmats_leastsquares.mat'));     % Patient CC linear models
     end
     
     
-%     ecogdata = load(fullfile(dataDir, nihpat, 'pt1sz2.mat'));          % Patient ECoG raw data
-    seegdata = load(fullfile(dataDir, 'Seiz_Data', ccpat, 'EZT019_seiz002.mat')); % Patient SEEG raw data
+    ecogdata = load(fullfile(dataDir, nihpat, 'pt1sz4.mat'));          % Patient ECoG raw data
+%     seegdata = load(fullfile(dataDir, 'Seiz_Data', ccpat, 'EZT019_seiz003.mat')); % Patient SEEG raw data
 
     if BP_FILTER
-%         ecogdata.data = buttfilt(ecogdata.data,[59.5 60.5], frequency_sampling,'stop',1);
-        seegdata.data = buttfilt(seegdata.data,[59.5 60.5], frequency_sampling,'stop',1);
+        ecogdata.data = buttfilt(ecogdata.data,[59.5 60.5], frequency_sampling,'stop',1);
+%         seegdata.data = buttfilt(seegdata.data,[59.5 60.5], frequency_sampling,'stop',1);
     end
     %% Define parameters
-%     data = ecogdata.data;
-%     seizureStart = ecogdata.seiz_start_mark;
-%     adjmat_struct = nihadjmat.adjmat_struct;
+    data = ecogdata.data;
+    seizureStart = ecogdata.seiz_start_mark;
+    adjmat_struct = nihadjmat.adjmat_struct;
 
-    data = seegdata.data;
-    seizureStart = seegdata.seiz_start_mark-1;
-    adjmat_struct = ccadjmat.adjmat_struct;
+%     data = seegdata.data;
+%     seizureStart = seegdata.seiz_start_mark-1;
+%     adjmat_struct = ccadjmat.adjmat_struct;
 
     numCh = size(data,1);
     fs = 1000;
@@ -184,11 +186,11 @@ for i=1:length(winSizes)
 
     currfig.PaperPosition = [-3.7448   -0.3385   15.9896   11.6771];
     currfig.Position = [1666 1 1535 1121];
-    toSaveFigFile = fullfile('./figures/ltvcomparison/');
-    if ~exist(toSaveFigFile, 'dir')
-        mkdir(toSaveFigFile);
+    toSaveFigDir = fullfile('./figures/ltvcomparison/ecog/');
+    if ~exist(toSaveFigDir, 'dir')
+        mkdir(toSaveFigDir);
     end
-    toSaveFigFile = fullfile(toSaveFigFile, strcat(patient, '_seegdata_', num2str(winSize)));
+    toSaveFigFile = fullfile(toSaveFigDir, strcat(patient, '_seegdata_', num2str(winSize)));
     print(toSaveFigFile, '-dpng', '-r0')
     
     error = norm(preSeiz_hat(exChans, timePoints) - preSeizData(exChans,timePoints)) / (length(timePoints));
@@ -223,9 +225,9 @@ for i=1:length(winSizes)
     % end
 end
 
-winSizes(winSizes==125) = [];
-errors(2) = [];
-mses(2) = [];
+% winSizes(winSizes==125) = [];
+% errors(2) = [];
+% mses(2) = [];
 
 figure;
 subplot(211); % plot errors
@@ -235,3 +237,8 @@ title('Plot of Reconstruction Error', 'FontSize', FONTSIZE);
 subplot(212);
 plot(winSizes, mses, 'ko');
 title('Mean Squared Error', 'FontSize', FONTSIZE);
+currfig = gcf;
+currfig.PaperPosition = [-3.7448   -0.3385   15.9896   11.6771];
+currfig.Position = [1666 1 1535 1121];
+toSaveFigFile = fullfile(toSaveFigDir, strcat(patient, '_seegerrors_', num2str(winSize)));
+print(toSaveFigFile, '-dpng', '-r0')
