@@ -41,6 +41,7 @@ perturbations = ['C', 'R'];
 
 exChan = 1;
 FONTSIZE = 18;
+MARKERSIZE = 12;
 
 serverDataDir = './serverdata/fixed_adj_mats_win500_step500_freq1000/';
 adjMatDir = serverDataDir;
@@ -104,9 +105,9 @@ for iPat=1:length(patients) % loop through each patient
         max(abs(rowPertEVals))
         
         figure;
-        plot(real(evals), imag(evals), 'ko'); hold on; set(gca, 'box', 'off')
-        plot(real(rowPertEVals), imag(rowPertEVals), 'ro');
-        plot(real(colPertEVals), imag(colPertEVals), 'g*', 'MarkerSize', 12);
+        plot(real(evals), imag(evals), 'ko', 'MarkerSize', MARKERSIZE); hold on; set(gca, 'box', 'off')
+        plot(real(rowPertEVals), imag(rowPertEVals), 'ro', 'MarkerSize', MARKERSIZE);
+        plot(real(colPertEVals), imag(colPertEVals), 'g*', 'MarkerSize', MARKERSIZE);
         xlabel('Real Part', 'FontSize', FONTSIZE);
         ylabel('Imag Part', 'FontSize', FONTSIZE);
         title(['Eigenspectrum of ', patient, ' channel ', num2str(exChan)], 'FontSize', FONTSIZE);
