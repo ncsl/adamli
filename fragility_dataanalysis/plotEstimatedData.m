@@ -25,6 +25,10 @@ addpath(genpath('./eeg_toolbox'));
 
 winSize = 500;
 winSizes = [100, 125, 200, 250, 500, 1000];
+
+errors = zeros(length(winSizes), 1);
+mses = zeros(length(winSizes), 1);
+
 for i=1:length(winSizes)
     winSize = winSizes(i);
 
@@ -44,29 +48,29 @@ for i=1:length(winSizes)
     %% Load in data
     try
         nihadjmat = load(fullfile(adjDir, nihpat, 'pt1sz2_adjmats_leastsquares.mat'));            % Patient NIH linear models A 3D matrix with all A matrices for 500 msec wins (numWins x numChannels x numChannels)
-%         ccadjmat = load(fullfile(adjDir, strcat(ccpat, '_seiz002'), 'EZT019_seiz002_adjmats_leastsquares.mat'));     % Patient CC linear models
+        ccadjmat = load(fullfile(adjDir, strcat(ccpat, '_seiz002'), 'EZT019_seiz002_adjmats_leastsquares.mat'));     % Patient CC linear models
     catch e
         disp(e)
         nihadjmat = load(fullfile(adjDir, 'pt1sz2_adjmats_leastsquares.mat'));            % Patient NIH linear models A 3D matrix with all A matrices for 500 msec wins (numWins x numChannels x numChannels)
-%         ccadjmat = load(fullfile(adjDir, 'EZT019_seiz002_adjmats_leastsquares.mat'));     % Patient CC linear models
+        ccadjmat = load(fullfile(adjDir, 'EZT019_seiz002_adjmats_leastsquares.mat'));     % Patient CC linear models
     end
     
     
     ecogdata = load(fullfile(dataDir, nihpat, 'pt1sz2.mat'));          % Patient ECoG raw data
-%     seegdata = load(fullfile(dataDir, 'Seiz_Data', ccpat, 'EZT019_seiz002.mat')); % Patient SEEG raw data
+    seegdata = load(fullfile(dataDir, 'Seiz_Data', ccpat, 'EZT019_seiz002.mat')); % Patient SEEG raw data
 
     if BP_FILTER
         ecogdata.data = buttfilt(ecogdata.data,[59.5 60.5], frequency_sampling,'stop',1);
-%         seegdata.data = buttfilt(seegdata.data,[59.5 60.5], frequency_sampling,'stop',1);
+        seegdata.data = buttfilt(seegdata.data,[59.5 60.5], frequency_sampling,'stop',1);
     end
     %% Define parameters
     data = ecogdata.data;
     seizureStart = ecogdata.seiz_start_mark;
     adjmat_struct = nihadjmat.adjmat_struct;
 
-%     data = seegdata.data;
-%     seizureStart = seegdata.seiz_start_mark-1;
-%     adjmat_struct = ccadjmat.adjmat_struct;
+    data = seegdata.data;
+    seizureStart = seegdata.seiz_start_mark-1;
+    adjmat_struct = ccadjmat.adjmat_struct;
 
     numCh = size(data,1);
     fs = 1000;
@@ -106,14 +110,12 @@ for i=1:length(winSizes)
         for iTime=initialTime+1:initialTime+winSize-1   % loop through time points to estimate data
     %         iTime
             preSeiz_hat(:, iTime) = currentA*preSeiz_hat(:, iTime-1);
-
-
         end
         evals(iWin) = max(abs(eig(currentA)));
     end
     toc;
 
-    exChans = [2, 3, 4, 5];
+    exChans = [3, 4, 5, 6, 7];
     exChan = 2;
     
     % compute difference metric between observed and estimated
@@ -122,14 +124,17 @@ for i=1:length(winSizes)
 
     %% Plotting
     FONTSIZE = 18;
-    timePoints = 1:500;
+    timePoints = 1:700;
     offset = 0;
 
     titleStr = {'Estimated ECoG Data Vs. Actual Data', ...
         strcat('For Window Size (', num2str(winSize), ')')};
+    titleStr = {'Estimated SEEG Data Vs. Actual Data', ...
+        strcat('For Window Size (', num2str(winSize), ')')};
+    
     
     figure;
-    subplot(211);
+%     subplot(211);
     yticklocs = zeros(length(exChans),1);
     for iChan=1:length(exChans)
         exChan = exChans(iChan);
@@ -161,20 +166,19 @@ for i=1:length(winSizes)
     set(axes, 'XTick', 1:200:length(timePoints));
     set(axes, 'XTickLabel', 0:0.2:length(timePoints)/frequency_sampling);
 
-    subplot(212); % plot errors
-    hist(error);
-    title('Plot of Reconstruction Error', 'FontSize', FONTSIZE);
-
-
-    exChan = 2;
-    chanData = preSeizData(exChan, :);
-    chanHat = preSeiz_hat(exChan, :);
-    figure;
-    plot(chanData(1:9000), 'k'); hold on;
-    plot(chanHat(1:9000), 'r')
-
-    figure;
-    plot(evals, 'ko')
+    currfig.PaperPosition = [-3.7448   -0.3385   15.9896   11.6771];
+    currfig.Position = [1666 1 1535 1121];
+    toSaveFigFile = fullfile('./figures/ltvcomparison/');
+    if ~exist(toSaveFigFile, 'dir')
+        mkdir(toSaveFigFile);
+    end
+    toSaveFigFile = fullfile(toSaveFigFile, strcat('seegdata_', num2str(winSize)));
+    print(toSaveFigFile, '-dpng', '-r0')
+    
+    error = norm(preSeiz_hat(exChans, timePoints) - preSeizData(exChans,timePoints)) / (length(timePoints));
+    mse = immse(preSeiz_hat(exChans, timePoints), preSeizData(exChans,timePoints))/ (length(timePoints));
+    errors(i) = error;
+    mses(i) = mse;
     %% Reconstruct postseizure data
     % postSeiz_hat = zeros(size(postSeizData));
     % [numChans, numTimes] = size(postSeizData);
@@ -201,73 +205,17 @@ for i=1:length(winSizes)
     % %     plot(chanData(1:2000), 'k'); hold on;
     % %     plot(chanHat(1:2000), 'r')
     % end
-
-    %% Plot subplots of estimated vs. actual
-    % Define parameters for plotting 
-%     p_winsize = 0.5*fs;        % in samples (here: plotting 500 msec at a time)
-%     chOff = 100;
-%     channelOffset = repmat(chOff*(1:numU)',1,size(data,2));
-% 
-%     for pwin = 6%1:p_numWin
-%         time = linspace(0,p_winsize,p_winsize);       % msec
-%     %     time = linspace((pwin-1)*p_winsize+1,pwin*p_winsize,p_winsize);       % msec
-%         p_data = data(indU,(pwin-1)*p_winsize+1:pwin*p_winsize);
-%         p_xu_est = xu_est(:,(pwin-1)*p_winsize+1:pwin*p_winsize);
-% 
-%         f1 = figure;
-%         for u = 1:5
-%             subplot(5,1,u)
-%             plot(time,p_data(u,:),'b','LineWidth',1.2)
-%             hold on
-%             plot(time,p_xu_est(u,:),'m')
-%             legend('actual','observer estimate')
-%     %         ylabel([X_name{indU(u)},' (unmeasured)'])
-%             ylabel(elec_labels(indU(u)))
-%             axis('tight')
-%             if u == 1
-%                 title('$$x^u$$[t] vs. $$\hat{x}^u$$[t]','Interpreter','Latex')
-%             end
-%             if u == 5
-%                 xlabel('t (msec)')
-%             end
-%         end
-%     %     pause;
-% 
-%         f2 = figure;
-%         for u = 6:10
-%             subplot(5,1,u-5)
-%             plot(time,p_data(u,:),'b','LineWidth',1.2)
-%             hold on
-%             plot(time,p_xu_est(u,:),'m')
-%             legend('actual','observer estimate')
-%     %         ylabel([X_name{indU(u)},' (unmeasured)'])
-%             ylabel(elec_labels(indU(u)))
-%             axis('tight')
-%             if u == 1+5
-%                 title('$$x^u$$[t] vs. $$\hat{x}^u$$[t]','Interpreter','Latex')
-%             end
-%             if u == 5+5
-%                 xlabel('t (msec)')
-%             end
-%         end
-% 
-%         f3 = figure;
-%         for u = 11:15
-%             subplot(5,1,u-10)
-%             plot(time,p_data(u,:),'b','LineWidth',1.2)
-%             hold on
-%             plot(time,p_xu_est(u,:),'m')
-%             legend('actual','observer estimate')
-%     %         ylabel([X_name{indU(u)},' (unmeasured)'])
-%             ylabel(elec_labels(indU(u)))
-%             axis('tight')
-%             if u == 1+10
-%                 title('$$x^u$$[t] vs. $$\hat{x}^u$$[t]','Interpreter','Latex')
-%             end
-%             if u == 5+10
-%                 xlabel('t (msec)')
-%             end
-%         end
-% 
-%     end
 end
+
+winSizes(winSizes==125) = [];
+errors(2) = [];
+mses(2) = [];
+
+figure;
+subplot(211); % plot errors
+plot(winSizes, errors, 'ko');
+title('Plot of Reconstruction Error', 'FontSize', FONTSIZE);
+
+subplot(212);
+plot(winSizes, mses, 'ko');
+title('Mean Squared Error', 'FontSize', FONTSIZE);

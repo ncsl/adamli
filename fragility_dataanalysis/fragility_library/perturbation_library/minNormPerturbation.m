@@ -43,6 +43,9 @@ sigma = [-sigma, sigma];
 N = size(A,1); % get the Number of Electrodes
 minPerturbation = zeros(N,1); % initialize minPerturbation Matrix
 
+frequency_sampling = 1000;
+winSize = 500;
+stepSize = 500;
 %% Error Checking/Logging
 if max(abs(eig(A))) > radius
     LOGERROR =  ['This patient has eigenvalue > radius, check it!', ...
