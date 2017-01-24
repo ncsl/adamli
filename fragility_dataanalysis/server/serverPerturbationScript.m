@@ -61,6 +61,10 @@ function serverPerturbationScript(patient, radius, winSize, stepSize, frequency_
     adjMats = data.adjMats;
     [T, N, ~] = size(adjMats);
     
+    seizureMarkStart = seizure_start / winSize;
+    adjmats = adjMats(1:seizureMarkStart+2,:,:);
+    [T, N, ~] = size(adjMats);
+    
     for j=1:length(perturbationTypes)
         % initialize matrices to store
         minNormPerturbMat = zeros(N,T);
@@ -73,7 +77,7 @@ function serverPerturbationScript(patient, radius, winSize, stepSize, frequency_
                 lower(TYPE_CONNECTIVITY), '_radius', num2str(radius), '.mat');
        
         toSavePertDir = fullfile(adjMatDir, strcat(perturbationType, '_perturbations', ...
-            '_radius', num2str(radius)), '_diluxan');
+            '_radius', num2str(radius)), '_newfixedalg');
         if ~exist(toSavePertDir, 'dir')
             mkdir(toSavePertDir);
         end
