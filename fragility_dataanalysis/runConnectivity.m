@@ -4,13 +4,14 @@ clc;
 
 % settings to run
 patients = {,...
-    'EZT019seiz002',...
+    'JH101sz1' 'JH101sz2' 'JH101sz3' 'JH101sz4',...
+%     'EZT019seiz002',...
 %      'pt1sz2',...
 %      'pt1sz3',...
 };
 
-winSize = 100;            % 500 milliseconds
-stepSize = 100; 
+winSize = 500;            % 500 milliseconds
+stepSize = 500; 
 frequency_sampling = 1000; % in Hz
 IS_SERVER = 0;
 TYPE_CONNECTIVITY = 'leastsquares';
@@ -21,6 +22,8 @@ l2regularization = 0;
 addpath(genpath('./fragility_library/'));
 addpath(genpath('/Users/adam2392/Dropbox/eeg_toolbox'));
 addpath(genpath('/home/WIN/ali39/Documents/adamli/fragility_dataanalysis/eeg_toolbox/'));
+
+TEST_DESCRIP = 'noltg';
 
 % set directory to find adjacency matrix data
 adjMatDir = fullfile(strcat('./serverdata/fixed_adj_mats_win', num2str(winSize), ...
@@ -41,13 +44,22 @@ for p=1:length(patients)
     % initialize patient, patient directory and file name
     patient = patients{p};
     disp(['Looking at patient: ',patient]);
-    patDir = fullfile(adjMatDir, patient);
-    fileName = strcat(patient, '_adjmats_leastsquares.mat');
+    toSaveAdjDir = fullfile(adjMatDir, patient);
+
+    if ~isempty(TEST_DESCRIP)
+        toSaveAdjDir = fullfile(toSaveAdjDir, TEST_DESCRIP);
+    end
+    
+    % set directory to find adjacency matrix data
+    % create directory if it does not exist
+    if ~exist(toSaveAdjDir, 'dir')
+        mkdir(toSaveAdjDir);
+    end
+    
     
 %     setupScripts;
 
     %% New Setup Scripts
-    
     if IS_SERVER
         adjMat = fullfile('..', 'serverdata', adjMat);
         dataDir = strcat('.', dataDir);
@@ -127,15 +139,6 @@ for p=1:length(patients)
     if ~isempty(included_channels)
         eeg = eeg(included_channels, :);
         labels = labels(included_channels);
-    end
-    
-    % set directory to find adjacency matrix data
-    toSaveAdjDir = fullfile(strcat('./serverdata/fixed_adj_mats_win', num2str(winSize), ...
-        '_step', num2str(stepSize), '_freq', num2str(frequency_sampling))); % at lab
-
-    % create directory if it does not exist
-    if ~exist(toSaveAdjDir, 'dir')
-        mkdir(toSaveAdjDir);
     end
     
     % define args for computing the functional connectivity

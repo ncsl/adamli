@@ -22,6 +22,7 @@ TYPE_CONNECTIVITY = 'leastsquares';     % type of functional conn.?
 BP_FILTER_RAW = 1;                      % apply notch filter before functional conn. computation?
 IS_INTERICTAL = 0;                      % is this interictal data?
 l2regularization = 0;                   % apply l2 regularization to estimation of functional conn.?
+TEST_DESCRIP = [];
 
 % set directory to find adjacency matrix data
 toSaveAdjDir = fullfile(strcat('./fixed_adj_mats_win', num2str(winSize), ...
@@ -35,6 +36,10 @@ dataDir = './data/';
 if IS_SERVER
     toSaveAdjDir = fullfile('../..', 'serverdata', toSaveAdjDir);
     dataDir = strcat('../.', dataDir);
+end
+
+if ~isempty(TEST_DESCRIP)
+    toSaveAdjDir = fullfile(toSaveAdjDir, TEST_DESCRIP);
 end
 
 % create directory if it does not exist

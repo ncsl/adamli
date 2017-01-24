@@ -76,20 +76,9 @@ for iNode=1:N % 1st loop through each electrode
         
         % compute row, or column perturbation
         if (perturbationType == 'R')
-%             C = ek'*inv(A - lambda*eye(N));  
-%             C = ek'/(A - lambda*eye(N));
-%             C = (A - lambda*eye(N))\ek;
-
-            % new after 1/13
-%             C = inv(A-lambda*eye(N))*ek;
             C = (A-lambda*eye(N))\ek;
         elseif (perturbationType == 'C')
-            % new after 1/13
-%             C = ek'*inv(A-lambda*eye(N));
-            C = ek'/(A-lambda*eye(N));
-            
-            % old
-%             C = ek/(A - lambda*eye(N)); 
+            C = ek'/(A-lambda*eye(N)); 
         end
 
         %- extract real and imaginary components
@@ -138,10 +127,10 @@ for iNode=1:N % 1st loop through each electrode
 %             temp = ek*del';
 %         end
 %         test = A + temp;
-% %         plot(real(eig(test)), imag(eig(test)), 'ko')
-%         if isempty(find(abs(radius - abs(eig(test))) < 1e-8))
-%             disp('Max eigenvalue is not displaced to correct location')
-%         end
+%         plot(real(eig(test)), imag(eig(test)), 'ko')
+% %         if isempty(find(abs(radius - abs(eig(test))) < 1e-8))
+% %             disp('Max eigenvalue is not displaced to correct location')
+% %         end
 %         close all
     end
 

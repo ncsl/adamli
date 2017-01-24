@@ -197,6 +197,8 @@ function [included_channels, ezone_labels, ...
         frequency_sampling = 2000;
     elseif strcmp(patient_id, 'JH101')
         included_channels = [1:4 7:19 21:37 42:43 46 48:63 72 75:86 90:119 122:135];
+        
+        included_channels = [1:4 7:19 21:37 42:43 46 48:63];
         ezone_labels = {'POLLAD1', 'POLLAD2', 'POLLAD3', 'POLLAD4', 'POLLAD5', 'POLLAD6'};
         earlyspread_labels = {};
         latespread_labels = {};

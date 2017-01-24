@@ -7,7 +7,7 @@ patients = {,...,
 %     'pt2aslp1', 'pt2aslp2', ...
 %     'pt3aw1', ...
 %     'pt3aslp1', 'pt3aslp2', ...
-    'pt1sz2', 
+%     'pt1sz2', 
 %     'pt1sz3', 'pt1sz4',...
 %     'pt2sz1' 'pt2sz3' 'pt2sz4', ...
 %     'pt3sz2' 'pt3sz4', ...
@@ -20,7 +20,7 @@ patients = {,...,
 %     'pt17sz1' 'pt17sz2',...
 %     'JH101sz1' 'JH101sz2' 'JH101sz3' 'JH101sz4',...
 % 	'JH102sz1' 'JH102sz2' 'JH102sz3' 'JH102sz4' 'JH102sz5' 'JH102sz6',...
-% 	'JH103sz1' 'JH103sz2' 'JH103sz3',...
+	'JH103sz1' 'JH103sz2' 'JH103sz3',...
 % 	'JH104sz1' 'JH104sz2' 'JH104sz3',...
 % 	'JH105sz1' 'JH105sz2' 'JH105sz3' 'JH105sz4' 'JH105sz5',...
 % 	'JH106sz1' 'JH106sz2' 'JH106sz3' 'JH106sz4' 'JH106sz5' 'JH106sz6',...
@@ -35,6 +35,7 @@ patients = {,...,
     };
 
 perturbationTypes = ['C', 'R'];
+perturbationType = perturbationTypes(1);
 PLOTALL = 1;
 
 % data parameters to find correct directory
@@ -57,31 +58,42 @@ for p=1:length(patients)
    
     setupScripts;
     adjMat = './serverdata/fixed_adj_mats_win';       % get the new data place
-    adjMatDir = '/Volumes/NIL_PASS/serverdata/fixed_adj_mats_win500_step500_freq1000/'; % on ext HD
-
     
     %%- Extract an example
-    finalDataDir = fullfile(strcat(adjMat, num2str(winSize), ...
-        '_step', num2str(stepSize), '_freq', num2str(frequency_sampling)), strcat('R', '_perturbations', ...
+    adjMatDir = fullfile(strcat(adjMat, num2str(winSize), ...
+        '_step', num2str(stepSize), '_freq', num2str(frequency_sampling)), patient);
+    
+    if ~isempty(TEST_DESCRIP)
+        adjMatDir = fullfile(adjMatDir, TEST_DESCRIP);
+    end
+    finalDataDir = fullfile(adjMatDir, strcat(perturbationType, '_perturbations', ...
             '_radius', num2str(radius)));
+    
+    % temp dir until I get everything fixed.
+    finalDataDir = fullfile(strcat(adjMat, num2str(winSize), ...
+        '_step', num2str(stepSize), '_freq', num2str(frequency_sampling)), strcat(perturbationType, '_perturbations', ...
+            '_radius', num2str(radius)), '_newfixedalg');
+        
     try
         final_data = load(fullfile(finalDataDir, strcat(patient, ...
-            '_', 'R', 'perturbation_', lower(TYPE_CONNECTIVITY), '.mat')));
+            '_', perturbationType, 'perturbation_', lower(TYPE_CONNECTIVITY), '.mat')));
         final_data = final_data.perturbation_struct;
     catch e
         disp(e)
         final_data = load(fullfile(finalDataDir, strcat(patient, ...
-            '_', 'R', 'perturbation_', lower(TYPE_CONNECTIVITY), ...
+            '_', perturbationType, 'perturbation_', lower(TYPE_CONNECTIVITY), ...
             '_radius', num2str(radius), '.mat')));
         final_data = final_data.perturbation_struct;
     end
     % set data to local variables
     minPerturb_time_chan = final_data.minNormPertMat;
-    fragility_rankings = final_data.fragility_rankings;
+    fragility_rankings = final_data.fragilityMat;
     timePoints = final_data.timePoints;
     info = final_data.info;
     num_channels = size(minPerturb_time_chan,1);
-    
+    seizureStart = info.seizure_start;
+    seizureEnd = info.seizure_end;
+ 
     %%- Get Indices for All Clinical Annotations
     if ~isempty(included_channels)
         included_labels = labels(included_channels);
@@ -119,9 +131,6 @@ for p=1:length(patients)
         
         %- initialize directories to save things and where to get
         %- perturbation structs
-        toSaveFinalDataDir = fullfile(strcat(adjMat, num2str(winSize), ...
-        '_step', num2str(stepSize), '_freq', num2str(frequency_sampling)), strcat(perturbationType, '_perturbations', ...
-            '_radius', num2str(radius)))
         toSaveFigDir = fullfile(figDir, perturbationType, strcat(patient, '_win', num2str(winSize), ...
             '_step', num2str(stepSize), '_freq', num2str(frequency_sampling), '_radius', num2str(radius)))
         if ~exist(toSaveFigDir, 'dir')
@@ -134,7 +143,7 @@ for p=1:length(patients)
         end
            
          %%- Extract an example
-        finalDataDir = toSaveFinalDataDir;
+%         finalDataDir = toSaveFinalDataDir;
         try
             final_data = load(fullfile(finalDataDir, strcat(patient, ...
                 '_', perturbationType, 'perturbation_', lower(TYPE_CONNECTIVITY), '.mat')));
@@ -164,8 +173,7 @@ for p=1:length(patients)
         PLOTARGS.xTickStep = 10*winSize/stepSize;
         PLOTARGS.titleStr = {['Minimum Norm Perturbation (', patient, ')'], ...
             [perturbationType, ' perturbation: ', ' Time Locked to Seizure']};
-%         seizureStart = info.seizure_start;
-%         seizureEnd = info.seizure_end;
+
         if seizureStart == size(eeg,2) % interictal data
             timeStart = 1;
             timeEnd = timePoints(size(minPerturb_time_chan,2),1) / frequency_sampling;
