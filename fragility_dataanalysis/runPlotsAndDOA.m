@@ -260,8 +260,8 @@ end
                 postWindow = 10;
                 preWindow = 60;
                 % find index of seizureStart
-                timeStart = timeIndex - preWindow - timeIndex; 
-                timeEnd = timeIndex - timeIndex + postWindow;
+                timeStart = (timeIndex - preWindow - timeIndex)*winSize/frequency_sampling; 
+                timeEnd = (timeIndex - timeIndex + postWindow)*winSize/frequency_sampling;
                 minPerturb_time_chan = minPerturb_time_chan(:, timeIndex-60:timeIndex + postWindow);
                 fragility_rankings = fragility_rankings(:, timeIndex-60:timeIndex + postWindow);
                 PLOTARGS.seizureIndex = abs(timeStart);
