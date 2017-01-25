@@ -1,0 +1,6 @@
+EZT076_seiz001.mat has 24 channels & 24 labels
+EZT076_seiz002.mat has 24 channels & 24 labels
+EZT076_seiz003.mat has 24 channels & 24 labels
+EZT076_seiz004.mat has 24 channels & 24 labels
+EZT076_seiz005.mat has 24 channels & 24 labels
+EZT076_seiz006.mat has 24 channels & 24 labels

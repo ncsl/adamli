@@ -1,0 +1,3 @@
+EZT005_seiz001.mat has 88 channels & 88 labels
+EZT005_seiz002.mat has 88 channels & 88 labels
+EZT005_seiz003.mat has 88 channels & 88 labels
