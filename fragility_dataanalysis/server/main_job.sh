@@ -41,7 +41,7 @@ patients=(
 	# 'pt1aslp1 pt1aslp2 pt1aw1 pt1aw2
 	# pt2aslp1 pt2aslp2 pt2aw1 pt2aw2
 	# pt3aslp1 pt3aslp2 pt3aw1')
-	'pt1sz2 pt1sz3 pt1sz4')
+	# 'pt1sz2 pt1sz3 pt1sz4')
 	# pt2sz1 pt2sz3 pt2sz4 pt3sz2 pt3sz4
 	# pt6sz3 pt6sz4 pt6sz5
 	# pt8sz1 pt8sz2 pt8sz3
@@ -55,7 +55,7 @@ patients=(
 	# JH103sz1 JH103sz2 JH103sz3
 	# JH104sz1 JH104sz2 JH104sz3
 	# JH105sz1 JH105sz2 JH105sz3 JH105sz4 JH105sz5
-	# JH106sz1 JH106sz2 JH106sz3 JH106sz4 JH106sz5 JH106sz6
+	'JH106sz1 JH106sz2 JH106sz3 JH106sz4 JH106sz5 JH106sz6')
 	# JH107sz1 JH107sz2 JH107sz3 JH107sz4 JH107sz5 JH107sz6 JH107sz7 JH107sz8 JH107sz8 JH107sz9
 	# JH108sz1 JH108sz2 JH108sz3 JH108sz4 JH108sz5 JH108sz6 JH108sz7')
 	# 'EZT019seiz001 EZT019seiz002 EZT019seiz003

@@ -77,7 +77,7 @@ function serverPerturbationScript(patient, radius, winSize, stepSize, frequency_
                 lower(TYPE_CONNECTIVITY), '_radius', num2str(radius), '.mat');
        
         toSavePertDir = fullfile(adjMatDir, strcat(perturbationType, '_perturbations', ...
-            '_radius', num2str(radius)), '_diluxan');
+            '_radius', num2str(radius)), '_newfixedalg');
         if ~exist(toSavePertDir, 'dir')
             mkdir(toSavePertDir);
         end
