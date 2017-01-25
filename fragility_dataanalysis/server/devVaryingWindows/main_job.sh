@@ -3,8 +3,8 @@
 
 # 01: Prompt user for input that runs the analysis
 echo "Begin analysis." # print beginning statement
-printf "Center (nih, cc, jhu): " # prompt for patient_id {pt1, pt2, ..., JH105, EZT005}
-read center
+# printf "Center (nih, cc, jhu): " # prompt for patient_id {pt1, pt2, ..., JH105, EZT005}
+# read center
 printf "Enter window size: " # prompt for seizure_id {sz1, sz2, ..., seiz001, seiz003}
 read winSize
 # printf "Enter step size: "
@@ -63,5 +63,5 @@ fi
 for patient in $patients; do
 	echo $patient
 	# run a pbs batch job. Make sure there are no spaces in between the parameters passed
-	qsub -v RUNCONNECTIVITY=$RUNCONNECTIVITY,patient=$patient,winSize=$winSize,center=$center run_job.pbs
+	qsub -v RUNCONNECTIVITY=$RUNCONNECTIVITY,patient=$patient,winSize=$winSize run_job.pbs
 done

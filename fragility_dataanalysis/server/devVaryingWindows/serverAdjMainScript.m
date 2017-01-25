@@ -1,4 +1,4 @@
-function serverAdjMainScript(patient, winSize, stepSize, center)
+function serverAdjMainScript(patient, winSize, stepSize)
 %% Add Libraries To Use For Function
 addpath(genpath('../../fragility_library/'));
 addpath(genpath('../../eeg_toolbox/'));
@@ -48,7 +48,9 @@ end
 
 %% DEFINE OUTPUT DIRS AND CLINICAL ANNOTATIONS
 %- Edit this file if new patients are added.
-[included_channels, ezone_labels, earlyspread_labels, latespread_labels, resection_labels, frequency_sampling] ...
+[included_channels, ezone_labels, earlyspread_labels,...
+    latespread_labels, resection_labels, frequency_sampling, ...
+    center] ...
             = determineClinicalAnnotations(patient_id, seizure_id);
 
 %%- Directory at work
