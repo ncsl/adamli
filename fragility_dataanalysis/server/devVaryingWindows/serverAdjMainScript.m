@@ -91,7 +91,7 @@ if seeg
     patient_eeg_path = fullfile(dataDir, patient_id);
     patient = strcat(patient_id, seizure_id);
 else
-    patient_eeg_path = strcat(dataDir, patient);
+    patient_eeg_path = fullfile(dataDir, patient);
 end
 patient_eeg_path
 patient
