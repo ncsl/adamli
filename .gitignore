@@ -7,7 +7,7 @@ fragility_dataanalysis/data/Seiz_Data/
 *pathdef.m
 *.m~
 *.sh.*
-_log/*
+*/_log/*
 /fragility_dataanalysis/simulated_data/EZT*/*
 /fragility_dataanalysis/simulated_data/EEG.mat
 *.edf
