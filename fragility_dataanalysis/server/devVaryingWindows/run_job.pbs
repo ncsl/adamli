@@ -7,8 +7,8 @@
 #PBS -q dque
 #PBS -S /bin/bash
 #PBS -d /home/ali/adamli/fragility_dataanalysis/server/devVaryingWindows/
-#PBS -e /home/ali/adamli/fragility_dataanalysis/server/devVaryingWindows/_log/test.err
-#PBS -o /home/ali/adamli/fragility_dataanalysis/server/devVaryingWindows_log/test.out
+#PBS -e localhost:${PBS_O_WORKDIR}/_log/${PBS_JOBNAME}.e${PBS_JOBID}
+#PBS -o localhost:${PBS_O_WORKDIR}/_log/${PBS_JOBNAME}.o${PBS_JOBID}
 
 # make sure to cd to the correct directory.
 # also make sure PBS -d is the correct directory 
