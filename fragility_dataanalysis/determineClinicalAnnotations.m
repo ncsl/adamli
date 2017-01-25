@@ -243,6 +243,10 @@ function [included_channels, ezone_labels, ...
     elseif strcmp(patient_id, 'JH107')
         included_channels = [1:7 9:19 21:31 34:37 42:43 45 47:83];
         
+%         find(included_channels==5)
+%         find(included_channels==6)
+%         find(included_channels==43)
+%         find(included_channels==45)
         included_channels = [1:4 7 9:19 21:31 34:37 42 47:83]; % removal of noise electrodes 1/27/17
         ezone_labels = {};
         earlyspread_labels = {};
