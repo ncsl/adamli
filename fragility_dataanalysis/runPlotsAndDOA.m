@@ -60,7 +60,33 @@ addpath(genpath('/home/WIN/ali39/Documents/adamli/fragility_dataanalysis/eeg_too
 for p=1:length(patients)
     patient = patients{p};
    
-    setupScripts;
+%     setupScripts;
+    
+    % set patientID and seizureID
+patient_id = patient(1:strfind(patient, 'seiz')-1);
+seizure_id = strcat('_', patient(strfind(patient, 'seiz'):end));
+seeg = 1;
+if isempty(patient_id)
+    patient_id = patient(1:strfind(patient, 'sz')-1);
+    seizure_id = patient(strfind(patient, 'sz'):end);
+    seeg = 0;
+end
+if isempty(patient_id)
+    patient_id = patient(1:strfind(patient, 'aslp')-1);
+    seizure_id = patient(strfind(patient, 'aslp'):end);
+    seeg = 0;
+end
+if isempty(patient_id)
+    patient_id = patient(1:strfind(patient, 'aw')-1);
+    seizure_id = patient(strfind(patient, 'aw'):end);
+    seeg = 0;
+end
+
+    [included_channels, ezone_labels, earlyspread_labels, latespread_labels, resection_labels, frequency_sampling] ...
+            = determineClinicalAnnotations(patient_id, seizure_id);
+        
+        
+        
     adjMat = './serverdata/fixed_adj_mats_win';       % get the new data place
     
     %%- Extract an example

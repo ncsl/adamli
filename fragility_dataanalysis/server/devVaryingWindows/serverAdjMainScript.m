@@ -1,7 +1,9 @@
 function serverAdjMainScript(patient, winSize, stepSize, center)
+%% Add Libraries To Use For Function
 addpath(genpath('../../fragility_library/'));
 addpath(genpath('../../eeg_toolbox/'));
 addpath('../../');
+
 IS_SERVER = 1;
 if nargin == 0 % testing purposes
     center = 'cc';
@@ -11,7 +13,6 @@ if nargin == 0 % testing purposes
     % window paramters
     winSize = 500; % 500 milliseconds
     stepSize = 500; 
-    frequency_sampling = 1000; % in Hz
     IS_SERVER = 1;
 end
 
@@ -21,8 +22,6 @@ disp(['Looking at patient: ',patient]);
 %% New Setup Scripts
 TYPE_CONNECTIVITY = 'leastsquares';     % type of functional conn.?
 BP_FILTER_RAW = 1;                      % apply notch filter before functional conn. computation?
-frequency_sampling = 1000;
-
 IS_INTERICTAL = 0;                      % is this interictal data?
 l2regularization = 0;                   % apply l2 regularization to estimation of functional conn.?
 TEST_DESCRIP = [];
@@ -94,8 +93,6 @@ else
 end
 patient_eeg_path
 patient
-% disp(patient_eeg_path)
-% disp(patient)
 
 %% LOAD DATA IN
 % READ EEG FILE Mat File
@@ -150,8 +147,8 @@ adj_args.seizureEnd = seizureEnd;                   % the second relative to end
 adj_args.l2regularization = l2regularization; 
 adj_args.TYPE_CONNECTIVITY = TYPE_CONNECTIVITY;
 
+% compute connectivity
 if size(eeg, 1) < winSize
-    % compute connectivity
     [adjMats, timePoints] = computeConnectivity(eeg, adj_args);
 else
     disp([patient, ' is underdetermined, must use optimization techniques']);
