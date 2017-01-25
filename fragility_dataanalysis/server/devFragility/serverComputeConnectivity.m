@@ -19,10 +19,6 @@ TYPE_CONNECTIVITY = 'leastsquares';
 l2regularization = 0;
 winSize = 500;
 stepSize = 500;
-% set directory to find adjacency matrix data
-dataDir = './data/';
-
-patient
 
 % set options for connectivity measurements
 OPTIONS.l2regularization = l2regularization;
@@ -38,23 +34,28 @@ end
 if isempty(patient_id)
     patient_id = patient(1:strfind(patient, 'aslp')-1);
     seizure_id = patient(strfind(patient, 'aslp'):end);
-    dataDir= './data/interictal_data/';
+    seeg = 0;
 end
 if isempty(patient_id)
     patient_id = patient(1:strfind(patient, 'aw')-1);
     seizure_id = patient(strfind(patient, 'aw'):end);
-    dataDir = './data/interictal_data/';
+    seeg = 0;
 end
 
-if IS_SERVER
-    dataDir = strcat('../.', dataDir);
-end
+
 
 %% DEFINE CHANNELS AND CLINICAL ANNOTATIONS
 %- Edit this file if new patients are added.
-[included_channels, ezone_labels, earlyspread_labels, latespread_labels, resection_labels, frequency_sampling] ...
+[included_channels, ezone_labels, earlyspread_labels, latespread_labels, resection_labels, frequency_sampling, center] ...
             = determineClinicalAnnotations(patient_id, seizure_id);
 
+% set directory to find adjacency matrix data
+dataDir = fullfile('./data/', center);
+
+if IS_SERVER
+    dataDir = strcat('../.', dataDir);
+end        
+        
 % put clinical annotations into a struct
 clinicalLabels = struct();
 clinicalLabels.ezone_labels = ezone_labels;
@@ -64,9 +65,9 @@ clinicalLabels.resection_labels = resection_labels;
 
 %% EZT/SEEG PATIENTS
 if seeg
-    patient_eeg_path = strcat(dataDir, 'Seiz_Data/', patient_id);
+    patient_eeg_path = fullfile(dataDir, patient_id);
 else
-    patient_eeg_path = strcat(dataDir, patient);
+    patient_eeg_path = fullfile(dataDir, patient);
 end
 
 % READ EEG FILE Mat File
@@ -81,6 +82,7 @@ seizureStart = (onset_time - recording_start); % time seizure starts
 seizureEnd = (offset_time - recording_start); % time seizure ends
 recording_duration = size(data.data, 2);
 num_channels = size(data.data, 1);
+
 clear data
 % check included channels length and how big eeg is
 if length(labels(included_channels)) ~= size(eeg(included_channels,:),1)
