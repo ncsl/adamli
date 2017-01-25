@@ -7,6 +7,7 @@ module load matlab/matlab2013a
 proc="$1"
 patient="$2"
 stepSize=$winSize
+center="$4"
 
 ## 01: Set parameters for matlab to run, and check if matlab is on path
 matlab_jvm="matlab -nojvm -nodesktop -nosplash -r"
@@ -18,12 +19,10 @@ matlab_jvm="matlab -nojvm -nodesktop -nosplash -r"
 
 # winSize=500
 # stepSize=500
-frequency_sampling=1000
 radius=1.5
 
 echo $winSize
 echo $stepSize
-echo $frequency_sampling
 echo $radius
 echo $RUNCONNECTIVITY
 
@@ -32,6 +31,13 @@ echo $RUNCONNECTIVITY
 if [[ "$RUNCONNECTIVITY" -eq 1 ]]; then
 	echo "Running connectivity computation."
 	matlab -logfile /home/ali/adamli/fragility_dataanalysis/server/_log/job$1.txt -nojvm -nodisplay -nosplash -r "currentpatient='$patient'; \
-		serverAdjMainScript(currentpatient, $winSize, $stepSize, $frequency_sampling);\
+		serverAdjMainScript(currentpatient, $winSize, $stepSize, $center);\
 		exit"
+else
+	echo "Running perturbation computation."
+	# run perturbation analysis
+	matlab -logfile /home/ali/adamli/fragility_dataanalysis/server/_log/job$1.txt -nojvm -nodisplay -nosplash -r "currentpatient='$patient'; \
+	serverPerturbationScript(currentpatient, $radius, $winSize, $stepSize, $center);\
+	exit"
+fi
 fi

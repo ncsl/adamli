@@ -1,3 +1,5 @@
+/fragility_dataaanalysis/data/*.mat
+*.mat
 *eeg.csv
 /fragility_dataanalysis/data/*_eeg.csv
 *EEG.mat

@@ -1,9 +1,10 @@
-function serverAdjMainScript(patient, winSize, stepSize, frequency_sampling)
+function serverAdjMainScript(patient, winSize, stepSize, center)
 addpath(genpath('../../fragility_library/'));
 addpath(genpath('../../eeg_toolbox/'));
 addpath('../../');
 IS_SERVER = 1;
 if nargin == 0 % testing purposes
+    center = 'cc';
     patient='EZT005seiz001';
 %     patient='JH102sz6';
 %     patient='pt1sz4';
@@ -11,7 +12,7 @@ if nargin == 0 % testing purposes
     winSize = 500; % 500 milliseconds
     stepSize = 500; 
     frequency_sampling = 1000; % in Hz
-    IS_SERVER = 0;
+    IS_SERVER = 1;
 end
 
 % setupScripts;
@@ -20,18 +21,48 @@ disp(['Looking at patient: ',patient]);
 %% New Setup Scripts
 TYPE_CONNECTIVITY = 'leastsquares';     % type of functional conn.?
 BP_FILTER_RAW = 1;                      % apply notch filter before functional conn. computation?
+frequency_sampling = 1000;
+
 IS_INTERICTAL = 0;                      % is this interictal data?
 l2regularization = 0;                   % apply l2 regularization to estimation of functional conn.?
-TEST_DESCRIP = 'nolpt';
+TEST_DESCRIP = [];
 
-% set directory to find adjacency matrix data
-toSaveAdjDir = fullfile(strcat('./fixed_adj_mats_win', num2str(winSize), ...
+% set patientID and seizureID
+patient_id = patient(1:strfind(patient, 'seiz')-1);
+seizure_id = strcat('_', patient(strfind(patient, 'seiz'):end));
+seeg = 1;
+if isempty(patient_id)
+    patient_id = patient(1:strfind(patient, 'sz')-1);
+    seizure_id = patient(strfind(patient, 'sz'):end);
+    seeg = 0;
+end
+if isempty(patient_id)
+    patient_id = patient(1:strfind(patient, 'aslp')-1);
+    seizure_id = patient(strfind(patient, 'aslp'):end);
+    seeg = 0;
+end
+if isempty(patient_id)
+    patient_id = patient(1:strfind(patient, 'aw')-1);
+    seizure_id = patient(strfind(patient, 'aw'):end);
+    seeg = 0;
+end
+
+%% DEFINE OUTPUT DIRS AND CLINICAL ANNOTATIONS
+%- Edit this file if new patients are added.
+[included_channels, ezone_labels, earlyspread_labels, latespread_labels, resection_labels, frequency_sampling] ...
+            = determineClinicalAnnotations(patient_id, seizure_id);
+
+%%- Directory at work
+% set dir to find raw data files
+dataDir = fullfile('./data/', center);
+% set directory to save computed data
+toSaveAdjDir = fullfile('./adjmats/', strcat('win', num2str(winSize), ...
     '_step', num2str(stepSize), '_freq', num2str(frequency_sampling)), patient); % at lab
-dataDir = './data/';
 
+%%- If using External HardDrive
 % toSaveAdjDir = fullfile(strcat('/Volumes/NIL_PASS/serverdata/fixed_adj_mats_win', num2str(winSize), ...
 %     '_step', num2str(stepSize), '_freq', num2str(frequency_sampling))); % at home
-% dataDir = '/Volumes/NIL_PASS/data/';
+% dataDir = fullfile('/Volumes/NIL_PASS/data/', center);
 
 if IS_SERVER
     toSaveAdjDir = fullfile('../..', 'serverdata', toSaveAdjDir);
@@ -46,34 +77,7 @@ end
 if ~exist(toSaveAdjDir, 'dir')
     mkdir(toSaveAdjDir);
 end
-
-% set patientID and seizureID
-patient_id = patient(1:strfind(patient, 'seiz')-1);
-seizure_id = strcat('_', patient(strfind(patient, 'seiz'):end));
-seeg = 1;
-if isempty(patient_id)
-    patient_id = patient(1:strfind(patient, 'sz')-1);
-    seizure_id = patient(strfind(patient, 'sz'):end);
-    seeg = 0;
-end
-if isempty(patient_id)
-    patient_id = patient(1:strfind(patient, 'aslp')-1);
-    seizure_id = patient(strfind(patient, 'aslp'):end);
-    dataDir= './data/interictal_data/';
-    if IS_SERVER
-        dataDir = '../data/interictal_data/';
-    end
-end
-if isempty(patient_id)
-    patient_id = patient(1:strfind(patient, 'aw')-1);
-    seizure_id = patient(strfind(patient, 'aw'):end);
-end
-
-%% DEFINE CHANNELS AND CLINICAL ANNOTATIONS
-%- Edit this file if new patients are added.
-[included_channels, ezone_labels, earlyspread_labels, latespread_labels, resection_labels, frequency_sampling] ...
-            = determineClinicalAnnotations(patient_id, seizure_id);
-
+        
 % put clinical annotations into a struct
 clinicalLabels = struct();
 clinicalLabels.ezone_labels = ezone_labels;
@@ -81,9 +85,9 @@ clinicalLabels.earlyspread_labels = earlyspread_labels;
 clinicalLabels.latespread_labels = latespread_labels;
 clinicalLabels.resection_labels = resection_labels;
 
-%% EZT/SEEG PATIENTS
+%% Set EEG Data Path
 if seeg
-    patient_eeg_path = strcat(dataDir, 'Seiz_Data/', patient_id);
+    patient_eeg_path = fullfile(dataDir, patient_id);
     patient = strcat(patient_id, seizure_id);
 else
     patient_eeg_path = strcat(dataDir, patient);
@@ -93,6 +97,7 @@ patient
 % disp(patient_eeg_path)
 % disp(patient)
 
+%% LOAD DATA IN
 % READ EEG FILE Mat File
 % files to process
 try
@@ -133,6 +138,7 @@ if ~isempty(included_channels)
     labels = labels(included_channels);
 end
 
+%% PERFORM ADJACENCY COMPUTATION
 % define args for computing the functional connectivity
 adj_args = struct();
 adj_args.BP_FILTER_RAW = BP_FILTER_RAW;                         % apply notch filter or not?
