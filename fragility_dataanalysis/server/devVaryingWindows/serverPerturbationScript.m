@@ -1,4 +1,4 @@
-function serverPerturbationScript(patient, radius, winSize, stepSize, frequency_sampling)
+function serverPerturbationScript(patient, radius, winSize, stepSize)
     if nargin == 0 % testing purposes
         patient='EZT007seiz001';
         patient ='pt6sz3';
