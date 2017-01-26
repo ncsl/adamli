@@ -83,7 +83,7 @@ if isempty(patient_id)
     seeg = 0;
 end
 
-    [included_channels, ezone_labels, earlyspread_labels, latespread_labels, resection_labels, frequency_sampling] ...
+    [included_channels, ezone_labels, earlyspread_labels, latespread_labels, resection_labels, frequency_sampling, center] ...
             = determineClinicalAnnotations(patient_id, seizure_id);
         
         

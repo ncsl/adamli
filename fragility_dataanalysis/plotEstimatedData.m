@@ -12,7 +12,7 @@
 close all; clear all; clc;
 %% Estimate A for different windowsizes, then use a reduced order observer to estimate signals from some of the channels, using A_hat
 
-BP_FILTER = 1;
+BP_FILTER = 0;
 % only use these two if working from external hard drive
 % path1 = genpath('/Volumes/NIL_PASS/data/');
 % path2 = genpath('/Volumes/NIL_PASS/serverdata/nofilter_adj_mats_win500_step500_freq1000/');
@@ -24,55 +24,77 @@ BP_FILTER = 1;
 addpath(genpath('./eeg_toolbox'));
 
 winSize = 500;
-winSizes = [100, 125, 200, 250, 500, 1000];
+winSizes = [125, 250, 500, 1000];
 
 errors = zeros(length(winSizes), 1);
 mses = zeros(length(winSizes), 1);
 
 patient = 'pt1sz4';
+patient = 'EZT019seiz002';
+
+patient_id = patient(1:strfind(patient, 'seiz')-1);
+seizure_id = strcat('_', patient(strfind(patient, 'seiz'):end));
+seeg = 1;
+if isempty(patient_id)
+    patient_id = patient(1:strfind(patient, 'sz')-1);
+    seizure_id = patient(strfind(patient, 'sz'):end);
+    seeg = 0;
+end
+if isempty(patient_id)
+    patient_id = patient(1:strfind(patient, 'aslp')-1);
+    seizure_id = patient(strfind(patient, 'aslp'):end);
+    seeg = 0;
+end
+if isempty(patient_id)
+    patient_id = patient(1:strfind(patient, 'aw')-1);
+    seizure_id = patient(strfind(patient, 'aw'):end);
+    seeg = 0;
+end
+
+if seeg
+    pat = patient_id;
+else
+    pat = patient;
+end
+
+[included_channels, ezone_labels, earlyspread_labels, latespread_labels, resection_labels, frequency_sampling, center] ...
+            = determineClinicalAnnotations(patient_id, seizure_id);
 
 for i=1:length(winSizes)
     winSize = winSizes(i);
 
     frequency_sampling = 1000;
-    dataDir = './data/';
+    dataDir = fullfile('./data/', center);
 %     dataDir = '/Volumes/NIL_PASS/data/';
     if BP_FILTER
-        adjDir = strcat('./serverdata/fixed_adj_mats_win', num2str(winSize), '_step', num2str(winSize), '_freq1000/');
+        adjDir = strcat('./serverdata/testing_winsizes/fixed_adj_mats_win', num2str(winSize), '_step', num2str(winSize), '_freq1000/');
 %         adjDir = strcat('/Volumes/NIL_PASS/serverdata/fixed_adj_mats_win', num2str(winSize), '_step', num2str(winSize), '_freq1000/');
     else
-        adjDir = strcat('./serverdata/nofilter_adj_mats_win', num2str(winSize), '_step', num2str(winSize), '_freq1000/');
+        adjDir = strcat('./serverdata/testing_winsizes/nofilter_adj_mats_win', num2str(winSize), '_step', num2str(winSize), '_freq1000/');
 %         adjDir = strcat('/Volumes/NIL_PASS/serverdata/nofilter_adj_mats_win', num2str(winSize), '_step', num2str(winSize), '_freq1000/');
     end
-    nihpat = 'pt1sz4';
-    ccpat = 'EZT019';
+    
 
     %% Load in data
+    %- 1. adj mat structure
     try
-        nihadjmat = load(fullfile(adjDir, nihpat, 'pt1sz4_adjmats_leastsquares.mat'));            % Patient NIH linear models A 3D matrix with all A matrices for 500 msec wins (numWins x numChannels x numChannels)
-%         ccadjmat = load(fullfile(adjDir, strcat(ccpat, '_seiz003'), 'EZT019_seiz003_adjmats_leastsquares.mat'));     % Patient CC linear models
+        adjmat_struct = load(fullfile(adjDir, pat, strcat(patient, '_adjmats_leastsquares.mat')));            % Patient NIH linear models A 3D matrix with all A matrices for 500 msec wins (numWins x numChannels x numChannels)
     catch e
         disp(e)
-        nihadjmat = load(fullfile(adjDir, 'pt1sz4_adjmats_leastsquares.mat'));            % Patient NIH linear models A 3D matrix with all A matrices for 500 msec wins (numWins x numChannels x numChannels)
-%         ccadjmat = load(fullfile(adjDir, 'EZT019_seiz003_adjmats_leastsquares.mat'));     % Patient CC linear models
+        adjmat_struct = load(fullfile(adjDir, strcat(patient, '_adjmats_leastsquares.mat')));            % Patient NIH linear models A 3D matrix with all A matrices for 500 msec wins (numWins x numChannels x numChannels)
     end
     
-    
-    ecogdata = load(fullfile(dataDir, nihpat, 'pt1sz4.mat'));          % Patient ECoG raw data
-%     seegdata = load(fullfile(dataDir, 'Seiz_Data', ccpat, 'EZT019_seiz003.mat')); % Patient SEEG raw data
+    %- 2. raw data
+    data = load(fullfile(dataDir, pat, patient));          % Patient ECoG raw data
 
+    %- Optional: Apply notch filter or not
     if BP_FILTER
-        ecogdata.data = buttfilt(ecogdata.data,[59.5 60.5], frequency_sampling,'stop',1);
-%         seegdata.data = buttfilt(seegdata.data,[59.5 60.5], frequency_sampling,'stop',1);
+        data.data = buttfilt(data.data,[59.5 60.5], frequency_sampling,'stop',1);
     end
-    %% Define parameters
-    data = ecogdata.data;
-    seizureStart = ecogdata.seiz_start_mark;
-    adjmat_struct = nihadjmat.adjmat_struct;
-
-%     data = seegdata.data;
-%     seizureStart = seegdata.seiz_start_mark-1;
-%     adjmat_struct = ccadjmat.adjmat_struct;
+    %% Define parameters and Extract Fields
+    data = data.data;
+    seizureStart = data.seiz_start_mark;
+    adjmat_struct = adjmat_struct.adjmat_struct;
 
     numCh = size(data,1);
     fs = 1000;
