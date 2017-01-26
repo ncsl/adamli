@@ -5,10 +5,11 @@ patients=(
 	# 'pt1aslp1 pt1aslp2 pt1aw1 pt1aw2')
 	# pt2aslp1 pt2aslp2 pt2aw1 pt2aw2
 	# pt3aslp1 pt3aslp2 pt3aw1
-	'pt1sz2 pt1sz3 pt1sz4
-	pt2sz1 pt2sz3 pt2sz4 
-	pt3sz2 pt3sz4
-	pt6sz3 pt6sz4 pt6sz5')
+	'pt1sz2')
+	# pt1sz3 pt1sz4
+	# pt2sz1 pt2sz3 pt2sz4 
+	# pt3sz2 pt3sz4
+	# pt6sz3 pt6sz4 pt6sz5')
 	# pt8sz1 pt8sz2 pt8sz3
 	# pt10sz1 pt10sz2 pt10sz3
 	# pt11sz1 pt11sz2 pt11sz3 pt11sz4
