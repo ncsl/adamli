@@ -30,7 +30,7 @@ errors = zeros(length(winSizes), 1);
 mses = zeros(length(winSizes), 1);
 
 patient = 'pt1sz4';
-% patient = 'EZT019seiz002';
+patient = 'EZT019seiz002';
 
 patient_id = patient(1:strfind(patient, 'seiz')-1);
 seizure_id = strcat('_', patient(strfind(patient, 'seiz'):end));
@@ -53,12 +53,15 @@ end
 
 if seeg
     pat = patient_id;
+    patient = strcat(patient_id, seizure_id);
 else
     pat = patient;
 end
 
 [included_channels, ezone_labels, earlyspread_labels, latespread_labels, resection_labels, frequency_sampling, center] ...
             = determineClinicalAnnotations(patient_id, seizure_id);
+
+        
 
 for i=1:length(winSizes)
     winSize = winSizes(i);
@@ -106,9 +109,30 @@ for i=1:length(winSizes)
     winSize = adjmat_struct.winSize;
     labels = adjmat_struct.all_labels;
     
+    if i==1
+            %- get 2 channels from EZ and 2 channels from outside EZ
+        ezElecs = findElectrodeIndices(ezone_labels, labels)';
+        randez = randsample(length(ezone_labels), 2);
+        ezIndices = ezElecs(randez);
+
+        nonezChannels = 1:length(included_channels);
+        nonezChannels(ezElecs) = [];
+        randIndices = randsample(length(nonezChannels), 2);
+        randIndices = nonezChannels(randIndices);
+
+        % create indice vector of the channels we want to plot
+        exChans = cat(2, ezIndices, randIndices);
+    end
+    
     % getting A and raw data
     preSeizData = double(data(:, 1:seizureStart+3000));
     preSeizA = adjmat_struct.adjMats(1:seizureStartMark+3000/winSize,:,:);
+    
+    if seeg
+        preSeizData = double(data(:, 1:seizureStart-1+3000));
+        seizureStartMark = (seizureStart-1)/winSize;
+        preSeizA = adjmat_struct.adjMats(1:seizureStartMark+3000/winSize,:,:);
+    end
     %% Reconstruct preseizure data
     preSeiz_hat = zeros(size(preSeizData));
     [numChans, numTimes] = size(preSeizData);
@@ -142,19 +166,6 @@ for i=1:length(winSizes)
         evals(iWin) = max(abs(eig(currentA)));
     end
     toc;
-
-    %- get 2 channels from EZ and 2 channels from outside EZ
-    ezElecs = findElectrodeIndices(ezone_labels, labels)';
-    randez = randsample(length(ezone_labels), 2);
-    ezIndices = ezElecs(randez);
-    
-    nonezChannels = 1:length(included_channels);
-    nonezChannels(ezElecs) = [];
-    randIndices = randsample(length(nonezChannels), 2);
-    randIndices = nonezChannels(randIndices);
-    
-    % create indice vector of the channels we want to plot
-    exChans = cat(2, ezIndices, randIndices);
     
     % compute difference metric between observed and estimated
     mse = immse(preSeiz_hat(exChans, :), preSeizData(exChans,:));
@@ -184,7 +195,8 @@ for i=1:length(winSizes)
     
     %% Plotting
     FONTSIZE = 18;
-    timePoints = [1600:3600, seizureStart-2000:seizureStart, seizureStart+500:seizureStart+2500];
+    timePoints = [1:2000, seizureStart-2000:seizureStart, seizureStart+500:seizureStart+2500];
+    timePoints = [1:2000, seizureStart-2000:seizureStart, seizureStart+500:seizureStart+2500];
     offset = 0;
     temp = preSeizData(exChans,timePoints);
     maxoffset = 1.5 * max(abs(temp(:)));
@@ -310,12 +322,12 @@ for i=1:length(winSizes)
     set(ax2, 'YTick', yticklocs(3:4), 'YTickLabel', labels(randIndices), 'FontSize', FONTSIZE);
     
     
-    toSaveFigDir = fullfile('./figures/ltvcomparison/ecog/');
+    toSaveFigDir = fullfile('./figures/ltvcomparison/', center);
     if ~exist(toSaveFigDir, 'dir')
         mkdir(toSaveFigDir);
     end
     
-    toSaveFigFile = fullfile(toSaveFigDir, strcat(patient, '_ecog_', num2str(winSize)));
+    toSaveFigFile = fullfile(toSaveFigDir, strcat(patient, '_seeg3_', num2str(winSize)));
     print(toSaveFigFile, '-dpng', '-r0')
     
     error = norm(preSeiz_hat(exChans, timePoints) - preSeizData(exChans,timePoints)) / (length(timePoints));
@@ -325,12 +337,17 @@ for i=1:length(winSizes)
 end
 
 figure;
-bar(winSizes, mses, 'k');
-title('Mean Squared Error of ECoG Reconstruction', 'FontSize', FONTSIZE);
-xlabel('Window Size');
-ylabel('Mean Squared Error');
+bar(winSizes, mses, 'k'); set(gca, 'box', 'off');
+    if ~seeg
+        title('Mean Squared Error of ECoG Reconstruction', 'FontSize', FONTSIZE);
+    else
+        title('Mean Squared Error of SEEG Reconstruction', 'FontSize', FONTSIZE);
+    end
+
+xlabel('Window Size', 'FontSize', FONTSIZE);
+ylabel('Mean Squared Error', 'FontSize', FONTSIZE);
 currfig = gcf;
 currfig.PaperPosition = [-3.7448   -0.3385   15.9896   11.6771];
 currfig.Position = [1666 1 1535 1121];
-toSaveFigFile = fullfile(toSaveFigDir, strcat(patient, '_ecogerrors_', num2str(winSize)));
+toSaveFigFile = fullfile(toSaveFigDir, strcat(patient, '_seegerrors3_', num2str(winSize)));
 print(toSaveFigFile, '-dpng', '-r0')

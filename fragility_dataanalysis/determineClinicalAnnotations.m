@@ -25,7 +25,8 @@ function [included_channels, ezone_labels, ...
 %         ezone_labels = {'I5', 'I6', 'B9', 'I9', 'T10', 'I10', 'B6', 'I4', ...
 %             'T9', 'I7', 'B3', 'B5', 'B4', 'I8', 'T6', 'B10', 'T3', ...
 %             'B1', 'T8', 'T7', 'B7', 'I3', 'B2', 'I2', 'T4', 'T2'}; 
-        ezone_labels = {'B3', 'B4', 'C1', 'C2'}; 
+        ezone_labels = {'B3', 'B4', 'C1', 'C2'};
+        ezone_labels = {'B3', 'B4', 'C2'}; % to run estimation alg win size testing
         earlyspread_labels = {};
         latespread_labels = {}; 
         resection_labels = {'A', 'B', 'C', 'E', 'I', 'X'}
