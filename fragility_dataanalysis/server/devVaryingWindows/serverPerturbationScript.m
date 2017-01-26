@@ -51,7 +51,8 @@ function serverPerturbationScript(patient, radius, winSize, stepSize)
 
     
     % set directory to find adjacency matrix data
-    adjMatDir = fullfile('../../serverdata/adjmats/', strcat('win', num2str(winSize), ...
+    serverDir = fullfile('../../serverdata/');
+    adjMatDir = fullfile(serverDir, 'adjmats/', strcat('win', num2str(winSize), ...
     '_step', num2str(stepSize), '_freq', num2str(frequency_sampling))); % at lab
 
     patDir = fullfile(adjMatDir, patient);
@@ -105,7 +106,6 @@ function serverPerturbationScript(patient, radius, winSize, stepSize)
     end
     flag
     
-    
     if flag ~= -1
         adjMats = adjMats(1:flag-1,:,:);
     else
@@ -125,8 +125,8 @@ function serverPerturbationScript(patient, radius, winSize, stepSize)
         filename = strcat(patient, '_', perturbationType, 'perturbation_', ...
                 lower(TYPE_CONNECTIVITY), '_radius', num2str(radius), '.mat');
        
-        toSavePertDir = fullfile(adjMatDir, strcat(perturbationType, '_perturbations', ...
-            '_radius', num2str(radius)), '_newfixedalg');
+        toSavePertDir = fullfile(serverDir, strcat(perturbationType, '_perturbations', ...
+            '_radius', num2str(radius)), patient);
         if ~exist(toSavePertDir, 'dir')
             mkdir(toSavePertDir);
         end

@@ -12,7 +12,7 @@
 close all; clear all; clc;
 %% Estimate A for different windowsizes, then use a reduced order observer to estimate signals from some of the channels, using A_hat
 
-BP_FILTER = 0;
+BP_FILTER = 1;
 % only use these two if working from external hard drive
 % path1 = genpath('/Volumes/NIL_PASS/data/');
 % path2 = genpath('/Volumes/NIL_PASS/serverdata/nofilter_adj_mats_win500_step500_freq1000/');
@@ -30,7 +30,7 @@ errors = zeros(length(winSizes), 1);
 mses = zeros(length(winSizes), 1);
 
 patient = 'pt1sz4';
-patient = 'EZT019seiz002';
+% patient = 'EZT019seiz002';
 
 patient_id = patient(1:strfind(patient, 'seiz')-1);
 seizure_id = strcat('_', patient(strfind(patient, 'seiz'):end));
@@ -85,15 +85,15 @@ for i=1:length(winSizes)
     end
     
     %- 2. raw data
-    data = load(fullfile(dataDir, pat, patient));          % Patient ECoG raw data
+    rawdata = load(fullfile(dataDir, pat, patient));          % Patient ECoG raw data
 
     %- Optional: Apply notch filter or not
     if BP_FILTER
-        data.data = buttfilt(data.data,[59.5 60.5], frequency_sampling,'stop',1);
+        rawdata.data = buttfilt(rawdata.data,[59.5 60.5], frequency_sampling,'stop',1);
     end
     %% Define parameters and Extract Fields
-    data = data.data;
-    seizureStart = data.seiz_start_mark;
+    data = rawdata.data;
+    seizureStart = rawdata.seiz_start_mark;
     adjmat_struct = adjmat_struct.adjmat_struct;
 
     numCh = size(data,1);
@@ -102,20 +102,13 @@ for i=1:length(winSizes)
     %% Use A and reconstruct raw data
     seizureStartMark = adjmat_struct.seizure_start/adjmat_struct.winSize;
 
-    data = data(adjmat_struct.included_channels,:);
+    data = data(included_channels,:);
     winSize = adjmat_struct.winSize;
-
-    % only get -60 seconds to seizure
-    % preSeizData = data(:, seizureStart-60*fs:seizureStart-1);
-    % preSeizA = adjmat_struct.adjMats(seizureStartMark-60*fs/winSize-1:seizureStartMark,:,:);
-
-    preSeizData = double(data(:, 1:seizureStart));
-    preSeizA = adjmat_struct.adjMats(1:seizureStartMark,:,:);
-
-    % only get seizure to +30 seconds
-    postSeizData = double(data(:, seizureStart:seizureStart+30*fs));
-    postSeizA = adjmat_struct.adjMats(seizureStartMark:seizureStartMark+30*fs/winSize-1,:,:);
-
+    labels = adjmat_struct.all_labels;
+    
+    % getting A and raw data
+    preSeizData = double(data(:, 1:seizureStart+3000));
+    preSeizA = adjmat_struct.adjMats(1:seizureStartMark+3000/winSize,:,:);
     %% Reconstruct preseizure data
     preSeiz_hat = zeros(size(preSeizData));
     [numChans, numTimes] = size(preSeizData);
@@ -131,6 +124,17 @@ for i=1:length(winSizes)
         preSeiz_hat(:, initialTime) = preSeizData(:, initialTime);
 
         currentA = squeeze(preSeizA(iWin, :, :));
+%         if max(abs(eig(currentA))) > 1
+%             [V, D] = eig(currentA, 'nobalance');
+%             overEvs = D(abs(D) > 1);
+%             theta = tanh(imag(overEvs)./real(overEvs));
+%             bprime = sin(theta);
+%             aprime = sqrt(1 - bprime.^2);
+%             D(abs(D) > 1) = aprime+1i*bprime;
+%             newA = abs(V*D*inv(V));
+%             
+%             imagesc(currentA)
+%         end
         for iTime=initialTime+1:initialTime+winSize-1   % loop through time points to estimate data
     %         iTime
             preSeiz_hat(:, iTime) = currentA*preSeiz_hat(:, iTime-1);
@@ -139,27 +143,61 @@ for i=1:length(winSizes)
     end
     toc;
 
-    exChans = [2, 3, 5, 6, 7];
-    exChan = 2;
+    %- get 2 channels from EZ and 2 channels from outside EZ
+    ezElecs = findElectrodeIndices(ezone_labels, labels)';
+    randez = randsample(length(ezone_labels), 2);
+    ezIndices = ezElecs(randez);
+    
+    nonezChannels = 1:length(included_channels);
+    nonezChannels(ezElecs) = [];
+    randIndices = randsample(length(nonezChannels), 2);
+    randIndices = nonezChannels(randIndices);
+    
+    % create indice vector of the channels we want to plot
+    exChans = cat(2, ezIndices, randIndices);
     
     % compute difference metric between observed and estimated
-    error = norm(preSeiz_hat(exChans, :) - preSeizData(exChans,:)) / numWins;
     mse = immse(preSeiz_hat(exChans, :), preSeizData(exChans,:));
-
+    
+    %% Reconstruct during seizure data
+%     seizData = double(data(:, seizureStart:seizureStart+5000));
+%     seizA = adjmat_struct.adjMats(seizureStartMark:seizureStartMark+10,:,:);
+%     
+%     seiz_hat = zeros(size(seizData));
+%     [numChans, numTimes] = size(seizData);
+%     numWin = numTimes / winSize;
+%     
+%       evals = zeros(numWins, 1);
+%     tic;
+%     for iWin=1:numWins              % loop through number of windows
+%         initialTime = (iWin-1)*winSize + 1;
+%         seiz_hat(:, initialTime) = seizData(:, initialTime);
+% 
+%         currentA = squeeze(seizA(iWin, :, :));
+%         for iTime=initialTime+1:initialTime+winSize-1   % loop through time points to estimate data
+%     %         iTime
+%             seiz_hat(:, iTime) = currentA*seiz_hat(:, iTime-1);
+%         end
+%         evals(iWin) = max(abs(eig(currentA)));
+%     end
+%     toc;
+    
     %% Plotting
     FONTSIZE = 18;
-    timePoints = 1:700;
+    timePoints = [1600:3600, seizureStart-2000:seizureStart, seizureStart+500:seizureStart+2500];
     offset = 0;
     temp = preSeizData(exChans,timePoints);
     maxoffset = 1.5 * max(abs(temp(:)));
 
-    titleStr = {'Estimated ECoG Data Vs. Actual Data', ...
+    if ~seeg
+        titleStr = {'Estimated ECoG Data Vs. Actual Data', ...
+            strcat('For Window Size (', num2str(winSize), ')')};
+    else
+        titleStr = {'Estimated SEEG Data Vs. Actual Data', ...
         strcat('For Window Size (', num2str(winSize), ')')};
-    titleStr = {'Estimated SEEG Data Vs. Actual Data', ...
-        strcat('For Window Size (', num2str(winSize), ')')};
+    end
     
-    
-    figure;
+    fig = figure;
 %     subplot(211);
     yticklocs = zeros(length(exChans),1);
     for iChan=1:length(exChans)
@@ -185,41 +223,10 @@ for i=1:length(winSizes)
             prevdatatrue = datatrue;
         end
         
-        offset = 50;
-        
-        plot(datahat, 'k'); hold on;
-        plot(datatrue, 'r'); 
-        
-        yticklocs(iChan) = mean(datatrue);
-    end
-    axes = gca; currfig = gcf;
-    set(axes, 'box', 'off');
-    xlabel('Time (seconds)', 'FontSize', FONTSIZE);
-    ylabel('Electrodes', 'FontSize', FONTSIZE);
-    title(titleStr, 'FontSize', FONTSIZE);
-    legend('LTV Model', 'Actual Data');
-    
-    % set y axes
-    set(axes, 'YTick', yticklocs);
-    set(axes, 'YTickLabel', {adjmat_struct.all_labels{exChans}});
-    % set x axes
-    set(axes, 'XTick', 1:200:length(timePoints));
-    set(axes, 'XTickLabel', 0:0.2:length(timePoints)/frequency_sampling);
-
-    currfig.PaperPosition = [-3.7448   -0.3385   15.9896   11.6771];
-    currfig.Position = [1666 1 1535 1121];
-    toSaveFigDir = fullfile('./figures/ltvcomparison/ecog/');
-    if ~exist(toSaveFigDir, 'dir')
-        mkdir(toSaveFigDir);
-    end
-    toSaveFigFile = fullfile(toSaveFigDir, strcat(patient, '_seegdata_', num2str(winSize)));
-    print(toSaveFigFile, '-dpng', '-r0')
-    
-    error = norm(preSeiz_hat(exChans, timePoints) - preSeizData(exChans,timePoints)) / (length(timePoints));
-    mse = immse(preSeiz_hat(exChans, timePoints), preSeizData(exChans,timePoints))/ (length(timePoints));
-    errors(i) = error;
-    mses(i) = mse;
-    %% Reconstruct postseizure data
+        if iChan==1
+            minVal = min([prevdatatrue, prevdatahat]); 
+            maxVal = max([prevdatatrue, prevdatahat]); 
+        else    %% Reconstruct postseizure data
     % postSeiz_hat = zeros(size(postSeizData));
     % [numChans, numTimes] = size(postSeizData);
     % numWins = numTimes / winSize;
@@ -245,22 +252,85 @@ for i=1:length(winSizes)
     % %     plot(chanData(1:2000), 'k'); hold on;
     % %     plot(chanHat(1:2000), 'r')
     % end
+            minVal = min([minVal, prevdatatrue, prevdatahat]); 
+            maxVal = max([maxVal, prevdatatrue, prevdatahat]);
+        end
+        
+        offset = 10;
+        
+        plot(datahat, 'k'); hold on;
+        plot(datatrue, 'r'); 
+        
+        yticklocs(iChan) = mean(datatrue);
+    end
+    ax = gca; currfig = gcf; 
+    set(ax, 'box', 'off');
+    xlabel('Time Period (2 seconds per window)', 'FontSize', FONTSIZE);
+    ylab = ylabel('Electrodes', 'FontSize', FONTSIZE);
+    title(titleStr, 'FontSize', FONTSIZE);
+    legend('LTV Model', 'Actual Data');
+   
+    % set x axes
+    set(ax, 'XTick', [1000 3000 5000]);
+    set(ax, 'XTickLabel', {'Interictal', 'Preictal', 'Ictal'});
+
+    currfig.PaperPosition = [-3.7448   -0.3385   15.9896   11.6771];
+    currfig.Position = [1666 1 1535 1121];
+    ylab.Position = ylab.Position + [6 0 0]; % move ylabel to the left
+
+    plot([2000 2000], ylim, 'k', 'MarkerSize', 3)
+    plot([4000 4000], ylim, 'k', 'MarkerSize', 3)
+    
+    xlim([0 6000])
+    ax1 = currfig.CurrentAxes; % get the current axes
+    ax1_xlim = ax1.XLim;
+    ax1_ylim = ax1.YLim;
+    set(ax1, 'YTick', []);
+    %%- Create the first axes to label the original electrodes
+    axy = axes('Position',ax1.Position,...
+        'XAxisLocation','bottom',...
+        'YAxisLocation','left',...
+            'XLim', ax1_xlim,...
+    'YLim', ax1_ylim,...
+        'Color','none', ...
+        'box', 'off');
+    set(axy, 'XTick', []);
+    set(axy, 'YTick', yticklocs(1:2), 'YTickLabel', labels(ezIndices), 'FontSize', FONTSIZE, 'YColor', 'red');
+
+    %%- Create new axes to label the electrode axis (y-axis)
+    % set second axes for ezone indices
+    ax2 = axes('Position',ax1.Position,...
+        'XAxisLocation','bottom',...
+        'YAxisLocation','left',...
+        'Color','none', ...
+        'XLim', ax1_xlim,...
+        'YLim', ax1_ylim,...
+        'box', 'off');
+    set(ax2, 'XTick', []);
+    set(ax2, 'YTick', yticklocs(3:4), 'YTickLabel', labels(randIndices), 'FontSize', FONTSIZE);
+    
+    
+    toSaveFigDir = fullfile('./figures/ltvcomparison/ecog/');
+    if ~exist(toSaveFigDir, 'dir')
+        mkdir(toSaveFigDir);
+    end
+    
+    toSaveFigFile = fullfile(toSaveFigDir, strcat(patient, '_ecog_', num2str(winSize)));
+    print(toSaveFigFile, '-dpng', '-r0')
+    
+    error = norm(preSeiz_hat(exChans, timePoints) - preSeizData(exChans,timePoints)) / (length(timePoints));
+    mse = immse(preSeiz_hat(exChans, timePoints), preSeizData(exChans,timePoints))/ (length(timePoints));
+    errors(i) = error;
+    mses(i) = mse;
 end
 
-winSizes(winSizes==250) = [];
-errors(4) = [];
-mses(4) = [];
-
 figure;
-subplot(211); % plot errors
-plot(winSizes, errors, 'ko');
-title('Plot of Reconstruction Error', 'FontSize', FONTSIZE);
-
-subplot(212);
-plot(winSizes, mses, 'ko');
-title('Mean Squared Error', 'FontSize', FONTSIZE);
+bar(winSizes, mses, 'k');
+title('Mean Squared Error of ECoG Reconstruction', 'FontSize', FONTSIZE);
+xlabel('Window Size');
+ylabel('Mean Squared Error');
 currfig = gcf;
 currfig.PaperPosition = [-3.7448   -0.3385   15.9896   11.6771];
 currfig.Position = [1666 1 1535 1121];
-toSaveFigFile = fullfile(toSaveFigDir, strcat(patient, '_seegerrorswithout250_', num2str(winSize)));
+toSaveFigFile = fullfile(toSaveFigDir, strcat(patient, '_ecogerrors_', num2str(winSize)));
 print(toSaveFigFile, '-dpng', '-r0')
