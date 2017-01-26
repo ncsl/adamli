@@ -7,10 +7,10 @@ patients = {,...,
 %     'pt2aslp1', 'pt2aslp2', ...
 %     'pt3aw1', ...
 %     'pt3aslp1', 'pt3aslp2', ...
-%     'pt1sz2', 'pt1sz3', 'pt1sz4',...
-%     'pt2sz1' 'pt2sz3' 'pt2sz4', ...
-%     'pt3sz2' 'pt3sz4', ...
-%     'pt6sz3', 'pt6sz4', 'pt6sz5',...
+    'pt1sz2', 'pt1sz3', 'pt1sz4',...
+    'pt2sz1' 'pt2sz3' 'pt2sz4', ...
+    'pt3sz2' 'pt3sz4', ...
+    'pt6sz3', 'pt6sz4', 'pt6sz5',...
 %     'pt8sz1' 'pt8sz2' 'pt8sz3',...
 %     'pt10sz1' 'pt10sz2' 'pt10sz3', ...
 %     'pt11sz1' 'pt11sz2' 'pt11sz3' 'pt11sz4', ...
@@ -25,7 +25,7 @@ patients = {,...,
 % 	'JH106sz1' 'JH106sz2' 'JH106sz3' 'JH106sz4' 'JH106sz5' 'JH106sz6',...
 % 	'JH107sz1' 'JH107sz2' 'JH107sz3' 'JH107sz4' 'JH107sz5' 
 %     'JH107sz6' 'JH107sz7' 'JH107sz8' 'JH107sz9',...
-   'JH108sz1', 'JH108sz2', 'JH108sz3', 'JH108sz4', 'JH108sz5', 'JH108sz6', 'JH108sz7',...
+%    'JH108sz1', 'JH108sz2', 'JH108sz3', 'JH108sz4', 'JH108sz5', 'JH108sz6', 'JH108sz7',...
 %    'EZT037seiz001', 'EZT037seiz002',...
 %    'EZT019seiz001', 'EZT019seiz002',...
 %     'EZT030seiz001', 'EZT030seiz002', 
@@ -36,7 +36,7 @@ patients = {,...,
 
 close all;
 
-perturbationTypes = ['C'];
+perturbationTypes = ['C', 'R'];
 perturbationType = perturbationTypes(1);
 PLOTALL = 1;
 
@@ -46,8 +46,9 @@ winSize = 500;            % 500 milliseconds
 stepSize = 500; 
 frequency_sampling = 1000; % in Hz
 IS_SERVER = 0;
-TEST_DESCRIP = 'noleftandrpp';
-% TEST_DESCRIP = [];
+% TEST_DESCRIP = 'noleftandrpp';
+TEST_DESCRIP = [];
+TYPE_CONNECTIVITY = 'leastsquares';
 
 figDir = './figures/fixedperts/';
 
@@ -100,9 +101,9 @@ end
             '_radius', num2str(radius)));
     
     % temp dir until I get everything fixed.
-%     finalDataDir = fullfile(strcat(adjMat, num2str(winSize), ...
-%         '_step', num2str(stepSize), '_freq', num2str(frequency_sampling)), strcat(perturbationType, '_perturbations', ...
-%             '_radius', num2str(radius)), '_newfixedalg');
+    finalDataDir = fullfile(strcat(adjMat, num2str(winSize), ...
+        '_step', num2str(stepSize), '_freq', num2str(frequency_sampling)), strcat(perturbationType, '_perturbations', ...
+            '_radius', num2str(radius)), '_newfixedalg');
         
     try
         final_data = load(fullfile(finalDataDir, strcat(patient, ...
@@ -177,8 +178,8 @@ end
             '_step', num2str(stepSize), '_freq', num2str(frequency_sampling)), strcat(perturbationType, '_perturbations', ...
                 '_radius', num2str(radius)), '_newfixedalg');
         
-        finalDataDir = fullfile(adjMatDir, strcat(perturbationType, '_perturbations', ...
-            '_radius', num2str(radius)));
+%         finalDataDir = fullfile(adjMatDir, strcat(perturbationType, '_perturbations', ...
+%             '_radius', num2str(radius)));
             
          %%- Extract an example
 %         finalDataDir = toSaveFinalDataDir;
@@ -200,9 +201,9 @@ end
         timePoints = final_data.timePoints;
         
         seizureMarkStart = seizureStart/winSize;
-        minPerturb_time_chan = minPerturb_time_chan(:, 1:seizureMarkStart+30);
-        fragility_rankings = fragility_rankings(:, 1:seizureMarkStart+30);
-        timePoints = timePoints(1:seizureMarkStart+30,:);
+        minPerturb_time_chan = minPerturb_time_chan(:, 1:seizureMarkStart);
+        fragility_rankings = fragility_rankings(:, 1:seizureMarkStart);
+        timePoints = timePoints(1:seizureMarkStart,:);
         
         if length(included_channels) ~= size(minPerturb_time_chan,1)
             % another patient
@@ -225,7 +226,7 @@ end
         PLOTARGS.SAVEFIG = 1;
         PLOTARGS.YAXFontSize = 9;
         PLOTARGS.FONTSIZE = FONTSIZE;
-        PLOTARGS.xlabelStr = 'Time (sec)';
+        PLOTARGS.xlabelStr = 'Time With Respect To Seizure (sec)';
         PLOTARGS.colorbarStr = 'Minimum 2-Induced Norm Perturbation';
         PLOTARGS.ylabelStr = 'Electrode Channels';
         PLOTARGS.xTickStep = 10*winSize/stepSize;
@@ -245,16 +246,15 @@ end
             if PLOTALL % plot entire data series
                 seizureIndex = timeIndex;
                 seizureEndIndex = find(seizureEnd < timePoints(:,2),1) + 1;
-                seizureTime = timePoints(find(seizureStart<timePoints(:,2),1) - 1) / frequency_sampling;
-                timeStart = 1;
-                timeEnd = timePoints(size(minPerturb_time_chan,2),1) / frequency_sampling;
                 
-                % make timeStart and timeEnd wrt seizure
-                timeStart = -timeIndex;
-                timeEnd = size(minPerturb_time_chan,2) - timeIndex;
+                % plotting from beginning of recording -> some time
+                % specified up there
+                timeStart = -seizureStart / frequency_sampling;
+                timeEnd = (timePoints(size(minPerturb_time_chan, 2), 2) - seizureStart)/frequency_sampling;
                 
-                PLOTARGS.seizureIndex = seizureIndex;
-                PLOTARGS.seizureEnd = seizureEndIndex;
+%                 PLOTARGS.seizureIndex = seizureIndex;
+%                 PLOTARGS.seizureEnd = seizureEndIndex;
+%                 PLOTARGS.seizureEnd = seizureIndex;
                 PLOTARGS.toSaveFigFile = fullfile(toSaveFigDir, strcat(patient, '_minPerturbation_alldata'));
             else % only plot window of data
                 postWindow = 10;
@@ -270,7 +270,7 @@ end
             end
         end
         
-        PLOTARGS.seizureEnd = 1;
+ 
         %% 2. Plot Min 2-Induced Norm Perturbation and Fragility Ranking
         plotMinimumPerturbation(minPerturb_time_chan, clinicalIndices, timeStart, timeEnd, PLOTARGS);
         
@@ -284,6 +284,6 @@ end
             [perturbationType, ' perturbation: ', ' Time Locked to Seizure']};
         plotFragilityMetric(fragility_rankings, minPerturb_time_chan, clinicalIndices, timeStart, timeEnd, PLOTARGS);
         
-%          close all
+         close all
     end
 end

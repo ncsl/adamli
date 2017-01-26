@@ -38,6 +38,8 @@ function plotFragilityMetric(fragility_mat, minPert_mat, clinicalIndices,...
     axes = gca; currfig = gcf;
     cbar = colorbar(); colormap('jet'); set(axes, 'box', 'off'); set(axes, 'YDir', 'normal');
     labelColorbar(cbar, colorbarStr, FONTSIZE);
+    set(cbar.Label, 'Rotation', 270);
+%     cbar.Label.Position = cbar.Label.Position + [1 0 0];
     
     XLim = get(gca, 'xlim'); XLowerLim = XLim(1); XUpperLim = XLim(2);
 
@@ -66,7 +68,7 @@ function plotFragilityMetric(fragility_mat, minPert_mat, clinicalIndices,...
 
     leg = legend('EZ', 'Early Onset', 'Late Onset');
     try
-        leg.Position = [0.8792    0.0103    0.1021    0.0880];
+        leg.Position = [0.8420    0.0085    0.1179    0.0880];
     catch
         disp('Legend not set yet for patient');
     end
@@ -80,7 +82,7 @@ function plotFragilityMetric(fragility_mat, minPert_mat, clinicalIndices,...
     
     currfig.PaperPosition = [-3.7448   -0.3385   15.9896   11.6771];
     currfig.Position = [1986           1        1535        1121];
-    ylab.Position = ylab.Position + [-.15 0 0]; % move ylabel to the left
+    ylab.Position = ylab.Position + [6 0 0]; % move ylabel to the left
 
     % plot the different labels on different axes to give different colors
     plotOptions = struct();
@@ -90,11 +92,12 @@ function plotFragilityMetric(fragility_mat, minPert_mat, clinicalIndices,...
                                 ezone_indices, ...
                                 earlyspread_indices, ...
                                 latespread_indices)
+    cbar.Label.Position = cbar.Label.Position + [1.2 0 0]; % moving it after resizing
                             
     % plot the second figure
     secfig = subplot(4,6, [6,12,18,24]);
     plot(rowsum, 1:size(fragility_mat,1), 'r'); hold on; set(axes, 'box', 'off');
-    plot(minpertsum, 1:size(minPert_mat, 1), 'k'); 
+%     plot(minpertsum, 1:size(minPert_mat, 1), 'k'); 
     pos = get(gca, 'Position');
     pos(1) = pos(1) + xoffset;
     ylim([1 size(fragility_mat,1)]);
@@ -102,9 +105,10 @@ function plotFragilityMetric(fragility_mat, minPert_mat, clinicalIndices,...
     set(gca, 'Position', pos);
     set(gca, 'YTick', []); set(gca, 'YTickLabel', []);
     set(gca, 'yaxislocation', 'right');
-    rowsumleg = legend('Fragility Row Sum', 'Min Perturb Row Sum');
-    
-    rowsumleg.Position = [0.8493    0.9297    0.1114    0.0308];
+    set(gca, 'XAxisLocation', 'top');
+%     rowsumleg = legend('Fragility Row Sum', 'Min Perturb Row Sum');
+%     
+%     rowsumleg.Position = [0.8493    0.9297    0.1114    0.0308];
     
     % save the figure                 
     if SAVEFIG

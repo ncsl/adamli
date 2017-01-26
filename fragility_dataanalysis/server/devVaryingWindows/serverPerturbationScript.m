@@ -1,7 +1,7 @@
 function serverPerturbationScript(patient, radius, winSize, stepSize, frequency_sampling)
     if nargin == 0 % testing purposes
         patient='EZT007seiz001';
-        patient ='pt1sz2';
+        patient ='pt6sz3';
 %         patient = 'JH102sz1';
         % window paramters
         radius = 1.5;
@@ -21,10 +21,38 @@ function serverPerturbationScript(patient, radius, winSize, stepSize, frequency_
     TYPE_CONNECTIVITY = 'leastsquares';
     IS_SERVER = 1;
     
-    setupScripts;
+    TEST_DESCRIP = [];
+
+    % set patientID and seizureID
+    patient_id = patient(1:strfind(patient, 'seiz')-1);
+    seizure_id = strcat('_', patient(strfind(patient, 'seiz'):end));
+    seeg = 1;
+    if isempty(patient_id)
+        patient_id = patient(1:strfind(patient, 'sz')-1);
+        seizure_id = patient(strfind(patient, 'sz'):end);
+        seeg = 0;
+    end
+    if isempty(patient_id)
+        patient_id = patient(1:strfind(patient, 'aslp')-1);
+        seizure_id = patient(strfind(patient, 'aslp'):end);
+        seeg = 0;
+    end
+    if isempty(patient_id)
+        patient_id = patient(1:strfind(patient, 'aw')-1);
+        seizure_id = patient(strfind(patient, 'aw'):end);
+        seeg = 0;
+    end
+    
+    %- Edit this file if new patients are added.
+    [included_channels, ezone_labels, earlyspread_labels,...
+    latespread_labels, resection_labels, frequency_sampling, ...
+    center] ...
+            = determineClinicalAnnotations(patient_id, seizure_id);
+
     
     % set directory to find adjacency matrix data
-    adjMatDir = '../../serverdata/fixed_adj_mats_win500_step500_freq1000/'; % at lab
+    adjMatDir = fullfile('../../serverdata/adjmats/', strcat('win', num2str(winSize), ...
+    '_step', num2str(stepSize), '_freq', num2str(frequency_sampling))); % at lab
 
     patDir = fullfile(adjMatDir, patient);
     fileName = strcat(patient, '_adjmats_leastsquares.mat');
@@ -62,7 +90,28 @@ function serverPerturbationScript(patient, radius, winSize, stepSize, frequency_
     [T, N, ~] = size(adjMats);
     
     seizureMarkStart = seizure_start / winSize;
-    adjmats = adjMats(1:seizureMarkStart+2,:,:);
+    
+    flag = -1;
+    for i=seizureMarkStart:size(adjMats,1)
+        adjmat = squeeze(adjMats(i, :, :));
+        evs = eig(adjmat);
+%         max(abs(evs))
+        if max(abs(evs)) > 1.4
+            flag = i;
+        end
+        if rank(adjmat) < size(adjmat,1)
+            i 
+        end
+    end
+    flag
+    
+    
+    if flag ~= -1
+        adjMats = adjMats(1:flag-1,:,:);
+    else
+%         adjMats = adjMats(1:seizureMarkStart+2,:,:);
+    end
+    
     [T, N, ~] = size(adjMats);
     
     for j=1:length(perturbationTypes)

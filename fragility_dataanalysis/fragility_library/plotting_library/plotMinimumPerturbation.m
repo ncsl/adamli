@@ -24,12 +24,20 @@ function plotMinimumPerturbation(minPerturb_time_chan, clinicalIndices,...
         seizureEnd = PLOTARGS.seizureEnd;
     end
     
+    %- create rowsum of fragility_mat
+    minpertsum = sum(minPerturb_time_chan, 2);
+    xoffset = 0.05;
+    
     %% Step 1: Plot Heatmap
     fig = figure;
+    firstplot = 1:24;
+    firstplot([6,12,18,24]) = []; hold on;
+    firstfig = subplot(4,6, firstplot);
     imagesc(minPerturb_time_chan); hold on;
     axes = gca; currfig = gcf;
     cbar = colorbar(); colormap('jet'); set(axes, 'box', 'off'); set(axes, 'YDir', 'normal');
     labelColorbar(cbar, colorbarStr, FONTSIZE);
+    set(cbar.Label, 'Rotation', 270);
     
     XLim = get(gca, 'xlim'); XLowerLim = XLim(1); XUpperLim = XLim(2);
 
@@ -57,11 +65,11 @@ function plotMinimumPerturbation(minPerturb_time_chan, clinicalIndices,...
     end
     
     leg = legend('EZ', 'Early Onset', 'Late Onset');
-try
-    leg.Position = [0.8792    0.0103    0.1021    0.0880];
-catch
-    disp('Legend not set yet for patient');
-end
+    try
+        leg.Position = [0.8420    0.0085    0.1179    0.0880];
+    catch
+        disp('Legend not set yet for patient');
+    end
     
     if exist('seizureIndex', 'var') 
         plot([seizureIndex seizureIndex], get(gca, 'YLim'), 'Color', 'black', 'LineWidth', 2);
@@ -72,7 +80,7 @@ end
 
     currfig.PaperPosition = [-3.7448   -0.3385   15.9896   11.6771];
     currfig.Position = [1986           1        1535        1121];
-    ylab.Position = ylab.Position + [-.25 0 0]; % move ylabel to the left
+    ylab.Position = ylab.Position + [6 0 0]; % move ylabel to the left
 
     % plot the different labels on different axes to give different colors
     plotOptions = struct();
@@ -82,6 +90,24 @@ end
                                 ezone_indices, ...
                                 earlyspread_indices, ...
                                 latespread_indices)
+    cbar.Label.Position = cbar.Label.Position + [1.2 0 0]; % moving it after resizing
+                            
+    % plot the second figure
+    secfig = subplot(4,6, [6,12,18,24]);
+%     plot(rowsum, 1:size(fragility_mat,1), 'r'); hold on; set(axes, 'box', 'off');
+    plot(minpertsum, 1:size(minPerturb_time_chan, 1), 'k'); 
+    pos = get(gca, 'Position');
+    pos(1) = pos(1) + xoffset;
+    ylim([1 size(minPerturb_time_chan,1)]);
+    ylabel('Row Sum of Minimum Perturbation', 'FontSize', FONTSIZE-3);
+    set(gca, 'Position', pos);
+    set(gca, 'YTick', []); set(gca, 'YTickLabel', []);
+    set(gca, 'yaxislocation', 'right');
+    set(gca, 'XAxisLocation', 'top');
+%     rowsumleg = legend('Fragility Row Sum', 'Min Perturb Row Sum');
+%     
+%     rowsumleg.Position = [0.8493    0.9297    0.1114    0.0308];
+    
    % save the figure  
     if SAVEFIG
         print(toSaveFigFile, '-dpng', '-r0')
