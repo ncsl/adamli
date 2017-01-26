@@ -38,4 +38,3 @@ else
 	serverPerturbationScript(currentpatient, $radius, $winSize, $stepSize, $center);\
 	exit"
 fi
-fi

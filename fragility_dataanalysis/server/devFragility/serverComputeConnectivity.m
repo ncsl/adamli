@@ -164,6 +164,7 @@ if currentWin == 1
 
     save(fullfile(tempDir, 'infoAdjMat'), 'info');
 end
+fprintf('Should have finished saving info mat.');
 
 % filename to be saved temporarily
 fileName = strcat(patient, '_adjmats_', num2str(currentWin));
