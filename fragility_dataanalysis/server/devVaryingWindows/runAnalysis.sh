@@ -28,13 +28,11 @@ echo $RUNCONNECTIVITY
 # open matlab and call functions
 if [[ "$RUNCONNECTIVITY" -eq 1 ]]; then
 	echo "Running connectivity computation."
-	matlab -logfile /home/ali/adamli/fragility_dataanalysis/server/_log/job$1.txt -nojvm -nodisplay -nosplash -r "currentpatient='$patient'; \
-		serverAdjMainScript(currentpatient, $winSize, $stepSize);\
-		exit"
+	matlab -logfile /home/ali/adamli/fragility_dataanalysis/server/devVaryingWindows/_log/job$1.txt -nojvm -nodisplay -nosplash -r "currentpatient='$patient'; \
+		serverAdjMainScript(currentpatient, $winSize, $stepSize);"
 else
 	echo "Running perturbation computation."
 	# run perturbation analysis
-	matlab -logfile /home/ali/adamli/fragility_dataanalysis/server/_log/job$1.txt -nojvm -nodisplay -nosplash -r "currentpatient='$patient'; \
-	serverPerturbationScript(currentpatient, $radius, $winSize, $stepSize, $center);\
-	exit"
+	matlab -logfile /home/ali/adamli/fragility_dataanalysis/server/devVaryingWindows/_log/job$1.txt -nojvm -nodisplay -nosplash -r "currentpatient='$patient'; \
+		serverPerturbationScript(currentpatient, $radius, $winSize, $stepSize);"
 fi
