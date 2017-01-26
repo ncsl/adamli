@@ -7,8 +7,8 @@ patients = {,...,
 %     'pt2aslp1', 'pt2aslp2', ...
 %     'pt3aw1', ...
 %     'pt3aslp1', 'pt3aslp2', ...
-    'pt1sz2', 'pt1sz3', 'pt1sz4',...
-    'pt2sz1' 'pt2sz3' 'pt2sz4', ...
+%     'pt1sz2', 'pt1sz3', 'pt1sz4',...
+%     'pt2sz1' 'pt2sz3' 'pt2sz4', ...
     'pt3sz2' 'pt3sz4', ...
     'pt6sz3', 'pt6sz4', 'pt6sz5',...
 %     'pt8sz1' 'pt8sz2' 'pt8sz3',...
@@ -60,9 +60,7 @@ addpath(genpath('/home/WIN/ali39/Documents/adamli/fragility_dataanalysis/eeg_too
 %%- Begin Loop Through Different Patients Here
 for p=1:length(patients)
     patient = patients{p};
-   
-%     setupScripts;
-    
+
     % set patientID and seizureID
 patient_id = patient(1:strfind(patient, 'seiz')-1);
 seizure_id = strcat('_', patient(strfind(patient, 'seiz'):end));
@@ -87,23 +85,18 @@ end
             = determineClinicalAnnotations(patient_id, seizure_id);
         
         
-        
-    adjMat = './serverdata/fixed_adj_mats_win';       % get the new data place
-    
+    serverDir = './serverdata/';
     %%- Extract an example
-    adjMatDir = fullfile(strcat(adjMat, num2str(winSize), ...
+    adjMatDir = fullfile(serverDir, 'adjmats', strcat('win', num2str(winSize), ...
         '_step', num2str(stepSize), '_freq', num2str(frequency_sampling)), patient);
     
     if ~isempty(TEST_DESCRIP)
         adjMatDir = fullfile(adjMatDir, TEST_DESCRIP);
     end
-    finalDataDir = fullfile(adjMatDir, strcat(perturbationType, '_perturbations', ...
-            '_radius', num2str(radius)));
     
-    % temp dir until I get everything fixed.
-    finalDataDir = fullfile(strcat(adjMat, num2str(winSize), ...
-        '_step', num2str(stepSize), '_freq', num2str(frequency_sampling)), strcat(perturbationType, '_perturbations', ...
-            '_radius', num2str(radius)), '_newfixedalg');
+    % directory that computed perturbation structs are saved
+    finalDataDir = fullfile(serverDir, strcat(perturbationType, '_perturbations', ...
+            '_radius', num2str(radius)), patient);
         
     try
         final_data = load(fullfile(finalDataDir, strcat(patient, ...
@@ -124,13 +117,14 @@ end
     num_channels = size(minPerturb_time_chan,1);
     seizureStart = info.seizure_start;
     seizureEnd = info.seizure_end;
+    included_labels = info.all_labels;
  
     %%- Get Indices for All Clinical Annotations
-    if ~isempty(included_channels)
-        included_labels = labels(included_channels);
-    else
-        included_labels = labels;
-    end
+%     if ~isempty(included_channels)
+%         included_labels = labels(included_channels);
+%     else
+%         included_labels = labels;
+%     end
     ezone_indices = findElectrodeIndices(ezone_labels, included_labels);
     earlyspread_indices = findElectrodeIndices(earlyspread_labels, included_labels);
     latespread_indices = findElectrodeIndices(latespread_labels, included_labels);
@@ -173,16 +167,10 @@ end
             mkdir(toSaveWeightsDir);
         end
            
-        % temp dir until I get everything fixed.
-        finalDataDir = fullfile(strcat(adjMat, num2str(winSize), ...
-            '_step', num2str(stepSize), '_freq', num2str(frequency_sampling)), strcat(perturbationType, '_perturbations', ...
-                '_radius', num2str(radius)), '_newfixedalg');
+        % directory that computed perturbation structs are saved
+        finalDataDir = fullfile(serverDir, strcat(perturbationType, '_perturbations', ...
+            '_radius', num2str(radius)), patient);
         
-%         finalDataDir = fullfile(adjMatDir, strcat(perturbationType, '_perturbations', ...
-%             '_radius', num2str(radius)));
-            
-         %%- Extract an example
-%         finalDataDir = toSaveFinalDataDir;
         try
             final_data = load(fullfile(finalDataDir, strcat(patient, ...
                 '_', perturbationType, 'perturbation_', lower(TYPE_CONNECTIVITY), '.mat')));
@@ -233,7 +221,7 @@ end
         PLOTARGS.titleStr = {['Minimum Norm Perturbation (', patient, ')'], ...
             [perturbationType, ' perturbation: ', ' Time Locked to Seizure']};
 
-        if seizureStart == size(eeg,2) % interictal data
+        if seizureStart == size(minPerturb_time_chan,1)*winSize % interictal data
             timeStart = 1;
             timeEnd = timePoints(size(minPerturb_time_chan,2),1) / frequency_sampling;
             if PLOTALL

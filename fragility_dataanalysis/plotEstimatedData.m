@@ -23,10 +23,7 @@ BP_FILTER = 1;
 
 addpath(genpath('./eeg_toolbox'));
 
-winSize = 500;
 winSizes = [125, 250, 500, 1000];
-
-errors = zeros(length(winSizes), 1);
 mses = zeros(length(winSizes), 1);
 
 patient = 'pt1sz4';
@@ -62,7 +59,7 @@ end
             = determineClinicalAnnotations(patient_id, seizure_id);
 
         
-
+%%- Main Loop through Window Sizes
 for i=1:length(winSizes)
     winSize = winSizes(i);
 
@@ -167,36 +164,10 @@ for i=1:length(winSizes)
     end
     toc;
     
-    % compute difference metric between observed and estimated
-    mse = immse(preSeiz_hat(exChans, :), preSeizData(exChans,:));
-    
-    %% Reconstruct during seizure data
-%     seizData = double(data(:, seizureStart:seizureStart+5000));
-%     seizA = adjmat_struct.adjMats(seizureStartMark:seizureStartMark+10,:,:);
-%     
-%     seiz_hat = zeros(size(seizData));
-%     [numChans, numTimes] = size(seizData);
-%     numWin = numTimes / winSize;
-%     
-%       evals = zeros(numWins, 1);
-%     tic;
-%     for iWin=1:numWins              % loop through number of windows
-%         initialTime = (iWin-1)*winSize + 1;
-%         seiz_hat(:, initialTime) = seizData(:, initialTime);
-% 
-%         currentA = squeeze(seizA(iWin, :, :));
-%         for iTime=initialTime+1:initialTime+winSize-1   % loop through time points to estimate data
-%     %         iTime
-%             seiz_hat(:, iTime) = currentA*seiz_hat(:, iTime-1);
-%         end
-%         evals(iWin) = max(abs(eig(currentA)));
-%     end
-%     toc;
-    
+    timePoints = [1:2000, seizureStart-2000:seizureStart, seizureStart+500:seizureStart+2500];
+    timePoints = [1:2000, seizureStart-2000:seizureStart, seizureStart+500:seizureStart+2500];
     %% Plotting
     FONTSIZE = 18;
-    timePoints = [1:2000, seizureStart-2000:seizureStart, seizureStart+500:seizureStart+2500];
-    timePoints = [1:2000, seizureStart-2000:seizureStart, seizureStart+500:seizureStart+2500];
     offset = 0;
     temp = preSeizData(exChans,timePoints);
     maxoffset = 1.5 * max(abs(temp(:)));
@@ -238,32 +209,7 @@ for i=1:length(winSizes)
         if iChan==1
             minVal = min([prevdatatrue, prevdatahat]); 
             maxVal = max([prevdatatrue, prevdatahat]); 
-        else    %% Reconstruct postseizure data
-    % postSeiz_hat = zeros(size(postSeizData));
-    % [numChans, numTimes] = size(postSeizData);
-    % numWins = numTimes / winSize;
-    % 
-    % if numWins ~= size(postSeizA, 1);
-    %     disp('There is an error in the number of windows!');
-    % end
-    % 
-    % for iWin=1:numWins              % loop through number of windows
-    %     initialTime = (iWin-1)*winSize + 1;
-    %     postSeiz_hat(:, initialTime) = postSeizData(:, initialTime);
-    %     
-    %     currentA = squeeze(postSeizA(iWin, :, :));
-    %     for iTime=initialTime+1:initialTime+winSize-1   % loop through time points to estimate data
-    %         iTime
-    %         postSeiz_hat(:, iTime) = currentA*postSeiz_hat(:, iTime-1);
-    %     end
-    %     
-    % %     exChan = 2;
-    % %     chanData = preSeizData(exChan, :);
-    % %     chanHat = preSeiz_hat(exChan, :);
-    % %     figure;
-    % %     plot(chanData(1:2000), 'k'); hold on;
-    % %     plot(chanHat(1:2000), 'r')
-    % end
+        else    
             minVal = min([minVal, prevdatatrue, prevdatahat]); 
             maxVal = max([maxVal, prevdatatrue, prevdatahat]);
         end
@@ -330,9 +276,8 @@ for i=1:length(winSizes)
     toSaveFigFile = fullfile(toSaveFigDir, strcat(patient, '_seeg3_', num2str(winSize)));
     print(toSaveFigFile, '-dpng', '-r0')
     
-    error = norm(preSeiz_hat(exChans, timePoints) - preSeizData(exChans,timePoints)) / (length(timePoints));
+    % store MSE of Reconstruction
     mse = immse(preSeiz_hat(exChans, timePoints), preSeizData(exChans,timePoints))/ (length(timePoints));
-    errors(i) = error;
     mses(i) = mse;
 end
 
