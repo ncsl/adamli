@@ -5,7 +5,8 @@ patient="$1"
 RUNCONNECTIVITY="$2" 
 numWins="$3"
 
-NprocperNode=8    					# number of processors per node
+NprocperNode=5    					# number of processors per node
+NNodes=$(($NprocperNode-1))
 Nnode=$((${3}/${NprocperNode}+1)) 	# the node to compute on
 walltime=00:01:00					# the walltime for each computation
 
@@ -27,6 +28,6 @@ for inode in `seq 1 $Nnode`; do
 	# 	echo $proc
 	# done
 	# run a pbs batch job. Make sure there are no spaces in between the parameters passed
-	qsub -v RUNCONNECTIVITY=${RUNCONNECTIVITY},patient=${patient},currentNode=${currentNode} -N ${jobname} -l nodes=1:ppn=${NprocperNode},walltime=${walltime} run_job.pbs
+	qsub -v RUNCONNECTIVITY=${RUNCONNECTIVITY},patient=${patient},currentNode=${currentNode},NprocperNode=${NNodes} -N ${jobname} -l nodes=1:ppn=${NprocperNode},walltime=${walltime} run_job.pbs
 done
 
