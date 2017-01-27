@@ -105,17 +105,20 @@ for iPat=1:length(patients) % loop through each patient
         max(abs(rowPertEVals))
         
         figure;
-        plot(real(evals), imag(evals), 'ko', 'MarkerSize', MARKERSIZE); hold on; set(gca, 'box', 'off')
+        plot(real(evals), imag(evals), 'k.', 'MarkerSize', MARKERSIZE+10); hold on; set(gca, 'box', 'off')
         plot(real(rowPertEVals), imag(rowPertEVals), 'ro', 'MarkerSize', MARKERSIZE);
         plot(real(colPertEVals), imag(colPertEVals), 'g*', 'MarkerSize', MARKERSIZE);
-        xlabel('Real Part', 'FontSize', FONTSIZE);
-        ylabel('Imag Part', 'FontSize', FONTSIZE);
-        title(['Eigenspectrum of ', patient, ' channel ', num2str(exChan)], 'FontSize', FONTSIZE);
+%         plot(1.5, 0, 'b*', 'MarkerSize', MARKERSIZE+5);
+        xlabel('Real Part', 'FontSize', FONTSIZE+6);
+        ylabel('Imag Part', 'FontSize', FONTSIZE+6);
+        title(['Eigenspectrum of ', patient, ' channel ', num2str(exChan)], 'FontSize', FONTSIZE+6);
         legend('Before', 'After Row', 'After Col');
-        
+%         legend('Before', 'After Perturbation');
         xlim([-0.5 1.6]);
         ylim([-0.85 0.85]);
         
+        xlim([0 1.5])
+        ylim([-0.5 0.5]);
         currfig = gcf;
         currfig.Position = [1666 1 1535 1121];
         currfig.PaperPosition = [ -3.7448   -0.3385   15.9896   11.6771];

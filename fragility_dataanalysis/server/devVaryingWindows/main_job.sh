@@ -28,12 +28,12 @@ patients=(
 	# pt3sz2 pt3sz4
 	# pt6sz3 pt6sz4 pt6sz5')
 	# pt8sz1 pt8sz2 pt8sz3')
-	# 'pt10sz1 pt10sz2 pt10sz3
-	# pt11sz1 pt11sz2 pt11sz3 pt11sz4
-	# pt14sz1 pt14sz2 pt14sz3 pt15sz1 pt15sz2 pt15sz3 pt15sz4
-	# pt16sz1 pt16sz2 pt16sz3 
-	# pt17sz1 pt17sz2')
-	'pt1sz2 EZT019seiz002')
+	'pt10sz1 pt10sz2 pt10sz3
+	pt11sz1 pt11sz2 pt11sz3 pt11sz4
+	pt14sz1 pt14sz2 pt14sz3 pt15sz1 pt15sz2 pt15sz3 pt15sz4
+	pt16sz1 pt16sz2 pt16sz3 
+	pt17sz1 pt17sz2')
+	# 'pt1sz2 EZT019seiz002')
 	# 'EZT019seiz001 EZT019seiz002 EZT019seiz003
 	# EZT005seiz001 EZT005seiz002 EZT005seiz003
 	# EZT007seiz001 EZT007seiz002 EZT007seiz003
