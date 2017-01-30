@@ -27,7 +27,7 @@ winSizes = [125, 250, 500, 1000];
 mses = zeros(length(winSizes), 1);
 
 patient = 'pt1sz4';
-patient = 'EZT019seiz002';
+% patient = 'EZT019seiz002';
 
 patient_id = patient(1:strfind(patient, 'seiz')-1);
 seizure_id = strcat('_', patient(strfind(patient, 'seiz'):end));
@@ -107,7 +107,7 @@ for i=1:length(winSizes)
     labels = adjmat_struct.all_labels;
     
     if i==1
-            %- get 2 channels from EZ and 2 channels from outside EZ
+        %- get 2 channels from EZ and 2 channels from outside EZ
         ezElecs = findElectrodeIndices(ezone_labels, labels)';
         randez = randsample(length(ezone_labels), 2);
         ezIndices = ezElecs(randez);
@@ -167,7 +167,7 @@ for i=1:length(winSizes)
     timePoints = [1:2000, seizureStart-2000:seizureStart, seizureStart+500:seizureStart+2500];
     timePoints = [1:2000, seizureStart-2000:seizureStart, seizureStart+500:seizureStart+2500];
     %% Plotting
-    FONTSIZE = 18;
+    FONTSIZE = 24;
     offset = 0;
     temp = preSeizData(exChans,timePoints);
     maxoffset = 1.5 * max(abs(temp(:)));
@@ -216,8 +216,8 @@ for i=1:length(winSizes)
         
         offset = 10;
         
-        plot(datahat, 'k'); hold on;
-        plot(datatrue, 'r'); 
+        plot(datahat, 'k', 'LineWidth', 1.75); hold on;
+        plot(datatrue, 'r--', 'LineWidth', 3); 
         
         yticklocs(iChan) = mean(datatrue);
     end
@@ -226,11 +226,11 @@ for i=1:length(winSizes)
     xlabel('Time Period (2 seconds per window)', 'FontSize', FONTSIZE);
     ylab = ylabel('Electrodes', 'FontSize', FONTSIZE);
     title(titleStr, 'FontSize', FONTSIZE);
-    legend('LTV Model', 'Actual Data');
+    leg = legend('LTV Model', 'Actual Data');
    
     % set x axes
     set(ax, 'XTick', [1000 3000 5000]);
-    set(ax, 'XTickLabel', {'Interictal', 'Preictal', 'Ictal'});
+    set(ax, 'XTickLabel', {'Interictal', 'Preictal', 'Ictal'}, 'FontSize', FONTSIZE);
 
     currfig.PaperPosition = [-3.7448   -0.3385   15.9896   11.6771];
     currfig.Position = [1666 1 1535 1121];
@@ -266,14 +266,14 @@ for i=1:length(winSizes)
         'box', 'off');
     set(ax2, 'XTick', []);
     set(ax2, 'YTick', yticklocs(3:4), 'YTickLabel', labels(randIndices), 'FontSize', FONTSIZE);
-    
+    leg.Position = leg.Position + [0.05 0.075 0 0];
     
     toSaveFigDir = fullfile('./figures/ltvcomparison/', center);
     if ~exist(toSaveFigDir, 'dir')
         mkdir(toSaveFigDir);
     end
     
-    toSaveFigFile = fullfile(toSaveFigDir, strcat(patient, '_seeg3_', num2str(winSize)));
+    toSaveFigFile = fullfile(toSaveFigDir, strcat(patient, '_ecog5_', num2str(winSize)));
     print(toSaveFigFile, '-dpng', '-r0')
     
     % store MSE of Reconstruction
@@ -294,5 +294,5 @@ ylabel('Mean Squared Error', 'FontSize', FONTSIZE);
 currfig = gcf;
 currfig.PaperPosition = [-3.7448   -0.3385   15.9896   11.6771];
 currfig.Position = [1666 1 1535 1121];
-toSaveFigFile = fullfile(toSaveFigDir, strcat(patient, '_seegerrors3_', num2str(winSize)));
+toSaveFigFile = fullfile(toSaveFigDir, strcat(patient, '_ecogerrors5_', num2str(winSize)));
 print(toSaveFigFile, '-dpng', '-r0')

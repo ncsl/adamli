@@ -11,12 +11,12 @@ patients = {,...
 %     'pt2aw1', 'pt2aw2', ...
 %     'pt2aslp1', 'pt2aslp2', ...
 %     'pt3aw1', 'pt3aslp1', 'pt3aslp2',...
-    'pt8sz1' 'pt8sz2' 'pt8sz3',...
-    'pt10sz1' 'pt10sz2' 'pt10sz3', ...
-    'pt11sz1' 'pt11sz2' 'pt11sz3' 'pt11sz4', ...
-    'pt14sz1' 'pt14sz2' 'pt14sz3' 'pt15sz1' 'pt15sz2' 'pt15sz3' 'pt15sz4',...
-    'pt16sz1' 'pt16sz2' 'pt16sz3',...
-    'pt17sz1' 'pt17sz2' 'pt17sz3',...
+%     'pt8sz1' 'pt8sz2' 'pt8sz3',...
+%     'pt10sz1' 'pt10sz2' 'pt10sz3', ...
+%     'pt11sz1' 'pt11sz2' 'pt11sz3' 'pt11sz4', ...
+%     'pt14sz1' 'pt14sz2' 'pt14sz3' 'pt15sz1' 'pt15sz2' 'pt15sz3' 'pt15sz4',...
+%     'pt16sz1' 'pt16sz2' 'pt16sz3',...
+%     'pt17sz1' 'pt17sz2' 'pt17sz3',...
 %     'JH101sz1' 'JH101sz2' 'JH102sz3' 'JH102sz4',...
 % 	'JH102sz1' 'JH102sz2' 'JH102sz3' 'JH102sz4' 'JH102sz5' 'JH102sz6',...
 % 	'JH103sz1' 'JH102sz2' 'JH102sz3',...
@@ -24,15 +24,16 @@ patients = {,...
 % 	'JH105sz1' 'JH105sz2' 'JH105sz3' 'JH105sz4' 'JH105sz5',...
 % 	'JH106sz1' 'JH106sz2' 'JH106sz3' 'JH106sz4' 'JH106sz5' 'JH106sz6',...
 % 	'JH107sz1' 'JH107sz2' 'JH107sz3' 'JH107sz4' 'JH107sz5' 'JH107sz6' 'JH107sz7' 'JH107sz8' 'JH107sz8',...
-%     'JH102sz1',
-%     'JH102sz2', 'JH102sz3', 'JH102sz4', 'JH102sz5', 'JH102sz6',...
-    %'EZT030seiz001' ...
-%     'EZT030seiz002' 'EZT037seiz001' 'EZT037seiz002',...
-% 	'EZT070seiz001' 'EZT070seiz002', ...
-% 	'JH104sz1' 'JH104sz2' 'JH104sz3',...
-%     'pt1sz2', 'pt1sz3', 'pt2sz1', 'pt2sz3', 'JH105sz1', 'pt7sz19', 'pt7sz21', 'pt7sz22',  ...
-%     'EZT005_seiz001', 'EZT005_seiz002', 'EZT007_seiz001', 'EZT007_seiz002', ...
-%     'EZT019_seiz001', 'EZT019_seiz002', 'EZT090_seiz002', 'EZT090_seiz003', ...
+'pt8sz1' 'pt8sz2' 'pt8sz3',...
+    'pt10sz1' 'pt10sz2' 'pt10sz3', ...
+    'pt11sz1' 'pt11sz2' 'pt11sz3' 'pt11sz4', ...
+    'pt14sz1' 'pt14sz2' 'pt14sz3' 'pt15sz1' 'pt15sz2' 'pt15sz3' 'pt15sz4',...
+    'pt16sz1' 'pt16sz2' 'pt16sz3',...
+    'pt17sz1' 'pt17sz2' 'pt17sz3',...
+  'EZT037seiz001', 'EZT037seiz002',...
+   'EZT019seiz001', 'EZT019seiz002',...
+   'EZT005seiz001', 'EZT005seiz002', 'EZT007seiz001', 'EZT007seiz002', ...
+   	'EZT070seiz001', 'EZT070seiz002', ...
     };
 
 addpath(genpath('./spectral_library/'));
@@ -95,7 +96,7 @@ end
 eegRootDirWork = '/Users/liaj/Documents/MATLAB/paremap';     % work
 % eegRootDirHome = '/Users/adam2392/Documents/MATLAB/Johns Hopkins/NINDS_Rotation';  % home
 eegRootDirHome = '/Volumes/NIL_PASS';
-eegRootDirJhu = '/home/WIN/ali39/Documents/adamli/';
+eegRootDirJhu = '/home/WIN/ali39/Documents/adamli/fragility_dataanalysis/data';
 % Determine which directory we're working with automatically
 if     ~isempty(dir(eegRootDirWork)), eegRootDir = eegRootDirWork;
 elseif ~isempty(dir(eegRootDirHome)), eegRootDir = eegRootDirHome;
@@ -115,7 +116,7 @@ waveletFreqs = eeganalparams('freqs');
 waveletWidth = eeganalparams('width');
 
 for iPat=1:length(patients)
-    patient = patients{1};
+    patient = patients{iPat};
     % set patientID and seizureID
     patient_id = patient(1:strfind(patient, 'seiz')-1);
     seizure_id = strcat('_', patient(strfind(patient, 'seiz'):end));
@@ -147,8 +148,16 @@ for iPat=1:length(patients)
     end
     toSaveDir
 
-    eegRootDir = fullfile(eegRootDir, 'fragility_dataanalysis', 'data', center);
-    data_struct = load(fullfile(eegRootDir, patient, patient));
+    if seeg
+        patient = strcat(patient_id, seizure_id);
+        eegDir = fullfile(eegRootDir, center);
+        data_struct = load(fullfile(eegDir, patient_id, patient));
+    else
+        eegDir = fullfile(eegRootDir, center);
+        data_struct = load(fullfile(eegDir, patient, patient));
+    end
+    
+
     [numChannels, eventDurationMS] = size(data_struct.data);
     elec_labels = data_struct.elec_labels;
     seizure_start = data_struct.seiz_start_mark;
@@ -161,16 +170,13 @@ for iPat=1:length(patients)
         eegWaveV = [zeros(1, BufferMS), eegWaveV, zeros(1, BufferMS)];
         
          % notch filter to eliminate 60 Hz noise
-        fprintf(' [%.1f sec] --> notch filt\n', toc); tic;
         eegWaveV = buttfilt(eegWaveV,[59.5 60.5],resampledrate,'stop',1); %-filter is overkill: order 1 --> 25 dB drop (removing 5-15dB peak)
 
         if strcmp(typeTransform, 'morlet') % OPTION 1: perform wavelet spectral analysis
             %%- i. multiphasevec3: get the phase and power
             % power, phase matrices for events x frequency x duration of time for each channel
-            fprintf(' [%.1f sec] --> freq decomp', toc); tic;
             [rawPhase,rawPow] = multiphasevec3(waveletFreqs,eegWaveV,resampledrate,waveletWidth);
-            fprintf(' [%.1f sec] --> save \n', toc);  tic;
-
+            
             %%- ii. REMOVE LEADING/TRAILING buffer areas from power, phase,
             %%eegWave, timeVector
             rawPow   = rawPow(:,:,BufferMS+1:end-BufferMS);
@@ -183,43 +189,41 @@ for iPat=1:length(patients)
             powerMat = 10*log10(rawPow);
             phaseMat = rawPhase;
             freqs = waveletFreqs;
-
-            fprintf(' [%.1f sec]', toc); tic;
-            clear rawPow rawPhase
-            disp('Morlet wavelet computed and power matrix computed...')
+            
+            disp(['Morlet wavelet computed and power matrix computed for ...', num2str(iChan)])
         end
         
-        powerMatZ = zeros(size(powerMat));
+%         powerMatZ = zeros(size(powerMat));
         iF  = 1:length(waveletFreqs); % # of freqs.
         iT  = 1:size(powerMat, 3); % # of time points
 
         %% B. Z-SCORE POWER MATRIX
         % indices of the powerMat to Z-score wrt
-        for iF = 1:length(freqs),
-            allVal = reshape(squeeze(powerMat(:,iF,iT)),length(1)*length(iT),1); %allVal for particular chan and freq
-            mu = mean(allVal); stdev = std(allVal);
-
-            % create the power matrix
-            powerMatZ(:,iF,iT) = (powerMat(:,iF,iT)-mu)/stdev;
-            if sum(isnan(powerMatZ(:,iF,iT)))>0
-                keyboard;
-            end
-        end
-        
-        
+%         for iF = 1:length(freqs),
+%             allVal = reshape(squeeze(powerMat(:,iF,iT)),length(1)*length(iT),1); %allVal for particular chan and freq
+%             mu = mean(allVal); stdev = std(allVal);
+% 
+%             % create the power matrix
+%             powerMatZ(:,iF,iT) = (powerMat(:,iF,iT)-mu)/stdev;
+%             if sum(isnan(powerMatZ(:,iF,iT)))>0
+%                 keyboard;
+%             end
+%         end
+%         
+        %%- condense matrices
         rangeFreqs = reshape([freqBandAr.rangeF], 2, 7)';
         if strcmp(typeTransform, 'morlet')
             %%- TIME BIN POWERMATZ WITH WINDOWSIZE AND OVERLAP
-            powerMatZ = timeBinSpectrogram(powerMatZ, winSize, stepSize);
+            powerMat = timeBinSpectrogram(powerMat, winSize, stepSize);
             phaseMat = timeBinSpectrogram(phaseMat, winSize, stepSize);
             
             %%- FREQUENCY BIN WITH FREQUENCY BANDS
-            powerMatZ = freqBinSpectrogram(powerMatZ, rangeFreqs, waveletFreqs);
+            powerMat = freqBinSpectrogram(powerMat, rangeFreqs, waveletFreqs);
             phaseMat = freqBinSpectrogram(phaseMat, rangeFreqs, waveletFreqs);
 
             % create 2D array to show time windows occupied by each index of new
             % power matrix
-            tWin = zeros(size(powerMatZ, 3), 2);
+            tWin = zeros(size(powerMat, 3), 2);
             tWin(:,1) = 0 : stepSize : eventDurationMS-winSize;
             tWin(:,2) = winSize : stepSize : eventDurationMS;
         end
@@ -230,8 +234,8 @@ for iPat=1:length(patients)
         chanData.chanNum = iChan;
         chanData.chanStr = elec_labels{iChan};
         chanData.freqBands = {freqBandAr.name};
-        chanData.powerMatZ = powerMatZ;
-        chanData.phaseMat = phaseMat;
+        chanData.powerMatZ = squeeze(powerMat);
+        chanData.phaseMat = squeeze(phaseMat);
         chanData.seizure_end = seizure_end;
         chanData.seizure_start = seizure_start;
         chanData.winSize = winSize;
