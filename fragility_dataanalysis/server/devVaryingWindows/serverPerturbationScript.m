@@ -126,8 +126,9 @@ function serverPerturbationScript(patient, radius, winSize, stepSize)
                 lower(TYPE_CONNECTIVITY), '_radius', num2str(radius), '.mat');
        
         toSavePertDir = fullfile(serverDir, ...
+            strcat(perturbationType, '_perturbations', '_radius', num2str(radius)),...
             strcat('win', num2str(winSize), '_step', num2str(stepSize), '_freq', num2str(frequency_sampling)), ...
-            strcat(perturbationType, '_perturbations', '_radius', num2str(radius)), patient);
+            patient);
         if ~exist(toSavePertDir, 'dir')
             mkdir(toSavePertDir);
         end
