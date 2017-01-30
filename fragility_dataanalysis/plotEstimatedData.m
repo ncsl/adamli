@@ -27,7 +27,7 @@ winSizes = [125, 250, 500, 1000];
 mses = zeros(length(winSizes), 1);
 
 patient = 'pt1sz4';
-% patient = 'EZT019seiz002';
+patient = 'EZT019seiz002';
 
 patient_id = patient(1:strfind(patient, 'seiz')-1);
 seizure_id = strcat('_', patient(strfind(patient, 'seiz'):end));
@@ -273,7 +273,7 @@ for i=1:length(winSizes)
         mkdir(toSaveFigDir);
     end
     
-    toSaveFigFile = fullfile(toSaveFigDir, strcat(patient, '_ecog1_', num2str(winSize)));
+    toSaveFigFile = fullfile(toSaveFigDir, strcat(patient, '_seeg4_', num2str(winSize)));
     print(toSaveFigFile, '-dpng', '-r0')
     
     % store MSE of Reconstruction
@@ -295,5 +295,5 @@ set(gca, 'XTickLabel', [125 250 500 100], 'FontSize', FONTSIZE);
 currfig = gcf;
 currfig.PaperPosition = [-3.7448   -0.3385   15.9896   11.6771];
 currfig.Position = [1666 1 1535 1121];
-toSaveFigFile = fullfile(toSaveFigDir, strcat(patient, '_ecogerrors1_', num2str(winSize)));
+toSaveFigFile = fullfile(toSaveFigDir, strcat(patient, '_seegerrors4_', num2str(winSize)));
 print(toSaveFigFile, '-dpng', '-r0')
