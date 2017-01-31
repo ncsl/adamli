@@ -16,7 +16,7 @@ function serverPerturbationScript(patient, radius, winSize, stepSize)
 
     % analysis parameters
     perturbationTypes = ['C', 'R'];
-    w_space = linspace(-radius, radius, 51);
+    w_space = linspace(-radius, radius, 100);
 
     TYPE_CONNECTIVITY = 'leastsquares';
     IS_SERVER = 1;
@@ -127,7 +127,7 @@ function serverPerturbationScript(patient, radius, winSize, stepSize)
        
         toSavePertDir = fullfile(serverDir, ...
             strcat(perturbationType, '_perturbations', '_radius', num2str(radius)),...
-            strcat('win', num2str(winSize), '_step', num2str(stepSize), '_freq', num2str(frequency_sampling)), ...
+            strcat('no0hz_win', num2str(winSize), '_step', num2str(stepSize), '_freq', num2str(frequency_sampling)), ...
             patient);
         if ~exist(toSavePertDir, 'dir')
             mkdir(toSavePertDir);
