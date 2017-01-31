@@ -43,36 +43,28 @@ exChan = 1;
 FONTSIZE = 18;
 MARKERSIZE = 12;
 
-serverDataDir = './serverdata/fixed_adj_mats_win500_step500_freq1000/';
-adjMatDir = serverDataDir;
-finalRowDataDir = fullfile(serverDataDir, 'R_perturbations_radius1.5/')
-finalColDataDir = fullfile(serverDataDir, 'C_perturbations_radius1.5/')
+serverDataDir = './serverdata/';
+adjMatDir = fullfile(serverDataDir, 'adjmats/win500_step500_freq1000/');
+finalRowDataDir = fullfile(serverDataDir, 'R_perturbations_radius1.5/', 'no0hz_win500_step500_freq1000')
+finalColDataDir = fullfile(serverDataDir, 'C_perturbations_radius1.5/', 'no0hz_win500_step500_freq1000')
 
 %% Output Spectral Map Per Patient
 for iPat=1:length(patients) % loop through each patient
     % load in the fragility data for row and column
     patient = patients{iPat};
-    
-    finalRowDataDir = fullfile(serverDataDir, patient, 'R_perturbations_radius1.5/_newfixedalg')
-    finalColDataDir = fullfile(serverDataDir, patient, 'C_perturbations_radius1.5/_newfixedalg')
-
-    finalRowDataDir = fullfile(serverDataDir, 'R_perturbations_radius1.5/_newfixedalg')
-    finalColDataDir = fullfile(serverDataDir, 'C_perturbations_radius1.5/_newfixedalg')
-
-    
-    
+        
     if ~exist(fullfile(figDir, patient), 'dir')
         mkdir(fullfile(figDir, patient));
     end
     
     % get the perturbation structures
-    patRowFragilityDir = fullfile(finalRowDataDir, strcat(patient, '_Rperturbation_leastsquares_radius1.5.mat'));
+    patRowFragilityDir = fullfile(finalRowDataDir, patient, strcat(patient, '_Rperturbation_leastsquares_radius1.5.mat'));
     finalRowData = load(patRowFragilityDir);
     rowPerturbations = finalRowData.perturbation_struct.del_table;
     
-    patColFragilityDir = fullfile(finalColDataDir, strcat(patient, '_Cperturbation_leastsquares_radius1.5.mat'));
+    patColFragilityDir = fullfile(finalColDataDir, patient, strcat(patient, '_Cperturbation_leastsquares_radius1.5.mat'));
     finalColData = load(patColFragilityDir);
-    colPerturbations = finalColData.perturbation_struct.info.del_table;
+    colPerturbations = finalColData.perturbation_struct.del_table;
     
     % get the adjacency mat strcutures
     adjMatFile = fullfile(adjMatDir, patient, strcat(patient, '_adjmats_leastsquares.mat'));
@@ -92,9 +84,17 @@ for iPat=1:length(patients) % loop through each patient
         ek = [zeros(exChan-1, 1); 1; zeros(numChans-exChan, 1)];
         
         % create perturbation matrices
-        coltemp = del_col'*ek';
-        rowtemp = ek*del_row';
-        
+        try
+            coltemp = del_col'*ek';
+            rowtemp = ek*del_row';
+        catch e
+            disp(e)
+            coltemp = del_col*ek';
+            rowtemp = ek*del_row';
+            
+            figure; imagesc(coltemp)
+            figure; imagesc(rowtemp)
+        end
         evals = eig(adjMat);
         test = adjMat + rowtemp;
         rowPertEVals = eig(test);
@@ -114,11 +114,11 @@ for iPat=1:length(patients) % loop through each patient
         title(['Eigenspectrum of ', patient, ' channel ', num2str(exChan)], 'FontSize', FONTSIZE+6);
         legend('Before', 'After Row', 'After Col');
 %         legend('Before', 'After Perturbation');
-        xlim([-0.5 1.6]);
-        ylim([-0.85 0.85]);
+%         xlim([-0.5 1.6]);
+%         ylim([-0.85 0.85]);
         
-        xlim([0 1.5])
-        ylim([-0.5 0.5]);
+%         xlim([0 1.5])
+%         ylim([-0.5 0.5]);
         currfig = gcf;
         currfig.Position = [1666 1 1535 1121];
         currfig.PaperPosition = [ -3.7448   -0.3385   15.9896   11.6771];
