@@ -13,12 +13,29 @@ function [included_channels, ezone_labels, ...
         earlyspread_labels = {};
         latespread_labels = {};
         center = 'cc';
+    elseif strcmp(patient_id, 'EZT004')
+        included_channels = [];
+        ezone_labels = {};
+        earlyspread_labels = {};
+        latespread_labels = {};
+        resection_labels = {};
+        
+        center = 'cc';
     elseif strcmp(patient_id, 'EZT005')
         included_channels = [1:21 23:60 63:88];
         ezone_labels = {'U3', 'U4','U5', 'U6', 'U7', 'U8'}; 
         earlyspread_labels = {};
          latespread_labels = {};
          center = 'cc';
+    elseif strcmp(patient_id, 'EZT006')
+        included_channels = [];
+        ezone_labels = {};
+        earlyspread_labels = {};
+        latespread_labels = {};
+        resection_labels = {};
+        
+        center = 'cc';
+        
     elseif strcmp(patient_id, 'EZT019')
         % resections: A,B,C,E,I AND likely T
         included_channels = [1:5 7:22 24:79];
@@ -26,12 +43,12 @@ function [included_channels, ezone_labels, ...
 %             'T9', 'I7', 'B3', 'B5', 'B4', 'I8', 'T6', 'B10', 'T3', ...
 %             'B1', 'T8', 'T7', 'B7', 'I3', 'B2', 'I2', 'T4', 'T2'}; 
         ezone_labels = {'B3', 'B4', 'C1', 'C2'};
-        ezone_labels = {'B3', 'B4', 'C2'}; % to run estimation alg win size testing
+%         ezone_labels = {'B3', 'B4', 'C2'}; % to run estimation alg win size testing
         earlyspread_labels = {};
         latespread_labels = {}; 
         resection_labels = {'A', 'B', 'C', 'E', 'I', 'X'}
         center = 'cc';
-    elseif strcmp(patient_id, 'EZT030')
+    elseif strcmp(patient_id, 'EZT030') % general seizures
         included_channels = [];
         ezone_labels = {'Q11', 'L6', 'M9', 'N9', 'W9'};
         earlyspread_labels = {};
