@@ -95,17 +95,27 @@ function plotFragilityMetric(fragility_mat, minPert_mat, clinicalIndices,...
     cbar.Label.Position = cbar.Label.Position + [1.2 0 0]; % moving it after resizing
                             
     % plot the second figure
+    xrange = 1:size(fragility_mat, 1);
+    xrange(ezone_indices) = [];
+    avge = mean(rowsum);
+    
     secfig = subplot(4,6, [6,12,18,24]);
-    plot(rowsum, 1:size(fragility_mat,1), 'r'); hold on; set(axes, 'box', 'off');
-%     plot(minpertsum, 1:size(minPert_mat, 1), 'k'); 
+    stem(xrange, rowsum(xrange), 'k'); hold on;
+    stem(ezone_indices, rowsum(ezone_indices), 'r');
+    plot([1 size(fragility_mat, 1)], [avge avge], 'k', 'MarkerSize', 1.5);
     pos = get(gca, 'Position');
     pos(1) = pos(1) + xoffset;
-    ylim([1 size(fragility_mat,1)]);
-    ylabel('Row Sum of Fragility', 'FontSize', FONTSIZE-3);
+    xlim([1 size(fragility_mat,1)]);
+    set(gca, 'Xdir', 'reverse');
     set(gca, 'Position', pos);
-    set(gca, 'YTick', []); set(gca, 'YTickLabel', []);
+    set(gca, 'XTick', []); set(gca, 'XTickLabel', []);
     set(gca, 'yaxislocation', 'right');
-    set(gca, 'XAxisLocation', 'top');
+    set(gca, 'XAxisLocation', 'bottom');
+    xlabel('Row Sum of Fragility Metric', 'FontSize', FONTSIZE-3);
+    view([90 90])
+    ax = gca;
+    ax.XLabel.Rotation = 270;
+    ax.XLabel.Position = ax.XLabel.Position + [0 700 0];
 %     rowsumleg = legend('Fragility Row Sum', 'Min Perturb Row Sum');
 %     
 %     rowsumleg.Position = [0.8493    0.9297    0.1114    0.0308];
