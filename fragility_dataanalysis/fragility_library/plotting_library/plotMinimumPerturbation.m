@@ -113,7 +113,7 @@ function plotMinimumPerturbation(minPerturb_time_chan, clinicalIndices,...
     view([90 90])
     ax = gca;
     ax.XLabel.Rotation = 270;
-    ax.XLabel.Position = ax.XLabel.Position + [0 200 0];
+    ax.XLabel.Position = ax.XLabel.Position + [0 max(ax.YLim) 0];
 
 %     rowsumleg = legend('Fragility Row Sum', 'Min Perturb Row Sum');
 %     

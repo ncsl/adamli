@@ -115,7 +115,7 @@ function plotFragilityMetric(fragility_mat, minPert_mat, clinicalIndices,...
     view([90 90])
     ax = gca;
     ax.XLabel.Rotation = 270;
-    ax.XLabel.Position = ax.XLabel.Position + [0 60 0];
+    ax.XLabel.Position = ax.XLabel.Position + [0 max(ax.YLim) 0];
 %     rowsumleg = legend('Fragility Row Sum', 'Min Perturb Row Sum');
 %     
 %     rowsumleg.Position = [0.8493    0.9297    0.1114    0.0308];

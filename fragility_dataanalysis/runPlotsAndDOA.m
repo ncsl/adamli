@@ -94,11 +94,11 @@ end
     
     % directory that computed perturbation structs are saved
     finalDataDir = fullfile(serverDir, strcat(perturbationType, '_perturbations', ...
-            '_radius', num2str(radius)), patient);
+            '_radius', num2str(radius)), 'win500_step500_freq1000', patient);
         
     % directory that computed perturbation structs without 0 Hz inside
-    finalDataDir = fullfile(serverDir, strcat(perturbationType, '_perturbations', ...
-            '_radius', num2str(radius)), 'no0hz_win500_step500_freq1000', patient);
+%     finalDataDir = fullfile(serverDir, strcat(perturbationType, '_perturbations', ...
+%             '_radius', num2str(radius)), 'no0hz_win500_step500_freq1000', patient);
         
     try
         final_data = load(fullfile(finalDataDir, strcat(patient, ...
@@ -171,11 +171,11 @@ end
            
         % directory that computed perturbation structs are saved
         finalDataDir = fullfile(serverDir, strcat(perturbationType, '_perturbations', ...
-            '_radius', num2str(radius)), patient);
+            '_radius', num2str(radius)), 'win500_step500_freq1000', patient);
         
-            % directory that computed perturbation structs without 0 Hz inside
-        finalDataDir = fullfile(serverDir, strcat(perturbationType, '_perturbations', ...
-            '_radius', num2str(radius)), 'no0hz_win500_step500_freq1000', patient);
+%             % directory that computed perturbation structs without 0 Hz inside
+%         finalDataDir = fullfile(serverDir, strcat(perturbationType, '_perturbations', ...
+%             '_radius', num2str(radius)), 'no0hz_win500_step500_freq1000', patient);
         
         try
             final_data = load(fullfile(finalDataDir, strcat(patient, ...
@@ -269,7 +269,7 @@ end
         plotMinimumPerturbation(minPerturb_time_chan, clinicalIndices, timeStart, timeEnd, PLOTARGS);
         
         if PLOTALL
-            PLOTARGS.toSaveFigFile = fullfile(toSaveFigDir, strcat(patient, '_fragilityMetric'));
+            PLOTARGS.toSaveFigFile = fullfile(toSaveFigDir, strcat(patient, '_fragilityMetricno'));
         else
             PLOTARGS.toSaveFigFile = fullfile(toSaveFigDir, strcat(patient, '_fragilityMetric'));
         end
