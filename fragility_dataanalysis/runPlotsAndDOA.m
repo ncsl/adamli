@@ -278,6 +278,6 @@ end
             [perturbationType, ' perturbation: ', ' Time Locked to Seizure']};
         plotFragilityMetric(fragility_rankings, minPerturb_time_chan, clinicalIndices, timeStart, timeEnd, PLOTARGS);
         
-         close all
+        close all
     end
 end

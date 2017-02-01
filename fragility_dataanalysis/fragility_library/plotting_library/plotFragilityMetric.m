@@ -92,7 +92,7 @@ function plotFragilityMetric(fragility_mat, minPert_mat, clinicalIndices,...
                                 ezone_indices, ...
                                 earlyspread_indices, ...
                                 latespread_indices)
-    cbar.Label.Position = cbar.Label.Position + [3.9615 1.75 0]; % moving it after resizing
+    cbar.Label.Position = cbar.Label.Position + [4.2 0.5 0]; % moving it after resizing
                             
     % plot the second figure
     xrange = 1:size(fragility_mat, 1);
@@ -115,7 +115,7 @@ function plotFragilityMetric(fragility_mat, minPert_mat, clinicalIndices,...
     view([90 90])
     ax = gca;
     ax.XLabel.Rotation = 270;
-    ax.XLabel.Position = ax.XLabel.Position + [0 200 0];
+    ax.XLabel.Position = ax.XLabel.Position + [0 60 0];
 %     rowsumleg = legend('Fragility Row Sum', 'Min Perturb Row Sum');
 %     
 %     rowsumleg.Position = [0.8493    0.9297    0.1114    0.0308];
