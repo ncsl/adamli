@@ -16,9 +16,11 @@ patients = {,...
 %     'pt2sz1' 'pt2sz3' 'pt2sz4', ...
 %     'pt3sz2' 'pt3sz4', ...
 %       'pt6sz3', 'pt6sz4', 'pt6sz5','JH108sz1', 'JH108sz2', 'JH108sz3', 'JH108sz4', 'JH108sz5', 'JH108sz6', 'JH108sz7',...
-%     'pt8sz1' 'pt8sz2' 'pt8sz3',...
+%     'pt8sz1' 
+'pt8sz2',...
+% 'pt8sz3',...
 %     'pt10sz1' 'pt10sz2' 'pt10sz3', ...
-    'pt11sz1' 'pt11sz2' 'pt11sz3' 'pt11sz4', ...
+%     'pt11sz1' 'pt11sz2' 'pt11sz3' 'pt11sz4', ...
 %     'pt14sz1' 'pt14sz2' 'pt14sz3' 'pt15sz1' 'pt15sz2' 'pt15sz3' 'pt15sz4',...
 %     'pt16sz1' 'pt16sz2' 'pt16sz3',...
 %     'pt17sz1' 'pt17sz2',...
@@ -36,7 +38,7 @@ patients = {,...
 addpath('./fragility_library/');
 
 dataDir = './data/';
-dataDir = '/Volumes/NIL_PASS/data/';
+% dataDir = '/Volumes/NIL_PASS/data/';
 
 if INTERICTAL
     dataDir = './data/interictal_data/';
@@ -47,15 +49,32 @@ if INTERICTAL
     for p=1:length(patients)
         patient = patients{p};
         
+     % set patientID and seizureID
+    patient_id = patient(1:strfind(patient, 'seiz')-1);
+    seizure_id = strcat('_', patient(strfind(patient, 'seiz'):end));
+    seeg = 1;
+    if isempty(patient_id)
+        patient_id = patient(1:strfind(patient, 'sz')-1);
+        seizure_id = patient(strfind(patient, 'sz'):end);
+        seeg = 0;
+    end
+    if isempty(patient_id)
+        patient_id = patient(1:strfind(patient, 'aslp')-1);
+        seizure_id = patient(strfind(patient, 'aslp'):end);
+        seeg = 0;
+    end
+    if isempty(patient_id)
         patient_id = patient(1:strfind(patient, 'aw')-1);
-        seizure_id = strcat(patient(strfind(patient, 'aw'):end));
-        if isempty(patient_id)
-            patient_id = patient(1:strfind(patient, 'aslp')-1);
-            seizure_id = patient(strfind(patient, 'aslp'):end);
-        end
+        seizure_id = patient(strfind(patient, 'aw'):end);
+        seeg = 0;
+    end
+
+    [included_channels, ezone_labels, earlyspread_labels, latespread_labels, resection_labels, frequency_sampling, center] ...
+            = determineClinicalAnnotations(patient_id, seizure_id);
+        
+        dataDir = fullfile('./data/', center);
+        
         %% DEFINE CHANNELS AND CLINICAL ANNOTATIONS
-        [included_channels, ezone_labels, earlyspread_labels, latespread_labels, resection_labels] ...
-                    = determineClinicalAnnotations(patient_id, seizure_id);
 
         % put clinical annotations into a struct
         clinicalLabels = struct();
@@ -119,24 +138,30 @@ else
     for p=1:length(patients)
         patient = patients{p};
 
-        patient_id = patient(1:strfind(patient, 'seiz')-2);
-        seizure_id = strcat('_', patient(strfind(patient, 'seiz'):end));
-        seeg = 1;
-        if isempty(patient_id)
-            patient_id = patient(1:strfind(patient, 'sz')-1);
-            seizure_id = patient(strfind(patient, 'sz'):end);
-            seeg = 0;
-        end
+     % set patientID and seizureID
+    patient_id = patient(1:strfind(patient, 'seiz')-1);
+    seizure_id = strcat('_', patient(strfind(patient, 'seiz'):end));
+    seeg = 1;
+    if isempty(patient_id)
+        patient_id = patient(1:strfind(patient, 'sz')-1);
+        seizure_id = patient(strfind(patient, 'sz'):end);
+        seeg = 0;
+    end
+    if isempty(patient_id)
+        patient_id = patient(1:strfind(patient, 'aslp')-1);
+        seizure_id = patient(strfind(patient, 'aslp'):end);
+        seeg = 0;
+    end
+    if isempty(patient_id)
+        patient_id = patient(1:strfind(patient, 'aw')-1);
+        seizure_id = patient(strfind(patient, 'aw'):end);
+        seeg = 0;
+    end
 
-        %% DEFINE CHANNELS AND CLINICAL ANNOTATIONS
-        [included_channels, ezone_labels, earlyspread_labels, latespread_labels] ...
-                    = determineClinicalAnnotations(patient_id, seizure_id);
-
-        % put clinical annotations into a struct
-        clinicalLabels = struct();
-        clinicalLabels.ezone_labels = ezone_labels;
-        clinicalLabels.earlyspread_labels = earlyspread_labels;
-        clinicalLabels.latespread_labels = latespread_labels;
+    [included_channels, ezone_labels, earlyspread_labels, latespread_labels, resection_labels, frequency_sampling, center] ...
+            = determineClinicalAnnotations(patient_id, seizure_id);
+        
+        dataDir = fullfile('./data/', center);
 
         %% DEFINE COMPUTATION PARAMETERS AND DIRECTORIES TO SAVE DATA
         % window paramters
@@ -152,7 +177,7 @@ else
         if ~seeg
             %% NIH, JHU PATIENTS
             %- set file path for the patient file 
-            patient_eeg_path = strcat(dataDir, patient);
+            patient_eeg_path = fullfile(dataDir, patient);
             patient_file_path = fullfile(dataDir, patient, strcat(patient, '.csv'));
 
             %- set the meta data using the patient input file
