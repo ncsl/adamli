@@ -90,7 +90,7 @@ function plotMinimumPerturbation(minPerturb_time_chan, clinicalIndices,...
                                 ezone_indices, ...
                                 earlyspread_indices, ...
                                 latespread_indices)
-    cbar.Label.Position = cbar.Label.Position + [1.2 0 0]; % moving it after resizing
+    cbar.Label.Position = cbar.Label.Position + [3.9615 1.75 0]; % moving it after resizing
                             
     % plot the second figure
     xrange = 1:size(minPerturb_time_chan, 1);
@@ -113,7 +113,7 @@ function plotMinimumPerturbation(minPerturb_time_chan, clinicalIndices,...
     view([90 90])
     ax = gca;
     ax.XLabel.Rotation = 270;
-    ax.XLabel.Position = ax.XLabel.Position + [0 700 0];
+    ax.XLabel.Position = ax.XLabel.Position + [0 200 0];
 
 %     rowsumleg = legend('Fragility Row Sum', 'Min Perturb Row Sum');
 %     

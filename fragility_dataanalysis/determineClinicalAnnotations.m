@@ -36,6 +36,23 @@ function [included_channels, ezone_labels, ...
         
         center = 'cc';
         
+    elseif strcmp(patient_id, 'EZT008')
+        included_channels = [];
+        ezone_labels = {};
+        earlyspread_labels = {};
+        latespread_labels = {};
+        resection_labels = {};
+        
+        center = 'cc';
+    elseif strcmp(patient_id, 'EZT009')
+        included_channels = [];
+        ezone_labels = {};
+        earlyspread_labels = {};
+        latespread_labels = {};
+        resection_labels = {};
+        
+        center = 'cc';
+        
     elseif strcmp(patient_id, 'EZT019')
         % resections: A,B,C,E,I AND likely T
         included_channels = [1:5 7:22 24:79];
