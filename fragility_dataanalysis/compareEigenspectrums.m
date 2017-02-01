@@ -117,8 +117,8 @@ for iPat=1:length(patients) % loop through each patient
 %         xlim([-0.5 1.6]);
 %         ylim([-0.85 0.85]);
         
-%         xlim([0 1.5])
-%         ylim([-0.5 0.5]);
+        xlim([-0.5 1.5])
+        ylim([-1.5 1.5]);
         currfig = gcf;
         currfig.Position = [1666 1 1535 1121];
         currfig.PaperPosition = [ -3.7448   -0.3385   15.9896   11.6771];
