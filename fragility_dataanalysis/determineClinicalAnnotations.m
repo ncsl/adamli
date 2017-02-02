@@ -248,8 +248,8 @@ function [included_channels, ezone_labels, ...
     elseif strcmp(patient_id, 'pt15')
         included_channels = [2:7 9:30 32:36 41:42 45:69 71:86 88:89];
         
-        % excludes LSF8 and PST2 due to red strip
-        included_channels = [2:7 9:30 32:36 41:42 45:47 49:69 71:85 88:89]; 
+        % excludes LSF8 and PST2 due to red strip and no R electrodes
+        included_channels = [2:7 9:30 32:36 41:42 45:47 49:69 71:85]; 
         
         % 
         
