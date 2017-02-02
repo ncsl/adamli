@@ -34,11 +34,10 @@ patients=(
 	# pt14sz1 pt14sz2 pt14sz3 pt15sz1 pt15sz2 pt15sz3 pt15sz4
 	# pt16sz1 pt16sz2 pt16sz3 
 	# pt17sz1 pt17sz2')
-	'pt10sz1')
-	# 'EZT004seiz001 EZT004seiz002
-	# EZT006seiz001 EZT006seiz002
-	# EZT008seiz001 EZT008seiz002
-	# EZT009seiz001 EZT009seiz002')
+	'EZT004seiz001 EZT004seiz002
+	EZT006seiz001 EZT006seiz002
+	EZT008seiz001 EZT008seiz002
+	EZT009seiz001 EZT009seiz002')
 	# EZT007seiz001 EZT007seiz002 EZT007seiz003
 	# EZT019seiz001 EZT019seiz002 EZT019seiz003
 	# EZT005seiz001 EZT005seiz002 EZT005seiz003
@@ -60,7 +59,9 @@ read answer
 
 if [[ "$RUNSLEEP" -eq 1 ]]; then
 	# runs the sleep function on all faulty nodes 
+	qsub -l walltime=24:00:00,nodes=node050 run_b_sleep.sh
 	qsub -l walltime=24:00:00,nodes=node054 run_b_sleep.sh
+	qsub -l walltime=24:00:00,nodes=node165 run_b_sleep.sh
 	qsub -l walltime=24:00:00,nodes=node215 run_b_sleep.sh
 	qsub -l walltime=24:00:00,nodes=node232 run_b_sleep.sh
 fi
