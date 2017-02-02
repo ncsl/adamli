@@ -90,6 +90,13 @@ function [included_channels, ezone_labels, ...
          latespread_labels = {}; 
          
          center = 'cc';
+     elseif strcmp(patient_id, 'EZT070')
+        included_channels = [1:82 84:94];
+        ezone_labels = {'B8', 'B9', 'B10', 'T4', 'T5', 'T6', 'T7'};
+        earlyspread_labels = {};
+        latespread_labels = {};
+        
+        center = 'cc';
       elseif strcmp(patient_id, 'EZT090') % FAILURES
         included_channels = [1:25 27:42 44:49 51:73 75:90 95:111];
         ezone_labels = {'N2', 'N1', 'N3', 'N8', 'N9', 'N6', 'N7', 'N5'}; 
@@ -208,6 +215,8 @@ function [included_channels, ezone_labels, ...
         center = 'nih';
     elseif strcmp(patient_id, 'pt11')
         included_channels = [1:19 21:37 39 40 43:74 76:81 83:87 89:94 101:130];
+        
+        % removed G25, B2, B1, (RIAS, RIM, RIPLT?)
 %         if REGION_ONLY
 %             included_channels = [11:19 21:37 39:40 43:62];
 %         end
@@ -222,6 +231,9 @@ function [included_channels, ezone_labels, ...
         if strcmp(seizure_id, 'sz3')
             included_channels = [1:17 19 21:37 41:42 45:61 68:78];
         end
+        
+        % removed G23, 15, G6, 7
+        
         ezone_labels = {'POLMST1', 'POLMST2', 'POLTT1', 'POLTT2', 'POLTT3', ...
                         'POLAST1', 'POLAST2'};
         earlyspread_labels = {'POLOF1', 'POLOF2', 'POLOF3', 'POLOF4', 'POLPT4', 'POLPT5', ...
@@ -231,7 +243,12 @@ function [included_channels, ezone_labels, ...
         center = 'nih';
     elseif strcmp(patient_id, 'pt15')
         included_channels = [2:7 9:30 32:36 41:42 45:69 71:86 88:89];
-        included_channels = [2:7 9:30 32:36 41:42 45:47 49:69 71:85 88:89]; % excludes LSF8 and PST2 due to red strip
+        
+        % excludes LSF8 and PST2 due to red strip
+        included_channels = [2:7 9:30 32:36 41:42 45:47 49:69 71:85 88:89]; 
+        
+        % 
+        
         ezone_labels = {'POLTT1', 'POLTT2', 'POLTT3', 'POLTT4', ...
             'POLMST1', 'POLMST2', 'POLAST1', 'POLAST2', 'POLAST3'};
         if strcmp(seizure_id, 'sz1') % getting rid of TT5, which isn't in clinical EZ
@@ -249,6 +266,8 @@ function [included_channels, ezone_labels, ...
             included_channels = [1:19 21:37 42:43 46:53 56:57]; % get rid of R3,R4,R5 with high freq noise
         end
         
+        % remove R1 and R2
+        
         ezone_labels = {'POLTT5', 'POLTT3', 'POLTT2', 'POLAST1'};
         earlyspread_labels = {'POLTT6', 'POLTT4', 'POLOF4', 'POLAST2', 'POLAST3', 'POLAST4',...
             'POLTT1', 'POLMST3', 'POLMST4', 'POLG18', 'POLG19', 'POLG20', 'POLG26', 'POLG27', 'POLG28'};
@@ -257,9 +276,12 @@ function [included_channels, ezone_labels, ...
         center = 'nih';
     elseif strcmp(patient_id, 'pt17')
         included_channels = [1:19 21:37 42:43 46:51 53];
+        
         if strcmp(seizure_id, 'sz2') % get rid of G7,6,4 with high frequency noises
             included_channels = [1:19 21 23:25 28:37 42:43 46:51 53];
         end
+        
+        
         ezone_labels = {'POLTT', 'POLTT2'};
         earlyspread_labels = {'POLPST1', 'POLPST2', 'POLPST3', 'POLTT3'};
         latespread_labels = {'POLMST1', 'POLMST2', 'POLAST1'};
@@ -347,13 +369,6 @@ function [included_channels, ezone_labels, ...
         latespread_labels = {};
         
         center = 'jhu';
-    elseif strcmp(patient_id, 'EZT070')
-        included_channels = [1:82 84:94];
-        ezone_labels = {'B8', 'B9', 'B10', 'T4', 'T5', 'T6', 'T7'};
-        earlyspread_labels = {};
-        latespread_labels = {};
-        
-        center = 'cc';
     end
     
 end
