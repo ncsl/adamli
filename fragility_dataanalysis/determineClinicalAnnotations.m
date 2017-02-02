@@ -216,8 +216,10 @@ function [included_channels, ezone_labels, ...
     elseif strcmp(patient_id, 'pt11')
         included_channels = [1:19 21:37 39 40 43:74 76:81 83:87 89:94 101:130];
         
-        % removed G25, B2, B1, (RIAS, RIM, RIPLT?)
-%         if REGION_ONLY
+        % removed G25, B2, B1, RIM, RIPI
+        included_channels = [1:19 21:35 37 39 40 43:74 76:81 83:84 101:128];
+        
+%         if REGION_ONLY of microgrid electrodes
 %             included_channels = [11:19 21:37 39:40 43:62];
 %         end
         ezone_labels = {'POLRG24', 'POLRG32', 'POLRG40', 'POLRG39'};
@@ -232,7 +234,9 @@ function [included_channels, ezone_labels, ...
             included_channels = [1:17 19 21:37 41:42 45:61 68:78];
         end
         
-        % removed G23, 15, G6, 7
+        % removed G23, 15, G6, 7 (6 and 7 are not on clinical annotations -
+        % 02/2/17)
+        included_channels = [1:4 7:10 12:17 19 21:37 41:42 45:61 68:78];
         
         ezone_labels = {'POLMST1', 'POLMST2', 'POLTT1', 'POLTT2', 'POLTT3', ...
                         'POLAST1', 'POLAST2'};
@@ -266,7 +270,8 @@ function [included_channels, ezone_labels, ...
             included_channels = [1:19 21:37 42:43 46:53 56:57]; % get rid of R3,R4,R5 with high freq noise
         end
         
-        % remove R1 and R2
+        % remove R1 and R2 and entire R strip -> Ref electrodes
+        included_channels = [1:19 21:37 42:43 46:53];
         
         ezone_labels = {'POLTT5', 'POLTT3', 'POLTT2', 'POLAST1'};
         earlyspread_labels = {'POLTT6', 'POLTT4', 'POLOF4', 'POLAST2', 'POLAST3', 'POLAST4',...
