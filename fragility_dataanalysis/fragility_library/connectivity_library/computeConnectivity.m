@@ -45,10 +45,6 @@ function [adjMats, timePoints] = computeConnectivity(eeg, adj_args)
         preFiltStrShort  = '_noFilt';
     end
 
-    % set stepsize and window size to reflect sampling rate (milliseconds)
-    stepSize = stepSize * frequency_sampling/1000; 
-    winSize = winSize * frequency_sampling/1000;
-
     % window parameters - overlap, #samples, stepsize, window pointer
     [num_channels, lenData] = size(eeg); % length of data in seconds
     numWindows = lenData/stepSize;
