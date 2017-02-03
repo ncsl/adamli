@@ -3,8 +3,8 @@ patients = {,...,
 %     'pt1aslp1', 'pt1aslp2', ...
 %     'pt2aw1', 'pt2aw2', ...
 %     'pt2aslp1', 
-    'pt2aslp2', ...
-    'pt3aslp1', 'pt3aslp2', ...
+%     'pt2aslp2', ...
+%     'pt3aslp1', 'pt3aslp2', ...
     'pt15sz1' 'pt15sz2' 'pt15sz3' 'pt15sz4',...
     'pt17sz1' 'pt17sz2',...
 %     'pt3aw1', ...
@@ -44,6 +44,7 @@ frequency_sampling = 1000; % in Hz
 % TEST_DESCRIP = 'noleftandrpp';
 TEST_DESCRIP = [];
 TYPE_CONNECTIVITY = 'leastsquares';
+FONTSIZE = 18;
 
 figDir = './figures/spectralanalysis/';
 
@@ -100,6 +101,7 @@ for p=1:length(patients)
     patient_id = patient(1:strfind(patient, 'seiz')-1);
     seizure_id = strcat('_', patient(strfind(patient, 'seiz'):end));
     seeg = 1;
+    interictal = 0;
     if isempty(patient_id)
         patient_id = patient(1:strfind(patient, 'sz')-1);
         seizure_id = patient(strfind(patient, 'sz'):end);
@@ -109,11 +111,13 @@ for p=1:length(patients)
         patient_id = patient(1:strfind(patient, 'aslp')-1);
         seizure_id = patient(strfind(patient, 'aslp'):end);
         seeg = 0;
+        interictal = 1;
     end
     if isempty(patient_id)
         patient_id = patient(1:strfind(patient, 'aw')-1);
         seizure_id = patient(strfind(patient, 'aw'):end);
         seeg = 0;
+        interictal = 1;
     end
     
     if strcmp(patient_id, 'pt2')
@@ -130,6 +134,9 @@ for p=1:length(patients)
         resection_labels, frequency_sampling, center] ...
             = determineClinicalAnnotations(patient_id, seizure_id);
      
+    % add random channel in ezone_label
+    elecs_to_plot{end+1} = ezone_labels{1};
+        
     %%- Define the raw data struct and extract it's contents
     if seeg
         patient = strcat(patient_id, seizure_id);
@@ -161,7 +168,7 @@ for p=1:length(patients)
 
     elecFiles = dir(fullfile(spectDir, '*.mat'));
     elecFiles = natsortfiles({elecFiles.name});
-    
+
     figure;
     for iChan=1:length(elecs_to_plot) % loop over every channel in this patient
         chan = elecs_to_plot{iChan};
@@ -175,24 +182,63 @@ for p=1:length(patients)
         if seizureStart ~= length(data.eegWave)
             seizureStart = seizureStart/data.stepSize;
         end
-            
-        subplot(length(elecs_to_plot), 1, iChan);
-        imagesc(data.powerMatZ);
-        colorbar(); colormap('jet');
+          
+        % extract frequency, time axis for this dataset
+        freqs = data.freqs;
+        ticks = data.waveT(:,2);
+        ticks = ticks(1:length(ticks)/5:end);
+        [~,idx] = intersect(data.waveT(:,2), ticks);
+
+        % perform plotting of data
+        fig{iChan} = subplot(length(elecs_to_plot), 1, iChan);
+        imagesc(data.powerMat); set(gca, 'Box', 'off'); hold on;
+        cbar = colorbar(); colormap('jet');
+        clim = get(gca, 'CLim');
+        if iChan==1
+            minclim = clim(1);
+            maxclim = clim(2);
+        else
+            minclim = min(clim(1), minclim);
+            maxclim = max(clim(2), maxclim);
+        end
         % set the heat map settings
-        set(gca,'ytick',[1:7],'yticklabel',freqBandYtickLabels)
+%         set(gca,'ytick',[1:7],'yticklabel',freqBandYtickLabels)
+        set(gca,'ytick',[1:4:41], 'yticklabel', freqs(1:4:41), 'FontSize', FONTSIZE)
+        ylabel('Freq (Hz)', 'FontSize', FONTSIZE);
         set(gca,'tickdir','out','YDir','normal'); % spectrogram should have low freq on the bottom
         ax = gca;
-%         ax.XTick = ticks;
-%         ax.XTickLabel = labels;
-        title(['Spectral Power for ', patient, ' at electrode: ', chan]);
-        xlabel('Time');
+        title(['Spectral Power for ', patient, ' at electrode: ', chan], 'FontSize', FONTSIZE);
+        xlabel('Time (sec)', 'FontSize', FONTSIZE);
         
+        if interictal
+            ax.XTick = idx;
+            ax.XTickLabel = ticks/frequency_sampling;
+        else
+            ax.XTick = idx;
+            seizmark = data.seizure_start / data.stepSize - 1;
+            seiztime = data.waveT(seizmark,2);
+            ticks = ticks - data.waveT(seizmark,2);
+            ax.XTickLabel = ticks/frequency_sampling;
+            
+            plot([seizmark seizmark], get(gca, 'YLim'), 'k-', 'MarkerSize', 1.5);
+        end
+    end
+    currfig = gcf;
+    for iChan=1:length(fig)
+        fig{iChan};
+        set(fig{iChan}, 'CLim', [minclim, maxclim]);
     end
 
-%     allYTicks = 1:num_channels; 
+    % save the figure of spectral power
+    currfig.PaperPosition = [-3.7448   -0.3385   15.9896   11.6771];
+    currfig.Position = [1986           1        1535        1121];
+    patFigDir = fullfile(figDir, patient);
+    if ~exist(patFigDir, 'dir')
+        mkdir(patFigDir);
+    end
+    toSaveFigFile = fullfile(figDir, patient, strcat(patient, '_spectral'));
+   % save the figure  
+    print(toSaveFigFile, '-dpng', '-r0')
     
-    
-    
-
+    close all
 end
