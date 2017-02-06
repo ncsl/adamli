@@ -91,6 +91,9 @@ function serverPerturbationScript(patient, radius, winSize, stepSize)
     [T, N, ~] = size(adjMats);
     
     seizureMarkStart = seizure_start / winSize;
+    if seeg
+        seizureMarkStart = (seizure_start-1)/winSize;
+    end
     
     flag = -1;
     for i=seizureMarkStart:size(adjMats,1)
