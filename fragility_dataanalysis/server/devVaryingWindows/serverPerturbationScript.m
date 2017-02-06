@@ -1,7 +1,7 @@
 function serverPerturbationScript(patient, radius, winSize, stepSize)
     if nargin == 0 % testing purposes
         patient='EZT007seiz001';
-        patient ='pt6sz3';
+%         patient ='pt6sz3';
 %         patient = 'JH102sz1';
         % window paramters
         radius = 1.5;
@@ -49,14 +49,14 @@ function serverPerturbationScript(patient, radius, winSize, stepSize)
     center] ...
             = determineClinicalAnnotations(patient_id, seizure_id);
 
-    
+        
     % set directory to find adjacency matrix data
     serverDir = fullfile('../../serverdata/');
     adjMatDir = fullfile(serverDir, 'adjmats/', strcat('win', num2str(winSize), ...
     '_step', num2str(stepSize), '_freq', num2str(frequency_sampling))); % at lab
 
     patDir = fullfile(adjMatDir, patient);
-    fileName = strcat(patient, '_adjmats_leastsquares.mat');
+    fileName = strcat(patient_id, seizure_id, '_adjmats_leastsquares.mat');
     data = load(fullfile(patDir, fileName));
     data = data.adjmat_struct;
     
