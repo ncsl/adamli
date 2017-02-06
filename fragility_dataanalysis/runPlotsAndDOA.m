@@ -17,7 +17,7 @@ patients = {,...,
 %     'pt14sz1' 'pt14sz2' 'pt14sz3'  'pt16sz1' 'pt16sz2' 'pt16sz3',...
 %     'pt15sz1' 'pt15sz2' 'pt15sz3' 'pt15sz4',...
 %     'pt16sz1' 'pt16sz2' 'pt16sz3',...
-    'pt17sz1' 'pt17sz2',...
+%     'pt17sz1' 'pt17sz2',...
 %     'JH101sz1' 'JH101sz2' 'JH101sz3' 'JH101sz4',...
 % 	'JH102sz1' 'JH102sz2' 'JH102sz3' 'JH102sz4' 'JH102sz5' 'JH102sz6',...
 % 	'JH103sz1' 'JH103sz2' 'JH103sz3',...
@@ -27,6 +27,10 @@ patients = {,...,
 % 	'JH107sz1' 'JH107sz2' 'JH107sz3' 'JH107sz4' 'JH107sz5' 
 %     'JH107sz6' 'JH107sz7' 'JH107sz8' 'JH107sz9',...
 %    'JH108sz1', 'JH108sz2', 'JH108sz3', 'JH108sz4', 'JH108sz5', 'JH108sz6', 'JH108sz7',...
+    'EZT004seiz001', 'EZT004seiz002', ...
+    'EZT006seiz001', 'EZT006seiz002', ...
+    'EZT008seiz001', 'EZT008seiz002', ...
+    'EZT009seiz001', 'EZT009seiz002', ...
 %    'EZT037seiz001', 'EZT037seiz002',...
 %    'EZT019seiz001', 'EZT019seiz002',...
 %    'EZT005seiz001', 'EZT005seiz002', 'EZT007seiz001', 'EZT007seiz002', ...
@@ -35,7 +39,7 @@ patients = {,...,
 
 close all;
 
-perturbationTypes = ['C', 'R'];
+perturbationTypes = ['C'];
 perturbationType = perturbationTypes(1);
 PLOTALL = 1;
 
@@ -196,23 +200,28 @@ end
         timePoints = final_data.timePoints;
         
         seizureMarkStart = seizureStart/winSize;
+        
+        if seeg
+            seizureMarkStart = (seizureStart-1) / winSize;
+        end
+        
         minPerturb_time_chan = minPerturb_time_chan(:, 1:seizureMarkStart);
         fragility_rankings = fragility_rankings(:, 1:seizureMarkStart);
         timePoints = timePoints(1:seizureMarkStart,:);
         
-        if length(included_channels) ~= size(minPerturb_time_chan,1)
-            % another patient
-            %             minPerturb_time_chan([5,6,35,36],:) = [];
-%             fragility_rankings([5,6,35,36],:) = [];
-%             clinicalIndices.all_indices = 1:length(included_channels);
-
-            % JH108
-            test = info.included_channels;
-            temp = intersect(test, included_channels);
-            minPerturb_time_chan = minPerturb_time_chan(temp, :);
-            fragility_rankings = fragility_rankings(temp, :);
-            clinicalIndices.all_indices = 1:length(temp);
-        end
+%         if length(included_channels) ~= size(minPerturb_time_chan,1)
+%             % another patient
+%             %             minPerturb_time_chan([5,6,35,36],:) = [];
+% %             fragility_rankings([5,6,35,36],:) = [];
+% %             clinicalIndices.all_indices = 1:length(included_channels);
+% 
+%             % JH108
+%             test = info.included_channels;
+%             temp = intersect(test, included_channels);
+%             minPerturb_time_chan = minPerturb_time_chan(temp, :);
+%             fragility_rankings = fragility_rankings(temp, :);
+%             clinicalIndices.all_indices = 1:length(temp);
+%         end
         
         %% 1: Extract Processed Data and Begin Plotting and Save in finalDataDir
         %%- initialize plotting args
@@ -232,7 +241,7 @@ end
             timeStart = 1;
             timeEnd = timePoints(size(minPerturb_time_chan,2),1) / frequency_sampling;
             if PLOTALL
-                 PLOTARGS.toSaveFigFile = fullfile(toSaveFigDir, strcat(patient, '_minPerturbation_alldata'));
+                PLOTARGS.toSaveFigFile = fullfile(toSaveFigDir, strcat(patient, '_minPerturbation_alldata'));
             else
                 PLOTARGS.toSaveFigFile = fullfile(toSaveFigDir, strcat(patient, '_minPerturbation'));
             end
