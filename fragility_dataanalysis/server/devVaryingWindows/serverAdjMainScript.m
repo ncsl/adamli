@@ -24,7 +24,7 @@ TYPE_CONNECTIVITY = 'leastsquares';     % type of functional conn.?
 BP_FILTER_RAW = 1;                      % apply notch filter before functional conn. computation?
 IS_INTERICTAL = 0;                      % is this interictal data?
 l2regularization = 0;                   % apply l2 regularization to estimation of functional conn.?
-TEST_DESCRIP = [];
+TEST_DESCRIP = 'after_first_removal';
 
 % set patientID and seizureID
 patient_id = patient(1:strfind(patient, 'seiz')-1);
