@@ -52,6 +52,23 @@ function [included_channels, ezone_labels, ...
         resection_labels = {};
         
         center = 'cc';
+    elseif strcmp(patient_id, 'EZT011')
+        included_channels = [];
+        ezone_labels = {};
+        earlyspread_labels = {};
+        latespread_labels = {};
+        resection_labels = {};
+        
+        center = 'cc';
+        
+    elseif strcmp(patient_id, 'EZT013')
+        included_channels = [];
+        ezone_labels = {};
+        earlyspread_labels = {};
+        latespread_labels = {};
+        resection_labels = {};
+        
+        center = 'cc';
         
     elseif strcmp(patient_id, 'EZT019')
         % resections: A,B,C,E,I AND likely T
@@ -64,6 +81,41 @@ function [included_channels, ezone_labels, ...
         earlyspread_labels = {};
         latespread_labels = {}; 
         resection_labels = {'A', 'B', 'C', 'E', 'I', 'X'}
+        center = 'cc';
+        
+    elseif strcmp(patient_id, 'EZT020')
+        included_channels = [];
+        ezone_labels = {};
+        earlyspread_labels = {};
+        latespread_labels = {};
+        resection_labels = {};
+        
+        center = 'cc';
+        
+    elseif strcmp(patient_id, 'EZT025')
+        included_channels = [];
+        ezone_labels = {};
+        earlyspread_labels = {};
+        latespread_labels = {};
+        resection_labels = {};
+        
+        center = 'cc';
+        
+    elseif strcmp(patient_id, 'EZT026')
+        included_channels = [];
+        ezone_labels = {};
+        earlyspread_labels = {};
+        latespread_labels = {};
+        resection_labels = {};
+        
+        center = 'cc';
+    elseif strcmp(patient_id, 'EZT028')
+        included_channels = [];
+        ezone_labels = {};
+        earlyspread_labels = {};
+        latespread_labels = {};
+        resection_labels = {};
+        
         center = 'cc';
     elseif strcmp(patient_id, 'EZT030') % general seizures
         included_channels = [];
