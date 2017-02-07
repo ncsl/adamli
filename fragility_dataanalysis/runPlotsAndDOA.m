@@ -39,7 +39,7 @@ patients = {,...,
 
 close all;
 
-perturbationTypes = ['C'];
+perturbationTypes = ['R', 'C'];
 perturbationType = perturbationTypes(1);
 PLOTALL = 1;
 
