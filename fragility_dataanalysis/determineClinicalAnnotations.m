@@ -53,7 +53,7 @@ function [included_channels, ezone_labels, ...
         
         center = 'cc';
     elseif strcmp(patient_id, 'EZT011')
-        included_channels = [];
+        included_channels = [1:23 25:81];
         ezone_labels = {};
         earlyspread_labels = {};
         latespread_labels = {};
@@ -62,7 +62,7 @@ function [included_channels, ezone_labels, ...
         center = 'cc';
         
     elseif strcmp(patient_id, 'EZT013')
-        included_channels = [];
+        included_channels = [1:28 31:51 53 55:110];
         ezone_labels = {};
         earlyspread_labels = {};
         latespread_labels = {};
@@ -84,7 +84,7 @@ function [included_channels, ezone_labels, ...
         center = 'cc';
         
     elseif strcmp(patient_id, 'EZT020')
-        included_channels = [];
+        included_channels = [1:18 20:40 42:49 55:60 63:79 81 83:86 88:124];
         ezone_labels = {};
         earlyspread_labels = {};
         latespread_labels = {};
@@ -93,7 +93,7 @@ function [included_channels, ezone_labels, ...
         center = 'cc';
         
     elseif strcmp(patient_id, 'EZT025')
-        included_channels = [];
+        included_channels = [1:28 30:38 43:98];
         ezone_labels = {};
         earlyspread_labels = {};
         latespread_labels = {};
