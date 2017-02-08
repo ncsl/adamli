@@ -55,14 +55,14 @@ function serverPerturbationScript(patient, radius, winSize, stepSize)
     adjMatDir = fullfile(serverDir, 'adjmats/', strcat('win', num2str(winSize), ...
     '_step', num2str(stepSize), '_freq', num2str(frequency_sampling))); % at lab
 
-    patDir = fullfile(adjMatDir, patient);
+    toSavePertDir = fullfile(adjMatDir, patient);
     
     if ~isempty(TEST_DESCRIP)
-        patDir = fullfile(patDir, TEST_DESCRIP);
+        toSavePertDir = fullfile(toSavePertDir, TEST_DESCRIP);
     end
     
     fileName = strcat(patient_id, seizure_id, '_adjmats_leastsquares.mat');
-    data = load(fullfile(patDir, fileName));
+    data = load(fullfile(toSavePertDir, fileName));
     data = data.adjmat_struct;
     
     % extract meta data
@@ -137,9 +137,17 @@ function serverPerturbationScript(patient, radius, winSize, stepSize)
             strcat(perturbationType, '_perturbations', '_radius', num2str(radius)),...
             strcat('win', num2str(winSize), '_step', num2str(stepSize), '_freq', num2str(frequency_sampling)), ...
             patient);
+        
+        if ~isempty(TEST_DESCRIP)
+            toSavePertDir = fullfile(toSavePertDir, TEST_DESCRIP);
+        end
+    
+        
         if ~exist(toSavePertDir, 'dir')
             mkdir(toSavePertDir);
         end
+        
+        
 
         perturb_args = struct();
         perturb_args.perturbationType = perturbationType;
