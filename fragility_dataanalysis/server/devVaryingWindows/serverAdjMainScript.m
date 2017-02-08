@@ -7,7 +7,7 @@ addpath('../../');
 IS_SERVER = 1;
 if nargin == 0 % testing purposes
     center = 'cc';
-    patient='EZT004seiz001';
+    patient='EZT009seiz001';
 %     patient='JH102sz6';
 %     patient='pt17sz1';
     % window paramters
