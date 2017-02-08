@@ -35,7 +35,7 @@ patients = {,...,
 %    	'EZT070seiz001', 'EZT070seiz002', ...
     };
 
-patient = 'EZT009seiz002';
+patient = 'EZT028seiz001'
 dataDir = '../data/';
 
 % add libraries of functions
@@ -74,6 +74,7 @@ addpath(genpath('../fragility_library/'));
     patDir = fullfile(dataDir, center, patient_id);
     rawdata = load(fullfile(patDir, strcat(patient_id, seizure_id)));    
     EEG = rawdata.data;
+    labels = rawdata.elec_labels;
     
-    save('EEG.mat', 'EEG');
+    save('EEG.mat', 'EEG', 'labels', 'patient');
 % end

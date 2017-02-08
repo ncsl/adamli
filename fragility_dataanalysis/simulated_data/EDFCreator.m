@@ -179,8 +179,10 @@ function pbCreate_Callback(hObject, eventdata, handles)
 
 % try
  [P, F, E] = fileparts(handles.fileName);
- sFilename = [P,'\', F,'.edf'];
+ sFilename = [P,'\', F,'.edf']
 
+ 
+ % loading in the data
  load(handles.fileName);
  [m, n] = size(EEG);
  if m < n
@@ -189,7 +191,7 @@ function pbCreate_Callback(hObject, eventdata, handles)
  end
  warning off;
 HDR.TYPE = 'EDF'; 
-HDR.FileName = sFilename;
+% HDR.FileName = sFilename;
 HDR.Patient.Sex = 'M'; 
 HDR.Patient.Age = '0'; 
 HDR.T0 = clock; 
@@ -210,7 +212,13 @@ HDR.Dur = 1/(HDR.SampleRate);
 for k = 1:n
     ChLabel(k)=  {strcat('CH', num2str(k))};
 end
-ChLabel = ChLabel';
+% ChLabel = ChLabel';
+
+% Adam added 02/8/17
+ChLabel = labels;
+HDR.FileName = strcat(patient, '.edf');
+
+
 HDR.Label = ChLabel;%<--------- DEFINE
 HDR.Filter.Notch    = NaN; 
 HDR.Filter.LowPass  = NaN; 
