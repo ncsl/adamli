@@ -35,10 +35,10 @@ patients=(
 	# 'pt15sz1 pt15sz2 pt15sz3 pt15sz4')
 	# pt16sz1 pt16sz2 pt16sz3') 
 	# 'pt17sz1 pt17sz2')
-	'EZT004seiz001 EZT004seiz002
-	EZT006seiz001 EZT006seiz002
-	EZT008seiz001 EZT008seiz002
-	EZT009seiz001 EZT009seiz002')
+	# 'EZT004seiz001 EZT004seiz002
+	# EZT006seiz001 EZT006seiz002
+	# EZT008seiz001 EZT008seiz002
+	'EZT009seiz001 EZT009seiz002')
 	# 'EZT011seiz001 EZT011seiz002
 	# EZT013seiz001 EZT013seiz002
 	# EZT020seiz001 EZT020seiz002
