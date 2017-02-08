@@ -1,6 +1,6 @@
 function serverPerturbationScript(patient, radius, winSize, stepSize)
     if nargin == 0 % testing purposes
-        patient='EZT007seiz001';
+        patient='EZT004seiz001';
 %         patient ='pt6sz3';
 %         patient = 'JH102sz1';
         % window paramters
@@ -55,14 +55,14 @@ function serverPerturbationScript(patient, radius, winSize, stepSize)
     adjMatDir = fullfile(serverDir, 'adjmats/', strcat('win', num2str(winSize), ...
     '_step', num2str(stepSize), '_freq', num2str(frequency_sampling))); % at lab
 
-    toSavePertDir = fullfile(adjMatDir, patient);
+    patDir = fullfile(adjMatDir, patient);
     
     if ~isempty(TEST_DESCRIP)
-        toSavePertDir = fullfile(toSavePertDir, TEST_DESCRIP);
+        patDir = fullfile(patDir, TEST_DESCRIP);
     end
     
     fileName = strcat(patient_id, seizure_id, '_adjmats_leastsquares.mat');
-    data = load(fullfile(toSavePertDir, fileName));
+    data = load(fullfile(patDir, fileName));
     data = data.adjmat_struct;
     
     % extract meta data
