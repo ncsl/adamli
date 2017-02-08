@@ -21,7 +21,7 @@ function serverPerturbationScript(patient, radius, winSize, stepSize)
     TYPE_CONNECTIVITY = 'leastsquares';
     IS_SERVER = 1;
     
-    TEST_DESCRIP = [];
+    TEST_DESCRIP = 'after_first_removal';
 
     % set patientID and seizureID
     patient_id = patient(1:strfind(patient, 'seiz')-1);
@@ -56,6 +56,11 @@ function serverPerturbationScript(patient, radius, winSize, stepSize)
     '_step', num2str(stepSize), '_freq', num2str(frequency_sampling))); % at lab
 
     patDir = fullfile(adjMatDir, patient);
+    
+    if ~isempty(TEST_DESCRIP)
+        patDir = fullfile(patDir, TEST_DESCRIP);
+    end
+    
     fileName = strcat(patient_id, seizure_id, '_adjmats_leastsquares.mat');
     data = load(fullfile(patDir, fileName));
     data = data.adjmat_struct;
