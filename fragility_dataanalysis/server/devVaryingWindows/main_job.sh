@@ -42,7 +42,7 @@ patients=(
 	# 'EZT011seiz001 EZT011seiz002
 	# EZT013seiz001 EZT013seiz002
 	# EZT020seiz001 EZT020seiz002
-	EZT025seiz001 
+	'EZT025seiz001') 
 	# EZT205seiz002
 	# EZT026seiz001 EZT026seiz002
 	# EZT028seiz001 EZT028seiz002')
