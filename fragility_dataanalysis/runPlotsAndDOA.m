@@ -113,6 +113,9 @@ for p=1:length(patients)
 %     finalDataDir = fullfile(serverDir, strcat(perturbationType, '_perturbations', ...
 %             '_radius', num2str(radius)), 'no0hz_win500_step500_freq1000', patient);
         
+    if ~isempty(TEST_DESCRIP)
+        finalDataDir = fullfile(finalDataDir, TEST_DESCRIP);
+    end
     try
         final_data = load(fullfile(finalDataDir, strcat(patient, ...
             '_', perturbationType, 'perturbation_', lower(TYPE_CONNECTIVITY), '.mat')));
