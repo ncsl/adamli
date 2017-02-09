@@ -297,7 +297,7 @@ for p=1:length(patients)
         end
         
         if ~isempty(TEST_DESCRIP)
-            PLOTARGS.toSaveFigfile = strcat(PLOTARGS.toSaveFigFile, TEST_DESCRIP);
+            PLOTARGS.toSaveFigFile = strcat(PLOTARGS.toSaveFigFile, TEST_DESCRIP);
         end
         
         PLOTARGS.colorbarStr = 'Fragility Metric';
