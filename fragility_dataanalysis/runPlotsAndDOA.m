@@ -7,7 +7,7 @@ patients = {,...,
 %     'pt2aslp1', 'pt2aslp2', ...
 %     'pt3aw1', ...
 %     'pt3aslp1', 'pt3aslp2', ...
-    'pt1sz2', 'pt1sz3', 'pt1sz4',...
+%     'pt1sz2', 'pt1sz3', 'pt1sz4',...
 %     'pt2sz1' 'pt2sz3' 'pt2sz4', ...
 %     'pt3sz2' 'pt3sz4', ...
 %     'pt6sz3', 'pt6sz4', 'pt6sz5',...
@@ -27,10 +27,10 @@ patients = {,...,
 % 	'JH107sz1' 'JH107sz2' 'JH107sz3' 'JH107sz4' 'JH107sz5' 
 %     'JH107sz6' 'JH107sz7' 'JH107sz8' 'JH107sz9',...
 %    'JH108sz1', 'JH108sz2', 'JH108sz3', 'JH108sz4', 'JH108sz5', 'JH108sz6', 'JH108sz7',...
-%     'EZT004seiz001', 'EZT004seiz002', ...
-%     'EZT006seiz001', 'EZT006seiz002', ...
-%     'EZT008seiz001', 'EZT008seiz002', ...
-%     'EZT009seiz001', 'EZT009seiz002', ...    
+    'EZT004seiz001', 'EZT004seiz002', ...
+    'EZT006seiz001', 'EZT006seiz002', ...
+    'EZT008seiz001', 'EZT008seiz002', ...
+    'EZT009seiz001', 'EZT009seiz002', ...    
 %     'EZT011seiz001', 'EZT011seiz002', ...
 %     'EZT013seiz001', 'EZT013seiz002', ...
 %     'EZT020seiz001', 'EZT020seiz002', ...
@@ -56,7 +56,8 @@ stepSize = 500;
 frequency_sampling = 1000; % in Hz
 IS_SERVER = 0;
 % TEST_DESCRIP = 'noleftandrpp';
-TEST_DESCRIP = [];
+TEST_DESCRIP = 'after_first_removal';
+% TEST_DESCRIP = [];
 TYPE_CONNECTIVITY = 'leastsquares';
 
 figDir = './figures/fixedperts/';
@@ -71,24 +72,24 @@ for p=1:length(patients)
     patient = patients{p};
 
     % set patientID and seizureID
-patient_id = patient(1:strfind(patient, 'seiz')-1);
-seizure_id = strcat('_', patient(strfind(patient, 'seiz'):end));
-seeg = 1;
-if isempty(patient_id)
-    patient_id = patient(1:strfind(patient, 'sz')-1);
-    seizure_id = patient(strfind(patient, 'sz'):end);
-    seeg = 0;
-end
-if isempty(patient_id)
-    patient_id = patient(1:strfind(patient, 'aslp')-1);
-    seizure_id = patient(strfind(patient, 'aslp'):end);
-    seeg = 0;
-end
-if isempty(patient_id)
-    patient_id = patient(1:strfind(patient, 'aw')-1);
-    seizure_id = patient(strfind(patient, 'aw'):end);
-    seeg = 0;
-end
+    patient_id = patient(1:strfind(patient, 'seiz')-1);
+    seizure_id = strcat('_', patient(strfind(patient, 'seiz'):end));
+    seeg = 1;
+    if isempty(patient_id)
+        patient_id = patient(1:strfind(patient, 'sz')-1);
+        seizure_id = patient(strfind(patient, 'sz'):end);
+        seeg = 0;
+    end
+    if isempty(patient_id)
+        patient_id = patient(1:strfind(patient, 'aslp')-1);
+        seizure_id = patient(strfind(patient, 'aslp'):end);
+        seeg = 0;
+    end
+    if isempty(patient_id)
+        patient_id = patient(1:strfind(patient, 'aw')-1);
+        seizure_id = patient(strfind(patient, 'aw'):end);
+        seeg = 0;
+    end
 
     [included_channels, ezone_labels, earlyspread_labels, latespread_labels,...
         resection_labels, frequency_sampling, center] ...
@@ -283,7 +284,7 @@ end
         
  
         if ~isempty(TEST_DESCRIP)
-            PLOTARGS.toSaveFigfile = strcat(PLOTARGS.toSaveFigFile, TEST_DESCRIP);
+            PLOTARGS.toSaveFigFile = strcat(PLOTARGS.toSaveFigFile, '_', TEST_DESCRIP);
         end
         
         %% 2. Plot Min 2-Induced Norm Perturbation and Fragility Ranking
