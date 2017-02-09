@@ -199,6 +199,8 @@ function [included_channels, ezone_labels, ...
                             'POLMLT2', 'POLMLT3', 'POLMLT4', 'POLG8', 'POLG16'};
         resection_labels = {'POLATT', 'POLAST', 'POLPST', 'POLAD', 'POLPD', 'POLPLT5', 'POLPLT6', 'POLSLT1'};
         
+        
+        resection_labels = {'ATT', 'AST', 'PST', 'AD', 'PD', 'PLT', 'POLSLT'};
         center = 'nih';
     elseif strcmp(patient_id, 'pt2')
         included_channels = [1:14 16:19 21:25 27:37 43 44 47:74];

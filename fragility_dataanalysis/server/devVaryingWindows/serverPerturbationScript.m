@@ -1,6 +1,6 @@
 function serverPerturbationScript(patient, radius, winSize, stepSize)
     if nargin == 0 % testing purposes
-        patient='EZT025seiz001';
+        patient='EZT009seiz001';
 %         patient ='pt6sz3';
 %         patient = 'JH102sz1';
         % window paramters
@@ -22,7 +22,7 @@ function serverPerturbationScript(patient, radius, winSize, stepSize)
     IS_SERVER = 1;
     
     TEST_DESCRIP = 'after_first_removal';
-    TEST_DESCRIP = [];
+%     TEST_DESCRIP = [];
 
     % set patientID and seizureID
     patient_id = patient(1:strfind(patient, 'seiz')-1);

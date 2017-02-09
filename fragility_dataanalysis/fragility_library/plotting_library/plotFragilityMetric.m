@@ -4,6 +4,7 @@ function plotFragilityMetric(fragility_mat, minPert_mat, clinicalIndices,...
     %- extract clinical indices from EZ, spread regions
     all_indices = clinicalIndices.all_indices;
     ezone_indices = clinicalIndices.ezone_indices;
+    resection_indices = clinicalIndices.resection_indices;
     earlyspread_indices = clinicalIndices.earlyspread_indices;
     latespread_indices = clinicalIndices.latespread_indices;
     included_labels = clinicalIndices.included_labels;
@@ -65,8 +66,24 @@ function plotFragilityMetric(fragility_mat, minPert_mat, clinicalIndices,...
             plotAnnotatedStars(firstfig, xLocations, figIndices{i}, colors{i});
         end
     end
+    
+    % plot *'s for the resection indices
+    if ~isempty(resection_indices)
+        xlim([XLowerLim-1, XUpperLim+2])
+        
+        xLocations = repmat(XLowerLim-1, length(resection_indices), 1);
+        plot(xLocations, resection_indices, 'o', 'Color', [0 0.5 0], 'MarkerSize', 4); hold on;
+        
+        xLocations = repmat(XUpperLim+2, length(resection_indices), 1);
+        plot(xLocations, resection_indices, 'o', 'Color', [0 0.5 0],'MarkerSize', 4); hold on;
+    end
 
-    leg = legend('EZ', 'Early Onset', 'Late Onset');
+    if isempty(resection_indices)
+        leg = legend('EZ', 'Early Onset', 'Late Onset');
+    else
+        leg = legend('EZ', 'Early Onset', 'Late Onset', 'Resected');
+    end
+    
     try
         leg.Position = [0.8420    0.0085    0.1179    0.0880];
     catch
@@ -92,8 +109,9 @@ function plotFragilityMetric(fragility_mat, minPert_mat, clinicalIndices,...
                                 ezone_indices, ...
                                 earlyspread_indices, ...
                                 latespread_indices)
-    cbar.Label.Position = cbar.Label.Position + [4.2 0.5 0]; % moving it after resizing
-                            
+    cbarPos = cbar.Label.Position;
+    cbar.Label.Position = cbar.Label.Position + [cbarPos(1)*1.05 0 0]; % moving it after resizing
+    
     % plot the second figure
     xrange = 1:size(fragility_mat, 1);
     xrange(ezone_indices) = [];
@@ -103,6 +121,17 @@ function plotFragilityMetric(fragility_mat, minPert_mat, clinicalIndices,...
     stem(xrange, rowsum(xrange), 'k'); hold on;
     stem(ezone_indices, rowsum(ezone_indices), 'r');
     plot([1 size(fragility_mat, 1)], [avge avge], 'k', 'MarkerSize', 1.5);
+    
+    % plot *'s for the resection indices
+    if ~isempty(resection_indices)
+        YLim = get(gca, 'XLim');
+        YLowerLim = YLim(1);
+        YUpperLim = YLim(2);
+        ylim([YLowerLim-1, YUpperLim])
+        
+        xLocations = repmat(XLowerLim-1, length(resection_indices), 1);
+        plot(resection_indices, xLocations, 'o', 'Color', [0 0.5 0], 'MarkerSize', 4); hold on;
+    end
     pos = get(gca, 'Position');
     pos(1) = pos(1) + xoffset;
     xlim([1 size(fragility_mat,1)]);
@@ -120,6 +149,7 @@ function plotFragilityMetric(fragility_mat, minPert_mat, clinicalIndices,...
 %     
 %     rowsumleg.Position = [0.8493    0.9297    0.1114    0.0308];
     
+
     % save the figure                 
     if SAVEFIG
         print(toSaveFigFile, '-dpng', '-r0')
