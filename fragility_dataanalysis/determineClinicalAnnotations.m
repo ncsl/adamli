@@ -121,6 +121,9 @@ function [included_channels, ezone_labels, ...
         center = 'cc';
     elseif strcmp(patient_id, 'EZT028')
         included_channels = [];
+        
+        if strcmp(seizure_id, 'seiz002')
+        
         ezone_labels = {};
         earlyspread_labels = {};
         latespread_labels = {};
