@@ -5,8 +5,8 @@ patients = {,...,
 %     'pt2aslp1', 
 %     'pt2aslp2', ...
 %     'pt3aslp1', 'pt3aslp2', ...
-    'pt15sz1' 'pt15sz2' 'pt15sz3' 'pt15sz4',...
-    'pt17sz1' 'pt17sz2',...
+%     'pt15sz1' 'pt15sz2' 'pt15sz3' 'pt15sz4',...
+%     'pt17sz1' 'pt17sz2',...
 %     'pt3aw1', ...
 %     'pt3aslp1', 'pt3aslp2', ...
 %     'pt1sz2', 'pt1sz3', 'pt1sz4',...
@@ -31,7 +31,8 @@ patients = {,...,
 %    'JH108sz1', 'JH108sz2', 'JH108sz3', 'JH108sz4', 'JH108sz5', 'JH108sz6', 'JH108sz7',...
 %    'EZT037seiz001', 'EZT037seiz002',...
 %    'EZT019seiz001', 'EZT019seiz002',...
-%    'EZT005seiz001', 'EZT005seiz002', 'EZT007seiz001', 'EZT007seiz002', ...
+   'EZT005seiz001', 'EZT005seiz002', ...
+%    'EZT007seiz001', 'EZT007seiz002', ...
 %    	'EZT070seiz001', 'EZT070seiz002', ...
     };
 
@@ -128,6 +129,8 @@ for p=1:length(patients)
         elecs_to_plot = {'POLLSF8', 'POLPST2'};
     elseif strcmp(patient_id, 'pt17')
         elecs_to_plot = {'POLG6', 'POLG7'};
+    elseif strcmp(patient_id, 'EZT005')
+        elecs_to_plot = {'M1', 'M2', 'M3', 'M5', 'M6', 'M7', 'M8', 'M9'};
     end
 
     [included_channels, ezone_labels, earlyspread_labels, latespread_labels, ...
@@ -139,6 +142,7 @@ for p=1:length(patients)
         
     %%- Define the raw data struct and extract it's contents
     if seeg
+        temppatient = patient;
         patient = strcat(patient_id, seizure_id);
         eegDir = fullfile(eegRootDir, center);
         data_struct = load(fullfile(eegDir, patient_id, patient));
@@ -157,7 +161,9 @@ for p=1:length(patients)
     %%- Define the spectral directory to extract the morlet wavelet
     %%- computed data
     serverDir = './serverdata/';
-    
+    if seeg
+        patient = temppatient;
+    end
     %%- Extract an example
     spectDir = fullfile(serverDir, 'spectral_analysis', strcat('win', num2str(winSize), ...
         '_step', num2str(stepSize), '_freq', num2str(frequency_sampling)), patient);
@@ -178,11 +184,15 @@ for p=1:length(patients)
         fileToLoad = fullfile(spectDir, elecFiles{indice});
         data = load(fileToLoad);
         data = data.data;
+        powerMat = data.powerMat;
         seizureStart = data.seizure_start;
         if seizureStart ~= length(data.eegWave)
             seizureStart = seizureStart/data.stepSize;
         end
           
+        %%- ONLY PLOT UP TO SEIZURE
+        powerMat = powerMat(:, 1:(data.seizure_start-1)/data.stepSize);
+        
         % extract frequency, time axis for this dataset
         freqs = data.freqs;
         ticks = data.waveT(:,2);
@@ -190,8 +200,12 @@ for p=1:length(patients)
         [~,idx] = intersect(data.waveT(:,2), ticks);
 
         % perform plotting of data
-        fig{iChan} = subplot(length(elecs_to_plot), 1, iChan);
-        imagesc(data.powerMat); set(gca, 'Box', 'off'); hold on;
+        if length(elecs_to_plot) <= 4
+            fig{iChan} = subplot(length(elecs_to_plot), 1, iChan);
+        else
+            fig{iChan} = subplot(round(length(elecs_to_plot)/2), 2, iChan);
+        end
+        imagesc(powerMat); set(gca, 'Box', 'off'); hold on;
         cbar = colorbar(); colormap('jet');
         clim = get(gca, 'CLim');
         if iChan==1
@@ -203,11 +217,11 @@ for p=1:length(patients)
         end
         % set the heat map settings
 %         set(gca,'ytick',[1:7],'yticklabel',freqBandYtickLabels)
-        set(gca,'ytick',[1:4:41], 'yticklabel', freqs(1:4:41), 'FontSize', FONTSIZE)
+        set(gca,'ytick',[1:4:41], 'yticklabel', freqs(1:4:41), 'FontSize', FONTSIZE-8)
         ylabel('Freq (Hz)', 'FontSize', FONTSIZE);
         set(gca,'tickdir','out','YDir','normal'); % spectrogram should have low freq on the bottom
         ax = gca;
-        title(['Spectral Power for ', patient, ' at electrode: ', chan], 'FontSize', FONTSIZE);
+        title([patient, ' at electrode: ', chan], 'FontSize', FONTSIZE);
         xlabel('Time (sec)', 'FontSize', FONTSIZE);
         
         if interictal
@@ -215,7 +229,11 @@ for p=1:length(patients)
             ax.XTickLabel = ticks/frequency_sampling;
         else
             ax.XTick = idx;
-            seizmark = data.seizure_start / data.stepSize - 1;
+            if seeg
+                seizmark = (data.seizure_start-1)/data.stepSize - 1;
+            else
+                seizmark = data.seizure_start / data.stepSize - 1;
+            end
             seiztime = data.waveT(seizmark,2);
             ticks = ticks - data.waveT(seizmark,2);
             ax.XTickLabel = ticks/frequency_sampling;

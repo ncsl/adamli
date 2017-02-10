@@ -1,6 +1,6 @@
 function serverPerturbationScript(patient, radius, winSize, stepSize)
     if nargin == 0 % testing purposes
-        patient='EZT009seiz001';
+        patient='EZT011seiz001';
 %         patient ='pt6sz3';
 %         patient = 'JH102sz1';
         % window paramters
@@ -9,7 +9,7 @@ function serverPerturbationScript(patient, radius, winSize, stepSize)
         stepSize = 500; 
         frequency_sampling = 1000; % in Hz
     end
-    test = 1;
+%     test = 1;
 
     addpath(genpath('../../fragility_library/'));
     addpath(genpath('../../eeg_toolbox/'));
@@ -22,11 +22,11 @@ function serverPerturbationScript(patient, radius, winSize, stepSize)
     TYPE_CONNECTIVITY = 'leastsquares';
     IS_SERVER = 1;
     
-    if test ==1
+%     if test ==1
     TEST_DESCRIP = 'after_first_removal';
-    else
-    TEST_DESCRIP = [];
-    end
+%     else
+%     TEST_DESCRIP = [];
+%     end
     % set patientID and seizureID
     patient_id = patient(1:strfind(patient, 'seiz')-1);
     seizure_id = strcat('_', patient(strfind(patient, 'seiz'):end));

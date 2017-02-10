@@ -22,6 +22,7 @@ disp(['Looking at patient: ',patient]);
 %% New Setup Scripts
 TYPE_CONNECTIVITY = 'leastsquares';     % type of functional conn.?
 BP_FILTER_RAW = 1;                      % apply notch filter before functional conn. computation?
+APPLY_FILTER = 1;
 IS_INTERICTAL = 0;                      % is this interictal data?
 l2regularization = 0;                   % apply l2 regularization to estimation of functional conn.?
 TEST_DESCRIP = 'after_first_removal';
@@ -111,6 +112,10 @@ onset_time = data.seiz_start_mark;
 offset_time = data.seiz_end_mark;
 seizureStart = (onset_time); % time seizure starts
 seizureEnd = (offset_time); % time seizure ends
+
+if APPLY_FILTER % apply some filter for a set of patients at certain electrodes
+    eeg = apply_filter(eeg, labels, patient_id);
+end
 
 % check to make sure eeg mat file was saved correctly with the right meta
 % data

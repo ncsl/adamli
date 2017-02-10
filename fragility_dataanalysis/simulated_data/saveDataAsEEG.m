@@ -35,7 +35,7 @@ patients = {,...,
 %    	'EZT070seiz001', 'EZT070seiz002', ...
     };
 
-patient = 'EZT004seiz001'
+patient = 'EZT004seiz002'
 dataDir = '../data/';
 
 % add libraries of functions
