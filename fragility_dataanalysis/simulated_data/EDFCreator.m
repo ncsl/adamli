@@ -218,7 +218,6 @@ end
 ChLabel = labels;
 HDR.FileName = strcat(patient, '.edf');
 
-
 HDR.Label = ChLabel;%<--------- DEFINE
 HDR.Filter.Notch    = NaN; 
 HDR.Filter.LowPass  = NaN; 
