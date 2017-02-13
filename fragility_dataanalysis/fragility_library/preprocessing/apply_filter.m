@@ -9,7 +9,7 @@ function [filtered_eeg] = apply_filter(eeg, elec_labels, patient_id)
     
     filtered_eeg = eeg;
     if strcmp(patient_id, 'EZT005')
-        freqs_to_reject = 160;
+        freqs_to_reject = 150;
         
         filtered_eeg = buttfilt(eeg, freqs_to_reject, 1000, 'low', 1);
     end
