@@ -69,9 +69,9 @@ function [included_channels, ezone_labels, ...
     elseif strcmp(patient_id, 'EZT011')
         included_channels = [1:23 25:81];
         
-%         if strcmp(seizure_id, 'seiz001') % second removal
-%             included_channels = [1:23 25:63 65:81];
-%         end
+        if strcmp(seizure_id, 'seiz001') % second removal
+            included_channels = [1:23 25:63 65:81];
+        end
         
         ezone_labels = {'B1', 'B2'};
         earlyspread_labels = {};
