@@ -20,7 +20,9 @@ function [included_channels, ezone_labels, ...
             included_channels = [1:7 9:10 12:22 24:49 51:60 63:70 72];
         end
         
-        ezone_labels = {};
+        ezone_labels = {'C2', 'C3', 'B2', 'B3', 'E1', 'E2', 'E3',...
+                        'U2', 'U3', 'W1', 'Z1', 'O7', 'O8', 'X1', 'X2', ...
+                        'X3', 'Y1', 'Y2', 'Y3'};
         earlyspread_labels = {};
         latespread_labels = {};
         resection_labels = {};
@@ -29,12 +31,16 @@ function [included_channels, ezone_labels, ...
     elseif strcmp(patient_id, 'EZT005')
         included_channels = [1:21 23:60 63:88];
         ezone_labels = {'U3', 'U4','U5', 'U6', 'U7', 'U8'}; 
-        earlyspread_labels = {};
+        earlyspread_labels = {'L4', 'L5', 'C6', 'C9', 'S1', 'S2', ...
+            'S3', 'S4', 'S5', 'S6', 'S7', 'S8', 'P1', 'P2', 'P3', ...
+            'P4', 'P5', 'P6', 'P7', 'P8', 'W5', 'W6', 'W7', 'H5', 'H6', 'H7', ...
+            'Y5', 'Y6', 'Y7', 'Y8','X6', 'X7', 'X8', 'M2', 'M3', 'M4', 'M5',...
+            'N2', 'N3', 'N4', 'N5', 'N6'};
          latespread_labels = {};
          center = 'cc';
     elseif strcmp(patient_id, 'EZT006')
         included_channels = [1:14 17:35 38:42 45:76];
-        ezone_labels = {};
+        ezone_labels = {'N1','N2', Y2'};
         earlyspread_labels = {};
         latespread_labels = {};
         resection_labels = {};
@@ -51,8 +57,11 @@ function [included_channels, ezone_labels, ...
         center = 'cc';
     elseif strcmp(patient_id, 'EZT009')
         included_channels = [1:32 34:43 45:85];
-        ezone_labels = {};
-        earlyspread_labels = {};
+        ezone_labels = {'Q5', 'Q6', 'O4', 'O6', 'O7', 'Y1', 'Y2', 'Y3',...
+            'X1', 'X2', 'X3', 'X4', 'X5'};
+        earlyspread_labels = {'B5', 'B6', 'B7', 'B8', 'B9', 'C5', 'C6', ...
+            'C7', 'C8', 'C9','E4', 'E5', 'E6', 'E7', 'E8', ...
+            'B1', 'B2', 'C1', 'C2', 'E1', 'E2', 'E3'};
         latespread_labels = {};
         resection_labels = {};
         
@@ -64,7 +73,7 @@ function [included_channels, ezone_labels, ...
             included_channels = [1:23 25:63 65:81];
         end
         
-        ezone_labels = {};
+        ezone_labels = {'B1', 'B2'};
         earlyspread_labels = {};
         latespread_labels = {};
         resection_labels = {};
@@ -73,7 +82,8 @@ function [included_channels, ezone_labels, ...
         
     elseif strcmp(patient_id, 'EZT013')
         included_channels = [1:28 31:51 53 55:110];
-        ezone_labels = {};
+        ezone_labels = {'X5', 'X6', 'X7', 'L1', 'L2', 'S1', 'S2', ...
+            'L3','L4', 'S3', 'C1', 'C2', 'C3', 'C4', 'C5', 'C6', 'F1', 'F2', 'F3', 'F4'};
         earlyspread_labels = {};
         latespread_labels = {};
         resection_labels = {};
@@ -86,16 +96,17 @@ function [included_channels, ezone_labels, ...
 %         ezone_labels = {'I5', 'I6', 'B9', 'I9', 'T10', 'I10', 'B6', 'I4', ...
 %             'T9', 'I7', 'B3', 'B5', 'B4', 'I8', 'T6', 'B10', 'T3', ...
 %             'B1', 'T8', 'T7', 'B7', 'I3', 'B2', 'I2', 'T4', 'T2'}; 
-        ezone_labels = {'B3', 'B4', 'C1', 'C2'};
+        ezone_labels = {'B2', 'B3', 'B4', 'C1', 'C2'};
 %         ezone_labels = {'B3', 'B4', 'C2'}; % to run estimation alg win size testing
-        earlyspread_labels = {};
+        earlyspread_labels = {'E1', 'E2', 'C3', 'X1', 'X2'};
         latespread_labels = {}; 
         resection_labels = {'A', 'B', 'C', 'E', 'I', 'X'}
         center = 'cc';
         
     elseif strcmp(patient_id, 'EZT020')
         included_channels = [1:18 20:40 42:49 55:60 63:79 81 83:86 88:124];
-        ezone_labels = {};
+        ezone_labels = {'B1', 'B2', 'B3', 'C1', 'C2', 'C3', ...
+            'O2','O3'};
         earlyspread_labels = {};
         latespread_labels = {};
         resection_labels = {};
@@ -113,7 +124,9 @@ function [included_channels, ezone_labels, ...
         
     elseif strcmp(patient_id, 'EZT026')
         included_channels = [];
-        ezone_labels = {};
+        ezone_labels = {'C1', 'C2', 'C3', 'E1', 'E2', 'E3', 'E4', ...
+            'B1', 'B2','B3', 'V1', 'W1', 'O1', 'O2', ...
+            'X1', 'X2', 'X3', 'X4'};
         earlyspread_labels = {};
         latespread_labels = {};
         resection_labels = {};
@@ -121,9 +134,11 @@ function [included_channels, ezone_labels, ...
         center = 'cc';
     elseif strcmp(patient_id, 'EZT028')
         included_channels = [];
-        ezone_labels = {};
-        earlyspread_labels = {};
-        latespread_labels = {};
+        ezone_labels = {'P1','P2','P3','P4','P5','P6','P7',...
+            'W1','W2'};
+        earlyspread_labels = {'R4','R5','R6','R7','R8','X5','X6','X7',...
+            'S3','S4','S5','S6','S7','S8'};
+        latespread_labels = {'M2','M3','M4','M5','M6', 'Y8', 'Y9'};
         resection_labels = {};
         
         center = 'cc';
@@ -155,8 +170,9 @@ function [included_channels, ezone_labels, ...
      elseif strcmp(patient_id, 'EZT070')
         included_channels = [1:82 84:94];
         ezone_labels = {'B8', 'B9', 'B10', 'T4', 'T5', 'T6', 'T7'};
-        earlyspread_labels = {};
-        latespread_labels = {};
+        earlyspread_labels = {'B4', 'B5', 'B6', 'C1', 'C2', 'C3', 'C4'};
+        latespread_labels = {'E4', 'U5', 'U6', 'U7', 'W5', 'W6', 'F7', 'F8', ...
+            'F9', 'F10', 'X8', 'X9', 'S3', 'S4', 'S5', 'S6', 'R1', 'R2'};
         
         center = 'cc';
       elseif strcmp(patient_id, 'EZT090') % FAILURES
