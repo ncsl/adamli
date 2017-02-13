@@ -140,13 +140,6 @@ function [included_channels, ezone_labels, ...
             'S3','S4','S5','S6','S7','S8'};
         latespread_labels = {'M2','M3','M4','M5','M6', 'Y8', 'Y9'};
 
-%         if strcmp(seizure_id, 'seiz002')
-        
-        ezone_labels = {};
-        earlyspread_labels = {};
-        latespread_labels = {};
-        resection_labels = {};
-        
         center = 'cc';
     elseif strcmp(patient_id, 'EZT030') % general seizures
         included_channels = [];

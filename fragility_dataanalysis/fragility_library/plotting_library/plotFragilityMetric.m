@@ -110,7 +110,7 @@ function plotFragilityMetric(fragility_mat, minPert_mat, clinicalIndices,...
                                 earlyspread_indices, ...
                                 latespread_indices)
     cbarPos = cbar.Label.Position;
-    cbar.Label.Position = cbar.Label.Position + [cbarPos(1)*1.05 0 0]; % moving it after resizing
+    cbar.Label.Position = [cbarPos(1)*1.45 cbarPos(2) cbarPos(3)]; % moving it after resizing
     
     % plot the second figure
     xrange = 1:size(fragility_mat, 1);
@@ -124,7 +124,7 @@ function plotFragilityMetric(fragility_mat, minPert_mat, clinicalIndices,...
     
     % plot *'s for the resection indices
     if ~isempty(resection_indices)
-        YLim = get(gca, 'XLim');
+        YLim = get(gca, 'YLim');
         YLowerLim = YLim(1);
         YUpperLim = YLim(2);
         ylim([YLowerLim-1, YUpperLim])
@@ -144,7 +144,7 @@ function plotFragilityMetric(fragility_mat, minPert_mat, clinicalIndices,...
     view([90 90])
     ax = gca;
     ax.XLabel.Rotation = 270;
-    ax.XLabel.Position = ax.XLabel.Position + [0 max(ax.YLim) 0];
+    ax.XLabel.Position = ax.XLabel.Position + [0 max(ax.YLim)*1.05 0];
 %     rowsumleg = legend('Fragility Row Sum', 'Min Perturb Row Sum');
 %     
 %     rowsumleg.Position = [0.8493    0.9297    0.1114    0.0308];
