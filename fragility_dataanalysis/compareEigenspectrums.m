@@ -22,12 +22,13 @@
 %% Initialization
 % initialize variables
 patients = {,...
-%     'EZT019_seiz002'...
+    'EZT004seiz001',...
+    'EZT019seiz002',...
 %     'pt1aw1',...
 %     'pt1sz2', 'pt1sz3', 'pt1sz4',...
 %     'pt2sz1' 'pt2sz3' 'pt2sz4', ...
 %     'pt3sz2' 'pt3sz4', ...
-    'pt8sz1' 'pt8sz2' 'pt8sz3',...
+%     'pt8sz1' 'pt8sz2' 'pt8sz3',...
 %     'pt10sz1' 'pt10sz2' 'pt10sz3', ...
 
     };
@@ -45,8 +46,8 @@ MARKERSIZE = 12;
 
 serverDataDir = './serverdata/';
 adjMatDir = fullfile(serverDataDir, 'adjmats/win500_step500_freq1000/');
-finalRowDataDir = fullfile(serverDataDir, 'R_perturbations_radius1.5/', 'no0hz_win500_step500_freq1000')
-finalColDataDir = fullfile(serverDataDir, 'C_perturbations_radius1.5/', 'no0hz_win500_step500_freq1000')
+finalRowDataDir = fullfile(serverDataDir, 'R_perturbations_radius1.5/', 'win500_step500_freq1000')
+finalColDataDir = fullfile(serverDataDir, 'C_perturbations_radius1.5/', 'win500_step500_freq1000')
 
 %% Output Spectral Map Per Patient
 for iPat=1:length(patients) % loop through each patient
@@ -57,6 +58,28 @@ for iPat=1:length(patients) % loop through each patient
         mkdir(fullfile(figDir, patient));
     end
     
+        % set patientID and seizureID
+    patient_id = patient(1:strfind(patient, 'seiz')-1);
+    seizure_id = strcat('_', patient(strfind(patient, 'seiz'):end));
+    seeg = 1;
+    if isempty(patient_id)
+        patient_id = patient(1:strfind(patient, 'sz')-1);
+        seizure_id = patient(strfind(patient, 'sz'):end);
+        seeg = 0;
+    end
+    if isempty(patient_id)
+        patient_id = patient(1:strfind(patient, 'aslp')-1);
+        seizure_id = patient(strfind(patient, 'aslp'):end);
+        seeg = 0;
+    end
+    if isempty(patient_id)
+        patient_id = patient(1:strfind(patient, 'aw')-1);
+        seizure_id = patient(strfind(patient, 'aw'):end);
+        seeg = 0;
+    end
+    
+
+    
     % get the perturbation structures
     patRowFragilityDir = fullfile(finalRowDataDir, patient, strcat(patient, '_Rperturbation_leastsquares_radius1.5.mat'));
     finalRowData = load(patRowFragilityDir);
@@ -66,8 +89,12 @@ for iPat=1:length(patients) % loop through each patient
     finalColData = load(patColFragilityDir);
     colPerturbations = finalColData.perturbation_struct.del_table;
     
+%     if seeg
+%         patient = strcat(patient_id, seizure_id);
+%     end
+    
     % get the adjacency mat strcutures
-    adjMatFile = fullfile(adjMatDir, patient, strcat(patient, '_adjmats_leastsquares.mat'));
+    adjMatFile = fullfile(adjMatDir, patient, strcat(patient_id, seizure_id, '_adjmats_leastsquares.mat'));
     load(adjMatFile);
     adjMats = adjmat_struct.adjMats;
     

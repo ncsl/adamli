@@ -26,6 +26,7 @@ APPLY_FILTER = 1;
 IS_INTERICTAL = 0;                      % is this interictal data?
 l2regularization = 0;                   % apply l2 regularization to estimation of functional conn.?
 TEST_DESCRIP = 'after_first_removal';
+TEST_DESCRIP = [];
 
 % set patientID and seizureID
 patient_id = patient(1:strfind(patient, 'seiz')-1);

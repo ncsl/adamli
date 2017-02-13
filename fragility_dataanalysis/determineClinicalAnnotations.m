@@ -40,7 +40,7 @@ function [included_channels, ezone_labels, ...
          center = 'cc';
     elseif strcmp(patient_id, 'EZT006')
         included_channels = [1:14 17:35 38:42 45:76];
-        ezone_labels = {'N1','N2', Y2'};
+        ezone_labels = {'N1','N2', 'Y2'};
         earlyspread_labels = {};
         latespread_labels = {};
         resection_labels = {};
@@ -69,9 +69,9 @@ function [included_channels, ezone_labels, ...
     elseif strcmp(patient_id, 'EZT011')
         included_channels = [1:23 25:81];
         
-        if strcmp(seizure_id, 'seiz001')
-            included_channels = [1:23 25:63 65:81];
-        end
+%         if strcmp(seizure_id, 'seiz001') % second removal
+%             included_channels = [1:23 25:63 65:81];
+%         end
         
         ezone_labels = {'B1', 'B2'};
         earlyspread_labels = {};
@@ -134,20 +134,17 @@ function [included_channels, ezone_labels, ...
         center = 'cc';
     elseif strcmp(patient_id, 'EZT028')
         included_channels = [];
-<<<<<<< HEAD
         ezone_labels = {'P1','P2','P3','P4','P5','P6','P7',...
             'W1','W2'};
         earlyspread_labels = {'R4','R5','R6','R7','R8','X5','X6','X7',...
             'S3','S4','S5','S6','S7','S8'};
         latespread_labels = {'M2','M3','M4','M5','M6', 'Y8', 'Y9'};
-=======
-        
-        if strcmp(seizure_id, 'seiz002')
+
+%         if strcmp(seizure_id, 'seiz002')
         
         ezone_labels = {};
         earlyspread_labels = {};
         latespread_labels = {};
->>>>>>> 3c2a690638852d8419c3e3a18c3efa9a6e2c45e3
         resection_labels = {};
         
         center = 'cc';
