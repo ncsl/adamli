@@ -28,6 +28,12 @@ function [ D ] = DOA( EpiMap, EpiMapStruct, CEZ, ALL, clinicalStruct, threshold 
 load(EpiMapStruct);
 load(clinicalStruct);
 
+% set default threshold parameter to 0.70
+
+if ~exist('threshold')
+    threshold = 0.70;
+end
+
 % seperate EpiMap keys and values 
 
 EpiMap_values = cell2mat(values(EpiMap));
