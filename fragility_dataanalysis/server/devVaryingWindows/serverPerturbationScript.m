@@ -23,9 +23,9 @@ function serverPerturbationScript(patient, radius, winSize, stepSize)
     IS_SERVER = 1;
     
 %     if test ==1
-    TEST_DESCRIP = 'after_first_removal';
+%     TEST_DESCRIP = 'after_first_removal';
 %     else
-%     TEST_DESCRIP = [];
+    TEST_DESCRIP = [];
 %     end
     % set patientID and seizureID
     patient_id = patient(1:strfind(patient, 'seiz')-1);
