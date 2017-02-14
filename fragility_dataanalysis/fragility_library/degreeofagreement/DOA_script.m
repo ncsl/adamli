@@ -12,7 +12,8 @@
 %   ALL: cell with all electrode labels
 %   clinicalStruct: struct with clinical values, with CEZ and ALL values in it 
 %   threshold: value from 0 - 1 required for an electrode in the EpiMap to 
-%   be considered part of the EEZ
+%   be considered part of the EEZ. Optional parameter. Default value is
+%   0.70.
 %   
 % Output: [function]
 %   DOA: (#CEZ intersect EEZ / #CEZ) / (#NOTCEZ intersect EEZ / #NOTCEZ)
@@ -20,52 +21,30 @@
 %   < 0 indicates poor match.
 % 
 % Author: Kriti Jindal, NCSL 
-% Last Updated: 02.10.17
+% Last Updated: 02.14.17
 %   
 % #########################################################################
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% function is in following format: 
+% function[ D ] = DOA( EpiMap, EpiMapStruct, CEZ, ALL, clinicalStruct, threshold )
+% where inputs are as described above. 
 
-% GLOBAL VARIABLES FOR TESTING 
+% List of inputs:
+% EpiMap = 'fake_data.EpiMap';
+% EpiMapStruct = 'fake_data.mat';
+% CEZ = 'adjmat_struct.ezone_labels';
+% ALL = 'adjmat_struct.all_labels';
+% clinicalStruct = 'pt1sz2_adjmats_leastsquares.mat';
+% threshold = 0.70; note threshold is optional 
 
-EpiMap = 'fake_data.EpiMap';
-EpiMapStruct = 'fake_data.mat';
-CEZ = 'adjmat_struct.ezone_labels';
-ALL = 'adjmat_struct.all_labels';
-clinicalStruct = 'pt1sz2_adjmats_leastsquares.mat';
-threshold = 0.70;
+% with default threshold
+DOA_threshold_default = DOA('fake_data.EpiMap', 'fake_data.mat', 'adjmat_struct.ezone_labels', 'adjmat_struct.all_labels', 'pt1sz2_adjmats_leastsquares.mat', 0.70);
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% with 0.80 threshold 
+DOA_threshold_eighty = DOA('fake_data.EpiMap', 'fake_data.mat', 'adjmat_struct.ezone_labels', 'adjmat_struct.all_labels', 'pt1sz2_adjmats_leastsquares.mat', 0.80);
 
-% load in necesssary structs for EpiMap, CEZ and ALL 
+% with 0.90 threshold 
+DOA_threshold_ninety = DOA('fake_data.EpiMap', 'fake_data.mat', 'adjmat_struct.ezone_labels', 'adjmat_struct.all_labels', 'pt1sz2_adjmats_leastsquares.mat', 0.90);
 
-load(EpiMapStruct);
-load(clinicalStruct);
-
-% seperate EpiMap values and keys 
-
-EpiMap_values = cell2mat(values(EpiMap));
-EpiMap_keys = keys(EpiMap);
-
-% saves all labels in EpiMap with > THRESHOLD in vector 'EEZ'
-
-y = 1;
-for x = 1:length(EpiMap_values)
-    if EpiMap_values(x) > threshold
-        EEZ(y) = EpiMap_keys(x);
-        y = y + 1;
-    end
-end
-
-% finds appropriate set intersections to plug into DOA formula 
-
-NotCEZ = setdiff(ALL, CEZ);
-CEZ_EEZ = intersect(CEZ, EEZ);
-NotCEZ_EEZ = intersect(NotCEZ, EEZ);
-
-term1 = length(CEZ_EEZ) / length(CEZ);
-term2 = length(NotCEZ_EEZ) / length(NotCEZ);
-
-D = term1 - term2;
-
-fprintf('The degree of agreement with threshold %.2f is %.5f. \n',threshold, D);
+% with 0.95 threshold
+DOA_threshold_ninetyfive = DOA('fake_data.EpiMap', 'fake_data.mat', 'adjmat_struct.ezone_labels', 'adjmat_struct.all_labels', 'pt1sz2_adjmats_leastsquares.mat', 0.95);
