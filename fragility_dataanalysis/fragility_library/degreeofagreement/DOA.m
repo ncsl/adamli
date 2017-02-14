@@ -11,7 +11,8 @@ function [ D ] = DOA( EpiMap, EpiMapStruct, CEZ, ALL, clinicalStruct, threshold 
 %   ALL: cell with all electrode labels
 %   clinicalStruct: struct with clinical values, with CEZ and ALL values in it 
 %   threshold: value from 0 - 1 required for an electrode in the EpiMap to 
-%   be considered part of the EEZ
+%   be considered part of the EEZ. Optional parameter. Default value is
+%   0.70.
 %   
 % Output: 
 %   DOA: (#CEZ intersect EEZ / #CEZ) / (#NOTCEZ intersect EEZ / #NOTCEZ)
@@ -19,7 +20,7 @@ function [ D ] = DOA( EpiMap, EpiMapStruct, CEZ, ALL, clinicalStruct, threshold 
 %   < 0 indicates poor match.
 % 
 % Author: Kriti Jindal, NCSL 
-% Last Updated: 02.09.17
+% Last Updated: 02.14.17
 %   
 % #########################################################################
 
