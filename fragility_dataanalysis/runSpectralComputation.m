@@ -213,22 +213,22 @@ for iPat=1:length(patients)
             disp(['Morlet wavelet computed and power matrix computed for ...', num2str(iChan)])
         end
         
-%         powerMatZ = zeros(size(powerMat));
+        powerMatZ = zeros(size(powerMat));
         iF  = 1:length(waveletFreqs); % # of freqs.
         iT  = 1:size(powerMat, 3); % # of time points
 
         %% B. Z-SCORE POWER MATRIX
         % indices of the powerMat to Z-score wrt
-%         for iF = 1:length(freqs),
-%             allVal = reshape(squeeze(powerMat(:,iF,iT)),length(1)*length(iT),1); %allVal for particular chan and freq
-%             mu = mean(allVal); stdev = std(allVal);
-% 
-%             % create the power matrix
-%             powerMatZ(:,iF,iT) = (powerMat(:,iF,iT)-mu)/stdev;
-%             if sum(isnan(powerMatZ(:,iF,iT)))>0
-%                 keyboard;
-%             end
-%         end
+        for iF = 1:length(freqs),
+            allVal = reshape(squeeze(powerMat(:,iF,iT)),length(1)*length(iT),1); %allVal for particular chan and freq
+            mu = mean(allVal); stdev = std(allVal);
+
+            % create the power matrix
+            powerMatZ(:,iF,iT) = (powerMat(:,iF,iT)-mu)/stdev;
+            if sum(isnan(powerMatZ(:,iF,iT)))>0
+                keyboard;
+            end
+        end
 %         
         %%- condense matrices
         rangeFreqs = reshape([freqBandAr.rangeF], 2, 7)';
@@ -259,6 +259,7 @@ for iPat=1:length(patients)
         chanData.chanStr = elec_labels{iChan};
         chanData.freqBands = {freqBandAr.name};
         chanData.powerMat = squeeze(powerMat);
+        chanData.powerMatZ = squeeze(powerMatZ);
         chanData.phaseMat = squeeze(phaseMat);
         chanData.seizure_end = seizure_end;
         chanData.seizure_start = seizure_start;

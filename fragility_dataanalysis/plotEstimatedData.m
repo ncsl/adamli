@@ -26,8 +26,8 @@ addpath(genpath('./eeg_toolbox'));
 winSizes = [250, 500, 1000];
 mses = zeros(length(winSizes), 1);
 
-patient = 'pt1sz4';
-% patient = 'EZT019seiz002';
+% patient = 'pt1sz4';
+patient = 'EZT019seiz002';
 
 patient_id = patient(1:strfind(patient, 'seiz')-1);
 seizure_id = strcat('_', patient(strfind(patient, 'seiz'):end));
@@ -109,7 +109,7 @@ for i=1:length(winSizes)
     if i==1
         %- get 2 channels from EZ and 2 channels from outside EZ
         ezElecs = findElectrodeIndices(ezone_labels, labels)';
-        randez = randsample(length(ezone_labels), 2);
+        randez = randsample(length(ezElecs), 2);
         ezIndices = ezElecs(randez);
 
         nonezChannels = 1:length(included_channels);
@@ -166,6 +166,7 @@ for i=1:length(winSizes)
     
     timePoints = [1:2000, seizureStart-2000:seizureStart, seizureStart+500:seizureStart+2500];
     timePoints = [1:2000, seizureStart-2000:seizureStart, seizureStart+500:seizureStart+2500];
+    timePoints = 1:10000;
     %% Plotting
     FONTSIZE = 24;
     offset = 0;
@@ -216,8 +217,15 @@ for i=1:length(winSizes)
         
         offset = 10;
         
+        %- changed to make plots to compare instead of overlaid
         plot(datahat, 'k', 'LineWidth', 1.75); hold on;
-        plot(datatrue, 'r--', 'LineWidth', 3); 
+        xlabel('Time');
+        ylabel('Voltage');
+        
+        figure;
+        plot(datatrue, 'k', 'LineWidth', 1.75); 
+                xlabel('Time');
+        ylabel('Voltage');
         
         yticklocs(iChan) = mean(datatrue);
     end
