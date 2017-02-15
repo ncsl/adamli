@@ -27,14 +27,14 @@ patients = {,...,
 % 	'JH107sz1' 'JH107sz2' 'JH107sz3' 'JH107sz4' 'JH107sz5' 
 %     'JH107sz6' 'JH107sz7' 'JH107sz8' 'JH107sz9',...
 %    'JH108sz1', 'JH108sz2', 'JH108sz3', 'JH108sz4', 'JH108sz5', 'JH108sz6', 'JH108sz7',...
-%     'EZT004seiz001', 'EZT004seiz002', ...
-%     'EZT006seiz001', 'EZT006seiz002', ...
-%     'EZT008seiz001', 'EZT008seiz002', ...
-%     'EZT009seiz001', 'EZT009seiz002', ...    
-%     'EZT011seiz001', 'EZT011seiz002', ...
-%     'EZT013seiz001', 'EZT013seiz002', ...
-%     'EZT020seiz001', 'EZT020seiz002', ...
-%     'EZT025seiz001', 'EZT025seiz002', ...
+    'EZT004seiz001', 'EZT004seiz002', ...
+    'EZT006seiz001', 'EZT006seiz002', ...
+    'EZT008seiz001', 'EZT008seiz002', ...
+    'EZT009seiz001', 'EZT009seiz002', ...    
+    'EZT011seiz001', 'EZT011seiz002', ...
+    'EZT013seiz001', 'EZT013seiz002', ...
+    'EZT020seiz001', 'EZT020seiz002', ...
+    'EZT025seiz001', 'EZT025seiz002', ...
 %     'EZT026seiz001', 'EZT026seiz002', ...
 %     'EZT028seiz001', 'EZT028seiz002', ...
 %    'EZT037seiz001', 'EZT037seiz002',...
@@ -46,7 +46,7 @@ patients = {,...,
 
 close all;
 
-perturbationTypes = ['R', 'C'];
+perturbationTypes = ['C', 'R'];
 perturbationType = perturbationTypes(1);
 PLOTALL = 1;
 
@@ -58,7 +58,7 @@ frequency_sampling = 1000; % in Hz
 IS_SERVER = 0;
 % TEST_DESCRIP = 'noleftandrpp';
 TEST_DESCRIP = 'after_first_removal';
-TEST_DESCRIP = [];
+% TEST_DESCRIP = [];
 TYPE_CONNECTIVITY = 'leastsquares';
 
 figDir = './figures/fixedperts/';
@@ -221,9 +221,12 @@ for p=1:length(patients)
             seizureMarkStart = (seizureStart-1) / winSize;
         end
         
-        minPerturb_time_chan = minPerturb_time_chan(:, 1:seizureMarkStart);
-        fragility_rankings = fragility_rankings(:, 1:seizureMarkStart);
-        timePoints = timePoints(1:seizureMarkStart,:);
+        minPerturb_time_chan = minPerturb_time_chan(:, 1:seizureMarkStart+20);
+        fragility_rankings = fragility_rankings(:, 1:seizureMarkStart+20);
+        timePoints = timePoints(1:seizureMarkStart+20,:);
+       
+        % make everything relative to seizureStart
+%         timePoints = timePoints - seizureStart;
         
 %         if length(included_channels) ~= size(minPerturb_time_chan,1)
 %             % another patient
@@ -252,6 +255,7 @@ for p=1:length(patients)
         PLOTARGS.xTickStep = 10*winSize/stepSize;
         PLOTARGS.titleStr = {['Minimum Norm Perturbation (', patient, ')'], ...
             [perturbationType, ' perturbation: ', ' Time Locked to Seizure']};
+        PLOTARGS.seizureMarkStart = seizureMarkStart;
 
         if seizureStart == size(minPerturb_time_chan,1)*winSize % interictal data
             timeStart = 1;
@@ -299,7 +303,7 @@ for p=1:length(patients)
         plotMinimumPerturbation(minPerturb_time_chan, clinicalIndices, timeStart, timeEnd, PLOTARGS);
         
         if PLOTALL
-            PLOTARGS.toSaveFigFile = fullfile(toSaveFigDir, strcat(patient, '_fragilityMetric'));
+            PLOTARGS.toSaveFigFile = fullfile(toSaveFigDir, strcat(patient, '_fragilityMetric_upto10secs'));
         else
             PLOTARGS.toSaveFigFile = fullfile(toSaveFigDir, strcat(patient, '_fragilityMetric'));
         end
@@ -311,7 +315,7 @@ for p=1:length(patients)
         PLOTARGS.colorbarStr = 'Fragility Metric';
         PLOTARGS.titleStr = {['Fragility Metric (', patient, ')'], ...
             [perturbationType, ' perturbation: ', ' Time Locked to Seizure']};
-        plotFragilityMetric(fragility_rankings, minPerturb_time_chan, clinicalIndices, timeStart, timeEnd, PLOTARGS);
+        plotFragilityMetric(fragility_rankings, minPerturb_time_chan, clinicalIndices, timePoints./frequency_sampling, timeStart, timeEnd, PLOTARGS);
         
         close all
     end

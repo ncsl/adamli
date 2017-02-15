@@ -80,25 +80,93 @@ ALL = 'adjmat_struct.all_labels';
 clinicalStruct = 'pt1sz2_adjmats_leastsquares.mat';
 threshold = 0.70;
 
+%- set the weights dir and params
 weightsDir = '../../figures/electrodeWeights/';
 winSize = 500;
 stepSize = 500;
 frequency_sampling = 1000;
 
+%- perturbation directory to compute a weight
+serverDir = '../../serverdata/'; 
+perturbationType = 'C';
+
+%%- Loop through each patient and compute DOA
 for iPat=1:length(patients)
     patient = patients{iPat};
-    patDir = fullfile(weightsDir, strcat(patient, '_', num2str(winSize), '_step', num2str(stepSize), ...
-            '_freq', num2str(frequency_sampling), '_radius', num2str(radius)));
-    weightsFile = fullfile(patDir, strcat(patient, '_weights.mat'));
-    load(weightsFile);
     
-    Cweights = data.C;
-    Rweights = data.R;
-        
-    % only focus on the Column perturbed weights for now
-    for iField=1:length(fieldnames(Cweights))
-        
+    % set patientID and seizureID
+    patient_id = patient(1:strfind(patient, 'seiz')-1);
+    seizure_id = strcat('_', patient(strfind(patient, 'seiz'):end));
+    seeg = 1;
+    if isempty(patient_id)
+        patient_id = patient(1:strfind(patient, 'sz')-1);
+        seizure_id = patient(strfind(patient, 'sz'):end);
+        seeg = 0;
     end
+    if isempty(patient_id)
+        patient_id = patient(1:strfind(patient, 'aslp')-1);
+        seizure_id = patient(strfind(patient, 'aslp'):end);
+        seeg = 0;
+    end
+    if isempty(patient_id)
+        patient_id = patient(1:strfind(patient, 'aw')-1);
+        seizure_id = patient(strfind(patient, 'aw'):end);
+        seeg = 0;
+    end
+
+    [included_channels, ezone_labels, earlyspread_labels, latespread_labels,...
+        resection_labels, frequency_sampling, center] ...
+            = determineClinicalAnnotations(patient_id, seizure_id);
+        
+     % directory that computed perturbation structs are saved
+    finalDataDir = fullfile(serverDir, strcat(perturbationType, '_perturbations', ...
+            '_radius', num2str(radius)), 'win500_step500_freq1000', patient);
+
+    final_data = load(fullfile(finalDataDir, strcat(patient, ...
+        '_', perturbationType, 'perturbation_', lower(TYPE_CONNECTIVITY), ...
+        '_radius', num2str(radius), '.mat')));
+    final_data = final_data.perturbation_struct;
+
+    % set data to local variables
+    minPerturb_time_chan = final_data.minNormPertMat;
+    fragility_rankings = final_data.fragilityMat;
+    timePoints = final_data.timePoints;
+    info = final_data.info;
+    num_channels = size(minPerturb_time_chan,1);
+    seizureStart = info.seizure_start;
+    seizureEnd = info.seizure_end;
+    included_labels = info.all_labels;
+    
+    %- rowsum
+    rowsum = sum(fragility_rankings, 2);
+    rowsum = rowsum./max(rowsum);
+    EEZ = rowsum(rowsum > mean(rowsum)+std(rowsum));
+    ALL = included_labels;
+    CEZ = ezone_labels;
+     
+    NotCEZ = setdiff(ALL, CEZ);
+    CEZ_EEZ = intersect(CEZ, EEZ);
+    NotCEZ_EEZ = intersect(NotCEZ, EEZ);
+
+    term1 = length(CEZ_EEZ) / length(CEZ);
+    term2 = length(NotCEZ_EEZ) / length(NotCEZ);
+
+    D = term1 - term2;
+    fprintf('The degree of agreement with threshold %.2f is %.5f. \n',threshold, D);
+    
+    %%- if computed weights previously
+%     patDir = fullfile(weightsDir, strcat(patient, '_', num2str(winSize), '_step', num2str(stepSize), ...
+%             '_freq', num2str(frequency_sampling), '_radius', num2str(radius)));
+%     weightsFile = fullfile(patDir, strcat(patient, '_weights.mat'));
+%     load(weightsFile);
+%     
+%     Cweights = data.C;
+%     Rweights = data.R;
+%         
+%     % only focus on the Column perturbed weights for now
+%     for iField=1:length(fieldnames(Cweights))
+%         
+%     end
 end
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

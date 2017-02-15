@@ -1,5 +1,5 @@
 function plotFragilityMetric(fragility_mat, minPert_mat, clinicalIndices,...
-          timeStart, timeEnd, PLOTARGS)
+          timePoints, timeStart, timeEnd, PLOTARGS)
     %% Step 0: Extract Metadata from Structs
     %- extract clinical indices from EZ, spread regions
     all_indices = clinicalIndices.all_indices;
@@ -17,6 +17,7 @@ function plotFragilityMetric(fragility_mat, minPert_mat, clinicalIndices,...
     colorbarStr = PLOTARGS.colorbarStr;
     SAVEFIG = PLOTARGS.SAVEFIG;
     toSaveFigFile = PLOTARGS.toSaveFigFile;
+    seizureMarkStart = PLOTARGS.seizureMarkStart;
     YAXFontSize = 9;
     if isfield(PLOTARGS, 'seizureIndex')
         seizureIndex = PLOTARGS.seizureIndex;
@@ -51,7 +52,15 @@ function plotFragilityMetric(fragility_mat, minPert_mat, clinicalIndices,...
     % set x/y ticks and increment xlim by 1
     xTickStep = (XUpperLim - XLowerLim) / 10;
     xTicks = round(timeStart: (timeEnd-timeStart)/10 :timeEnd);
+%     xTickStep = length(timePoints)/5;
+%     xTicks = timePoints(1:length(timePoints)/5:end, 1);
     yTicks = [1, 5:5:size(fragility_mat,1)];
+    
+    try
+        plot([seizureMarkStart seizureMarkStart], get(gca, 'ylim'), 'k')
+    catch e
+        disp(e)
+    end
     
     set(gca, 'XTick', (XLowerLim+0.5 : xTickStep : XUpperLim+0.5)); set(gca, 'XTickLabel', xTicks); % set xticks and their labels
     set(gca, 'YTick', yTicks);
