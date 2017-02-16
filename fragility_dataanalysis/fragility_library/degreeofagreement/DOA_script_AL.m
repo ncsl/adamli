@@ -52,14 +52,14 @@ patients = {...,
 % 	'JH107sz1' 'JH107sz2' 'JH107sz3' 'JH107sz4' 'JH107sz5' 
 %     'JH107sz6' 'JH107sz7' 'JH107sz8' 'JH107sz9',...
 %    'JH108sz1', 'JH108sz2', 'JH108sz3', 'JH108sz4', 'JH108sz5', 'JH108sz6', 'JH108sz7',...
-    'EZT004seiz001', 'EZT004seiz002', ...
-    'EZT006seiz001', 'EZT006seiz002', ...
-    'EZT008seiz001', 'EZT008seiz002', ...
-    'EZT009seiz001', 'EZT009seiz002', ...    
-    'EZT011seiz001', 'EZT011seiz002', ...
-    'EZT013seiz001', 'EZT013seiz002', ...
-    'EZT020seiz001', 'EZT020seiz002', ...
-    'EZT025seiz001', 'EZT025seiz002', ...
+%     'EZT004seiz001', 'EZT004seiz002', ...
+%     'EZT006seiz001', 'EZT006seiz002', ...
+%     'EZT008seiz001', 'EZT008seiz002', ...
+%     'EZT009seiz001', 'EZT009seiz002', ...    
+%     'EZT011seiz001', 'EZT011seiz002', ...
+%     'EZT013seiz001', 'EZT013seiz002', ...
+%     'EZT020seiz001', 'EZT020seiz002', ...
+%     'EZT025seiz001', 'EZT025seiz002', ...
     'EZT026seiz001', 'EZT026seiz002', ...
     'EZT028seiz001', 'EZT028seiz002', ...
    'EZT037seiz001', 'EZT037seiz002',...
@@ -80,6 +80,8 @@ ALL = 'adjmat_struct.all_labels';
 clinicalStruct = 'pt1sz2_adjmats_leastsquares.mat';
 threshold = 0.70;
 
+EXTERNAL = 0;
+
 %- set the weights dir and params
 weightsDir = '../../figures/electrodeWeights/';
 winSize = 500;
@@ -92,11 +94,16 @@ TYPE_CONNECTIVITY = 'leastsquares';
 serverDir = '../../serverdata/'; 
 perturbationType = 'C';
 TEST_DESCRIP = 'after_first_removal';
-% TEST_DESCRIP = [];
+TEST_DESCRIP = [];
+
+if EXTERNAL
+    weightsDir = '';
+    serverDir = '';
+end
 
 %%- Loop through each patient and compute DOA
 for iPat=1:length(patients)
-    patient = patients{iPat};
+    patient = patients{iPat}
     
     % set patientID and seizureID
     patient_id = patient(1:strfind(patient, 'seiz')-1);
@@ -154,7 +161,7 @@ for iPat=1:length(patients)
     fragility_rankings = fragility_rankings(:, 1:seizureMarkStart);
     timePoints = timePoints(1:seizureMarkStart,:);  
 
-    %- rowsum
+    %- rowsum (overall strength of fragility)
     rowsum = sum(fragility_rankings, 2);
     rowsum = rowsum./max(rowsum);
     EEZ_indices = find(rowsum > mean(rowsum)+std(rowsum));
@@ -172,7 +179,7 @@ for iPat=1:length(patients)
     D = term1 - term2;
     fprintf('The degree of agreement with threshold %.2f is %.5f. \n',threshold, D);
     
-    %- rowsum -> after thresholding
+    %- rowsum -> after thresholding (intensity of fragility)
     fragility_rankings(fragility_rankings < threshold) = 0;
     rowsum = sum(fragility_rankings, 2);
     rowsum = rowsum./max(rowsum);
@@ -198,6 +205,28 @@ for iPat=1:length(patients)
     D = term1 - term2;
     fprintf('The degree of agreement with threshold %.2f is %.5f. \n',threshold, D);
 
+    %- rowsum instances of fragility 
+    fragility_rankings = final_data.fragilityMat;
+     fragility_rankings = fragility_rankings(:, 1:seizureMarkStart);
+    fragility_rankings(fragility_rankings < threshold) = 0;
+    fragility_rankings(fragility_rankings >= threshold) = 1;
+    rowsum = sum(fragility_rankings, 2);
+    
+    test = rowsum(rowsum > 0);
+    EEZ_indices = find(rowsum > mean(test));
+    EEZ = included_labels(EEZ_indices);
+    ALL = included_labels;
+    CEZ = ezone_labels;
+     
+    NotCEZ = setdiff(ALL, CEZ);
+    CEZ_EEZ = intersect(CEZ, EEZ);
+    NotCEZ_EEZ = intersect(NotCEZ, EEZ);
+
+    term1 = length(CEZ_EEZ) / length(CEZ);
+    term2 = length(NotCEZ_EEZ) / length(NotCEZ);
+
+    D = term1 - term2;
+    fprintf('The degree of agreement with threshold %.2f is %.5f. \n',threshold, D);
     
 end
 
