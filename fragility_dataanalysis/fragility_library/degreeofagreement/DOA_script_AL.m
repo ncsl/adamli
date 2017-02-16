@@ -228,6 +228,18 @@ for iPat=1:length(patients)
     D = term1 - term2;
     fprintf('The degree of agreement with threshold %.2f is %.5f. \n',threshold, D);
     
+    %%- output data to summarize
+    %- 1. is CEZ within EEZ? -> what proportion?
+    
+    
+    %- 2. what is DOA?
+    
+    
+    %- 3. Log data into a csv file
+    summaryFile = 'summarydoafile.txt';
+    fid = fopen(summaryFile, 'w');
+    fprintf(fid, 'patient, proportion detected?, DOA\n');
+    fprintf(fid, '%s, %f, %f\n');
 end
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
