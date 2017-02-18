@@ -14,7 +14,7 @@ read RUNSLEEP
 patient=('pt1sz2')
 numElecsToRemove=25
 
-printf "About to run on patients (press enter to continue): $patients" # prompt for patient_id {pt1, pt2, ..., JH105, EZT005}
+printf "About to run on patients (press enter to continue): $patient" # prompt for patient_id {pt1, pt2, ..., JH105, EZT005}
 read answer
 
 if [[ "$RUNSLEEP" -eq 1 ]]; then

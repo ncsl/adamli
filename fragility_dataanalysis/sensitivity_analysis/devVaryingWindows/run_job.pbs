@@ -6,7 +6,7 @@
 #PBS -m abe
 #PBS -q dque
 #PBS -S /bin/bash
-#PBS -d /home/ali/adamli/fragility_dataanalysis/server/devVaryingWindows/
+#PBS -d /home/ali/adamli/fragility_dataanalysis/sensitivity_analysis/devVaryingWindows/
 #PBS -e localhost:${PBS_O_WORKDIR}/_log/${PBS_JOBNAME}.e${PBS_JOBID}
 #PBS -o localhost:${PBS_O_WORKDIR}/_log/${PBS_JOBNAME}.o${PBS_JOBID}
 
