@@ -27,7 +27,7 @@ echo $RUNCONNECTIVITY
 if [[ "$RUNCONNECTIVITY" -eq 1 ]]; then
 	echo "Running connectivity computation."
 	matlab -logfile /home/ali/adamli/fragility_dataanalysis/sensitivity_analysis/devVaryingWindows/_log/job$1.txt -nojvm -nodisplay -nosplash -r "currentpatient='$patient'; \
-		sensitivityScript($patient,$numToRemove);"
+		sensitivityScript(currentpatient,$numToRemove);"
 else
 	echo "Running perturbation computation."
 	# # run perturbation analysis

@@ -11,7 +11,7 @@ printf "run sleep (Enter 1, or 0)? "
 read RUNSLEEP
 
 # patients listed 5 per row
-patient=('pt1sz2')
+patient='pt1sz2'
 numElecsToRemove=25
 
 printf "About to run on patients (press enter to continue): $patient" # prompt for patient_id {pt1, pt2, ..., JH105, EZT005}
