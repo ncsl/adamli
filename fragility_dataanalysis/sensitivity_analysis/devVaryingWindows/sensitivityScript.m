@@ -3,7 +3,7 @@ function sensitivityScript(patient, numRemove)
 %- add libraries to path
 addpath(genpath('../fragility_library/'));
 addpath(genpath('../eeg_toolbox/'));
-addpath('../');
+addpath('../../');
 
 % fprintf(patient);
 % fprintf(numRemove);
