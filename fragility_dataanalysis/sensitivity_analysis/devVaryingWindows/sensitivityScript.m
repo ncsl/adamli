@@ -19,6 +19,7 @@ winSize = 500;
 stepSize = 500;
 APPLY_FILTER = 0;
 BP_FILTER_RAW = 1;
+l2regularization = 0;
 
 % set working directory
 % data directories to save data into - choose one
@@ -135,6 +136,7 @@ adj_args.stepSize = stepSize;                       % step size
 adj_args.seizureStart = seizureStart;               % the second relative to start of seizure
 adj_args.seizureEnd = seizureEnd;                   % the second relative to end of seizure
 adj_args.TYPE_CONNECTIVITY = TYPE_CONNECTIVITY;
+adj_args.l2regularization = l2regularization;
 
 % compute connectivity
 if size(eegdata, 1) < winSize

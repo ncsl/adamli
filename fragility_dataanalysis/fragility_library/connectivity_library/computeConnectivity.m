@@ -21,7 +21,8 @@ function [adjMats, timePoints] = computeConnectivity(eeg, adj_args)
     stepSize = adj_args.stepSize;
     seizureStart = adj_args.seizureStart; % time seizure starts
     seizureEnd = adj_args.seizureEnd; % time seizure ends
-
+    l2regularization = adj_args.l2regularization;
+    
     TYPE_CONNECTIVITY = adj_args.TYPE_CONNECTIVITY;
 
     % set options for connectivity measurements
