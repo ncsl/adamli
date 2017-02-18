@@ -80,8 +80,9 @@ ALL = 'adjmat_struct.all_labels';
 clinicalStruct = 'pt1sz2_adjmats_leastsquares.mat';
 threshold = 0.70;
 
-EXTERNAL = 0;
+EXTERNAL = 1;
 
+addpath('../../');
 %- set the weights dir and params
 weightsDir = '../../figures/electrodeWeights/';
 winSize = 500;
@@ -98,12 +99,36 @@ TEST_DESCRIP = [];
 
 if EXTERNAL
     weightsDir = '';
-    serverDir = '';
+    serverDir = '/Volumes/NIL_PASS/serverdata/';
 end
 
+summaryFile = 'summarydoafile.csv';
+fid = fopen(summaryFile, 'w');
+
+successPatients = {
+    'EZT004seiz001', 'EZT004seiz002', ...
+    'EZT005seiz001', 'EZT005seiz002', ...
+    'EZT007seiz001', 'EZT007seiz002', ...
+    'EZT019seiz001', 'EZT019seiz002',...
+    'EZT037seiz001', 'EZT037seiz002',...
+    'EZT028seiz001', 'EZT028seiz002', ...
+    'EZT009seiz001', 'EZT009seiz002', ...   
+    'EZT011seiz001', 'EZT011seiz002', ...
+    'EZT026seiz001', 'EZT026seiz002', ...
+    };
+
+failPatients = {   
+    'EZT006seiz001', 'EZT006seiz002', ...
+    'EZT008seiz001', 'EZT008seiz002', ...   
+    'EZT013seiz001', 'EZT013seiz002', ...
+    'EZT020seiz001', 'EZT020seiz002', ...
+    'EZT025seiz001', 'EZT025seiz002', ...
+};
+
 %%- Loop through each patient and compute DOA
-for iPat=1:length(patients)
-    patient = patients{iPat}
+successDOA = zeros(length(successPatients),1);
+for iPat=1:length(successPatients)
+    patient = successPatients{iPat}
     
     % set patientID and seizureID
     patient_id = patient(1:strfind(patient, 'seiz')-1);
@@ -133,13 +158,23 @@ for iPat=1:length(patients)
     finalDataDir = fullfile(serverDir, strcat(perturbationType, '_perturbations', ...
             '_radius', num2str(radius)), 'win500_step500_freq1000', patient);
 
-    if ~isempty(TEST_DESCRIP)
-        finalDataDir = fullfile(finalDataDir, TEST_DESCRIP);
+    try
+        TEST_DESCRIP = 'after_first_removal';
+        if ~isempty(TEST_DESCRIP)
+            finalDataDir = fullfile(finalDataDir, TEST_DESCRIP);
+        end
+
+        final_data = load(fullfile(finalDataDir, strcat(patient, ...
+            '_', perturbationType, 'perturbation_', lower(TYPE_CONNECTIVITY), ...
+            '_radius', num2str(radius), '.mat')));
+    catch e
+        disp(e)
+        finalDataDir = fullfile(serverDir, strcat(perturbationType, '_perturbations', ...
+            '_radius', num2str(radius)), 'win500_step500_freq1000', patient);
+        final_data = load(fullfile(finalDataDir, strcat(patient, ...
+            '_', perturbationType, 'perturbation_', lower(TYPE_CONNECTIVITY), ...
+            '_radius', num2str(radius), '.mat')));
     end
-        
-    final_data = load(fullfile(finalDataDir, strcat(patient, ...
-        '_', perturbationType, 'perturbation_', lower(TYPE_CONNECTIVITY), ...
-        '_radius', num2str(radius), '.mat')));
     final_data = final_data.perturbation_struct;
 
     % set data to local variables
@@ -230,18 +265,233 @@ for iPat=1:length(patients)
     
     %%- output data to summarize
     %- 1. is CEZ within EEZ? -> what proportion?
+    fragility_rankings = final_data.fragilityMat;
+     fragility_rankings = fragility_rankings(:, 1:seizureMarkStart);
+    fragility_rankings(fragility_rankings < threshold) = 0;
+    rowsum = sum(fragility_rankings, 2);
+    rowsum = rowsum./max(rowsum);
     
+    EEZ_indices = find(rowsum > threshold);
+    [sorted_rowsum, sorted_indices] = sort(rowsum,'descend');
+    if ismember(0, sorted_rowsum(1:length(ezone_labels)))
+        EEZ_indices = find(sorted_rowsum(1:find(0==sorted_rowsum, 1)-1));
+    else
+        EEZ_indices = find(sorted_rowsum(1:length(ezone_labels)));
+    end
+    EEZ_indices = sorted_indices(EEZ_indices);
+    EEZ = included_labels(EEZ_indices);
+    ALL = included_labels;
+    CEZ = ezone_labels;
+     
+    NotCEZ = setdiff(ALL, CEZ);
+    CEZ_EEZ = intersect(CEZ, EEZ);
+    NotCEZ_EEZ = intersect(NotCEZ, EEZ);
+
+    term1 = length(CEZ_EEZ) / length(CEZ);
+    term2 = length(NotCEZ_EEZ) / length(NotCEZ);
+    
+    intersection = intersect(included_labels(find(rowsum > 0)), CEZ);
+    proportion_intersection = length(intersection) / length(CEZ);
     
     %- 2. what is DOA?
+    D = term1 - term2;
     
-    
+    successDOA(iPat) = D;
     %- 3. Log data into a csv file
-    summaryFile = 'summarydoafile.txt';
-    fid = fopen(summaryFile, 'w');
     fprintf(fid, 'patient, proportion detected?, DOA\n');
-    fprintf(fid, '%s, %f, %f\n');
+    fprintf(fid, '%s, %f, %f\n', patient, proportion_intersection, D);
 end
 
+
+failedDOA = zeros(length(failPatients),1);
+for iPat=1:length(failPatients)
+    patient = failPatients{iPat}
+    
+    % set patientID and seizureID
+    patient_id = patient(1:strfind(patient, 'seiz')-1);
+    seizure_id = strcat('_', patient(strfind(patient, 'seiz'):end));
+    seeg = 1;
+    if isempty(patient_id)
+        patient_id = patient(1:strfind(patient, 'sz')-1);
+        seizure_id = patient(strfind(patient, 'sz'):end);
+        seeg = 0;
+    end
+    if isempty(patient_id)
+        patient_id = patient(1:strfind(patient, 'aslp')-1);
+        seizure_id = patient(strfind(patient, 'aslp'):end);
+        seeg = 0;
+    end
+    if isempty(patient_id)
+        patient_id = patient(1:strfind(patient, 'aw')-1);
+        seizure_id = patient(strfind(patient, 'aw'):end);
+        seeg = 0;
+    end
+
+    [included_channels, ezone_labels, earlyspread_labels, latespread_labels,...
+        resection_labels, frequency_sampling, center] ...
+            = determineClinicalAnnotations(patient_id, seizure_id);
+        
+     % directory that computed perturbation structs are saved
+    finalDataDir = fullfile(serverDir, strcat(perturbationType, '_perturbations', ...
+            '_radius', num2str(radius)), 'win500_step500_freq1000', patient);
+
+    try
+        TEST_DESCRIP = 'after_first_removal';
+        if ~isempty(TEST_DESCRIP)
+            finalDataDir = fullfile(finalDataDir, TEST_DESCRIP);
+        end
+
+        final_data = load(fullfile(finalDataDir, strcat(patient, ...
+            '_', perturbationType, 'perturbation_', lower(TYPE_CONNECTIVITY), ...
+            '_radius', num2str(radius), '.mat')));
+    catch e
+        disp(e)
+        finalDataDir = fullfile(serverDir, strcat(perturbationType, '_perturbations', ...
+            '_radius', num2str(radius)), 'win500_step500_freq1000', patient);
+        final_data = load(fullfile(finalDataDir, strcat(patient, ...
+            '_', perturbationType, 'perturbation_', lower(TYPE_CONNECTIVITY), ...
+            '_radius', num2str(radius), '.mat')));
+    end
+    final_data = final_data.perturbation_struct;
+
+    % set data to local variables
+    minPerturb_time_chan = final_data.minNormPertMat;
+    fragility_rankings = final_data.fragilityMat;
+    timePoints = final_data.timePoints;
+    info = final_data.info;
+    num_channels = size(minPerturb_time_chan,1);
+    seizureStart = info.seizure_start;
+    seizureEnd = info.seizure_end;
+    included_labels = info.all_labels;
+
+    seizureMarkStart = seizureStart/winSize;
+    if seeg
+        seizureMarkStart = (seizureStart-1) / winSize;
+    end
+
+    minPerturb_time_chan = minPerturb_time_chan(:, 1:seizureMarkStart);
+    fragility_rankings = fragility_rankings(:, 1:seizureMarkStart);
+    timePoints = timePoints(1:seizureMarkStart,:);  
+
+    %- rowsum (overall strength of fragility)
+    rowsum = sum(fragility_rankings, 2);
+    rowsum = rowsum./max(rowsum);
+    EEZ_indices = find(rowsum > mean(rowsum)+std(rowsum));
+    EEZ = included_labels(EEZ_indices);
+    ALL = included_labels;
+    CEZ = ezone_labels;
+     
+    NotCEZ = setdiff(ALL, CEZ);
+    CEZ_EEZ = intersect(CEZ, EEZ);
+    NotCEZ_EEZ = intersect(NotCEZ, EEZ);
+
+    term1 = length(CEZ_EEZ) / length(CEZ);
+    term2 = length(NotCEZ_EEZ) / length(NotCEZ);
+
+    D = term1 - term2;
+    fprintf('The degree of agreement with threshold %.2f is %.5f. \n',threshold, D);
+    
+    %- rowsum -> after thresholding (intensity of fragility)
+    fragility_rankings(fragility_rankings < threshold) = 0;
+    rowsum = sum(fragility_rankings, 2);
+    rowsum = rowsum./max(rowsum);
+    EEZ_indices = find(rowsum > threshold);
+    [sorted_rowsum, sorted_indices] = sort(rowsum,'descend');
+    if ismember(0, sorted_rowsum(1:length(ezone_labels)))
+        EEZ_indices = find(sorted_rowsum(1:find(0==sorted_rowsum, 1)-1));
+    else
+        EEZ_indices = find(sorted_rowsum(1:length(ezone_labels)));
+    end
+    EEZ_indices = sorted_indices(EEZ_indices);
+    EEZ = included_labels(EEZ_indices);
+    ALL = included_labels;
+    CEZ = ezone_labels;
+     
+    NotCEZ = setdiff(ALL, CEZ);
+    CEZ_EEZ = intersect(CEZ, EEZ);
+    NotCEZ_EEZ = intersect(NotCEZ, EEZ);
+
+    term1 = length(CEZ_EEZ) / length(CEZ);
+    term2 = length(NotCEZ_EEZ) / length(NotCEZ);
+
+    D = term1 - term2;
+    fprintf('The degree of agreement with threshold %.2f is %.5f. \n',threshold, D);
+
+    %- rowsum instances of fragility 
+    fragility_rankings = final_data.fragilityMat;
+     fragility_rankings = fragility_rankings(:, 1:seizureMarkStart);
+    fragility_rankings(fragility_rankings < threshold) = 0;
+    fragility_rankings(fragility_rankings >= threshold) = 1;
+    rowsum = sum(fragility_rankings, 2);
+    
+    test = rowsum(rowsum > 0);
+    EEZ_indices = find(rowsum > mean(test));
+    EEZ = included_labels(EEZ_indices);
+    ALL = included_labels;
+    CEZ = ezone_labels;
+     
+    NotCEZ = setdiff(ALL, CEZ);
+    CEZ_EEZ = intersect(CEZ, EEZ);
+    NotCEZ_EEZ = intersect(NotCEZ, EEZ);
+
+    term1 = length(CEZ_EEZ) / length(CEZ);
+    term2 = length(NotCEZ_EEZ) / length(NotCEZ);
+
+    D = term1 - term2;
+    fprintf('The degree of agreement with threshold %.2f is %.5f. \n',threshold, D);
+    
+    %%- output data to summarize
+    %- 1. is CEZ within EEZ? -> what proportion?
+    fragility_rankings = final_data.fragilityMat;
+     fragility_rankings = fragility_rankings(:, 1:seizureMarkStart);
+    fragility_rankings(fragility_rankings < threshold) = 0;
+    rowsum = sum(fragility_rankings, 2);
+    rowsum = rowsum./max(rowsum);
+    
+    EEZ_indices = find(rowsum > threshold);
+    [sorted_rowsum, sorted_indices] = sort(rowsum,'descend');
+    if ismember(0, sorted_rowsum(1:length(ezone_labels)))
+        EEZ_indices = find(sorted_rowsum(1:find(0==sorted_rowsum, 1)-1));
+    else
+        EEZ_indices = find(sorted_rowsum(1:length(ezone_labels)));
+    end
+    EEZ_indices = sorted_indices(EEZ_indices);
+    EEZ = included_labels(EEZ_indices);
+    ALL = included_labels;
+    CEZ = ezone_labels;
+     
+    NotCEZ = setdiff(ALL, CEZ);
+    CEZ_EEZ = intersect(CEZ, EEZ);
+    NotCEZ_EEZ = intersect(NotCEZ, EEZ);
+
+    term1 = length(CEZ_EEZ) / length(CEZ);
+    term2 = length(NotCEZ_EEZ) / length(NotCEZ);
+    
+    intersection = intersect(included_labels(find(rowsum > 0)), CEZ);
+    proportion_intersection = length(intersection) / length(CEZ);
+    
+    %- 2. what is DOA?
+    D = term1 - term2;
+    
+    if isnan(D)
+        D = 0;
+    end
+    failedDOA(iPat) = D;
+    %- 3. Log data into a csv file
+    fprintf(fid, 'patient, proportion detected?, DOA\n');
+    fprintf(fid, '%s, %f, %f\n', patient, proportion_intersection, D);
+end
+
+% plotting box plot
+g = [ones(size(successDOA)); 2*ones(size(failedDOA))];
+figure;
+boxplot([successDOA; failedDOA], g);
+axes = gca;
+axes.FontSize = 18;
+axes.XTickLabel = {'Success', 'Failures'};
+
+title(['Summary Degree of Agreement']);
+ylabel('Degree of Agreement');
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % load in necesssary structs for EpiMap, CEZ and ALL 
