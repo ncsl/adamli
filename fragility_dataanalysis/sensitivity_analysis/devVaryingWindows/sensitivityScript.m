@@ -18,12 +18,12 @@ BP_FILTER_RAW = 1;
 
 % set working directory
 % data directories to save data into - choose one
-eegRootDirWork = '/Users/liaj/Documents/MATLAB/paremap';     % work
+eegRootDirServer = '/home/ali/adamli/fragility_dataanalysis/sensitivity_analysis/';     % work
 % eegRootDirHome = '/Users/adam2392/Documents/MATLAB/Johns Hopkins/NINDS_Rotation';  % home
 eegRootDirHome = '/Volumes/NIL_PASS/';
 eegRootDirJhu = '/home/WIN/ali39/Documents/adamli/fragility_dataanalysis/';
 % Determine which directory we're working with automatically
-if     ~isempty(dir(eegRootDirWork)), rootDir = eegRootDirWork;
+if     ~isempty(dir(eegRootDirServer)), rootDir = eegRootDirServer;
 elseif ~isempty(dir(eegRootDirHome)), rootDir = eegRootDirHome;
 elseif ~isempty(dir(eegRootDirJhu)), rootDir = eegRootDirJhu;
 else   error('Neither Work nor Home EEG directories exist! Exiting'); end
