@@ -12,8 +12,8 @@
 
 # make sure to cd to the correct directory.
 # also make sure PBS -d is the correct directory 
-cd /home/ali/adamli/fragility_dataanalysis/server/devVaryingWindows/
+cd /home/ali/adamli/fragility_dataanalysis/sensitivity_analysis/devVaryingWindows/
 
 proc=0 
-pbsdsh -n $proc /home/ali/adamli/fragility_dataanalysis/server/devVaryingWindows/runAnalysis.sh $proc $patient $RUNCONNECTIVITY $winSize $numToRemove &
+pbsdsh -n $proc /home/ali/adamli/fragility_dataanalysis/sensitivity_analysis/devVaryingWindows/runAnalysis.sh $proc $patient $RUNCONNECTIVITY $winSize $numToRemove &
 wait
