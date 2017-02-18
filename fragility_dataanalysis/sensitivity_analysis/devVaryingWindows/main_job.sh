@@ -11,7 +11,7 @@ printf "run sleep (Enter 1, or 0)? "
 read RUNSLEEP
 
 # patients listed 5 per row
-patients=('pt1sz2')
+patient=('pt1sz2')
 numElecsToRemove=25
 
 printf "About to run on patients (press enter to continue): $patients" # prompt for patient_id {pt1, pt2, ..., JH105, EZT005}
@@ -29,10 +29,11 @@ fi
 ## 02: Call pbs job, runAnalysis
 for numToRemove in `seq 1 $numElecsToRemove`; do
 	echo $patient
+	echo $numToRemove
 	if [[ "$RUNCONNECTIVITY" -eq 1 ]]; then
-		jobname="compute_adjacency_${patient}"
+		jobname="compute_adjacency_${patient}_${numToRemove}"
 	else
-		jobname="compute_perturbation_${patient}"
+		jobname="compute_perturbation_${patient}_${numToRemove}"
 	fi
 	# run a pbs batch job. Make sure there are no spaces in between the parameters passed
 	qsub -v RUNCONNECTIVITY=$RUNCONNECTIVITY,patient=$patient,winSize=$winSize,numToRemove=$numToRemove -N ${jobname} run_job.pbs
