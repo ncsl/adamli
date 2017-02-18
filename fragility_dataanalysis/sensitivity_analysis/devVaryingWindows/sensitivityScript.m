@@ -89,6 +89,9 @@ eegdata(randIndices,:) = [];
 
 %- location to save data
 toSaveAdjDir = fullfile(rootDir, '/serverdata/adjmats', patient, strcat(patient, '_numelecs', N));
+if ~exist(toSaveAdjDir, 'dir')
+    mkdir(toSaveAdjDir);
+end
 
 %%- 1. Run adjmat computation with data
 % put clinical annotations into a struct
