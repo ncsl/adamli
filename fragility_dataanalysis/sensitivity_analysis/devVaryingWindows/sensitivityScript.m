@@ -5,6 +5,10 @@ addpath(genpath('../fragility_library/'));
 addpath(genpath('../eeg_toolbox/'));
 addpath('../../');
 
+if nargin==0
+    patient = 'pt1sz2';
+    numRemove = 2;
+end
 % fprintf(patient);
 % fprintf(numRemove);
 
@@ -18,7 +22,7 @@ BP_FILTER_RAW = 1;
 
 % set working directory
 % data directories to save data into - choose one
-eegRootDirServer = '/home/ali/adamli/fragility_dataanalysis/sensitivity_analysis/';     % work
+eegRootDirServer = '/home/ali/adamli/fragility_dataanalysis/';     % work
 % eegRootDirHome = '/Users/adam2392/Documents/MATLAB/Johns Hopkins/NINDS_Rotation';  % home
 eegRootDirHome = '/Volumes/NIL_PASS/';
 eegRootDirJhu = '/home/WIN/ali39/Documents/adamli/fragility_dataanalysis/';
