@@ -5,6 +5,9 @@ addpath(genpath('../fragility_library/'));
 addpath(genpath('../eeg_toolbox/'));
 addpath('../');
 
+fprintf(patient);
+fprintf(numRemove);
+
 %%- 0. Load in data for a wellperforming patient
 % patient = 'pt1sz2';
 TYPE_CONNECTIVITY = 'leastsquares';
