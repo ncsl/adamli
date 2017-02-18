@@ -29,7 +29,7 @@ if [[ "$RUNCONNECTIVITY" -eq 1 ]]; then
 	matlab -logfile /home/ali/adamli/fragility_dataanalysis/sensitivity_analysis/devVaryingWindows/_log/job$1.txt -nojvm -nodisplay -nosplash -r "currentpatient='$patient'; \
 		sensitivityScript($patient,$numToRemove);"
 else
-	# echo "Running perturbation computation."
+	echo "Running perturbation computation."
 	# # run perturbation analysis
 	# matlab -logfile /home/ali/adamli/fragility_dataanalysis/server/devVaryingWindows/_log/job$1.txt -nojvm -nodisplay -nosplash -r "currentpatient='$patient'; \
 	# 	serverPerturbationScript(currentpatient, $radius, $winSize, $stepSize);"
