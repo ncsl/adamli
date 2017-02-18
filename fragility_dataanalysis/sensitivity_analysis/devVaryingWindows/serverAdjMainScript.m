@@ -1,29 +1,32 @@
-function sensitivityScript(patient, numRemove)
-% script to perform sensitivity analysis for different electrodes removed
-%- add libraries to path
-addpath(genpath('../fragility_library/'));
-addpath(genpath('../eeg_toolbox/'));
-addpath('../');
+function serverAdjMainScript(patient, winSize, stepSize)
+%% Add Libraries To Use For Function
+addpath(genpath('../../fragility_library/'));
+addpath(genpath('../../eeg_toolbox/'));
+addpath('../../');
 
-%%- 0. Load in data for a wellperforming patient
-% patient = 'pt1sz2';
-TYPE_CONNECTIVITY = 'leastsquares';
-winSize = 500;
-stepSize = 500;
-APPLY_FILTER = 0;
-BP_FILTER_RAW = 1;
+IS_SERVER = 1;
+if nargin == 0 % testing purposes
+    center = 'cc';
+    patient='EZT009seiz001';
+%     patient='JH102sz6';
+%     patient='pt17sz1';
+    % window paramters
+    winSize = 500; % 500 milliseconds
+    stepSize = 500; 
+    IS_SERVER = 1;
+end
 
-% set working directory
-% data directories to save data into - choose one
-eegRootDirWork = '/Users/liaj/Documents/MATLAB/paremap';     % work
-% eegRootDirHome = '/Users/adam2392/Documents/MATLAB/Johns Hopkins/NINDS_Rotation';  % home
-eegRootDirHome = '/Volumes/NIL_PASS/';
-eegRootDirJhu = '/home/WIN/ali39/Documents/adamli/fragility_dataanalysis/';
-% Determine which directory we're working with automatically
-if     ~isempty(dir(eegRootDirWork)), rootDir = eegRootDirWork;
-elseif ~isempty(dir(eegRootDirHome)), rootDir = eegRootDirHome;
-elseif ~isempty(dir(eegRootDirJhu)), rootDir = eegRootDirJhu;
-else   error('Neither Work nor Home EEG directories exist! Exiting'); end
+% setupScripts;
+disp(['Looking at patient: ',patient]);
+
+%% New Setup Scripts
+TYPE_CONNECTIVITY = 'leastsquares';     % type of functional conn.?
+BP_FILTER_RAW = 1;                      % apply notch filter before functional conn. computation?
+APPLY_FILTER = 1;
+IS_INTERICTAL = 0;                      % is this interictal data?
+l2regularization = 0;                   % apply l2 regularization to estimation of functional conn.?
+TEST_DESCRIP = 'after_first_removal';
+TEST_DESCRIP = [];
 
 % set patientID and seizureID
 patient_id = patient(1:strfind(patient, 'seiz')-1);
@@ -45,44 +48,39 @@ if isempty(patient_id)
     seeg = 0;
 end
 
-[included_channels, ezone_labels, earlyspread_labels, latespread_labels,...
-    resection_labels, frequency_sampling, center] ...
-        = determineClinicalAnnotations(patient_id, seizure_id);
-        
-%- load in data dir of patient
-dataDir = fullfile(rootDir, '/data/', center, patient);
-data = load(fullfile(dataDir, patient));
+%% DEFINE OUTPUT DIRS AND CLINICAL ANNOTATIONS
+%- Edit this file if new patients are added.
+[included_channels, ezone_labels, earlyspread_labels,...
+    latespread_labels, resection_labels, frequency_sampling, ...
+    center] ...
+            = determineClinicalAnnotations(patient_id, seizure_id);
 
-eegdata = data.data;
-included_labels = data.elec_labels;
-seizureStart = data.seiz_start_mark;
-seizureEnd = data.seiz_end_mark;
+%%- Directory at work
+% set dir to find raw data files
+dataDir = fullfile('./data/', center);
+% set directory to save computed data
+toSaveAdjDir = fullfile('./adjmats/', strcat('win', num2str(winSize), ...
+    '_step', num2str(stepSize), '_freq', num2str(frequency_sampling)), patient); % at lab
 
-% apply included channels to eeg and labels
-if ~isempty(included_channels)
-    eegdata = eegdata(included_channels, :);
-    included_labels = included_labels(included_channels);
+%%- If using External HardDrive
+% toSaveAdjDir = fullfile(strcat('/Volumes/NIL_PASS/serverdata/fixed_adj_mats_win', num2str(winSize), ...
+%     '_step', num2str(stepSize), '_freq', num2str(frequency_sampling))); % at home
+% dataDir = fullfile('/Volumes/NIL_PASS/data/', center);
+
+if IS_SERVER
+    toSaveAdjDir = fullfile('../..', 'serverdata', toSaveAdjDir);
+    dataDir = strcat('../.', dataDir);
 end
 
-% strip the data of electrode(s)
-[N, T] = size(eegdata);
+if ~isempty(TEST_DESCRIP)
+    toSaveAdjDir = fullfile(toSaveAdjDir, TEST_DESCRIP);
+end
 
-% find random electrodes to remove not within the EZ
-ezone_indices = findElectrodeIndices(ezone_labels, included_labels);
-earlyspread_indices = findElectrodeIndices(earlyspread_labels, included_labels);
-latespread_indices = findElectrodeIndices(latespread_labels, included_labels);
-
-% only keep electrodes not in EZ
-elec_indices = 1:N;
-elec_indices(ezone_indices) = [];
-
-randIndices = randsample(elec_indices, numRemove);
-eegdata(randIndices,:) = [];
-
-%- location to save data
-toSaveAdjDir = fullfile(rootDir, '/serverdata/adjmats', patient, strcat(patient, '_numelecs', N));
-
-%%- 1. Run adjmat computation with data
+% create directory if it does not exist
+if ~exist(toSaveAdjDir, 'dir')
+    mkdir(toSaveAdjDir);
+end
+        
 % put clinical annotations into a struct
 clinicalLabels = struct();
 clinicalLabels.ezone_labels = ezone_labels;
@@ -100,8 +98,24 @@ end
 patient_eeg_path
 patient
 
+%% LOAD DATA IN
+% READ EEG FILE Mat File
+% files to process
+try
+    data = load(fullfile(patient_eeg_path, strcat(patient, '.mat')));
+catch e
+    disp(e)
+    data = load(fullfile(patient_eeg_path, strcat(patient_id, seizure_id, '.mat')));
+end
+eeg = data.data;
+labels = data.elec_labels;
+onset_time = data.seiz_start_mark;
+offset_time = data.seiz_end_mark;
+seizureStart = (onset_time); % time seizure starts
+seizureEnd = (offset_time); % time seizure ends
+
 if APPLY_FILTER % apply some filter for a set of patients at certain electrodes
-    eegdata = apply_filter(eegdata, labels, patient_id);
+    eeg = apply_filter(eeg, labels, patient_id);
 end
 
 % check to make sure eeg mat file was saved correctly with the right meta
@@ -110,12 +124,23 @@ if seizureStart == 0 || seizureEnd == 0
     disp('Mat file from .csv was not saved correctly.');
 end
 
+% check included channels length and how big eeg is
+if length(labels(included_channels)) ~= size(eeg(included_channels,:),1)
+        disp('Something wrong here...!!!!');
+end
+
 if frequency_sampling ~=1000
-    eegdata = eegdata(:, 1:(1000/frequency_sampling):end);
+    eeg = eeg(:, 1:(1000/frequency_sampling):end);
     seizureStart = seizureStart * frequency_sampling/1000;
     seizureEnd = seizureEnd * frequency_sampling/1000;
     winSize = winSize*frequency_sampling/1000;
     stepSize = stepSize*frequency_sampling/1000;
+end
+    
+% apply included channels to eeg and labels
+if ~isempty(included_channels)
+    eeg = eeg(included_channels, :);
+    labels = labels(included_channels);
 end
 
 %% PERFORM ADJACENCY COMPUTATION
@@ -127,11 +152,12 @@ adj_args.winSize = winSize;                         % window size
 adj_args.stepSize = stepSize;                       % step size
 adj_args.seizureStart = seizureStart;               % the second relative to start of seizure
 adj_args.seizureEnd = seizureEnd;                   % the second relative to end of seizure
+adj_args.l2regularization = l2regularization; 
 adj_args.TYPE_CONNECTIVITY = TYPE_CONNECTIVITY;
 
 % compute connectivity
-if size(eegdata, 1) < winSize
-    [adjMats, timePoints] = computeConnectivity(eegdata, adj_args);
+if size(eeg, 1) < winSize
+    [adjMats, timePoints] = computeConnectivity(eeg, adj_args);
 else
     disp([patient, ' is underdetermined, must use optimization techniques']);
 end
@@ -161,7 +187,5 @@ catch e
     disp(e);
     save(fullfile(toSaveAdjDir, fileName), 'adjmat_struct', '-v7.3');
 end
+
 end
-
-
-%%- 2. then Run perturbation algorithm
