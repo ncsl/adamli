@@ -1,8 +1,8 @@
 function sensitivityScript(patient, numRemove)
 % script to perform sensitivity analysis for different electrodes removed
 %- add libraries to path
-addpath(genpath('../fragility_library/'));
-addpath(genpath('../eeg_toolbox/'));
+addpath(genpath('../../fragility_library/'));
+addpath(genpath('../../eeg_toolbox/'));
 addpath('../../');
 
 if nargin==0
