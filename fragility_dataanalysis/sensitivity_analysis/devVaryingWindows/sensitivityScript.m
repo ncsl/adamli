@@ -88,7 +88,7 @@ randIndices = randsample(elec_indices, numRemove);
 eegdata(randIndices,:) = [];
 
 %- location to save data
-toSaveAdjDir = fullfile(rootDir, '/serverdata/adjmats', patient, strcat(patient, '_numelecs', N));
+toSaveAdjDir = fullfile(rootDir, '/serverdata/adjmats', patient, strcat(patient, '_numelecs', num2str(N)));
 if ~exist(toSaveAdjDir, 'dir')
     mkdir(toSaveAdjDir);
 end
@@ -155,7 +155,7 @@ adjmat_struct.ezone_labels = ezone_labels;
 adjmat_struct.earlyspread_labels = earlyspread_labels;
 adjmat_struct.latespread_labels = latespread_labels;
 adjmat_struct.resection_labels = resection_labels;
-adjmat_struct.all_labels = labels;
+adjmat_struct.all_labels = included_labels;
 adjmat_struct.seizure_start = seizureStart;
 adjmat_struct.seizure_end = seizureEnd;
 adjmat_struct.winSize = winSize;
