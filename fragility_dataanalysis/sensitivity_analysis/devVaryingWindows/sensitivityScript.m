@@ -87,6 +87,8 @@ elec_indices(ezone_indices) = [];
 randIndices = randsample(elec_indices, numRemove);
 eegdata(randIndices,:) = [];
 
+[N, T] = size(eegdata);
+
 %- location to save data
 toSaveAdjDir = fullfile(rootDir, '/serverdata/adjmats', patient, strcat(patient, '_numelecs', num2str(N)));
 if ~exist(toSaveAdjDir, 'dir')
