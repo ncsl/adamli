@@ -315,6 +315,24 @@ function [included_channels, ezone_labels, ...
          latespread_labels = {};
          
          center = 'nih';
+         
+    elseif strcmp(patient_id, 'pt12')
+        included_channels = [1:15 17:33 38:39 42:61];
+        
+        ezone_labels = {};
+        earlyspread_labels = {};
+        latespread_labels = {};
+        
+        center = 'nih';
+    elseif strcmp(patient_id, 'pt13')
+        included_channels = [1:36 39:40 43:66 69:74 77 79:94 96:103 105:130];
+        
+        ezone_labels = {};
+        earlyspread_labels = {};
+        latespread_labels = {};
+        
+        center = 'nih';
+        
     elseif strcmp(patient_id, 'pt14')
         included_channels = [1:19 21:37 41:42 45:61 68:78];
         
