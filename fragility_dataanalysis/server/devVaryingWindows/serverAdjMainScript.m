@@ -9,7 +9,7 @@ if nargin == 0 % testing purposes
     center = 'cc';
     patient='EZT009seiz001';
 %     patient='JH102sz6';
-%     patient='pt17sz1';
+    patient='pt7sz19';
     % window paramters
     winSize = 500; % 500 milliseconds
     stepSize = 500; 

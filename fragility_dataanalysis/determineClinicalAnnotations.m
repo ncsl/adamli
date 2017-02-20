@@ -319,17 +319,18 @@ function [included_channels, ezone_labels, ...
     elseif strcmp(patient_id, 'pt12')
         included_channels = [1:15 17:33 38:39 42:61];
         
-        ezone_labels = {};
-        earlyspread_labels = {};
-        latespread_labels = {};
+        ezone_labels = {'POLAST1', 'POLAST2', 'POLTT2', 'POLTT3', 'POLTT5', 'POLMST2'};
+        earlyspread_labels = {'POLG27', 'POLG28', 'POLG29', 'POLG19', 'POLG20'};
+        latespread_labels = {'POLG15', 'POLG14', 'POLG13', 'POLG12', 'POLG22', 'POLG21'};
         
         center = 'nih';
     elseif strcmp(patient_id, 'pt13')
         included_channels = [1:36 39:40 43:66 69:74 77 79:94 96:103 105:130];
         
-        ezone_labels = {};
-        earlyspread_labels = {};
-        latespread_labels = {};
+        ezone_labels = {'POLFP1', 'POLFP2', 'POLFP9', 'POLFP10', 'POLFP17', 'POLFP18'};
+        earlyspread_labels = {'POLAP3', 'POLMF6', 'POLFP25', 'POLFP26', 'POLFP27', 'POLFP19', 'POLFP11', ...
+            'POLFP12', 'POLFP3', 'POLFP4', 'POLFP5'};
+        latespread_labels = {'POLFP4', 'POLRPPIH6', 'POLFPPIH5', 'POLRPPIH4'};
         
         center = 'nih';
         
