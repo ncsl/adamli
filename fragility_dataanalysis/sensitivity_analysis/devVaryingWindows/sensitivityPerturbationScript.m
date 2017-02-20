@@ -7,7 +7,7 @@ addpath('../../');
 
 if nargin==0
     patient = 'pt1sz2';
-    numRemove = 2;
+    numRemove = 1;
 end
 % fprintf(patient);
 % fprintf(numRemove);
@@ -22,7 +22,9 @@ BP_FILTER_RAW = 1;
 l2regularization = 0;
 % perturbation analysis parameters
 perturbationTypes = ['C', 'R'];
+radius = 1.5;
 w_space = linspace(-radius, radius, 51);
+
 
 % set working directory
 % data directories to save data into - choose one
@@ -126,7 +128,7 @@ for j=1:length(perturbationTypes)
     perturb_args.w_space = w_space;
     perturb_args.radius = radius;
 
-    parfor iTime=1:T
+    for iTime=1:T
         adjMat = squeeze(adjMats(iTime,:,:));
 
         [minNormPert, del_vecs, ERRORS] = minNormPerturbation(patient, adjMat, perturb_args);

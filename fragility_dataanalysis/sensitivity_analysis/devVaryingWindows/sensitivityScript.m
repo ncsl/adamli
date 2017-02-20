@@ -7,7 +7,7 @@ addpath('../../');
 
 if nargin==0
     patient = 'pt1sz2';
-    numRemove = 2;
+    numRemove = 1;
 end
 % fprintf(patient);
 % fprintf(numRemove);

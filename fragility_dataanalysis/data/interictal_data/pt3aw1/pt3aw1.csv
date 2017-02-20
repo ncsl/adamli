@@ -1,0 +1,2 @@
+patient_id,date,recording_start,onset_time,offset_time,recording_duration,num_channels,included_channels
+pt3aw1,10/24/14,19:27:24,0:00:00,0:00:00,363,135,
