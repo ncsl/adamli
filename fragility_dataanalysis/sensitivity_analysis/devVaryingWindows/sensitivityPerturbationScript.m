@@ -7,7 +7,7 @@ addpath('../../');
 
 if nargin==0
     patient = 'pt1sz2';
-    numRemove = 1;
+    numRemove = 2;
 end
 % fprintf(patient);
 % fprintf(numRemove);
@@ -128,7 +128,7 @@ for j=1:length(perturbationTypes)
     perturb_args.w_space = w_space;
     perturb_args.radius = radius;
 
-    for iTime=1:T
+    parfor iTime=1:T
         adjMat = squeeze(adjMats(iTime,:,:));
 
         [minNormPert, del_vecs, ERRORS] = minNormPerturbation(patient, adjMat, perturb_args);
