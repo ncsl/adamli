@@ -86,6 +86,7 @@ elec_indices(ezone_indices) = [];
 
 randIndices = randsample(elec_indices, numRemove);
 eegdata(randIndices,:) = [];
+included_labels(randIndices) = [];
 
 [N, T] = size(eegdata);
 
