@@ -90,7 +90,7 @@ eegdata(randIndices,:) = [];
 [N, T] = size(eegdata);
 
 %- location to save data
-toSaveAdjDir = fullfile(rootDir, '/serverdata/adjmats', patient, strcat(patient, '_numelecs', num2str(N)));
+toSaveAdjDir = fullfile(rootDir, '/serverdata/adjmats', patient, strcat(patient, '_numelecs', num2str(numRemove)));
 if ~exist(toSaveAdjDir, 'dir')
     mkdir(toSaveAdjDir);
 end
