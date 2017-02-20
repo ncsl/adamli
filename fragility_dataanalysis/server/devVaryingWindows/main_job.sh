@@ -28,6 +28,7 @@ patients=(
 	# pt3sz2 pt3sz4
 	# pt6sz3 pt6sz4 
 	# 'pt6sz5')
+	'pt7sz19 pt7sz21 pt7sz22')
 	# 'pt8sz1 pt8sz2 pt8sz3')
 	# 'pt10sz1 pt10sz2 pt10sz3
 	# 'pt11sz1 pt11sz2 pt11sz3 pt11sz4
@@ -50,7 +51,7 @@ patients=(
 	# EZT019seiz001 EZT019seiz002 EZT019seiz003
 	# 'EZT005seiz001 EZT005seiz002 EZT005seiz003
 	# EZT011seiz001')
-	'EZT070seiz001 EZT070seiz002')
+	# 'EZT070seiz001 EZT070seiz002')
 	# EZT037seiz001 EZT037seiz002')
 	# 'EZT070seiz001 EZT070seiz002')
 	# 'JH101sz1')
