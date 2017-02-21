@@ -12,7 +12,7 @@
 close all; clear all; clc;
 %% Estimate A for different windowsizes, then use a reduced order observer to estimate signals from some of the channels, using A_hat
 
-BP_FILTER = 1;
+BP_FILTER = 0;
 % only use these two if working from external hard drive
 % path1 = genpath('/Volumes/NIL_PASS/data/');
 % path2 = genpath('/Volumes/NIL_PASS/serverdata/nofilter_adj_mats_win500_step500_freq1000/');
@@ -21,13 +21,14 @@ BP_FILTER = 1;
 % path2 = genpath('./data/');
 % addpath(path1, path2);
 
+addpath(genpath('./fragility_library'));
 addpath(genpath('./eeg_toolbox'));
 
-winSizes = [250, 500, 1000];
+winSizes = [500, 1000];
 mses = zeros(length(winSizes), 1);
 
-% patient = 'pt1sz4';
-patient = 'EZT019seiz002';
+patient = 'pt1sz4';
+% patient = 'EZT019seiz002 ';
 
 patient_id = patient(1:strfind(patient, 'seiz')-1);
 seizure_id = strcat('_', patient(strfind(patient, 'seiz'):end));

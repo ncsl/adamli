@@ -47,7 +47,7 @@ dataDir = fullfile(rootDir, 'serverdata/adjmats', patient);
 numElecsToRemove = 1:25;
 
 %%- Begin Loop Through Different Patients Here
-for i=2:length(numElecsToRemove)
+for i=1:length(numElecsToRemove)
     patient
 
     % set patientID and seizureID
@@ -190,7 +190,8 @@ for i=2:length(numElecsToRemove)
         PLOTARGS.ylabelStr = 'Electrode Channels';
         PLOTARGS.xTickStep = 10*winSize/stepSize;
         PLOTARGS.titleStr = {['Minimum Norm Perturbation (', patient, ')'], ...
-            [perturbationType, ' perturbation: ', ' Time Locked to Seizure']};
+            [perturbationType, ' perturbation: ', ' Time Locked to Seizure'], ...
+            ['With ', num2str(i), ' electrodes removed']};
         PLOTARGS.seizureMarkStart = seizureMarkStart;
 
         if INTERICTAL % interictal data
@@ -250,7 +251,8 @@ for i=2:length(numElecsToRemove)
         
         PLOTARGS.colorbarStr = 'Fragility Metric';
         PLOTARGS.titleStr = {['Fragility Metric (', patient, ')'], ...
-            [perturbationType, ' perturbation: ', ' Time Locked to Seizure']};
+            [perturbationType, ' perturbation: ', ' Time Locked to Seizure'],...
+            ['With ', num2str(i), ' electrodes removed']};
         plotFragilityMetric(fragility_rankings, minPerturb_time_chan, clinicalIndices, timePoints./frequency_sampling, timeStart, timeEnd, PLOTARGS);
         
         close all

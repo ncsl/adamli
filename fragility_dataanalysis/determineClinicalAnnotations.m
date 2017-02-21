@@ -13,6 +13,24 @@ function [included_channels, ezone_labels, ...
         earlyspread_labels = {};
         latespread_labels = {};
         center = 'cc';
+    elseif strcmp(patient_id, 'Pat2')
+        included_channels = [];
+        ezone_labels = {};
+        earlyspread_labels = {};
+        latespread_labels = {};
+        
+        resection_labels = {};
+        
+        center = 'cc';
+    elseif strcmp(patient_id, 'Pat16')
+        included_channels = [];
+        ezone_labels = {};
+        earlyspread_labels = {};
+        latespread_labels = {};
+        
+        resection_labels = {};
+        
+        center = 'cc';
     elseif strcmp(patient_id, 'EZT004')
         included_channels = [1:7 9:10 12:22 24:49 51:60 62:73];
         

@@ -1,7 +1,7 @@
 function serverPerturbationScript(patient, radius, winSize, stepSize)
     if nargin == 0 % testing purposes
         patient='EZT011seiz001';
-%         patient ='pt6sz3';
+        patient ='pt7sz19';
 %         patient = 'JH102sz1';
         % window paramters
         radius = 1.5;
