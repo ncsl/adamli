@@ -11,8 +11,8 @@ if nargin == 0 % testing purposes
 %     patient='JH102sz6';
     patient='pt7sz19';
     % window paramters
-    winSize = 500; % 500 milliseconds
-    stepSize = 500; 
+    winSize = 250; % 500 milliseconds
+    stepSize = 125; 
     IS_SERVER = 1;
 end
 

@@ -5,8 +5,8 @@
 echo "Begin analysis." # print beginning statement
 # printf "Center (nih, cc, jhu): " # prompt for patient_id {pt1, pt2, ..., JH105, EZT005}
 # read center
-printf "Enter window size: " # prompt for seizure_id {sz1, sz2, ..., seiz001, seiz003}
-read winSize
+# printf "Enter window size: " # prompt for seizure_id {sz1, sz2, ..., seiz001, seiz003}
+# read winSize
 # printf "Enter step size: "
 # read stepSize
 # printf "Enter radius: "
@@ -20,14 +20,13 @@ read RUNSLEEP
 
 # patients listed 5 per row
 patients=(
-	# 'pt1aslp1 pt1aslp2 pt1aw1 pt1aw2
-	# pt2aslp1 pt2aslp2 pt2aw1 pt2aw2
-	# pt3aslp1 pt3aslp2 pt3aw1
-	# pt1sz2 pt1sz3 pt1sz4
-	# pt2sz1 pt2sz3 pt2sz4 
-	# pt3sz2 pt3sz4
-	# pt6sz3 pt6sz4 
-	# 'pt6sz5')
+	'pt1aslp1 pt1aslp2 pt1aw1 pt1aw2
+	pt2aslp1 pt2aslp2 pt2aw1 pt2aw2
+	pt3aslp1 pt3aslp2 pt3aw1
+	pt1sz2 pt1sz3 pt1sz4
+	pt2sz1 pt2sz3 pt2sz4 
+	pt3sz2 pt3sz4
+	pt6sz3 pt6sz4 pt6sz5')
 	# 'pt7sz19 pt7sz21 pt7sz22')
 	# 'pt8sz1 pt8sz2 pt8sz3')
 	# 'pt10sz1 pt10sz2 pt10sz3
@@ -49,8 +48,8 @@ patients=(
 	# EZT025seiz001 EZT025seiz002')
 	# EZT026seiz001 EZT026seiz002
 	# EZT028seiz001 EZT028seiz002')
-	'Pat2sz1p Pat2sz2p Pat2sz3p
-	Pat16sz1p Pat16sz2p Pat16sz3p')
+	# 'Pat2sz1p Pat2sz2p Pat2sz3p
+	# Pat16sz1p Pat16sz2p Pat16sz3p')
 	# 'EZT007seiz001 EZT007seiz002 EZT007seiz003
 	# EZT019seiz001 EZT019seiz002 EZT019seiz003
 	# 'EZT005seiz001 EZT005seiz002 EZT005seiz003
