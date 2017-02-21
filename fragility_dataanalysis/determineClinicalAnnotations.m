@@ -14,7 +14,7 @@ function [included_channels, ezone_labels, ...
         latespread_labels = {};
         center = 'cc';
     elseif strcmp(patient_id, 'Pat2')
-        included_channels = [];
+        included_channels = [1:4 7:19 21:37 46:47 50:101];
         ezone_labels = {};
         earlyspread_labels = {};
         latespread_labels = {};
@@ -23,7 +23,7 @@ function [included_channels, ezone_labels, ...
         
         center = 'cc';
     elseif strcmp(patient_id, 'Pat16')
-        included_channels = [];
+        included_channels = [1:4 7:19 21:121 124:157 178:189];
         ezone_labels = {};
         earlyspread_labels = {};
         latespread_labels = {};
