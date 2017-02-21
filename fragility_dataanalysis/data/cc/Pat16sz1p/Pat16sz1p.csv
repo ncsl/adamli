@@ -1,2 +1,2 @@
 patient_id,date,recording_start,onset_time,offset_time,recording_duration,num_channels,included_channels
-Pat16sz1,1/8/15,20:12:43,20:14:56,20:15:47,332,193,[1:4 7:19 21:39 42:121 124:157 178:189]
+Pat16sz1p,1/8/15,20:12:43,20:14:56,20:15:47,332,193,[1:4 7:19 21:121 124:157 178:189]
