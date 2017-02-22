@@ -27,6 +27,8 @@ patients=(
 	pt2sz1 pt2sz3 pt2sz4 
 	pt3sz2 pt3sz4
 	pt6sz3 pt6sz4 pt6sz5')
+	# Pat2sz1p Pat2sz2p Pat2sz3p
+	# Pat16sz1p Pat16sz2p Pat16sz3p')
 	# 'pt7sz19 pt7sz21 pt7sz22')
 	# 'pt8sz1 pt8sz2 pt8sz3')
 	# 'pt10sz1 pt10sz2 pt10sz3
