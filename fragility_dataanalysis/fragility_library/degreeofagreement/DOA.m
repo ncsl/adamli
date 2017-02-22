@@ -27,7 +27,8 @@ function [ D ] = DOA(EEZ, CEZ, ALL, metric, args)
     if nargin < 4
         metric = 'default';
     elseif nargin == 4
-        if ~(strcmp(metric, 'default') || strcmp(metric, 'jaccard'))
+        if ~(strcmp(metric, 'default') || strcmp(metric, 'jaccard') || ...
+                strcmp(metric, 'sorensen') || strcmp(metric, 'tversky'))
             errormsg = 'Metric is incorrect.\n Enter "default", or "jaccard".';
             error('DOA:incorrectInput', errormsg);
         end
@@ -60,7 +61,7 @@ function [ D ] = DOA(EEZ, CEZ, ALL, metric, args)
         CEZandEEZ = union(CEZ, EEZ);   % set in union
 
         % find Jaccard index
-        D = length(CEZ_EEZ) / length(CEZandEEZ) * 100;
+        D = length(CEZ_EEZ) / length(CEZandEEZ);
     elseif strcmp(metric, 'sorensen')
         CEZ_EEZ = intersect(CEZ, EEZ);
         
@@ -71,11 +72,11 @@ function [ D ] = DOA(EEZ, CEZ, ALL, metric, args)
         CEZEEZ_C = setdiff(CEZ, EEZ);
         EEZCEZ_C = setdiff(EEZ, CEZ);
         
-        a = min(CEZEEZ_C, EEZCEZ_C);
-        b = max(CEZEEZ_C, EEZCEZ_C);
+        a = min(length(CEZEEZ_C), length(EEZCEZ_C));
+        b = max(length(CEZEEZ_C), length(EEZCEZ_C));
         
         % compute tversky index
 %         D = length(CEZ_EEZ) / (length(CEZ_EEZ) + alpha*length(CEZEEZ_C) + beta*length(EEZCEZ_C));
-        D = length(CEZ_EEZ) / (length(CEZ_EEZ) + beta(alpha*a + (1-alpha)*b));
+        D = length(CEZ_EEZ) / (length(CEZ_EEZ) + beta*(alpha*a + (1-alpha)*b));
     end
 end
