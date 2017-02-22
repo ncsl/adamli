@@ -1,17 +1,16 @@
-function [ D ] = DOA( EpiMap, EpiMapStruct, CEZ, ALL, clinicalStruct, threshold )
+function [ D ] = DOA(EEZ, CEZ, ALL, metric, args)
 % #########################################################################
 % Function Summary: Computes statistic (DOA = Degree of Agreement) indicat-
 % ing how well EEZ (from EpiMap) and CEZ (clinical ezone) agree. 
 % 
 % Inputs:
-%   EpiMap: Map with keys as electrode labels and corresponding values from
-%   0-1 indicating how likely an electrode is in the ezone 
-%   EpiMapStruct: struct with EpiMap in it
+%   EEZ: cell with EpiMap's predicted ezone labels
 %   CEZ: cell with clinically predicted ezone labels 
 %   ALL: cell with all electrode labels
-%   clinicalStruct: struct with clinical values, with CEZ and ALL values in it 
-%   threshold: value from 0 - 1 required for an electrode in the EpiMap to 
-%   be considered part of the EEZ
+%   metric: (optional) string argument of
+%       - Jaccard index
+%       - Sorensen's coefficient
+%       - DOA (default) from R01 grant
 %   
 % Output: 
 %   DOA: (#CEZ intersect EEZ / #CEZ) / (#NOTCEZ intersect EEZ / #NOTCEZ)
@@ -19,43 +18,64 @@ function [ D ] = DOA( EpiMap, EpiMapStruct, CEZ, ALL, clinicalStruct, threshold 
 %   < 0 indicates poor match.
 % 
 % Author: Kriti Jindal, NCSL 
-% Last Updated: 02.09.17
+% - Edited by: Adam Li
+% Last Updated: 02.22.17
 %   
 % #########################################################################
+    %% Argument Management
+    % arg 4 is optional
+    if nargin < 4
+        metric = 'default';
+    elseif nargin == 4
+        if ~(strcmp(metric, 'default') || strcmp(metric, 'jaccard'))
+            errormsg = 'Metric is incorrect.\n Enter "default", or "jaccard".';
+            error('DOA:incorrectInput', errormsg);
+        end
+    end
+    
+    % if tversky index, make sure alpha and beta are defined
+    if strcmp(metric, 'tversky') 
+        if isfield(args, 'alpha') && isfield(args, 'beta')
+            alpha = args.alpha;
+            beta = args.beta;
+        else
+            errormsg = 'Must define alpha and beta constants >= 0 for Tversky Index.';
+            error('DOA:provideParameters', errormsg);
+        end
+    end
 
-% load in necesssary structs for EpiMap, CEZ and ALL 
+    %% Compute Degree of Agreement
+    % finds appropriate set intersections to plug into DOA formula 
+    if strcmp(metric, 'default')
+        NotCEZ = setdiff(ALL, CEZ);
+        CEZ_EEZ = intersect(CEZ, EEZ);
+        NotCEZ_EEZ = intersect(NotCEZ, EEZ);
 
-load(EpiMapStruct);
-load(clinicalStruct);
+        term1 = length(CEZ_EEZ) / length(CEZ);
+        term2 = length(NotCEZ_EEZ) / length(NotCEZ);
 
-% seperate EpiMap keys and values 
+        D = term1 - term2;
+    elseif strcmp(metric, 'jaccard')
+        CEZ_EEZ = intersect(CEZ, EEZ); % set in intersection
+        CEZandEEZ = union(CEZ, EEZ);   % set in union
 
-EpiMap_values = cell2mat(values(EpiMap));
-EpiMap_keys = keys(EpiMap);
-
-% saves all labels in EpiMap with > threshold in vector 'EEZ'
-
-y = 1;
-for x = 1:length(EpiMap_values)
-    if EpiMap_values(x) > threshold
-        EEZ(y) = EpiMap_keys(x);
-        y = y + 1;
+        % find Jaccard index
+        D = length(CEZ_EEZ) / length(CEZandEEZ) * 100;
+    elseif strcmp(metric, 'sorensen')
+        CEZ_EEZ = intersect(CEZ, EEZ);
+        
+        % find Sorensen coefficient
+        D = 2*length(CEZ_EEZ) / (length(CEZ) + length(EEZ));
+    elseif strcmp(metric, 'tversky')
+        CEZ_EEZ = intersect(CEZ, EEZ);
+        CEZEEZ_C = setdiff(CEZ, EEZ);
+        EEZCEZ_C = setdiff(EEZ, CEZ);
+        
+        a = min(CEZEEZ_C, EEZCEZ_C);
+        b = max(CEZEEZ_C, EEZCEZ_C);
+        
+        % compute tversky index
+%         D = length(CEZ_EEZ) / (length(CEZ_EEZ) + alpha*length(CEZEEZ_C) + beta*length(EEZCEZ_C));
+        D = length(CEZ_EEZ) / (length(CEZ_EEZ) + beta(alpha*a + (1-alpha)*b));
     end
 end
-
-% finds appropriate set intersections to plug into DOA formula 
-
-NotCEZ = setdiff(ALL, CEZ);
-CEZ_EEZ = intersect(CEZ, EEZ);
-NotCEZ_EEZ = intersect(NotCEZ, EEZ);
-
-term1 = length(CEZ_EEZ) / length(CEZ);
-term2 = length(NotCEZ_EEZ) / length(NotCEZ);
-
-D = term1 - term2;
-
-fprintf('The degree of agreement with threshold %.2f is %.5f. \n',threshold, D);
-
-
-end
-
