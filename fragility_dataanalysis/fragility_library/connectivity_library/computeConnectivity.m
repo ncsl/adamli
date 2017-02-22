@@ -47,7 +47,7 @@ function [adjMats, timePoints] = computeConnectivity(eeg, adj_args)
 
     % window parameters - overlap, #samples, stepsize, window pointer
     [num_channels, lenData] = size(eeg); % length of data in seconds
-    numWindows = lenData/stepSize;
+    numWindows = lenData/stepSize - 1;
 
     % initialize timePoints vector and adjacency matrices
     timePoints = [1:stepSize:lenData-winSize+1; winSize:stepSize:lenData]';
