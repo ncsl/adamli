@@ -21,12 +21,12 @@ matlab_jvm="matlab -nojvm -nodesktop -nosplash -r"
 # serverComputeConnectivity(currentpatient, $currentWin);\
 if [[ "$RUNCONNECTIVITY" -eq 1 ]]; then
 	echo "Running connectivity computation."
-	matlab -logfile /home/ali/adamli/fragility_dataanalysis/server/devFragility/_log/job$3.txt -nojvm -nodisplay -nosplash -r "currentpatient='$patient'; \
-	serverComputeConnectivity(currentpatient,$currentWin);\
+	matlab -logfile /home/ali/adamli/fragility_dataanalysis/server/devFragility/_log/job${3}.txt -nojvm -nodisplay -nosplash -r "currentpatient='${patient}'; \
+	serverComputeConnectivity(currentpatient,${currentWin});\
 		fprintf('it is working.');"
 else
 	echo "Running perturbation computation."
 	# run perturbation analysis
-	matlab -logfile /home/ali/adamli/fragility_dataanalysis/server/devFragility/_log/job$3.txt -nojvm -nodisplay -nosplash -r "currentpatient='$patient'; \
-	serverComputePerturbations(currentpatient, $currentWin);"
+	matlab -logfile /home/ali/adamli/fragility_dataanalysis/server/devFragility/_log/job${3}.txt -nojvm -nodisplay -nosplash -r "currentpatient='${patient}'; \
+	serverComputePerturbations(currentpatient, ${currentWin});"
 fi

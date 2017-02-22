@@ -7,6 +7,9 @@
 #PBS -e localhost:${PBS_O_WORKDIR}/_log/${PBS_JOBNAME}.e${PBS_JOBID}
 #PBS -o localhost:${PBS_O_WORKDIR}/_log/${PBS_JOBNAME}.o${PBS_JOBID}
 
+source /etc/profile.modules
+module load matlab/matlab2013a
+
 cd /home/ali/adamli/fragility_dataanalysis/server/devFragility/
 
 for proc in `seq 0 $NprocperNode`; do
