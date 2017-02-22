@@ -10,6 +10,9 @@
 #PBS -e localhost:${PBS_O_WORKDIR}/_log/${PBS_JOBNAME}.e${PBS_JOBID}
 #PBS -o localhost:${PBS_O_WORKDIR}/_log/${PBS_JOBNAME}.o${PBS_JOBID}
 
+source /etc/profile.modules
+module load matlab/matlab2013a
+
 # make sure to cd to the correct directory.
 # also make sure PBS -d is the correct directory 
 cd /home/ali/adamli/fragility_dataanalysis/server/devVaryingWindows/

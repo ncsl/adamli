@@ -2,6 +2,7 @@ function serverPerturbationScript(patient, radius, winSize, stepSize)
     if nargin == 0 % testing purposes
         patient='EZT011seiz001';
         patient ='pt7sz19';
+        patient = 'Pat2sz2p';
 %         patient = 'JH102sz1';
         % window paramters
         radius = 1.5;
@@ -9,12 +10,24 @@ function serverPerturbationScript(patient, radius, winSize, stepSize)
         stepSize = 500; 
         frequency_sampling = 1000; % in Hz
     end
-%     test = 1;
 
-    addpath(genpath('../../fragility_library/'));
-    addpath(genpath('../../eeg_toolbox/'));
-    addpath('../../');
+    % set working directory
+    % data directories to save data into - choose one
+    eegRootDirServer = '/home/ali/adamli/fragility_dataanalysis/';     % work
+    % eegRootDirHome = '/Users/adam2392/Documents/MATLAB/Johns Hopkins/NINDS_Rotation';  % home
+    eegRootDirHome = '/Volumes/NIL_PASS/';
+    eegRootDirJhu = '/home/WIN/ali39/Documents/adamli/fragility_dataanalysis/';
+    % Determine which directory we're working with automatically
+    if     ~isempty(dir(eegRootDirServer)), rootDir = eegRootDirServer;
+    elseif ~isempty(dir(eegRootDirHome)), rootDir = eegRootDirHome;
+    elseif ~isempty(dir(eegRootDirJhu)), rootDir = eegRootDirJhu;
+    else   error('Neither Work nor Home EEG directories exist! Exiting'); end
 
+    addpath(genpath(fullfile(rootDir, '/fragility_library/')));
+    addpath(genpath(fullfile(rootDir, '/eeg_toolbox/'));
+    addpath(rootDir);
+
+    
     % analysis parameters
     perturbationTypes = ['C', 'R'];
     w_space = linspace(-radius, radius, 51);
@@ -55,7 +68,7 @@ function serverPerturbationScript(patient, radius, winSize, stepSize)
 
         
     % set directory to find adjacency matrix data
-    serverDir = fullfile('../../serverdata/');
+    serverDir = fullfile(rootDir, '/serverdata/');
     adjMatDir = fullfile(serverDir, 'adjmats/', strcat('win', num2str(winSize), ...
     '_step', num2str(stepSize), '_freq', num2str(frequency_sampling))); % at lab
 
