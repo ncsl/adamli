@@ -30,6 +30,8 @@ patients=(
 	# EZT007seiz001 EZT007seiz002 EZT007seiz003
 	# EZT070seiz001 EZT070seiz002')
 
+cd /home/ali/adamli/fragility_dataanalysis/server/devFragility/
+
 # 01: Prompt user for input that runs the analysis
 echo "Begin analysis." # print beginning statement
 printf "Run Connectivity (Enter 1, or 0)? "

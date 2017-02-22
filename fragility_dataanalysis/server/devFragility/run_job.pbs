@@ -12,8 +12,11 @@ module load matlab/matlab2013a
 
 cd /home/ali/adamli/fragility_dataanalysis/server/devFragility/
 
-for proc in `seq 0 $NprocperNode`; do
-	currentWin=$(($currentNode+$proc+1))
+for ((proc=0; proc <= ((${NprocperNode})); proc++))
+do
+	currentWin=$(( ${currentNode} + ${proc} + 1))
 	echo $currentWin
-	pbsdsh -n $proc /home/ali/adamli/fragility_dataanalysis/server/devFragility/computeAnalysis.sh $proc $patient $currentWin $RUNCONNECTIVITY &
+	pbsdsh -n $proc /home/ali/adamli/fragility_dataanalysis/server/devFragility/computeAnalysis.sh ${proc} ${patient} ${currentWin} ${RUNCONNECTIVITY} &
 done
+
+wait

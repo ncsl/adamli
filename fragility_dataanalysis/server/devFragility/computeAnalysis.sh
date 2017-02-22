@@ -1,6 +1,9 @@
-#!/bin/bash -l
+#!/bin/bash
+
 source /etc/profile.modules
 module load matlab/matlab2013a
+
+cd /home/ali/adamli/fragility_dataanalysis/server/devFragility
 
 ## 00: Load in input parameters
 proc="$1"
