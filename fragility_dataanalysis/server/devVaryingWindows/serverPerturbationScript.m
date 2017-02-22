@@ -24,7 +24,7 @@ function serverPerturbationScript(patient, radius, winSize, stepSize)
     else   error('Neither Work nor Home EEG directories exist! Exiting'); end
 
     addpath(genpath(fullfile(rootDir, '/fragility_library/')));
-    addpath(genpath(fullfile(rootDir, '/eeg_toolbox/'));
+    addpath(genpath(fullfile(rootDir, '/eeg_toolbox/')));
     addpath(rootDir);
 
     
