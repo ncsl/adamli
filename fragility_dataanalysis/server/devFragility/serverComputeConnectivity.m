@@ -2,6 +2,7 @@ function serverComputeConnectivity(patient, currentWin)
 if nargin==0
     patient = 'pt3sz2';
     patient = 'pt1sz2';
+    patient = 'Pat2sz1p';
     currentWin = 3;
 end
 
@@ -142,6 +143,12 @@ timePoints = [1:stepSize:lenData-winSize+1; winSize:stepSize:lenData]';
 % apply band notch filter to eeg data
 tempeeg = eeg(:, timePoints(currentWin,1):timePoints(currentWin,2));
 
+% test = whos
+% sum = 0;
+% for i=1:length(test)
+%     sum = sum+test(i).bytes;
+% end
+% sum / 10^6
 % clear eeg from RAM after usage
 clear eeg data
 
@@ -164,11 +171,11 @@ if currentWin == 1
 
     save(fullfile(tempDir, 'infoAdjMat'), 'info');
 end
-fprintf('Should have finished saving info mat.');
+fprintf('Should have finished saving info mat.\n');
 
 % filename to be saved temporarily
 fileName = strcat(patient, '_adjmats_', num2str(currentWin));
-fid = fopen(strcat(patient, num2str(currentWin)), 'w');
+fid = fopen(fullfile(tempDir, strcat(patient, num2str(currentWin))), 'w');
 fprintf(fid, 'Wrote');
 fclose(fid);
 % fprintf(fileName);
@@ -196,7 +203,7 @@ elseif strcmp(TYPE_CONNECTIVITY, 'DTF')
 end
 
 % display a message for the user
-fprintf(['Finished: ', num2str(currentWin)]);
+fprintf(['Finished: ', num2str(currentWin), '\n']);
 
 % save the file in temporary dir
 save(fullfile(tempDir, fileName), 'theta_adj');

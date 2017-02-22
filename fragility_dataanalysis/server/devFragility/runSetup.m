@@ -25,29 +25,30 @@ patients = {,...
 % 	'JH105sz1' 'JH105sz2' 'JH105sz3'  'JH105sz4' 'JH105sz5',...
 % 	'JH106sz1' 'JH106sz2' 'JH106sz3' 'JH106sz4' 'JH106sz5' 'JH106sz6',...
 % 	'JH107sz1' 'JH107sz2' 'JH107sz3' 'JH107sz4' 'JH107sz5' 'JH107sz6' 
-    'JH107sz7' 'JH107sz8' 'JH107sz8', 'JH107sz9'...
+%     'JH107sz7' 'JH107sz8' 'JH107sz8', 'JH107sz9'...
+    'Pat2sz1p',...
 %     'JH108sz1', 'JH108sz2', 'JH108sz3', 'JH108sz4', 'JH108sz5', 'JH108sz6', 'JH108sz7',...
 };
 
-% for iPat=1:length(patients)
-%     patient = patients{iPat};
-%     serverSetupComputation(patient);
-% end
-
-metaDir = './patientMeta/jhu/';
-metaFiles = dir(fullfile(metaDir, '*.txt'));
-metaFiles = {metaFiles.name};
-data = 0;
-maxData = '0';
-for iFile=1:length(metaFiles)
-%     metaFiles{iFile}
-    fid = fopen(fullfile(metaDir, metaFiles{iFile}));
-    data = fgetl(fid);
-    fclose(fid);
-    
-    if str2num(data) > str2num(maxData)
-        data
-        maxData = data;
-    end
+for iPat=1:length(patients)
+    patient = patients{iPat};
+    serverSetupComputation(patient);
 end
-maxData
+
+% metaDir = './patientMeta/';
+% metaFiles = dir(fullfile(metaDir, '*.txt'));
+% metaFiles = {metaFiles.name};
+% data = 0;
+% maxData = '0';
+% for iFile=1:length(metaFiles)
+% %     metaFiles{iFile}
+%     fid = fopen(fullfile(metaDir, metaFiles{iFile}));
+%     data = fgetl(fid);
+%     fclose(fid);
+%     
+%     if str2num(data) > str2num(maxData)
+%         data
+%         maxData = data;
+%     end
+% end
+% maxData

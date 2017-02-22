@@ -5,13 +5,13 @@ patient="$1"
 RUNCONNECTIVITY="$2" 
 numWins="$3"
 
-NprocperNode=5    					# number of processors per node
+NprocperNode=8    					# number of processors per node
 NNodes=$(($NprocperNode-1))
 Nnode=$((${3}/${NprocperNode}+1)) 	# the node to compute on
-walltime=00:01:00					# the walltime for each computation
+walltime=1:00:00					# the walltime for each computation
 
 echo $Nnode
-for inode in `seq 1 $Nnode`; do
+for inode in `seq 1 2`; do
 	echo $inode
 	currentNode=$((($inode-1)*$NprocperNode))
 

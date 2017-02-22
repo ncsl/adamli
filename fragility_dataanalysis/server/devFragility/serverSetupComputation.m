@@ -22,22 +22,26 @@ function serverSetupComputation(patient, winSize, stepSize)
         stepSize = 500;
     end
     
+    % set working directory
+    % data directories to save data into - choose one
+    eegRootDirServer = '/home/ali/adamli/fragility_dataanalysis/';     % work
+    % eegRootDirHome = '/Users/adam2392/Documents/MATLAB/Johns Hopkins/NINDS_Rotation';  % home
+    eegRootDirHome = '/Volumes/NIL_PASS/';
+    eegRootDirJhu = '/home/WIN/ali39/Documents/adamli/fragility_dataanalysis/';
+    % Determine which directory we're working with automatically
+    if     ~isempty(dir(eegRootDirServer)), rootDir = eegRootDirServer;
+    elseif ~isempty(dir(eegRootDirHome)), rootDir = eegRootDirHome;
+    elseif ~isempty(dir(eegRootDirJhu)), rootDir = eegRootDirJhu;
+    else   error('Neither Work nor Home EEG directories exist! Exiting'); end
+
+    
 %     IS_INTERICTAL = 1; % need to change per run of diff data
     TYPE_CONNECTIVITY = 'leastsquares';
     l2regularization = 0;
-
-    % to save temp text file data dir
-    toSaveDir = './patientMeta/';
-    fileName = fullfile(toSaveDir, strcat(patient, '.txt'));
-    if ~exist(toSaveDir, 'dir')
-        mkdir(toSaveDir);
-    end
     
-    % set directory to find dataset
-    dataDir = '../../data/';
-    patient
-    
-    patient_id = [];
+    % set patientID and seizureID
+    patient_id = patient(1:strfind(patient, 'seiz')-1);
+    seizure_id = strcat('_', patient(strfind(patient, 'seiz'):end));
     seeg = 1;
     if isempty(patient_id)
         patient_id = patient(1:strfind(patient, 'sz')-1);
@@ -47,28 +51,34 @@ function serverSetupComputation(patient, winSize, stepSize)
     if isempty(patient_id)
         patient_id = patient(1:strfind(patient, 'aslp')-1);
         seizure_id = patient(strfind(patient, 'aslp'):end);
-        dataDir= './data/interictal_data/';
-        if IS_SERVER
-            dataDir = '../../data/interictal_data/';
-        end
+        seeg = 0;
     end
-   
     if isempty(patient_id)
         patient_id = patient(1:strfind(patient, 'aw')-1);
         seizure_id = patient(strfind(patient, 'aw'):end);
-        
-        dataDir= './data/interictal_data/';
-        if IS_SERVER
-            dataDir = '../../data/interictal_data/';
-        end
+        seeg = 0;
     end
     
 %     dataDir = '/Volumes/NIL_PASS/data/interictal_data/';
     %% DEFINE CHANNELS AND CLINICAL ANNOTATIONS
     %- Edit this file if new patients are added.
-    [included_channels, ezone_labels, earlyspread_labels, latespread_labels, resection_labels, frequency_sampling] ...
-                = determineClinicalAnnotations(patient_id, seizure_id);
+    %- Edit this file if new patients are added.
+    [included_channels, ezone_labels, earlyspread_labels,...
+        latespread_labels, resection_labels, frequency_sampling, ...
+        center] ...
+            = determineClinicalAnnotations(patient_id, seizure_id);
 
+    % set directory to find dataset
+    dataDir = fullfile(rootDir, 'data', center);
+    patient
+        
+        % to save temp text file data dir
+    toSaveDir = fullfile(rootDir, 'server/devFragility/patientMeta/');
+    fileName = fullfile(toSaveDir, strcat(patient, '.txt'));
+    if ~exist(toSaveDir, 'dir')
+        mkdir(toSaveDir);
+    end
+    
     % put clinical annotations into a struct
     clinicalLabels = struct();
     clinicalLabels.ezone_labels = ezone_labels;
@@ -78,11 +88,14 @@ function serverSetupComputation(patient, winSize, stepSize)
 
     %% EZT/SEEG PATIENTS
     if seeg
-        patient_eeg_path = strcat(dataDir, 'Seiz_Data/', patient_id);
+        patient_eeg_path = fullfile(dataDir, patient_id);
+        patient = strcat(patient_id, seizure_id);
     else
-        patient_eeg_path = strcat(dataDir, patient);
+        patient_eeg_path = fullfile(dataDir, patient);
     end
-    
+    patient_eeg_path
+    patient
+
     % READ EEG FILE Mat File
     % files to process
     data = load(fullfile(patient_eeg_path, patient));
