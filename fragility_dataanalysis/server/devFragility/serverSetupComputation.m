@@ -89,7 +89,12 @@ function serverSetupComputation(patient, winSize, stepSize)
     
     %- compute number of windows there are based on length of eeg,
     %- winSize and stepSize
-    numWins = size(eeg,2) / stepSize - 1;
+%     if winSize == stepSize
+%         numWins = size(eeg,2) / stepSize;
+%     else
+%         numWins = size(eeg,2) / stepSize - 1;
+%     end
+    numWins = size(eeg, 2) / stepSize - winSize/stepSize + 1;
     
     fid = fopen(fileName, 'w');
     fprintf(fid, '%i\n', numWins);

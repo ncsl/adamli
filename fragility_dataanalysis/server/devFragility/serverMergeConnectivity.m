@@ -6,13 +6,13 @@ patients = {,...
 %     'pt2aslp2', ...
 %     'pt3aw1', ...
 %     'pt3aslp1', 'pt3aslp2', ...
-%     'pt1sz2', 'pt1sz3', 'pt1sz4',...
+    'pt1sz2', 'pt1sz3', 'pt1sz4',...
 %     'pt2sz1' 'pt2sz3' 'pt2sz4', ...
 %     'pt3sz2' 'pt3sz4', ...
 %       'pt6sz3', 'pt6sz4', 'pt6sz5','JH108sz1', 'JH108sz2', 'JH108sz3', 'JH108sz4', 'JH108sz5', 'JH108sz6', 'JH108sz7',...
 %     'pt8sz1' 'pt8sz2' 'pt8sz3',...
 %     'pt10sz1' 'pt10sz2' 'pt10sz3', ...
-    'pt11sz1' 'pt11sz2' 'pt11sz3' 'pt11sz4', ...
+%     'pt11sz1' 'pt11sz2' 'pt11sz3' 'pt11sz4', ...
 %     'pt14sz1' 'pt14sz2' 'pt14sz3' 'pt15sz1' 'pt15sz2' 'pt15sz3' 'pt15sz4',...
 %     'pt16sz1' 'pt16sz2' 'pt16sz3',...
 %     'pt17sz1' 'pt17sz2',...
@@ -27,12 +27,72 @@ patients = {,...
 %     'JH108sz1', 'JH108sz2', 'JH108sz3', 'JH108sz4', 'JH108sz5', 'JH108sz6', 'JH108sz7',...
 };
 
+%% Set Working Directories
+% set working directory
+% data directories to save data into - choose one
+eegRootDirServer = '/home/ali/adamli/fragility_dataanalysis/';     % work
+% eegRootDirHome = '/Users/adam2392/Documents/MATLAB/Johns Hopkins/NINDS_Rotation';  % home
+eegRootDirHome = '/Volumes/NIL_PASS/';
+eegRootDirJhu = '/home/WIN/ali39/Documents/adamli/fragility_dataanalysis/';
+% Determine which directory we're working with automatically
+if     ~isempty(dir(eegRootDirServer)), rootDir = eegRootDirServer;
+elseif ~isempty(dir(eegRootDirHome)), rootDir = eegRootDirHome;
+elseif ~isempty(dir(eegRootDirJhu)), rootDir = eegRootDirJhu;
+else   error('Neither Work nor Home EEG directories exist! Exiting'); end
+
+addpath(genpath(fullfile(rootDir, '/fragility_library/')));
+addpath(genpath(fullfile(rootDir, '/eeg_toolbox/')));
+addpath(rootDir);
+
+%% Parameters for Analysis
+winSize = 500;
+stepSize = 500;
+frequency_sampling = 1000;
+radius = 1.5;
+
+TYPE_CONNECTIVITY = 'leastsquares';
+perturbations = ['C', 'R'];
+TEST_DESCRIP = 'after_first_removal';
+TEST_DESCRIP = [];
+
 for iPat=1:length(patients)
     patient = patients{iPat};
+    
+     % set patientID and seizureID
+    patient_id = patient(1:strfind(patient, 'seiz')-1);
+    seizure_id = strcat('_', patient(strfind(patient, 'seiz'):end));
+    seeg = 1;
+    if isempty(patient_id)
+        patient_id = patient(1:strfind(patient, 'sz')-1);
+        seizure_id = patient(strfind(patient, 'sz'):end);
+        seeg = 0;
+    end
+    if isempty(patient_id)
+        patient_id = patient(1:strfind(patient, 'aslp')-1);
+        seizure_id = patient(strfind(patient, 'aslp'):end);
+        seeg = 0;
+    end
+    if isempty(patient_id)
+        patient_id = patient(1:strfind(patient, 'aw')-1);
+        seizure_id = patient(strfind(patient, 'aw'):end);
+        seeg = 0;
+    end
+    
+    %% DEFINE CHANNELS AND CLINICAL ANNOTATIONS
+    %- Edit this file if new patients are added.
+    %- Edit this file if new patients are added.
+    [included_channels, ezone_labels, earlyspread_labels,...
+        latespread_labels, resection_labels, frequency_sampling, ...
+        center] ...
+            = determineClinicalAnnotations(patient_id, seizure_id);
+    
     % set directory to find adjacency matrix data
-    adjMatDir = fullfile(strcat('./serverdata/fixed_adj_mats_win', num2str(winSize), ...
-        '_step', nu2str(stepSize), '_freq', num2str(frequency_sampling))); % at lab
-    tempDir = fullfile('../tempdata/', patient);
+    serverDir = fullfile(rootDir, 'serverdata');
+    adjMatDir = fullfile(serverDir, 'adjmats/', strcat('win', num2str(winSize), ...
+        '_step', num2str(stepSize), '_freq', num2str(frequency_sampling))); % at lab
+    tempDir = fullfile(rootDir, 'server/devFragility/tempdata/', patient);
+    
+    connDir = fullfile(tempDir, 'connectivity');
 
     if ~exist(adjMatDir, 'dir')
         mkdir(adjMatDir);
@@ -40,9 +100,26 @@ for iPat=1:length(patients)
     patient
     tempDir
     adjMatDir
-
+    
+    % set directory to find dataset
+    dataDir = fullfile(rootDir, 'data', center);    
+    %% EZT/SEEG PATIENTS
+    if seeg
+        patient_eeg_path = fullfile(dataDir, patient_id);
+        patient = strcat(patient_id, seizure_id);
+    else
+        patient_eeg_path = fullfile(dataDir, patient);
+    end
+    % READ EEG FILE Mat File
+    % files to process
+    data = load(fullfile(patient_eeg_path, patient));
+    eeg = data.data;
+    %- compute number of windows there are based on length of eeg,
+    %- winSize and stepSize
+    numWins = size(eeg,2) / stepSize - 1;
+    
     % extract info mat file from tempDir
-    load(fullfile(tempDir, 'infoAdjMat.mat'));
+    load(fullfile(connDir, 'infoAdjMat.mat'));
     TYPE_CONNECTIVITY = info.type_connectivity;
     ezone_labels = info.ezone_labels;
     earlyspread_labels = info.earlyspread_labels;
@@ -58,7 +135,7 @@ for iPat=1:length(patients)
     frequency_sampling = info.frequency_sampling;
 
     % load in adjMats file
-    matFiles = dir(fullfile(tempDir, patient, '*.mat'));
+    matFiles = dir(fullfile(connDir, patient, '*.mat'));
     matFileNames = natsort(matFiles.name);
     
     % construct the adjMats from the windows computed of adjMat

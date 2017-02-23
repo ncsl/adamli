@@ -174,9 +174,9 @@ fprintf('Should have finished saving info mat.\n');
 
 % filename to be saved temporarily
 fileName = strcat(patient, '_adjmats_', num2str(currentWin));
-fid = fopen(fullfile(tempDir, strcat(patient, num2str(currentWin))), 'w');
-fprintf(fid, 'Wrote');
-fclose(fid);
+% fid = fopen(fullfile(tempDir, strcat(patient, num2str(currentWin))), 'w');
+% fprintf(fid, 'Wrote');
+% fclose(fid);
 % fprintf(fileName);
 
 % step 2: compute some functional connectivity 
