@@ -9,7 +9,7 @@ numWins="$3"
 NprocperNode=8    					# number of processors per node
 NNodes=$(($NprocperNode-1))
 Nnode=$((${3}/${NprocperNode}+1)) 	# the number of nodes to compute on
-walltime=02:00:00					# the walltime for each computation
+walltime=00:30:00					# the walltime for each computation
 
 echo $Nnode
 for ((inode=1; inode <= Nnode; inode++))
@@ -25,13 +25,14 @@ do
 	
 	echo "Submit job ${inode}"
 
-	if ((inode == Nnode)); then
-		if ((${numWins} > ${inode}*${NprocperNode})); then
-			NprocperNode=$((${numWins} - ${inode}*${NprocperNode} + 1))
-			echo "New NprocperNode"
-			echo $NprocperNode
-		fi
-	fi
+	# if ((inode == Nnode)); then
+	# 	if ((${numWins} < ${inode}*${NprocperNode})); then
+	# 		NprocperNode=$((${inode}*${NprocperNode} - ${numWins} + 1))
+	# 		echo "New NprocperNode"
+	# 		echo $NprocperNode
+	# 	elif ((${numWins} == ${inode}*${NprocperNode})); then
+	# 	fi
+	# fi
 
 	# run a pbs batch job. Make sure there are no spaces in between the parameters passed
 	qsub -v RUNCONNECTIVITY=${RUNCONNECTIVITY},patient=${patient},currentNode=${currentNode},NprocperNode=${NNodes} -N ${jobname} -l nodes=1:ppn=${NprocperNode},walltime=${walltime} run_job.pbs
