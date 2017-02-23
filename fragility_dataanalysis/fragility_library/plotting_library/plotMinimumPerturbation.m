@@ -32,8 +32,8 @@ function plotMinimumPerturbation(minPerturb_time_chan, clinicalIndices,...
     fig = figure;
     firstplot = 1:24;
     firstplot([6,12,18,24]) = []; hold on;
-    firstfig = subplot(4,6, firstplot);
-    imagesc(minPerturb_time_chan); hold on;
+%     firstfig = subplot(4,6, firstplot);
+    imagesc(minPerturb_time_chan); hold on; axis tight;
     axes = gca; currfig = gcf;
     cbar = colorbar(); colormap('jet'); set(axes, 'box', 'off'); set(axes, 'YDir', 'normal');
     labelColorbar(cbar, colorbarStr, FONTSIZE);
@@ -66,7 +66,7 @@ function plotMinimumPerturbation(minPerturb_time_chan, clinicalIndices,...
     
     leg = legend('EZ', 'Early Onset', 'Late Onset');
     try
-        leg.Position = [0.8420    0.0085    0.1179    0.0880];
+        leg.Position = [ 0.8752    0.0115    0.1179    0.0821];
     catch
         disp('Legend not set yet for patient');
     end
@@ -97,27 +97,23 @@ function plotMinimumPerturbation(minPerturb_time_chan, clinicalIndices,...
     xrange(ezone_indices) = [];
     avge = mean(minpertsum);
     
-    secfig = subplot(4,6, [6,12,18,24]);
-    stem(xrange, minpertsum(xrange), 'k'); hold on;
-    stem(ezone_indices, minpertsum(ezone_indices), 'r');
-    plot([1 size(minPerturb_time_chan, 1)], [avge avge], 'k', 'MarkerSize', 1.5);
-    pos = get(gca, 'Position');
-    pos(1) = pos(1) + xoffset;
-    xlim([1 size(minPerturb_time_chan,1)]);
-    set(gca, 'Xdir', 'reverse');
-    set(gca, 'Position', pos);
-    set(gca, 'XTick', []); set(gca, 'XTickLabel', []);
-    set(gca, 'yaxislocation', 'right');
-    set(gca, 'XAxisLocation', 'bottom');
-    xlabel('Row Sum of Minimum Perturbation', 'FontSize', FONTSIZE-3);
-    view([90 90])
-    ax = gca;
-    ax.XLabel.Rotation = 270;
-    ax.XLabel.Position = ax.XLabel.Position + [0 max(ax.YLim) 0];
-
-%     rowsumleg = legend('Fragility Row Sum', 'Min Perturb Row Sum');
-%     
-%     rowsumleg.Position = [0.8493    0.9297    0.1114    0.0308];
+%     secfig = subplot(4,6, [6,12,18,24]);
+%     stem(xrange, minpertsum(xrange), 'k'); hold on;
+%     stem(ezone_indices, minpertsum(ezone_indices), 'r');
+%     plot([1 size(minPerturb_time_chan, 1)], [avge avge], 'k', 'MarkerSize', 1.5);
+%     pos = get(gca, 'Position');
+%     pos(1) = pos(1) + xoffset;
+%     xlim([1 size(minPerturb_time_chan,1)]);
+%     set(gca, 'Xdir', 'reverse');
+%     set(gca, 'Position', pos);
+%     set(gca, 'XTick', []); set(gca, 'XTickLabel', []);
+%     set(gca, 'yaxislocation', 'right');
+%     set(gca, 'XAxisLocation', 'bottom');
+%     xlabel('Row Sum of Minimum Perturbation', 'FontSize', FONTSIZE-3);
+%     view([90 90])
+%     ax = gca;
+%     ax.XLabel.Rotation = 270;
+%     ax.XLabel.Position = ax.XLabel.Position + [0 max(ax.YLim) 0];
     
    % save the figure  
     if SAVEFIG

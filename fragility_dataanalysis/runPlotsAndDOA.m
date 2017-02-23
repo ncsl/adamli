@@ -7,7 +7,9 @@ patients = {,...,
 %     'pt2aslp1', 'pt2aslp2', ...
 %     'pt3aw1', ...
 %     'pt3aslp1', 'pt3aslp2', ...
-%     'pt1sz2', 'pt1sz3', 'pt1sz4',...
+%     'pt1sz2', 'pt1sz3', ...
+    'pt2sz1' 'pt2sz3',...
+%     'pt1sz4',...
 %     'pt2sz1' 'pt2sz3' 'pt2sz4', ...
 %     'pt3sz2' 'pt3sz4', ...
 %     'pt6sz3', 'pt6sz4', 'pt6sz5',...
@@ -15,8 +17,8 @@ patients = {,...,
 %     'pt8sz1' 'pt8sz2' 'pt8sz3',...
 %     'pt10sz1' 'pt10sz2' 'pt10sz3', ...
 %     'pt11sz1' 'pt11sz2' 'pt11sz3' 'pt11sz4', ...
-    'pt12sz1', 'pt12sz2', ...
-    'pt13sz1', 'pt13sz2', 'pt13sz3', 'pt13sz5',...
+%     'pt12sz1', 'pt12sz2', ...
+%     'pt13sz1', 'pt13sz2', 'pt13sz3', 'pt13sz5',...
 %     'pt14sz1' 'pt14sz2' 'pt14sz3'  'pt16sz1' 'pt16sz2' 'pt16sz3',...
 %     'pt15sz1' 'pt15sz2' 'pt15sz3' 'pt15sz4',...
 %     'pt16sz1' 'pt16sz2' 'pt16sz3',...
@@ -175,8 +177,9 @@ for p=1:length(patients)
     y_latespreadindices = sort(latespread_indices);
     
     % find resection indices
-    y_resectionindices = findResectionIndices(included_labels, resection_labels);
-
+%     y_resectionindices = findResectionIndices(included_labels, resection_labels);
+    y_resectionindices = [];
+    
     % create struct for clinical indices
     clinicalIndices.all_indices = y_indices;
     clinicalIndices.ezone_indices = y_ezoneindices;
@@ -237,9 +240,14 @@ for p=1:length(patients)
             seizureMarkStart = (seizureStart-1) / winSize;
         end
         
-        minPerturb_time_chan = minPerturb_time_chan(:, 1:seizureMarkStart+20);
-        fragility_rankings = fragility_rankings(:, 1:seizureMarkStart+20);
-        timePoints = timePoints(1:seizureMarkStart+20,:);
+%         minPerturb_time_chan = minPerturb_time_chan(:, 1:seizureMarkStart+20);
+%         fragility_rankings = fragility_rankings(:, 1:seizureMarkStart+20);
+%         timePoints = timePoints(1:seizureMarkStart+20,:);
+
+        % for ACC
+        minPerturb_time_chan = minPerturb_time_chan(:, seizureMarkStart-121:seizureMarkStart);
+        fragility_rankings = fragility_rankings(:, seizureMarkStart-121:seizureMarkStart);
+        timePoints = timePoints(seizureMarkStart-121:seizureMarkStart,:);
        
         % make everything relative to seizureStart
 %         timePoints = timePoints - seizureStart;
@@ -269,8 +277,10 @@ for p=1:length(patients)
         PLOTARGS.colorbarStr = 'Minimum 2-Induced Norm Perturbation';
         PLOTARGS.ylabelStr = 'Electrode Channels';
         PLOTARGS.xTickStep = 10*winSize/stepSize;
-        PLOTARGS.titleStr = {['Minimum Norm Perturbation (', patient, ')'], ...
-            [perturbationType, ' perturbation: ', ' Time Locked to Seizure']};
+%         PLOTARGS.titleStr = {['Minimum Norm Perturbation (', patient, ')'], ...
+%             [perturbationType, ' perturbation: ', ' Time Locked to Seizure']};
+        PLOTARGS.titleStr = {['Minimum Norm Perturbation For All Channels'], ...
+            ['C Perturbation: Time Locked To Seizure']};
         PLOTARGS.seizureMarkStart = seizureMarkStart;
 
         if seizureStart == size(minPerturb_time_chan,1)*winSize % interictal data
@@ -292,10 +302,14 @@ for p=1:length(patients)
                 timeStart = -seizureStart / frequency_sampling;
                 timeEnd = (timePoints(size(minPerturb_time_chan, 2), 2) - seizureStart)/frequency_sampling;
                 
+                % for ACC
+                timeStart = ceil((timePoints(1,2) - seizureStart) / frequency_sampling);
+                timeEnd = (timePoints(end,2) - seizureStart) / frequency_sampling;
+                
 %                 PLOTARGS.seizureIndex = seizureIndex;
 %                 PLOTARGS.seizureEnd = seizureEndIndex;
 %                 PLOTARGS.seizureEnd = seizureIndex;
-                PLOTARGS.toSaveFigFile = fullfile(toSaveFigDir, strcat(patient, '_minPerturbation'));
+                PLOTARGS.toSaveFigFile = fullfile(toSaveFigDir, strcat(patient, '_minPerturbation_ACCA'));
             else % only plot window of data
                 postWindow = 10;
                 preWindow = 60;
@@ -319,7 +333,7 @@ for p=1:length(patients)
         plotMinimumPerturbation(minPerturb_time_chan, clinicalIndices, timeStart, timeEnd, PLOTARGS);
         
         if PLOTALL
-            PLOTARGS.toSaveFigFile = fullfile(toSaveFigDir, strcat(patient, '_fragilityMetric_upto10secs'));
+            PLOTARGS.toSaveFigFile = fullfile(toSaveFigDir, strcat(patient, '_fragilityMetric_ACC'));
         else
             PLOTARGS.toSaveFigFile = fullfile(toSaveFigDir, strcat(patient, '_fragilityMetric'));
         end
@@ -330,7 +344,7 @@ for p=1:length(patients)
         
         PLOTARGS.colorbarStr = 'Fragility Metric';
         PLOTARGS.titleStr = {['Fragility Metric (', patient, ')'], ...
-            [perturbationType, ' perturbation: ', ' Time Locked to Seizure']};
+            [perturbationType, ' Perturbation: ', ' Time Locked to Seizure']};
         plotFragilityMetric(fragility_rankings, minPerturb_time_chan, clinicalIndices, timePoints./frequency_sampling, timeStart, timeEnd, PLOTARGS);
         
         close all

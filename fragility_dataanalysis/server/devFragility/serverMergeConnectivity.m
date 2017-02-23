@@ -90,7 +90,7 @@ for iPat=1:length(patients)
     serverDir = fullfile(rootDir, 'serverdata');
     adjMatDir = fullfile(serverDir, 'adjmats/', strcat('win', num2str(winSize), ...
         '_step', num2str(stepSize), '_freq', num2str(frequency_sampling))); % at lab
-    tempDir = fullfile(rootDir, 'server/devFragility/tempdata/', patient);
+    tempDir = fullfile(rootDir, 'server/devFragility/tempData/', patient);
     
     connDir = fullfile(tempDir, 'connectivity');
 
@@ -101,22 +101,22 @@ for iPat=1:length(patients)
     tempDir
     adjMatDir
     
-    % set directory to find dataset
-    dataDir = fullfile(rootDir, 'data', center);    
-    %% EZT/SEEG PATIENTS
-    if seeg
-        patient_eeg_path = fullfile(dataDir, patient_id);
-        patient = strcat(patient_id, seizure_id);
-    else
-        patient_eeg_path = fullfile(dataDir, patient);
-    end
-    % READ EEG FILE Mat File
-    % files to process
-    data = load(fullfile(patient_eeg_path, patient));
-    eeg = data.data;
-    %- compute number of windows there are based on length of eeg,
-    %- winSize and stepSize
-    numWins = size(eeg,2) / stepSize - 1;
+%     % set directory to find dataset
+%     dataDir = fullfile(rootDir, 'data', center);    
+%     %% EZT/SEEG PATIENTS
+%     if seeg
+%         patient_eeg_path = fullfile(dataDir, patient_id);
+%         patient = strcat(patient_id, seizure_id);
+%     else
+%         patient_eeg_path = fullfile(dataDir, patient);
+%     end
+%     % READ EEG FILE Mat File
+%     % files to process
+%     data = load(fullfile(patient_eeg_path, patient));
+%     eeg = data.data;
+%     %- compute number of windows there are based on length of eeg,
+%     %- winSize and stepSize
+%     numWins = size(eeg,2) / stepSize - 1;
     
     % extract info mat file from tempDir
     load(fullfile(connDir, 'infoAdjMat.mat'));
@@ -134,12 +134,25 @@ for iPat=1:length(patients)
     included_channels = info.included_channels;
     frequency_sampling = info.frequency_sampling;
 
+    [N,~] = size(timePoints);
+    
     % load in adjMats file
-    matFiles = dir(fullfile(connDir, patient, '*.mat'));
-    matFileNames = natsort(matFiles.name);
+    matFiles = dir(fullfile(connDir, '*.mat'));
+    matFileNames = natsort({matFiles.name});
+    
+    matFileNames = matFilesNames(2:end);
+    
+    winsComputed = zeros(N, 1);
+    for iMat=1:length(matFileNames)
+        currentFile = matFileNames{iMat};
+        currentWin = currentFile(strfind('_', currentFile):end-3);
+        
+        winsComputed(str2num(currentWin)) = 1;
+    end
+    find(winsComputed == 0)
     
     % construct the adjMats from the windows computed of adjMat
-    for iMat=1:length(matFileNames)
+    for iMat=1:N
         matFile = fullfile(tempDir, patient, matFileNames{iMat});
         load(matFile);
         

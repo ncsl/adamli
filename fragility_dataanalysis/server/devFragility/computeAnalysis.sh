@@ -11,6 +11,9 @@ patient="$2"
 currentWin="$3"
 RUNCONNECTIVITY="$4"
 
+winSize=500
+stepSize=500
+
 ## 01: Set parameters for matlab to run, and check if matlab is on path
 matlab_jvm="matlab -nojvm -nodesktop -nosplash -r"
 [[ ! -z "`which matlab`" ]] || \
@@ -25,11 +28,14 @@ matlab_jvm="matlab -nojvm -nodesktop -nosplash -r"
 if [[ "$RUNCONNECTIVITY" -eq 1 ]]; then
 	echo "Running connectivity computation."
 	matlab -logfile /home/ali/adamli/fragility_dataanalysis/server/devFragility/_log/job${3}.txt -nojvm -nodisplay -nosplash -r "currentpatient='${patient}'; \
+	serverSetupComputation(currentpatient);\
 	serverComputeConnectivity(currentpatient,${currentWin});\
-		fprintf('it is working.');"
+	exit;"
 else
 	echo "Running perturbation computation."
 	# run perturbation analysis
 	matlab -logfile /home/ali/adamli/fragility_dataanalysis/server/devFragility/_log/job${3}.txt -nojvm -nodisplay -nosplash -r "currentpatient='${patient}'; \
-	serverComputePerturbations(currentpatient, ${currentWin});"
+	serverSetupComputation(currentpatient);\
+	serverComputePerturbations(currentpatient, ${currentWin});\
+	exit;"
 fi

@@ -1,4 +1,4 @@
-function serverComputeConnectivity(patient, currentWin)
+function serverComputeConnectivity(patient, currentWin, winSize, stepSize)
 if nargin==0
     patient = 'pt3sz2';
     patient = 'pt1sz2';
@@ -6,6 +6,10 @@ if nargin==0
     currentWin = 3;
 end
 
+if nargin<3
+    winSize = 500;
+    stepSize = 500;
+end
 
 % add libraries of functions
 addpath(('../../'));
@@ -18,9 +22,6 @@ IS_SERVER = 1;
 IS_INTERICTAL = 1; % need to change per run of diff data
 TYPE_CONNECTIVITY = 'leastsquares';
 l2regularization = 0;
-winSize = 500;
-stepSize = 500;
-
 % set options for connectivity measurements
 OPTIONS.l2regularization = l2regularization;
 
@@ -41,8 +42,6 @@ if isempty(patient_id)
     seizure_id = patient(strfind(patient, 'aw'):end);
     seeg = 0;
 end
-
-
 
 %% DEFINE CHANNELS AND CLINICAL ANNOTATIONS
 %- Edit this file if new patients are added.
