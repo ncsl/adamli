@@ -21,7 +21,7 @@
 %   < 0 indicates poor match.
 % 
 % Author: Kriti Jindal, NCSL 
-% Last Updated: 02.14.17
+% Last Updated: 02.23.17
 %   
 % #########################################################################
 
@@ -30,21 +30,35 @@
 % where inputs are as described above. 
 
 % List of inputs:
-% EpiMap = 'fake_data.EpiMap';
-% EpiMapStruct = 'fake_data.mat';
+% --EpiMap = 'fake_data.EpiMap';
+% EpiMapStruct = 'fake_data.mat';-- 
 % CEZ = 'adjmat_struct.ezone_labels';
 % ALL = 'adjmat_struct.all_labels';
 % clinicalStruct = 'pt1sz2_adjmats_leastsquares.mat';
 % threshold = 0.70; note threshold is optional 
 
+% create struct with randomly simulated values from 0-1 for each electrode
+% in the clinical ezone labels. 
+
+load('pt1sz2_adjmats_leastsquares.mat');
+k = adjmat_struct.ezone_labels;
+num_labels = length(k);
+v = rand(num_labels, 1);
+
+EpiMap = containers.Map(k, v);
+
+EpiMap_struct = struct('EpiMap_field', EpiMap);
+
 % with default threshold
-DOA_threshold_default = DOA('fake_data.EpiMap', 'fake_data.mat', 'adjmat_struct.ezone_labels', 'adjmat_struct.all_labels', 'pt1sz2_adjmats_leastsquares.mat', 0.70);
+DOA_threshold_default = DOA('EpiMap_struct.EpiMap_field', 'EpiMap_struct', 'adjmat_struct.ezone_labels', 'adjmat_struct.all_labels', 'pt1sz2_adjmats_leastsquares.mat', 0.70);
 
 % with 0.80 threshold 
-DOA_threshold_eighty = DOA('fake_data.EpiMap', 'fake_data.mat', 'adjmat_struct.ezone_labels', 'adjmat_struct.all_labels', 'pt1sz2_adjmats_leastsquares.mat', 0.80);
+DOA_threshold_default = DOA('EpiMap_struct.EpiMap_field', 'EpiMap_struct', 'adjmat_struct.ezone_labels', 'adjmat_struct.all_labels', 'pt1sz2_adjmats_leastsquares.mat', 0.80);
 
 % with 0.90 threshold 
-DOA_threshold_ninety = DOA('fake_data.EpiMap', 'fake_data.mat', 'adjmat_struct.ezone_labels', 'adjmat_struct.all_labels', 'pt1sz2_adjmats_leastsquares.mat', 0.90);
+DOA_threshold_ninety = DOA('EpiMap_struct.EpiMap_field', 'EpiMap_struct', 'adjmat_struct.ezone_labels', 'adjmat_struct.all_labels', 'pt1sz2_adjmats_leastsquares.mat', 0.90);
 
 % with 0.95 threshold
-DOA_threshold_ninetyfive = DOA('fake_data.EpiMap', 'fake_data.mat', 'adjmat_struct.ezone_labels', 'adjmat_struct.all_labels', 'pt1sz2_adjmats_leastsquares.mat', 0.95);
+DOA_threshold_ninetyfive = DOA('EpiMap_struct.EpiMap_field', 'EpiMap_struct', 'adjmat_struct.ezone_labels', 'adjmat_struct.all_labels', 'pt1sz2_adjmats_leastsquares.mat', 0.95);
+
+%% 

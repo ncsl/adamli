@@ -26,7 +26,7 @@ function [ D ] = DOA( EpiMap, EpiMapStruct, CEZ, ALL, clinicalStruct, threshold 
 
 % load in necesssary structs for EpiMap, CEZ and ALL 
 
-load(EpiMapStruct);
+%load(EpiMapStruct);
 load(clinicalStruct);
 
 % set default threshold parameter to 0.70
