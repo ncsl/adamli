@@ -12,7 +12,7 @@ Nnode=$((${3}/${NprocperNode}+1)) 	# the number of nodes to compute on
 walltime=02:00:00					# the walltime for each computation
 
 echo $Nnode
-for ((inode=1; inode <= 2; inode++))
+for ((inode=1; inode <= 1; inode++))
 do
 	echo $inode
 	currentNode=$((($inode-1)*$NprocperNode))

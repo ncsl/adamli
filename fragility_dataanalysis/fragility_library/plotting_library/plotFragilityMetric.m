@@ -35,7 +35,7 @@ function plotFragilityMetric(fragility_mat, minPert_mat, clinicalIndices,...
     fig = figure;
     firstplot = 1:24;
     firstplot([6,12,18,24]) = []; hold on;
-%     firstfig = subplot(4,6, firstplot);
+    firstfig = subplot(4,6, firstplot);
     imagesc(fragility_mat); hold on; axis tight;
     axes = gca; currfig = gcf;
     cbar = colorbar(); colormap('jet'); set(axes, 'box', 'off'); set(axes, 'YDir', 'normal');
@@ -52,8 +52,6 @@ function plotFragilityMetric(fragility_mat, minPert_mat, clinicalIndices,...
     % set x/y ticks and increment xlim by 1
     xTickStep = (XUpperLim - XLowerLim) / 10;
     xTicks = round(timeStart: (timeEnd-timeStart)/10 :timeEnd);
-%     xTickStep = length(timePoints)/5;
-%     xTicks = timePoints(1:length(timePoints)/5:end, 1);
     yTicks = [1, 5:5:size(fragility_mat,1)];
     
 %     try
@@ -127,34 +125,34 @@ function plotFragilityMetric(fragility_mat, minPert_mat, clinicalIndices,...
     xrange(ezone_indices) = [];
     avge = mean(rowsum);
     
-%     secfig = subplot(4,6, [6,12,18,24]);
-%     stem(xrange, rowsum(xrange), 'k'); hold on;
-%     stem(ezone_indices, rowsum(ezone_indices), 'r');
-%     plot([1 size(fragility_mat, 1)], [avge avge], 'k', 'MarkerSize', 1.5);
-%     
-%     % plot *'s for the resection indices
-%     if ~isempty(resection_indices)
-%         YLim = get(gca, 'YLim');
-%         YLowerLim = YLim(1);
-%         YUpperLim = YLim(2);
-%         ylim([YLowerLim-1, YUpperLim])
-%         
-%         xLocations = repmat(XLowerLim-1, length(resection_indices), 1);
-%         plot(resection_indices, xLocations, 'o', 'Color', [0 0.5 0], 'MarkerSize', 4); hold on;
-%     end
-%     pos = get(gca, 'Position');
-%     pos(1) = pos(1) + xoffset;
-%     xlim([1 size(fragility_mat,1)]);
-%     set(gca, 'Xdir', 'reverse');
-%     set(gca, 'Position', pos);
-%     set(gca, 'XTick', []); set(gca, 'XTickLabel', []);
-%     set(gca, 'yaxislocation', 'right');
-%     set(gca, 'XAxisLocation', 'bottom');
-%     xlabel('Row Sum of Fragility Metric', 'FontSize', FONTSIZE-3);
-%     view([90 90])
-%     ax = gca;
-%     ax.XLabel.Rotation = 270;
-%     ax.XLabel.Position = ax.XLabel.Position + [0 max(ax.YLim)*1.05 0];
+    secfig = subplot(4,6, [6,12,18,24]);
+    stem(xrange, rowsum(xrange), 'k'); hold on;
+    stem(ezone_indices, rowsum(ezone_indices), 'r');
+    plot([1 size(fragility_mat, 1)], [avge avge], 'k', 'MarkerSize', 1.5);
+    
+    % plot *'s for the resection indices
+    if ~isempty(resection_indices)
+        YLim = get(gca, 'YLim');
+        YLowerLim = YLim(1);
+        YUpperLim = YLim(2);
+        ylim([YLowerLim-1, YUpperLim])
+        
+        xLocations = repmat(XLowerLim-1, length(resection_indices), 1);
+        plot(resection_indices, xLocations, 'o', 'Color', [0 0.5 0], 'MarkerSize', 4); hold on;
+    end
+    pos = get(gca, 'Position');
+    pos(1) = pos(1) + xoffset;
+    xlim([1 size(fragility_mat,1)]);
+    set(gca, 'Xdir', 'reverse');
+    set(gca, 'Position', pos);
+    set(gca, 'XTick', []); set(gca, 'XTickLabel', []);
+    set(gca, 'yaxislocation', 'right');
+    set(gca, 'XAxisLocation', 'bottom');
+    xlabel('Row Sum of Fragility Metric', 'FontSize', FONTSIZE-3);
+    view([90 90])
+    ax = gca;
+    ax.XLabel.Rotation = 270;
+    ax.XLabel.Position = ax.XLabel.Position + [0 max(ax.YLim)*1.05 0];
 
     % save the figure                 
     if SAVEFIG

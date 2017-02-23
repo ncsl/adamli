@@ -140,28 +140,22 @@ for iPat=1:length(patients)
     matFiles = dir(fullfile(connDir, '*.mat'));
     matFileNames = natsort({matFiles.name});
     
-    matFileNames = matFilesNames(2:end);
+    matFileNames = matFileNames(2:end);
     
-    winsComputed = zeros(N, 1);
-    for iMat=1:length(matFileNames)
-        currentFile = matFileNames{iMat};
-        currentWin = currentFile(strfind('_', currentFile):end-3);
-        
-        winsComputed(str2num(currentWin)) = 1;
-    end
-    find(winsComputed == 0)
-    
+    winsComputed = zeros(N, 1);    
     % construct the adjMats from the windows computed of adjMat
-    for iMat=1:N
-        matFile = fullfile(tempDir, patient, matFileNames{iMat});
+    for iMat=1:length(matFileNames)
+        matFile = fullfile(connDir, matFileNames{iMat});
         load(matFile);
         
         % check window numbers and make sure they are being stored in order
         currentFile = matFileNames{iMat};
-        currentWin = currentFile(strfind('_', currentFile):end-3);
-        if currentWin ~= iMat
+        index =strfind(currentFile, '_');
+        currentWin = currentFile(index(2)+1:end-4);
+        if str2num(currentWin) ~= iMat
             disp(['There is an error at ', num2str(iMat)]);
         end
+         winsComputed(str2num(currentWin)) = 1;
         
         % initialize matrix if first loop and then store results
         if iMat==1
@@ -169,6 +163,12 @@ for iPat=1:length(patients)
             adjMats = zeros(length(matFileNames), N, N); 
         end
         adjMats(iMat, :, :) = theta_adj;
+    end
+    test = find(winsComputed == 0)
+    if isempty(test)
+       SUCCESS = 1;
+    else
+       SUCCESS = 0;
     end
     
     %%- Create the structure for the adjacency matrices for this patient/seizure
@@ -190,10 +190,18 @@ for iPat=1:length(patients)
     
     % save the merged adjMatDir
     fileName = strcat(patient, '_adjmats_', lower(TYPE_CONNECTIVITY), '.mat');
-    try
-        save(fullfile(adjMatDir, fileName), 'adjmat_struct');
-    catch e
-        disp(e);
-        save(fullfile(adjMatDir, fileName), 'adjmat_struct', '-v7.3');
+    
+    % Check if it was successful full computation
+    if SUCCESS
+        try
+            save(fullfile(adjMatDir, fileName), 'adjmat_struct');
+        catch e
+            disp(e);
+            save(fullfile(adjMatDir, fileName), 'adjmat_struct', '-v7.3');
+        end
+        
+        delete((fullfile(connDir, '*.mat')));
+    else
+        fprintf('Make sure to fix the windows not computed!');
     end
 end

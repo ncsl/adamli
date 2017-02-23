@@ -240,32 +240,14 @@ for p=1:length(patients)
             seizureMarkStart = (seizureStart-1) / winSize;
         end
         
-%         minPerturb_time_chan = minPerturb_time_chan(:, 1:seizureMarkStart+20);
-%         fragility_rankings = fragility_rankings(:, 1:seizureMarkStart+20);
-%         timePoints = timePoints(1:seizureMarkStart+20,:);
+        minPerturb_time_chan = minPerturb_time_chan(:, 1:seizureMarkStart+20);
+        fragility_rankings = fragility_rankings(:, 1:seizureMarkStart+20);
+        timePoints = timePoints(1:seizureMarkStart+20,:);
 
         % for ACC
-        minPerturb_time_chan = minPerturb_time_chan(:, seizureMarkStart-121:seizureMarkStart);
-        fragility_rankings = fragility_rankings(:, seizureMarkStart-121:seizureMarkStart);
-        timePoints = timePoints(seizureMarkStart-121:seizureMarkStart,:);
-       
-        % make everything relative to seizureStart
-%         timePoints = timePoints - seizureStart;
-        
-%         if length(included_channels) ~= size(minPerturb_time_chan,1)
-%             % another patient
-%             %             minPerturb_time_chan([5,6,35,36],:) = [];
-% %             fragility_rankings([5,6,35,36],:) = [];
-% %             clinicalIndices.all_indices = 1:length(included_channels);
-% 
-%             % JH108
-%             test = info.included_channels;
-%             temp = intersect(test, included_channels);
-%             minPerturb_time_chan = minPerturb_time_chan(temp, :);
-%             fragility_rankings = fragility_rankings(temp, :);
-%             clinicalIndices.all_indices = 1:length(temp);
-%         end
-        
+%         minPerturb_time_chan = minPerturb_time_chan(:, seizureMarkStart-121:seizureMarkStart);
+%         fragility_rankings = fragility_rankings(:, seizureMarkStart-121:seizureMarkStart);
+%         timePoints = timePoints(seizureMarkStart-121:seizureMarkStart,:);
         %% 1: Extract Processed Data and Begin Plotting and Save in finalDataDir
         %%- initialize plotting args
         FONTSIZE = 20;
@@ -303,8 +285,8 @@ for p=1:length(patients)
                 timeEnd = (timePoints(size(minPerturb_time_chan, 2), 2) - seizureStart)/frequency_sampling;
                 
                 % for ACC
-                timeStart = ceil((timePoints(1,2) - seizureStart) / frequency_sampling);
-                timeEnd = (timePoints(end,2) - seizureStart) / frequency_sampling;
+%                 timeStart = ceil((timePoints(1,2) - seizureStart) / frequency_sampling);
+%                 timeEnd = (timePoints(end,2) - seizureStart) / frequency_sampling;
                 
 %                 PLOTARGS.seizureIndex = seizureIndex;
 %                 PLOTARGS.seizureEnd = seizureEndIndex;
