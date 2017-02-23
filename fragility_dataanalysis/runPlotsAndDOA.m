@@ -341,9 +341,9 @@ for p=1:length(patients)
         if ~isempty(TEST_DESCRIP)
             PLOTARGS.toSaveFigFile = strcat(PLOTARGS.toSaveFigFile, TEST_DESCRIP);
         end
-        
+        seizure_id = strcat('seiz', num2str(p));
         PLOTARGS.colorbarStr = 'Fragility Metric';
-        PLOTARGS.titleStr = {['Fragility Metric (', patient, ')'], ...
+        PLOTARGS.titleStr = {['Fragility Metric (', strcat(patient_id, seizure_id), ')'], ...
             [perturbationType, ' Perturbation: ', ' Time Locked to Seizure']};
         plotFragilityMetric(fragility_rankings, minPerturb_time_chan, clinicalIndices, timePoints./frequency_sampling, timeStart, timeEnd, PLOTARGS);
         
