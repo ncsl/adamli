@@ -1,15 +1,42 @@
 function serverComputePerturbations(patient, currentWin)
 if nargin==0
-    patient = 'JH101sz2';
+    patient = 'pt1sz2';
     currentWin = 3;
 end
 
-%% 0: Extract Vars and Initialize Parameters
-perturbationTypes = ['C', 'R'];
-radius = 1.5;
+if nargin < 3
+    winSize = 500;
+    stepSize = 500;
+end
+
+%% Set Working Directories
+% set working directory
+% data directories to save data into - choose one
+eegRootDirServer = '/home/ali/adamli/fragility_dataanalysis/';                      % ICM SERVER
+% eegRootDirHome = '/Users/adam2392/Documents/MATLAB/Johns Hopkins/NINDS_Rotation'; % home
+eegRootDirHome = '/Volumes/NIL_PASS/';                                              % external HD
+eegRootDirJhu = '/home/WIN/ali39/Documents/adamli/fragility_dataanalysis/';         % at work - JHU
+
+% Determine which directory we're working with automatically
+if     ~isempty(dir(eegRootDirServer)), rootDir = eegRootDirServer;
+elseif ~isempty(dir(eegRootDirHome)), rootDir = eegRootDirHome;
+elseif ~isempty(dir(eegRootDirJhu)), rootDir = eegRootDirJhu;
+else   error('Neither Work nor Home EEG directories exist! Exiting.'); end
+
+addpath(genpath(fullfile(rootDir, '/fragility_library/')));
+addpath(genpath(fullfile(rootDir, '/eeg_toolbox/')));
+addpath(rootDir);
+
+
+%% Parameters for Analysis
 frequency_sampling = 1000;
-winSize = 500;
-stepSize = 500;
+radius = 1.5;
+
+TYPE_CONNECTIVITY = 'leastsquares';
+TEST_DESCRIP = 'after_first_removal';
+TEST_DESCRIP = [];
+
+perturbationTypes = ['C', 'R'];
 w_space = linspace(-radius, radius, 51);
 sigma = sqrt(radius^2 - w_space.^2); % move to the unit circle 1, for a plethora of different radial frequencies
 b = [0; 1];                          % initialize for perturbation computation later
@@ -19,18 +46,98 @@ w_space = [w_space, w_space];
 sigma = [-sigma, sigma];
 
 
-tempDir = fullfile('./tempData/', patient, 'perturbation');
+tempDir = fullfile(rootDir, 'server/devFragility/tempData/', patient, 'perturbation');
 if ~exist(tempDir, 'dir')
     mkdir(tempDir);
 end
 
-%% extract adjMat for this patient
-adjMatDir = fullfile('../../serverdata/fixed_adj_mats_win500_step500_freq1000/', patient);
-adjMatDir = fullfile('../../serverdata/fixed_adj_mats_win500_step500_freq1000/');
-load(fullfile(adjMatDir, strcat(patient, '_adjmats_leastsquares')));
-adjMat = squeeze(adjmat_struct.adjMats(currentWin, :, :));
+%% extract adjMat for this patient from completed dir
+%%- Extract an example
+% serverDir = fullfile(rootDir, 'serverdata');
+% adjMatDir = fullfile(serverDir, 'adjmats', strcat('win', num2str(winSize), ...
+%     '_step', num2str(stepSize), '_freq', num2str(frequency_sampling)), patient);    
+% if ~isempty(TEST_DESCRIP)
+%     adjMatDir = fullfile(adjMatDir, TEST_DESCRIP);
+% end
+%     
+% load(fullfile(adjMatDir, strcat(patient, '_adjmats_leastsquares')));
+% adjMat = squeeze(adjmat_struct.adjMats(currentWin, :, :));
 
+% extract params
+% TYPE_CONNECTIVITY = adjmat_struct.type_connectivity;
+% ezone_labels = adjmat_struct.ezone_labels;
+% earlyspread_labels = adjmat_struct.earlyspread_labels;
+% latespread_labels = adjmat_struct.latespread_labels;
+% resection_labels = adjmat_struct.resection_labels;
+% labels = adjmat_struct.all_labels;
+% seizureStart = adjmat_struct.seizure_start;
+% seizureEnd = adjmat_struct.seizure_end;
+% winSize = adjmat_struct.winSize;
+% stepSize = adjmat_struct.stepSize;
+% timePoints = adjmat_struct.timePoints;
+% adjMats = adjmat_struct.adjMats;
+% frequency_sampling = adjmat_struct.frequency_sampling;    
+% included_channels = adjmat_struct.included_channels;
+
+%% extract adjMat for this patient from temp dir
+%%- Extract an example
+connDir = fullfile(rootDir, 'server/devFragility/tempData/', patient, 'connectivity');  
+
+% load in adjMats file
+matFiles = dir(fullfile(connDir, '*.mat'));
+matFileNames = natsort({matFiles.name});
+       
+fileToCompute = [];
+% construct the adjMats from the windows computed of adjMat
+for iMat=1:length(matFileNames)
+    % check window numbers and make sure they are being stored in order
+    currentFile = matFileNames{iMat};
+    index = strfind(currentFile, '_');
+    fileWin = currentFile(index(2)+1:end-4);
+    
+    % if file window matches our current window of computation
+    if str2num(fileWin) == currentWin
+        fileToCompute = currentFile;
+    end
+end
+if isempty(fileToCompute)
+   errormsg = ['Connectivity file was not computed yet! Check ', num2str(currentWin)];
+   error(errormsg);
+end
+    
+load(fullfile(connDir, fileToCompute));
+adjMat = theta_adj;
 N = size(adjMat, 1);
+
+% extract info mat file from tempDir
+load(fullfile(tempDir, 'infoAdjMat.mat'));
+TYPE_CONNECTIVITY = info.type_connectivity;
+ezone_labels = info.ezone_labels;
+earlyspread_labels = info.earlyspread_labels;
+latespread_labels = info.latespread_labels;
+resection_labels = info.resection_labels;
+labels = info.all_labels;
+seizureStart = info.seizure_start;
+seizureEnd = info.seizure_end;
+winSize = info.winSize;
+stepSize = info.stepSize;
+timePoints = info.timePoints;
+included_channels = info.included_channels;
+frequency_sampling = info.frequency_sampling;
+
+%- set meta data struct
+info.ezone_labels = ezone_labels;
+info.earlyspread_labels = earlyspread_labels;
+info.latespread_labels = latespread_labels;
+info.resection_labels = resection_labels;
+info.all_labels = all_labels;
+info.seizure_start = seizure_start;
+info.seizure_end = seizure_end;
+info.winSize = winSize;
+info.stepSize = stepSize;
+info.frequency_sampling = frequency_sampling;
+info.included_channels = included_channels;
+
 %% 1: Begin Perturbation Analysis
 %- initialize matrices for colsum, rowsum, and minimum perturbation\
 minPerturb_time_chan = zeros(N,1);
@@ -40,110 +147,50 @@ del_table = cell(N,1);
 tic; % start counter
 
 if max(abs(eig(adjMat))) > radius
-    logfile = strcat(patient, '_perturbation_log.txt');
-    fid = fopen(logfile, 'w');
-    fprintf(fid, '%6s, %f \n', ['This patient has eigenvalue > radius, check it!', ...
-        patient, '_', num2str(frequency_sampling), '_', num2str(winSize), '_', num2str(stepSize)]);
-    fclose(fid);
-elseif max(abs(eig(adjMat))) - radius < 1e-8
-    logfile = strcat(patient, '_equaleigenvals_perturbation_log.txt');
-    fid = fopen(logfile, 'w');
-    fprintf(fid, '%6s, %f \n', ['This patient has eigenvalue == radius, check it!', ...
-        patient, '_', num2str(frequency_sampling), '_', num2str(winSize), '_', num2str(stepSize)]);
-    fclose(fid);
+    errormsg = ['Max eigenvalue in window ', num2str(currentWin), ' is larger then radius'];
+    error('ServerComputePerturbation:illposedproblem', errormsg);
+elseif abs(max(abs(eig(adjMat))) - radius) < 1e-8
+    errormsg = ['Max eigenvalue in window ', num2str(currentWin), ' is equal to radius'];
+    error('ServerComputePerturbation:illposedproblem', errormsg);
 end
 
 for iPert=1:length(perturbationTypes)
     perturbationType = perturbationTypes(iPert);
     
-    %%- 02:Compute Minimum Norm Perturbation
-    % determine which indices have eigenspectrums that are stable
-    max_eig = max(abs(eig(adjMat)));
-    if (max_eig < radius) % this is a stable eigenspectrum
-        % store min delta for each electrode X w
-        del_size = zeros(N, length(w_space));   % store min_norms
-        del_temp = cell(length(w_space));       % store all min_norm vectors
+    % initialize vectors to store
+    minNormPerturbMat = zeros(N,1);
+    fragilityMat = zeros(N,1);
+    del_table = cell(N,1);
+    
+    perturb_args = struct();
+    perturb_args.perturbationType = perturbationType;
+    perturb_args.w_space = w_space;
+    perturb_args.radius = radius;
+    
+    [minNormPert, del_vecs, ERRORS] = minNormPerturbation(patient, adjMat, perturb_args);
 
-        %%- grid search over sigma and w for each row to determine, what is
-        %%- the min norm perturbation
-        for iNode=1:N % 1st loop through each electrode
-            ek = [zeros(iNode-1, 1); 1; zeros(N-iNode,1)]; % unit column vector at this node
-            A = adjMat; 
+    % store results
+    minNormPerturbMat = minNormPert;
+    del_table = del_vecs;
 
-            for iW=1:length(w_space) % 2nd loop through frequencies
-                lambda = sigma(iW) + 1i*w_space(iW);
-
-                if (perturbationType == 'R')
-        %             C = ek'*inv(A - lambda*eye(N));  
-        %             C = ek'/(A - lambda*eye(N));
-        %             C = (A - lambda*eye(N))\ek;
-
-                    % new after 1/13
-        %             C = inv(A-lambda*eye(N))*ek;
-                    C = (A-lambda*eye(N))\ek;
-                elseif (perturbationType == 'C')
-                    % new after 1/13
-        %             C = ek'*inv(A-lambda*eye(N));
-                    C = ek'/(A-lambda*eye(N));
-
-                    % old
-        %             C = ek/(A - lambda*eye(N)); 
-                end
-
-                %- extract real and imaginary components
-                %- create B vector of constraints
-                Cr = real(C);  Ci = imag(C);
-                if strcmp(perturbationType, 'R')
-                    B = [Ci; Cr]';
-                else
-                    B = [Ci, Cr];
-                end
-
-                % compute perturbation necessary
-                if w_space(iW) ~= 0
-                    w_space(iW)
-                    del = B'*inv(B*B')*b;
-                else
-                    del = -C./(norm(C)^2);
-                end
-
-                % store the l2-norm of the perturbation vector
-                del_size(iNode, iW) = norm(del); 
-                del_temp{iW} = del;
-            end
-
-            %%- 03: Store Results min norm perturbation
-            % store minimum perturbation, for each node at a certain time point
-            min_index = find(del_size(iNode,:) == min(del_size(iNode, :)),1);
-            minPerturb_time_chan(iNode) = del_size(iNode, min_index);
-            del_table(iNode) = del_temp(min_index);
-        end % end of loop through channels
-
-        % update pointer for the fragility heat map
-        disp(['On ', num2str(currentWin)]);
-    else
-        disp(['max eigenvalue problem for ', num2str(iTime), ' time point.']);
+    %% 3. Compute fragility rankings per column by normalization
+    % Compute fragility rankings per column by normalization
+    for i=1:N      % loop through each channel
+        fragilityMat(i) = (max(minNormPerturbMat(:)) - minNormPerturbMat(i)) ...
+                                    / max(minNormPerturbMat(:));
     end
 
+    % initialize struct to save
+    perturbation_struct = struct();
+    perturbation_struct.del_table = del_table;
+    perturbation_struct.minNormPertMat = minNormPerturbMat;
+    perturbation_struct.fragilityMat = fragilityMat;
 
-%% 3. Compute fragility rankings per column by normalization
-fragility_rankings = zeros(size(minPerturb_time_chan,1),1);
-for i=1:size(minPerturb_time_chan,1)      % loop through each channel
-    fragility_rankings(i) = (max(minPerturb_time_chan) - minPerturb_time_chan(i)) ...
-                                / max(minPerturb_time_chan);
-end
+    % display a message for the user
+    disp(['Finished: ', num2str(currentWin)]);
 
-% initialize struct to save
-perturbation_struct = struct();
-perturbation_struct.del_table = del_table;
-perturbation_struct.minNormPertMat = minPerturb_time_chan;
-perturbation_struct.fragility_rankings = fragility_rankings;
-
-% display a message for the user
-disp(['Finished: ', num2str(currentWin)]);
-
-% save the file in temporary dir
-fileName = strcat(patient, '_', perturbationType, '_pert_', num2str(currentWin));
-save(fullfile(tempDir, fileName), 'perturbation_struct');
+    % save the file in temporary dir
+    fileName = strcat(patient, '_', perturbationType, '_pert_', num2str(currentWin));
+    save(fullfile(tempDir, fileName), 'perturbation_struct');
 end
 end

@@ -259,10 +259,10 @@ for p=1:length(patients)
         PLOTARGS.colorbarStr = 'Minimum 2-Induced Norm Perturbation';
         PLOTARGS.ylabelStr = 'Electrode Channels';
         PLOTARGS.xTickStep = 10*winSize/stepSize;
-%         PLOTARGS.titleStr = {['Minimum Norm Perturbation (', patient, ')'], ...
-%             [perturbationType, ' perturbation: ', ' Time Locked to Seizure']};
-        PLOTARGS.titleStr = {['Minimum Norm Perturbation For All Channels'], ...
-            ['C Perturbation: Time Locked To Seizure']};
+        PLOTARGS.titleStr = {['Minimum Norm Perturbation (', patient, ')'], ...
+            [perturbationType, ' perturbation: ', ' Time Locked to Seizure']};
+%         PLOTARGS.titleStr = {['Minimum Norm Perturbation For All Channels'], ...
+%             ['C Perturbation: Time Locked To Seizure']};
         PLOTARGS.seizureMarkStart = seizureMarkStart;
 
         if seizureStart == size(minPerturb_time_chan,1)*winSize % interictal data
@@ -291,7 +291,7 @@ for p=1:length(patients)
 %                 PLOTARGS.seizureIndex = seizureIndex;
 %                 PLOTARGS.seizureEnd = seizureEndIndex;
 %                 PLOTARGS.seizureEnd = seizureIndex;
-                PLOTARGS.toSaveFigFile = fullfile(toSaveFigDir, strcat(patient, '_minPerturbation_ACCA'));
+                PLOTARGS.toSaveFigFile = fullfile(toSaveFigDir, strcat(patient, '_minPerturbation'));
             else % only plot window of data
                 postWindow = 10;
                 preWindow = 60;
@@ -315,7 +315,7 @@ for p=1:length(patients)
         plotMinimumPerturbation(minPerturb_time_chan, clinicalIndices, timeStart, timeEnd, PLOTARGS);
         
         if PLOTALL
-            PLOTARGS.toSaveFigFile = fullfile(toSaveFigDir, strcat(patient, '_fragilityMetric_ACC'));
+            PLOTARGS.toSaveFigFile = fullfile(toSaveFigDir, strcat(patient, '_fragilityMetric'));
         else
             PLOTARGS.toSaveFigFile = fullfile(toSaveFigDir, strcat(patient, '_fragilityMetric'));
         end

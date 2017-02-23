@@ -119,7 +119,7 @@ for iPat=1:length(patients)
 %     numWins = size(eeg,2) / stepSize - 1;
     
     % extract info mat file from tempDir
-    load(fullfile(connDir, 'infoAdjMat.mat'));
+    load(fullfile(tempDir, 'infoAdjMat.mat'));
     TYPE_CONNECTIVITY = info.type_connectivity;
     ezone_labels = info.ezone_labels;
     earlyspread_labels = info.earlyspread_labels;
@@ -140,7 +140,7 @@ for iPat=1:length(patients)
     matFiles = dir(fullfile(connDir, '*.mat'));
     matFileNames = natsort({matFiles.name});
     
-    matFileNames = matFileNames(2:end);
+%     matFileNames = matFileNames(2:end);
     
     winsComputed = zeros(N, 1);    
     % construct the adjMats from the windows computed of adjMat

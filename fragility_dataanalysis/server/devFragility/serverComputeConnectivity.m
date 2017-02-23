@@ -167,7 +167,7 @@ if currentWin == 1
     info.included_channels = included_channels;
     info.frequency_sampling = frequency_sampling;
 
-    save(fullfile(tempDir, 'infoAdjMat'), 'info');
+    save(fullfile('./tempData/', patient, 'infoAdjMat'), 'info');
 end
 fprintf('Should have finished saving info mat.\n');
 

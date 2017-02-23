@@ -30,6 +30,7 @@ if [[ "$RUNCONNECTIVITY" -eq 1 ]]; then
 	matlab -logfile /home/ali/adamli/fragility_dataanalysis/server/devFragility/_log/job${3}.txt -nojvm -nodisplay -nosplash -r "currentpatient='${patient}'; \
 	serverSetupComputation(currentpatient);\
 	serverComputeConnectivity(currentpatient,${currentWin});\
+	serverComputePerturbations(currentpatient, ${currentWin});\
 	exit;"
 else
 	echo "Running perturbation computation."
