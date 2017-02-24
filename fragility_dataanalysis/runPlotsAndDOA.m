@@ -7,14 +7,12 @@ patients = {,...,
 %     'pt2aslp1', 'pt2aslp2', ...
 %     'pt3aw1', ...
 %     'pt3aslp1', 'pt3aslp2', ...
-%     'pt1sz2', 'pt1sz3', ...
-    'pt2sz1' 'pt2sz3',...
-%     'pt1sz4',...
-%     'pt2sz1' 'pt2sz3' 'pt2sz4', ...
+%     'pt1sz2', 'pt1sz3', 'pt1sz4',...
+%     'pt2sz1' 'pt2sz3' ,...'pt2sz4', ...
 %     'pt3sz2' 'pt3sz4', ...
 %     'pt6sz3', 'pt6sz4', 'pt6sz5',...
 %     'pt7sz19', 'pt7sz21', 'pt7sz22',...
-%     'pt8sz1' 'pt8sz2' 'pt8sz3',...
+    'pt8sz1' 'pt8sz2' 'pt8sz3',...
 %     'pt10sz1' 'pt10sz2' 'pt10sz3', ...
 %     'pt11sz1' 'pt11sz2' 'pt11sz3' 'pt11sz4', ...
 %     'pt12sz1', 'pt12sz2', ...
@@ -59,6 +57,10 @@ PLOTALL = 1;
 radius = 1.5;             % spectral radius
 winSize = 500;            % 500 milliseconds
 stepSize = 500; 
+
+% winSize = 250;
+% stepSize = 125;
+
 frequency_sampling = 1000; % in Hz
 IS_SERVER = 0;
 % TEST_DESCRIP = 'noleftandrpp';
@@ -94,6 +96,7 @@ for p=1:length(patients)
     patient_id = patient(1:strfind(patient, 'seiz')-1);
     seizure_id = strcat('_', patient(strfind(patient, 'seiz'):end));
     seeg = 1;
+    INTERICTAL = 0;
     if isempty(patient_id)
         patient_id = patient(1:strfind(patient, 'sz')-1);
         seizure_id = patient(strfind(patient, 'sz'):end);
@@ -103,11 +106,13 @@ for p=1:length(patients)
         patient_id = patient(1:strfind(patient, 'aslp')-1);
         seizure_id = patient(strfind(patient, 'aslp'):end);
         seeg = 0;
+        INTERICTAL = 1;
     end
     if isempty(patient_id)
         patient_id = patient(1:strfind(patient, 'aw')-1);
         seizure_id = patient(strfind(patient, 'aw'):end);
         seeg = 0;
+        INTERICTAL = 1;
     end
 
     [included_channels, ezone_labels, earlyspread_labels, latespread_labels,...
@@ -207,7 +212,8 @@ for p=1:length(patients)
            
         % directory that computed perturbation structs are saved
         finalDataDir = fullfile(serverDir, strcat(perturbationType, '_perturbations', ...
-            '_radius', num2str(radius)), 'win500_step500_freq1000', patient);
+            '_radius', num2str(radius)), strcat('win', num2str(winSize),...
+            '_step', num2str(stepSize), '_freq', num2str(frequency_sampling)), patient);
         
 %             % directory that computed perturbation structs without 0 Hz inside
 %         finalDataDir = fullfile(serverDir, strcat(perturbationType, '_perturbations', ...
@@ -219,14 +225,11 @@ for p=1:length(patients)
 
         try
             final_data = load(fullfile(finalDataDir, strcat(patient, ...
-                '_', perturbationType, 'perturbation_', lower(TYPE_CONNECTIVITY), '.mat')));
-            final_data = final_data.perturbation_struct;
-        catch e
-            disp(e)
-            final_data = load(fullfile(finalDataDir, strcat(patient, ...
                 '_', perturbationType, 'perturbation_', lower(TYPE_CONNECTIVITY), ...
                 '_radius', num2str(radius), '.mat')));
             final_data = final_data.perturbation_struct;
+        catch e
+            disp(e)
         end
         % set data to local variables
         minPerturb_time_chan = final_data.minNormPertMat;
@@ -234,16 +237,17 @@ for p=1:length(patients)
         info = final_data.info;
         timePoints = final_data.timePoints;
         
-        seizureMarkStart = seizureStart/winSize;
+        seizureMarkStart = seizureStart/stepSize - 1;
         
         if seeg
-            seizureMarkStart = (seizureStart-1) / winSize;
+            seizureMarkStart = (seizureStart-1) / stepSize;
         end
         
-        minPerturb_time_chan = minPerturb_time_chan(:, 1:seizureMarkStart+20);
-        fragility_rankings = fragility_rankings(:, 1:seizureMarkStart+20);
-        timePoints = timePoints(1:seizureMarkStart+20,:);
-
+        if ~INTERICTAL
+            minPerturb_time_chan = minPerturb_time_chan(:, 1:seizureMarkStart+20);
+            fragility_rankings = fragility_rankings(:, 1:seizureMarkStart+20);
+            timePoints = timePoints(1:seizureMarkStart+20,:);
+        end
         % for ACC
 %         minPerturb_time_chan = minPerturb_time_chan(:, seizureMarkStart-121:seizureMarkStart);
 %         fragility_rankings = fragility_rankings(:, seizureMarkStart-121:seizureMarkStart);
@@ -323,7 +327,7 @@ for p=1:length(patients)
         if ~isempty(TEST_DESCRIP)
             PLOTARGS.toSaveFigFile = strcat(PLOTARGS.toSaveFigFile, TEST_DESCRIP);
         end
-        seizure_id = strcat('seiz', num2str(p));
+%         seizure_id = strcat('seiz', num2str(p));
         PLOTARGS.colorbarStr = 'Fragility Metric';
         PLOTARGS.titleStr = {['Fragility Metric (', strcat(patient_id, seizure_id), ')'], ...
             [perturbationType, ' Perturbation: ', ' Time Locked to Seizure']};

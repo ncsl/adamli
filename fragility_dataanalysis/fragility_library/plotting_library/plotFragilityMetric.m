@@ -54,11 +54,11 @@ function plotFragilityMetric(fragility_mat, minPert_mat, clinicalIndices,...
     xTicks = round(timeStart: (timeEnd-timeStart)/10 :timeEnd);
     yTicks = [1, 5:5:size(fragility_mat,1)];
     
-%     try
-%         plot([seizureMarkStart seizureMarkStart], get(gca, 'ylim'), 'k')
-%     catch e
-%         disp(e)
-%     end
+    try
+        plot([seizureMarkStart seizureMarkStart], get(gca, 'ylim'), 'k', 'MarkerSize', 2)
+    catch e
+        disp(e)
+    end
     
     set(gca, 'XTick', (XLowerLim+0.5 : xTickStep : XUpperLim+0.5)); set(gca, 'XTickLabel', xTicks); % set xticks and their labels
     set(gca, 'YTick', yTicks);

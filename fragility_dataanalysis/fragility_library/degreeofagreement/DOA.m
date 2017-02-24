@@ -27,7 +27,7 @@ function [ D ] = DOA(EEZ, CEZ, ALL, metric, args)
     if nargin < 4
         metric = 'default';
     elseif nargin == 4
-        if ~(strcmp(metric, 'default') || strcmp(metric, 'jaccard') || ...
+        if ~(strcmp(lower(metric), 'default') || strcmp(metric, 'jaccard') || ...
                 strcmp(metric, 'sorensen') || strcmp(metric, 'tversky'))
             errormsg = 'Metric is incorrect.\n Enter "default", or "jaccard".';
             error('DOA:incorrectInput', errormsg);
@@ -47,7 +47,7 @@ function [ D ] = DOA(EEZ, CEZ, ALL, metric, args)
 
     %% Compute Degree of Agreement
     % finds appropriate set intersections to plug into DOA formula 
-    if strcmp(metric, 'default')
+    if strcmp(lower(metric), 'default')
         NotCEZ = setdiff(ALL, CEZ);
         CEZ_EEZ = intersect(CEZ, EEZ);
         NotCEZ_EEZ = intersect(NotCEZ, EEZ);

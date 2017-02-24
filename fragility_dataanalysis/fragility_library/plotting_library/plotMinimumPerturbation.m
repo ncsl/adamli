@@ -14,6 +14,7 @@ function plotMinimumPerturbation(minPerturb_time_chan, clinicalIndices,...
     xlabelStr = PLOTARGS.xlabelStr;
     ylabelStr = PLOTARGS.ylabelStr;
     colorbarStr = PLOTARGS.colorbarStr;
+    seizureMarkStart = PLOTARGS.seizureMarkStart;
     SAVEFIG = PLOTARGS.SAVEFIG;
     toSaveFigFile = PLOTARGS.toSaveFigFile;
     YAXFontSize = 9;
@@ -49,6 +50,13 @@ function plotMinimumPerturbation(minPerturb_time_chan, clinicalIndices,...
     xTickStep = (XUpperLim - XLowerLim) / 10;
     xTicks = round(timeStart: (timeEnd-timeStart)/10 :timeEnd);
     yTicks = [1, 5:5:size(minPerturb_time_chan,1)];
+    
+    try
+        plot([seizureMarkStart seizureMarkStart], get(gca, 'ylim'), 'k')
+    catch e
+        disp(e)
+    end
+
     
     set(gca, 'XTick', (XLowerLim+0.5 : xTickStep : XUpperLim+0.5)); set(gca, 'XTickLabel', xTicks); % set xticks and their labels
     set(gca, 'YTick', yTicks);

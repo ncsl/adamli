@@ -80,7 +80,7 @@ TEST_DESCRIP = 'after_first_removal';
 TEST_DESCRIP = [];
 
 % similarity metrics to test
-metrics = {'default', 'jaccard', 'sorensen', 'tversky'};
+metrics = {'Default', 'jaccard', 'sorensen', 'tversky'};
 
 % threshold on fragility map
 thresholds = [0.6, 0.65, 0.7, 0.75, 0.8, 0.85];
@@ -292,15 +292,29 @@ for iPat=1:length(patients)
     end
     
     hold on;
+     plotSyms = {'ko', 'b*', 'r-', 'p-'};
     for iMetric=1:length(metrics)
         metric = metrics{iMetric};
-        plot(thresholds, dataToPlot(metric), 'o'); hold on;
+        plot(thresholds, dataToPlot(metric), plotSyms{iMetric}); hold on;
     end
     title([patient]);
-    xlabel('Thresholds');
-    ylabel({'Degree of', 'Agreement'});
+%     xlabel('Thresholds');
+%     ylabel({'Degree of', 'Agreement'});
+    
+    if iElec > 20
+        xlabel('Thresholds');
+    end    
+    if mod(iPat, 5) == 1 || iPat == 1
+        ylabel({'Degree of', 'Agreement'});
+    end
+    
     axis tight
     axes = gca;
     axes.FontSize = FONTSIZE;
 end
-legend(metrics)
+xlim([min(thresholds), max(thresholds)]);
+ylim([0 1]);
+leg = legend(metrics)
+currfig = gcf;
+currfig.PaperPosition = [-3.7448   -0.3385   15.9896   11.6771];
+currfig.Position = [1986           1        1535        1121];

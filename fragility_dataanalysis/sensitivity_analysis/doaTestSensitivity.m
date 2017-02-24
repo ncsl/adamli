@@ -63,13 +63,15 @@ stepSize = 500;
 frequency_sampling = 1000;
 radius = 1.5;
 
+numElecsToRemove = 1:25;
+
 TYPE_CONNECTIVITY = 'leastsquares';
 perturbationType = 'C';
 TEST_DESCRIP = 'after_first_removal';
 TEST_DESCRIP = [];
 
 % similarity metrics to test
-metrics = {'default', 'jaccard', 'sorensen', 'tversky'};
+metrics = {'Default', 'jaccard', 'sorensen', 'tversky'};
 
 % threshold on fragility map
 thresholds = [0.6, 0.65, 0.7, 0.75, 0.8, 0.85];
@@ -144,132 +146,138 @@ for iPat=1:length(patients)
             '_radius', num2str(radius)), strcat('win', num2str(winSize), '_step', num2str(stepSize), ...
             '_freq', num2str(frequency_sampling)), patient);
         
-    %%- load in data
-    try
-        TEST_DESCRIP = 'after_first_removal';
-        if ~isempty(TEST_DESCRIP)
-            finalDataDir = fullfile(finalDataDir, TEST_DESCRIP);
-        end
-
-        final_data = load(fullfile(finalDataDir, strcat(patient, ...
-            '_', perturbationType, 'perturbation_', lower(TYPE_CONNECTIVITY), ...
-            '_radius', num2str(radius), '.mat')));
-    catch e
-        disp(e)
-        finalDataDir = fullfile(serverDir, strcat(perturbationType, '_perturbations', ...
-            '_radius', num2str(radius)), 'win500_step500_freq1000', patient);
-        final_data = load(fullfile(finalDataDir, strcat(patient, ...
-            '_', perturbationType, 'perturbation_', lower(TYPE_CONNECTIVITY), ...
-            '_radius', num2str(radius), '.mat')));
-    end
-    final_data = final_data.perturbation_struct;
+    finalDataDir = fullfile(serverDir, 'adjmats', patient);
     
-    % set data to local variables
-    minPerturb_time_chan = final_data.minNormPertMat;
-    fragility_rankings = final_data.fragilityMat;
-    timePoints = final_data.timePoints;
-    info = final_data.info;
-    num_channels = size(minPerturb_time_chan,1);
-    seizureStart = info.seizure_start;
-    seizureEnd = info.seizure_end;
-    included_labels = info.all_labels;
+    for iElec=1:length(numElecsToRemove)
+        dataDir = fullfile(finalDataDir, strcat(patient, '_numelecs', num2str(iElec)));
+        
+        key = strcat(patient, '_', num2str(iElec));
+        % load in the column perturbation
+        final_data = load(fullfile(dataDir, strcat(patient, '_Cperturbation_', TYPE_CONNECTIVITY, '_radius', num2str(radius), '.mat')));
+        final_data = final_data.perturbation_struct;
 
-    % set the seizure start time window and only analyze up to that point
-    seizureMarkStart = seizureStart/winSize;
-    if seeg
-        seizureMarkStart = (seizureStart-1) / winSize;
+        % set data to local variables
+        minPerturb_time_chan = final_data.minNormPertMat;
+        fragility_rankings = final_data.fragilityMat;
+        timePoints = final_data.timePoints;
+        info = final_data.info;
+        num_channels = size(minPerturb_time_chan,1);
+        seizureStart = info.seizure_start;
+        seizureEnd = info.seizure_end;
+        included_labels = info.all_labels;
+
+        % set the seizure start time window and only analyze up to that point
+        seizureMarkStart = seizureStart/winSize;
+        if seeg
+            seizureMarkStart = (seizureStart-1) / winSize;
+        end
+        minPerturb_time_chan = minPerturb_time_chan(:, 1:seizureMarkStart);
+        fragility_rankings = fragility_rankings(:, 1:seizureMarkStart);
+        timePoints = timePoints(1:seizureMarkStart,:);  
+
+        ALL = included_labels;
+        CEZ = ezone_labels;
+
+        %% Perform test on all thresholds to test sensitivity to fragility thresholding
+        for iThresh=1:length(thresholds)
+            threshold = thresholds(iThresh);
+            fieldname = strcat('threshold_', num2str(threshold*100));
+
+            if ~isfield(doa, fieldname)
+                doa.(fieldname) = struct();
+            end
+
+            % threshold the fragility map and rowsum
+            thresh_map = fragility_rankings;
+            thresh_map(thresh_map < threshold) = 0;
+            rowsum = sum(thresh_map, 2);
+
+            % get the electrode indices that pass
+            EEZ_indices = find(rowsum > 0);
+            [sorted_rowsum, sorted_indices] = sort(rowsum, 'descend');
+    %         indices = 1:length(rowsum);
+    %         EEZ_indices = indices(EEZ_indices);
+            EEZ = included_labels(EEZ_indices);
+
+            %% Perform Analysis on All Metrics of Similarity
+            for iMetric=1:length(metrics)
+                metric = metrics{iMetric};
+
+                % initialize as a container map
+                if ~isfield(doa.(fieldname), metric)
+                    doa.(fieldname).(metric) = containers.Map;
+                end
+
+                if strcmp(metric, 'tversky')
+                    D = DOA(EEZ, CEZ, ALL, metric, args);
+                else
+                    D = DOA(EEZ, CEZ, ALL, metric);
+                end
+
+                % append the results to a container map
+                newmap = containers.Map(key, D);
+                map = doa.(fieldname).(metric);
+
+                doa.(fieldname).(metric) = [map; newmap];  
+            end
+        end 
     end
-    minPerturb_time_chan = minPerturb_time_chan(:, 1:seizureMarkStart);
-    fragility_rankings = fragility_rankings(:, 1:seizureMarkStart);
-    timePoints = timePoints(1:seizureMarkStart,:);  
-
-    ALL = included_labels;
-    CEZ = ezone_labels;
-    
-    %% Perform test on all thresholds to test sensitivity to fragility thresholding
-    for iThresh=1:length(thresholds)
-        threshold = thresholds(iThresh);
-        fieldname = strcat('threshold_', num2str(threshold*100));
-        
-        if ~isfield(doa, fieldname)
-            doa.(fieldname) = struct();
-        end
-
-        % threshold the fragility map and rowsum
-        thresh_map = fragility_rankings;
-        thresh_map(thresh_map < threshold) = 0;
-        rowsum = sum(thresh_map, 2);
-        
-        % get the electrode indices that pass
-        EEZ_indices = find(rowsum > 0);
-        [sorted_rowsum, sorted_indices] = sort(rowsum, 'descend');
-%         indices = 1:length(rowsum);
-%         EEZ_indices = indices(EEZ_indices);
-        EEZ = included_labels(EEZ_indices);
-        
-        %% Perform Analysis on All Metrics of Similarity
-        for iMetric=1:length(metrics)
-            metric = metrics{iMetric};
-            
-            % initialize as a container map
-            if ~isfield(doa.(fieldname), metric)
-                doa.(fieldname).(metric) = containers.Map;
-            end
-            
-            if strcmp(metric, 'tversky')
-                D = DOA(EEZ, CEZ, ALL, metric, args);
-            else
-                D = DOA(EEZ, CEZ, ALL, metric);
-            end
-            
-            % append the results to a container map
-            newmap = containers.Map(patient, D);
-            map = doa.(fieldname).(metric);
-            
-            doa.(fieldname).(metric) = [map; newmap];  
-        end
-    end 
 %     toc;
 end
 
 %% PLOTTING
 FONTSIZE = 20;
 
-figure;
-numSubPlots = ceil(length(patients)/5) * 5;
+metrics = {'default'};
 for iPat=1:length(patients)
     patient = patients{iPat};
     
-    subplot(5, numSubPlots/5, iPat);
-    
-    dataToPlot = containers.Map();
-    for iThresh=1:length(thresholds)
-        threshold = thresholds(iThresh);
-        fieldname = strcat('threshold_', num2str(threshold*100));
+    figure;
+    numSubPlots = ceil(length(numElecsToRemove)/5) * 5;
+    for iElec=1:length(numElecsToRemove)
+        key = strcat(patient, '_', num2str(iElec));
         
-        for iMetric=1:length(metrics)
-            metric = metrics{iMetric};
-            
-            data = doa.(fieldname).(metric);
-            val = values(data, {patient});
-            if ~isKey(dataToPlot, metric)
-                dataToPlot(metric) = [val{1}];
-            else
-                dataToPlot(metric) = [dataToPlot(metric) val{1}];
+        subplot(5, numSubPlots/5, iElec);
+
+        dataToPlot = containers.Map();
+        for iThresh=1:length(thresholds)
+            threshold = thresholds(iThresh);
+            fieldname = strcat('threshold_', num2str(threshold*100));
+
+            for iMetric=1:length(metrics)
+                metric = metrics{iMetric};
+
+                data = doa.(fieldname).(metric);
+                val = values(data, {key});
+                if ~isKey(dataToPlot, metric)
+                    dataToPlot(metric) = [val{1}];
+                else
+                    dataToPlot(metric) = [dataToPlot(metric) val{1}];
+                end
             end
         end
+
+        hold on;
+        plotSyms = {'ko', 'b*', 'r-', 'p-'};
+        for iMetric=1:length(metrics)
+            metric = metrics{iMetric};
+            plot(thresholds, dataToPlot(metric), plotSyms{iMetric}); hold on;
+        end
+        titleStr = strcat(patient, '-', num2str(iElec));
+        title([titleStr]);
+        
+        if iElec > 20
+            xlabel('Thresholds');
+        end    
+        if mod(iElec, 5) == 1 || iElec == 1
+            ylabel({'Degree of', 'Agreement'});
+        end
+        axis tight
+        axes = gca;
+        axes.FontSize = FONTSIZE;
+        xlim([min(thresholds), max(thresholds)]);
+        ylim([0.4 0.8]);
     end
-    
-    hold on;
-    for iMetric=1:length(metrics)
-        metric = metrics{iMetric};
-        plot(thresholds, dataToPlot(metric), 'o'); hold on;
-    end
-    title([patient]);
-    xlabel('Thresholds');
-    ylabel({'Degree of', 'Agreement'});
-    axis tight
-    axes = gca;
-    axes.FontSize = FONTSIZE;
 end
+metrics = {'Default'};
 legend(metrics)
