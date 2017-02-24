@@ -86,9 +86,9 @@ function plotFragilityMetric(fragility_mat, minPert_mat, clinicalIndices,...
     end
 
     if isempty(resection_indices)
-        leg = legend('EZ', 'Early Onset', 'Late Onset');
+        leg = legend('Seizure', 'EZ', 'Early Onset', 'Late Onset');
     else
-        leg = legend('EZ', 'Early Onset', 'Late Onset', 'Resected');
+        leg = legend('Seizure', 'EZ', 'Early Onset', 'Late Onset', 'Resected');
     end
     
     try

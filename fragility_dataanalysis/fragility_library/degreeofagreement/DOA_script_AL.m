@@ -24,17 +24,17 @@
 %   
 % #########################################################################
 patients = {...,
-    'pt1aw1','pt1aw2', ...
-    'pt1aslp1', 'pt1aslp2', ...
-    'pt2aw1', 'pt2aw2', ...
-    'pt2aslp1', 'pt2aslp2', ...
-    'pt3aslp1', 'pt3aslp2', ...
-    'pt3aw1', ...
-    'pt1sz2', 'pt1sz3', 'pt1sz4',...
-    'pt2sz1', 'pt2sz3', 'pt2sz4', ...
-    'pt3sz2', 'pt3sz4', ...
-    'pt6sz3', 'pt6sz4', 'pt6sz5',...
-%     'pt8sz1' 'pt8sz2' 'pt8sz3',...
+%     'pt1aw1','pt1aw2', ...
+%     'pt1aslp1', 'pt1aslp2', ...
+%     'pt2aw1', 'pt2aw2', ...
+%     'pt2aslp1', 'pt2aslp2', ...
+%     'pt3aslp1', 'pt3aslp2', ...
+%     'pt3aw1', ...
+%     'pt1sz2', 'pt1sz3', 'pt1sz4',...
+%     'pt2sz1', 'pt2sz3', 'pt2sz4', ...
+%     'pt3sz2', 'pt3sz4', ...
+%     'pt6sz3', 'pt6sz4', 'pt6sz5',...
+    'pt8sz1' 'pt8sz2' 'pt8sz3',...
 %     'pt10sz1' 'pt10sz2' 'pt10sz3', ...
 %     'pt11sz1' 'pt11sz2' 'pt11sz3' 'pt11sz4', ...
 %     'pt14sz1' 'pt14sz2' 'pt14sz3', ...
@@ -214,6 +214,10 @@ for iPat=1:length(patients)
     fragility_rankings = fragility_rankings(:, 1:seizureMarkStart);
     timePoints = timePoints(1:seizureMarkStart,:);  
 
+%     minPerturb_time_chan = minPerturb_time_chan(:, 1:seizureMarkStart+20);
+%     fragility_rankings = fragility_rankings(:, 1:seizureMarkStart+20);
+%     timePoints = timePoints(1:seizureMarkStart+20,:);  
+    
     ALL = included_labels;
     CEZ = ezone_labels;
     
@@ -265,13 +269,14 @@ end
 
 %% PLOTTING
 FONTSIZE = 20;
+numPats = 3;
 
 figure;
-numSubPlots = ceil(length(patients)/5) * 5;
+numSubPlots = ceil(length(patients)/numPats) * numPats;
 for iPat=1:length(patients)
     patient = patients{iPat};
     
-    subplot(5, numSubPlots/5, iPat);
+    subplot(numPats, numSubPlots/numPats, iPat);
     
     dataToPlot = containers.Map();
     for iThresh=1:length(thresholds)
@@ -301,12 +306,13 @@ for iPat=1:length(patients)
 %     xlabel('Thresholds');
 %     ylabel({'Degree of', 'Agreement'});
     
-    if iElec > 20
+    if iPat >= numPats
         xlabel('Thresholds');
     end    
-    if mod(iPat, 5) == 1 || iPat == 1
-        ylabel({'Degree of', 'Agreement'});
-    end
+%     if mod(iPat, numPats) == 1 || iPat == 1
+%         ylabel({'Degree of', 'Agreement'});
+%     end
+    ylabel({'Degree of', 'Agreement'});
     
     axis tight
     axes = gca;
@@ -314,6 +320,8 @@ for iPat=1:length(patients)
 end
 xlim([min(thresholds), max(thresholds)]);
 ylim([0 1]);
+h = suptitle('Patient 8 | -44 to Seizure');
+set(h, 'FontSize', FONTSIZE);
 leg = legend(metrics)
 currfig = gcf;
 currfig.PaperPosition = [-3.7448   -0.3385   15.9896   11.6771];

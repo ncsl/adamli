@@ -72,7 +72,7 @@ function plotMinimumPerturbation(minPerturb_time_chan, clinicalIndices,...
         end
     end
     
-    leg = legend('EZ', 'Early Onset', 'Late Onset');
+    leg = legend('Seizure', 'EZ', 'Early Onset', 'Late Onset');
     try
         leg.Position = [ 0.8752    0.0115    0.1179    0.0821];
     catch
