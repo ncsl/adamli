@@ -75,6 +75,7 @@ for iNode=1:N % 1st loop through each electrode
         lambda = curr_sigma + 1i*curr_w;
         
         % compute row, or column perturbation
+        % A\b => Ax = b => x = inv(A)*b
         if (perturbationType == 'R')
             C = (A-lambda*eye(N))\ek;
         elseif (perturbationType == 'C')
