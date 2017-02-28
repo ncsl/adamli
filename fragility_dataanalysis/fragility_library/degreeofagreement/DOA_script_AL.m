@@ -75,7 +75,7 @@ frequency_sampling = 1000;
 radius = 1.5;
 
 TYPE_CONNECTIVITY = 'leastsquares';
-perturbationType = 'R';
+perturbationType = 'C';
 TEST_DESCRIP = 'after_first_removal';
 TEST_DESCRIP = [];
 
@@ -211,13 +211,13 @@ for iPat=1:length(patients)
     if seeg
         seizureMarkStart = (seizureStart-1) / winSize;
     end
-    minPerturb_time_chan = minPerturb_time_chan(:, 1:seizureMarkStart);
-    fragility_rankings = fragility_rankings(:, 1:seizureMarkStart);
-    timePoints = timePoints(1:seizureMarkStart,:);  
+%     minPerturb_time_chan = minPerturb_time_chan(:, 1:seizureMarkStart);
+%     fragility_rankings = fragility_rankings(:, 1:seizureMarkStart);
+%     timePoints = timePoints(1:seizureMarkStart,:);  
 % 
-%     minPerturb_time_chan = minPerturb_time_chan(:, 1:seizureMarkStart+20);
-%     fragility_rankings = fragility_rankings(:, 1:seizureMarkStart+20);
-%     timePoints = timePoints(1:seizureMarkStart+20,:);  
+    minPerturb_time_chan = minPerturb_time_chan(:, 1:seizureMarkStart+20);
+    fragility_rankings = fragility_rankings(:, 1:seizureMarkStart+20);
+    timePoints = timePoints(1:seizureMarkStart+20,:);  
     
     ALL = included_labels;
     CEZ = ezone_labels;
@@ -322,7 +322,7 @@ for iPat=1:length(patients)
 end
 xlim([min(thresholds), max(thresholds)]);
 
-h = suptitle('Patient 8 | Start to Seizure');
+h = suptitle('Patient 8 | Start to Seizure + 10');
 set(h, 'FontSize', FONTSIZE);
 leg = legend(metrics)
 currfig = gcf;
@@ -333,5 +333,5 @@ figDir = fullfile(rootDir, 'figures/degree of agreement/', perturbationType);
 if ~exist(figDir, 'dir')
     mkdir(figDir);
 end
-toSaveFigFile = fullfile(figDir, strcat(patient_id, '_allmetrics_startto0'));
+toSaveFigFile = fullfile(figDir, strcat(patient_id, '_allmetrics_startto10'));
 print(toSaveFigFile, '-dpng', '-r0')
