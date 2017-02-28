@@ -34,8 +34,8 @@ patients = {...,
 %     'pt2sz1', 'pt2sz3', 'pt2sz4', ...
 %     'pt3sz2', 'pt3sz4', ...
 %     'pt6sz3', 'pt6sz4', 'pt6sz5',...
-    'pt8sz1' 'pt8sz2' 'pt8sz3',...
-%     'pt10sz1' 'pt10sz2' 'pt10sz3', ...
+%     'pt8sz1' 'pt8sz2' 'pt8sz3',...
+    'pt10sz1' 'pt10sz2' 'pt10sz3', ...
 %     'pt11sz1' 'pt11sz2' 'pt11sz3' 'pt11sz4', ...
 %     'pt14sz1' 'pt14sz2' 'pt14sz3', ...
 %      'pt15sz1' 'pt15sz2' 'pt15sz3' 'pt15sz4',...
@@ -75,7 +75,7 @@ frequency_sampling = 1000;
 radius = 1.5;
 
 TYPE_CONNECTIVITY = 'leastsquares';
-perturbationType = 'C';
+perturbationType = 'R';
 TEST_DESCRIP = 'after_first_removal';
 TEST_DESCRIP = [];
 
@@ -211,13 +211,13 @@ for iPat=1:length(patients)
     if seeg
         seizureMarkStart = (seizureStart-1) / winSize;
     end
-%     minPerturb_time_chan = minPerturb_time_chan(:, 1:seizureMarkStart);
-%     fragility_rankings = fragility_rankings(:, 1:seizureMarkStart);
-%     timePoints = timePoints(1:seizureMarkStart,:);  
-
-    minPerturb_time_chan = minPerturb_time_chan(:, 1:seizureMarkStart+20);
-    fragility_rankings = fragility_rankings(:, 1:seizureMarkStart+20);
-    timePoints = timePoints(1:seizureMarkStart+20,:);  
+    minPerturb_time_chan = minPerturb_time_chan(:, 1:seizureMarkStart);
+    fragility_rankings = fragility_rankings(:, 1:seizureMarkStart);
+    timePoints = timePoints(1:seizureMarkStart,:);  
+% 
+%     minPerturb_time_chan = minPerturb_time_chan(:, 1:seizureMarkStart+20);
+%     fragility_rankings = fragility_rankings(:, 1:seizureMarkStart+20);
+%     timePoints = timePoints(1:seizureMarkStart+20,:);  
     
     ALL = included_labels;
     CEZ = ezone_labels;
@@ -318,19 +318,20 @@ for iPat=1:length(patients)
     axis tight
     axes = gca;
     axes.FontSize = FONTSIZE;
+    ylim([-0.2 1]);
 end
 xlim([min(thresholds), max(thresholds)]);
-ylim([0 1]);
-h = suptitle('Patient 8 | -44 to Seizure + 10');
+
+h = suptitle('Patient 8 | Start to Seizure');
 set(h, 'FontSize', FONTSIZE);
 leg = legend(metrics)
 currfig = gcf;
 currfig.PaperPosition = [-3.7448   -0.3385   15.9896   11.6771];
 currfig.Position = [1986           1        1535        1121];
 
-figDir = fullfile(rootDir, 'figures/degree of agreement/');
+figDir = fullfile(rootDir, 'figures/degree of agreement/', perturbationType);
 if ~exist(figDir, 'dir')
     mkdir(figDir);
 end
-toSaveFigFile = fullfile(figDir, strcat(patient_id, '_allmetrics_44to10'));
+toSaveFigFile = fullfile(figDir, strcat(patient_id, '_allmetrics_startto0'));
 print(toSaveFigFile, '-dpng', '-r0')
