@@ -228,7 +228,7 @@ end
 %% PLOTTING
 FONTSIZE = 20;
 
-metrics = {'default'};
+metrics = {'Default'};
 for iPat=1:length(patients)
     patient = patients{iPat};
     
@@ -281,3 +281,11 @@ for iPat=1:length(patients)
 end
 metrics = {'Default'};
 legend(metrics)
+
+
+figDir = fullfile(rootDir, 'figures/degree of agreement/');
+if ~exist(figDir, 'dir')
+    mkdir(figDir);
+end
+toSaveFigFile = fullfile(figDir, strcat(patient, '_allmetrics_sensitivity'));
+print(toSaveFigFile, '-dpng', '-r0')
