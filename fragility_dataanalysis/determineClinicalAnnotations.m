@@ -284,6 +284,26 @@ function [included_channels, ezone_labels, ...
             'OF3', 'OF4'};
             
         center = 'nih';
+    elseif strcmp(patient_id, 'pt4')
+        included_channels = [3:19 23:24 29:34];
+        ezone_labels = {};
+        earlyspread_labels = {};
+        latespread_labels = {};
+        resection_labels = {};
+        
+        frequency_sampling = 200;
+    
+        center = 'nih';
+    elseif strcmp(patient_id, 'pt5')
+        included_channels = [21:22 25:26 35:36];
+        ezone_labels = {};
+        earlyspread_labels = {};
+        latespread_labels = {};
+        resection_labels = {};
+        
+        frequency_sampling = 200;
+        
+        center = 'nih';
     elseif strcmp(patient_id, 'pt6')
         included_channels = [1:36 42:43 46 52:56 58:71 73:95];
         ezone_labels = {'POLLA1', 'POLLA2', 'POLLA3', 'POLLA4', 'POLLAH1', ...

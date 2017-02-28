@@ -81,6 +81,7 @@ TEST_DESCRIP = [];
 
 % similarity metrics to test
 metrics = {'Default', 'jaccard', 'sorensen', 'tversky'};
+metrics = {'Default', 'jaccard'};
 
 % threshold on fragility map
 thresholds = [0.6, 0.65, 0.7, 0.75, 0.8, 0.85];
@@ -210,13 +211,13 @@ for iPat=1:length(patients)
     if seeg
         seizureMarkStart = (seizureStart-1) / winSize;
     end
-    minPerturb_time_chan = minPerturb_time_chan(:, 1:seizureMarkStart);
-    fragility_rankings = fragility_rankings(:, 1:seizureMarkStart);
-    timePoints = timePoints(1:seizureMarkStart,:);  
+%     minPerturb_time_chan = minPerturb_time_chan(:, 1:seizureMarkStart);
+%     fragility_rankings = fragility_rankings(:, 1:seizureMarkStart);
+%     timePoints = timePoints(1:seizureMarkStart,:);  
 
-%     minPerturb_time_chan = minPerturb_time_chan(:, 1:seizureMarkStart+20);
-%     fragility_rankings = fragility_rankings(:, 1:seizureMarkStart+20);
-%     timePoints = timePoints(1:seizureMarkStart+20,:);  
+    minPerturb_time_chan = minPerturb_time_chan(:, 1:seizureMarkStart+20);
+    fragility_rankings = fragility_rankings(:, 1:seizureMarkStart+20);
+    timePoints = timePoints(1:seizureMarkStart+20,:);  
     
     ALL = included_labels;
     CEZ = ezone_labels;
@@ -320,9 +321,16 @@ for iPat=1:length(patients)
 end
 xlim([min(thresholds), max(thresholds)]);
 ylim([0 1]);
-h = suptitle('Patient 8 | -44 to Seizure');
+h = suptitle('Patient 8 | -44 to Seizure + 10');
 set(h, 'FontSize', FONTSIZE);
 leg = legend(metrics)
 currfig = gcf;
 currfig.PaperPosition = [-3.7448   -0.3385   15.9896   11.6771];
 currfig.Position = [1986           1        1535        1121];
+
+figDir = fullfile(rootDir, 'figures/degree of agreement/');
+if ~exist(figDir, 'dir')
+    mkdir(figDir);
+end
+toSaveFigFile = fullfile(figDir, strcat(patient_id, '_allmetrics_44to10'));
+print(toSaveFigFile, '-dpng', '-r0')
