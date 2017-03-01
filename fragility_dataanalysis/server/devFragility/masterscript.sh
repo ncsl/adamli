@@ -48,7 +48,9 @@ read answer
 # 02: Run sleep on nodes on icm server that don't work with our module of MATLAB
 if [[ "$RUNSLEEP" -eq 1 ]]; then
 	# runs the sleep function on all faulty nodes 
+	qsub -l walltime=24:00:00,nodes=node050 run_b_sleep.sh
 	qsub -l walltime=24:00:00,nodes=node054 run_b_sleep.sh
+	qsub -l walltime=24:00:00,nodes=node165 run_b_sleep.sh
 	qsub -l walltime=24:00:00,nodes=node215 run_b_sleep.sh
 	qsub -l walltime=24:00:00,nodes=node232 run_b_sleep.sh
 fi

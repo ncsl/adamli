@@ -139,7 +139,7 @@ for iNode=1:N % 1st loop through each electrode
 
     %%- 03: Store Results min norm perturbation
     % find index of min norm perturbation for this node
-    min_index = find(del_size(iNode,:) == min(del_size(iNode, :)),1);
+    min_index = find(del_size(iNode,:) == min(del_size(iNode, :)));
     
     % store the min-norm perturbation vector for this node
     del_table(iNode) = del_vecs(min_index);
