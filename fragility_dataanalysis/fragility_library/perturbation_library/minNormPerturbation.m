@@ -141,8 +141,24 @@ for iNode=1:N % 1st loop through each electrode
     % find index of min norm perturbation for this node
     min_index = find(del_size(iNode,:) == min(del_size(iNode, :)));
     
-    % store the min-norm perturbation vector for this node
-    del_table(iNode) = del_vecs(min_index);
+    if length(min_index) == 1
+        % store the min-norm perturbation vector for this node
+        del_table(iNode) = del_vecs(min_index);
+    else
+        temp = del_vecs(min_index);
+
+        for i=1:length(min_index)
+            vec = reshape(temp{i}, N, 1);
+            
+            if i==1
+                to_insert = vec;
+            else
+                to_insert = cat(2, to_insert, vec);
+            end
+        end
+        
+        del_table(iNode) = to_insert;
+    end
     
     % test on the min norm perturbation vector
 %     if strcmp(perturbationType, 'C')

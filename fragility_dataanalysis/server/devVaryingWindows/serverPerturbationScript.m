@@ -2,7 +2,7 @@ function serverPerturbationScript(patient, radius, winSize, stepSize)
     if nargin == 0 % testing purposes
         patient='EZT011seiz001';
         patient ='pt7sz19';
-        patient = 'Pat2sz2p';
+        patient = 'Pat16sz1p';
 %         patient = 'JH102sz1';
         % window paramters
         radius = 1.5;
@@ -171,7 +171,7 @@ function serverPerturbationScript(patient, radius, winSize, stepSize)
         perturb_args.w_space = w_space;
         perturb_args.radius = radius;
         
-        parfor iTime=1:T
+        for iTime=1:T
             adjMat = squeeze(adjMats(iTime,:,:));
             
             [minNormPert, del_vecs, ERRORS] = minNormPerturbation(patient, adjMat, perturb_args);
