@@ -78,7 +78,8 @@ addpath(genpath(fullfile(rootDir, '/fragility_library/')));
 addpath(genpath(fullfile(rootDir, '/eeg_toolbox/')));
 addpath(rootDir);
 
-figDir = './figures/patientFigs/';
+figDir = fullfile(rootDir, '/figures/patientFigs/', strcat('win', num2str(winSize),...
+        '_step', num2str(stepSize), '_freq', num2str(frequency_sampling), '_radius', num2str(radius)));
 if ~exist(figDir, 'dir')
     mkdir(figDir);
 end
@@ -200,7 +201,7 @@ for p=1:length(patients)
     
     included_labels = strrep(included_labels, 'POL', '');
     
-    %%- Plot A_i matrix
+    %% Plot A_i matrix
     firstfig = subplot(2, 2, 1);
     imagesc(adjMat); hold on; axis tight;
     axes = gca; currfig = gcf;
@@ -219,6 +220,91 @@ for p=1:length(patients)
     axy.FontSize = 5;
     axes.XTickLabel = [];
     
-     currfig.PaperPosition = [-3.7448   -0.3385   15.9896   11.6771];
+    %% Plot Eigenspectrum
+      % test to make sure things are working...
+%         if strcmp(perturbationType, 'C')
+%             del = del';
+%             try
+%                 temp = del*ek';
+%             catch e
+% %                 disp(e)
+%                 temp = del'*ek'; 
+%             end
+%         else
+%             temp = ek*del';
+%         end
+%         test = A + temp;
+
+    del_table = info.del_table;
+    del = del_table(randIndice, 1);
+    del = del';
+    temp = del*ek';
+    test = adjMat + temp;
+    
+    secfig = subplot(2, 2, 2);
+    plot(real(eig(test)), imag(eig(test)), 'ko', 'MarkerSize', 3); hold on;
+    axes = gca;
+    xlabelStr = 'Real Part';
+    ylabelStr = 'Imag Part';
+    titleStr = ['Eigenspectrum of ', perturbationType, ' Perturbation'];
+    labelBasicAxes(axes, titleStr, ylabelStr, xlabelStr, FONTSIZE);
+    xlim([-radius radius]);
+    ylim([-radius radius]);
+    plot(get(axes, 'XLim'), [0 0], 'k');
+    plot([0 0], get(axes, 'YLim'), 'k');
+    
+    %% Plot Minimum Norm Perturbation
+    thirdfig = subplot(2,2, [3,4]);
+    imagesc(minPerturb_time_chan); hold on; axis tight;
+    axes = gca; currfig = gcf;
+    cbar = colorbar(); colormap('jet'); set(axes, 'box', 'off'); set(axes, 'YDir', 'normal');
+    XLim = get(gca, 'xlim'); XLowerLim = XLim(1); XUpperLim = XLim(2);
+    colorbarStr = 'Minimum Norm Perturbation';
+    xlabelStr = 'Time (sec)';
+    ylabelStr = 'Electrodes';
+    titleStr = ['Min Norm ', perturbationType, ' Perturbation WRT Seizure'];
+    
+    labelColorbar(cbar, colorbarStr, FONTSIZE);
+    set(cbar.Label, 'Rotation', 270);
+    % create title string and label the axes of plot
+    labelBasicAxes(axes, titleStr, ylabelStr, xlabelStr, FONTSIZE);
+
+    % set x/y ticks and increment xlim by 1
+    xTickStep = (XUpperLim - XLowerLim) / 10;
+    timeStart = 1;
+    timeEnd = T;
+    xTicks = round(timeStart: (timeEnd-timeStart)/10 :timeEnd);
+%     yTicks = [1, 5:5:size(minPerturb_time_chan,1)];
+%     set(gca, 'YTick', yTicks);
+    set(gca, 'XTick', (XLowerLim+0.5 : xTickStep : XUpperLim+0.5)); set(gca, 'XTickLabel', xTicks); % set xticks and their labels
+    xlim([XLowerLim, XUpperLim+1]);
+
+    % plot start star's for the different clinical annotations
+    figIndices = {ezone_indices, earlyspread_indices, latespread_indices};
+    colors = {[1 0 0], [1 .5 0], [0 0 1]};
+    for i=1:length(figIndices)
+        if sum(figIndices{i})>0
+            xLocations = repmat(XUpperLim+1, length(figIndices{i}), 1);
+            plotAnnotatedStars(fig, xLocations, figIndices{i}, colors{i});
+        end
+    end
+    
+    % plot the different labels on different axes to give different colors
+    plotOptions = struct();
+    plotOptions.YAXFontSize = YAXFontSize;
+    plotOptions.FONTSIZE = FONTSIZE;
+    plotIndices(currfig, plotOptions, all_indices, included_labels, ...
+                                ezone_indices, ...
+                                earlyspread_indices, ...
+                                latespread_indices)
+    
+    currfig.PaperPosition = [-3.7448   -0.3385   15.9896   11.6771];
     currfig.Position = [1986           1        1535        1121];
+    
+    patDir = fullfile(figDir, patient);
+    if ~exist(figDir, 'dir')
+        mkdir(figDir);
+    end
+    toSaveFigFile = fullfile(figDir, strcat(patient, '_preplots'));
+    print(toSaveFigFile, '-dpng', '-r0')
 end
