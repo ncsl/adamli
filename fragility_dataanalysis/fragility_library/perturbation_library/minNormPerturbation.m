@@ -157,7 +157,7 @@ for iNode=1:N % 1st loop through each electrode
             end
         end
         
-        del_table(iNode) = to_insert;
+        del_table(iNode) = {to_insert};
     end
     
     % test on the min norm perturbation vector
@@ -170,7 +170,13 @@ for iNode=1:N % 1st loop through each electrode
 %     plot(real(eig(test)), imag(eig(test)), 'ko')
     
     % store the min-norm perturbation for this node
-    minPerturbation(iNode) = del_size(iNode, min_index);
+    if length(min_index) > 1
+        if del_size(iNode, min_index(1)) == del_size(iNode, min_index(2))
+            minPerturbation(iNode) = del_size(iNode, min_index(1);
+        end
+    else
+        minPerturbation(iNode) = del_size(iNode, min_index);
+    end
 end % end of loop through channels
 
 end

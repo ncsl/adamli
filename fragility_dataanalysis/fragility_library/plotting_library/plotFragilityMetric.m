@@ -27,10 +27,19 @@ function plotFragilityMetric(fragility_mat, minPert_mat, clinicalIndices,...
     end
     
     %- create rowsum of fragility_mat
-    minpertsum = sum(minPert_mat, 2);
-    rowsum = sum(fragility_mat, 2);
+    threshold = 0.8;
+    thresh_fragility = fragility_mat;
+    thresh_fragility(thresh_fragility < threshold) = 0;
+    thresh_fragility(thresh_fragility >= threshold) = 1;
+    
+    %- create rowsum based on threshold from pre-seizure, seiz+10, seiz+20
+    rowsum_preseize = sum(thresh_fragility(:, 1:seizureMarkStart), 2);
+    rowsum_postseize10 = sum(thresh_fragility(:, 1:seizureMarkStart+10*frequency_sampling/stepSize), 2);
+    rowsum_postseize20 = sum(thresh_fragility(:, 1:seizureMarkStart+20*frequency_sampling/stepSize), 2);
     xoffset = 0.05;
     
+    fragility_mat = fragility_mat(:, 1:seizureMarkStart+20*frequency_sampling/stepSize);
+    timePoints = timePoints(1:seizureMarkStart + 20*frequency_sampling/stepSize, :);
     %% Step 1: Plot Heatmap
     fig = figure;
     firstplot = 1:24;
@@ -120,12 +129,16 @@ function plotFragilityMetric(fragility_mat, minPert_mat, clinicalIndices,...
     cbarPos = cbar.Label.Position;
     cbar.Label.Position = [cbarPos(1)*1.45 cbarPos(2) cbarPos(3)]; % moving it after resizing
     
-    % plot the second figure
+    %% plot the second figure
     xrange = 1:size(fragility_mat, 1);
     xrange(ezone_indices) = [];
     avge = mean(rowsum);
     
     secfig = subplot(4,6, [6,12,18,24]);
+    %- plot stem
+    stem(xrange, rowsum_preseize(xrange), 'k'); hold on;
+    stem(ezone_indices, rowsum_preseize(ezone_indices), 'r');
+    **
     stem(xrange, rowsum(xrange), 'k'); hold on;
     stem(ezone_indices, rowsum(ezone_indices), 'r');
     plot([1 size(fragility_mat, 1)], [avge avge], 'k', 'MarkerSize', 1.5);

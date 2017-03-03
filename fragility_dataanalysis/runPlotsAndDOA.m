@@ -246,11 +246,11 @@ for p=1:length(patients)
             seizureMarkStart = (seizureStart-1) / stepSize;
         end
         
-        if ~INTERICTAL
-            minPerturb_time_chan = minPerturb_time_chan(:, 1:seizureMarkStart+20);
-            fragility_rankings = fragility_rankings(:, 1:seizureMarkStart+20);
-            timePoints = timePoints(1:seizureMarkStart+20,:);
-        end
+%         if ~INTERICTAL
+%             minPerturb_time_chan = minPerturb_time_chan(:, 1:seizureMarkStart+20);
+%             fragility_rankings = fragility_rankings(:, 1:seizureMarkStart+20);
+%             timePoints = timePoints(1:seizureMarkStart+20,:);
+%         end
         % for ACC
 %         minPerturb_time_chan = minPerturb_time_chan(:, seizureMarkStart-121:seizureMarkStart);
 %         fragility_rankings = fragility_rankings(:, seizureMarkStart-121:seizureMarkStart);
@@ -319,7 +319,7 @@ for p=1:length(patients)
         end
         
         %% 2. Plot Min 2-Induced Norm Perturbation and Fragility Ranking
-        plotMinimumPerturbation(minPerturb_time_chan, clinicalIndices, timeStart, timeEnd, PLOTARGS);
+%         plotMinimumPerturbation(minPerturb_time_chan, clinicalIndices, timeStart, timeEnd, PLOTARGS);
         
         if PLOTALL
             PLOTARGS.toSaveFigFile = fullfile(toSaveFigDir, strcat(patient, '_fragilityMetric'));

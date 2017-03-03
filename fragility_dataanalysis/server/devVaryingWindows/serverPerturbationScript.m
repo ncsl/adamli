@@ -171,7 +171,7 @@ function serverPerturbationScript(patient, radius, winSize, stepSize)
         perturb_args.w_space = w_space;
         perturb_args.radius = radius;
         
-        for iTime=1:T
+        parfor iTime=1:T
             adjMat = squeeze(adjMats(iTime,:,:));
             
             [minNormPert, del_vecs, ERRORS] = minNormPerturbation(patient, adjMat, perturb_args);
