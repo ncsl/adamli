@@ -138,10 +138,12 @@ function plotFragilityMetric(fragility_mat, minPert_mat, clinicalIndices,...
     %- plot stem
     stem(xrange, rowsum_preseize(xrange), 'k'); hold on;
     stem(ezone_indices, rowsum_preseize(ezone_indices), 'r');
-    **
-    stem(xrange, rowsum(xrange), 'k'); hold on;
-    stem(ezone_indices, rowsum(ezone_indices), 'r');
-    plot([1 size(fragility_mat, 1)], [avge avge], 'k', 'MarkerSize', 1.5);
+    plot(1:size(fragility_mat, 1), rowsum_postseize10, 'g');
+    plot(1:size(fragility_mat, 1), rowsum_postseize20, 'b');
+    
+%     stem(xrange, rowsum(xrange), 'k'); hold on;
+%     stem(ezone_indices, rowsum(ezone_indices), 'r');
+%     plot([1 size(fragility_mat, 1)], [avge avge], 'k', 'MarkerSize', 1.5);
     
     % plot *'s for the resection indices
     if ~isempty(resection_indices)
@@ -167,6 +169,8 @@ function plotFragilityMetric(fragility_mat, minPert_mat, clinicalIndices,...
     ax.XLabel.Rotation = 270;
     ax.XLabel.Position = ax.XLabel.Position + [0 max(ax.YLim)*1.05 0];
 
+    secleg = legend('Preseizure', 'EZone, 'Post+10', 'Post+20');
+    
     % save the figure                 
     if SAVEFIG
         print(toSaveFigFile, '-dpng', '-r0')

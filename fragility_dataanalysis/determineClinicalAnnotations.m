@@ -1,9 +1,10 @@
 function [included_channels, ezone_labels, ...
     earlyspread_labels, latespread_labels, ...
-    resection_labels, frequency_sampling, center] ...
+    resection_labels, frequency_sampling, center, success_or_failure] ...
                 = determineClinicalAnnotations(patient_id, seizure_id)
     frequency_sampling = 1000; % general default sampling frequency
     resection_labels = {};     % initialize resection labels
+    success_or_failure = -1; % if 1, then success, if 0 then failure, if -1 not set
     
     if strcmp(patient_id, 'EZT007')
         included_channels = [1:16 18:53 55:71 74:78 81:94];
@@ -245,6 +246,8 @@ function [included_channels, ezone_labels, ...
         
         resection_labels = {'ATT', 'AST', 'PST', 'AD', 'PD', 'PLT', 'POLSLT'};
         center = 'nih';
+        
+        success_or_failure = 1;
     elseif strcmp(patient_id, 'pt2')
         included_channels = [1:14 16:19 21:25 27:37 43 44 47:74];
         
@@ -266,6 +269,7 @@ function [included_channels, ezone_labels, ...
                         'MST1', 'MST2', 'MST3', 'MST4'};
         
         center = 'nih';
+        success_or_failure = 1;
     elseif strcmp(patient_id, 'pt3')
         included_channels = [1:19 21:37 42 43 46:69 71:133 135];
         included_channels = [1:19 21:37 42:43 46:69 71:107]; % removing left hemisphere electrodes
@@ -284,6 +288,7 @@ function [included_channels, ezone_labels, ...
             'OF3', 'OF4'};
             
         center = 'nih';
+        success_or_failure = 1;
     elseif strcmp(patient_id, 'pt4')
         included_channels = [3:19 23:24 29:34];
         ezone_labels = {};
@@ -294,6 +299,7 @@ function [included_channels, ezone_labels, ...
         frequency_sampling = 200;
     
         center = 'nih';
+        
     elseif strcmp(patient_id, 'pt5')
         included_channels = [21:22 25:26 35:36];
         ezone_labels = {};
@@ -312,6 +318,7 @@ function [included_channels, ezone_labels, ...
         latespread_labels = {};
         
         center = 'nih';
+        success_or_failure = 0;
      elseif strcmp(patient_id, 'pt7')
         included_channels = [1:17 19:35 37:38 41:62 67:109];
         ezone_labels = {};
@@ -319,6 +326,7 @@ function [included_channels, ezone_labels, ...
         latespread_labels = {};
         
         center = 'nih';
+        success_or_failure = 0;
     elseif strcmp(patient_id, 'pt8')
         included_channels = [1:19 21 23 30:37 39:40 43:64 71:76];
         ezone_labels = {'POLG22','POLG23', 'POLG29', 'POLG30', 'POLG31', 'POLTO6', 'POLTO5', ...
@@ -327,6 +335,7 @@ function [included_channels, ezone_labels, ...
          latespread_labels = {};
          
          center = 'nih';
+         success_or_failure = 1;
     elseif strcmp(patient_id, 'pt10')
         included_channels = [1:3 5:10 12:19 21:22 24:35 48:85];
         included_channels = [1:3 5:10 12:19 21:22 24:35 48:69]; %w/o p ELECTRODES hfreq noise electrodes
@@ -339,6 +348,7 @@ function [included_channels, ezone_labels, ...
             'POLG25', 'POLG28', 'POLG29', 'POLG30', 'POLG31', 'POLG32'};
 
         center = 'nih';
+        success_or_failure = 1;
     elseif strcmp(patient_id, 'pt11')
         included_channels = [1:19 21:37 39 40 43:74 76:81 83:87 89:94 101:130];
         
@@ -353,7 +363,7 @@ function [included_channels, ezone_labels, ...
          latespread_labels = {};
          
          center = 'nih';
-         
+         success_or_failure = 1;
     elseif strcmp(patient_id, 'pt12')
         included_channels = [1:15 17:33 38:39 42:61];
         
@@ -362,6 +372,7 @@ function [included_channels, ezone_labels, ...
         latespread_labels = {'POLG15', 'POLG14', 'POLG13', 'POLG12', 'POLG22', 'POLG21'};
         
         center = 'nih';
+        success_or_failure = 0;
     elseif strcmp(patient_id, 'pt13')
         included_channels = [1:36 39:40 43:66 69:74 77 79:94 96:103 105:130];
         
@@ -371,7 +382,7 @@ function [included_channels, ezone_labels, ...
         latespread_labels = {'POLFP4', 'POLRPPIH6', 'POLFPPIH5', 'POLRPPIH4'};
         
         center = 'nih';
-        
+        success_or_failure = 1;
     elseif strcmp(patient_id, 'pt14')
         included_channels = [1:19 21:37 41:42 45:61 68:78];
         
@@ -390,6 +401,7 @@ function [included_channels, ezone_labels, ...
         latespread_labels = {};
         
         center = 'nih';
+        success_or_failure = 0;
     elseif strcmp(patient_id, 'pt15')
         included_channels = [2:7 9:30 32:36 41:42 45:69 71:86 88:89];
         
@@ -409,6 +421,7 @@ function [included_channels, ezone_labels, ...
         latespread_labels = {'POLTO5', 'POLTO6', 'POLOF2', 'POLOF3', 'POLG22'};
         
         center = 'nih';
+        success_or_failure = 1;
     elseif strcmp(patient_id, 'pt16')
         included_channels = [1:19 21:37 42:43 46:53 56:60];
         if strcmp(seizure_id, 'sz2')
@@ -424,6 +437,7 @@ function [included_channels, ezone_labels, ...
         latespread_labels = {};
         
         center = 'nih';
+        success_or_failure = 1;
     elseif strcmp(patient_id, 'pt17')
         included_channels = [1:19 21:37 42:43 46:51 53];
         
@@ -438,6 +452,7 @@ function [included_channels, ezone_labels, ...
         frequency_sampling = 2000;
         
         center = 'nih';
+        success_or_failure = 1;
     elseif strcmp(patient_id, 'JH101')
         included_channels = [1:4 7:19 21:37 42:43 46 48:63 72 75:86 90:119 122:135];
         

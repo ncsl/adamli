@@ -113,7 +113,7 @@ for p=1:length(patients)
     end
 
     [included_channels, ezone_labels, earlyspread_labels, latespread_labels,...
-        resection_labels, frequency_sampling, center] ...
+        resection_labels, frequency_sampling, center, success_or_failure] ...
             = determineClinicalAnnotations(patient_id, seizure_id);
 
      serverDir = fullfile(rootDir, '/serverdata/');
@@ -331,6 +331,8 @@ for p=1:length(patients)
         mkdir(patDir);
     end
     toSaveFigFile = fullfile(patDir, strcat(patient, '_preplots'));
+    
+    %%%%% CONVERT TO PDF
     print(toSaveFigFile, '-dpng', '-r0')
     close all
 end

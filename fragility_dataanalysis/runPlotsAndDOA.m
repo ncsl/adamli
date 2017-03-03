@@ -119,7 +119,7 @@ for p=1:length(patients)
     end
 
     [included_channels, ezone_labels, earlyspread_labels, latespread_labels,...
-        resection_labels, frequency_sampling, center] ...
+        resection_labels, frequency_sampling, center, success_or_failure] ...
             = determineClinicalAnnotations(patient_id, seizure_id);
         
         
@@ -332,8 +332,16 @@ for p=1:length(patients)
         end
 %         seizure_id = strcat('seiz', num2str(p));
         PLOTARGS.colorbarStr = 'Fragility Metric';
-        PLOTARGS.titleStr = {['Fragility Metric (', strcat(patient_id, seizure_id), ')'], ...
+        if success_or_failure == 1
+            PLOTARGS.titleStr = {['Success: Fragility Metric (', strcat(patient_id, seizure_id), ')'], ...
             [perturbationType, ' Perturbation: ', ' Time Locked to Seizure']};
+        elseif success_or_failure == 0
+            PLOTARGS.titleStr = {['Failure: Fragility Metric (', strcat(patient_id, seizure_id), ')'], ...
+            [perturbationType, ' Perturbation: ', ' Time Locked to Seizure']};
+        else % not set
+            PLOTARGS.titleStr = {['Fragility Metric (', strcat(patient_id, seizure_id), ')'], ...
+            [perturbationType, ' Perturbation: ', ' Time Locked to Seizure']};
+        end
         plotFragilityMetric(fragility_rankings, minPerturb_time_chan, clinicalIndices, timePoints./frequency_sampling, timeStart, timeEnd, PLOTARGS);
         
         close all
