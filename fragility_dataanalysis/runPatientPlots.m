@@ -5,11 +5,11 @@ patients = {,...,
 %     'pt2aslp1', 'pt2aslp2', ...
 %     'pt3aw1', ...
 %     'pt3aslp1', 'pt3aslp2', ...
-    'pt1sz2', 'pt1sz3', 'pt1sz4',...
-%     'pt2sz1' 'pt2sz3' ,...'pt2sz4', ...
+%     'pt1sz2', 'pt1sz3', 'pt1sz4',...
+%     'pt2sz1' 'pt2sz3' ,'pt2sz4', ...
 %     'pt3sz2' 'pt3sz4', ...
 %     'pt6sz3', 'pt6sz4', 'pt6sz5',...
-%     'pt7sz19', 'pt7sz21', 'pt7sz22',...
+    'pt7sz19', 'pt7sz22',...'pt7sz21', 
 %     'pt8sz1' 'pt8sz2' 'pt8sz3',...
 %     'pt10sz1',...
 % 'pt10sz2' 'pt10sz3', ...
@@ -47,7 +47,7 @@ patients = {,...,
 %     'Pat2sz1p', 'Pat2sz2p', 'Pat2sz3p', ...
 %     'Pat16sz1p', 'Pat16sz2p', 'Pat16sz3p',...
     };
-
+close all;
 %% Parameters for Analysis
 winSize = 500;
 stepSize = 500;
@@ -60,6 +60,7 @@ TEST_DESCRIP = 'after_first_removal';
 TEST_DESCRIP = [];
 
 FONTSIZE = 18;
+YAXFONTSIZE = 8;
 %% Set Working Directories
 % set working directory
 % data directories to save data into - choose one
@@ -158,6 +159,11 @@ for p=1:length(patients)
     if seeg
         seizureMarkStart = (seizureStart-1) / stepSize;
     end  
+    
+    seizureMarkEnd = seizureEnd / stepSize - 1;
+    if seeg
+        seizureMarkEnd = (seizureEnd-1) / stepSize;
+    end
  
     %- get clinical indices of annotations
     ezone_indices = findElectrodeIndices(ezone_labels, included_labels);
@@ -189,7 +195,7 @@ for p=1:length(patients)
     %- 1. Plot adjacency matrix
     % get random index
     [T, N, ~] = size(adjMats);
-    randIndice = randsample(seizureMarkStart, 1);
+    randIndice = randsample(seizureMarkStart, 1); % get random time point
     timeWindow = timePoints(randIndice,:) - seizureStart;
     timeWindow(1) = timeWindow(1) - 1;
     timeWindow = timeWindow / frequency_sampling;
@@ -221,28 +227,26 @@ for p=1:length(patients)
     axes.XTickLabel = [];
     
     %% Plot Eigenspectrum
-      % test to make sure things are working...
-%         if strcmp(perturbationType, 'C')
-%             del = del';
-%             try
-%                 temp = del*ek';
-%             catch e
-% %                 disp(e)
-%                 temp = del'*ek'; 
-%             end
-%         else
-%             temp = ek*del';
-%         end
-%         test = A + temp;
-
-    del_table = info.del_table;
-    del = del_table(randIndice, 1);
-    del = del';
-    temp = del*ek';
-    test = adjMat + temp;
-    
     secfig = subplot(2, 2, 2);
-    plot(real(eig(test)), imag(eig(test)), 'ko', 'MarkerSize', 3); hold on;
+    
+    chan = 1;
+    for chan=1:N
+        ek = [zeros(chan-1, 1); 1; zeros(N-chan,1)]; % unit column vector at this node
+        del_table = final_data.del_table;
+        del = del_table{chan, randIndice};
+        del = reshape(del, N, 1);
+%         size(del)
+%         try
+        temp = del*ek';
+%         catch e
+%             disp(e)
+%             temp = del'*ek;
+%         end
+        test = adjMat + temp;
+    
+    
+    plot(real(eig(test)), imag(eig(test)), 'r*', 'MarkerSize', 5); hold on;
+    end
     axes = gca;
     xlabelStr = 'Real Part';
     ylabelStr = 'Imag Part';
@@ -252,7 +256,12 @@ for p=1:length(patients)
     ylim([-radius radius]);
     plot(get(axes, 'XLim'), [0 0], 'k');
     plot([0 0], get(axes, 'YLim'), 'k');
-    
+    th = 0:pi/50:2*pi;
+    r = 1; x = 0; y = 0;
+    xunit = r * cos(th) + x;
+    yunit = r * sin(th) + y;
+    h = plot(xunit, yunit);
+
     %% Plot Minimum Norm Perturbation
     thirdfig = subplot(2,2, [3,4]);
     imagesc(minPerturb_time_chan); hold on; axis tight;
@@ -262,17 +271,18 @@ for p=1:length(patients)
     colorbarStr = 'Minimum Norm Perturbation';
     xlabelStr = 'Time (sec)';
     ylabelStr = 'Electrodes';
-    titleStr = ['Min Norm ', perturbationType, ' Perturbation WRT Seizure'];
+    titleStr = {patient, ['Min Norm ', perturbationType, ' Perturbation WRT Seizure']};
     
     labelColorbar(cbar, colorbarStr, FONTSIZE);
     set(cbar.Label, 'Rotation', 270);
     % create title string and label the axes of plot
     labelBasicAxes(axes, titleStr, ylabelStr, xlabelStr, FONTSIZE);
-
+    ylab = axes.YLabel;
+    
     % set x/y ticks and increment xlim by 1
     xTickStep = (XUpperLim - XLowerLim) / 10;
-    timeStart = 1;
-    timeEnd = T;
+    timeStart = -seizureStart / frequency_sampling;
+    timeEnd = (timePoints(end,2) - seizureStart) / frequency_sampling;
     xTicks = round(timeStart: (timeEnd-timeStart)/10 :timeEnd);
 %     yTicks = [1, 5:5:size(minPerturb_time_chan,1)];
 %     set(gca, 'YTick', yTicks);
@@ -289,22 +299,47 @@ for p=1:length(patients)
         end
     end
     
+    try
+        plot([seizureMarkStart seizureMarkStart], get(gca, 'ylim'), 'k', 'MarkerSize', 4);
+        plot([seizureMarkEnd seizureMarkEnd], get(gca, 'ylim'), 'k', 'MarkerSize', 4);
+    catch e
+        disp(e)
+    end
+    
+    
     % plot the different labels on different axes to give different colors
     plotOptions = struct();
-    plotOptions.YAXFontSize = YAXFontSize;
+    plotOptions.YAXFontSize = YAXFONTSIZE;
     plotOptions.FONTSIZE = FONTSIZE;
-    plotIndices(currfig, plotOptions, all_indices, included_labels, ...
+    plotIndices(currfig, plotOptions, y_indices, included_labels, ...
                                 ezone_indices, ...
                                 earlyspread_indices, ...
                                 latespread_indices)
+    % make sure the cbar label is find
+    pause(0.001);
+    cbarPos = cbar.Label.Position;
+    cbar.Label.Position = [cbarPos(1)*1.45 cbarPos(2) cbarPos(3)]; % moving it after resizing
     
+                            
     currfig.PaperPosition = [-3.7448   -0.3385   15.9896   11.6771];
     currfig.Position = [1986           1        1535        1121];
-    
-    patDir = fullfile(figDir, patient);
-    if ~exist(figDir, 'dir')
-        mkdir(figDir);
+    ylabPos = ylab.Position;
+    ylab.Position = [ylabPos(1)*3 ylabPos(2) ylabPos(3)]; % move ylabel to the left
+
+    patDir = fullfile(figDir, patient_id);
+    if ~exist(patDir, 'dir')
+        mkdir(patDir);
     end
-    toSaveFigFile = fullfile(figDir, strcat(patient, '_preplots'));
+    toSaveFigFile = fullfile(patDir, strcat(patient, '_preplots'));
     print(toSaveFigFile, '-dpng', '-r0')
+    close all
 end
+
+% function h = circle(x,y,r)
+% hold on
+% th = 0:pi/50:2*pi;
+% xunit = r * cos(th) + x;
+% yunit = r * sin(th) + y;
+% h = plot(xunit, yunit);
+% hold off
+% end
