@@ -172,7 +172,7 @@ for iNode=1:N % 1st loop through each electrode
     % store the min-norm perturbation for this node
     if length(min_index) > 1
         if del_size(iNode, min_index(1)) == del_size(iNode, min_index(2))
-            minPerturbation(iNode) = del_size(iNode, min_index(1);
+            minPerturbation(iNode) = del_size(iNode, min_index(1));
         end
     else
         minPerturbation(iNode) = del_size(iNode, min_index);
