@@ -18,6 +18,8 @@ function plotFragilityMetric(fragility_mat, minPert_mat, clinicalIndices,...
     SAVEFIG = PLOTARGS.SAVEFIG;
     toSaveFigFile = PLOTARGS.toSaveFigFile;
     seizureMarkStart = PLOTARGS.seizureMarkStart;
+    frequency_sampling = PLOTARGS.frequency_sampling;
+    stepSize = PLOTARGS.stepSize;
     YAXFontSize = 9;
     if isfield(PLOTARGS, 'seizureIndex')
         seizureIndex = PLOTARGS.seizureIndex;
@@ -32,14 +34,11 @@ function plotFragilityMetric(fragility_mat, minPert_mat, clinicalIndices,...
     thresh_fragility(thresh_fragility < threshold) = 0;
     thresh_fragility(thresh_fragility >= threshold) = 1;
     
-    %- create rowsum based on threshold from pre-seizure, seiz+10, seiz+20
-    rowsum_preseize = sum(thresh_fragility(:, 1:seizureMarkStart), 2);
-    rowsum_postseize10 = sum(thresh_fragility(:, 1:seizureMarkStart+10*frequency_sampling/stepSize), 2);
-    rowsum_postseize20 = sum(thresh_fragility(:, 1:seizureMarkStart+20*frequency_sampling/stepSize), 2);
     xoffset = 0.05;
     
-    fragility_mat = fragility_mat(:, 1:seizureMarkStart+20*frequency_sampling/stepSize);
-    timePoints = timePoints(1:seizureMarkStart + 20*frequency_sampling/stepSize, :);
+    %- create rowsum based on threshold from pre-seizure, seiz+10, seiz+20
+    rowsum_preseize = sum(thresh_fragility(:, 1:seizureMarkStart), 2);
+    
     %% Step 1: Plot Heatmap
     fig = figure;
     firstplot = 1:24;
@@ -94,10 +93,15 @@ function plotFragilityMetric(fragility_mat, minPert_mat, clinicalIndices,...
         plot(xLocations, resection_indices, 'o', 'Color', [0 0.5 0],'MarkerSize', 4); hold on;
     end
 
-    if isempty(resection_indices)
-        leg = legend('Seizure', 'EZ', 'Early Onset', 'Late Onset');
+    h = findobj(gca,'Type','line');
+    if seizureMarkStart > size(thresh_fragility,2) - 10
+        leg = legend(flip(h(1:3)), {'EZ', 'Early Onset', 'Late Onset', 'Resected'});
     else
-        leg = legend('Seizure', 'EZ', 'Early Onset', 'Late Onset', 'Resected');
+        if isempty(resection_indices)
+            leg = legend('Seizure', 'EZ', 'Early Onset', 'Late Onset');
+        else
+            leg = legend('Seizure', 'EZ', 'Early Onset', 'Late Onset', 'Resected');
+        end
     end
     
     try
@@ -132,14 +136,22 @@ function plotFragilityMetric(fragility_mat, minPert_mat, clinicalIndices,...
     %% plot the second figure
     xrange = 1:size(fragility_mat, 1);
     xrange(ezone_indices) = [];
-    avge = mean(rowsum);
-    
     secfig = subplot(4,6, [6,12,18,24]);
     %- plot stem
-    stem(xrange, rowsum_preseize(xrange), 'k'); hold on;
+    stem(xrange, rowsum_preseize(xrange), 'k'); hold on; axis tight;
     stem(ezone_indices, rowsum_preseize(ezone_indices), 'r');
-    plot(1:size(fragility_mat, 1), rowsum_postseize10, 'g');
-    plot(1:size(fragility_mat, 1), rowsum_postseize20, 'b');
+    
+    if seizureMarkStart < size(thresh_fragility,2) - 10
+        rowsum_postseize10 = sum(thresh_fragility(:, 1:seizureMarkStart+10*frequency_sampling/stepSize), 2);
+        rowsum_postseize20 = sum(thresh_fragility(:, 1:seizureMarkStart+20*frequency_sampling/stepSize), 2);
+        
+        fragility_mat = fragility_mat(:, 1:seizureMarkStart+20*frequency_sampling/stepSize);
+        timePoints = timePoints(1:seizureMarkStart + 20*frequency_sampling/stepSize, :);
+        
+        plot(1:size(fragility_mat, 1), rowsum_postseize10, 'g');
+        plot(1:size(fragility_mat, 1), rowsum_postseize20, 'b');
+    end
+    
     
 %     stem(xrange, rowsum(xrange), 'k'); hold on;
 %     stem(ezone_indices, rowsum(ezone_indices), 'r');
@@ -169,8 +181,8 @@ function plotFragilityMetric(fragility_mat, minPert_mat, clinicalIndices,...
     ax.XLabel.Rotation = 270;
     ax.XLabel.Position = ax.XLabel.Position + [0 max(ax.YLim)*1.05 0];
 
-    secleg = legend('Preseizure', 'EZone, 'Post+10', 'Post+20');
-    
+    secleg = legend('Preseizure', 'EZone', 'Post+10', 'Post+20');
+    secleg.Position = [0.8710    0.9529    0.0678    0.0316];
     % save the figure                 
     if SAVEFIG
         print(toSaveFigFile, '-dpng', '-r0')
