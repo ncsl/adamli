@@ -117,8 +117,13 @@ function plotFragilityMetric(fragility_mat, minPert_mat, clinicalIndices,...
         plot([seizureEnd seizureEnd], get(gca, 'YLim'), 'Color', 'black', 'LineWidth', 2);
     end
     
-    currfig.PaperPosition = [-3.7448   -0.3385   15.9896   11.6771];
-    currfig.Position = [1986           1        1535        1121];
+%     currfig.PaperPosition = [-3.7448   -0.3385   15.9896   11.6771];
+    
+    set(currfig, 'Units', 'inches');
+    
+%     currfig.Position = [1986           1        1535        1121];
+    currfig.Position = [17.3438         0   15.9896   11.6771];
+%     currfig.PaperPosition = [17.3438         0   15.9896   11.6771];
     ylab.Position = ylab.Position + [6 0 0]; % move ylabel to the left
 
     % plot the different labels on different axes to give different colors
@@ -186,5 +191,6 @@ function plotFragilityMetric(fragility_mat, minPert_mat, clinicalIndices,...
     % save the figure                 
     if SAVEFIG
         print(toSaveFigFile, '-dpng', '-r0')
+%         saveas(fig, toSaveFigFile, 'pdf')
     end
 end
