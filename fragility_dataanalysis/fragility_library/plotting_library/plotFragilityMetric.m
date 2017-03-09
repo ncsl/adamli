@@ -40,9 +40,10 @@ function plotFragilityMetric(fragility_mat, minPert_mat, clinicalIndices,...
     rowsum_preseize = sum(thresh_fragility(:, 1:seizureMarkStart), 2);
     
     if seizureMarkStart < size(thresh_fragility,2) - 10
-        fragility_mat = fragility_mat(:, 1:seizureMarkStart+20*frequency_sampling/stepSize);
-        timePoints = timePoints(1:seizureMarkStart + 20*frequency_sampling/stepSize, :);
-        timeEnd = 20;
+        timeEnd = 40;
+        fragility_mat = fragility_mat(:, 1:seizureMarkStart+timeEnd*frequency_sampling/stepSize);
+        timePoints = timePoints(1:seizureMarkStart + timeEnd*frequency_sampling/stepSize, :);
+        
     end
     
     %% Step 1: Plot Heatmap

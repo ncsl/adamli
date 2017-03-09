@@ -10,6 +10,7 @@ if nargin == 0 % testing purposes
     patient='EZT009seiz001';
 %     patient='JH102sz6';
     patient='pt7sz19';
+    patient ='pt11sz1';
     % window paramters
     winSize = 250; % 500 milliseconds
     stepSize = 125; 
@@ -59,7 +60,7 @@ end
 % set dir to find raw data files
 dataDir = fullfile('./data/', center);
 % set directory to save computed data
-toSaveAdjDir = fullfile('./harmonics_adjmats/', strcat('win', num2str(winSize), ...
+toSaveAdjDir = fullfile('./adjmats/', strcat('win', num2str(winSize), ...
     '_step', num2str(stepSize), '_freq', num2str(frequency_sampling)), patient); % at lab
 
 %%- If using External HardDrive

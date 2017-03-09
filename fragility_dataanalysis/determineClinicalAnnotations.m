@@ -356,6 +356,9 @@ function [included_channels, ezone_labels, ...
         % removed G25, B2, B1, RIM, RIPI
         included_channels = [1:19 21:35 37 39 40 43:74 76:81 83:84 101:128];
         
+        % remove LG, LIPI, LIM, LIAI -> left hemisphere electrodes
+        included_channels = [1:19 21:35 37 39 40 43:74 76:81 83:84];
+        
 %         if REGION_ONLY of microgrid electrodes
 %             included_channels = [11:19 21:37 39:40 43:62];
 %         end
@@ -413,11 +416,11 @@ function [included_channels, ezone_labels, ...
         
         ezone_labels = {'POLTT1', 'POLTT2', 'POLTT3', 'POLTT4', ...
             'POLMST1', 'POLMST2', 'POLAST1', 'POLAST2', 'POLAST3'};
-        if strcmp(seizure_id, 'sz1') % getting rid of TT5, which isn't in clinical EZ
-            included_channels = [2:7 9:30 32:36 41:42 45:69 71:86 88:89];
-            ezone_labels = {'POLTT1', 'POLTT2', 'POLTT3', 'POLTT4', 'POLTT5', ...
-                        'POLMST1', 'POLMST2', 'POLAST1', 'POLAST2', 'POLAST3'};
-        end
+%         if strcmp(seizure_id, 'sz1') % getting rid of TT5, which isn't in clinical EZ
+%             included_channels = [2:7 9:30 32:36 41:42 45:69 71:86 88:89];
+%             ezone_labels = {'POLTT1', 'POLTT2', 'POLTT3', 'POLTT4', 'POLTT5', ...
+%                         'POLMST1', 'POLMST2', 'POLAST1', 'POLAST2', 'POLAST3'};
+%         end
         earlyspread_labels = {'POLMST3', 'POLMST4', 'POLPST1', 'POLPST2', 'POLMST5'};
         latespread_labels = {'POLTO5', 'POLTO6', 'POLOF2', 'POLOF3', 'POLG22'};
         
