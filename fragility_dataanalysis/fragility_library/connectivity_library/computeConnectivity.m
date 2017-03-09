@@ -37,6 +37,12 @@ function [adjMats, timePoints] = computeConnectivity(eeg, adj_args)
         preFiltStrShort  = '_BPfilt';
         % apply band notch filter to eeg data
         eeg = buttfilt(eeg,[59.5 60.5], frequency_sampling,'stop',1);
+        % apply band notch filter to eeg data
+        eeg = buttfilt(eeg,[119.5 120.5], frequency_sampling,'stop',1);
+        % apply band notch filter to eeg data
+        eeg = buttfilt(eeg,[179.5 180.5], frequency_sampling,'stop',1);
+        % apply band notch filter to eeg data
+        eeg = buttfilt(eeg,[239.5 240.5], frequency_sampling,'stop',1);
     else
         preFiltFreq      = []; %keep this empty to avoid any filtering of the raw data
         preFiltType      = 'stop';
