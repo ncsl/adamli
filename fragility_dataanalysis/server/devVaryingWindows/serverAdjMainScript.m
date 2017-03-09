@@ -10,10 +10,10 @@ if nargin == 0 % testing purposes
     patient='EZT009seiz001';
 %     patient='JH102sz6';
     patient='pt7sz19';
-    patient ='pt11sz1';
+    patient ='pt17sz1';
     % window paramters
-    winSize = 250; % 500 milliseconds
-    stepSize = 125; 
+    winSize = 500; % 500 milliseconds
+    stepSize = 500; 
     IS_SERVER = 1;
 end
 
@@ -131,7 +131,7 @@ if length(labels(included_channels)) ~= size(eeg(included_channels,:),1)
 end
 
 if frequency_sampling ~=1000
-    eeg = eeg(:, 1:(1000/frequency_sampling):end);
+%     eeg = eeg(:, 1:(1000/frequency_sampling):end);
     seizureStart = seizureStart * frequency_sampling/1000;
     seizureEnd = seizureEnd * frequency_sampling/1000;
     winSize = winSize*frequency_sampling/1000;
