@@ -7,8 +7,8 @@ function serverPerturbationScript(patient, radius, winSize, stepSize)
 %         patient = 'JH102sz1';
         % window paramters
         radius = 1.5;
-        winSize = 250; % 500 milliseconds
-        stepSize = 125; 
+        winSize = 500; % 500 milliseconds
+        stepSize = 500; 
         frequency_sampling = 1000; % in Hz
     end
 
@@ -105,8 +105,8 @@ function serverPerturbationScript(patient, radius, winSize, stepSize)
     info.all_labels = all_labels;
     info.seizure_start = seizure_start;
     info.seizure_end = seizure_end;
-    info.winSize = winSize;
-    info.stepSize = stepSize;
+%     info.winSize = winSize;
+%     info.stepSize = stepSize;
     info.frequency_sampling = frequency_sampling;
     info.included_channels = included_channels;
 

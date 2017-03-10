@@ -120,7 +120,11 @@ for p=1:length(patients)
     [included_channels, ezone_labels, earlyspread_labels, latespread_labels,...
         resection_labels, frequency_sampling, center, success_or_failure] ...
             = determineClinicalAnnotations(patient_id, seizure_id);
-        
+      
+%     if frequency_sampling ~=1000
+%         winSize = winSize*frequency_sampling/1000;
+%         stepSize = stepSize*frequency_sampling/1000;
+%     end
         
     serverDir = fullfile(rootDir, '/serverdata/');
     %%- Extract an example
@@ -133,7 +137,8 @@ for p=1:length(patients)
     
     % directory that computed perturbation structs are saved
     finalDataDir = fullfile(serverDir, strcat(perturbationType, '_perturbations', ...
-            '_radius', num2str(radius)), 'win500_step500_freq1000', patient);
+            '_radius', num2str(radius)), strcat('win', num2str(winSize), ...
+            '_step', num2str(stepSize), '_freq', num2str(frequency_sampling)), patient);
         
     % directory that computed perturbation structs without 0 Hz inside
 %     finalDataDir = fullfile(serverDir, strcat(perturbationType, '_perturbations', ...
