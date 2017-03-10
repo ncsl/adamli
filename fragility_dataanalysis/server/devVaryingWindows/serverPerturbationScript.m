@@ -1,7 +1,8 @@
 function serverPerturbationScript(patient, radius, winSize, stepSize)
     if nargin == 0 % testing purposes
         patient='EZT011seiz001';
-        patient ='pt7sz21';
+        patient ='pt17sz1';
+        patient='pt15sz3';
 %         patient = 'Pat16sz1p';
 %         patient = 'JH102sz1';
         % window paramters
@@ -104,8 +105,8 @@ function serverPerturbationScript(patient, radius, winSize, stepSize)
     info.all_labels = all_labels;
     info.seizure_start = seizure_start;
     info.seizure_end = seizure_end;
-    info.winSize = winSize;
-    info.stepSize = stepSize;
+%     info.winSize = winSize;
+%     info.stepSize = stepSize;
     info.frequency_sampling = frequency_sampling;
     info.included_channels = included_channels;
 

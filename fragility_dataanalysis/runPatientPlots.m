@@ -10,15 +10,16 @@ patients = {,...,
 %     'pt3sz2' 'pt3sz4', ...
 %     'pt6sz3', 'pt6sz4', 'pt6sz5',...
 %     'pt7sz19', 'pt7sz22',...'pt7sz21', 
-    'pt8sz1' 'pt8sz2' 'pt8sz3',...
+%     'pt8sz1' 'pt8sz2' 'pt8sz3',...
 %     'pt10sz1', 'pt10sz2' 'pt10sz3', ...
 %     'pt11sz1' 'pt11sz2' 'pt11sz3' 'pt11sz4', ...
 %     'pt12sz1', 'pt12sz2', ...
 %     'pt13sz1', 'pt13sz2', 'pt13sz3', 'pt13sz5',...
 %     'pt14sz1' 'pt14sz2' 'pt14sz3'  'pt16sz1' 'pt16sz2' 'pt16sz3',...
-%     'pt15sz1' 'pt15sz2' 'pt15sz3' 'pt15sz4',...
+%     'pt15sz1' 'pt15sz2'
+%     'pt15sz3' 'pt15sz4',...
 %     'pt16sz1' 'pt16sz2' 'pt16sz3',...
-%     'pt17sz1' 'pt17sz2',...
+    'pt17sz1' 'pt17sz2',...
 %     'JH101sz1' 'JH101sz2' 'JH101sz3' 'JH101sz4',...
 % 	'JH102sz1' 'JH102sz2' 'JH102sz3' 'JH102sz4' 'JH102sz5' 'JH102sz6',...
 % 	'JH103sz1' 'JH103sz2' 'JH103sz3',...
@@ -121,7 +122,8 @@ for p=1:length(patients)
         '_step', num2str(stepSize), '_freq', num2str(frequency_sampling)), patient);
     % directory that computed perturbation structs are saved
     finalDataDir = fullfile(serverDir, strcat(perturbationType, '_perturbations', ...
-            '_radius', num2str(radius)), 'win500_step500_freq1000', patient);
+            '_radius', num2str(radius)), strcat('win', num2str(winSize), ...
+            '_step', num2str(stepSize), '_freq', num2str(frequency_sampling)), patient);
 
             
     if ~isempty(TEST_DESCRIP)
@@ -149,8 +151,8 @@ for p=1:length(patients)
     seizureStart = info.seizure_start;
     seizureEnd = info.seizure_end;
     included_labels = info.all_labels;
-    winSize = info.winSize;
-    stepSize = info.stepSize;
+%     winSize = info.winSize;
+%     stepSize = info.stepSize;
     frequency_sampling = info.frequency_sampling;
     
     % seizure Mark 
@@ -233,19 +235,22 @@ for p=1:length(patients)
         ek = [zeros(chan-1, 1); 1; zeros(N-chan,1)]; % unit column vector at this node
         del_table = final_data.del_table;
         del = del_table{chan, randIndice};
-        del = reshape(del, N, 1);
-%         size(del)
-%         try
-        temp = del*ek';
-%         catch e
-%             disp(e)
-%             temp = del'*ek;
-%         end
-        test = adjMat + temp;
-    
-    
-    plot(real(eig(test)), imag(eig(test)), 'r*', 'MarkerSize', 5); hold on;
+        if size(del, 2) == 1 || size(del, 1) == 1
+            del = reshape(del, N, 1);
+            temp = del*ek';
+            test = adjMat + temp;
+            a =plot(real(eig(test)), imag(eig(test)), 'r*', 'MarkerSize', 5); hold on;
+        else
+            for i=1:size(del,2)
+                del_temp = reshape(squeeze(del(:,i)), N, 1);
+                temp = del_temp*ek';
+                test = adjMat + temp;
+                plot(real(eig(test)), imag(eig(test)), 'r*', 'MarkerSize', 5); hold on;
+            end
+        end
     end
+    b = plot(real(eig(adjMat)), imag(eig(adjMat)), 'b*', 'MarkerSize', 5); hold on;
+    legend([a, b], 'Perturbed', 'Original')
     axes = gca;
     xlabelStr = 'Real Part';
     ylabelStr = 'Imag Part';
@@ -320,7 +325,7 @@ for p=1:length(patients)
     cbar.Label.Position = [cbarPos(1)*1.45 cbarPos(2) cbarPos(3)]; % moving it after resizing
     
                             
-    currfig.PaperPosition = [-3.7448   -0.3385   15.9896   11.6771];
+%     currfig.PaperPosition = [-3.7448   -0.3385   15.9896   11.6771];
     currfig.Position = [1986           1        1535        1121];
     ylabPos = ylab.Position;
     ylab.Position = [ylabPos(1)*3 ylabPos(2) ylabPos(3)]; % move ylabel to the left
@@ -333,6 +338,7 @@ for p=1:length(patients)
     
     %%%%% CONVERT TO PDF
     print(toSaveFigFile, '-dpng', '-r0')
+%     print(toSaveFigFile, '-dpng');
     close all
 end
 

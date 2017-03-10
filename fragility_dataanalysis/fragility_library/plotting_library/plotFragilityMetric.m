@@ -40,9 +40,10 @@ function plotFragilityMetric(fragility_mat, minPert_mat, clinicalIndices,...
     rowsum_preseize = sum(thresh_fragility(:, 1:seizureMarkStart), 2);
     
     if seizureMarkStart < size(thresh_fragility,2) - 10
-        fragility_mat = fragility_mat(:, 1:seizureMarkStart+20*frequency_sampling/stepSize);
-        timePoints = timePoints(1:seizureMarkStart + 20*frequency_sampling/stepSize, :);
-        timeEnd = 20;
+        timeEnd = 30;
+        fragility_mat = fragility_mat(:, 1:seizureMarkStart+timeEnd*frequency_sampling/stepSize);
+        timePoints = timePoints(1:seizureMarkStart + timeEnd*frequency_sampling/stepSize, :);
+        
     end
     
     %% Step 1: Plot Heatmap
@@ -153,14 +154,16 @@ function plotFragilityMetric(fragility_mat, minPert_mat, clinicalIndices,...
     stem(ezone_indices, rowsum_preseize(ezone_indices), 'r');
     
     if seizureMarkStart < size(thresh_fragility,2) - 10
-        rowsum_postseize10 = sum(thresh_fragility(:, 1:seizureMarkStart+10*frequency_sampling/stepSize), 2);
-        rowsum_postseize20 = sum(thresh_fragility(:, 1:seizureMarkStart+20*frequency_sampling/stepSize), 2);
-        
+        try
+            rowsum_postseize10 = sum(thresh_fragility(:, 1:seizureMarkStart+10*frequency_sampling/stepSize), 2);
+            plot(1:size(fragility_mat, 1), rowsum_postseize10, 'g');
+            rowsum_postseize20 = sum(thresh_fragility(:, 1:seizureMarkStart+20*frequency_sampling/stepSize), 2);
+            plot(1:size(fragility_mat, 1), rowsum_postseize20, 'b');
+        catch e
+            disp(e)
+        end
 %         fragility_mat = fragility_mat(:, 1:seizureMarkStart+20*frequency_sampling/stepSize);
 %         timePoints = timePoints(1:seizureMarkStart + 20*frequency_sampling/stepSize, :);
-        
-        plot(1:size(fragility_mat, 1), rowsum_postseize10, 'g');
-        plot(1:size(fragility_mat, 1), rowsum_postseize20, 'b');
     end
     
     

@@ -10,9 +10,10 @@ if nargin == 0 % testing purposes
     patient='EZT009seiz001';
 %     patient='JH102sz6';
     patient='pt7sz19';
+    patient ='pt17sz1';
     % window paramters
-    winSize = 250; % 500 milliseconds
-    stepSize = 125; 
+    winSize = 500; % 500 milliseconds
+    stepSize = 500; 
     IS_SERVER = 1;
 end
 
@@ -59,6 +60,9 @@ end
 % set dir to find raw data files
 dataDir = fullfile('./data/', center);
 % set directory to save computed data
+toSaveAdjDir = fullfile('./adjmats/', strcat('win', num2str(winSize), ...
+    '_step', num2str(stepSize), '_freq', num2str(frequency_sampling)), patient); % at lab
+
 toSaveAdjDir = fullfile('./harmonics_adjmats/', strcat('win', num2str(winSize), ...
     '_step', num2str(stepSize), '_freq', num2str(frequency_sampling)), patient); % at lab
 
@@ -130,7 +134,7 @@ if length(labels(included_channels)) ~= size(eeg(included_channels,:),1)
 end
 
 if frequency_sampling ~=1000
-    eeg = eeg(:, 1:(1000/frequency_sampling):end);
+%     eeg = eeg(:, 1:(1000/frequency_sampling):end);
     seizureStart = seizureStart * frequency_sampling/1000;
     seizureEnd = seizureEnd * frequency_sampling/1000;
     winSize = winSize*frequency_sampling/1000;
