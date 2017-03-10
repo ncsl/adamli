@@ -409,8 +409,6 @@ function [included_channels, ezone_labels, ...
         % excludes LSF8 and PST2 due to red strip and no R electrodes
         included_channels = [2:7 9:30 32:36 41:42 45:47 49:66 69 71:85]; 
         
-        % 
-        
         ezone_labels = {'POLTT1', 'POLTT2', 'POLTT3', 'POLTT4', ...
             'POLMST1', 'POLMST2', 'POLAST1', 'POLAST2', 'POLAST3'};
         if strcmp(seizure_id, 'sz1') % getting rid of TT5, which isn't in clinical EZ
