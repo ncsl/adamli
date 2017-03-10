@@ -2,12 +2,13 @@ function serverPerturbationScript(patient, radius, winSize, stepSize)
     if nargin == 0 % testing purposes
         patient='EZT011seiz001';
         patient ='pt17sz1';
+        patient='pt15sz3';
 %         patient = 'Pat16sz1p';
 %         patient = 'JH102sz1';
         % window paramters
         radius = 1.5;
-        winSize = 500; % 500 milliseconds
-        stepSize = 500; 
+        winSize = 250; % 500 milliseconds
+        stepSize = 125; 
         frequency_sampling = 1000; % in Hz
     end
 

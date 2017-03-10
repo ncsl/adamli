@@ -1,6 +1,7 @@
 patients = {,...,
 %      'pt1aw1',
-    'pt1aw2', ...
+%     'pt1aw2', ...
+    'pt2aw2', 'pt2aslp2',...
 %     'pt1aslp1', 'pt1aslp2', ...
 %     'pt2aw1', 'pt2aw2', ...
 %     'pt2aslp1', 
@@ -47,6 +48,8 @@ frequency_sampling = 1000; % in Hz
 TEST_DESCRIP = [];
 TYPE_CONNECTIVITY = 'leastsquares';
 FONTSIZE = 18;
+typeTransform = 'morlet';
+typeTransform = 'fourier';
 
 figDir = './figures/spectralanalysis/';
 
@@ -170,7 +173,7 @@ for p=1:length(patients)
         patient = temppatient;
     end
     %%- Extract an example
-    spectDir = fullfile(serverDir, 'spectral_analysis', strcat('win', num2str(winSize), ...
+    spectDir = fullfile(serverDir, 'spectral_analysis', typeTransform, strcat('win', num2str(winSize), ...
         '_step', num2str(stepSize), '_freq', num2str(frequency_sampling)), patient);
     
     if ~isempty(TEST_DESCRIP)
@@ -222,7 +225,10 @@ for p=1:length(patients)
         end
         % set the heat map settings
 %         set(gca,'ytick',[1:7],'yticklabel',freqBandYtickLabels)
-        set(gca,'ytick',[1:4:41], 'yticklabel', freqs(1:4:41), 'FontSize', FONTSIZE-8)
+        set(gca, 'ytick', 1:2:length(freqs), 'yticklabel', freqs(1:2:length(freqs)));
+%         set(gca,'ytick',[1:41], 'yticklabel', freqs(1:41), 'FontSize', FONTSIZE-8)
+%         set(gca,'ytick',[1:4:41], 'yticklabel', freqs(1:4:41), 'FontSize', FONTSIZE-8)
+        
         ylabel('Freq (Hz)', 'FontSize', FONTSIZE);
         set(gca,'tickdir','out','YDir','normal'); % spectrogram should have low freq on the bottom
         ax = gca;
@@ -259,7 +265,7 @@ for p=1:length(patients)
     if ~exist(patFigDir, 'dir')
         mkdir(patFigDir);
     end
-    toSaveFigFile = fullfile(figDir, patient, strcat(patient, '_spectral'));
+    toSaveFigFile = fullfile(figDir, patient, strcat(patient, '_spectral_', typeTransform));
    % save the figure  
    print(toSaveFigFile, '-dpng', '-r0')
     

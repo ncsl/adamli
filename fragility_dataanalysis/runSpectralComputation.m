@@ -6,14 +6,15 @@ patients = {,...
 %     'pt1sz2', 'pt1sz3', 'pt1sz4',...
 %     'pt2sz1', 'pt2sz3', 'pt2sz4',...
 %     'pt3sz2', 'pt3sz4', ... 
-    'pt1aw1', 'pt1aw2', ...
-    'pt1aslp1', 'pt1aslp2', ...
-    'pt2aw1', 'pt2aw2', ...
-    'pt3aw1',...
+%     'pt1aw1', 
+%     'pt1aw2', ...
+%     'pt1aslp1', 'pt1aslp2', ...
+%     'pt2aw1', 
+      'pt2aslp2', 'pt2aw2', ...
+%     'pt3aw1',...
 %     'pt2aslp1', ...
 %     'pt6sz3', 'pt6sz4', 'pt6sz5',...
 % 'pt3aslp1', 'pt3aslp2',...
-%     'pt2aslp2', ...
 %     'pt3aslp1', 'pt3aslp2', ...
 %     'pt15sz1' 'pt15sz2' 'pt15sz3' 'pt15sz4',...
 %     'pt17sz1' 'pt17sz2',...
@@ -63,6 +64,7 @@ addpath(genpath('./spectral_library/'));
 % FILTERING OPTIONS
 BP_FILTER_RAW = 1;  %-0 or 1: apply a bandpass filter to the raw traces (1-499 hz)
 typeTransform = 'morlet';
+typeTransform = 'fourier';
 winSize = 500;
 stepSize = 250;
 
@@ -146,10 +148,10 @@ for iPat=1:length(patients)
             = determineClinicalAnnotations(patient_id, seizure_id);
         
     if ~BP_FILTER_RAW
-        toSaveDir = fullfile(strcat('./serverdata/spectral_analysis/', 'nofilter_', 'win', num2str(winSize), ...
+        toSaveDir = fullfile(strcat('./serverdata/spectral_analysis/', typeTransform, '/nofilter_', 'win', num2str(winSize), ...
             '_step', num2str(stepSize), '_freq', num2str(frequency_sampling)), patient); % at lab
     else
-        toSaveDir = fullfile(strcat('./serverdata/spectral_analysis/', 'win', num2str(winSize), ...
+        toSaveDir = fullfile(strcat('./serverdata/spectral_analysis/', typeTransform, '/win', num2str(winSize), ...
             '_step', num2str(stepSize), '_freq', num2str(frequency_sampling)), patient); % at lab
     end
     
@@ -216,6 +218,31 @@ for iPat=1:length(patients)
             freqs = waveletFreqs;
             
             disp(['Morlet wavelet computed and power matrix computed for ...', num2str(iChan)])
+        elseif strcmp(typeTransform, 'fourier')
+            %%- i. remove buffer area
+            eegWaveV = eegWaveV(:,BufferMS+1:end-BufferMS); 
+
+            %%- ii. eeg_mtwelch2: get the phase and power using multitaper
+            % parameters for multitaper FFT:
+            % sampling freq, overlap, stepsize, bandwidth
+            Fs = frequency_sampling;
+            T = winSize/1000;       % the window size in milliseconds
+            overlap = (winSize - stepSize)/winSize; % in percentage
+            mtBandWidth = 4;        % number of times to avge the FFT
+            mtFreqs = [];
+
+            %%- multitaper FFT 
+            [rawPowBase, freqs_FFT, t_sec,rawPhaseBase] = eeg_mtwelch2(eegWaveV, Fs, T, overlap, mtBandWidth, mtFreqs, 'eigen');
+%             fprintf(' [multitaper%.1f|',toc); tic;
+
+            %%- iii. make powerMat, phaseMat and set time and freq axis
+            powerMat = 10*log10(rawPowBase);
+            phaseMat = rawPhaseBase;
+            freqs = freqs_FFT;
+%             tWin = t_sec + LOWERTIME;
+
+%             clear rawPowBase rawPhaseBase
+            disp('Multitaper FFT computed and power matrix computed...')
         end
         
         powerMatZ = zeros(size(powerMat));
@@ -247,17 +274,22 @@ for iPat=1:length(patients)
 %             powerMat = freqBinSpectrogram(powerMat, rangeFreqs, waveletFreqs);
 %             phaseMat = freqBinSpectrogram(phaseMat, rangeFreqs, waveletFreqs);
 
-            % create 2D array to show time windows occupied by each index of new
-            % power matrix
-            tWin = zeros(size(powerMat, 3), 2);
-            tWin(:,1) = 0 : stepSize : eventDurationMS-winSize;
-            tWin(:,2) = winSize : stepSize : eventDurationMS;
-%             
+
 %             tWin = zeros(size(powerMat, 3), 2);
 %             tWin(:,1) = 0 : winSize : eventDurationMS-winSize;
 %             tWin(:,2) = winSize : winSize : eventDurationMS;
+        elseif strcmp(typeTransform, 'multitaper')
+            disp('doing multitaper');
+            %%- FREQUENCY BIN
+%             powerMatZ = freqBinSpectrogram(powerMatZ, rangeFreqs, waveletFreqs);
         end
         
+        % create 2D array to show time windows occupied by each index of new
+        % power matrix
+        tWin = zeros(size(powerMat, 3), 2);
+        tWin(:,1) = 0 : stepSize : eventDurationMS-winSize;
+        tWin(:,2) = winSize : stepSize : eventDurationMS;
+            
         % create to save data struct
         chanData = struct();
         chanData.eegWave = eegWaveV;

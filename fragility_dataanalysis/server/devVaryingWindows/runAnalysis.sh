@@ -15,8 +15,8 @@ matlab_jvm="matlab -nojvm -nodesktop -nosplash -r"
 		exit 1;
 	}
 
-winSize=250
-stepSize=125
+winSize=500
+stepSize=500
 radius=1.5
 
 echo $winSize
