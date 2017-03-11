@@ -10,7 +10,7 @@ if nargin == 0 % testing purposes
     patient='EZT009seiz001';
 %     patient='JH102sz6';
     patient='pt7sz19';
-    patient ='pt17sz1';
+    patient ='pt15sz1';
     % window paramters
     winSize = 500; % 500 milliseconds
     stepSize = 500; 
@@ -63,8 +63,8 @@ dataDir = fullfile('./data/', center);
 toSaveAdjDir = fullfile('./adjmats/', strcat('win', num2str(winSize), ...
     '_step', num2str(stepSize), '_freq', num2str(frequency_sampling)), patient); % at lab
 
-toSaveAdjDir = fullfile('./harmonics_adjmats/', strcat('win', num2str(winSize), ...
-    '_step', num2str(stepSize), '_freq', num2str(frequency_sampling)), patient); % at lab
+% toSaveAdjDir = fullfile('./harmonics_adjmats/', strcat('win', num2str(winSize), ...
+%     '_step', num2str(stepSize), '_freq', num2str(frequency_sampling)), patient); % at lab
 
 %%- If using External HardDrive
 % toSaveAdjDir = fullfile(strcat('/Volumes/NIL_PASS/serverdata/fixed_adj_mats_win', num2str(winSize), ...

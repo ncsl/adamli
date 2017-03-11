@@ -246,6 +246,25 @@ for p=1:length(patients)
         
         seizureMarkStart = seizureStart/stepSize - 1;
         
+        % Compute fragility rankings per column by normalization
+%         minNormPerturbMat = minPerturb_time_chan;
+%         [N, T] = size(minPerturb_time_chan);
+%         for i=1:N      % loop through each channel
+%             for t=1:T % loop through each time point
+%                 fragilityMat(i,t) = (max(minNormPerturbMat(:,t)) - minNormPerturbMat(i,t)) ...
+%                                             / max(minNormPerturbMat(:,t)) - min(minNormPerturbMat(:,t));
+%             end
+%         end
+%         range(fragilityMat(:,1))
+%         
+%         for i=1:N      % loop through each channel
+%             for t=1:T % loop through each time point
+%                 fragilityMat(i,t) = ((minNormPerturbMat(i,t)) - min(minNormPerturbMat(:,t))) ...
+%                                             / (max(minNormPerturbMat(:,t)) - min(minNormPerturbMat(:,t))); 
+%             end
+%         end
+%         range(fragilityMat(:,1))
+        
         if seeg
             seizureMarkStart = (seizureStart-1) / stepSize;
         end

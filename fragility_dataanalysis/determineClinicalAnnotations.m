@@ -364,7 +364,7 @@ function [included_channels, ezone_labels, ...
 %         end
         ezone_labels = {'POLRG24', 'POLRG32', 'POLRG40', 'POLRG39'};
         earlyspread_labels = {'POLRPG5', 'POLRPG6', 'POLRPG11', 'POLRPG12'};
-         latespread_labels = {};
+        latespread_labels = {};
          
          center = 'nih';
          success_or_failure = 1;
