@@ -1,9 +1,4 @@
 function serverAdjMainScript(patient, winSize, stepSize)
-%% Add Libraries To Use For Function
-addpath(genpath('../../fragility_library/'));
-addpath(genpath('../../eeg_toolbox/'));
-addpath('../../');
-
 IS_SERVER = 1;
 if nargin == 0 % testing purposes
     center = 'cc';
@@ -16,6 +11,22 @@ if nargin == 0 % testing purposes
     stepSize = 500; 
     IS_SERVER = 1;
 end
+
+% set working directory
+% data directories to save data into - choose one
+eegRootDirServer = '/home/ali/adamli/fragility_dataanalysis/';     % work
+% eegRootDirHome = '/Users/adam2392/Documents/MATLAB/Johns Hopkins/NINDS_Rotation';  % home
+eegRootDirHome = '/Volumes/NIL_PASS/';
+eegRootDirJhu = '/home/WIN/ali39/Documents/adamli/fragility_dataanalysis/';
+% Determine which directory we're working with automatically
+if     ~isempty(dir(eegRootDirServer)), rootDir = eegRootDirServer;
+elseif ~isempty(dir(eegRootDirHome)), rootDir = eegRootDirHome;
+elseif ~isempty(dir(eegRootDirJhu)), rootDir = eegRootDirJhu;
+else   error('Neither Work nor Home EEG directories exist! Exiting'); end
+
+addpath(genpath(fullfile(rootDir, '/fragility_library/')));
+addpath(genpath(fullfile(rootDir, '/eeg_toolbox/')));
+addpath(rootDir);
 
 % setupScripts;
 disp(['Looking at patient: ',patient]);
@@ -58,23 +69,18 @@ end
 
 %%- Directory at work
 % set dir to find raw data files
-dataDir = fullfile('./data/', center);
+dataDir = fullfile(rootDir, '/data/', center);
 % set directory to save computed data
-toSaveAdjDir = fullfile('./adjmats/', strcat('win', num2str(winSize), ...
+toSaveAdjDir = fullfile(rootDir, 'serverdata/adjmats/', strcat('win', num2str(winSize), ...
     '_step', num2str(stepSize), '_freq', num2str(frequency_sampling)), patient); % at lab
 
-toSaveAdjDir = fullfile('./harmonics_adjmats/', strcat('win', num2str(winSize), ...
+toSaveAdjDir = fullfile(rootDir, 'serverdata/harmonics_adjmats/', strcat('win', num2str(winSize), ...
     '_step', num2str(stepSize), '_freq', num2str(frequency_sampling)), patient); % at lab
 
 %%- If using External HardDrive
 % toSaveAdjDir = fullfile(strcat('/Volumes/NIL_PASS/serverdata/fixed_adj_mats_win', num2str(winSize), ...
 %     '_step', num2str(stepSize), '_freq', num2str(frequency_sampling))); % at home
 % dataDir = fullfile('/Volumes/NIL_PASS/data/', center);
-
-if IS_SERVER
-    toSaveAdjDir = fullfile('../..', 'serverdata', toSaveAdjDir);
-    dataDir = strcat('../.', dataDir);
-end
 
 if ~isempty(TEST_DESCRIP)
     toSaveAdjDir = fullfile(toSaveAdjDir, TEST_DESCRIP);

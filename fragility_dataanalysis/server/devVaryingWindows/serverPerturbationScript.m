@@ -28,7 +28,6 @@ function serverPerturbationScript(patient, radius, winSize, stepSize)
     addpath(genpath(fullfile(rootDir, '/eeg_toolbox/')));
     addpath(rootDir);
 
-    
     % analysis parameters
     perturbationTypes = ['C', 'R'];
     w_space = linspace(-radius, radius, 51);
@@ -72,6 +71,11 @@ function serverPerturbationScript(patient, radius, winSize, stepSize)
     serverDir = fullfile(rootDir, '/serverdata/');
     adjMatDir = fullfile(serverDir, 'adjmats/', strcat('win', num2str(winSize), ...
     '_step', num2str(stepSize), '_freq', num2str(frequency_sampling))); % at lab
+    
+    % rejection of harmonics of 60 Hz.
+    adjMatDir = fullfile(serverDir, 'harmonics_adjmats/', strcat('win', num2str(winSize), ...
+    '_step', num2str(stepSize), '_freq', num2str(frequency_sampling)), patient); % at lab
+
 
     patDir = fullfile(adjMatDir, patient);
     
@@ -152,7 +156,7 @@ function serverPerturbationScript(patient, radius, winSize, stepSize)
                 lower(TYPE_CONNECTIVITY), '_radius', num2str(radius), '.mat');
        
         toSavePertDir = fullfile(serverDir, ...
-            strcat(perturbationType, '_perturbations', '_radius', num2str(radius)),...
+            'harmonics', strcat(perturbationType, '_perturbations', '_radius', num2str(radius)),...
             strcat('win', num2str(winSize), '_step', num2str(stepSize), '_freq', num2str(frequency_sampling)), ...
             patient);
         
