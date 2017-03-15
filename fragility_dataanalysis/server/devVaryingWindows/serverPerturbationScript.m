@@ -74,7 +74,7 @@ function serverPerturbationScript(patient, radius, winSize, stepSize)
     
     % rejection of harmonics of 60 Hz.
     adjMatDir = fullfile(serverDir, 'harmonics_adjmats/', strcat('win', num2str(winSize), ...
-    '_step', num2str(stepSize), '_freq', num2str(frequency_sampling)), patient); % at lab
+    '_step', num2str(stepSize), '_freq', num2str(frequency_sampling))); % at lab
 
 
     patDir = fullfile(adjMatDir, patient);
