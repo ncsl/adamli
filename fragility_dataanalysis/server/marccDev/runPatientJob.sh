@@ -2,10 +2,7 @@
 
 ############################# SLURM CONFIGURATION ############################
 #SBATCH
-#SBATCH --job-name=${SLURM_JOBNAME}
-#SBATCH --time=6:0:0
 #SBATCH --partition=shared
-#SBATCH --nodes=1
 # NUMBER OF TASKS (PROCS) PER NODE
 #SBATCH --ntasks-per-node=24
 #SBATCH --mail-type=end
@@ -40,10 +37,10 @@ else
 fi
 
 ## Run slurm batch job for this patient
-NprocperNode=8    					# number of processors per node
+NprocperNode=24    							# number of processors per node (marcc has 24)
 NNodes=$(($NprocperNode-1))
 Nprocs=$((${numWins}/${NprocperNode}+1)) 	# the number of nodes to compute on
-walltime=02:00:00					# the walltime for each computation
+walltime=02:00:00							# the walltime for each computation
 
 for ((iproc=1; iproc <= Nprocs; iproc++))
 do
@@ -58,6 +55,7 @@ do
 	fi
 
 	echo "Submit job ${iproc}"
+	# submit slurm job: pass in 1) jobname, 2) walltime, 3) number of nodes, 4) number of processors
 	sbatch -v RUNCONNECTIVITY=${RUNCONNECTIVITY},patient=${patient},currentNode=${currentNode},NprocperNode=${NNodes} -J ${jobname} -t ${walltime} runJob.sh
 done
 

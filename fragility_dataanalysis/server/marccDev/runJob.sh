@@ -3,9 +3,7 @@
 ############################# SLURM CONFIGURATION ############################
 #SBATCH
 #SBATCH --partition=shared
-#SBATCH --nodes=1
 # NUMBER OF TASKS (PROCS) PER NODE
-#SBATCH --ntasks-per-node=24
 #SBATCH --mail-type=end
 #SBATCH --mail-user=ali39@jhu.edu
 #SBATCH -o localhost:${SLURM_SUBMIT_DIR}/_log/${SLURM_JOBNAME}.o${SLURM_JOBID}
