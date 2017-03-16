@@ -322,7 +322,7 @@ function [included_channels, ezone_labels, ...
      elseif strcmp(patient_id, 'pt7')
         included_channels = [1:17 19:35 37:38 41:62 67:109];
         ezone_labels = {'POLMFP1', 'POLLFP3', 'POLPT2', 'POLPT3', 'POLPT4', 'POLPT5', ...
-            'POLMT2', 'POLMT3', 'POLAT3', 'POLAT4', 'POLLSF3', 'POLLFP3'};
+            'POLMT2', 'POLMT3', 'POLAT3', 'POLAT4', 'POLG29', 'POLG30', 'POLG39', 'POLG40', 'POLG45', 'POLG46'};
         earlyspread_labels = {};
         latespread_labels = {};
         
