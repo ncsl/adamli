@@ -1,7 +1,7 @@
 patients = {,...,
-%      'pt1aw1',
 %     'pt1aw2', ...
-    'pt2aw2', 'pt2aslp2',...
+     'pt1aw1',
+%     'pt2aw2', 'pt2aslp2',...
 %     'pt1aslp1', 'pt1aslp2', ...
 %     'pt2aw1', 'pt2aw2', ...
 %     'pt2aslp1', 
@@ -225,7 +225,7 @@ for p=1:length(patients)
         end
         % set the heat map settings
 %         set(gca,'ytick',[1:7],'yticklabel',freqBandYtickLabels)
-        set(gca, 'ytick', 1:2:length(freqs), 'yticklabel', freqs(1:2:length(freqs)));
+        set(gca, 'ytick', 1:10:length(freqs), 'yticklabel', freqs(1:10:length(freqs)));
 %         set(gca,'ytick',[1:41], 'yticklabel', freqs(1:41), 'FontSize', FONTSIZE-8)
 %         set(gca,'ytick',[1:4:41], 'yticklabel', freqs(1:4:41), 'FontSize', FONTSIZE-8)
         

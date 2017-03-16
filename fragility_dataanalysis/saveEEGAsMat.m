@@ -244,7 +244,7 @@ else
             eeg = csv2eeg(patient_eeg_path, filename, num_values, num_channels);
 
             data = eeg;
-            elec_labels = labels;
+            elec_labels = strtrim(labels);
             seiz_end_mark = seizureEnd;
             seiz_start_mark = seizureStart;
 
@@ -262,3 +262,12 @@ else
         end
     end
 end
+
+% for p=1:length(patients)
+%     patient = patients{p};
+%     center = 'cc';
+%     dataDir = fullfile('./data/', center);
+%     load(fullfile(dataDir, patient, patient));
+%     elec_labels = strtrim(elec_labels);
+%     save(fullfile(dataDir, patient, patient), 'data', 'elec_labels', 'seiz_end_mark', 'seiz_start_mark');
+% end
