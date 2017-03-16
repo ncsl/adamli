@@ -1,7 +1,6 @@
 patients = {,...,
-%     'pt1aw2', ...
-     'pt1aw1',
-%     'pt2aw2', 'pt2aslp2',...
+    'pt1aw2', ...
+    'pt2aw2', 'pt2aslp2',...
 %     'pt1aslp1', 'pt1aslp2', ...
 %     'pt2aw1', 'pt2aw2', ...
 %     'pt2aslp1', 
@@ -49,9 +48,9 @@ TEST_DESCRIP = [];
 TYPE_CONNECTIVITY = 'leastsquares';
 FONTSIZE = 18;
 typeTransform = 'morlet';
-typeTransform = 'fourier';
+% typeTransform = 'fourier';
 
-figDir = './figures/spectralanalysis/';
+figDir = './figures/spectralanalysis/notchfilterharmonics/';
 
 %% array of frequency bands
 freqBandAr(1).name    = 'delta';
@@ -158,13 +157,9 @@ for p=1:length(patients)
         eegDir = fullfile(eegRootDir, center);
         data_struct = load(fullfile(eegDir, patient, patient));
     end
-    
 
     [numChannels, eventDurationMS] = size(data_struct.data);
     elec_labels = data_struct.elec_labels;
-    seizure_start = data_struct.seiz_start_mark;
-    seizure_end = data_struct.seiz_end_mark;
-    data = data_struct.data;
      
     %%- Define the spectral directory to extract the morlet wavelet
     %%- computed data
@@ -176,6 +171,8 @@ for p=1:length(patients)
     spectDir = fullfile(serverDir, 'spectral_analysis', typeTransform, strcat('win', num2str(winSize), ...
         '_step', num2str(stepSize), '_freq', num2str(frequency_sampling)), patient);
     
+    spectDir = fullfile(serverDir, strcat('spectral_analysis/', typeTransform, '/notchharmonics_win', num2str(winSize), ...
+            '_step', num2str(stepSize), '_freq', num2str(frequency_sampling)), patient); % at lab
     if ~isempty(TEST_DESCRIP)
         spectDir = fullfile(spectDir, TEST_DESCRIP);
     end

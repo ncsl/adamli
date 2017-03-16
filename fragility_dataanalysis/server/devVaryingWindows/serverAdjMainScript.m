@@ -5,7 +5,7 @@ if nargin == 0 % testing purposes
     patient='EZT009seiz001';
 %     patient='JH102sz6';
     patient='pt7sz19';
-    patient ='pt15sz1';
+    patient ='UMMC001_sz1';
     % window paramters
     winSize = 500; % 500 milliseconds
     stepSize = 500; 
@@ -33,7 +33,7 @@ disp(['Looking at patient: ',patient]);
 
 %% New Setup Scripts
 TYPE_CONNECTIVITY = 'leastsquares';     % type of functional conn.?
-BP_FILTER_RAW = 1;                      % apply notch filter before functional conn. computation?
+BP_FILTER_RAW = 2;                      % apply notch filter before functional conn. computation?
 APPLY_FILTER = 1;
 IS_INTERICTAL = 0;                      % is this interictal data?
 l2regularization = 0;                   % apply l2 regularization to estimation of functional conn.?
@@ -59,14 +59,17 @@ if isempty(patient_id)
     seizure_id = patient(strfind(patient, 'aw'):end);
     seeg = 0;
 end
-
+buffpatid = patient_id;
+if strcmp(patient_id(end), '_')
+    patient_id = patient_id(1:end-1);
+end
 %% DEFINE OUTPUT DIRS AND CLINICAL ANNOTATIONS
 %- Edit this file if new patients are added.
 [included_channels, ezone_labels, earlyspread_labels,...
     latespread_labels, resection_labels, frequency_sampling, ...
     center] ...
             = determineClinicalAnnotations(patient_id, seizure_id);
-
+patient_id = buffpatid;
 %%- Directory at work
 % set dir to find raw data files
 dataDir = fullfile(rootDir, '/data/', center);
@@ -77,6 +80,10 @@ toSaveAdjDir = fullfile(rootDir, 'serverdata/adjmats/', strcat('win', num2str(wi
 % toSaveAdjDir = fullfile(rootDir, 'serverdata/harmonics_adjmats/', strcat('win', num2str(winSize), ...
 %     '_step', num2str(stepSize), '_freq', num2str(frequency_sampling)), patient); % at lab
 
+if BP_FILTER_RAW == 2,
+    toSaveAdjDir = fullfile(rootDir, 'serverdata/adaptivefilter_adjmats/', strcat('win', num2str(winSize), ...
+    '_step', num2str(stepSize), '_freq', num2str(frequency_sampling)), patient); % at lab
+end
 %%- If using External HardDrive
 % toSaveAdjDir = fullfile(strcat('/Volumes/NIL_PASS/serverdata/fixed_adj_mats_win', num2str(winSize), ...
 %     '_step', num2str(stepSize), '_freq', num2str(frequency_sampling))); % at home
