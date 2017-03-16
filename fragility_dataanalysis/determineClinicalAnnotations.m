@@ -572,7 +572,7 @@ function [included_channels, ezone_labels, ...
         frequency_sampling = 250;
         center = 'ummc';
     elseif strcmp(patient_id, 'UMMC005')
-        included_channels = [];
+        included_channels = [1:33 35:48];
         ezone_labels = {'AT2', 'G17', 'G19', 'G25', 'G27', 'AT1', 'AT2', 'AT3', 'AT4', 'AT5', 'AT6'};
         earlyspread_labels = {};
         latespread_labels = {};
@@ -581,7 +581,7 @@ function [included_channels, ezone_labels, ...
         frequency_sampling = 1000;
         center = 'ummc';
     elseif strcmp(patient_id, 'UMMC006')
-        included_channels = [];
+        included_channels = [1:22 24:29 31:33 35:56];
         ezone_labels = {'MT2', 'MT3', 'MT4', 'MES2', 'MES3', 'MES4', 'MES5', 'MAT1', 'MAT2'};
         earlyspread_labels = {};
         latespread_labels = {};
@@ -589,7 +589,7 @@ function [included_channels, ezone_labels, ...
         frequency_sampling = 250;
         center = 'ummc';
     elseif strcmp(patient_id, 'UMMC007')
-        included_channels = [];
+        included_channels = [1:30];
         ezone_labels = {'LMT1', 'LMT2', 'LMT3', 'LMT4', 'RMT1', 'RAT1', 'RAT2', 'RAT3', 'RAT4', ...
             'RPT3', 'RPT4', 'RPT5', 'LPT3', 'LMT1', 'LMT2', 'LAT4', 'LAT5'};
         earlyspread_labels = {};
