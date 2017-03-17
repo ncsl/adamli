@@ -59,7 +59,10 @@ function serverPerturbationScript(patient, radius, winSize, stepSize)
         seizure_id = patient(strfind(patient, 'aw'):end);
         seeg = 0;
     end
-    
+    buffpatid = patient_id;
+    if strcmp(patient_id(end), '_')
+        patient_id = patient_id(1:end-1);
+    end
     %- Edit this file if new patients are added.
     [included_channels, ezone_labels, earlyspread_labels,...
     latespread_labels, resection_labels, frequency_sampling, ...
@@ -85,7 +88,7 @@ function serverPerturbationScript(patient, radius, winSize, stepSize)
         patDir = fullfile(patDir, TEST_DESCRIP);
     end
     
-    fileName = strcat(patient_id, seizure_id, '_adjmats_leastsquares.mat');
+    fileName = strcat(patient, '_adjmats_leastsquares.mat');
     data = load(fullfile(patDir, fileName));
     data = data.adjmat_struct;
     
