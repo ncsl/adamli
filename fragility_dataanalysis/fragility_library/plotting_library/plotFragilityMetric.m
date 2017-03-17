@@ -39,8 +39,8 @@ function plotFragilityMetric(fragility_mat, minPert_mat, clinicalIndices,...
     %- create rowsum based on threshold from pre-seizure, seiz+10, seiz+20
     rowsum_preseize = sum(thresh_fragility(:, 1:seizureMarkStart), 2);
     
-    if seizureMarkStart < size(thresh_fragility,2) - 10
-        timeEnd = 30;
+    if seizureMarkStart < size(thresh_fragility,2) - 20
+        timeEnd = 20;
         fragility_mat = fragility_mat(:, 1:seizureMarkStart+timeEnd*frequency_sampling/stepSize);
         timePoints = timePoints(1:seizureMarkStart + timeEnd*frequency_sampling/stepSize, :);
         

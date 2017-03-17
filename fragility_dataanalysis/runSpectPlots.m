@@ -48,7 +48,7 @@ TEST_DESCRIP = [];
 TYPE_CONNECTIVITY = 'leastsquares';
 FONTSIZE = 18;
 typeTransform = 'morlet';
-% typeTransform = 'fourier';
+typeTransform = 'fourier';
 
 figDir = './figures/spectralanalysis/notchfilterharmonics/';
 
@@ -266,5 +266,5 @@ for p=1:length(patients)
    % save the figure  
    print(toSaveFigFile, '-dpng', '-r0')
     
-%     close all
+    close all
 end

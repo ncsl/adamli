@@ -38,11 +38,11 @@ function [adjMats, timePoints] = computeConnectivity(eeg, adj_args)
         % apply band notch filter to eeg data
         eeg = buttfilt(eeg,[59.5 60.5], frequency_sampling,'stop',1);
         % apply band notch filter to eeg data
-%         eeg = buttfilt(eeg,[119.5 120.5], frequency_sampling,'stop',1);
-%         % apply band notch filter to eeg data
-%         eeg = buttfilt(eeg,[179.5 180.5], frequency_sampling,'stop',1);
-%         % apply band notch filter to eeg data
-%         eeg = buttfilt(eeg,[239.5 240.5], frequency_sampling,'stop',1);
+        eeg = buttfilt(eeg,[119.5 120.5], frequency_sampling,'stop',1);
+        % apply band notch filter to eeg data
+        eeg = buttfilt(eeg,[179.5 180.5], frequency_sampling,'stop',1);
+        % apply band notch filter to eeg data
+        eeg = buttfilt(eeg,[239.5 240.5], frequency_sampling,'stop',1);
     elseif BP_FILTER_RAW == 2,
         disp('Adaptive filtering ...');
         % apply an adaptive filtering algorithm.

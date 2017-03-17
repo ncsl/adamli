@@ -187,8 +187,14 @@ for iPat=1:length(patients)
             preFiltOrder     = 2;
             preFiltStr       = sprintf('%s filter raw; %.1f - %.1f Hz',preFiltType,preFiltFreq);
             preFiltStrShort  = '_BPfilt';
-             % notch filter to eliminate 60 Hz noise
+            % notch filter to eliminate 60 Hz noise
             eegWaveV = buttfilt(eegWaveV,[59.5 60.5],resampledrate,'stop',1); %-filter is overkill: order 1 --> 25 dB drop (removing 5-15dB peak)
+            % apply band notch filter to eeg data
+            eegWaveV = buttfilt(eegWaveV,[119.5 120.5], frequency_sampling,'stop',1);
+            % apply band notch filter to eeg data
+            eegWaveV = buttfilt(eegWaveV,[179.5 180.5], frequency_sampling,'stop',1);
+            % apply band notch filter to eeg data
+            eegWaveV = buttfilt(eegWaveV,[239.5 240.5], frequency_sampling,'stop',1);
         else
             preFiltFreq      = []; %keep this empty to avoid any filtering of the raw data
             preFiltType      = 'stop';
