@@ -20,14 +20,14 @@ read RUNSLEEP
 
 # patients listed 5 per row
 patients=(
-	# 'pt1aslp1 pt1aslp2 pt1aw1 pt1aw2
-	# pt2aslp1 pt2aslp2 pt2aw1 pt2aw2
-	# pt3aslp1 pt3aslp2 pt3aw1
-	# pt1sz2 pt1sz3 pt1sz4
-	# pt2sz1 pt2sz3 pt2sz4 
-	# pt3sz2 pt3sz4
-	# pt6sz3 pt6sz4 pt6sz5
-	'UMMC001_sz1 UMMC001_sz2 UMMC001_sz3
+	'pt1aslp1 pt1aslp2 pt1aw1 pt1aw2
+	pt2aslp1 pt2aslp2 pt2aw1 pt2aw2
+	pt3aslp1 pt3aslp2 pt3aw1
+	pt1sz2 pt1sz3 pt1sz4
+	pt2sz1 pt2sz3 pt2sz4 
+	pt3sz2 pt3sz4
+	pt6sz3 pt6sz4 pt6sz5
+	UMMC001_sz1 UMMC001_sz2 UMMC001_sz3
 	UMMC002_sz1 UMMC002_sz2 UMMC002_sz3
 	UMMC003_sz1 UMMC003_sz2 UMMC003_sz3
 	UMMC004_sz1 UMMC004_sz2 UMMC004_sz3
