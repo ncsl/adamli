@@ -80,7 +80,7 @@ function serverPerturbationScript(patient, radius, winSize, stepSize)
     '_step', num2str(stepSize), '_freq', num2str(frequency_sampling))); % at lab
 
     adjMatDir = fullfile(rootDir, 'serverdata/adaptivefilter_adjmats/', strcat('win', num2str(winSize), ...
-    '_step', num2str(stepSize), '_freq', num2str(frequency_sampling))); % at lab
+    '_step', num2str(stepSize), '_freq', num2str(frequency_sampling))) % at lab
 
     patDir = fullfile(adjMatDir, patient);
     
@@ -173,7 +173,7 @@ function serverPerturbationScript(patient, radius, winSize, stepSize)
         toSavePertDir = fullfile(serverDir, ...
             'adaptivefilter', strcat(perturbationType, '_perturbations', '_radius', num2str(radius)),...
             strcat('win', num2str(winSize), '_step', num2str(stepSize), '_freq', num2str(frequency_sampling)), ...
-            patient);
+            patient)
         
         
         
