@@ -172,6 +172,7 @@ adj_args.seizureEnd = seizureEnd;                   % the second relative to end
 adj_args.l2regularization = l2regularization; 
 adj_args.TYPE_CONNECTIVITY = TYPE_CONNECTIVITY;
 
+
 % compute connectivity
 if size(eeg, 1) < winSize
     [adjMats, timePoints] = computeConnectivity(eeg, adj_args);
@@ -195,6 +196,7 @@ adjmat_struct.timePoints = timePoints;
 adjmat_struct.adjMats = adjMats;
 adjmat_struct.included_channels = included_channels;
 adjmat_struct.frequency_sampling = frequency_sampling;
+adjmat_struct.FILTER = BP_FILTER_RAW;
 
 fileName = strcat(patient, '_adjmats_', lower(TYPE_CONNECTIVITY), '.mat');
 
