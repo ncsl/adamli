@@ -539,8 +539,8 @@ function [included_channels, ezone_labels, ...
     elseif strcmp(patient_id, 'UMMC001')
         included_channels = [1:22 24:29 31:33 35:79 81:92];
         ezone_labels = {'GP13', 'GP21', 'GP29'};
-        earlyspread_labels = {'GP12', 'GP13', 'GP18', 'GP19', 'GP20', 'GP21', ...
-            'GP27', 'GP28', 'GP29', 'GA7', 'GA14', 'GA21'};
+        earlyspread_labels = {'GP12', 'GP18', 'GP19', 'GP20', ...
+            'GP27', 'GP28', 'GA7', 'GA14', 'GA21'};
         latespread_labels = {};
         
         frequency_sampling = 500;
