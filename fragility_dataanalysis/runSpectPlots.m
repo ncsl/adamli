@@ -51,6 +51,7 @@ typeTransform = 'morlet';
 typeTransform = 'fourier';
 
 figDir = './figures/spectralanalysis/notchfilterharmonics/';
+% figDir = './figures/spectralanalysis/adaptivefilter/';
 
 %% array of frequency bands
 freqBandAr(1).name    = 'delta';
@@ -173,6 +174,10 @@ for p=1:length(patients)
     
     spectDir = fullfile(serverDir, strcat('spectral_analysis/', typeTransform, '/notchharmonics_win', num2str(winSize), ...
             '_step', num2str(stepSize), '_freq', num2str(frequency_sampling)), patient); % at lab
+
+%     spectDir = fullfile(serverDir, strcat('spectral_analysis/', typeTransform, '/adaptivefilter_win', num2str(winSize), ...
+%             '_step', num2str(stepSize), '_freq', num2str(frequency_sampling)), patient); % at lab
+        
     if ~isempty(TEST_DESCRIP)
         spectDir = fullfile(spectDir, TEST_DESCRIP);
     end

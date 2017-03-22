@@ -143,16 +143,20 @@ for iPat=1:length(patients)
     [included_channels, ezone_labels, earlyspread_labels, latespread_labels, resection_labels, frequency_sampling, center] ...
             = determineClinicalAnnotations(patient_id, seizure_id);
         
-    if ~BP_FILTER_RAW
-        toSaveDir = fullfile(strcat('./serverdata/spectral_analysis/', typeTransform, '/nofilter_', 'win', num2str(winSize), ...
-            '_step', num2str(stepSize), '_freq', num2str(frequency_sampling)), patient); % at lab
-    else
+        
+    if BP_FILTER_RAW == 1
         toSaveDir = fullfile(strcat('./serverdata/spectral_analysis/', typeTransform, '/win', num2str(winSize), ...
             '_step', num2str(stepSize), '_freq', num2str(frequency_sampling)), patient); % at lab
-    end
-    toSaveDir = fullfile(strcat('./serverdata/spectral_analysis/', typeTransform, '/notchharmonics_win', num2str(winSize), ...
+        toSaveDir = fullfile(strcat('./serverdata/spectral_analysis/', typeTransform, '/notchharmonics_win', num2str(winSize), ...
             '_step', num2str(stepSize), '_freq', num2str(frequency_sampling)), patient); % at lab
-    
+    elseif BP_FILTER_RAW == 2
+        toSaveDir = fullfile(strcat('./serverdata/spectral_analysis/', typeTransform, '/adaptivefilter_win', num2str(winSize), ...
+            '_step', num2str(stepSize), '_freq', num2str(frequency_sampling)), patient); % at lab
+    else 
+        toSaveDir = fullfile(strcat('./serverdata/spectral_analysis/', typeTransform, '/nofilter_', 'win', num2str(winSize), ...
+            '_step', num2str(stepSize), '_freq', num2str(frequency_sampling)), patient); % at lab
+    end
+
     if ~exist(toSaveDir, 'dir')
         mkdir(toSaveDir);
     end
@@ -189,12 +193,15 @@ for iPat=1:length(patients)
             preFiltStrShort  = '_BPfilt';
             % notch filter to eliminate 60 Hz noise
             eegWaveV = buttfilt(eegWaveV,[59.5 60.5],resampledrate,'stop',1); %-filter is overkill: order 1 --> 25 dB drop (removing 5-15dB peak)
-            % apply band notch filter to eeg data
             eegWaveV = buttfilt(eegWaveV,[119.5 120.5], frequency_sampling,'stop',1);
-            % apply band notch filter to eeg data
             eegWaveV = buttfilt(eegWaveV,[179.5 180.5], frequency_sampling,'stop',1);
-            % apply band notch filter to eeg data
             eegWaveV = buttfilt(eegWaveV,[239.5 240.5], frequency_sampling,'stop',1);
+            eegWaveV = buttfilt(eegWaveV,[299.5 300.5], frequency_sampling,'stop',1);
+            eegWaveV = buttfilt(eegWaveV,[359.5 360.5], frequency_sampling,'stop',1);
+            eegWaveV = buttfilt(eegWaveV,[419.5 420.5], frequency_sampling,'stop',1);
+            eegWaveV = buttfilt(eegWaveV,[479.5 480.5], frequency_sampling,'stop',1);
+        elseif BP_FILTER_RAW == 2
+            eegWaveV = removePLI_multichan(eegWaveV, frequency_sampling, 7, [50,0.01,4], [0.1,2,4], 2);
         else
             preFiltFreq      = []; %keep this empty to avoid any filtering of the raw data
             preFiltType      = 'stop';
