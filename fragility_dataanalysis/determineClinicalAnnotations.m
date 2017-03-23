@@ -576,7 +576,6 @@ function [included_channels, onset_electrodes, ...
         latespread_labels = {};
         
         frequency_sampling = 500;
-        
         success_or_failure = 1;
         
         center = 'ummc';
