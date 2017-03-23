@@ -103,12 +103,6 @@ end
         mkdir(toSaveDir);
     end
 
-    % put clinical annotations into a struct
-    clinicalLabels = struct();
-    clinicalLabels.ezone_labels = ezone_labels;
-    clinicalLabels.earlyspread_labels = earlyspread_labels;
-    clinicalLabels.latespread_labels = latespread_labels;
-    clinicalLabels.resection_labels = resection_labels;
     
     if seeg
         patient = strcat(patient_id, seizure_id);
@@ -124,7 +118,6 @@ end
     seizure_start = data_struct.seiz_start_mark;
     seizure_end = data_struct.seiz_end_mark;
     data = data_struct.data;
-    tWin = 0;
     
     if strcmp(typeTransform, 'morlet')
         %%- gets the range of frequencies using eeganalparams
@@ -166,7 +159,6 @@ end
     end
 
     %%- condense matrices
-    rangeFreqs = reshape([freqBandAr.rangeF], 2, 7)';
     if strcmp(typeTransform, 'morlet')
         %%- TIME BIN POWERMATZ WITH WINDOWSIZE AND OVERLAP
         powerMat = timeBinSpectrogram(powerMat, winSize, stepSize);
