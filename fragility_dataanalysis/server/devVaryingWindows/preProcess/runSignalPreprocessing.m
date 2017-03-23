@@ -3,7 +3,7 @@
 % Description: Used to compute power for an eeg wave
 %
 %
-function runSignalPreprocessing(patient, typeTransform)
+function runSignalPreprocessing(patient, winSize, stepSize, typeTransform)
     if nargin==0
         patient = 'pt1aw2';
         typeTransform = 'fourier';
@@ -29,8 +29,8 @@ function runSignalPreprocessing(patient, typeTransform)
     %- 1 == notch filtering
     %- 2 == adaptive filtering
     FILTER_RAW = 2; 
-    winSize = 500;
-    stepSize = 250;
+%     winSize = 500;
+%     stepSize = 250;
 
     % set patientID and seizureID
     patient_id = patient(1:strfind(patient, 'seiz')-1);
