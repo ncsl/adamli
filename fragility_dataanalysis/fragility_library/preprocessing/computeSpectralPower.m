@@ -9,7 +9,7 @@
 % transformArgs.mtFreqs = [];
 % [powerMat, phaseMat] = computeSpectralPower(eegWave, fs, freqs, 'fourier', transformArgs);
 % 
-function [powerMat, phaseMat, freqs, t_sec] = computeSpectralPower(eegWave, fs, typeTransform, transformArgs)
+function [powerMat, phaseMat, freqs] = computeSpectralPower(eegWave, fs, typeTransform, transformArgs)
     %% Initial Argument Checking
     %- check user entered in correct transforms
     transforms = {'morlet', 'fourier'};

@@ -27,6 +27,6 @@ echo $currentChan
 echo $typeTransform
 
 # run spectral computation
-echo "Running connectivity computation."
+echo "Running spectral computation..."
 matlab -logfile /home/ali/adamli/fragility_dataanalysis/server/devVaryingWindows/_log/job$1.txt -nojvm -nodisplay -nosplash -r "currentpatient='$patient'; \
 		computeChannelSpectrum(currentpatient, $winSize, $stepSize, $typeTransform, $currentChan);"
