@@ -8,6 +8,8 @@ printf "Enter step size: "
 read stepSize
 printf "Enter type transform (morlet, fourier):"
 read typeTransform
+printf "run sleep (Enter 1, or 0)? "
+read RUNSLEEP
 
 # patients listed 5 per row
 patients=(

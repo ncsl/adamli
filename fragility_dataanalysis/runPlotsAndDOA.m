@@ -14,7 +14,8 @@ patients = {,...,
 %     'pt2sz1' 'pt2sz3' , 'pt2sz4', ...
 %     'pt3sz2' 'pt3sz4', ...
     'UMMC001_sz1', 'UMMC001_sz2', 'UMMC001_sz3', ...
-    'UMMC002_sz1', 'UMMC002_sz2', 'UMMC002_sz3', ...
+    'UMMC002_sz1',... 'UMMC002_sz2',
+    'UMMC002_sz3', ...
     'UMMC003_sz1', 'UMMC003_sz2', 'UMMC003_sz3', ...
     'UMMC004_sz1', 'UMMC004_sz2', 'UMMC004_sz3', ...
     'UMMC005_sz1', 'UMMC005_sz2', 'UMMC005_sz3', ...
@@ -277,9 +278,11 @@ for p=1:length(patients)
             disp(e)
         end
         
+        tempWinSize = winSize;
+        tempStepSize = stepSize;
         if frequency_sampling ~=1000
-            winSize = winSize*frequency_sampling/1000;
-            stepSize = stepSize*frequency_sampling/1000;
+            tempWinSize = winSize*frequency_sampling/1000;
+            tempStepSize = stepSize*frequency_sampling/1000;
         end
         
         % set data to local variables
@@ -288,7 +291,7 @@ for p=1:length(patients)
         info = final_data.info;
         timePoints = final_data.timePoints;
         
-        seizureMarkStart = seizureStart/stepSize - 1;
+        seizureMarkStart = seizureStart/tempStepSize - 1;
         
         % Compute fragility rankings per column by normalization
 %         minNormPerturbMat = minPerturb_time_chan;
@@ -310,7 +313,7 @@ for p=1:length(patients)
 %         range(fragilityMat(:,1))
         
         if seeg
-            seizureMarkStart = (seizureStart-1) / stepSize;
+            seizureMarkStart = (seizureStart-1) / tempStepSize;
         end
         
 %         if ~INTERICTAL
@@ -374,8 +377,8 @@ for p=1:length(patients)
                 postWindow = 10;
                 preWindow = 60;
                 % find index of seizureStart
-                timeStart = (timeIndex - preWindow - timeIndex)*winSize/frequency_sampling; 
-                timeEnd = (timeIndex - timeIndex + postWindow)*winSize/frequency_sampling;
+                timeStart = (timeIndex - preWindow - timeIndex)*tempWinSize/frequency_sampling; 
+                timeEnd = (timeIndex - timeIndex + postWindow)*tempWinSize/frequency_sampling;
                 minPerturb_time_chan = minPerturb_time_chan(:, timeIndex-60:timeIndex + postWindow);
                 fragility_rankings = fragility_rankings(:, timeIndex-60:timeIndex + postWindow);
                 PLOTARGS.seizureIndex = abs(timeStart);
@@ -391,7 +394,6 @@ for p=1:length(patients)
         
         %% 2. Plot Min 2-Induced Norm Perturbation and Fragility Ranking
 %         plotMinimumPerturbation(minPerturb_time_chan, clinicalIndices, timeStart, timeEnd, PLOTARGS);
-        
         if PLOTALL
             PLOTARGS.toSaveFigFile = fullfile(toSaveFigDir, strcat(patient, '_fragilityMetric'));
         else
