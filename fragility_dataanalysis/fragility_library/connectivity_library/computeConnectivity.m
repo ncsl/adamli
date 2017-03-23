@@ -22,6 +22,7 @@ function [adjMats, timePoints] = computeConnectivity(eeg, adj_args)
     seizureStart = adj_args.seizureStart; % time seizure starts
     seizureEnd = adj_args.seizureEnd; % time seizure ends
     l2regularization = adj_args.l2regularization;
+    numHarmonics = adj_args.numHarmonics
     
     TYPE_CONNECTIVITY = adj_args.TYPE_CONNECTIVITY;
 
@@ -47,7 +48,7 @@ function [adjMats, timePoints] = computeConnectivity(eeg, adj_args)
     elseif BP_FILTER_RAW == 2,
         disp('Adaptive filtering ...');
         % apply an adaptive filtering algorithm.
-        eeg = removePLI_multichan(eeg, frequency_sampling, 7, [50,0.01,4], [0.1,2,4], 2);
+        eeg = removePLI_multichan(eeg, frequency_sampling, numHarmonics, [50,0.01,4], [0.1,2,4], 2);
     else
         preFiltFreq      = []; %keep this empty to avoid any filtering of the raw data
         preFiltType      = 'stop';

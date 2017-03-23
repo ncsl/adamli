@@ -2,7 +2,7 @@ function serverPerturbationScript(patient, radius, winSize, stepSize)
     if nargin == 0 % testing purposes
         patient='EZT011seiz001';
         patient ='pt17sz1';
-        patient='pt15sz3';
+        patient='UMMC002_sz2';
 %         patient = 'Pat16sz1p';
 %         patient = 'JH102sz1';
         % window paramters
@@ -79,7 +79,7 @@ function serverPerturbationScript(patient, radius, winSize, stepSize)
     adjMatDir = fullfile(serverDir, 'harmonics_adjmats/', strcat('win', num2str(winSize), ...
     '_step', num2str(stepSize), '_freq', num2str(frequency_sampling))); % at lab
 
-    adjMatDir = fullfile(rootDir, 'serverdata/adaptivefilter_adjmats/', strcat('win', num2str(winSize), ...
+    adjMatDir = fullfile(rootDir, 'serverdata/adjmats/adaptivefilter_adjmats/', strcat('win', num2str(winSize), ...
     '_step', num2str(stepSize), '_freq', num2str(frequency_sampling))) % at lab
 
     patDir = fullfile(adjMatDir, patient);
@@ -105,6 +105,12 @@ function serverPerturbationScript(patient, radius, winSize, stepSize)
     frequency_sampling = data.frequency_sampling;
     included_channels = data.included_channels;
     timePoints = data.timePoints;
+    try
+    numHarmonics = data.numHarmonics;
+    FILTER = data.FILTER;
+    catch e
+        disp(e)
+    end
     
     %- set meta data struct
     info.ezone_labels = ezone_labels;
@@ -118,7 +124,12 @@ function serverPerturbationScript(patient, radius, winSize, stepSize)
 %     info.stepSize = stepSize;
     info.frequency_sampling = frequency_sampling;
     info.included_channels = included_channels;
-
+    try
+        info.numHarmonics = numHarmonics;
+        info.FILTER = FILTER;
+    catch e
+        disp(e)
+    end
     adjMats = data.adjMats;
     [T, N, ~] = size(adjMats);
     
