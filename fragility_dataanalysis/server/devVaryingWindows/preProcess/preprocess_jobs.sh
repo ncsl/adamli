@@ -81,12 +81,16 @@ if [[ "$RUNSLEEP" -eq 1 ]]; then
 	qsub -l walltime=24:00:00,nodes=node232 run_b_sleep.sh
 fi
 
+NprocperNode=8
+
 ## 02: Call pbs job, runAnalysis
 for patient in $patients; do
 	echo $patient
 	jobname="spectral_${typeTransform}_${patient}"
 	numChans=$(<../patientMeta/${patient}.txt)
 
+	Nnode=$((${numChans}/${NprocperNode}+1)) 	# the number of nodes to compute on
+
 	# run a pbs batch job. Make sure there are no spaces in between the parameters passed
-	qsub -v patient=$patient,winSize=$winSize,stepSize=$stepSize,typeTransform=$typeTransform,numChans=$numChans -N ${jobname} runPreProcess.pbs
+	qsub -v patient=$patient,winSize=$winSize,stepSize=$stepSize,typeTransform=$typeTransform,numChans=$numChans -N ${jobname} -l nodes=${Nnode}:ppn=${NprocperNode} runPreProcess.pbs
 done
