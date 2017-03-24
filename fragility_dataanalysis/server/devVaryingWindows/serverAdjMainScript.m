@@ -5,7 +5,7 @@ if nargin == 0 % testing purposes
     patient='EZT009seiz001';
 %     patient='JH102sz6';
     patient='pt7sz19';
-    patient ='UMMC001_sz1';
+    patient ='UMMC002_sz2';
     % window paramters
     winSize = 500; % 500 milliseconds
     stepSize = 500; 
@@ -160,6 +160,9 @@ if ~isempty(included_channels)
     labels = labels(included_channels);
 end
 
+% set the number of harmonics
+numHarmonics = floor(frequency_sampling/2/60) - 1;
+
 %% PERFORM ADJACENCY COMPUTATION
 % define args for computing the functional connectivity
 adj_args = struct();
@@ -171,7 +174,7 @@ adj_args.seizureStart = seizureStart;               % the second relative to sta
 adj_args.seizureEnd = seizureEnd;                   % the second relative to end of seizure
 adj_args.l2regularization = l2regularization; 
 adj_args.TYPE_CONNECTIVITY = TYPE_CONNECTIVITY;
-
+adj_args.numHarmonics = numHarmonics;
 
 % compute connectivity
 if size(eeg, 1) < winSize
@@ -196,6 +199,7 @@ adjmat_struct.timePoints = timePoints;
 adjmat_struct.adjMats = adjMats;
 adjmat_struct.included_channels = included_channels;
 adjmat_struct.frequency_sampling = frequency_sampling;
+adjmat_struct.numHarmonics = numHarmonics;
 adjmat_struct.FILTER = BP_FILTER_RAW;
 
 fileName = strcat(patient, '_adjmats_', lower(TYPE_CONNECTIVITY), '.mat');

@@ -1,2 +1,2 @@
 patient_id,date,recording_start,onset_time,offset_time,recording_duration,num_channels,included_channels
-UMMC002_sz2,7/25/13,0:00:49,0:00:49,0:03:53,294,128,[1:22 24:29 31:33 35:52]
+UMMC002_sz2,7/25/13,0:00:00,0:00:49,0:03:53,294,128,[1:22 24:29 31:33 35:52]
