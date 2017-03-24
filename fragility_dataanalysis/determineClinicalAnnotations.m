@@ -581,7 +581,8 @@ function [included_channels, onset_electrodes, ...
         center = 'ummc';
     elseif strcmp(patient_id, 'UMMC003')
         included_channels = [1:22 24:29 31:33 35:48];
-        onset_electrodes = {'MEST4', 'MEST5', 'G4', 'G10', 'G12', 'G18', 'G19', 'G20', 'G26', 'G27'};
+        onset_electrodes = {'MeST4', 'MeST5', 'Grid4', 'Grid10', 'Grid12',...
+            'Grid18', 'Grid19', 'Grid20', 'Grid26', 'Grid27'};
         earlyspread_labels = {};
         latespread_labels = {};
         
