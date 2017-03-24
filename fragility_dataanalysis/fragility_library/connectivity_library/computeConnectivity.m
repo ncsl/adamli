@@ -13,7 +13,11 @@
 %
 % Outputs:
 % 1. adjMats: 3D matrix that is N x N x T 
-function [adjMats, timePoints] = computeConnectivity(eeg, adj_args)
+function [adjMats, timePoints] = computeConnectivity(eeg, adj_args, VERBOSE)
+    if nargin==2
+        VERBOSE = 0;
+    end
+    
     % extract arguments and clinical annotations
     BP_FILTER_RAW = adj_args.BP_FILTER_RAW; % apply notch filter or not?
     frequency_sampling = adj_args.frequency_sampling; % frequency that this eeg data was sampled at
@@ -22,7 +26,7 @@ function [adjMats, timePoints] = computeConnectivity(eeg, adj_args)
     seizureStart = adj_args.seizureStart; % time seizure starts
     seizureEnd = adj_args.seizureEnd; % time seizure ends
     l2regularization = adj_args.l2regularization;
-    numHarmonics = adj_args.numHarmonics
+    numHarmonics = adj_args.numHarmonics;
     
     TYPE_CONNECTIVITY = adj_args.TYPE_CONNECTIVITY;
 
@@ -59,18 +63,20 @@ function [adjMats, timePoints] = computeConnectivity(eeg, adj_args)
 
     % window parameters - overlap, #samples, stepsize, window pointer
     [num_channels, lenData] = size(eeg); % length of data in seconds
-    numWindows = lenData/stepSize - 1;
+    numWindows = lenData/stepSize;
 
     % initialize timePoints vector and adjacency matrices
     timePoints = [1:stepSize:lenData-winSize+1; winSize:stepSize:lenData]';
     adjMats = zeros(size(timePoints,1), num_channels, num_channels);
 
     % display data 
-    disp(['Length of to be included channels ', num2str(size(eeg,1))]);
-    disp(['Seizure starts at ', num2str(seizureStart), ' milliseconds']);
-    disp(['Seizure ends at ', num2str(seizureEnd), ' milliseconds']);
-    disp(['Running analysis for ', num2str(numWindows), ' windows']);
-
+    if VERBOSE
+        disp(['Length of to be included channels ', num2str(size(eeg,1))]);
+        disp(['Seizure starts at ', num2str(seizureStart), ' milliseconds']);
+        disp(['Seizure ends at ', num2str(seizureEnd), ' milliseconds']);
+        disp(['Running analysis for ', num2str(numWindows), ' windows']);
+    end
+    
     for i=1:numWindows
         % step 1: extract the data and apply the notch filter. Note that column
         %         #i in the extracted matrix is filled by data samples from the
