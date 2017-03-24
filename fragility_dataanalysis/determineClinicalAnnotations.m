@@ -613,7 +613,7 @@ function [included_channels, onset_electrodes, ...
         success_or_failure = 1;
         center = 'ummc';
     elseif strcmp(patient_id, 'UMMC006')
-        included_channels = [1:22 24:29 31:33 35:56];
+        included_channels = [1:22 24:27 29 31:33 35:56];
         onset_electrodes = {'MT2', 'MT3', 'MT4', 'MES2', 'MES3', 'MES4', 'MES5', 'MAT1', 'MAT2'};
         earlyspread_labels = {};
         latespread_labels = {};
@@ -647,7 +647,7 @@ function [included_channels, onset_electrodes, ...
         success_or_failure = 1;
         center = 'ummc';
     elseif strcmp(patient_id, 'UMMC009')
-        included_channels = [1:30];
+        included_channels = [1:10 12:30];
         onset_electrodes = {'G4', 'G5', 'G6', 'G7', 'G12', 'G14', 'PT1', 'AT1'};
         earlyspread_labels = {};
         latespread_labels = {};

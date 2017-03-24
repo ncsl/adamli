@@ -15,27 +15,26 @@ printf "Run Connectivity (Enter 1, or 0)? "
 read RUNCONNECTIVITY
 printf "run sleep (Enter 1, or 0)? "
 read RUNSLEEP
-# printf "run for different radii: "
-# read radius
 
 # patients listed 5 per row
 patients=(
-	'pt1aslp1 pt1aslp2 pt1aw1 pt1aw2
-	pt2aslp1 pt2aslp2 pt2aw1 pt2aw2
-	pt3aslp1 pt3aslp2 pt3aw1
-	pt1sz2 pt1sz3 pt1sz4
-	pt2sz1 pt2sz3 pt2sz4 
-	pt3sz2 pt3sz4
-	pt6sz3 pt6sz4 pt6sz5
-	UMMC001_sz1 UMMC001_sz2 UMMC001_sz3
-	UMMC002_sz1 UMMC002_sz2 UMMC002_sz3
-	UMMC003_sz1 UMMC003_sz2 UMMC003_sz3
-	UMMC004_sz1 UMMC004_sz2 UMMC004_sz3
-	UMMC005_sz1 UMMC005_sz2 UMMC005_sz3
-	UMMC006_sz1 UMMC006_sz2 UMMC006_sz3
-	UMMC007_sz1 UMMC007_sz2 UMMC007_sz3
-	UMMC008_sz1 UMMC008_sz2 UMMC008_sz3
+	# 'pt1aslp1 pt1aslp2 pt1aw1 pt1aw2
+	# pt2aslp1 pt2aslp2 pt2aw1 pt2aw2
+	# pt3aslp1 pt3aslp2 pt3aw1
+	# pt1sz2 pt1sz3 pt1sz4
+	# pt2sz1 pt2sz3 pt2sz4 
+	# pt3sz2 pt3sz4
+	# pt6sz3 pt6sz4 pt6sz5
+	# UMMC001_sz1 UMMC001_sz2 UMMC001_sz3
+	# UMMC002_sz1 UMMC002_sz2 UMMC002_sz3
+	# UMMC003_sz1 UMMC003_sz2 UMMC003_sz3
+	# UMMC004_sz1 UMMC004_sz2 UMMC004_sz3
+	# UMMC005_sz1 UMMC005_sz2 UMMC005_sz3
+	'UMMC006_sz1 UMMC006_sz2 UMMC006_sz3
 	UMMC009_sz1 UMMC009_sz2 UMMC009_sz3')
+	# UMMC007_sz1 UMMC007_sz2 UMMC007_sz3
+	# UMMC008_sz1 UMMC008_sz2 UMMC008_sz3
+	# UMMC009_sz1 UMMC009_sz2 UMMC009_sz3')
 # pt7sz19 pt7sz21 pt7sz22
 # 	pt8sz1 pt8sz2 pt8sz3
 # 	pt10sz1 pt10sz2 pt10sz3
@@ -76,7 +75,6 @@ patients=(
 	# JH108sz1 JH108sz2 JH108sz3 JH108sz4 JH108sz5 JH108sz6 JH108sz7')
 
 	
-
 printf "About to run on patients (press enter to continue): $patients" # prompt for patient_id {pt1, pt2, ..., JH105, EZT005}
 read answer
 
