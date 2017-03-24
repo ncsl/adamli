@@ -82,6 +82,7 @@ if [[ "$RUNSLEEP" -eq 1 ]]; then
 fi
 
 NprocperNode=8
+walltime=00:03:00					# the walltime for each computation
 
 ## 02: Call pbs job, runAnalysis
 for patient in $patients; do
@@ -92,5 +93,5 @@ for patient in $patients; do
 	Nnode=$((${numChans}/${NprocperNode}+1)) 	# the number of nodes to compute on
 
 	# run a pbs batch job. Make sure there are no spaces in between the parameters passed
-	qsub -v patient=$patient,winSize=$winSize,stepSize=$stepSize,typeTransform=$typeTransform,numChans=$numChans -N ${jobname} -l nodes=${Nnode}:ppn=${NprocperNode} runPreProcess.pbs
+	qsub -v patient=$patient,winSize=$winSize,stepSize=$stepSize,typeTransform=$typeTransform,numChans=$numChans -N ${jobname} -l nodes=${Nnode}:ppn=${NprocperNode},walltime=${walltime} runPreProcess.pbs
 done
