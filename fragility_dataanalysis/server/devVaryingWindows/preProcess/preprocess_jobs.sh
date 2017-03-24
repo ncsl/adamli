@@ -79,7 +79,7 @@ if [[ "$RUNSLEEP" -eq 1 ]]; then
 fi
 
 NprocperNode=8
-walltime=00:03:00					# the walltime for each computation
+walltime=00:20:00					# the walltime for each computation
 
 ## 02: Call pbs job, runAnalysis
 for patient in $patients; do
