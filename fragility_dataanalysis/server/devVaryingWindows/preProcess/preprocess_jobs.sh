@@ -37,7 +37,7 @@ patients=(
 	# pt13sz1 pt13sz2 pt13sz3 pt13sz5
 	# pt14sz1 pt14sz2 pt14sz3
 	# pt15sz1 pt15sz2 
-	'p15sz3 pt15sz4
+	'pt15sz3 pt15sz4
 	pt16sz1 pt16sz2 pt16sz3
 	pt17sz1 pt17sz2
 	EZT004seiz001 EZT004seiz002
