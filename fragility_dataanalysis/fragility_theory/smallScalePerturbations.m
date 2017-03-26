@@ -80,6 +80,7 @@ end
     
 data = load(fullfile(dataDir, patient));
 data.data = data.data(included_channels, :);
+seizurestart = data.seizureStart;
 eegdata = data.data;
 
 %- create an example adjMat
@@ -98,7 +99,8 @@ numSims = 200;
 all_del_sizes = zeros(numSims, P, length(w_space));
 for iSim=1:numSims
     randIndices = randsample(size(eegdata,1), P);
-    adjMat = squeeze(computeConnectivity(eegdata(randIndices, 1:500), adj_args));
+    randTime = randsample(seizureStart-500, 1);
+    adjMat = squeeze(computeConnectivity(eegdata(randIndices, randTime:randTime+499), adj_args));
 
     [N, ~] = size(adjMat);
 
