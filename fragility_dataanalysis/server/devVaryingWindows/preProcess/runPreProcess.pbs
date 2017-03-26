@@ -20,6 +20,6 @@ do
 done
 
 proc = ${numChans}
-pbsdsh -n $proc /home/ali/adamli/fragility_dataanalysis/server/devVaryingWindows/preProcess/mergeJobs.sh ${proc} ${patient} ${winSize} ${stepSize} ${currentChan} ${typeTransform} &
+pbsdsh -n $proc /home/ali/adamli/fragility_dataanalysis/server/devVaryingWindows/preProcess/mergeJobs.sh ${proc} ${patient} ${winSize} ${stepSize} ${typeTransform} &
 
 wait
