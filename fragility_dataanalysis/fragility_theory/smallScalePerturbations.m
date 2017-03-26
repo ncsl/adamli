@@ -19,10 +19,6 @@ addpath(genpath(fullfile(rootDir, '/fragility_library/')));
 addpath(genpath(fullfile(rootDir, '/eeg_toolbox/')));
 addpath(rootDir);
 
-center = 'nih';
-patient = 'pt1sz2';
-dataDir = fullfile(rootDir, 'data', center, patient);
-
 %- plotting options
 FONTSIZE = 16;
 figDir = fullfile(rootDir, 'fragility_theory', 'figures');
@@ -48,6 +44,14 @@ sigma = [-sigma, sigma];
 
 
 %% create small perturbation simulation from real data
+
+
+center = 'nih';
+patient = 'pt7sz19';
+
+center='cc';
+patient = 'EZT019seiz001';
+
 % set patientID and seizureID
 patient_id = patient(1:strfind(patient, 'seiz')-1);
 seizure_id = strcat('_', patient(strfind(patient, 'seiz'):end));
@@ -78,9 +82,12 @@ end
     resection_labels, frequency_sampling, center, success_or_failure] ...
         = determineClinicalAnnotations(patient_id, seizure_id);
     
-data = load(fullfile(dataDir, patient));
+dataDir = fullfile(rootDir, 'data', center, patient);
+dataDir = fullfile(rootDir, 'data', center, patient_id);
+    
+data = load(fullfile(dataDir, strcat(patient_id, seizure_id)));
 data.data = data.data(included_channels, :);
-seizurestart = data.seizureStart;
+seizureStart = data.seiz_start_mark;
 eegdata = data.data;
 
 %- create an example adjMat
@@ -111,12 +118,12 @@ for iSim=1:numSims
     del_table = cell(N, 1);                 % store min_norm vector for each node
 
     % %- check orthogonality of 
-    [V, D] = eig(adjMat);
-
-    % testing if eigenvectors are real vs complex
-    V = complex(randn(N, N), randn(N,N));
-    V = randn(N,N);
-    adjMat = V*D*inv(V);
+%     [V, D] = eig(adjMat);
+% 
+%     % testing if eigenvectors are real vs complex
+%     V = complex(randn(N, N), randn(N,N));
+%     V = randn(N,N);
+%     adjMat = V*D*inv(V);
     tol = 1e-7;
 
     %%- grid search over sigma and w for each row to determine, what is
@@ -265,6 +272,14 @@ for iSim=1:numSims
     all_del_sizes(iSim,:,:) = del_size;
 end
 
+for i=1:numSims
+    for j=1:N
+        testindex = find(all_del_sizes(i,j,:) == min(all_del_sizes(i,j,:)));
+        if testindex ~= 152 && testindex ~= 51
+            disp(['Wrong at ', num2str(i), ' ', num2str(j)]);
+        end
+    end
+end
 
 colors = {'k', 'b', 'r'};
 
@@ -288,8 +303,10 @@ for i=1:N
     set(currfig, 'Units', 'inches');
     currfig.Position = [17.3438         0   15.9896   11.6771];
     
-    toSaveFigFile = fullfile(figDir, strcat(patient, '_chanindex', num2str(i), '_realevecs'));
-    print(toSaveFigFile, '-dpng', '-r0')
+    toSaveFigFile = fullfile(figDir, strcat(patient, '_chanindex', num2str(i), '_realdata_randomtime'));
+    print(toSaveFigFile, '-dpng', '-r0');
+    
+    close all
 end
 
 disp('done')
