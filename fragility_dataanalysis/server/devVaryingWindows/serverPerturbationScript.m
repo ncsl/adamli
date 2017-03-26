@@ -2,7 +2,7 @@ function serverPerturbationScript(patient, radius, winSize, stepSize)
     if nargin == 0 % testing purposes
         patient='EZT011seiz001';
         patient ='pt17sz1';
-        patient='UMMC002_sz2';
+        patient='UMMC006_sz2';
 %         patient = 'Pat16sz1p';
 %         patient = 'JH102sz1';
         % window paramters
@@ -133,9 +133,9 @@ function serverPerturbationScript(patient, radius, winSize, stepSize)
     adjMats = data.adjMats;
     [T, N, ~] = size(adjMats);
     
-    seizureMarkStart = seizure_start / winSize;
+    seizureMarkStart = round(seizure_start / winSize);
     if seeg
-        seizureMarkStart = (seizure_start-1)/winSize;
+        seizureMarkStart = round((seizure_start-1)/winSize);
     end
     
     flag = -1;

@@ -1,12 +1,12 @@
-function computeChannelSpectrum(patient, winSize, stepSize, typeTransform, currentChan)
-if nargin==0
-    patient='pt1sz2';
-%     patient='UMMC003_sz1';
-    winSize=500;
-    stepSize=250;
-    typeTransform='fourier';
-    currentChan=2;
-end
+function mergeChannelSpectrum(patient, winSize, stepSize, typeTransform)
+    if nargin==0
+        patient='pt1sz2';
+%         patient='UMMC003_sz1';
+        winSize=500;
+        stepSize=250;
+        typeTransform='fourier';
+        currentChan=2;
+    end
 
      %% Initialization
     % data directories to save data into - choose one
@@ -23,13 +23,6 @@ end
     addpath(genpath(fullfile(rootDir, '/fragility_library/')));
     addpath(genpath(fullfile(rootDir, '/eeg_toolbox/')));
     addpath(rootDir);
-
-    %- 0 == no filtering
-    %- 1 == notch filtering
-    %- 2 == adaptive filtering
-    FILTER_RAW = 2; 
-%     winSize = 500;
-%     stepSize = 250;
 
     % set patientID and seizureID
     patient_id = patient(1:strfind(patient, 'seiz')-1);
@@ -87,12 +80,8 @@ end
                 = determineClinicalAnnotations(patient_id, seizure_id);
     patient_id = buffpatid;
     
-    % set directory to save computed data
+    % temp dir to access computed data
     tempDir = fullfile(rootDir, 'server/devVaryingWindows/preProcess/tempData/', strcat(patient, '_', typeTransform));
-
-    if ~exist(tempDir, 'dir')
-        mkdir(tempDir);
-    end
     
     if seeg
         patient = strcat(patient_id, seizure_id);
@@ -109,85 +98,106 @@ end
     seizure_end = data_struct.seiz_end_mark;
     data = data_struct.data;
     
-    if strcmp(typeTransform, 'morlet')
-        %%- gets the range of frequencies using eeganalparams
-        waveletFreqs = eeganalparams('freqs');
-        waveletWidth = eeganalparams('width');
-        transformArgs.waveletWidth = waveletWidth;
-        transformArgs.waveletFreqs = waveletFreqs;
-    elseif strcmp(typeTransform, 'fourier')
-        transformArgs.winSize = 500;
-        transformArgs.stepSize = 250;
-        transformArgs.mtBandWidth = 4;
-        transformArgs.mtFreqs = [];
+    [N, T] = size(data);
+    
+     % load in adjMats file
+    matFiles = dir(fullfile(tempDir, '*.mat'));
+    matFileNames = natsort({matFiles.name});
+    
+    % initialize matrices to store computed data
+    chansComputed = zeros(N, 1);    
+
+    
+    % construct the adjMats from the windows computed of adjMat
+    for iMat=1:length(matFileNames)
+        matFile = fullfile(tempDir, matFileNames{iMat});
+        load(matFile);
+        
+        % check window numbers and make sure they are being stored in order
+        currentFile = matFileNames{iMat};
+        index = strfind(currentFile, '_');
+        index = currentFile(1:index-1);
+        
+        if str2num(index) ~= iMat
+            disp(['There is an error at ', num2str(iMat)]);
+        end
+        chansComputed(str2num(index)) = 1;
+        
+        % extract the computed transform data
+        temppowerMat = data.powerMat;
+        temppowerMatZ = data.powerMatZ;
+        
+        % initialize matrix if first loop and then store results
+        if iMat==1
+            FILTERTYPE = data.FILTERTYPE;
+            waveT = data.waveT;
+            freqs = data.freqs;
+            winSize = data.winSize;
+            stepSize = data.stepSize;
+            
+            % set directory to save merged computed data
+            if FILTER_RAW == 1
+                toSaveDir = fullfile(rootDir, strcat('/serverdata/spectral_analysis/', typeTransform, '/notchharmonics/win', num2str(winSize), ...
+                    '_step', num2str(stepSize), '_freq', num2str(fs)), patient); % at lab
+            elseif FILTER_RAW == 2
+                toSaveDir = fullfile(rootDir, strcat('/serverdata/spectral_analysis/', typeTransform, '/adaptivefilter/win', num2str(winSize), ...
+                    '_step', num2str(stepSize), '_freq', num2str(fs)), patient); % at lab
+            else 
+                toSaveDir = fullfile(rootDir, strcat('/serverdata/spectral_analysis/', typeTransform, '/nofilter/', 'win', num2str(winSize), ...
+                    '_step', num2str(stepSize), '_freq', num2str(fs)), patient); % at lab
+            end
+
+
+            % create directory if it does not exist
+            if ~exist(toSaveDir, 'dir')
+                mkdir(toSaveDir);
+            end
+            
+            % initialize matrices
+            powerMat = zeros(N, length(freqs), size(waveT, 1));
+            powerMatZ = zeros(size(powerMat));
+        end
+        
+        % store the computed transform data into 3D matrix
+        powerMat(iMat, :,:) = temppowerMat;
+        powerMatZ(iMat, :, :) = temppowerMatZ;
     end
     
-    eegWave = data(currentChan, :);
-        
-    [powerMat, phaseMat, freqs] = computeSpectralPower(eegWave, fs, typeTransform, transformArgs);
-    % squeeze channel dimension
-    powerMat = squeeze(powerMat);
-    phaseMat = squeeze(phaseMat);
-
-    powerMatZ = zeros(size(powerMat));
-    [numFreqs, numTime] = size(powerMat);
-    iF  = 1:numFreqs; % # of freqs.
-    iT  = 1:numTime; % # of time points
-
-    %% Z-SCORE POWER MATRIX
-    % indices of the powerMat to Z-score wrt
-    for iF = 1:length(freqs),
-        allVal = reshape(powerMat(iF,iT),length(1)*length(iT),1); %allVal for particular chan and freq
-        mu = mean(allVal); stdev = std(allVal);
-
-        % create the power matrix
-        powerMatZ(iF,iT) = (powerMat(iF,iT)-mu)/stdev;
-        if sum(isnan(powerMatZ(iF,iT)))>0
-            disp('Wrong');
-            keyboard;
-        end
+    test = find(chansComputed == 0);
+    if isempty(test)
+       SUCCESS = 1;
+    else
+       SUCCESS = 0;
     end
-
-    %%- condense matrices
-    if strcmp(typeTransform, 'morlet')
-        %%- TIME BIN POWERMATZ WITH WINDOWSIZE AND OVERLAP
-        powerMat = timeBinSpectrogram(powerMat, winSize, stepSize);
-        phaseMat = timeBinSpectrogram(phaseMat, winSize, stepSize);
-        
-        powerMatZ = timeBinSpectrogram(powerMatZ, winSize, stepSize);
-
-        %%- FREQUENCY BIN WITH FREQUENCY BANDS
-%             powerMat = freqBinSpectrogram(powerMat, rangeFreqs, waveletFreqs);
-%             phaseMat = freqBinSpectrogram(phaseMat, rangeFreqs, waveletFreqs);
-    elseif strcmp(typeTransform, 'multitaper')
-        disp('doing multitaper');
-        %%- FREQUENCY BIN
-%             powerMatZ = freqBinSpectrogram(powerMatZ, rangeFreqs, waveletFreqs);
-    end
-
-    % create 2D array to show time windows occupied by each index of new
-    % power matrix
-    tWin = zeros(size(powerMat, 2), 2);
-    tWin(:,1) = 0 : stepSize : eventDurationMS-winSize;
-    tWin(:,2) = winSize : stepSize : eventDurationMS;
 
     % create to save data struct
     chanData = struct();
     chanData.FILTERTYPE = FILTER_RAW;
-%     chanData.eegWave = eegWave;
-    chanData.chanNum = currentChan;
-    chanData.chanStr = elec_labels{currentChan};
-    chanData.powerMat = squeeze(powerMat);
-    chanData.powerMatZ = squeeze(powerMatZ);
-%     chanData.phaseMat = squeeze(phaseMat);
-%     chanData.seizure_end = seizure_end;
-%     chanData.seizure_start = seizure_start;
+    chanData.chanStr = elec_labels;
+    chanData.chansComputed = chansComputed;
+    chanData.powerMat = powerMat;
+    chanData.powerMatZ = powerMatZ;
+    chanData.seizure_end = seizure_end;
+    chanData.seizure_start = seizure_start;
     chanData.winSize = winSize;
     chanData.stepSize = stepSize;
-    chanData.waveT = tWin;
+    chanData.waveT = waveT;
     chanData.freqs = freqs;
 
     %%- SAVING DIR PARAMETERS
-    chanFileName = strcat(num2str(currentChan), '_', elec_labels{currentChan}, '.mat');
-    saveChannel(tempDir, chanFileName, chanData); 
+    chanFileName = strcat(patient, '_', typeTransform, '.mat');
+    saveChannel(toSaveDir, chanFileName, chanData); 
+    
+    % Check if it was successful full computation
+    if SUCCESS
+%         try
+%             save(fullfile(adjMatDir, fileName), 'adjmat_struct');
+%         catch e
+%             disp(e);
+%             save(fullfile(adjMatDir, fileName), 'adjmat_struct', '-v7.3');
+%         end
+        delete((fullfile(tempDir, '*.mat')));
+    else
+        fprintf('Make sure to fix the windows not computed!');
+    end
 end

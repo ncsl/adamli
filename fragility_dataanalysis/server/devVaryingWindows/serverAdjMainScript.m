@@ -5,7 +5,7 @@ if nargin == 0 % testing purposes
     patient='EZT009seiz001';
 %     patient='JH102sz6';
     patient='pt7sz19';
-    patient ='UMMC008_sz2';
+    patient ='UMMC006_sz2';
     % window paramters
     winSize = 500; % 500 milliseconds
     stepSize = 500; 
@@ -81,7 +81,7 @@ toSaveAdjDir = fullfile(rootDir, 'serverdata/adjmats/', strcat('win', num2str(wi
 %     '_step', num2str(stepSize), '_freq', num2str(frequency_sampling)), patient); % at lab
 
 if BP_FILTER_RAW == 2,
-    toSaveAdjDir = fullfile(rootDir, 'serverdata/adjmats/adaptivefilter/', strcat('win', num2str(winSize), ...
+    toSaveAdjDir = fullfile(rootDir, 'serverdata/adjmats/adaptivefilter_adjmats/', strcat('win', num2str(winSize), ...
     '_step', num2str(stepSize), '_freq', num2str(frequency_sampling)), patient); % at lab
 end
 %%- If using External HardDrive
