@@ -7,7 +7,7 @@
 % 4. apply thresholding
 % 5. Return time points that are broadband noise affected
 patients = {
-'UMMC001_sz1', 'UMMC001_sz2', 'UMMC001_sz3', ...
+    'UMMC001_sz1', 'UMMC001_sz2', 'UMMC001_sz3', ...
     'UMMC002_sz1', 'UMMC002_sz2', 'UMMC002_sz3', ...
     'UMMC003_sz1', 'UMMC003_sz2', 'UMMC003_sz3', ...
     'UMMC004_sz1', 'UMMC004_sz2', 'UMMC004_sz3', ...
@@ -80,7 +80,7 @@ typeTransform = 'morlet';
         spectDir = fullfile(strcat('./serverdata/spectral_analysis/', typeTransform, '/notchharmonics_win', num2str(winSize), ...
             '_step', num2str(stepSize), '_freq', num2str(fs)), patient); % at lab
     elseif FILTER_RAW == 2
-        spectDir = fullfile(strcat('./serverdata/spectral_analysis/', typeTransform, '/adaptivefilter_win', num2str(winSize), ...
+        spectDir = fullfile(strcat('./serverdata/spectral_analysis/', typeTransform, '/adaptivefilter/win', num2str(winSize), ...
             '_step', num2str(stepSize), '_freq', num2str(fs)), patient); % at lab
     else 
         spectDir = fullfile(strcat('./serverdata/spectral_analysis/', typeTransform, '/nofilter_', 'win', num2str(winSize), ...
@@ -91,8 +91,12 @@ typeTransform = 'morlet';
     elecFiles = dir(fullfile(spectDir, '*.mat'));
     elecFiles = natsortfiles({elecFiles.name});
     
+    % load in the electrode file
+    data = load(elecFiles(1));
+    
+    
     %% Loop Through Channels and Apply Broadband Filter
-    for iChan=1:length(elecFiles)
+    for iChan=1:numChans
         
         
     end
