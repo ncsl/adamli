@@ -1,11 +1,10 @@
 function mergeChannelSpectrum(patient, winSize, stepSize, typeTransform)
     if nargin==0
-        patient='pt1sz2';
+        patient='pt1sz4';
 %         patient='UMMC003_sz1';
         winSize=500;
         stepSize=250;
         typeTransform='fourier';
-        currentChan=2;
     end
 
      %% Initialization
@@ -136,10 +135,10 @@ function mergeChannelSpectrum(patient, winSize, stepSize, typeTransform)
             stepSize = data.stepSize;
             
             % set directory to save merged computed data
-            if FILTER_RAW == 1
+            if FILTERTYPE == 1
                 toSaveDir = fullfile(rootDir, strcat('/serverdata/spectral_analysis/', typeTransform, '/notchharmonics/win', num2str(winSize), ...
                     '_step', num2str(stepSize), '_freq', num2str(fs)), patient); % at lab
-            elseif FILTER_RAW == 2
+            elseif FILTERTYPE == 2
                 toSaveDir = fullfile(rootDir, strcat('/serverdata/spectral_analysis/', typeTransform, '/adaptivefilter/win', num2str(winSize), ...
                     '_step', num2str(stepSize), '_freq', num2str(fs)), patient); % at lab
             else 
@@ -172,7 +171,7 @@ function mergeChannelSpectrum(patient, winSize, stepSize, typeTransform)
 
     % create to save data struct
     chanData = struct();
-    chanData.FILTERTYPE = FILTER_RAW;
+    chanData.FILTERTYPE = FILTERTYPE;
     chanData.chanStr = elec_labels;
     chanData.chansComputed = chansComputed;
     chanData.powerMat = powerMat;
