@@ -34,7 +34,7 @@ disp(['Looking at patient: ',patient]);
 %% New Setup Scripts
 TYPE_CONNECTIVITY = 'leastsquares';     % type of functional conn.?
 BP_FILTER_RAW = 2;                      % apply notch filter before functional conn. computation?
-APPLY_FILTER = 1;
+APPLY_FILTER = 0;
 IS_INTERICTAL = 0;                      % is this interictal data?
 l2regularization = 0;                   % apply l2 regularization to estimation of functional conn.?
 TEST_DESCRIP = 'after_first_removal';
