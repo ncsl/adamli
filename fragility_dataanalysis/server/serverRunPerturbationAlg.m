@@ -70,6 +70,7 @@ function serverPerturbationScript(patient, radius, winSize, stepSize, frequency_
         winSize = adjmat_struct.winSize;
         stepSize = adjmat_struct.stepSize;
         frequency_sampling = adjmat_struct.frequency_sampling;
+        FILTER = adjmat_struct.FILTER;
 
         %- set meta data struct
         info.ezone_labels = ezone_labels;
@@ -82,7 +83,8 @@ function serverPerturbationScript(patient, radius, winSize, stepSize, frequency_
         info.winSize = winSize;
         info.stepSize = stepSize;
         info.frequency_sampling = frequency_sampling;
-
+        info.FILTER = FILTER;
+        
         % get the number of channels and time points
         num_channels = size(adjmat_struct.adjMats, 3);
         N = num_channels;

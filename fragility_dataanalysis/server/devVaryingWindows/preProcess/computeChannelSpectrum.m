@@ -128,6 +128,29 @@ end
     leneeg = floor(length(eegWave) / fs) * fs;
     eegWave = eegWave(1:leneeg);
     
+    %- apply filtering on the eegWave
+    if FILTER_RAW == 1
+       % apply band notch filter to eeg data
+        eegWave = buttfilt(eegWave,[59.5 60.5], fs,'stop',1);
+        eegWave = buttfilt(eegWave,[119.5 120.5], fs,'stop',1);
+        if frequency_sampling >= 250
+            eegWave = buttfilt(eegWave,[179.5 180.5], fs,'stop',1);
+            eegWave = buttfilt(eegWave,[239.5 240.5], fs,'stop',1);
+            
+            if frequency_sampling >= 500
+                eegWave = buttfilt(eegWave,[299.5 300.5], fs,'stop',1);
+                eegWave = buttfilt(eegWave,[359.5 360.5], fs,'stop',1);
+                eegWave = buttfilt(eegWave,[419.5 420.5], fs,'stop',1);
+                eegWave = buttfilt(eegWave,[479.5 480.5], fs,'stop',1);
+            end
+        end
+    elseif FILTER_RAW == 2
+         % apply an adaptive filtering algorithm.
+        eegWave = removePLI(eegWave, fs, numHarmonics, [50,0.01,4], [0.1,2,4], 2, 60);
+    else 
+        disp('no filtering?');
+    end
+    
     [powerMat, phaseMat, freqs, t_sec] = computeSpectralPower(eegWave, fs, typeTransform, transformArgs);
     % squeeze channel dimension
     powerMat = squeeze(powerMat);
