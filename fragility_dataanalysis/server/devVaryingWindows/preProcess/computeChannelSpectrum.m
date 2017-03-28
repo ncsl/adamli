@@ -128,6 +128,9 @@ end
     leneeg = floor(length(eegWave) / fs) * fs;
     eegWave = eegWave(1:leneeg);
     
+    % set the number of harmonics
+    numHarmonics = floor(fs/2/60) - 1;
+
     %- apply filtering on the eegWave
     if FILTER_RAW == 1
        % apply band notch filter to eeg data

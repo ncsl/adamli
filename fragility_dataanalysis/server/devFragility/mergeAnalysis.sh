@@ -1,41 +1,35 @@
-#!/bin/bash
-
+#!/bin/bash -l
+# This script runs the computation/estimation of adjacency matrices
 source /etc/profile.modules
 module load matlab/matlab2013a
-
-cd /home/ali/adamli/fragility_dataanalysis/server/devFragility
 
 ## 00: Load in input parameters
 proc="$1"
 patient="$2"
-currentWin="$3"
-winSize="$4"
-stepSize="$5"
-radius="$6"
-RUNCONNECTIVITY="$7"
+winSize="$3"
+stepSize="$4"
+radius="$5"
+RUNCONNECTIVITY="$6"
 
 ## 01: Set parameters for matlab to run, and check if matlab is on path
 matlab_jvm="matlab -nojvm -nodesktop -nosplash -r"
 [[ ! -z "`which matlab`" ]] || \
-	{ 
-		echo "MATLAB not found on the PATH; please add to path."; 
-		exit 1;
-	}
+{ 
+	echo "MATLAB not found on the PATH; please add to path."; 
+	exit 1;
+}
 
-# run adjacency computation and then run perturbation analysis on the same patient/seizure
-# open matlab and call functions
+# run analysis merge
 # serverComputeConnectivity(currentpatient, $currentWin);\
 if [[ "$RUNCONNECTIVITY" -eq 1 ]]; then
-	echo "Running connectivity computation."
+	echo "Running connectivity merging."
 	matlab -logfile /home/ali/adamli/fragility_dataanalysis/server/devFragility/_log/job${3}.txt -nojvm -nodisplay -nosplash -r "currentpatient='${patient}'; \
-	serverSetupComputation(currentpatient);\
-	serverComputeConnectivity(currentpatient, ${winSize}, ${stepSize}, ${currentWin});
+	serverMergeConnectivity(currentpatient, $winSize, $stepSize);\
 	exit;"
 else
-	echo "Running perturbation computation."
+	echo "Running perturbation merging."
 	# run perturbation analysis
 	matlab -logfile /home/ali/adamli/fragility_dataanalysis/server/devFragility/_log/job${3}.txt -nojvm -nodisplay -nosplash -r "currentpatient='${patient}'; \
-	serverSetupComputation(currentpatient);\
-	serverComputePerturbations(currentpatient, ${winSize}, ${stepSize}, ${radius}, ${currentWin});\
+	serverMergePerturbation(currentpatient, $winSize, $stepSize, $radius);\
 	exit;"
 fi

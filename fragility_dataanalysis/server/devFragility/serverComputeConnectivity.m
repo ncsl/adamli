@@ -1,4 +1,4 @@
-function serverComputeConnectivity(patient, currentWin, winSize, stepSize)
+function serverComputeConnectivity(patient, winSize, stepSize, currentWin)
 if nargin==0
     patient = 'pt3sz2';
     patient = 'pt1sz2';
@@ -11,15 +11,26 @@ if nargin<3
     stepSize = 500;
 end
 
-% add libraries of functions
-addpath(('../../'));
-addpath(genpath('../../eeg_toolbox/'));
-addpath(genpath('../../fragility_library/'));
-% addpath(genpath('/Users/adam2392/Dropbox/eeg_toolbox/'));
-% addpath(genpath('/home/WIN/ali39/Documents/adamli/fragility_dataanalysis/eeg_toolbox/'));
+%% INITIALIZATION
+% data directories to save data into - choose one
+eegRootDirServer = '/home/ali/adamli/fragility_dataanalysis/';     % work
+% eegRootDirHome = '/Users/adam2392/Documents/MATLAB/Johns Hopkins/NINDS_Rotation';  % home
+eegRootDirHome = '/Volumes/NIL_PASS/';
+eegRootDirJhu = '/home/WIN/ali39/Documents/adamli/fragility_dataanalysis/';
+% Determine which directory we're working with automatically
+if     ~isempty(dir(eegRootDirServer)), rootDir = eegRootDirServer;
+elseif ~isempty(dir(eegRootDirHome)), rootDir = eegRootDirHome;
+elseif ~isempty(dir(eegRootDirJhu)), rootDir = eegRootDirJhu;
+else   error('Neither Work nor Home EEG directories exist! Exiting'); end
 
-IS_SERVER = 1;
-IS_INTERICTAL = 1; % need to change per run of diff data
+addpath(genpath(fullfile(rootDir, '/fragility_library/')));
+addpath(genpath(fullfile(rootDir, '/eeg_toolbox/')));
+addpath(rootDir);
+
+%- 0 == no filtering
+%- 1 == notch filtering
+%- 2 == adaptive filtering
+FILTER_RAW = 1; 
 TYPE_CONNECTIVITY = 'leastsquares';
 l2regularization = 0;
 % set options for connectivity measurements
@@ -42,18 +53,26 @@ if isempty(patient_id)
     seizure_id = patient(strfind(patient, 'aw'):end);
     seeg = 0;
 end
-
+ buffpatid = patient_id;
+if strcmp(patient_id(end), '_')
+    patient_id = patient_id(1:end-1);
+end
 %% DEFINE CHANNELS AND CLINICAL ANNOTATIONS
 %- Edit this file if new patients are added.
-[included_channels, ezone_labels, earlyspread_labels, latespread_labels, resection_labels, frequency_sampling, center] ...
+[included_channels, ezone_labels, earlyspread_labels,...
+    latespread_labels, resection_labels, frequency_sampling, ...
+    center] ...
             = determineClinicalAnnotations(patient_id, seizure_id);
+patient_id = buffpatid;
 
-% set directory to find adjacency matrix data
-dataDir = fullfile('./data/', center);
+% set dir to find raw data files
+dataDir = fullfile(rootDir, '/data/', center);
 
-if IS_SERVER
-    dataDir = strcat('../.', dataDir);
-end        
+tempDir = fullfile('./tempData/', 'connectivity', strcat('win', num2str(winSize), ...
+    '_step', numstr(stepSize)), patient);
+if ~exist(tempDir, 'dir')
+    mkdir(tempDir);
+end
         
 % put clinical annotations into a struct
 clinicalLabels = struct();
@@ -62,9 +81,10 @@ clinicalLabels.earlyspread_labels = earlyspread_labels;
 clinicalLabels.latespread_labels = latespread_labels;
 clinicalLabels.resection_labels = resection_labels;
 
-%% EZT/SEEG PATIENTS
+%% Read in EEG Raw Data and Preprocess
 if seeg
     patient_eeg_path = fullfile(dataDir, patient_id);
+    patient = strcat(patient_id, seizure_id);
 else
     patient_eeg_path = fullfile(dataDir, patient);
 end
@@ -76,11 +96,8 @@ eeg = data.data;
 labels = data.elec_labels;
 onset_time = data.seiz_start_mark;
 offset_time = data.seiz_end_mark;
-recording_start = 0; % since they dont' give absolute time of starting the recording
-seizureStart = (onset_time - recording_start); % time seizure starts
-seizureEnd = (offset_time - recording_start); % time seizure ends
-recording_duration = size(data.data, 2);
-num_channels = size(data.data, 1);
+seizureStart = (onset_time); % time seizure starts
+seizureEnd = (offset_time); % time seizure ends
 
 clear data
 % check included channels length and how big eeg is
@@ -89,7 +106,6 @@ if length(labels(included_channels)) ~= size(eeg(included_channels,:),1)
 end
 
 if frequency_sampling ~=1000
-    eeg = eeg(:, 1:(1000/frequency_sampling):end);
     seizureStart = seizureStart * frequency_sampling/1000;
     seizureEnd = seizureEnd * frequency_sampling/1000;
     winSize = winSize*frequency_sampling/1000;
@@ -101,53 +117,45 @@ if ~isempty(included_channels)
     eeg = eeg(included_channels, :);
     labels = labels(included_channels);
 end
-    
-tempDir = fullfile('./tempData/', patient, 'connectivity');
-if ~exist(tempDir, 'dir')
-    mkdir(tempDir);
+
+% set the number of harmonics
+numHarmonics = floor(frequency_sampling/2/60) - 1;
+
+%- apply filtering on the eegWave
+if FILTER_RAW == 1
+   % apply band notch filter to eeg data
+    eeg = buttfilt(eeg,[59.5 60.5], fs,'stop',1);
+    eeg = buttfilt(eeg,[119.5 120.5], fs,'stop',1);
+    if frequency_sampling >= 250
+        eeg = buttfilt(eeg,[179.5 180.5], fs,'stop',1);
+        eeg = buttfilt(eeg,[239.5 240.5], fs,'stop',1);
+
+        if frequency_sampling >= 500
+            eeg = buttfilt(eeg,[299.5 300.5], fs,'stop',1);
+            eeg = buttfilt(eeg,[359.5 360.5], fs,'stop',1);
+            eeg = buttfilt(eeg,[419.5 420.5], fs,'stop',1);
+            eeg = buttfilt(eeg,[479.5 480.5], fs,'stop',1);
+        end
+    end
+elseif FILTER_RAW == 2
+     % apply an adaptive filtering algorithm.
+    eeg = removePLI_multichan(eeg, fs, numHarmonics, [50,0.01,4], [0.1,2,4], 2, 60);
+else 
+    disp('no filtering?');
 end
 
-BP_FILTER_RAW=1;
-%- apply a bandpass filter raw data? (i.e. pre-filter the wave?)
-if BP_FILTER_RAW==1,
-    preFiltFreq      = [1 499];   %[1 499] [2 250]; first bandpass filter data from 1-499 Hz
-    preFiltType      = 'bandpass';
-    preFiltOrder     = 2;
-    preFiltStr       = sprintf('%s filter raw; %.1f - %.1f Hz',preFiltType,preFiltFreq);
-    preFiltStrShort  = '_BPfilt';
-    eeg = buttfilt(eeg,[59.5 60.5], frequency_sampling,'stop',1);
-%     eeg = buttfilt(eeg,[59.5 60.5], frequency_sampling,'stop',1);
-else
-    preFiltFreq      = []; %keep this empty to avoid any filtering of the raw data
-    preFiltType      = 'stop';
-    preFiltOrder     = 1;
-    preFiltStr       = 'Unfiltered raw traces';
-    preFiltStrShort  = '_noFilt';
-end
-
-% set stepsize and window size to reflect sampling rate (milliseconds)
-stepSize = stepSize * frequency_sampling/1000; 
-winSize = winSize * frequency_sampling/1000;
 
 % paramters describing the data to be saved
 % window parameters - overlap, #samples, stepsize, window pointer
 lenData = size(eeg,2); % length of data in seconds
-numWindows = lenData/stepSize;
 numChans = size(eeg,1);
 
 % initialize timePoints vector and adjacency matrices
 timePoints = [1:stepSize:lenData-winSize+1; winSize:stepSize:lenData]';
 
-% apply band notch filter to eeg data
+% get the window of data to compute adjacency
 tempeeg = eeg(:, timePoints(currentWin,1):timePoints(currentWin,2));
 
-% test = whos
-% sum = 0;
-% for i=1:length(test)
-%     sum = sum+test(i).bytes;
-% end
-% sum / 10^6
-% clear eeg from RAM after usage
 clear eeg data
 
 % save meta data for the computation 
@@ -166,18 +174,16 @@ if currentWin == 1
     info.timePoints = timePoints;
     info.included_channels = included_channels;
     info.frequency_sampling = frequency_sampling;
+    info.FILTER_TYPE = FILTER_RAW;
 
-    save(fullfile('./tempData/', patient, 'infoAdjMat'), 'info');
+    save(fullfile(tempDir, 'info', 'infoAdjMat.mat'), 'info');
 end
 fprintf('Should have finished saving info mat.\n');
 
 % filename to be saved temporarily
 fileName = strcat(patient, '_adjmats_', num2str(currentWin));
-% fid = fopen(fullfile(tempDir, strcat(patient, num2str(currentWin))), 'w');
-% fprintf(fid, 'Wrote');
-% fclose(fid);
-% fprintf(fileName);
 
+%% Perform Least Squares Computations
 % step 2: compute some functional connectivity 
 if strcmp(TYPE_CONNECTIVITY, 'leastsquares')
     fprintf('About to start least squares');
