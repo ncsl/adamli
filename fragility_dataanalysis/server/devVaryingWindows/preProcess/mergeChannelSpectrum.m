@@ -146,7 +146,6 @@ function mergeChannelSpectrum(patient, winSize, stepSize, typeTransform)
                     '_step', num2str(stepSize), '_freq', num2str(fs)), patient); % at lab
             end
 
-
             % create directory if it does not exist
             if ~exist(toSaveDir, 'dir')
                 mkdir(toSaveDir);

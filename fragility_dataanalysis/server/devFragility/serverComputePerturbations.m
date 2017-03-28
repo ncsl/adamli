@@ -1,12 +1,10 @@
-function serverComputePerturbations(patient, currentWin)
+function serverComputePerturbations(patient, winSize, stepSize, radius, currentWin)
 if nargin==0
     patient = 'pt1sz2';
     currentWin = 3;
-end
-
-if nargin < 3
     winSize = 500;
-    stepSize = 500;
+    stepSize=500;
+    radius = 1.5;
 end
 
 %% Set Working Directories
@@ -29,9 +27,6 @@ addpath(rootDir);
 
 
 %% Parameters for Analysis
-frequency_sampling = 1000;
-radius = 1.5;
-
 TYPE_CONNECTIVITY = 'leastsquares';
 TEST_DESCRIP = 'after_first_removal';
 TEST_DESCRIP = [];
@@ -45,67 +40,28 @@ b = [0; 1];                          % initialize for perturbation computation l
 w_space = [w_space, w_space];
 sigma = [-sigma, sigma];
 
-
-tempDir = fullfile(rootDir, 'server/devFragility/tempData/', patient, 'perturbation');
+tempDir = fullfile('./tempData/', 'perturbation', strcat('win', num2str(winSize), ...
+    '_step', num2str(stepSize)), patient);
 if ~exist(tempDir, 'dir')
     mkdir(tempDir);
 end
 
-%% extract adjMat for this patient from completed dir
-%%- Extract an example
-% serverDir = fullfile(rootDir, 'serverdata');
-% adjMatDir = fullfile(serverDir, 'adjmats', strcat('win', num2str(winSize), ...
-%     '_step', num2str(stepSize), '_freq', num2str(frequency_sampling)), patient);    
-% if ~isempty(TEST_DESCRIP)
-%     adjMatDir = fullfile(adjMatDir, TEST_DESCRIP);
-% end
-%     
-% load(fullfile(adjMatDir, strcat(patient, '_adjmats_leastsquares')));
-% adjMat = squeeze(adjmat_struct.adjMats(currentWin, :, :));
-
-% extract params
-% TYPE_CONNECTIVITY = adjmat_struct.type_connectivity;
-% ezone_labels = adjmat_struct.ezone_labels;
-% earlyspread_labels = adjmat_struct.earlyspread_labels;
-% latespread_labels = adjmat_struct.latespread_labels;
-% resection_labels = adjmat_struct.resection_labels;
-% labels = adjmat_struct.all_labels;
-% seizureStart = adjmat_struct.seizure_start;
-% seizureEnd = adjmat_struct.seizure_end;
-% winSize = adjmat_struct.winSize;
-% stepSize = adjmat_struct.stepSize;
-% timePoints = adjmat_struct.timePoints;
-% adjMats = adjmat_struct.adjMats;
-% frequency_sampling = adjmat_struct.frequency_sampling;    
-% included_channels = adjmat_struct.included_channels;
-
 %% extract adjMat for this patient from temp dir
-%%- Extract an example
-connDir = fullfile(rootDir, 'server/devFragility/tempData/', patient, 'connectivity');  
+% set directory to save merged computed data
+if FILTERTYPE == 1
+    connDir = fullfile(rootDir, 'serverdata/adjmats/notchfilter_adjmats/', strcat('win', num2str(winSize), ...
+    '_step', num2str(stepSize), '_freq', num2str(frequency_sampling)), patient); % at lab
+elseif FILTERTYPE == 2
+    connDir = fullfile(rootDir, 'serverdata/adjmats/adaptivefilter_adjmats/', strcat('win', num2str(winSize), ...
+        '_step', num2str(stepSize), '_freq', num2str(frequency_sampling)), patient); % at lab
+else 
+    connDir = fullfile(rootDir, 'serverdata/adjmats/nofilter_adjmats/', strcat('win', num2str(winSize), ...
+        '_step', num2str(stepSize), '_freq', num2str(frequency_sampling)), patient); % at lab
+end
 
-% load in adjMats file
-matFiles = dir(fullfile(connDir, '*.mat'));
-matFileNames = natsort({matFiles.name});
-       
-fileToCompute = [];
-% construct the adjMats from the windows computed of adjMat
-for iMat=1:length(matFileNames)
-    % check window numbers and make sure they are being stored in order
-    currentFile = matFileNames{iMat};
-    index = strfind(currentFile, '_');
-    fileWin = currentFile(index(2)+1:end-4);
-    
-    % if file window matches our current window of computation
-    if str2num(fileWin) == currentWin
-        fileToCompute = currentFile;
-    end
-end
-if isempty(fileToCompute)
-   errormsg = ['Connectivity file was not computed yet! Check ', num2str(currentWin)];
-   error(errormsg);
-end
-    
-load(fullfile(connDir, fileToCompute));
+%- load in adjmat struct    
+data = load(fullfile(connDir, patient));
+adjmat_struct = data.adjmat_struct;
 adjMat = theta_adj;
 N = size(adjMat, 1);
 
