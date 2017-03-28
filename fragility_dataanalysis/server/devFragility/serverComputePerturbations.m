@@ -28,9 +28,35 @@ addpath(rootDir);
 
 
 %% Parameters for Analysis
-TYPE_CONNECTIVITY = 'leastsquares';
-TEST_DESCRIP = 'after_first_removal';
-TEST_DESCRIP = [];
+%% Parameters for Analysis
+patient_id = [];
+seeg = 1;
+if isempty(patient_id)
+    patient_id = patient(1:strfind(patient, 'sz')-1);
+    seizure_id = patient(strfind(patient, 'sz'):end);
+    seeg = 0;
+end
+if isempty(patient_id)
+    patient_id = patient(1:strfind(patient, 'aslp')-1);
+    seizure_id = patient(strfind(patient, 'aslp'):end);
+    seeg = 0;
+end
+if isempty(patient_id)
+    patient_id = patient(1:strfind(patient, 'aw')-1);
+    seizure_id = patient(strfind(patient, 'aw'):end);
+    seeg = 0;
+end
+ buffpatid = patient_id;
+if strcmp(patient_id(end), '_')
+    patient_id = patient_id(1:end-1);
+end
+
+%- Edit this file if new patients are added.
+[included_channels, ezone_labels, earlyspread_labels,...
+    latespread_labels, resection_labels, frequency_sampling, ...
+    center] ...
+            = determineClinicalAnnotations(patient_id, seizure_id);
+patient_id = buffpatid;
 
 perturbationTypes = ['C', 'R'];
 w_space = linspace(-radius, radius, 51);
@@ -42,7 +68,7 @@ w_space = [w_space, w_space];
 sigma = [-sigma, sigma];
 
 tempDir = fullfile('./tempData/', 'perturbation', strcat('win', num2str(winSize), ...
-    '_step', num2str(stepSize)), patient);
+    '_step', num2str(stepSize), '_radius', num2str(radius)), patient);
 if ~exist(tempDir, 'dir')
     mkdir(tempDir);
 end
@@ -61,48 +87,37 @@ else
 end
 
 %- load in adjmat struct    
-data = load(fullfile(connDir, patient));
+data = load(fullfile(connDir, strcat(patient, '_adjmats_leastsquares')));
 adjmat_struct = data.adjmat_struct;
-adjMat = theta_adj;
-N = size(adjMat, 1);
+adjMats = adjmat_struct.adjMats;
+adjMat = squeeze(adjMats(currentWin, : ,:));
+[T, N, ~] = size(adjMats);
 
-% extract info mat file from tempDir
-load(fullfile(tempDir, 'infoAdjMat.mat'));
-TYPE_CONNECTIVITY = info.type_connectivity;
-ezone_labels = info.ezone_labels;
-earlyspread_labels = info.earlyspread_labels;
-latespread_labels = info.latespread_labels;
-resection_labels = info.resection_labels;
-labels = info.all_labels;
-seizureStart = info.seizure_start;
-seizureEnd = info.seizure_end;
-winSize = info.winSize;
-stepSize = info.stepSize;
-timePoints = info.timePoints;
-included_channels = info.included_channels;
-frequency_sampling = info.frequency_sampling;
-
-%- set meta data struct
-info.ezone_labels = ezone_labels;
-info.earlyspread_labels = earlyspread_labels;
-info.latespread_labels = latespread_labels;
-info.resection_labels = resection_labels;
-info.all_labels = all_labels;
-info.seizure_start = seizure_start;
-info.seizure_end = seizure_end;
-info.winSize = winSize;
-info.stepSize = stepSize;
-info.frequency_sampling = frequency_sampling;
-info.included_channels = included_channels;
-
+if currentWin == 1
+    %- set meta data struct
+    info.ezone_labels = ezone_labels;
+    info.earlyspread_labels = earlyspread_labels;
+    info.latespread_labels = latespread_labels;
+    info.resection_labels = resection_labels;
+    info.all_labels = all_labels;
+    info.seizure_start = seizure_start;
+    info.seizure_end = seizure_end;
+    info.winSize = winSize;
+    info.stepSize = stepSize;
+    info.frequency_sampling = frequency_sampling;
+    info.included_channels = included_channels;
+    info.FILTER = adjmat_struct.FILTER;
+    info.timePoints = adjmat_struct.timePoints;
+    info.TYPE_CONNECTIVITY = adjmat_struct.type_connectivity;
+    
+    save(fullfile(tempDir, 'info', 'infoAdjMat.mat'), 'info');
+end
 %% 1: Begin Perturbation Analysis
 %- initialize matrices for colsum, rowsum, and minimum perturbation\
 minPerturb_time_chan = zeros(N,1);
 del_table = cell(N,1);
 
 % loop through mat files
-tic; % start counter
-
 if max(abs(eig(adjMat))) > radius
     errormsg = ['Max eigenvalue in window ', num2str(currentWin), ' is larger then radius'];
     error('ServerComputePerturbation:illposedproblem', errormsg);
@@ -113,17 +128,17 @@ end
 
 for iPert=1:length(perturbationTypes)
     perturbationType = perturbationTypes(iPert);
-    
+
     % initialize vectors to store
     minNormPerturbMat = zeros(N,1);
     fragilityMat = zeros(N,1);
     del_table = cell(N,1);
-    
+
     perturb_args = struct();
     perturb_args.perturbationType = perturbationType;
     perturb_args.w_space = w_space;
     perturb_args.radius = radius;
-    
+
     [minNormPert, del_vecs, ERRORS] = minNormPerturbation(patient, adjMat, perturb_args);
 
     % store results
@@ -139,15 +154,15 @@ for iPert=1:length(perturbationTypes)
 
     % initialize struct to save
     perturbation_struct = struct();
-    perturbation_struct.del_table = del_table;
-    perturbation_struct.minNormPertMat = minNormPerturbMat;
-    perturbation_struct.fragilityMat = fragilityMat;
-
-    % display a message for the user
-    disp(['Finished: ', num2str(currentWin)]);
-
-    % save the file in temporary dir
-    fileName = strcat(patient, '_', perturbationType, '_pert_', num2str(currentWin));
-    save(fullfile(tempDir, fileName), 'perturbation_struct');
+    perturbation_struct.(perturbationType) = struct();
+    perturbation_struct.(perturbationType).del_table = del_table;
+    perturbation_struct.(perturbationType).minNormPertMat = minNormPerturbMat;
+    perturbation_struct.(perturbationType).fragilityMat = fragilityMat;
 end
+% display a message for the user
+disp(['Finished: ', num2str(currentWin)]);
+
+% save the file in temporary dir
+fileName = strcat(patient, '_pert_', num2str(currentWin));
+save(fullfile(tempDir, fileName), 'perturbation_struct');
 end
