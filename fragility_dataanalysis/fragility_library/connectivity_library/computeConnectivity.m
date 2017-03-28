@@ -43,16 +43,21 @@ function [adjMats, timePoints] = computeConnectivity(eeg, adj_args, VERBOSE)
         % apply band notch filter to eeg data
         eeg = buttfilt(eeg,[59.5 60.5], frequency_sampling,'stop',1);
         eeg = buttfilt(eeg,[119.5 120.5], frequency_sampling,'stop',1);
-        eeg = buttfilt(eeg,[179.5 180.5], frequency_sampling,'stop',1);
-        eeg = buttfilt(eeg,[239.5 240.5], frequency_sampling,'stop',1);
-        eeg = buttfilt(eeg,[299.5 300.5], frequency_sampling,'stop',1);
-        eeg = buttfilt(eeg,[359.5 360.5], frequency_sampling,'stop',1);
-        eeg = buttfilt(eeg,[419.5 420.5], frequency_sampling,'stop',1);
-        eeg = buttfilt(eeg,[479.5 480.5], frequency_sampling,'stop',1);
+        if frequency_sampling >= 250
+            eeg = buttfilt(eeg,[179.5 180.5], frequency_sampling,'stop',1);
+            eeg = buttfilt(eeg,[239.5 240.5], frequency_sampling,'stop',1);
+            
+            if frequency_sampling >= 500
+                eeg = buttfilt(eeg,[299.5 300.5], frequency_sampling,'stop',1);
+                eeg = buttfilt(eeg,[359.5 360.5], frequency_sampling,'stop',1);
+                eeg = buttfilt(eeg,[419.5 420.5], frequency_sampling,'stop',1);
+                eeg = buttfilt(eeg,[479.5 480.5], frequency_sampling,'stop',1);
+            end
+        end
     elseif BP_FILTER_RAW == 2,
         disp('Adaptive filtering ...');
         % apply an adaptive filtering algorithm.
-        eeg = removePLI_multichan(eeg, frequency_sampling, numHarmonics, [50,0.01,4], [0.1,2,4], 2);
+        eeg = removePLI_multichan(eeg, frequency_sampling, numHarmonics, [50,0.01,4], [0.1,2,4], 2, 60);
     else
         preFiltFreq      = []; %keep this empty to avoid any filtering of the raw data
         preFiltType      = 'stop';

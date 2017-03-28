@@ -125,7 +125,7 @@ end
 ordr   = 4;   % Order
 h  = fdesign.bandpass('N,F3dB1,F3dB2', ordr, Fc1, Fc2, fs);
 Hd = design(h, 'butter');
-x_f = filter(Hd,x);	%Bandpass Filtering
+x_f = filter(Hd,x);         %Bandpass Filtering
 x_f = [0 diff(x_f)];		%First Difference
 
 %--------- Start of data processing:
@@ -168,7 +168,7 @@ for n=1:N
 
         % Phase/Amplitude Adaptation
         sincmp = a(k)*u_k(k) + b(k)*u_kp(k);
-        e = e - sincmp;
+        e = e - sincmp; % update signal
         %--- Simplified RLS
         r1(k) = lambda_a(k)*r1(k) + u_k(k)^2;
         r4(k) = lambda_a(k)*r4(k) + u_kp(k)^2;
