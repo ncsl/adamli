@@ -195,7 +195,7 @@ function mergeChannelSpectrum(patient, winSize, stepSize, typeTransform)
 %             disp(e);
 %             save(fullfile(adjMatDir, fileName), 'adjmat_struct', '-v7.3');
 %         end
-        delete((fullfile(tempDir, '*.mat')));
+        rmdir(fullfile(tempDir));
     else
         fprintf('Make sure to fix the windows not computed!');
     end
