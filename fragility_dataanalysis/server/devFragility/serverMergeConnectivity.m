@@ -18,7 +18,7 @@ addpath(rootDir);
 %- 0 == no filtering
 %- 1 == notch filtering
 %- 2 == adaptive filtering
-FILTER_TYPE = 1; 
+FILTERTYPE = 1; 
 
 %% Parameters for Analysis
 patient_id = [];
@@ -92,7 +92,7 @@ included_channels = info.included_channels;
 frequency_sampling = info.frequency_sampling;
 FILTER = info.FILTER_TYPE;
 
-if FILTER ~= FILTER_TYPE
+if FILTER ~= FILTERTYPE
     disp('error in filters!');
 end
 
@@ -149,7 +149,7 @@ adjmat_struct.timePoints = timePoints;
 adjmat_struct.adjMats = adjMats;
 adjmat_struct.included_channels = included_channels;
 adjmat_struct.frequency_sampling = frequency_sampling;
-adjmat_struct.FILTER = FILTER_TYPE;
+adjmat_struct.FILTER = FILTERTYPE;
 
 % save the merged adjMatDir
 fileName = strcat(patient, '_adjmats_', lower(TYPE_CONNECTIVITY), '.mat');

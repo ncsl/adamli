@@ -6,6 +6,7 @@ if nargin==0
     stepSize=500;
     radius = 1.5;
 end
+FILTERTYPE = 2;
 
 %% Set Working Directories
 % set working directory
