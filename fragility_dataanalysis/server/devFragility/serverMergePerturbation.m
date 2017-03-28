@@ -121,9 +121,11 @@ for iMat=1:length(matFileNames)
     end
     winsComputed(str2num(currentWin)) = 1;
 
+    %- loop through each row/column perturbation
     for j=1:length(perturbationTypes)
         perturbationType = perturbationTypes(j);
         
+        %- extract the perturbation computations
         minNormPertMat = data.(perturbationType).minNormPertMat;
         fragilityMat = data.(perturbationType).fragilityMat;
         del_table = data.(perturbationType).del_table;
@@ -131,15 +133,25 @@ for iMat=1:length(matFileNames)
         % initialize matrix if first loop and then store results
         if iMat==1
             %- initialize matrices for storing each row/col 
-            rowPertMats = zeros(length(matFileNames), N, N); 
-            colPertmats = zeros(length(matFileNames), N, N);
-            rowfragMats = zeros(length(matFileNames), N, N); 
-            colfragmats = zeros(length(matFileNames), N, N);
+            rowPertMats = zeros(length(matFileNames), N); 
+            colPertmats = zeros(length(matFileNames), N);
+            rowfragMats = zeros(length(matFileNames), N); 
+            colfragmats = zeros(length(matFileNames), N);
             
             rowdel_table = cell(N, length(matFileNames));
             coldel_table = cell(N, length(matFileNames));
         end
-        rowPertMats(iMat, :, :) = theta_adj;
+        
+        %- put col/row computations in their respective matrices
+        if strcmp(perturbationType, 'R')
+            rowPertMats(iMat, :) = minNormPertMat;
+            rowfragMats(iMat, :) = fragilityMat;
+            rowdel_table(:, iMat) = del_table;
+        elseif strcmp(perturbationType, 'C')
+            colPertMats(iMat, :) = minNormPertMat;
+            colfragMats(iMat, :) = fragilityMat;
+            coldel_table(:, iMat) = del_table; 
+        end
     end
 end
 
