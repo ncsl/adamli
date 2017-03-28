@@ -5,6 +5,7 @@ if nargin==0
     winSize=500;
     stepSize=250;
     typeTransform='fourier';
+    typeTransform = 'morlet';
     currentChan=2;
 end
 
@@ -123,8 +124,11 @@ end
     end
     
     eegWave = data(currentChan, :);
-        
-    [powerMat, phaseMat, freqs] = computeSpectralPower(eegWave, fs, typeTransform, transformArgs);
+    
+    leneeg = floor(length(eegWave) / fs) * fs;
+    eegWave = eegWave(1:leneeg);
+    
+    [powerMat, phaseMat, freqs, t_sec] = computeSpectralPower(eegWave, fs, typeTransform, transformArgs);
     % squeeze channel dimension
     powerMat = squeeze(powerMat);
     phaseMat = squeeze(phaseMat);
@@ -151,10 +155,10 @@ end
     %%- condense matrices
     if strcmp(typeTransform, 'morlet')
         %%- TIME BIN POWERMATZ WITH WINDOWSIZE AND OVERLAP
-        powerMat = timeBinSpectrogram(powerMat, winSize, stepSize);
-        phaseMat = timeBinSpectrogram(phaseMat, winSize, stepSize);
+        [powerMat, t_sec] = timeBinSpectrogram(powerMat, fs, winSize, stepSize);
+        [phaseMat, ~] = timeBinSpectrogram(phaseMat, fs, winSize, stepSize);
         
-        powerMatZ = timeBinSpectrogram(powerMatZ, winSize, stepSize);
+        [powerMatZ, ~] = timeBinSpectrogram(powerMatZ, fs, winSize, stepSize);
 
         %%- FREQUENCY BIN WITH FREQUENCY BANDS
 %             powerMat = freqBinSpectrogram(powerMat, rangeFreqs, waveletFreqs);
@@ -167,9 +171,10 @@ end
 
     % create 2D array to show time windows occupied by each index of new
     % power matrix
-    tWin = zeros(size(powerMat, 2), 2);
-    tWin(:,1) = 0 : stepSize : eventDurationMS-winSize;
-    tWin(:,2) = winSize : stepSize : eventDurationMS;
+    if fs ~=1000
+        winSizefs = winSize*fs/1000;
+        stepSizefs = stepSize*fs/1000;
+    end
 
     % create to save data struct
     chanData = struct();
@@ -182,9 +187,11 @@ end
 %     chanData.phaseMat = squeeze(phaseMat);
 %     chanData.seizure_end = seizure_end;
 %     chanData.seizure_start = seizure_start;
-    chanData.winSize = winSize;
-    chanData.stepSize = stepSize;
-    chanData.waveT = tWin;
+    chanData.winSizeMS = winSize;
+    chanData.stepSizeMS = stepSize;
+    chanData.winSize = winSizefs;
+    chanData.stepSize = stepSizefs;
+    chanData.waveT = t_sec;
     chanData.freqs = freqs;
 
     %%- SAVING DIR PARAMETERS

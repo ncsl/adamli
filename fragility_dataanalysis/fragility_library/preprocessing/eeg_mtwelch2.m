@@ -49,6 +49,7 @@ NeegSample = size(eegTrialsxTime,2);
 %- FFT setup
 Nsamples      = round(T*Fs); % if odd, Nyquist component is not evaluated
 ovrlp_samples = round(overlap*Nsamples);
+% ovrlp_samples = floor(overlap*Nsamples);
 freqs_FFT     = linspace(0,Fs/2,Nsamples/2+1);
 
 

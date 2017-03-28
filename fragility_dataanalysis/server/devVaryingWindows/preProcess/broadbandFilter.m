@@ -16,7 +16,7 @@ patients = {
 %     'UMMC007_sz1', 'UMMC007_sz2','UMMC007_sz3', ...
 %     'UMMC008_sz1', 'UMMC008_sz2', 'UMMC008_sz3', ...
 %     'UMMC009_sz1', 'UMMC009_sz2', 'UMMC009_sz3', ...
-    'pt1sz2', 'pt1sz4', ...
+    'pt1aw2', 'pt1sz4', ...
 };
 patient = patients{1};
 typeTransform = 'morlet';
@@ -95,8 +95,55 @@ typeTransform = 'morlet';
     data = load(elecFile);
     data = data.data;
     
+    chanStrs = data.chanStr;
+    winSize = data.winSize;
+    stepSize = data.stepSize;
+    seizureStart = data.seizure_start;
+    seizureEnd = data.seizure_end;
+    timePoints = data.waveT;
+    freqs = data.freqs;
+    powerMatZ = data.powerMatZ;
+    
+    % get seizure marks in window
+    seizureStartMark = seizureStart / stepSize - (winSize/stepSize - 1);
+    seizureEndMark = seizureEnd / stepSize - (winSize/stepSize - 1);
+    
+    [numChans, numFreqs, numTimes] = size(powerMatZ);
+    lowperctile = 1;
+    highperctile = 99;
+    perctiles = zeros(numFreqs, 2);
     %% Loop Through Channels and Apply Broadband Filter
     for iChan=1:numChans
+        %- get channel power matrix
+        chanPowerMat = squeeze(powerMatZ(iChan, :, 1:seizureStartMark));
+        mask = zeros(size(chanPowerMat));
         
+        %- compute low and high percentiles
+        perctiles(:, 1) = prctile(chanPowerMat, lowperctile, 2);
+        perctiles(:, 2) = prctile(chanPowerMat, highperctile, 2);
+        
+        %- apply mask to each frequency in the power matrix
+        for i=1:numFreqs
+            indices = chanPowerMat(i, :) > perctiles(i, 2);
+            mask(i, indices) = 1;
+            
+            indices = chanPowerMat(i, :) < perctiles(i, 1);
+            mask(i, indices) = -1;
+        end
+        
+        %- create matrix on the mask of only high powers
+        highmask = zeros(size(mask));
+        highmask(mask == 1) = 1;
+        highinteg = trapz(freqs, highmask, 1) ./ trapz(freqs, ones(size(highmask)), 1);
+        
+        imagesc(highinteg);
+        figure;
+        imagesc(mask);
+        colorbar(); hold on;
+        plot([seizureStartMark seizureStartMark], [1 41], 'k')
         
     end
+    
+    
+    
+    

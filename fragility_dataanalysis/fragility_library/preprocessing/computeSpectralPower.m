@@ -9,7 +9,7 @@
 % transformArgs.mtFreqs = [];
 % [powerMat, phaseMat] = computeSpectralPower(eegWave, fs, freqs, 'fourier', transformArgs);
 % 
-function [powerMat, phaseMat, freqs] = computeSpectralPower(eegWave, fs, typeTransform, transformArgs)
+function [powerMat, phaseMat, freqs, t_sec] = computeSpectralPower(eegWave, fs, typeTransform, transformArgs)
     %% Initial Argument Checking
     %- check user entered in correct transforms
     transforms = {'morlet', 'fourier'};
@@ -19,6 +19,8 @@ function [powerMat, phaseMat, freqs] = computeSpectralPower(eegWave, fs, typeTra
     
     %- intialize buffer region if transform calls for it
     BufferMS = 1000 * fs/1000; % buffer region of 1 second (milliseconds)
+    
+    t_sec = -1;
     
     [N, T] = size(eegWave);
     disp(['Number of channels: ', num2str(N)]);
