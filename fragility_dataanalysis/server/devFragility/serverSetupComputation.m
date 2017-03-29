@@ -34,6 +34,7 @@ function serverSetupComputation(patient, winSize, stepSize)
     addpath(rootDir);
 
     % set patientID and seizureID
+    patient_id = [];
     patient_id = patient(1:strfind(patient, 'seiz')-1);
     seizure_id = strcat('_', patient(strfind(patient, 'seiz'):end));
     seeg = 1;
@@ -52,15 +53,17 @@ function serverSetupComputation(patient, winSize, stepSize)
         seizure_id = patient(strfind(patient, 'aw'):end);
         seeg = 0;
     end
-    
-%     dataDir = '/Volumes/NIL_PASS/data/interictal_data/';
+     buffpatid = patient_id;
+    if strcmp(patient_id(end), '_')
+        patient_id = patient_id(1:end-1);
+    end
     %% DEFINE CHANNELS AND CLINICAL ANNOTATIONS
-    %- Edit this file if new patients are added.
     %- Edit this file if new patients are added.
     [included_channels, ezone_labels, earlyspread_labels,...
         latespread_labels, resection_labels, frequency_sampling, ...
         center] ...
-            = determineClinicalAnnotations(patient_id, seizure_id);
+                = determineClinicalAnnotations(patient_id, seizure_id);
+    patient_id = buffpatid;
 
     % set directory to find dataset
     dataDir = fullfile(rootDir, 'data', center);
