@@ -16,9 +16,32 @@ patients = {
 %     'UMMC007_sz1', 'UMMC007_sz2','UMMC007_sz3', ...
 %     'UMMC008_sz1', 'UMMC008_sz2', 'UMMC008_sz3', ...
 %     'UMMC009_sz1', 'UMMC009_sz2', 'UMMC009_sz3', ...
-    'pt1aw2', 'pt1sz4', ...
+%      'pt1aw1','pt1aw2', ...
+%     'pt1aslp1','pt1aslp2', ...
+%     'pt2aw1', 'pt2aw2', ...
+%     'pt2aslp1', 'pt2aslp2', ...
+%     'pt3aw1', ...
+%     'pt3aslp1', 'pt3aslp2', ...
+%     'pt1sz2', 'pt1sz3', 'pt1sz4',...
+%     'pt2sz1' 'pt2sz3' , 'pt2sz4', ...
+%     'pt3sz2' 'pt3sz4', ...
+     'pt6sz3', 'pt6sz4', 'pt6sz5',...
+    'pt7sz19', 'pt7sz21', 'pt7sz22',...
+    'pt8sz1' 'pt8sz2' 'pt8sz3',...
+    'pt10sz1','pt10sz2' 'pt10sz3', ...
+    'pt11sz1' 'pt11sz2' 'pt11sz3' 'pt11sz4', ...
+    'pt12sz1', 'pt12sz2', ...
+    'pt13sz1', 'pt13sz2', 'pt13sz3', 'pt13sz5',...
+    'pt14sz1' 'pt14sz2' 'pt14sz3'  'pt16sz1' 'pt16sz2' 'pt16sz3',...
+    'pt15sz1' 'pt15sz2' 'pt15sz3' 'pt15sz4',...
+    'pt16sz1' 'pt16sz2' 'pt16sz3',...
+%     'pt17sz1' 'pt17sz2',...
 };
-patient = patients{1};
+
+thresholds = linspace(0, 1, 100);
+thresh_sense = zeros(length(patients), length(thresholds));
+parfor iPat=1:length(patients)
+patient = patients{iPat};
 typeTransform = 'fourier';
 
 % Initialization
@@ -117,62 +140,87 @@ perctiles = zeros(numFreqs, 2);
 noiseindices = find(~cellfun(@isempty, cellfun(@(x)strfind(x, 'POLG25'), chanStrs, 'uniform', 0)));
 FONTSIZE = 16;
 
+reject_cell = zeros(length(thresholds), 1);
+
+% tic
 %% Loop Through Channels and Apply Broadband Filter
-% for iChan=1:numChans
-for i=1:length(noiseindices)
-    iChan = noiseindices(i);
-    chan = chanStrs{iChan}
+for iThresh=1:length(thresholds)
+    threshold = thresholds(iThresh);
     
-    
-    %- get channel power matrix
-    chanPowerMat = squeeze(powerMatZ(iChan, :, 1:seizureStartMark));
-    mask = zeros(size(chanPowerMat));
+    thresholdindices = [];
+    for iChan=1:numChans
+    % for i=1:length(noiseindices)
+    %     iChan = noiseindices(i);
+        chan = chanStrs{iChan};
 
-    %-  compute low and high percentiles
-    perctiles(:, 1) = prctile(chanPowerMat, lowperctile, 2);
-    perctiles(:, 2) = prctile(chanPowerMat, highperctile, 2);
 
-    %- apply mask of {-1,0,1} to each frequency in the power matrix
-    for i=1:numFreqs
-        indices = chanPowerMat(i, :) > perctiles(i, 2);
-        mask(i, indices) = 1;
+        %- get channel power matrix
+        chanPowerMat = squeeze(powerMatZ(iChan, :, 1:seizureStartMark));
+        mask = zeros(size(chanPowerMat));
 
-        indices = chanPowerMat(i, :) < perctiles(i, 1);
-        mask(i, indices) = -1;
+        %-  compute low and high percentiles
+        perctiles(:, 1) = prctile(chanPowerMat, lowperctile, 2);
+        perctiles(:, 2) = prctile(chanPowerMat, highperctile, 2);
+
+        %- apply mask of {-1,0,1} to each frequency in the power matrix
+        for i=1:numFreqs
+            indices = chanPowerMat(i, :) > perctiles(i, 2);
+            mask(i, indices) = 1;
+
+            indices = chanPowerMat(i, :) < perctiles(i, 1);
+            mask(i, indices) = -1;
+        end
+
+        %- create matrix on the mask of only high powers
+        highmask = zeros(size(mask));
+        highmask(mask == 1) = 1;
+        highinteg = trapz(freqs, highmask, 1) ./ trapz(freqs, ones(size(highmask)), 1);
+
+       %- log indices greater then a certain threshold
+        rejectindices = find(highinteg >= threshold);
+        thresholdindices = union(thresholdindices, rejectindices);
+        
+%         figure;
+%         subplot(2,1,1);
+%         imagesc(chanPowerMat);
+%         colorbar(); set(gca, 'Box', 'off');
+%         colormap('jet');
+%          set(gca, 'ytick', 1:10:length(freqs), 'yticklabel', freqs(1:10:length(freqs)));
+%         ylabel('Freq (Hz)', 'FontSize', FONTSIZE);
+%         set(gca,'tickdir','out','YDir','normal'); % spectrogram should have low freq on the bottom
+%         ax = gca;
+%         title([patient, ' at electrode: ', chan], 'FontSize', FONTSIZE);
+%         xlabel('Time (sec)', 'FontSize', FONTSIZE);
+% 
+%         subplot(2, 1, 2);
+%         imagesc(highinteg);
+%         colorbar(); hold on;
+%         plot([seizureStartMark seizureStartMark], [1 41], 'k');
+% 
+%         timeStart = timePoints(1, 2) / fs - seizureStartMark * stepSize/fs;
+%         timeEnd = timePoints(end, 2) / fs - seizureStartMark * stepSize/fs;
+%         XLim = get(gca, 'XLim');
+%         XLowerLim = XLim(1);
+%         XUpperLim = XLim(2);
+%         xTickStep = (XUpperLim) / 10;
+%         xTicks = round(timeStart : (abs(timeEnd - timeStart)) / 10 : timeEnd);
+%         set(gca, 'XTick', (XLowerLim+0.5 : xTickStep : XUpperLim+0.5)); set(gca, 'XTickLabel', xTicks); % set xticks and their labels
     end
-
-    %- create matrix on the mask of only high powers
-    highmask = zeros(size(mask));
-    highmask(mask == 1) = 1;
-    highinteg = trapz(freqs, highmask, 1) ./ trapz(freqs, ones(size(highmask)), 1);
-
-    figure;
-    subplot(2,1,1);
-    imagesc(chanPowerMat);
-    colorbar(); set(gca, 'Box', 'off');
-    colormap('jet');
-     set(gca, 'ytick', 1:10:length(freqs), 'yticklabel', freqs(1:10:length(freqs)));
-    ylabel('Freq (Hz)', 'FontSize', FONTSIZE);
-    set(gca,'tickdir','out','YDir','normal'); % spectrogram should have low freq on the bottom
-    ax = gca;
-    title([patient, ' at electrode: ', chan], 'FontSize', FONTSIZE);
-    xlabel('Time (sec)', 'FontSize', FONTSIZE);
-    
-    subplot(2, 1, 2);
-    imagesc(highinteg);
-    colorbar(); hold on;
-    plot([seizureStartMark seizureStartMark], [1 41], 'k');
-    
-    timeStart = timePoints(1, 2) / fs - seizureStartMark * stepSize/fs;
-    timeEnd = timePoints(end, 2) / fs - seizureStartMark * stepSize/fs;
-    XLim = get(gca, 'XLim');
-    XLowerLim = XLim(1);
-    XUpperLim = XLim(2);
-    xTickStep = (XUpperLim) / 10;
-    xTicks = round(timeStart : (abs(timeEnd - timeStart)) / 10 : timeEnd);
-    set(gca, 'XTick', (XLowerLim+0.5 : xTickStep : XUpperLim+0.5)); set(gca, 'XTickLabel', xTicks); % set xticks and their labels
-
+    reject_cell(iThresh) = length(thresholdindices) / numTimes; % store the ratio of data rejected
+%     reject_cell{iThresh} = thresholdindices;
 end
+% toc
+
+thresh_sense(iPat, :) = reject_cell;
+end
+
+figure;
+shadedErrorBar(thresholds, mean(thresh_sense), std(thresh_sense)); hold on;
+xlabel('Thresholds');
+ylabel('% of time Window Loss');
+plot(get(gca, 'XLim'), [0.1, 0.1], 'k--');
+ylim([0 1]);
+title('Data Loss vs Threshold For NIH 6-16 patients');
 
 
 
