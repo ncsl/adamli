@@ -84,5 +84,5 @@ for patient in $patients; do
 	Nnode=$((${numWins}/${NprocperNode}+1)) 			# the number of nodes to compute on
 
 	# run a pbs batch job. Make sure there are no spaces in between the parameters passed
-	qsub -v patient=$patient,winSize=$winSize,stepSize=$stepSize,radius=$radius,numWins=$numWins -N ${jobname} -l nodes=${Nnode}:ppn=${NprocperNode},walltime=${walltime} run_job.pbs
+	qsub -v patient=$patient,winSize=$winSize,stepSize=$stepSize,radius=$radius,numWins=$numWins,RUNCONNECTIVITY=$RUNCONNECTIVITY -N ${jobname} -l nodes=${Nnode}:ppn=${NprocperNode},walltime=${walltime} run_job.pbs
 done
