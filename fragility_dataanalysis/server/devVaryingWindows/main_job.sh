@@ -26,8 +26,8 @@ patients=(
 	# pt3sz2 pt3sz4
 	# pt6sz3 pt6sz4 pt6sz5
 	# UMMC001_sz1 UMMC001_sz2 UMMC001_sz3
-	# UMMC002_sz1 UMMC002_sz2 UMMC002_sz3
-	'UMMC003_sz1 UMMC003_sz2 UMMC003_sz3
+	'UMMC002_sz1 UMMC002_sz2 UMMC002_sz3
+	UMMC003_sz1 UMMC003_sz2 UMMC003_sz3
 	UMMC004_sz1 UMMC004_sz2 UMMC004_sz3
 	UMMC005_sz1 UMMC005_sz2 UMMC005_sz3
 	UMMC006_sz1 UMMC006_sz2 UMMC006_sz3
@@ -44,8 +44,9 @@ patients=(
 	# pt15sz1 pt15sz2 p15sz3 pt15sz4
 	# pt16sz1 pt16sz2 pt16sz3
 	# Pat2sz1p Pat2sz2p Pat2sz3p
-	# Pat16sz1p Pat16sz2p Pat16sz3p
-	# JH101sz2 JH101sz3 JH101sz4
+	# Pat16sz1p 
+	# 'Pat16sz2p Pat16sz3p JH101sz1')
+	# JH101sz1 JH101sz2 JH101sz3 JH101sz4
 	# JH102sz1 JH102sz2 JH102sz3 JH102sz4 JH102sz5 JH102sz6
 	# JH103sz1 JH103sz2 JH103sz3
 	# JH104sz1 JH104sz2 JH104sz3
