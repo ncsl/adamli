@@ -2,7 +2,16 @@
 
 # patients listed 5 per row
 patients=(
-	'Pat16sz2p Pat16sz3p JH101sz1')
+	# 'Pat16sz2p Pat16sz3p JH101sz1')
+	'UMMC001_sz1 UMMC001_sz2 UMMC001_sz3
+	UMMC002_sz1 UMMC002_sz2 UMMC002_sz3
+	UMMC003_sz1 UMMC003_sz2 UMMC003_sz3
+	UMMC004_sz1 UMMC004_sz2 UMMC004_sz3
+	UMMC005_sz1 UMMC005_sz2 UMMC005_sz3
+	UMMC006_sz1 UMMC006_sz2 UMMC006_sz3
+	UMMC007_sz1 UMMC007_sz2 UMMC007_sz3
+	UMMC008_sz1 UMMC008_sz2 UMMC008_sz3
+	UMMC009_sz1 UMMC009_sz2 UMMC009_sz3')
 	# 'pt1aslp1 pt1aslp2 pt1aw1 pt1aw2')
 	# pt2aslp1 pt2aslp2 pt2aw1 pt2aw2
 	# pt3aslp1 pt3aslp2 pt3aw1
