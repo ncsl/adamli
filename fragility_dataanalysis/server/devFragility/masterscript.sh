@@ -2,6 +2,7 @@
 
 # patients listed 5 per row
 patients=(
+	'Pat16sz2p Pat16sz3p JH101sz1')
 	# 'pt1aslp1 pt1aslp2 pt1aw1 pt1aw2')
 	# pt2aslp1 pt2aslp2 pt2aw1 pt2aw2
 	# pt3aslp1 pt3aslp2 pt3aw1
@@ -13,7 +14,7 @@ patients=(
 	# pt6sz3 pt6sz4 pt6sz5')
 	# pt8sz1 pt8sz2 pt8sz3
 	# pt10sz1 pt10sz2 pt10sz3
-	'pt11sz1') 
+	# 'pt11sz1') 
 	# pt11sz2 pt11sz3 pt11sz4
 	# pt14sz1 pt14sz2 pt14sz3 pt15sz1 pt15sz2 pt15sz3 pt15sz4
 	# pt16sz1 pt16sz2 pt16sz3 
