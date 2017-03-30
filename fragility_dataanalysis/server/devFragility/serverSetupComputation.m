@@ -97,7 +97,7 @@ function serverSetupComputation(patient, winSize, stepSize)
 %     else
 %         numWins = size(eeg,2) / stepSize - 1;
 %     end
-    numWins = size(eeg, 2) / stepSize - winSize/stepSize + 1;
+    numWins = floor(size(eeg, 2) / stepSize - winSize/stepSize + 1);
     
     fid = fopen(fileName, 'w');
     fprintf(fid, '%i\n', numWins);
