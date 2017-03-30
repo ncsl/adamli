@@ -1,8 +1,8 @@
 function serverComputeConnectivity(patient, winSize, stepSize, currentWin)
 if nargin==0
-    patient = 'pt3sz2';
     patient = 'pt1sz2';
-    patient = 'Pat2sz1p';
+%     patient = 'pt17sz2';
+%     patient = 'Pat2sz1p';
     currentWin = 3;
 end
 
@@ -63,6 +63,7 @@ end
     latespread_labels, resection_labels, frequency_sampling, ...
     center] ...
             = determineClinicalAnnotations(patient_id, seizure_id);
+fs = frequency_sampling;
 patient_id = buffpatid;
 
 % set dir to find raw data files
@@ -105,12 +106,9 @@ if length(labels(included_channels)) ~= size(eeg(included_channels,:),1)
     disp('Something wrong here...!!!!');
 end
 
-if frequency_sampling ~=1000
-    seizureStart = seizureStart * frequency_sampling/1000;
-    seizureEnd = seizureEnd * frequency_sampling/1000;
-    winSize = winSize*frequency_sampling/1000;
-    stepSize = stepSize*frequency_sampling/1000;
-end
+%- initialize the number of samples in the window / step (ms) 
+numSampsInWin = winSize * frequency_sampling / 1000;
+numSampsInStep = stepSize * frequency_sampling / 1000;
 
 % apply included channels to eeg and labels
 if ~isempty(included_channels)
@@ -144,14 +142,17 @@ else
     disp('no filtering?');
 end
 
-
 % paramters describing the data to be saved
 % window parameters - overlap, #samples, stepsize, window pointer
 lenData = size(eeg,2); % length of data in seconds
 numChans = size(eeg,1);
 
 % initialize timePoints vector and adjacency matrices
-timePoints = [1:stepSize:lenData-winSize+1; winSize:stepSize:lenData]';
+timePoints = [1:numSampsInStep:lenData-numSampsInWin+1; numSampsInWin:numSampsInStep:lenData]';
+
+%- compute seizureStart/End Mark in time windows
+seizureStartMark = find(timePoints(:,2) - seizureStart * frequency_sampling / 1000 == 0);
+seizureEndMark = find(timePoints(:,2) - seizureEnd * frequency_sampling / 1000 == 0);
 
 % get the window of data to compute adjacency
 tempeeg = eeg(:, timePoints(currentWin,1):timePoints(currentWin,2));
@@ -167,11 +168,17 @@ if currentWin == 1
     info.latespread_labels = latespread_labels;
     info.resection_labels = resection_labels;
     info.all_labels = labels;
-    info.seizure_start = seizureStart;
-    info.seizure_end = seizureEnd;
+    info.seizure_start_ms = seizureStart;       % store in ms
+    info.seizure_end_ms = seizureEnd;
+    info.seizureStartMark = seizureStartMark;   % store the actual mark
+    info.seizureEndMark = seizureEndMark;
     info.winSize = winSize;
     info.stepSize = stepSize;
-    info.timePoints = timePoints;
+    info.numSamplesInWin = numSampsInWin;
+    info.numSamplesInStep = numSampsInStep;
+    info.rawtimePoints = timePoints;
+    timePoints(:, 1) = timePoints(:, 1) - 1;
+    info.timePoints = (timePoints - seizureStart * frequency_sampling / 1000) ./ frequency_sampling;
     info.included_channels = included_channels;
     info.frequency_sampling = frequency_sampling;
     info.FILTER_TYPE = FILTER_RAW;
