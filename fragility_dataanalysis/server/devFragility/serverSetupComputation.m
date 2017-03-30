@@ -3,13 +3,13 @@
 function serverSetupComputation(patient, winSize, stepSize)
     if nargin == 0 % testing purposes
         patient='EZT007seiz001';
-        patient ='pt1sz2';
+        patient ='pt17sz1';
 
         % window paramters
         radius = 1.5;
         winSize = 500; % 500 milliseconds
         stepSize = 500; 
-        frequency_sampling = 1000; % in Hz
+%         frequency_sampling = 1000; % in Hz
     end
     
     if nargin == 1
@@ -97,7 +97,11 @@ function serverSetupComputation(patient, winSize, stepSize)
 %     else
 %         numWins = size(eeg,2) / stepSize - 1;
 %     end
-    numWins = floor(size(eeg, 2) / stepSize - winSize/stepSize + 1);
+    
+    numSampsInWin = winSize * frequency_sampling / 1000;
+    numSampsInStep = stepSize * frequency_sampling / 1000;
+    
+    numWins = floor(size(eeg, 2) / numSampsInStep - numSampsInWin/numSampsInStep + 1);
     
     fid = fopen(fileName, 'w');
     fprintf(fid, '%i\n', numWins);
