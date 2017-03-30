@@ -296,7 +296,7 @@ for i=1:N
     ax.FontSize = FONTSIZE;
     xlabel('Along W Space');
     ylabel('Delta Norms');
-    title(['Channel ', num2str(i), ' Delta Norms over Space']);
+    title(['Delta Norms over W Space']);
     legend('Average Norms', 'Min Norms', 'Max Norms');
     
     currfig = gcf;
