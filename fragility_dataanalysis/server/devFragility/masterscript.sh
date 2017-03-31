@@ -85,9 +85,9 @@ for patient in $patients; do
 	echo $patient
 	# set pbs job name
 	if [[ "$RUNCONNECTIVITY" -eq 1 ]]; then
-		jobname="compute_adjacency_${patient}"
+		jobname="comp_adj_par_${patient}"
 	else
-		jobname="compute_perturbation_${patient}"
+		jobname="comp_pert_par_${patient}"
 	fi
 	numWins=$(<./patientMeta/$patient.txt)				# extract the number of windows to compute on
 	Nnode=$((${numWins}/${NprocperNode}+1)) 			# the number of nodes to compute on
