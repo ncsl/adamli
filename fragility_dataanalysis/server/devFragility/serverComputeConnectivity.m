@@ -95,6 +95,8 @@ end
 data = load(fullfile(patient_eeg_path, patient));
 eeg = data.data;
 labels = data.elec_labels;
+
+
 onset_time = data.seiz_start_mark;
 offset_time = data.seiz_end_mark;
 seizureStart = (onset_time); % time seizure starts
