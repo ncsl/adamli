@@ -63,7 +63,6 @@ end
     latespread_labels, resection_labels, frequency_sampling, ...
     center] ...
             = determineClinicalAnnotations(patient_id, seizure_id);
-fs = frequency_sampling;
 patient_id = buffpatid;
 
 % set dir to find raw data files
@@ -95,12 +94,13 @@ end
 data = load(fullfile(patient_eeg_path, patient));
 eeg = data.data;
 labels = data.elec_labels;
-
-
-onset_time = data.seiz_start_mark;
-offset_time = data.seiz_end_mark;
-seizureStart = (onset_time); % time seizure starts
-seizureEnd = (offset_time); % time seizure ends
+engelscore = data.engelscore;
+frequency_sampling = data.fs;
+outcome = data.outcome;
+seizure_eonset_ms = data.seizure_eonset_ms;
+seizure_eoffset_ms = data.seizure_eoffset_ms;
+seizure_conset_ms = data.seizure_conset_ms;
+seizure_coffset_ms = data.seizure_coffset_ms;
 
 clear data
 % check included channels length and how big eeg is
@@ -124,22 +124,22 @@ numHarmonics = floor(frequency_sampling/2/60) - 1;
 %- apply filtering on the eegWave
 if FILTER_RAW == 1
    % apply band notch filter to eeg data
-    eeg = buttfilt(eeg,[59.5 60.5], fs,'stop',1);
-    eeg = buttfilt(eeg,[119.5 120.5], fs,'stop',1);
+    eeg = buttfilt(eeg,[59.5 60.5], frequency_sampling,'stop',1);
+    eeg = buttfilt(eeg,[119.5 120.5], frequency_sampling,'stop',1);
     if frequency_sampling >= 250
-        eeg = buttfilt(eeg,[179.5 180.5], fs,'stop',1);
-        eeg = buttfilt(eeg,[239.5 240.5], fs,'stop',1);
+        eeg = buttfilt(eeg,[179.5 180.5], frequency_sampling,'stop',1);
+        eeg = buttfilt(eeg,[239.5 240.5], frequency_sampling,'stop',1);
 
         if frequency_sampling >= 500
-            eeg = buttfilt(eeg,[299.5 300.5], fs,'stop',1);
-            eeg = buttfilt(eeg,[359.5 360.5], fs,'stop',1);
-            eeg = buttfilt(eeg,[419.5 420.5], fs,'stop',1);
-            eeg = buttfilt(eeg,[479.5 480.5], fs,'stop',1);
+            eeg = buttfilt(eeg,[299.5 300.5], frequency_sampling,'stop',1);
+            eeg = buttfilt(eeg,[359.5 360.5], frequency_sampling,'stop',1);
+            eeg = buttfilt(eeg,[419.5 420.5], frequency_sampling,'stop',1);
+            eeg = buttfilt(eeg,[479.5 480.5], frequency_sampling,'stop',1);
         end
     end
 elseif FILTER_RAW == 2
      % apply an adaptive filtering algorithm.
-    eeg = removePLI_multichan(eeg, fs, numHarmonics, [50,0.01,4], [0.1,2,4], 2, 60);
+    eeg = removePLI_multichan(eeg, frequency_sampling, numHarmonics, [50,0.01,4], [0.1,2,4], 2, 60);
 else 
     disp('no filtering?');
 end
@@ -153,8 +153,8 @@ numChans = size(eeg,1);
 timePoints = [1:numSampsInStep:lenData-numSampsInWin+1; numSampsInWin:numSampsInStep:lenData]';
 
 %- compute seizureStart/End Mark in time windows
-seizureStartMark = find(timePoints(:,2) - seizureStart * frequency_sampling / 1000 == 0);
-seizureEndMark = find(timePoints(:,2) - seizureEnd * frequency_sampling / 1000 == 0);
+seizureStartMark = find(timePoints(:,2) - seizure_eonset_ms * frequency_sampling / 1000 == 0);
+seizureEndMark = find(timePoints(:,2) - seizure_eoffset_ms * frequency_sampling / 1000 == 0);
 
 % get the window of data to compute adjacency
 tempeeg = eeg(:, timePoints(currentWin,1):timePoints(currentWin,2));
@@ -170,17 +170,19 @@ if currentWin == 1
     info.latespread_labels = latespread_labels;
     info.resection_labels = resection_labels;
     info.all_labels = labels;
-    info.seizure_start_ms = seizureStart;       % store in ms
-    info.seizure_end_ms = seizureEnd;
-    info.seizureStartMark = seizureStartMark;   % store the actual mark
-    info.seizureEndMark = seizureEndMark;
+    info.seizure_estart_ms = seizure_eonset_ms;       % store in ms
+    info.seizure_eend_ms = seizure_eoffset_ms;
+    info.seizure_cstart_ms = seizure_conset_ms;
+    info.seizure_coffset_ms = seizure_coffset_ms;
+    info.seizure_estart_mark = seizureStartMark;
+    info.seizure_eend_mark = seizureEndMark;
     info.winSize = winSize;
     info.stepSize = stepSize;
     info.numSamplesInWin = numSampsInWin;
     info.numSamplesInStep = numSampsInStep;
     info.rawtimePoints = timePoints;
     timePoints(:, 1) = timePoints(:, 1) - 1;
-    info.timePoints = (timePoints - seizureStart * frequency_sampling / 1000) ./ frequency_sampling;
+    info.timePoints = (timePoints - seizure_eonset_ms * frequency_sampling / 1000) ./ frequency_sampling;
     info.included_channels = included_channels;
     info.frequency_sampling = frequency_sampling;
     info.FILTER_TYPE = FILTER_RAW;
