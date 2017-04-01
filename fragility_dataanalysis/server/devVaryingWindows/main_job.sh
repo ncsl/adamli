@@ -96,9 +96,9 @@ fi
 for patient in $patients; do
 	echo $patient
 	if [[ "$RUNCONNECTIVITY" -eq 1 ]]; then
-		jobname="compute_adjacency_${patient}"
+		jobname="comp_adj_${patient}"
 	else
-		jobname="compute_perturbation_${patient}"
+		jobname="comp_pert_${patient}"
 	fi
 	# run a pbs batch job. Make sure there are no spaces in between the parameters passed
 	qsub -v RUNCONNECTIVITY=$RUNCONNECTIVITY,patient=$patient,winSize=$winSize -N ${jobname} run_job.pbs

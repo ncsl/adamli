@@ -8,7 +8,7 @@ function [patient_id, date1, recording_start, ...
     fileID = fopen(patient_file_path,'r');
 
     % Read columns of data according to format string.
-    dataArray = textscan(fileID, formatSpec, 'Delimiter',',', 'HeaderLines' ,1 , 'ReturnOnError', false);
+    dataArray = textscan(fileID, formatSpec, 'Delimiter',',', 'HeaderLines' ,1 , 'EmptyValue', NaN, 'ReturnOnError', false);
 
     % Close the text file.
     fclose(fileID);
