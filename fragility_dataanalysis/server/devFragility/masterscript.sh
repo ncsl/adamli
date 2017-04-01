@@ -71,27 +71,15 @@ if [[ "$RUNSLEEP" -eq 1 ]]; then
 	qsub -l walltime=24:00:00,nodes=node232 run_b_sleep.sh
 fi
 
-# 03: Parameters for each pbs job.
-NprocperNode=8						# number of cores per node
-if [[ "${RUNCONNECTIVITY}" -eq 1 ]]; then
-	walltime=00:30:00
-else
-	walltime=01:00:00					# the walltime for each computation
-fi
-
 
 ## 04: Call pbs job, runAnalysis
 for patient in $patients; do
-	echo $patient
-	# set pbs job name
-	if [[ "$RUNCONNECTIVITY" -eq 1 ]]; then
-		jobname="compute_adjacency_${patient}"
-	else
-		jobname="compute_perturbation_${patient}"
-	fi
+	
 	numWins=$(<./patientMeta/$patient.txt)				# extract the number of windows to compute on
-	Nnode=$((${numWins}/${NprocperNode}+1)) 			# the number of nodes to compute on
+	
+	echo $patient
+	echo $numWins
 
 	# run a pbs batch job. Make sure there are no spaces in between the parameters passed
-	qsub -v patient=$patient,winSize=$winSize,stepSize=$stepSize,radius=$radius,numWins=$numWins,RUNCONNECTIVITY=$RUNCONNECTIVITY -N ${jobname} -l nodes=${Nnode}:ppn=${NprocperNode},walltime=${walltime} run_job.pbs
+	sh ./runPatient.sh $patient $winSize $stepSize $radius $numWins $RUNCONNECTIVITY
 done
