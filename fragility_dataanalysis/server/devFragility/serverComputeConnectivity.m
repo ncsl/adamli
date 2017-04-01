@@ -176,6 +176,8 @@ if currentWin == 1
     info.seizure_coffset_ms = seizure_coffset_ms;
     info.seizure_estart_mark = seizureStartMark;
     info.seizure_eend_mark = seizureEndMark;
+    info.engelscore = engelscore;
+    info.outcome = outcome;
     info.winSize = winSize;
     info.stepSize = stepSize;
     info.numSamplesInWin = numSampsInWin;
