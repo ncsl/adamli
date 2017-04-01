@@ -24,8 +24,9 @@ fi
 # 04: Loop through each node
 for ((inode=1; inode <= Nnode; inode++))
 do
-	echo $inode
+	echo $iWin
 	currentNode=$((($inode-1)*$NprocperNode))
+	# currentNode=$((($iWin+7)/NprocperNode))
 
 	# set pbs job name
 	if [[ "$RUNCONNECTIVITY" -eq 1 ]]; then
@@ -34,7 +35,7 @@ do
 		jobname="compute_perturbation_${patient}+${currentNode}"
 	fi
 	
-	echo "Submit job ${inode}"
+	echo "Submit job for ${currentNode}"
 
 	# run a pbs batch job. Make sure there are no spaces in between the parameters passed
 	qsub -v RUNCONNECTIVITY=${RUNCONNECTIVITY},patient=${patient},winSize=${winSize},stepSize=${stepSize},radius=${radius},currentNode=${currentNode},NprocperNode=${NNodes} -N ${jobname} -l nodes=1:ppn=${NprocperNode},walltime=${walltime} run_job.pbs
