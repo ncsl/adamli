@@ -16,9 +16,9 @@ Nnode=$((${numWins}/${NprocperNode}+1)) # the number of nodes to compute on
 
 # 03: Parameters for each pbs job.
 if [[ "${RUNCONNECTIVITY}" -eq 1 ]]; then
-	walltime=00:30:00
+	walltime=00:05:00
 else
-	walltime=01:00:00					# the walltime for each computation
+	walltime=00:10:00					# the walltime for each computation
 fi
 
 # 04: Loop through each node
