@@ -3,6 +3,7 @@
 # patients listed 5 per row
 patients=(
 <<<<<<< HEAD
+<<<<<<< HEAD
 	# 'Pat16sz2p Pat16sz3p JH101sz1')
 	# 'UMMC001_sz1 UMMC001_sz2 UMMC001_sz3
 	# UMMC002_sz1 UMMC002_sz2 UMMC002_sz3
@@ -31,6 +32,8 @@ patients=(
 	pt16sz1 pt16sz2 pt16sz3 
 	pt17sz1 pt17sz2 pt17sz3')
 =======
+=======
+>>>>>>> parent of b9120e2cd... Rerunning UMMC patients parallelized.
 	'Pat16sz2p Pat16sz3p JH101sz1')
 	# 'pt1aslp1 pt1aslp2 pt1aw1 pt1aw2')
 	# pt2aslp1 pt2aslp2 pt2aw1 pt2aw2
