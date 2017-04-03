@@ -29,7 +29,7 @@ patients=(
 	pt12sz1 pt12sz2
 	pt13sz1 pt13sz2 pt13sz3 pt13sz5
 	pt14sz1 pt14sz2 pt14sz3
-	pt15sz1 pt15sz2 p15sz3 pt15sz4
+	pt15sz1 pt15sz2 pt15sz3 pt15sz4
 	pt16sz1 pt16sz2 pt16sz3
 	pt17sz1 pt17sz2 pt17sz3')
 	# Pat2sz1p Pat2sz2p Pat2sz3p
@@ -108,5 +108,5 @@ for patient in $patients; do
 		jobname="comp_pert_${patient}"
 	fi
 	# run a pbs batch job. Make sure there are no spaces in between the parameters passed
-	qsub -v RUNCONNECTIVITY=$RUNCONNECTIVITY,patient=$patient,winSize=$winSize,stepSize=$stepSize,radius=$radius,Nnode=$Nnode -N ${jobname} -l nodes=${Nnode}:ppn=${NprocperNode},walltime=${walltime} run_job.pbs
+	qsub -v RUNCONNECTIVITY=$RUNCONNECTIVITY,patient=$patient,winSize=$winSize,stepSize=$stepSize,radius=$radius,Nnode=$Nnode,NprocperNode=$NprocperNode -N ${jobname} -l nodes=${Nnode}:ppn=${NprocperNode},walltime=${walltime} run_job.pbs
 done

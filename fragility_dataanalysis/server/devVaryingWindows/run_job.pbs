@@ -14,7 +14,9 @@ module load matlab/matlab2013a
 # also make sure PBS -d is the correct directory 
 cd /home/ali/adamli/fragility_dataanalysis/server/devVaryingWindows/
 
-for ((proc=0; proc<= ((${Nnode})); proc++))
+# ((proc=1; proc<= ((${Nnode})); proc++))
+for proc in `seq 1 ${NprocperNode}`;
 do 
+	echo $proc
 	pbsdsh -n $proc /home/ali/adamli/fragility_dataanalysis/server/devVaryingWindows/runAnalysis.sh ${proc} ${patient} ${winSize} ${stepSize} ${radius} ${RUNCONNECTIVITY} ${Nnode} &
 done

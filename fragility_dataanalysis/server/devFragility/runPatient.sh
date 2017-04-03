@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-=======
 #!/bin/bash -l
 cd /home/ali/adamli/fragility_dataanalysis/server/devFragility/
 
@@ -42,4 +40,3 @@ do
 	# run a pbs batch job. Make sure there are no spaces in between the parameters passed
 	qsub -v RUNCONNECTIVITY=${RUNCONNECTIVITY},patient=${patient},winSize=${winSize},stepSize=${stepSize},radius=${radius},currentNode=${currentNode},NprocperNode=${NNodes} -N ${jobname} -l nodes=1:ppn=${NprocperNode},walltime=${walltime} run_job.pbs
 done
->>>>>>> bd9f6dfff5def0140cb9af066ab887cbdc2449a1
