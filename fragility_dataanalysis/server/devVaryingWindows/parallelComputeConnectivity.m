@@ -194,7 +194,11 @@ if iProc == 1
     info.frequency_sampling = frequency_sampling;
     info.FILTER_TYPE = FILTER_RAW;
 
-    save(fullfile(tempDir, 'info', 'infoAdjMat.mat'), 'info');
+    if ~exist(fullfile(tempDir, 'info'), 'dir')
+        mkdir(fullfile(tempDir, 'info'));
+    end
+    
+    save(fullfile(tempDir,'info', 'infoAdjMat.mat'), 'info');
 end
 fprintf('Should have finished saving info mat.\n');
 
