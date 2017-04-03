@@ -22,4 +22,8 @@ do
 	pbsdsh -n $proc /home/ali/adamli/fragility_dataanalysis/server/devVaryingWindows/runAnalysis.sh ${id} ${patient} ${winSize} ${stepSize} ${radius} ${RUNCONNECTIVITY} ${Nnode} &
 done
 
+proc = ${NprocperNode}
+pbsdsh -n $proc /home/ali/adamli/fragility_dataanalysis/server/devVaryingWindows/mergeComputes.sh ${proc} ${patient} ${winSize} ${stepSize} ${radius} ${RUNCONNECTIVITY} &
+
+# need to add this wait to make sure things finish
 wait
