@@ -1,0 +1,23 @@
+<<<<<<< HEAD
+=======
+#!/bin/bash -l
+#PBS -M ali39@jhu.edu
+#PBS -m abe
+#PBS -q dque
+#PBS -S /bin/bash
+#PBS -d /home/ali/adamli/fragility_dataanalysis/server/devVaryingWindows/
+#PBS -e localhost:${PBS_O_WORKDIR}/_log/${PBS_JOBNAME}.e${PBS_JOBID}
+#PBS -o localhost:${PBS_O_WORKDIR}/_log/${PBS_JOBNAME}.o${PBS_JOBID}
+
+source /etc/profile.modules
+module load matlab/matlab2013a
+
+# make sure to cd to the correct directory.
+# also make sure PBS -d is the correct directory 
+cd /home/ali/adamli/fragility_dataanalysis/server/devVaryingWindows/
+
+for ((proc=0; proc<= Nnode; proc++))
+do 
+	pbsdsh -n $proc /home/ali/adamli/fragility_dataanalysis/server/devVaryingWindows/runAnalysis.sh ${proc} ${patient} ${numWins} ${winSize} ${stepSize} ${radius} ${RUNCONNECTIVITY} ${Nnode} &
+done
+>>>>>>> bd9f6dfff5def0140cb9af066ab887cbdc2449a1
