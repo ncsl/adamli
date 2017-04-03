@@ -25,7 +25,7 @@ matlab_jvm="matlab -nojvm -nodesktop -nosplash -r"
 # open matlab and call functions
 if [[ "$RUNCONNECTIVITY" -eq 1 ]]; then
 	echo "Running connectivity computation."
-	matlab -logfile /home/ali/adamli/fragility_dataanalysis/server/devVaryingWindows/_log/${patient}_job$1.txt -nojvm -nodisplay -nosplash -r "currentpatient='$patient'; \
+	matlab -logfile /home/ali/adamli/fragility_dataanalysis/server/devVaryingWindows/_log/$2_job$1.txt -nojvm -nodisplay -nosplash -r "currentpatient='$patient'; \
 		parallelComputeConnectivity(currentpatient, $winSize, $stepSize, $proc, $numProcs);"
 else
 	echo "Running perturbation computation."
