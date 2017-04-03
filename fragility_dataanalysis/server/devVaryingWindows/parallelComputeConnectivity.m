@@ -196,12 +196,13 @@ if iProc == 1
 end
 fprintf('Should have finished saving info mat.\n');
 
-% filename to be saved temporarily
-fileName = strcat(patient, '_adjmats_', num2str(currentWin));
 
 %- save file for all the windows
 for iWin=1:length(windows)
     currentWin = windows(iWin);
+    % filename to be saved temporarily
+    fileName = strcat(patient, '_adjmats_', num2str(currentWin));
+
     % get the window of data to compute adjacency
     tempeeg = eeg(:, timePoints(currentWin,1):timePoints(currentWin,2));
 
