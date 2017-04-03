@@ -15,8 +15,11 @@ module load matlab/matlab2013a
 cd /home/ali/adamli/fragility_dataanalysis/server/devVaryingWindows/
 
 # ((proc=1; proc<= ((${Nnode})); proc++))
-for ((proc=1; proc <= ((${NprocperNode})); proc++))
+for ((proc=0; proc < ((${NprocperNode})); proc++))
 do 
 	echo $proc
-	pbsdsh -n $proc /home/ali/adamli/fragility_dataanalysis/server/devVaryingWindows/runAnalysis.sh ${proc} ${patient} ${winSize} ${stepSize} ${radius} ${RUNCONNECTIVITY} ${Nnode} &
+	id=$((proc+1))
+	pbsdsh -n $proc /home/ali/adamli/fragility_dataanalysis/server/devVaryingWindows/runAnalysis.sh ${id} ${patient} ${winSize} ${stepSize} ${radius} ${RUNCONNECTIVITY} ${Nnode} &
 done
+
+wait

@@ -3,6 +3,9 @@
 source /etc/profile.modules
 module load matlab/matlab2013a
 
+cd /home/ali/adamli/fragility_dataanalysis/server/devVaryingWindows/
+
+
 ## 00: Load in input parameters
 proc="$1"
 patient="$2"
