@@ -21,6 +21,11 @@ matlab_jvm="matlab -nojvm -nodesktop -nosplash -r"
 		exit 1;
 	}
 
+echo $winSize
+echo $stepSize
+echo $proc
+echo $numProcs
+
 # run adjacency computation and then run perturbation analysis on the same patient/seizure
 # open matlab and call functions
 if [[ "$RUNCONNECTIVITY" -eq 1 ]]; then
