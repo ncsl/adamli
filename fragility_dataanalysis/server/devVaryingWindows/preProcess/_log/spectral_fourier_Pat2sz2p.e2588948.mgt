@@ -1,0 +1,668 @@
+/var/spool/torque/mom_priv/jobs/2588948.mgt.SC: line 22: proc: command not found
+Terminated
+Terminated
+/apps/MATLAB/R2013a/bin/activate_matlab.sh: line 690:   497 Killed                  /apps/MATLAB/R2013a/sys/java/jre/glnxa64/jre/bin/java -Djava.ext.dirs=/apps/MATLAB/R2013a/sys/java/jre/glnxa64/jre/lib/ext:/apps/MATLAB/R2013a/java/jar:/apps/MATLAB/R2013a/java/jar/cmlink/:/apps/MATLAB/R2013a/java/jar/help/:/apps/MATLAB/R2013a/java/jar/ja_JP/:/apps/MATLAB/R2013a/java/jar/org/:/apps/MATLAB/R2013a/java/jar/physmod/:/apps/MATLAB/R2013a/java/jar/project/:/apps/MATLAB/R2013a/java/jar/toolbox/:/apps/MATLAB/R2013a/java/jar/zh_CN/:/apps/MATLAB/R2013a/java/jarext:/apps/MATLAB/R2013a/java/jarext/axis2/:/apps/MATLAB/R2013a/java/jarext/chilkat/:/apps/MATLAB/R2013a/java/jarext/connector/:/apps/MATLAB/R2013a/java/jarext/connector_api/:/apps/MATLAB/R2013a/java/jarext/distcomp/:/apps/MATLAB/R2013a/java/jarext/geotools/:/apps/MATLAB/R2013a/java/jarext/guice/:/apps/MATLAB/R2013a/java/jarext/ice/:/apps/MATLAB/R2013a/java/jarext/jide/:/apps/MATLAB/R2013a/java/jarext/jung/:/apps/MATLAB/R2013a/java/jarext/jxbrowser/:/apps/MATLAB/R2013a/java/jarext/saxon9.notices/:/apps/MATLAB/R2013a/java/jarext/sqlite4java/:/apps/MATLAB/R2013a/java/jarext/svnkit/:/apps/MATLAB/R2013a/java/jarext/webservices/ com.mathworks.activationclient.ActivationApplication -root /apps/MATLAB/R2013a -fromMatlab
+pbsdsh: task 119 exit status 1
+pbsdsh: task 114 exit status 1
+pbsdsh: task 117 exit status 1
+pbsdsh: task 112 exit status 1
+pbsdsh: task 115 exit status 1
+pbsdsh: task 118 exit status 1
+pbsdsh: task 116 exit status 1
+pbsdsh: task 113 exit status 1
+{Undefined function or variable "winSizefs".
+
+Error in computeChannelSpectrum (line 192)
+    chanData.winSize = winSizefs;
+} 
+{Undefined function or variable "winSizefs".
+
+Error in computeChannelSpectrum (line 192)
+    chanData.winSize = winSizefs;
+} 
+{Undefined function or variable "winSizefs".
+
+Error in computeChannelSpectrum (line 192)
+    chanData.winSize = winSizefs;
+} 
+{Undefined function or variable "winSizefs".
+
+Error in computeChannelSpectrum (line 192)
+    chanData.winSize = winSizefs;
+} 
+{Undefined function or variable "winSizefs".
+
+Error in computeChannelSpectrum (line 192)
+    chanData.winSize = winSizefs;
+} 
+{Undefined function or variable "winSizefs".
+
+Error in computeChannelSpectrum (line 192)
+    chanData.winSize = winSizefs;
+} 
+{Undefined function or variable "winSizefs".
+
+Error in computeChannelSpectrum (line 192)
+    chanData.winSize = winSizefs;
+} 
+{Undefined function or variable "winSizefs".
+
+Error in computeChannelSpectrum (line 192)
+    chanData.winSize = winSizefs;
+} 
+{Undefined function or variable "winSizefs".
+
+Error in computeChannelSpectrum (line 192)
+    chanData.winSize = winSizefs;
+} 
+{Undefined function or variable "winSizefs".
+
+Error in computeChannelSpectrum (line 192)
+    chanData.winSize = winSizefs;
+} 
+{Undefined function or variable "winSizefs".
+
+Error in computeChannelSpectrum (line 192)
+    chanData.winSize = winSizefs;
+} 
+{Undefined function or variable "winSizefs".
+
+Error in computeChannelSpectrum (line 192)
+    chanData.winSize = winSizefs;
+} 
+{Undefined function or variable "winSizefs".
+
+Error in computeChannelSpectrum (line 192)
+    chanData.winSize = winSizefs;
+} 
+{Undefined function or variable "winSizefs".
+
+Error in computeChannelSpectrum (line 192)
+    chanData.winSize = winSizefs;
+} 
+{Undefined function or variable "winSizefs".
+
+Error in computeChannelSpectrum (line 192)
+    chanData.winSize = winSizefs;
+} 
+{Undefined function or variable "winSizefs".
+
+Error in computeChannelSpectrum (line 192)
+    chanData.winSize = winSizefs;
+} 
+{Undefined function or variable "winSizefs".
+
+Error in computeChannelSpectrum (line 192)
+    chanData.winSize = winSizefs;
+} 
+{Undefined function or variable "winSizefs".
+
+Error in computeChannelSpectrum (line 192)
+    chanData.winSize = winSizefs;
+} 
+{Undefined function or variable "winSizefs".
+
+Error in computeChannelSpectrum (line 192)
+    chanData.winSize = winSizefs;
+} 
+{Undefined function or variable "winSizefs".
+
+Error in computeChannelSpectrum (line 192)
+    chanData.winSize = winSizefs;
+} 
+{Undefined function or variable "winSizefs".
+
+Error in computeChannelSpectrum (line 192)
+    chanData.winSize = winSizefs;
+} 
+{Undefined function or variable "winSizefs".
+
+Error in computeChannelSpectrum (line 192)
+    chanData.winSize = winSizefs;
+} 
+{Undefined function or variable "winSizefs".
+
+Error in computeChannelSpectrum (line 192)
+    chanData.winSize = winSizefs;
+} 
+{Undefined function or variable "winSizefs".
+
+Error in computeChannelSpectrum (line 192)
+    chanData.winSize = winSizefs;
+} 
+{Undefined function or variable "winSizefs".
+
+Error in computeChannelSpectrum (line 192)
+    chanData.winSize = winSizefs;
+} 
+{Undefined function or variable "winSizefs".
+
+Error in computeChannelSpectrum (line 192)
+    chanData.winSize = winSizefs;
+} 
+{Undefined function or variable "winSizefs".
+
+Error in computeChannelSpectrum (line 192)
+    chanData.winSize = winSizefs;
+} 
+{Undefined function or variable "winSizefs".
+
+Error in computeChannelSpectrum (line 192)
+    chanData.winSize = winSizefs;
+} 
+{Undefined function or variable "winSizefs".
+
+Error in computeChannelSpectrum (line 192)
+    chanData.winSize = winSizefs;
+} 
+{Undefined function or variable "winSizefs".
+
+Error in computeChannelSpectrum (line 192)
+    chanData.winSize = winSizefs;
+} 
+{Undefined function or variable "winSizefs".
+
+Error in computeChannelSpectrum (line 192)
+    chanData.winSize = winSizefs;
+} 
+{Undefined function or variable "winSizefs".
+
+Error in computeChannelSpectrum (line 192)
+    chanData.winSize = winSizefs;
+} 
+{Undefined function or variable "winSizefs".
+
+Error in computeChannelSpectrum (line 192)
+    chanData.winSize = winSizefs;
+} 
+{Undefined function or variable "winSizefs".
+
+Error in computeChannelSpectrum (line 192)
+    chanData.winSize = winSizefs;
+} 
+{Undefined function or variable "winSizefs".
+
+Error in computeChannelSpectrum (line 192)
+    chanData.winSize = winSizefs;
+} 
+{Undefined function or variable "winSizefs".
+
+Error in computeChannelSpectrum (line 192)
+    chanData.winSize = winSizefs;
+} 
+{Undefined function or variable "winSizefs".
+
+Error in computeChannelSpectrum (line 192)
+    chanData.winSize = winSizefs;
+} 
+{Undefined function or variable "winSizefs".
+
+Error in computeChannelSpectrum (line 192)
+    chanData.winSize = winSizefs;
+} 
+{Undefined function or variable "winSizefs".
+
+Error in computeChannelSpectrum (line 192)
+    chanData.winSize = winSizefs;
+} 
+{Undefined function or variable "winSizefs".
+
+Error in computeChannelSpectrum (line 192)
+    chanData.winSize = winSizefs;
+} 
+{Undefined function or variable "winSizefs".
+
+Error in computeChannelSpectrum (line 192)
+    chanData.winSize = winSizefs;
+} 
+{Undefined function or variable "winSizefs".
+
+Error in computeChannelSpectrum (line 192)
+    chanData.winSize = winSizefs;
+} 
+{Undefined function or variable "winSizefs".
+
+Error in computeChannelSpectrum (line 192)
+    chanData.winSize = winSizefs;
+} 
+{Undefined function or variable "winSizefs".
+
+Error in computeChannelSpectrum (line 192)
+    chanData.winSize = winSizefs;
+} 
+{Undefined function or variable "winSizefs".
+
+Error in computeChannelSpectrum (line 192)
+    chanData.winSize = winSizefs;
+} 
+{Undefined function or variable "winSizefs".
+
+Error in computeChannelSpectrum (line 192)
+    chanData.winSize = winSizefs;
+} 
+{Undefined function or variable "winSizefs".
+
+Error in computeChannelSpectrum (line 192)
+    chanData.winSize = winSizefs;
+} 
+{Undefined function or variable "winSizefs".
+
+Error in computeChannelSpectrum (line 192)
+    chanData.winSize = winSizefs;
+} 
+{Undefined function or variable "winSizefs".
+
+Error in computeChannelSpectrum (line 192)
+    chanData.winSize = winSizefs;
+} 
+{Undefined function or variable "winSizefs".
+
+Error in computeChannelSpectrum (line 192)
+    chanData.winSize = winSizefs;
+} 
+{Undefined function or variable "winSizefs".
+
+Error in computeChannelSpectrum (line 192)
+    chanData.winSize = winSizefs;
+} 
+{Undefined function or variable "winSizefs".
+
+Error in computeChannelSpectrum (line 192)
+    chanData.winSize = winSizefs;
+} 
+{Undefined function or variable "winSizefs".
+
+Error in computeChannelSpectrum (line 192)
+    chanData.winSize = winSizefs;
+} 
+{Undefined function or variable "winSizefs".
+
+Error in computeChannelSpectrum (line 192)
+    chanData.winSize = winSizefs;
+} 
+{Undefined function or variable "winSizefs".
+
+Error in computeChannelSpectrum (line 192)
+    chanData.winSize = winSizefs;
+} 
+{Undefined function or variable "winSizefs".
+
+Error in computeChannelSpectrum (line 192)
+    chanData.winSize = winSizefs;
+} 
+{Undefined function or variable "winSizefs".
+
+Error in computeChannelSpectrum (line 192)
+    chanData.winSize = winSizefs;
+} 
+{Undefined function or variable "winSizefs".
+
+Error in computeChannelSpectrum (line 192)
+    chanData.winSize = winSizefs;
+} 
+{Undefined function or variable "winSizefs".
+
+Error in computeChannelSpectrum (line 192)
+    chanData.winSize = winSizefs;
+} 
+{Undefined function or variable "winSizefs".
+
+Error in computeChannelSpectrum (line 192)
+    chanData.winSize = winSizefs;
+} 
+{Undefined function or variable "winSizefs".
+
+Error in computeChannelSpectrum (line 192)
+    chanData.winSize = winSizefs;
+} 
+{Undefined function or variable "winSizefs".
+
+Error in computeChannelSpectrum (line 192)
+    chanData.winSize = winSizefs;
+} 
+{Undefined function or variable "winSizefs".
+
+Error in computeChannelSpectrum (line 192)
+    chanData.winSize = winSizefs;
+} 
+{Undefined function or variable "winSizefs".
+
+Error in computeChannelSpectrum (line 192)
+    chanData.winSize = winSizefs;
+} 
+{Undefined function or variable "winSizefs".
+
+Error in computeChannelSpectrum (line 192)
+    chanData.winSize = winSizefs;
+} 
+{Undefined function or variable "winSizefs".
+
+Error in computeChannelSpectrum (line 192)
+    chanData.winSize = winSizefs;
+} 
+{Undefined function or variable "winSizefs".
+
+Error in computeChannelSpectrum (line 192)
+    chanData.winSize = winSizefs;
+} 
+{Undefined function or variable "winSizefs".
+
+Error in computeChannelSpectrum (line 192)
+    chanData.winSize = winSizefs;
+} 
+{Undefined function or variable "winSizefs".
+
+Error in computeChannelSpectrum (line 192)
+    chanData.winSize = winSizefs;
+} 
+{Undefined function or variable "winSizefs".
+
+Error in computeChannelSpectrum (line 192)
+    chanData.winSize = winSizefs;
+} 
+{Undefined function or variable "winSizefs".
+
+Error in computeChannelSpectrum (line 192)
+    chanData.winSize = winSizefs;
+} 
+{Undefined function or variable "winSizefs".
+
+Error in computeChannelSpectrum (line 192)
+    chanData.winSize = winSizefs;
+} 
+{Undefined function or variable "winSizefs".
+
+Error in computeChannelSpectrum (line 192)
+    chanData.winSize = winSizefs;
+} 
+{Undefined function or variable "winSizefs".
+
+Error in computeChannelSpectrum (line 192)
+    chanData.winSize = winSizefs;
+} 
+{Undefined function or variable "winSizefs".
+
+Error in computeChannelSpectrum (line 192)
+    chanData.winSize = winSizefs;
+} 
+{Undefined function or variable "winSizefs".
+
+Error in computeChannelSpectrum (line 192)
+    chanData.winSize = winSizefs;
+} 
+{Undefined function or variable "winSizefs".
+
+Error in computeChannelSpectrum (line 192)
+    chanData.winSize = winSizefs;
+} 
+{Undefined function or variable "winSizefs".
+
+Error in computeChannelSpectrum (line 192)
+    chanData.winSize = winSizefs;
+} 
+{Undefined function or variable "winSizefs".
+
+Error in computeChannelSpectrum (line 192)
+    chanData.winSize = winSizefs;
+} 
+{Undefined function or variable "winSizefs".
+
+Error in computeChannelSpectrum (line 192)
+    chanData.winSize = winSizefs;
+} 
+{Undefined function or variable "winSizefs".
+
+Error in computeChannelSpectrum (line 192)
+    chanData.winSize = winSizefs;
+} 
+{Undefined function or variable "winSizefs".
+
+Error in computeChannelSpectrum (line 192)
+    chanData.winSize = winSizefs;
+} 
+{Undefined function or variable "winSizefs".
+
+Error in computeChannelSpectrum (line 192)
+    chanData.winSize = winSizefs;
+} 
+{Undefined function or variable "winSizefs".
+
+Error in computeChannelSpectrum (line 192)
+    chanData.winSize = winSizefs;
+} 
+{Undefined function or variable "winSizefs".
+
+Error in computeChannelSpectrum (line 192)
+    chanData.winSize = winSizefs;
+} 
+{Undefined function or variable "winSizefs".
+
+Error in computeChannelSpectrum (line 192)
+    chanData.winSize = winSizefs;
+} 
+{Undefined function or variable "winSizefs".
+
+Error in computeChannelSpectrum (line 192)
+    chanData.winSize = winSizefs;
+} 
+{Undefined function or variable "winSizefs".
+
+Error in computeChannelSpectrum (line 192)
+    chanData.winSize = winSizefs;
+} 
+{Undefined function or variable "winSizefs".
+
+Error in computeChannelSpectrum (line 192)
+    chanData.winSize = winSizefs;
+} 
+{Undefined function or variable "winSizefs".
+
+Error in computeChannelSpectrum (line 192)
+    chanData.winSize = winSizefs;
+} 
+{Undefined function or variable "winSizefs".
+
+Error in computeChannelSpectrum (line 192)
+    chanData.winSize = winSizefs;
+} 
+{Undefined function or variable "winSizefs".
+
+Error in computeChannelSpectrum (line 192)
+    chanData.winSize = winSizefs;
+} 
+{Undefined function or variable "winSizefs".
+
+Error in computeChannelSpectrum (line 192)
+    chanData.winSize = winSizefs;
+} 
+{Undefined function or variable "winSizefs".
+
+Error in computeChannelSpectrum (line 192)
+    chanData.winSize = winSizefs;
+} 
+{Undefined function or variable "winSizefs".
+
+Error in computeChannelSpectrum (line 192)
+    chanData.winSize = winSizefs;
+} 
+{Undefined function or variable "winSizefs".
+
+Error in computeChannelSpectrum (line 192)
+    chanData.winSize = winSizefs;
+} 
+{Undefined function or variable "winSizefs".
+
+Error in computeChannelSpectrum (line 192)
+    chanData.winSize = winSizefs;
+} 
+{Undefined function or variable "winSizefs".
+
+Error in computeChannelSpectrum (line 192)
+    chanData.winSize = winSizefs;
+} 
+{Undefined function or variable "winSizefs".
+
+Error in computeChannelSpectrum (line 192)
+    chanData.winSize = winSizefs;
+} 
+{Undefined function or variable "winSizefs".
+
+Error in computeChannelSpectrum (line 192)
+    chanData.winSize = winSizefs;
+} 
+{Undefined function or variable "winSizefs".
+
+Error in computeChannelSpectrum (line 192)
+    chanData.winSize = winSizefs;
+} 
+{Undefined function or variable "winSizefs".
+
+Error in computeChannelSpectrum (line 192)
+    chanData.winSize = winSizefs;
+} 
+{Undefined function or variable "winSizefs".
+
+Error in computeChannelSpectrum (line 192)
+    chanData.winSize = winSizefs;
+} 
+{Undefined function or variable "winSizefs".
+
+Error in computeChannelSpectrum (line 192)
+    chanData.winSize = winSizefs;
+} 
+{Undefined function or variable "winSizefs".
+
+Error in computeChannelSpectrum (line 192)
+    chanData.winSize = winSizefs;
+} 
+{Undefined function or variable "winSizefs".
+
+Error in computeChannelSpectrum (line 192)
+    chanData.winSize = winSizefs;
+} 
+{Undefined function or variable "winSizefs".
+
+Error in computeChannelSpectrum (line 192)
+    chanData.winSize = winSizefs;
+} 
+{Undefined function or variable "winSizefs".
+
+Error in computeChannelSpectrum (line 192)
+    chanData.winSize = winSizefs;
+} 
+{Undefined function or variable "winSizefs".
+
+Error in computeChannelSpectrum (line 192)
+    chanData.winSize = winSizefs;
+} 
+{Undefined function or variable "winSizefs".
+
+Error in computeChannelSpectrum (line 192)
+    chanData.winSize = winSizefs;
+} 
+{Undefined function or variable "winSizefs".
+
+Error in computeChannelSpectrum (line 192)
+    chanData.winSize = winSizefs;
+} 
+{Undefined function or variable "winSizefs".
+
+Error in computeChannelSpectrum (line 192)
+    chanData.winSize = winSizefs;
+} 
+{Undefined function or variable "winSizefs".
+
+Error in computeChannelSpectrum (line 192)
+    chanData.winSize = winSizefs;
+} 
+{Undefined function or variable "winSizefs".
+
+Error in computeChannelSpectrum (line 192)
+    chanData.winSize = winSizefs;
+} 
+{Undefined function or variable "winSizefs".
+
+Error in computeChannelSpectrum (line 192)
+    chanData.winSize = winSizefs;
+} 
+{Undefined function or variable "winSizefs".
+
+Error in computeChannelSpectrum (line 192)
+    chanData.winSize = winSizefs;
+} 
+{Undefined function or variable "winSizefs".
+
+Error in computeChannelSpectrum (line 192)
+    chanData.winSize = winSizefs;
+} 
+{Undefined function or variable "winSizefs".
+
+Error in computeChannelSpectrum (line 192)
+    chanData.winSize = winSizefs;
+} 
+{Undefined function or variable "winSizefs".
+
+Error in computeChannelSpectrum (line 192)
+    chanData.winSize = winSizefs;
+} 
+{Undefined function or variable "winSizefs".
+
+Error in computeChannelSpectrum (line 192)
+    chanData.winSize = winSizefs;
+} 
+{Undefined function or variable "winSizefs".
+
+Error in computeChannelSpectrum (line 192)
+    chanData.winSize = winSizefs;
+} 
+{Undefined function or variable "winSizefs".
+
+Error in computeChannelSpectrum (line 192)
+    chanData.winSize = winSizefs;
+} 
+{Undefined function or variable "winSizefs".
+
+Error in computeChannelSpectrum (line 192)
+    chanData.winSize = winSizefs;
+} 
+{Undefined function or variable "winSizefs".
+
+Error in computeChannelSpectrum (line 192)
+    chanData.winSize = winSizefs;
+} 
+{Undefined function or variable "winSizefs".
+
+Error in computeChannelSpectrum (line 192)
+    chanData.winSize = winSizefs;
+} 
+{Undefined function or variable "winSizefs".
+
+Error in computeChannelSpectrum (line 192)
+    chanData.winSize = winSizefs;
+} 
+{Undefined function or variable "winSizefs".
+
+Error in computeChannelSpectrum (line 192)
+    chanData.winSize = winSizefs;
+} 
+{Undefined function or variable "winSizefs".
+
+Error in computeChannelSpectrum (line 192)
+    chanData.winSize = winSizefs;
+} 
+{Undefined function or variable "winSizefs".
+
+Error in computeChannelSpectrum (line 192)
+    chanData.winSize = winSizefs;
+} 
+{Undefined function or variable "winSizefs".
+
+Error in computeChannelSpectrum (line 192)
+    chanData.winSize = winSizefs;
+} 
+{Undefined function or variable "winSizefs".
+
+Error in computeChannelSpectrum (line 192)
+    chanData.winSize = winSizefs;
+} 
+

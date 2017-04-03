@@ -1,0 +1,48 @@
+----------------------------------------
+Begin PBS Prologue Sun Apr  2 02:07:25 EDT 2017 1491113245
+Job ID:		2676779.mgt
+Username:	ali
+Group:		sarma
+Nodes:		node186
+End PBS Prologue Sun Apr  2 02:07:25 EDT 2017 1491113245
+----------------------------------------
+Running connectivity computation.
+Running connectivity computation.
+
+                            < M A T L A B (R) >
+                  Copyright 1984-2013 The MathWorks, Inc.
+                    R2013a (8.1.0.604) 64-bit (glnxa64)
+                             February 15, 2013
+
+
+                            < M A T L A B (R) >
+                  Copyright 1984-2013 The MathWorks, Inc.
+                    R2013a (8.1.0.604) 64-bit (glnxa64)
+                             February 15, 2013
+
+ 
+ 
+To get started, type one of these: helpwin, helpdesk, or demo.
+To get started, type one of these: helpwin, helpdesk, or demo.
+For product information, visit www.mathworks.com.
+For product information, visit www.mathworks.com.
+ 
+ 
+[Warning: Directory already exists.] 
+[> In serverComputeConnectivity at 74] 
+----------------------------------------
+Begin PBS Epilogue Sun Apr  2 02:07:52 EDT 2017 1491113272
+Job ID:		2676779.mgt
+Username:	ali
+Group:		sarma
+Job Name:	compute_adjacency_pt2sz4_8
+Session:	5315
+Limits:		neednodes=1:ppn=8,nodes=1:ppn=8,walltime=00:30:00
+Resources:	cput=00:00:00,mem=7952kb,vmem=206060kb,walltime=00:00:22
+Queue:		dque
+Account:		
+Nodes:	node186
+Killing leftovers...
+
+End PBS Epilogue Sun Apr  2 02:07:53 EDT 2017 1491113273
+----------------------------------------

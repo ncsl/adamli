@@ -1,0 +1,989 @@
+----------------------------------------
+Begin PBS Prologue Thu Mar 30 11:55:45 EDT 2017 1490889345
+Job ID:		2633334.mgt
+Username:	ali
+Group:		sarma
+Nodes:		node093
+End PBS Prologue Thu Mar 30 11:55:45 EDT 2017 1490889345
+----------------------------------------
+500
+500
+1.5
+1
+Running connectivity computation.
+
+                            < M A T L A B (R) >
+                  Copyright 1984-2013 The MathWorks, Inc.
+                    R2013a (8.1.0.604) 64-bit (glnxa64)
+                             February 15, 2013
+
+ 
+To get started, type one of these: helpwin, helpdesk, or demo.
+For product information, visit www.mathworks.com.
+ 
+Looking at patient: UMMC007_sz3
+
+patient_eeg_path =
+
+/home/ali/adamli/fragility_dataanalysis/data/ummc/UMMC007_sz3
+
+
+patient =
+
+UMMC007_sz3
+
+Adaptive filtering ...
+Finished: 1 out of 698.292
+Finished: 2 out of 698.292
+Finished: 3 out of 698.292
+Finished: 4 out of 698.292
+Finished: 5 out of 698.292
+Finished: 6 out of 698.292
+Finished: 7 out of 698.292
+Finished: 8 out of 698.292
+Finished: 9 out of 698.292
+Finished: 10 out of 698.292
+Finished: 11 out of 698.292
+Finished: 12 out of 698.292
+Finished: 13 out of 698.292
+Finished: 14 out of 698.292
+Finished: 15 out of 698.292
+Finished: 16 out of 698.292
+Finished: 17 out of 698.292
+Finished: 18 out of 698.292
+Finished: 19 out of 698.292
+Finished: 20 out of 698.292
+Finished: 21 out of 698.292
+Finished: 22 out of 698.292
+Finished: 23 out of 698.292
+Finished: 24 out of 698.292
+Finished: 25 out of 698.292
+Finished: 26 out of 698.292
+Finished: 27 out of 698.292
+Finished: 28 out of 698.292
+Finished: 29 out of 698.292
+Finished: 30 out of 698.292
+Finished: 31 out of 698.292
+Finished: 32 out of 698.292
+Finished: 33 out of 698.292
+Finished: 34 out of 698.292
+Finished: 35 out of 698.292
+Finished: 36 out of 698.292
+Finished: 37 out of 698.292
+Finished: 38 out of 698.292
+Finished: 39 out of 698.292
+Finished: 40 out of 698.292
+Finished: 41 out of 698.292
+Finished: 42 out of 698.292
+Finished: 43 out of 698.292
+Finished: 44 out of 698.292
+Finished: 45 out of 698.292
+Finished: 46 out of 698.292
+Finished: 47 out of 698.292
+Finished: 48 out of 698.292
+Finished: 49 out of 698.292
+Finished: 50 out of 698.292
+Finished: 51 out of 698.292
+Finished: 52 out of 698.292
+Finished: 53 out of 698.292
+Finished: 54 out of 698.292
+Finished: 55 out of 698.292
+Finished: 56 out of 698.292
+Finished: 57 out of 698.292
+Finished: 58 out of 698.292
+Finished: 59 out of 698.292
+Finished: 60 out of 698.292
+Finished: 61 out of 698.292
+Finished: 62 out of 698.292
+Finished: 63 out of 698.292
+Finished: 64 out of 698.292
+Finished: 65 out of 698.292
+Finished: 66 out of 698.292
+Finished: 67 out of 698.292
+Finished: 68 out of 698.292
+Finished: 69 out of 698.292
+Finished: 70 out of 698.292
+Finished: 71 out of 698.292
+Finished: 72 out of 698.292
+Finished: 73 out of 698.292
+Finished: 74 out of 698.292
+Finished: 75 out of 698.292
+Finished: 76 out of 698.292
+Finished: 77 out of 698.292
+Finished: 78 out of 698.292
+Finished: 79 out of 698.292
+Finished: 80 out of 698.292
+Finished: 81 out of 698.292
+Finished: 82 out of 698.292
+Finished: 83 out of 698.292
+Finished: 84 out of 698.292
+Finished: 85 out of 698.292
+Finished: 86 out of 698.292
+Finished: 87 out of 698.292
+Finished: 88 out of 698.292
+Finished: 89 out of 698.292
+Finished: 90 out of 698.292
+Finished: 91 out of 698.292
+Finished: 92 out of 698.292
+Finished: 93 out of 698.292
+Finished: 94 out of 698.292
+Finished: 95 out of 698.292
+Finished: 96 out of 698.292
+Finished: 97 out of 698.292
+Finished: 98 out of 698.292
+Finished: 99 out of 698.292
+Finished: 100 out of 698.292
+Finished: 101 out of 698.292
+Finished: 102 out of 698.292
+Finished: 103 out of 698.292
+Finished: 104 out of 698.292
+Finished: 105 out of 698.292
+Finished: 106 out of 698.292
+Finished: 107 out of 698.292
+Finished: 108 out of 698.292
+Finished: 109 out of 698.292
+Finished: 110 out of 698.292
+Finished: 111 out of 698.292
+Finished: 112 out of 698.292
+Finished: 113 out of 698.292
+Finished: 114 out of 698.292
+Finished: 115 out of 698.292
+Finished: 116 out of 698.292
+Finished: 117 out of 698.292
+Finished: 118 out of 698.292
+Finished: 119 out of 698.292
+Finished: 120 out of 698.292
+Finished: 121 out of 698.292
+Finished: 122 out of 698.292
+Finished: 123 out of 698.292
+Finished: 124 out of 698.292
+Finished: 125 out of 698.292
+Finished: 126 out of 698.292
+Finished: 127 out of 698.292
+Finished: 128 out of 698.292
+Finished: 129 out of 698.292
+Finished: 130 out of 698.292
+Finished: 131 out of 698.292
+Finished: 132 out of 698.292
+Finished: 133 out of 698.292
+Finished: 134 out of 698.292
+Finished: 135 out of 698.292
+Finished: 136 out of 698.292
+Finished: 137 out of 698.292
+Finished: 138 out of 698.292
+Finished: 139 out of 698.292
+Finished: 140 out of 698.292
+Finished: 141 out of 698.292
+Finished: 142 out of 698.292
+Finished: 143 out of 698.292
+Finished: 144 out of 698.292
+Finished: 145 out of 698.292
+Finished: 146 out of 698.292
+Finished: 147 out of 698.292
+Finished: 148 out of 698.292
+Finished: 149 out of 698.292
+Finished: 150 out of 698.292
+Finished: 151 out of 698.292
+Finished: 152 out of 698.292
+Finished: 153 out of 698.292
+Finished: 154 out of 698.292
+Finished: 155 out of 698.292
+Finished: 156 out of 698.292
+Finished: 157 out of 698.292
+Finished: 158 out of 698.292
+Finished: 159 out of 698.292
+Finished: 160 out of 698.292
+Finished: 161 out of 698.292
+Finished: 162 out of 698.292
+Finished: 163 out of 698.292
+Finished: 164 out of 698.292
+Finished: 165 out of 698.292
+Finished: 166 out of 698.292
+Finished: 167 out of 698.292
+Finished: 168 out of 698.292
+Finished: 169 out of 698.292
+Finished: 170 out of 698.292
+Finished: 171 out of 698.292
+Finished: 172 out of 698.292
+Finished: 173 out of 698.292
+Finished: 174 out of 698.292
+Finished: 175 out of 698.292
+Finished: 176 out of 698.292
+Finished: 177 out of 698.292
+Finished: 178 out of 698.292
+Finished: 179 out of 698.292
+Finished: 180 out of 698.292
+Finished: 181 out of 698.292
+Finished: 182 out of 698.292
+Finished: 183 out of 698.292
+Finished: 184 out of 698.292
+Finished: 185 out of 698.292
+Finished: 186 out of 698.292
+Finished: 187 out of 698.292
+Finished: 188 out of 698.292
+Finished: 189 out of 698.292
+Finished: 190 out of 698.292
+Finished: 191 out of 698.292
+Finished: 192 out of 698.292
+Finished: 193 out of 698.292
+Finished: 194 out of 698.292
+Finished: 195 out of 698.292
+Finished: 196 out of 698.292
+Finished: 197 out of 698.292
+Finished: 198 out of 698.292
+Finished: 199 out of 698.292
+Finished: 200 out of 698.292
+Finished: 201 out of 698.292
+Finished: 202 out of 698.292
+Finished: 203 out of 698.292
+Finished: 204 out of 698.292
+Finished: 205 out of 698.292
+Finished: 206 out of 698.292
+Finished: 207 out of 698.292
+Finished: 208 out of 698.292
+Finished: 209 out of 698.292
+Finished: 210 out of 698.292
+Finished: 211 out of 698.292
+Finished: 212 out of 698.292
+Finished: 213 out of 698.292
+Finished: 214 out of 698.292
+Finished: 215 out of 698.292
+Finished: 216 out of 698.292
+Finished: 217 out of 698.292
+Finished: 218 out of 698.292
+Finished: 219 out of 698.292
+Finished: 220 out of 698.292
+Finished: 221 out of 698.292
+Finished: 222 out of 698.292
+Finished: 223 out of 698.292
+Finished: 224 out of 698.292
+Finished: 225 out of 698.292
+Finished: 226 out of 698.292
+Finished: 227 out of 698.292
+Finished: 228 out of 698.292
+Finished: 229 out of 698.292
+Finished: 230 out of 698.292
+Finished: 231 out of 698.292
+Finished: 232 out of 698.292
+Finished: 233 out of 698.292
+Finished: 234 out of 698.292
+Finished: 235 out of 698.292
+Finished: 236 out of 698.292
+Finished: 237 out of 698.292
+Finished: 238 out of 698.292
+Finished: 239 out of 698.292
+Finished: 240 out of 698.292
+Finished: 241 out of 698.292
+Finished: 242 out of 698.292
+Finished: 243 out of 698.292
+Finished: 244 out of 698.292
+Finished: 245 out of 698.292
+Finished: 246 out of 698.292
+Finished: 247 out of 698.292
+Finished: 248 out of 698.292
+Finished: 249 out of 698.292
+Finished: 250 out of 698.292
+Finished: 251 out of 698.292
+Finished: 252 out of 698.292
+Finished: 253 out of 698.292
+Finished: 254 out of 698.292
+Finished: 255 out of 698.292
+Finished: 256 out of 698.292
+Finished: 257 out of 698.292
+Finished: 258 out of 698.292
+Finished: 259 out of 698.292
+Finished: 260 out of 698.292
+Finished: 261 out of 698.292
+Finished: 262 out of 698.292
+Finished: 263 out of 698.292
+Finished: 264 out of 698.292
+Finished: 265 out of 698.292
+Finished: 266 out of 698.292
+Finished: 267 out of 698.292
+Finished: 268 out of 698.292
+Finished: 269 out of 698.292
+Finished: 270 out of 698.292
+Finished: 271 out of 698.292
+Finished: 272 out of 698.292
+Finished: 273 out of 698.292
+Finished: 274 out of 698.292
+Finished: 275 out of 698.292
+Finished: 276 out of 698.292
+Finished: 277 out of 698.292
+Finished: 278 out of 698.292
+Finished: 279 out of 698.292
+Finished: 280 out of 698.292
+Finished: 281 out of 698.292
+Finished: 282 out of 698.292
+Finished: 283 out of 698.292
+Finished: 284 out of 698.292
+Finished: 285 out of 698.292
+Finished: 286 out of 698.292
+Finished: 287 out of 698.292
+Finished: 288 out of 698.292
+Finished: 289 out of 698.292
+Finished: 290 out of 698.292
+Finished: 291 out of 698.292
+Finished: 292 out of 698.292
+Finished: 293 out of 698.292
+Finished: 294 out of 698.292
+Finished: 295 out of 698.292
+Finished: 296 out of 698.292
+Finished: 297 out of 698.292
+Finished: 298 out of 698.292
+Finished: 299 out of 698.292
+Finished: 300 out of 698.292
+Finished: 301 out of 698.292
+Finished: 302 out of 698.292
+Finished: 303 out of 698.292
+Finished: 304 out of 698.292
+Finished: 305 out of 698.292
+Finished: 306 out of 698.292
+Finished: 307 out of 698.292
+Finished: 308 out of 698.292
+Finished: 309 out of 698.292
+Finished: 310 out of 698.292
+Finished: 311 out of 698.292
+Finished: 312 out of 698.292
+Finished: 313 out of 698.292
+Finished: 314 out of 698.292
+Finished: 315 out of 698.292
+Finished: 316 out of 698.292
+Finished: 317 out of 698.292
+Finished: 318 out of 698.292
+Finished: 319 out of 698.292
+Finished: 320 out of 698.292
+Finished: 321 out of 698.292
+Finished: 322 out of 698.292
+Finished: 323 out of 698.292
+Finished: 324 out of 698.292
+Finished: 325 out of 698.292
+Finished: 326 out of 698.292
+Finished: 327 out of 698.292
+Finished: 328 out of 698.292
+Finished: 329 out of 698.292
+Finished: 330 out of 698.292
+Finished: 331 out of 698.292
+Finished: 332 out of 698.292
+Finished: 333 out of 698.292
+Finished: 334 out of 698.292
+Finished: 335 out of 698.292
+Finished: 336 out of 698.292
+Finished: 337 out of 698.292
+Finished: 338 out of 698.292
+Finished: 339 out of 698.292
+Finished: 340 out of 698.292
+Finished: 341 out of 698.292
+Finished: 342 out of 698.292
+Finished: 343 out of 698.292
+Finished: 344 out of 698.292
+Finished: 345 out of 698.292
+Finished: 346 out of 698.292
+Finished: 347 out of 698.292
+Finished: 348 out of 698.292
+Finished: 349 out of 698.292
+Finished: 350 out of 698.292
+Finished: 351 out of 698.292
+Finished: 352 out of 698.292
+Finished: 353 out of 698.292
+Finished: 354 out of 698.292
+Finished: 355 out of 698.292
+Finished: 356 out of 698.292
+Finished: 357 out of 698.292
+Finished: 358 out of 698.292
+Finished: 359 out of 698.292
+Finished: 360 out of 698.292
+Finished: 361 out of 698.292
+Finished: 362 out of 698.292
+Finished: 363 out of 698.292
+Finished: 364 out of 698.292
+Finished: 365 out of 698.292
+Finished: 366 out of 698.292
+Finished: 367 out of 698.292
+Finished: 368 out of 698.292
+Finished: 369 out of 698.292
+Finished: 370 out of 698.292
+Finished: 371 out of 698.292
+Finished: 372 out of 698.292
+Finished: 373 out of 698.292
+Finished: 374 out of 698.292
+Finished: 375 out of 698.292
+Finished: 376 out of 698.292
+Finished: 377 out of 698.292
+Finished: 378 out of 698.292
+Finished: 379 out of 698.292
+Finished: 380 out of 698.292
+Finished: 381 out of 698.292
+Finished: 382 out of 698.292
+Finished: 383 out of 698.292
+Finished: 384 out of 698.292
+Finished: 385 out of 698.292
+Finished: 386 out of 698.292
+Finished: 387 out of 698.292
+Finished: 388 out of 698.292
+Finished: 389 out of 698.292
+Finished: 390 out of 698.292
+Finished: 391 out of 698.292
+Finished: 392 out of 698.292
+Finished: 393 out of 698.292
+Finished: 394 out of 698.292
+Finished: 395 out of 698.292
+Finished: 396 out of 698.292
+Finished: 397 out of 698.292
+Finished: 398 out of 698.292
+Finished: 399 out of 698.292
+Finished: 400 out of 698.292
+Finished: 401 out of 698.292
+Finished: 402 out of 698.292
+Finished: 403 out of 698.292
+Finished: 404 out of 698.292
+Finished: 405 out of 698.292
+Finished: 406 out of 698.292
+Finished: 407 out of 698.292
+Finished: 408 out of 698.292
+Finished: 409 out of 698.292
+Finished: 410 out of 698.292
+Finished: 411 out of 698.292
+Finished: 412 out of 698.292
+Finished: 413 out of 698.292
+Finished: 414 out of 698.292
+Finished: 415 out of 698.292
+Finished: 416 out of 698.292
+Finished: 417 out of 698.292
+Finished: 418 out of 698.292
+Finished: 419 out of 698.292
+Finished: 420 out of 698.292
+Finished: 421 out of 698.292
+Finished: 422 out of 698.292
+Finished: 423 out of 698.292
+Finished: 424 out of 698.292
+Finished: 425 out of 698.292
+Finished: 426 out of 698.292
+Finished: 427 out of 698.292
+Finished: 428 out of 698.292
+Finished: 429 out of 698.292
+Finished: 430 out of 698.292
+Finished: 431 out of 698.292
+Finished: 432 out of 698.292
+Finished: 433 out of 698.292
+Finished: 434 out of 698.292
+Finished: 435 out of 698.292
+Finished: 436 out of 698.292
+Finished: 437 out of 698.292
+Finished: 438 out of 698.292
+Finished: 439 out of 698.292
+Finished: 440 out of 698.292
+Finished: 441 out of 698.292
+Finished: 442 out of 698.292
+Finished: 443 out of 698.292
+Finished: 444 out of 698.292
+Finished: 445 out of 698.292
+Finished: 446 out of 698.292
+Finished: 447 out of 698.292
+Finished: 448 out of 698.292
+Finished: 449 out of 698.292
+Finished: 450 out of 698.292
+Finished: 451 out of 698.292
+Finished: 452 out of 698.292
+Finished: 453 out of 698.292
+Finished: 454 out of 698.292
+Finished: 455 out of 698.292
+Finished: 456 out of 698.292
+Finished: 457 out of 698.292
+Finished: 458 out of 698.292
+Finished: 459 out of 698.292
+Finished: 460 out of 698.292
+Finished: 461 out of 698.292
+Finished: 462 out of 698.292
+Finished: 463 out of 698.292
+Finished: 464 out of 698.292
+Finished: 465 out of 698.292
+Finished: 466 out of 698.292
+Finished: 467 out of 698.292
+Finished: 468 out of 698.292
+Finished: 469 out of 698.292
+Finished: 470 out of 698.292
+Finished: 471 out of 698.292
+Finished: 472 out of 698.292
+Finished: 473 out of 698.292
+Finished: 474 out of 698.292
+Finished: 475 out of 698.292
+Finished: 476 out of 698.292
+Finished: 477 out of 698.292
+Finished: 478 out of 698.292
+Finished: 479 out of 698.292
+Finished: 480 out of 698.292
+Finished: 481 out of 698.292
+Finished: 482 out of 698.292
+Finished: 483 out of 698.292
+Finished: 484 out of 698.292
+Finished: 485 out of 698.292
+Finished: 486 out of 698.292
+Finished: 487 out of 698.292
+Finished: 488 out of 698.292
+Finished: 489 out of 698.292
+Finished: 490 out of 698.292
+Finished: 491 out of 698.292
+Finished: 492 out of 698.292
+Finished: 493 out of 698.292
+Finished: 494 out of 698.292
+Finished: 495 out of 698.292
+Finished: 496 out of 698.292
+Finished: 497 out of 698.292
+Finished: 498 out of 698.292
+Finished: 499 out of 698.292
+Finished: 500 out of 698.292
+Finished: 501 out of 698.292
+Finished: 502 out of 698.292
+Finished: 503 out of 698.292
+Finished: 504 out of 698.292
+Finished: 505 out of 698.292
+Finished: 506 out of 698.292
+Finished: 507 out of 698.292
+Finished: 508 out of 698.292
+Finished: 509 out of 698.292
+Finished: 510 out of 698.292
+Finished: 511 out of 698.292
+Finished: 512 out of 698.292
+Finished: 513 out of 698.292
+Finished: 514 out of 698.292
+Finished: 515 out of 698.292
+Finished: 516 out of 698.292
+Finished: 517 out of 698.292
+Finished: 518 out of 698.292
+Finished: 519 out of 698.292
+Finished: 520 out of 698.292
+Finished: 521 out of 698.292
+Finished: 522 out of 698.292
+Finished: 523 out of 698.292
+Finished: 524 out of 698.292
+Finished: 525 out of 698.292
+Finished: 526 out of 698.292
+Finished: 527 out of 698.292
+Finished: 528 out of 698.292
+Finished: 529 out of 698.292
+Finished: 530 out of 698.292
+Finished: 531 out of 698.292
+Finished: 532 out of 698.292
+Finished: 533 out of 698.292
+Finished: 534 out of 698.292
+Finished: 535 out of 698.292
+Finished: 536 out of 698.292
+Finished: 537 out of 698.292
+Finished: 538 out of 698.292
+Finished: 539 out of 698.292
+Finished: 540 out of 698.292
+Finished: 541 out of 698.292
+Finished: 542 out of 698.292
+Finished: 543 out of 698.292
+Finished: 544 out of 698.292
+Finished: 545 out of 698.292
+Finished: 546 out of 698.292
+Finished: 547 out of 698.292
+Finished: 548 out of 698.292
+Finished: 549 out of 698.292
+Finished: 550 out of 698.292
+Finished: 551 out of 698.292
+Finished: 552 out of 698.292
+Finished: 553 out of 698.292
+Finished: 554 out of 698.292
+Finished: 555 out of 698.292
+Finished: 556 out of 698.292
+Finished: 557 out of 698.292
+Finished: 558 out of 698.292
+Finished: 559 out of 698.292
+Finished: 560 out of 698.292
+Finished: 561 out of 698.292
+Finished: 562 out of 698.292
+Finished: 563 out of 698.292
+Finished: 564 out of 698.292
+Finished: 565 out of 698.292
+Finished: 566 out of 698.292
+Finished: 567 out of 698.292
+Finished: 568 out of 698.292
+Finished: 569 out of 698.292
+Finished: 570 out of 698.292
+Finished: 571 out of 698.292
+Finished: 572 out of 698.292
+Finished: 573 out of 698.292
+Finished: 574 out of 698.292
+Finished: 575 out of 698.292
+[Warning: Rank deficient, rank = 870, tol =  9.496160e-07.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 576 out of 698.292
+[Warning: Rank deficient, rank = 870, tol =  9.975758e-07.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 577 out of 698.292
+[Warning: Rank deficient, rank = 870, tol =  9.141425e-07.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 578 out of 698.292
+[Warning: Rank deficient, rank = 870, tol =  8.072043e-07.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 579 out of 698.292
+[Warning: Rank deficient, rank = 870, tol =  7.493815e-07.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 580 out of 698.292
+[Warning: Rank deficient, rank = 870, tol =  9.000295e-07.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 581 out of 698.292
+[Warning: Rank deficient, rank = 870, tol =  6.630530e-07.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 582 out of 698.292
+[Warning: Rank deficient, rank = 870, tol =  7.196255e-07.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 583 out of 698.292
+[Warning: Rank deficient, rank = 870, tol =  7.157745e-07.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 584 out of 698.292
+[Warning: Rank deficient, rank = 870, tol =  7.644949e-07.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 585 out of 698.292
+[Warning: Rank deficient, rank = 870, tol =  8.153313e-07.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 586 out of 698.292
+[Warning: Rank deficient, rank = 870, tol =  8.644433e-07.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 587 out of 698.292
+[Warning: Rank deficient, rank = 870, tol =  8.640703e-07.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 588 out of 698.292
+[Warning: Rank deficient, rank = 870, tol =  9.035806e-07.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 589 out of 698.292
+[Warning: Rank deficient, rank = 870, tol =  9.028311e-07.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 590 out of 698.292
+[Warning: Rank deficient, rank = 870, tol =  8.903720e-07.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 591 out of 698.292
+[Warning: Rank deficient, rank = 870, tol =  2.480913e-06.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 592 out of 698.292
+[Warning: Rank deficient, rank = 870, tol =  2.148199e-06.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 593 out of 698.292
+[Warning: Rank deficient, rank = 870, tol =  8.630831e-07.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 594 out of 698.292
+[Warning: Rank deficient, rank = 870, tol =  8.413433e-07.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 595 out of 698.292
+[Warning: Rank deficient, rank = 870, tol =  8.274689e-07.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 596 out of 698.292
+[Warning: Rank deficient, rank = 870, tol =  8.184211e-07.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 597 out of 698.292
+[Warning: Rank deficient, rank = 870, tol =  8.074096e-07.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 598 out of 698.292
+[Warning: Rank deficient, rank = 870, tol =  7.919892e-07.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 599 out of 698.292
+[Warning: Rank deficient, rank = 870, tol =  8.003263e-07.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 600 out of 698.292
+[Warning: Rank deficient, rank = 870, tol =  8.077581e-07.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 601 out of 698.292
+[Warning: Rank deficient, rank = 870, tol =  7.998224e-07.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 602 out of 698.292
+[Warning: Rank deficient, rank = 870, tol =  7.736943e-07.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 603 out of 698.292
+[Warning: Rank deficient, rank = 870, tol =  6.987124e-07.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 604 out of 698.292
+Finished: 605 out of 698.292
+Finished: 606 out of 698.292
+Finished: 607 out of 698.292
+Finished: 608 out of 698.292
+Finished: 609 out of 698.292
+Finished: 610 out of 698.292
+Finished: 611 out of 698.292
+Finished: 612 out of 698.292
+Finished: 613 out of 698.292
+Finished: 614 out of 698.292
+Finished: 615 out of 698.292
+Finished: 616 out of 698.292
+Finished: 617 out of 698.292
+Finished: 618 out of 698.292
+Finished: 619 out of 698.292
+Finished: 620 out of 698.292
+Finished: 621 out of 698.292
+Finished: 622 out of 698.292
+Finished: 623 out of 698.292
+Finished: 624 out of 698.292
+Finished: 625 out of 698.292
+Finished: 626 out of 698.292
+Finished: 627 out of 698.292
+Finished: 628 out of 698.292
+Finished: 629 out of 698.292
+Finished: 630 out of 698.292
+Finished: 631 out of 698.292
+Finished: 632 out of 698.292
+Finished: 633 out of 698.292
+Finished: 634 out of 698.292
+Finished: 635 out of 698.292
+Finished: 636 out of 698.292
+Finished: 637 out of 698.292
+Finished: 638 out of 698.292
+Finished: 639 out of 698.292
+Finished: 640 out of 698.292
+Finished: 641 out of 698.292
+Finished: 642 out of 698.292
+Finished: 643 out of 698.292
+Finished: 644 out of 698.292
+Finished: 645 out of 698.292
+Finished: 646 out of 698.292
+Finished: 647 out of 698.292
+Finished: 648 out of 698.292
+Finished: 649 out of 698.292
+Finished: 650 out of 698.292
+Finished: 651 out of 698.292
+Finished: 652 out of 698.292
+Finished: 653 out of 698.292
+Finished: 654 out of 698.292
+Finished: 655 out of 698.292
+Finished: 656 out of 698.292
+Finished: 657 out of 698.292
+Finished: 658 out of 698.292
+Finished: 659 out of 698.292
+Finished: 660 out of 698.292
+Finished: 661 out of 698.292
+Finished: 662 out of 698.292
+[Warning: Rank deficient, rank = 870, tol =  6.907813e-07.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 663 out of 698.292
+[Warning: Rank deficient, rank = 870, tol =  7.111310e-07.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 664 out of 698.292
+[Warning: Rank deficient, rank = 870, tol =  6.888786e-07.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 665 out of 698.292
+[Warning: Rank deficient, rank = 870, tol =  6.382183e-07.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 666 out of 698.292
+[Warning: Rank deficient, rank = 870, tol =  6.287748e-07.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 667 out of 698.292
+[Warning: Rank deficient, rank = 870, tol =  7.251253e-07.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 668 out of 698.292
+[Warning: Rank deficient, rank = 870, tol =  7.257380e-07.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 669 out of 698.292
+[Warning: Rank deficient, rank = 870, tol =  6.906252e-07.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 670 out of 698.292
+[Warning: Rank deficient, rank = 870, tol =  6.270498e-07.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 671 out of 698.292
+[Warning: Rank deficient, rank = 870, tol =  6.157542e-07.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 672 out of 698.292
+[Warning: Rank deficient, rank = 870, tol =  7.138008e-07.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 673 out of 698.292
+[Warning: Rank deficient, rank = 870, tol =  6.688876e-07.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 674 out of 698.292
+[Warning: Rank deficient, rank = 870, tol =  5.984752e-07.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 675 out of 698.292
+[Warning: Rank deficient, rank = 870, tol =  5.965947e-07.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 676 out of 698.292
+[Warning: Rank deficient, rank = 870, tol =  5.501462e-07.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 677 out of 698.292
+[Warning: Rank deficient, rank = 870, tol =  6.897323e-07.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 678 out of 698.292
+[Warning: Rank deficient, rank = 870, tol =  7.162601e-07.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 679 out of 698.292
+[Warning: Rank deficient, rank = 870, tol =  5.612153e-07.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 680 out of 698.292
+[Warning: Rank deficient, rank = 870, tol =  6.061685e-07.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 681 out of 698.292
+[Warning: Rank deficient, rank = 870, tol =  6.806339e-07.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 682 out of 698.292
+[Warning: Rank deficient, rank = 870, tol =  5.584419e-07.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 683 out of 698.292
+[Warning: Rank deficient, rank = 870, tol =  6.350116e-07.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 684 out of 698.292
+[Warning: Rank deficient, rank = 870, tol =  5.993252e-07.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 685 out of 698.292
+[Warning: Rank deficient, rank = 870, tol =  5.723202e-07.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 686 out of 698.292
+[Warning: Rank deficient, rank = 870, tol =  5.696539e-07.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 687 out of 698.292
+[Warning: Rank deficient, rank = 870, tol =  1.122257e-06.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 688 out of 698.292
+[Warning: Rank deficient, rank = 870, tol =  1.368384e-06.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 689 out of 698.292
+[Warning: Rank deficient, rank = 870, tol =  1.558143e-06.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 690 out of 698.292
+[Warning: Rank deficient, rank = 870, tol =  1.618977e-06.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 691 out of 698.292
+[Warning: Rank deficient, rank = 870, tol =  1.665633e-06.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 692 out of 698.292
+[Warning: Rank deficient, rank = 870, tol =  1.598454e-06.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 693 out of 698.292
+Finished: 694 out of 698.292
+Finished: 695 out of 698.292
+Finished: 696 out of 698.292
+Finished: 697 out of 698.292
+Finished: 698 out of 698.292
+>> ----------------------------------------
+Begin PBS Epilogue Thu Mar 30 12:00:16 EDT 2017 1490889616
+Job ID:		2633334.mgt
+Username:	ali
+Group:		sarma
+Job Name:	compute_adjacency_UMMC007_sz3
+Session:	12256
+Limits:		neednodes=1:ppn=8,nodes=1:ppn=8,walltime=12:00:00
+Resources:	cput=00:04:04,mem=784692kb,vmem=1504932kb,walltime=00:04:26
+Queue:		dque
+Account:		
+Nodes:	node093
+Killing leftovers...
+
+End PBS Epilogue Thu Mar 30 12:00:16 EDT 2017 1490889616
+----------------------------------------

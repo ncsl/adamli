@@ -1,0 +1,7 @@
+/var/spool/torque/mom_priv/jobs/2589024.mgt.SC: line 22: proc: command not found
+{Subscripted assignment dimension mismatch.
+
+Error in mergeChannelSpectrum (line 161)
+        powerMat(iMat, :,:) = temppowerMat;
+} 
+

@@ -1,0 +1,11 @@
+/var/spool/torque/mom_priv/jobs/2596357.mgt.SC: line 22: proc: command not found
+{Error using load
+Unable to read MAT-file
+/home/ali/adamli/fragility_dataanalysis/server/devVaryingWindows/preProcess/tempData/pt17sz2_fourier/46_POLG27.mat
+
+File may be corrupt.
+
+Error in mergeChannelSpectrum (line 113)
+        load(matFile);
+} 
+

@@ -1,0 +1,8 @@
+/var/spool/torque/mom_priv/jobs/2596144.mgt.SC: line 22: proc: command not found
+{Error using rmdir
+No directories were removed.
+
+Error in mergeChannelSpectrum (line 197)
+        rmdir(fullfile(tempDir));
+} 
+=>> PBS: job killed: walltime 1233 exceeded limit 1200

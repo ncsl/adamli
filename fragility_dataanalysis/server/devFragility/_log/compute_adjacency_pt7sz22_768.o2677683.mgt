@@ -1,0 +1,35 @@
+----------------------------------------
+Begin PBS Prologue Sun Apr  2 02:18:51 EDT 2017 1491113931
+Job ID:		2677683.mgt
+Username:	ali
+Group:		sarma
+Nodes:		node091
+End PBS Prologue Sun Apr  2 02:18:51 EDT 2017 1491113931
+----------------------------------------
+Running connectivity computation.
+
+                            < M A T L A B (R) >
+                  Copyright 1984-2013 The MathWorks, Inc.
+                    R2013a (8.1.0.604) 64-bit (glnxa64)
+                             February 15, 2013
+
+ 
+To get started, type one of these: helpwin, helpdesk, or demo.
+For product information, visit www.mathworks.com.
+ 
+----------------------------------------
+Begin PBS Epilogue Sun Apr  2 02:19:03 EDT 2017 1491113943
+Job ID:		2677683.mgt
+Username:	ali
+Group:		sarma
+Job Name:	compute_adjacency_pt7sz22_768
+Session:	10607
+Limits:		neednodes=1:ppn=8,nodes=1:ppn=8,walltime=00:30:00
+Resources:	cput=00:00:00,mem=6796kb,vmem=138084kb,walltime=00:00:07
+Queue:		dque
+Account:		
+Nodes:	node091
+Killing leftovers...
+
+End PBS Epilogue Sun Apr  2 02:19:03 EDT 2017 1491113943
+----------------------------------------

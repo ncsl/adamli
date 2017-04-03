@@ -1,0 +1,24 @@
+----------------------------------------
+Begin PBS Prologue Sun Apr  2 01:50:49 EDT 2017 1491112249
+Job ID:		2676602.mgt
+Username:	ali
+Group:		sarma
+Nodes:		node238
+End PBS Prologue Sun Apr  2 01:50:49 EDT 2017 1491112249
+----------------------------------------
+----------------------------------------
+Begin PBS Epilogue Sun Apr  2 01:50:57 EDT 2017 1491112257
+Job ID:		2676602.mgt
+Username:	ali
+Group:		sarma
+Job Name:	compute_adjacency_pt1sz4_712
+Session:	23257
+Limits:		neednodes=1:ppn=8,nodes=1:ppn=8,walltime=00:30:00
+Resources:	cput=00:00:00,mem=4032kb,vmem=510624kb,walltime=00:00:01
+Queue:		dque
+Account:		
+Nodes:	node238
+Killing leftovers...
+
+End PBS Epilogue Sun Apr  2 01:50:57 EDT 2017 1491112257
+----------------------------------------

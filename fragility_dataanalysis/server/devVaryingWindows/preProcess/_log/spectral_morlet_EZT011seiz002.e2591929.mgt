@@ -1,0 +1,448 @@
+/var/spool/torque/mom_priv/jobs/2591929.mgt.SC: line 22: proc: command not found
+pbsdsh: task 51 exit status 1
+pbsdsh: task 53 exit status 1
+pbsdsh: task 52 exit status 1
+pbsdsh: task 48 exit status 1
+pbsdsh: task 55 exit status 1
+pbsdsh: task 50 exit status 1
+pbsdsh: task 54 exit status 1
+pbsdsh: task 49 exit status 1
+{Undefined function or variable 'numHarmonics'.
+
+Error in computeChannelSpectrum (line 149)
+        eegWave = removePLI(eegWave, fs, numHarmonics, [50,0.01,4], [0.1,2,4],
+        2, 60);
+} 
+{Undefined function or variable 'numHarmonics'.
+
+Error in computeChannelSpectrum (line 149)
+        eegWave = removePLI(eegWave, fs, numHarmonics, [50,0.01,4], [0.1,2,4],
+        2, 60);
+} 
+{Undefined function or variable 'numHarmonics'.
+
+Error in computeChannelSpectrum (line 149)
+        eegWave = removePLI(eegWave, fs, numHarmonics, [50,0.01,4], [0.1,2,4],
+        2, 60);
+} 
+{Undefined function or variable 'numHarmonics'.
+
+Error in computeChannelSpectrum (line 149)
+        eegWave = removePLI(eegWave, fs, numHarmonics, [50,0.01,4], [0.1,2,4],
+        2, 60);
+} 
+{Undefined function or variable 'numHarmonics'.
+
+Error in computeChannelSpectrum (line 149)
+        eegWave = removePLI(eegWave, fs, numHarmonics, [50,0.01,4], [0.1,2,4],
+        2, 60);
+} 
+{Undefined function or variable 'numHarmonics'.
+
+Error in computeChannelSpectrum (line 149)
+        eegWave = removePLI(eegWave, fs, numHarmonics, [50,0.01,4], [0.1,2,4],
+        2, 60);
+} 
+{Undefined function or variable 'numHarmonics'.
+
+Error in computeChannelSpectrum (line 149)
+        eegWave = removePLI(eegWave, fs, numHarmonics, [50,0.01,4], [0.1,2,4],
+        2, 60);
+} 
+{Undefined function or variable 'numHarmonics'.
+
+Error in computeChannelSpectrum (line 149)
+        eegWave = removePLI(eegWave, fs, numHarmonics, [50,0.01,4], [0.1,2,4],
+        2, 60);
+} 
+{Undefined function or variable 'numHarmonics'.
+
+Error in computeChannelSpectrum (line 149)
+        eegWave = removePLI(eegWave, fs, numHarmonics, [50,0.01,4], [0.1,2,4],
+        2, 60);
+} 
+{Undefined function or variable 'numHarmonics'.
+
+Error in computeChannelSpectrum (line 149)
+        eegWave = removePLI(eegWave, fs, numHarmonics, [50,0.01,4], [0.1,2,4],
+        2, 60);
+} 
+{Undefined function or variable 'numHarmonics'.
+
+Error in computeChannelSpectrum (line 149)
+        eegWave = removePLI(eegWave, fs, numHarmonics, [50,0.01,4], [0.1,2,4],
+        2, 60);
+} 
+{Undefined function or variable 'numHarmonics'.
+
+Error in computeChannelSpectrum (line 149)
+        eegWave = removePLI(eegWave, fs, numHarmonics, [50,0.01,4], [0.1,2,4],
+        2, 60);
+} 
+{Undefined function or variable 'numHarmonics'.
+
+Error in computeChannelSpectrum (line 149)
+        eegWave = removePLI(eegWave, fs, numHarmonics, [50,0.01,4], [0.1,2,4],
+        2, 60);
+} 
+{Undefined function or variable 'numHarmonics'.
+
+Error in computeChannelSpectrum (line 149)
+        eegWave = removePLI(eegWave, fs, numHarmonics, [50,0.01,4], [0.1,2,4],
+        2, 60);
+} 
+{Undefined function or variable 'numHarmonics'.
+
+Error in computeChannelSpectrum (line 149)
+        eegWave = removePLI(eegWave, fs, numHarmonics, [50,0.01,4], [0.1,2,4],
+        2, 60);
+} 
+{Undefined function or variable 'numHarmonics'.
+
+Error in computeChannelSpectrum (line 149)
+        eegWave = removePLI(eegWave, fs, numHarmonics, [50,0.01,4], [0.1,2,4],
+        2, 60);
+} 
+{Undefined function or variable 'numHarmonics'.
+
+Error in computeChannelSpectrum (line 149)
+        eegWave = removePLI(eegWave, fs, numHarmonics, [50,0.01,4], [0.1,2,4],
+        2, 60);
+} 
+{Undefined function or variable 'numHarmonics'.
+
+Error in computeChannelSpectrum (line 149)
+        eegWave = removePLI(eegWave, fs, numHarmonics, [50,0.01,4], [0.1,2,4],
+        2, 60);
+} 
+{Undefined function or variable 'numHarmonics'.
+
+Error in computeChannelSpectrum (line 149)
+        eegWave = removePLI(eegWave, fs, numHarmonics, [50,0.01,4], [0.1,2,4],
+        2, 60);
+} 
+{Undefined function or variable 'numHarmonics'.
+
+Error in computeChannelSpectrum (line 149)
+        eegWave = removePLI(eegWave, fs, numHarmonics, [50,0.01,4], [0.1,2,4],
+        2, 60);
+} 
+{Undefined function or variable 'numHarmonics'.
+
+Error in computeChannelSpectrum (line 149)
+        eegWave = removePLI(eegWave, fs, numHarmonics, [50,0.01,4], [0.1,2,4],
+        2, 60);
+} 
+{Undefined function or variable 'numHarmonics'.
+
+Error in computeChannelSpectrum (line 149)
+        eegWave = removePLI(eegWave, fs, numHarmonics, [50,0.01,4], [0.1,2,4],
+        2, 60);
+} 
+{Undefined function or variable 'numHarmonics'.
+
+Error in computeChannelSpectrum (line 149)
+        eegWave = removePLI(eegWave, fs, numHarmonics, [50,0.01,4], [0.1,2,4],
+        2, 60);
+} 
+{Undefined function or variable 'numHarmonics'.
+
+Error in computeChannelSpectrum (line 149)
+        eegWave = removePLI(eegWave, fs, numHarmonics, [50,0.01,4], [0.1,2,4],
+        2, 60);
+} 
+{Undefined function or variable 'numHarmonics'.
+
+Error in computeChannelSpectrum (line 149)
+        eegWave = removePLI(eegWave, fs, numHarmonics, [50,0.01,4], [0.1,2,4],
+        2, 60);
+} 
+{Undefined function or variable 'numHarmonics'.
+
+Error in computeChannelSpectrum (line 149)
+        eegWave = removePLI(eegWave, fs, numHarmonics, [50,0.01,4], [0.1,2,4],
+        2, 60);
+} 
+{Undefined function or variable 'numHarmonics'.
+
+Error in computeChannelSpectrum (line 149)
+        eegWave = removePLI(eegWave, fs, numHarmonics, [50,0.01,4], [0.1,2,4],
+        2, 60);
+} 
+{Undefined function or variable 'numHarmonics'.
+
+Error in computeChannelSpectrum (line 149)
+        eegWave = removePLI(eegWave, fs, numHarmonics, [50,0.01,4], [0.1,2,4],
+        2, 60);
+} 
+{Undefined function or variable 'numHarmonics'.
+
+Error in computeChannelSpectrum (line 149)
+        eegWave = removePLI(eegWave, fs, numHarmonics, [50,0.01,4], [0.1,2,4],
+        2, 60);
+} 
+{Undefined function or variable 'numHarmonics'.
+
+Error in computeChannelSpectrum (line 149)
+        eegWave = removePLI(eegWave, fs, numHarmonics, [50,0.01,4], [0.1,2,4],
+        2, 60);
+} 
+{Undefined function or variable 'numHarmonics'.
+
+Error in computeChannelSpectrum (line 149)
+        eegWave = removePLI(eegWave, fs, numHarmonics, [50,0.01,4], [0.1,2,4],
+        2, 60);
+} 
+{Undefined function or variable 'numHarmonics'.
+
+Error in computeChannelSpectrum (line 149)
+        eegWave = removePLI(eegWave, fs, numHarmonics, [50,0.01,4], [0.1,2,4],
+        2, 60);
+} 
+{Undefined function or variable 'numHarmonics'.
+
+Error in computeChannelSpectrum (line 149)
+        eegWave = removePLI(eegWave, fs, numHarmonics, [50,0.01,4], [0.1,2,4],
+        2, 60);
+} 
+{Undefined function or variable 'numHarmonics'.
+
+Error in computeChannelSpectrum (line 149)
+        eegWave = removePLI(eegWave, fs, numHarmonics, [50,0.01,4], [0.1,2,4],
+        2, 60);
+} 
+{Undefined function or variable 'numHarmonics'.
+
+Error in computeChannelSpectrum (line 149)
+        eegWave = removePLI(eegWave, fs, numHarmonics, [50,0.01,4], [0.1,2,4],
+        2, 60);
+} 
+{Undefined function or variable 'numHarmonics'.
+
+Error in computeChannelSpectrum (line 149)
+        eegWave = removePLI(eegWave, fs, numHarmonics, [50,0.01,4], [0.1,2,4],
+        2, 60);
+} 
+{Undefined function or variable 'numHarmonics'.
+
+Error in computeChannelSpectrum (line 149)
+        eegWave = removePLI(eegWave, fs, numHarmonics, [50,0.01,4], [0.1,2,4],
+        2, 60);
+} 
+{Undefined function or variable 'numHarmonics'.
+
+Error in computeChannelSpectrum (line 149)
+        eegWave = removePLI(eegWave, fs, numHarmonics, [50,0.01,4], [0.1,2,4],
+        2, 60);
+} 
+{Undefined function or variable 'numHarmonics'.
+
+Error in computeChannelSpectrum (line 149)
+        eegWave = removePLI(eegWave, fs, numHarmonics, [50,0.01,4], [0.1,2,4],
+        2, 60);
+} 
+{Undefined function or variable 'numHarmonics'.
+
+Error in computeChannelSpectrum (line 149)
+        eegWave = removePLI(eegWave, fs, numHarmonics, [50,0.01,4], [0.1,2,4],
+        2, 60);
+} 
+{Undefined function or variable 'numHarmonics'.
+
+Error in computeChannelSpectrum (line 149)
+        eegWave = removePLI(eegWave, fs, numHarmonics, [50,0.01,4], [0.1,2,4],
+        2, 60);
+} 
+{Undefined function or variable 'numHarmonics'.
+
+Error in computeChannelSpectrum (line 149)
+        eegWave = removePLI(eegWave, fs, numHarmonics, [50,0.01,4], [0.1,2,4],
+        2, 60);
+} 
+{Undefined function or variable 'numHarmonics'.
+
+Error in computeChannelSpectrum (line 149)
+        eegWave = removePLI(eegWave, fs, numHarmonics, [50,0.01,4], [0.1,2,4],
+        2, 60);
+} 
+{Undefined function or variable 'numHarmonics'.
+
+Error in computeChannelSpectrum (line 149)
+        eegWave = removePLI(eegWave, fs, numHarmonics, [50,0.01,4], [0.1,2,4],
+        2, 60);
+} 
+{Undefined function or variable 'numHarmonics'.
+
+Error in computeChannelSpectrum (line 149)
+        eegWave = removePLI(eegWave, fs, numHarmonics, [50,0.01,4], [0.1,2,4],
+        2, 60);
+} 
+{Undefined function or variable 'numHarmonics'.
+
+Error in computeChannelSpectrum (line 149)
+        eegWave = removePLI(eegWave, fs, numHarmonics, [50,0.01,4], [0.1,2,4],
+        2, 60);
+} 
+{Undefined function or variable 'numHarmonics'.
+
+Error in computeChannelSpectrum (line 149)
+        eegWave = removePLI(eegWave, fs, numHarmonics, [50,0.01,4], [0.1,2,4],
+        2, 60);
+} 
+{Undefined function or variable 'numHarmonics'.
+
+Error in computeChannelSpectrum (line 149)
+        eegWave = removePLI(eegWave, fs, numHarmonics, [50,0.01,4], [0.1,2,4],
+        2, 60);
+} 
+{Undefined function or variable 'numHarmonics'.
+
+Error in computeChannelSpectrum (line 149)
+        eegWave = removePLI(eegWave, fs, numHarmonics, [50,0.01,4], [0.1,2,4],
+        2, 60);
+} 
+{Undefined function or variable 'numHarmonics'.
+
+Error in computeChannelSpectrum (line 149)
+        eegWave = removePLI(eegWave, fs, numHarmonics, [50,0.01,4], [0.1,2,4],
+        2, 60);
+} 
+{Undefined function or variable 'numHarmonics'.
+
+Error in computeChannelSpectrum (line 149)
+        eegWave = removePLI(eegWave, fs, numHarmonics, [50,0.01,4], [0.1,2,4],
+        2, 60);
+} 
+{Undefined function or variable 'numHarmonics'.
+
+Error in computeChannelSpectrum (line 149)
+        eegWave = removePLI(eegWave, fs, numHarmonics, [50,0.01,4], [0.1,2,4],
+        2, 60);
+} 
+{Undefined function or variable 'numHarmonics'.
+
+Error in computeChannelSpectrum (line 149)
+        eegWave = removePLI(eegWave, fs, numHarmonics, [50,0.01,4], [0.1,2,4],
+        2, 60);
+} 
+{Undefined function or variable 'numHarmonics'.
+
+Error in computeChannelSpectrum (line 149)
+        eegWave = removePLI(eegWave, fs, numHarmonics, [50,0.01,4], [0.1,2,4],
+        2, 60);
+} 
+{Undefined function or variable 'numHarmonics'.
+
+Error in computeChannelSpectrum (line 149)
+        eegWave = removePLI(eegWave, fs, numHarmonics, [50,0.01,4], [0.1,2,4],
+        2, 60);
+} 
+{Undefined function or variable 'numHarmonics'.
+
+Error in computeChannelSpectrum (line 149)
+        eegWave = removePLI(eegWave, fs, numHarmonics, [50,0.01,4], [0.1,2,4],
+        2, 60);
+} 
+{Undefined function or variable 'numHarmonics'.
+
+Error in computeChannelSpectrum (line 149)
+        eegWave = removePLI(eegWave, fs, numHarmonics, [50,0.01,4], [0.1,2,4],
+        2, 60);
+} 
+{Undefined function or variable 'numHarmonics'.
+
+Error in computeChannelSpectrum (line 149)
+        eegWave = removePLI(eegWave, fs, numHarmonics, [50,0.01,4], [0.1,2,4],
+        2, 60);
+} 
+{Undefined function or variable 'numHarmonics'.
+
+Error in computeChannelSpectrum (line 149)
+        eegWave = removePLI(eegWave, fs, numHarmonics, [50,0.01,4], [0.1,2,4],
+        2, 60);
+} 
+{Undefined function or variable 'numHarmonics'.
+
+Error in computeChannelSpectrum (line 149)
+        eegWave = removePLI(eegWave, fs, numHarmonics, [50,0.01,4], [0.1,2,4],
+        2, 60);
+} 
+{Undefined function or variable 'numHarmonics'.
+
+Error in computeChannelSpectrum (line 149)
+        eegWave = removePLI(eegWave, fs, numHarmonics, [50,0.01,4], [0.1,2,4],
+        2, 60);
+} 
+{Undefined function or variable 'numHarmonics'.
+
+Error in computeChannelSpectrum (line 149)
+        eegWave = removePLI(eegWave, fs, numHarmonics, [50,0.01,4], [0.1,2,4],
+        2, 60);
+} 
+{Undefined function or variable 'numHarmonics'.
+
+Error in computeChannelSpectrum (line 149)
+        eegWave = removePLI(eegWave, fs, numHarmonics, [50,0.01,4], [0.1,2,4],
+        2, 60);
+} 
+{Undefined function or variable 'numHarmonics'.
+
+Error in computeChannelSpectrum (line 149)
+        eegWave = removePLI(eegWave, fs, numHarmonics, [50,0.01,4], [0.1,2,4],
+        2, 60);
+} 
+{Undefined function or variable 'numHarmonics'.
+
+Error in computeChannelSpectrum (line 149)
+        eegWave = removePLI(eegWave, fs, numHarmonics, [50,0.01,4], [0.1,2,4],
+        2, 60);
+} 
+{Undefined function or variable 'numHarmonics'.
+
+Error in computeChannelSpectrum (line 149)
+        eegWave = removePLI(eegWave, fs, numHarmonics, [50,0.01,4], [0.1,2,4],
+        2, 60);
+} 
+{Undefined function or variable 'numHarmonics'.
+
+Error in computeChannelSpectrum (line 149)
+        eegWave = removePLI(eegWave, fs, numHarmonics, [50,0.01,4], [0.1,2,4],
+        2, 60);
+} 
+{Undefined function or variable 'numHarmonics'.
+
+Error in computeChannelSpectrum (line 149)
+        eegWave = removePLI(eegWave, fs, numHarmonics, [50,0.01,4], [0.1,2,4],
+        2, 60);
+} 
+{Undefined function or variable 'numHarmonics'.
+
+Error in computeChannelSpectrum (line 149)
+        eegWave = removePLI(eegWave, fs, numHarmonics, [50,0.01,4], [0.1,2,4],
+        2, 60);
+} 
+{Undefined function or variable 'numHarmonics'.
+
+Error in computeChannelSpectrum (line 149)
+        eegWave = removePLI(eegWave, fs, numHarmonics, [50,0.01,4], [0.1,2,4],
+        2, 60);
+} 
+{Undefined function or variable 'numHarmonics'.
+
+Error in computeChannelSpectrum (line 149)
+        eegWave = removePLI(eegWave, fs, numHarmonics, [50,0.01,4], [0.1,2,4],
+        2, 60);
+} 
+{Undefined function or variable 'numHarmonics'.
+
+Error in computeChannelSpectrum (line 149)
+        eegWave = removePLI(eegWave, fs, numHarmonics, [50,0.01,4], [0.1,2,4],
+        2, 60);
+} 
+{Undefined function or variable 'numHarmonics'.
+
+Error in computeChannelSpectrum (line 149)
+        eegWave = removePLI(eegWave, fs, numHarmonics, [50,0.01,4], [0.1,2,4],
+        2, 60);
+} 
+

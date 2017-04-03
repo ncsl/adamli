@@ -1,0 +1,82 @@
+----------------------------------------
+Begin PBS Prologue Sun Apr  2 03:49:45 EDT 2017 1491119385
+Job ID:		2676760.mgt
+Username:	ali
+Group:		sarma
+Nodes:		node249
+End PBS Prologue Sun Apr  2 03:49:45 EDT 2017 1491119385
+----------------------------------------
+Running connectivity computation.
+Running connectivity computation.
+
+                            < M A T L A B (R) >
+                  Copyright 1984-2013 The MathWorks, Inc.
+                    R2013a (8.1.0.604) 64-bit (glnxa64)
+                             February 15, 2013
+
+
+                            < M A T L A B (R) >
+                  Copyright 1984-2013 The MathWorks, Inc.
+                    R2013a (8.1.0.604) 64-bit (glnxa64)
+                             February 15, 2013
+
+ 
+ 
+To get started, type one of these: helpwin, helpdesk, or demo.
+To get started, type one of these: helpwin, helpdesk, or demo.
+For product information, visit www.mathworks.com.
+For product information, visit www.mathworks.com.
+ 
+ 
+Should have finished saving info mat.
+About to start least squaresShould have finished saving info mat.
+About to start least squaresFinished least squaresFinished: 601
+>> Finished least squaresFinished: 602
+>> Running connectivity computation.
+Running connectivity computation.
+
+                            < M A T L A B (R) >
+                  Copyright 1984-2013 The MathWorks, Inc.
+                    R2013a (8.1.0.604) 64-bit (glnxa64)
+                             February 15, 2013
+
+
+                            < M A T L A B (R) >
+                  Copyright 1984-2013 The MathWorks, Inc.
+                    R2013a (8.1.0.604) 64-bit (glnxa64)
+                             February 15, 2013
+
+Encountered unexpected end-of-file (line 0) while loading toolbox cache.
+Error occurred loading: /home/ali/.matlab/R2013a/toolbox_cache-8.1.0-3347771634-glnxa64.xml
+Cache file ignored.
+Encountered unexpected end-of-file (line 0) while loading toolbox cache.
+Error occurred loading: /home/ali/.matlab/R2013a/toolbox_cache-8.1.0-3347771634-glnxa64.xml
+Cache file ignored.
+ 
+ 
+To get started, type one of these: helpwin, helpdesk, or demo.
+To get started, type one of these: helpwin, helpdesk, or demo.
+For product information, visit www.mathworks.com.
+For product information, visit www.mathworks.com.
+ 
+ 
+Should have finished saving info mat.
+About to start least squaresShould have finished saving info mat.
+About to start least squaresFinished least squaresFinished: 604
+>> Finished least squaresFinished: 603
+>> ----------------------------------------
+Begin PBS Epilogue Sun Apr  2 03:51:47 EDT 2017 1491119507
+Job ID:		2676760.mgt
+Username:	ali
+Group:		sarma
+Job Name:	compute_adjacency_pt2sz3_600
+Session:	30816
+Limits:		neednodes=1:ppn=8,nodes=1:ppn=8,walltime=00:30:00
+Resources:	cput=00:01:14,mem=1178160kb,vmem=2757588kb,walltime=00:01:57
+Queue:		dque
+Account:		
+Nodes:	node249
+Killing leftovers...
+
+End PBS Epilogue Sun Apr  2 03:51:47 EDT 2017 1491119507
+----------------------------------------

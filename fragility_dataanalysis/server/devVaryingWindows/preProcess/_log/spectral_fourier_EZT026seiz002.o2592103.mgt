@@ -1,0 +1,1837 @@
+----------------------------------------
+Begin PBS Prologue Tue Mar 28 15:39:01 EDT 2017 1490729941
+Job ID:		2592103.mgt
+Username:	ali
+Group:		sarma
+Nodes:		node137 node144 node149 node151 node156 node164 node171 node172 
+node189 node190 node192 node195
+End PBS Prologue Tue Mar 28 15:39:02 EDT 2017 1490729942
+----------------------------------------
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+11
+EZT026seiz002
+500
+250
+12
+fourier
+Running spectral computation...
+35
+EZT026seiz002
+500
+250
+36
+fourier
+Running spectral computation...
+9
+EZT026seiz002
+500
+250
+10
+fourier
+Running spectral computation...
+2
+EZT026seiz002
+500
+250
+3
+fourier
+Running spectral computation...
+7
+EZT026seiz002
+500
+250
+8
+fourier
+Running spectral computation...
+3
+EZT026seiz002
+500
+250
+4
+fourier
+Running spectral computation...
+4
+EZT026seiz002
+500
+250
+5
+fourier
+Running spectral computation...
+6
+EZT026seiz002
+500
+250
+7
+fourier
+Running spectral computation...
+1
+EZT026seiz002
+500
+250
+2
+fourier
+Running spectral computation...
+8
+EZT026seiz002
+500
+250
+9
+fourier
+Running spectral computation...
+34
+EZT026seiz002
+500
+250
+35
+fourier
+Running spectral computation...
+12
+EZT026seiz002
+500
+250
+13
+fourier
+Running spectral computation...
+5
+EZT026seiz002
+500
+250
+6
+fourier
+Running spectral computation...
+31
+27
+EZT026seiz002
+500
+250
+32
+fourier
+EZT026seiz002
+500
+250
+28
+fourier
+Running spectral computation...
+Running spectral computation...
+26
+EZT026seiz002
+500
+250
+37
+27
+fourier
+Running spectral computation...
+EZT026seiz002
+500
+250
+38
+fourier
+Running spectral computation...
+24
+EZT026seiz002
+500
+250
+25
+29
+fourier
+Running spectral computation...
+EZT026seiz002
+500
+250
+30
+fourier
+Running spectral computation...
+60
+EZT026seiz002
+500
+250
+61
+fourier
+Running spectral computation...
+30
+EZT026seiz002
+500
+250
+31
+fourier
+Running spectral computation...
+25
+EZT026seiz002
+500
+250
+26
+fourier
+Running spectral computation...
+73
+EZT026seiz002
+500
+250
+74
+fourier
+Running spectral computation...
+14
+EZT026seiz002
+500
+250
+15
+fourier
+Running spectral computation...
+75
+EZT026seiz002
+500
+250
+76
+fourier
+Running spectral computation...
+10
+EZT026seiz002
+500
+250
+11
+fourier
+Running spectral computation...
+28
+EZT026seiz002
+500
+250
+29
+fourier
+Running spectral computation...
+0
+EZT026seiz002
+500
+250
+1
+fourier
+56
+Running spectral computation...
+EZT026seiz002
+500
+250
+57
+fourier
+Running spectral computation...
+32
+EZT026seiz002
+500
+250
+33
+fourier
+Running spectral computation...
+61
+EZT026seiz002
+500
+250
+62
+fourier
+Running spectral computation...
+78
+EZT026seiz002
+500
+250
+79
+fourier
+Running spectral computation...
+15
+EZT026seiz002
+500
+250
+16
+fourier
+Running spectral computation...
+74
+57
+33
+EZT026seiz002
+500
+250
+58
+fourier
+Running spectral computation...
+EZT026seiz002
+500
+250
+34
+fourier
+Running spectral computation...
+EZT026seiz002
+500
+250
+75
+fourier
+Running spectral computation...
+39
+EZT026seiz002
+500
+250
+40
+fourier
+Running spectral computation...
+13
+EZT026seiz002
+500
+250
+14
+fourier
+Running spectral computation...
+79
+EZT026seiz002
+500
+250
+80
+fourier
+Running spectral computation...
+38
+EZT026seiz002
+500
+250
+39
+fourier
+Running spectral computation...
+58
+EZT026seiz002
+500
+250
+59
+fourier
+Running spectral computation...
+36
+EZT026seiz002
+500
+250
+37
+fourier
+Running spectral computation...
+72
+EZT026seiz002
+500
+250
+73
+fourier
+Running spectral computation...
+59
+EZT026seiz002
+500
+250
+60
+fourier
+Running spectral computation...
+63
+EZT026seiz002
+500
+250
+64
+fourier
+Running spectral computation...
+76
+EZT026seiz002
+500
+250
+77
+fourier
+Running spectral computation...
+62
+EZT026seiz002
+500
+250
+63
+fourier
+Running spectral computation...
+77
+EZT026seiz002
+500
+250
+78
+fourier
+Running spectral computation...
+46
+EZT026seiz002
+500
+250
+47
+fourier
+Running spectral computation...
+44
+EZT026seiz002
+500
+250
+41
+45
+fourier
+Running spectral computation...
+EZT026seiz002
+500
+250
+42
+40
+EZT026seiz002
+500
+250
+43
+EZT026seiz002
+500
+250
+41
+fourier
+Running spectral computation...
+fourier
+Running spectral computation...
+45
+EZT026seiz002
+500
+250
+46
+fourier
+Running spectral computation...
+43
+EZT026seiz002
+500
+250
+44
+fourier
+Running spectral computation...
+47
+EZT026seiz002
+500
+250
+48
+fourier
+Running spectral computation...
+42
+fourier
+Running spectral computation...
+20
+EZT026seiz002
+500
+250
+21
+fourier
+Running spectral computation...
+21
+EZT026seiz002
+500
+250
+22
+fourier
+Running spectral computation...
+22
+EZT026seiz002
+500
+250
+23
+fourier
+Running spectral computation...
+19
+EZT026seiz002
+500
+250
+20
+fourier
+18
+EZT026seiz002
+500
+250
+19
+fourier
+Running spectral computation...
+17
+EZT026seiz002
+500
+250
+18
+fourier
+Running spectral computation...
+Running spectral computation...
+16
+23
+EZT026seiz002
+500
+250
+17
+EZT026seiz002
+fourier
+Running spectral computation...
+500
+250
+24
+fourier
+Running spectral computation...
+89
+EZT026seiz002
+500
+250
+90
+fourier
+Running spectral computation...
+Running spectral merge...
+88
+EZT026seiz002
+500
+250
+89
+fourier
+Running spectral computation...
+54
+EZT026seiz002
+500
+250
+55
+fourier
+Running spectral computation...
+48
+EZT026seiz002
+52
+EZT026seiz002
+500
+250
+53
+fourier
+51
+Running spectral computation...
+EZT026seiz002
+500
+250
+52
+fourier
+500
+Running spectral computation...
+250
+49
+49
+EZT026seiz002
+500
+250
+50
+fourier
+Running spectral computation...
+fourier
+Running spectral computation...
+53
+55
+EZT026seiz002
+500
+250
+54
+fourier
+Running spectral computation...
+EZT026seiz002
+500
+250
+56
+fourier
+Running spectral computation...
+68
+65
+71
+70
+67
+50
+EZT026seiz002
+500
+250
+72
+fourier
+Running spectral computation...
+EZT026seiz002
+500
+250
+66
+fourier
+Running spectral computation...
+EZT026seiz002
+500
+250
+69
+fourier
+Running spectral computation...
+EZT026seiz002
+500
+250
+71
+fourier
+Running spectral computation...
+EZT026seiz002
+500
+EZT026seiz002
+500
+250
+68
+fourier
+Running spectral computation...
+250
+69
+51
+fourier
+Running spectral computation...
+EZT026seiz002
+500
+250
+70
+fourier
+Running spectral computation...
+66
+EZT026seiz002
+500
+250
+67
+fourier
+Running spectral computation...
+64
+EZT026seiz002
+500
+250
+65
+fourier
+Running spectral computation...
+87
+EZT026seiz002
+500
+250
+88
+fourier
+Running spectral computation...
+83
+EZT026seiz002
+500
+250
+84
+fourier
+Running spectral computation...
+84
+EZT026seiz002
+500
+80
+250
+85
+fourier
+Running spectral computation...
+85
+EZT026seiz002
+500
+250
+81
+EZT026seiz002
+500
+250
+81
+fourier
+Running spectral computation...
+EZT026seiz002
+500
+250
+82
+86
+fourier
+82
+fourier
+Running spectral computation...
+Running spectral computation...
+EZT026seiz002
+500
+250
+83
+fourier
+86
+Running spectral computation...
+EZT026seiz002
+500
+250
+87
+fourier
+Running spectral computation...
+
+                            < M A T L A B (R) >
+                  Copyright 1984-2013 The MathWorks, Inc.
+                    R2013a (8.1.0.604) 64-bit (glnxa64)
+                             February 15, 2013
+
+
+                            < M A T L A B (R) >
+                  Copyright 1984-2013 The MathWorks, Inc.
+                    R2013a (8.1.0.604) 64-bit (glnxa64)
+                             February 15, 2013
+
+
+                            < M A T L A B (R) >
+                  Copyright 1984-2013 The MathWorks, Inc.
+                    R2013a (8.1.0.604) 64-bit (glnxa64)
+                             February 15, 2013
+
+
+                            < M A T L A B (R) >
+                  Copyright 1984-2013 The MathWorks, Inc.
+                    R2013a (8.1.0.604) 64-bit (glnxa64)
+                             February 15, 2013
+
+
+                            < M A T L A B (R) >
+                  Copyright 1984-2013 The MathWorks, Inc.
+                    R2013a (8.1.0.604) 64-bit (glnxa64)
+                             February 15, 2013
+
+
+                            < M A T L A B (R) >
+                  Copyright 1984-2013 The MathWorks, Inc.
+                    R2013a (8.1.0.604) 64-bit (glnxa64)
+                             February 15, 2013
+
+
+                            < M A T L A B (R) >
+                  Copyright 1984-2013 The MathWorks, Inc.
+                    R2013a (8.1.0.604) 64-bit (glnxa64)
+                             February 15, 2013
+
+
+                            < M A T L A B (R) >
+                  Copyright 1984-2013 The MathWorks, Inc.
+                    R2013a (8.1.0.604) 64-bit (glnxa64)
+                             February 15, 2013
+
+
+                            < M A T L A B (R) >
+                  Copyright 1984-2013 The MathWorks, Inc.
+                    R2013a (8.1.0.604) 64-bit (glnxa64)
+                             February 15, 2013
+
+
+                            < M A T L A B (R) >
+                  Copyright 1984-2013 The MathWorks, Inc.
+                    R2013a (8.1.0.604) 64-bit (glnxa64)
+                             February 15, 2013
+
+
+                            < M A T L A B (R) >
+                  Copyright 1984-2013 The MathWorks, Inc.
+                    R2013a (8.1.0.604) 64-bit (glnxa64)
+                             February 15, 2013
+
+
+                            < M A T L A B (R) >
+                  Copyright 1984-2013 The MathWorks, Inc.
+                    R2013a (8.1.0.604) 64-bit (glnxa64)
+                             February 15, 2013
+
+
+                            < M A T L A B (R) >
+                  Copyright 1984-2013 The MathWorks, Inc.
+                    R2013a (8.1.0.604) 64-bit (glnxa64)
+                             February 15, 2013
+
+
+                            < M A T L A B (R) >
+                  Copyright 1984-2013 The MathWorks, Inc.
+                    R2013a (8.1.0.604) 64-bit (glnxa64)
+                             February 15, 2013
+
+
+                            < M A T L A B (R) >
+                  Copyright 1984-2013 The MathWorks, Inc.
+                    R2013a (8.1.0.604) 64-bit (glnxa64)
+                             February 15, 2013
+
+
+                            < M A T L A B (R) >
+                  Copyright 1984-2013 The MathWorks, Inc.
+                    R2013a (8.1.0.604) 64-bit (glnxa64)
+                             February 15, 2013
+
+
+                            < M A T L A B (R) >
+                  Copyright 1984-2013 The MathWorks, Inc.
+                    R2013a (8.1.0.604) 64-bit (glnxa64)
+                             February 15, 2013
+
+
+                            < M A T L A B (R) >
+                  Copyright 1984-2013 The MathWorks, Inc.
+                    R2013a (8.1.0.604) 64-bit (glnxa64)
+                             February 15, 2013
+
+
+                            < M A T L A B (R) >
+                  Copyright 1984-2013 The MathWorks, Inc.
+                    R2013a (8.1.0.604) 64-bit (glnxa64)
+                             February 15, 2013
+
+
+                            < M A T L A B (R) >
+                  Copyright 1984-2013 The MathWorks, Inc.
+                    R2013a (8.1.0.604) 64-bit (glnxa64)
+                             February 15, 2013
+
+
+                            < M A T L A B (R) >
+                  Copyright 1984-2013 The MathWorks, Inc.
+                    R2013a (8.1.0.604) 64-bit (glnxa64)
+                             February 15, 2013
+
+
+                            < M A T L A B (R) >
+                  Copyright 1984-2013 The MathWorks, Inc.
+                    R2013a (8.1.0.604) 64-bit (glnxa64)
+                             February 15, 2013
+
+
+                            < M A T L A B (R) >
+                  Copyright 1984-2013 The MathWorks, Inc.
+                    R2013a (8.1.0.604) 64-bit (glnxa64)
+                             February 15, 2013
+
+
+                            < M A T L A B (R) >
+                  Copyright 1984-2013 The MathWorks, Inc.
+                    R2013a (8.1.0.604) 64-bit (glnxa64)
+                             February 15, 2013
+
+
+                            < M A T L A B (R) >
+                  Copyright 1984-2013 The MathWorks, Inc.
+                    R2013a (8.1.0.604) 64-bit (glnxa64)
+                             February 15, 2013
+
+
+                            < M A T L A B (R) >
+                  Copyright 1984-2013 The MathWorks, Inc.
+                    R2013a (8.1.0.604) 64-bit (glnxa64)
+                             February 15, 2013
+
+
+                            < M A T L A B (R) >
+                  Copyright 1984-2013 The MathWorks, Inc.
+                    R2013a (8.1.0.604) 64-bit (glnxa64)
+                             February 15, 2013
+
+
+                            < M A T L A B (R) >
+                  Copyright 1984-2013 The MathWorks, Inc.
+                    R2013a (8.1.0.604) 64-bit (glnxa64)
+                             February 15, 2013
+
+
+                            < M A T L A B (R) >
+                  Copyright 1984-2013 The MathWorks, Inc.
+                    R2013a (8.1.0.604) 64-bit (glnxa64)
+                             February 15, 2013
+
+
+                            < M A T L A B (R) >
+                  Copyright 1984-2013 The MathWorks, Inc.
+                    R2013a (8.1.0.604) 64-bit (glnxa64)
+                             February 15, 2013
+
+
+                            < M A T L A B (R) >
+                  Copyright 1984-2013 The MathWorks, Inc.
+                    R2013a (8.1.0.604) 64-bit (glnxa64)
+                             February 15, 2013
+
+
+                            < M A T L A B (R) >
+                  Copyright 1984-2013 The MathWorks, Inc.
+                    R2013a (8.1.0.604) 64-bit (glnxa64)
+                             February 15, 2013
+
+
+                            < M A T L A B (R) >
+                  Copyright 1984-2013 The MathWorks, Inc.
+                    R2013a (8.1.0.604) 64-bit (glnxa64)
+                             February 15, 2013
+
+
+                            < M A T L A B (R) >
+                  Copyright 1984-2013 The MathWorks, Inc.
+                    R2013a (8.1.0.604) 64-bit (glnxa64)
+                             February 15, 2013
+
+
+                            < M A T L A B (R) >
+                  Copyright 1984-2013 The MathWorks, Inc.
+                    R2013a (8.1.0.604) 64-bit (glnxa64)
+                             February 15, 2013
+
+
+                            < M A T L A B (R) >
+                  Copyright 1984-2013 The MathWorks, Inc.
+                    R2013a (8.1.0.604) 64-bit (glnxa64)
+                             February 15, 2013
+
+
+                            < M A T L A B (R) >
+                  Copyright 1984-2013 The MathWorks, Inc.
+                    R2013a (8.1.0.604) 64-bit (glnxa64)
+                             February 15, 2013
+
+
+                            < M A T L A B (R) >
+                  Copyright 1984-2013 The MathWorks, Inc.
+                    R2013a (8.1.0.604) 64-bit (glnxa64)
+                             February 15, 2013
+
+
+                            < M A T L A B (R) >
+                  Copyright 1984-2013 The MathWorks, Inc.
+                    R2013a (8.1.0.604) 64-bit (glnxa64)
+                             February 15, 2013
+
+
+                            < M A T L A B (R) >
+                  Copyright 1984-2013 The MathWorks, Inc.
+                    R2013a (8.1.0.604) 64-bit (glnxa64)
+                             February 15, 2013
+
+
+                            < M A T L A B (R) >
+                  Copyright 1984-2013 The MathWorks, Inc.
+                    R2013a (8.1.0.604) 64-bit (glnxa64)
+                             February 15, 2013
+
+
+                            < M A T L A B (R) >
+                  Copyright 1984-2013 The MathWorks, Inc.
+                    R2013a (8.1.0.604) 64-bit (glnxa64)
+                             February 15, 2013
+
+
+                            < M A T L A B (R) >
+                  Copyright 1984-2013 The MathWorks, Inc.
+                    R2013a (8.1.0.604) 64-bit (glnxa64)
+                             February 15, 2013
+
+
+                            < M A T L A B (R) >
+                  Copyright 1984-2013 The MathWorks, Inc.
+                    R2013a (8.1.0.604) 64-bit (glnxa64)
+                             February 15, 2013
+
+
+                            < M A T L A B (R) >
+                  Copyright 1984-2013 The MathWorks, Inc.
+                    R2013a (8.1.0.604) 64-bit (glnxa64)
+                             February 15, 2013
+
+
+                            < M A T L A B (R) >
+                  Copyright 1984-2013 The MathWorks, Inc.
+                    R2013a (8.1.0.604) 64-bit (glnxa64)
+                             February 15, 2013
+
+
+                            < M A T L A B (R) >
+                  Copyright 1984-2013 The MathWorks, Inc.
+                    R2013a (8.1.0.604) 64-bit (glnxa64)
+                             February 15, 2013
+
+
+                            < M A T L A B (R) >
+                  Copyright 1984-2013 The MathWorks, Inc.
+                    R2013a (8.1.0.604) 64-bit (glnxa64)
+                             February 15, 2013
+
+
+                            < M A T L A B (R) >
+                  Copyright 1984-2013 The MathWorks, Inc.
+                    R2013a (8.1.0.604) 64-bit (glnxa64)
+                             February 15, 2013
+
+
+                            < M A T L A B (R) >
+                  Copyright 1984-2013 The MathWorks, Inc.
+                    R2013a (8.1.0.604) 64-bit (glnxa64)
+                             February 15, 2013
+
+
+                            < M A T L A B (R) >
+                  Copyright 1984-2013 The MathWorks, Inc.
+                    R2013a (8.1.0.604) 64-bit (glnxa64)
+                             February 15, 2013
+
+
+                            < M A T L A B (R) >
+                  Copyright 1984-2013 The MathWorks, Inc.
+                    R2013a (8.1.0.604) 64-bit (glnxa64)
+                             February 15, 2013
+
+
+                            < M A T L A B (R) >
+                  Copyright 1984-2013 The MathWorks, Inc.
+                    R2013a (8.1.0.604) 64-bit (glnxa64)
+                             February 15, 2013
+
+
+                            < M A T L A B (R) >
+                  Copyright 1984-2013 The MathWorks, Inc.
+                    R2013a (8.1.0.604) 64-bit (glnxa64)
+                             February 15, 2013
+
+
+                            < M A T L A B (R) >
+                  Copyright 1984-2013 The MathWorks, Inc.
+                    R2013a (8.1.0.604) 64-bit (glnxa64)
+                             February 15, 2013
+
+
+                            < M A T L A B (R) >
+                  Copyright 1984-2013 The MathWorks, Inc.
+                    R2013a (8.1.0.604) 64-bit (glnxa64)
+                             February 15, 2013
+
+
+                            < M A T L A B (R) >
+                  Copyright 1984-2013 The MathWorks, Inc.
+                    R2013a (8.1.0.604) 64-bit (glnxa64)
+                             February 15, 2013
+
+
+                            < M A T L A B (R) >
+                  Copyright 1984-2013 The MathWorks, Inc.
+                    R2013a (8.1.0.604) 64-bit (glnxa64)
+                             February 15, 2013
+
+
+                            < M A T L A B (R) >
+                  Copyright 1984-2013 The MathWorks, Inc.
+                    R2013a (8.1.0.604) 64-bit (glnxa64)
+                             February 15, 2013
+
+
+                            < M A T L A B (R) >
+                  Copyright 1984-2013 The MathWorks, Inc.
+                    R2013a (8.1.0.604) 64-bit (glnxa64)
+                             February 15, 2013
+
+
+                            < M A T L A B (R) >
+                  Copyright 1984-2013 The MathWorks, Inc.
+                    R2013a (8.1.0.604) 64-bit (glnxa64)
+                             February 15, 2013
+
+
+                            < M A T L A B (R) >
+                  Copyright 1984-2013 The MathWorks, Inc.
+                    R2013a (8.1.0.604) 64-bit (glnxa64)
+                             February 15, 2013
+
+
+                            < M A T L A B (R) >
+                  Copyright 1984-2013 The MathWorks, Inc.
+                    R2013a (8.1.0.604) 64-bit (glnxa64)
+                             February 15, 2013
+
+
+                            < M A T L A B (R) >
+                  Copyright 1984-2013 The MathWorks, Inc.
+                    R2013a (8.1.0.604) 64-bit (glnxa64)
+                             February 15, 2013
+
+
+                            < M A T L A B (R) >
+                  Copyright 1984-2013 The MathWorks, Inc.
+                    R2013a (8.1.0.604) 64-bit (glnxa64)
+                             February 15, 2013
+
+
+                            < M A T L A B (R) >
+                  Copyright 1984-2013 The MathWorks, Inc.
+                    R2013a (8.1.0.604) 64-bit (glnxa64)
+                             February 15, 2013
+
+
+                            < M A T L A B (R) >
+                  Copyright 1984-2013 The MathWorks, Inc.
+                    R2013a (8.1.0.604) 64-bit (glnxa64)
+                             February 15, 2013
+
+
+                            < M A T L A B (R) >
+                  Copyright 1984-2013 The MathWorks, Inc.
+                    R2013a (8.1.0.604) 64-bit (glnxa64)
+                             February 15, 2013
+
+
+                            < M A T L A B (R) >
+                  Copyright 1984-2013 The MathWorks, Inc.
+                    R2013a (8.1.0.604) 64-bit (glnxa64)
+                             February 15, 2013
+
+
+                            < M A T L A B (R) >
+                  Copyright 1984-2013 The MathWorks, Inc.
+                    R2013a (8.1.0.604) 64-bit (glnxa64)
+                             February 15, 2013
+
+
+                            < M A T L A B (R) >
+                  Copyright 1984-2013 The MathWorks, Inc.
+                    R2013a (8.1.0.604) 64-bit (glnxa64)
+                             February 15, 2013
+
+
+                            < M A T L A B (R) >
+                  Copyright 1984-2013 The MathWorks, Inc.
+                    R2013a (8.1.0.604) 64-bit (glnxa64)
+                             February 15, 2013
+
+
+                            < M A T L A B (R) >
+                  Copyright 1984-2013 The MathWorks, Inc.
+                    R2013a (8.1.0.604) 64-bit (glnxa64)
+                             February 15, 2013
+
+
+                            < M A T L A B (R) >
+                  Copyright 1984-2013 The MathWorks, Inc.
+                    R2013a (8.1.0.604) 64-bit (glnxa64)
+                             February 15, 2013
+
+
+                            < M A T L A B (R) >
+                  Copyright 1984-2013 The MathWorks, Inc.
+                    R2013a (8.1.0.604) 64-bit (glnxa64)
+                             February 15, 2013
+
+
+                            < M A T L A B (R) >
+                  Copyright 1984-2013 The MathWorks, Inc.
+                    R2013a (8.1.0.604) 64-bit (glnxa64)
+                             February 15, 2013
+
+
+                            < M A T L A B (R) >
+                  Copyright 1984-2013 The MathWorks, Inc.
+                    R2013a (8.1.0.604) 64-bit (glnxa64)
+                             February 15, 2013
+
+
+                            < M A T L A B (R) >
+                  Copyright 1984-2013 The MathWorks, Inc.
+                    R2013a (8.1.0.604) 64-bit (glnxa64)
+                             February 15, 2013
+
+
+                            < M A T L A B (R) >
+                  Copyright 1984-2013 The MathWorks, Inc.
+                    R2013a (8.1.0.604) 64-bit (glnxa64)
+                             February 15, 2013
+
+
+                            < M A T L A B (R) >
+                  Copyright 1984-2013 The MathWorks, Inc.
+                    R2013a (8.1.0.604) 64-bit (glnxa64)
+                             February 15, 2013
+
+
+                            < M A T L A B (R) >
+                  Copyright 1984-2013 The MathWorks, Inc.
+                    R2013a (8.1.0.604) 64-bit (glnxa64)
+                             February 15, 2013
+
+
+                            < M A T L A B (R) >
+                  Copyright 1984-2013 The MathWorks, Inc.
+                    R2013a (8.1.0.604) 64-bit (glnxa64)
+                             February 15, 2013
+
+
+                            < M A T L A B (R) >
+                  Copyright 1984-2013 The MathWorks, Inc.
+                    R2013a (8.1.0.604) 64-bit (glnxa64)
+                             February 15, 2013
+
+
+                            < M A T L A B (R) >
+                  Copyright 1984-2013 The MathWorks, Inc.
+                    R2013a (8.1.0.604) 64-bit (glnxa64)
+                             February 15, 2013
+
+
+                            < M A T L A B (R) >
+                  Copyright 1984-2013 The MathWorks, Inc.
+                    R2013a (8.1.0.604) 64-bit (glnxa64)
+                             February 15, 2013
+
+
+                            < M A T L A B (R) >
+                  Copyright 1984-2013 The MathWorks, Inc.
+                    R2013a (8.1.0.604) 64-bit (glnxa64)
+                             February 15, 2013
+
+
+                            < M A T L A B (R) >
+                  Copyright 1984-2013 The MathWorks, Inc.
+                    R2013a (8.1.0.604) 64-bit (glnxa64)
+                             February 15, 2013
+
+
+                            < M A T L A B (R) >
+                  Copyright 1984-2013 The MathWorks, Inc.
+                    R2013a (8.1.0.604) 64-bit (glnxa64)
+                             February 15, 2013
+
+
+                            < M A T L A B (R) >
+                  Copyright 1984-2013 The MathWorks, Inc.
+                    R2013a (8.1.0.604) 64-bit (glnxa64)
+                             February 15, 2013
+
+
+                            < M A T L A B (R) >
+                  Copyright 1984-2013 The MathWorks, Inc.
+                    R2013a (8.1.0.604) 64-bit (glnxa64)
+                             February 15, 2013
+
+
+                            < M A T L A B (R) >
+                  Copyright 1984-2013 The MathWorks, Inc.
+                    R2013a (8.1.0.604) 64-bit (glnxa64)
+                             February 15, 2013
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+To get started, type one of these: helpwin, helpdesk, or demo.
+To get started, type one of these: helpwin, helpdesk, or demo.
+To get started, type one of these: helpwin, helpdesk, or demo.
+To get started, type one of these: helpwin, helpdesk, or demo.
+To get started, type one of these: helpwin, helpdesk, or demo.
+To get started, type one of these: helpwin, helpdesk, or demo.
+To get started, type one of these: helpwin, helpdesk, or demo.
+To get started, type one of these: helpwin, helpdesk, or demo.
+For product information, visit www.mathworks.com.
+For product information, visit www.mathworks.com.
+For product information, visit www.mathworks.com.
+ 
+For product information, visit www.mathworks.com.
+ 
+ 
+ 
+For product information, visit www.mathworks.com.
+For product information, visit www.mathworks.com.
+ 
+ 
+For product information, visit www.mathworks.com.
+For product information, visit www.mathworks.com.
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+To get started, type one of these: helpwin, helpdesk, or demo.
+To get started, type one of these: helpwin, helpdesk, or demo.
+To get started, type one of these: helpwin, helpdesk, or demo.
+To get started, type one of these: helpwin, helpdesk, or demo.
+To get started, type one of these: helpwin, helpdesk, or demo.
+To get started, type one of these: helpwin, helpdesk, or demo.
+For product information, visit www.mathworks.com.
+For product information, visit www.mathworks.com.
+For product information, visit www.mathworks.com.
+For product information, visit www.mathworks.com.
+ 
+ 
+ 
+For product information, visit www.mathworks.com.
+ 
+To get started, type one of these: helpwin, helpdesk, or demo.
+For product information, visit www.mathworks.com.
+ 
+ 
+To get started, type one of these: helpwin, helpdesk, or demo.
+To get started, type one of these: helpwin, helpdesk, or demo.
+To get started, type one of these: helpwin, helpdesk, or demo.
+To get started, type one of these: helpwin, helpdesk, or demo.
+To get started, type one of these: helpwin, helpdesk, or demo.
+To get started, type one of these: helpwin, helpdesk, or demo.
+To get started, type one of these: helpwin, helpdesk, or demo.
+For product information, visit www.mathworks.com.
+ 
+ 
+For product information, visit www.mathworks.com.
+For product information, visit www.mathworks.com.
+For product information, visit www.mathworks.com.
+For product information, visit www.mathworks.com.
+For product information, visit www.mathworks.com.
+ 
+ 
+ 
+For product information, visit www.mathworks.com.
+ 
+For product information, visit www.mathworks.com.
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+To get started, type one of these: helpwin, helpdesk, or demo.
+To get started, type one of these: helpwin, helpdesk, or demo.
+To get started, type one of these: helpwin, helpdesk, or demo.
+To get started, type one of these: helpwin, helpdesk, or demo.
+To get started, type one of these: helpwin, helpdesk, or demo.
+To get started, type one of these: helpwin, helpdesk, or demo.
+To get started, type one of these: helpwin, helpdesk, or demo.
+ 
+To get started, type one of these: helpwin, helpdesk, or demo.
+For product information, visit www.mathworks.com.
+For product information, visit www.mathworks.com.
+ 
+ 
+For product information, visit www.mathworks.com.
+For product information, visit www.mathworks.com.
+For product information, visit www.mathworks.com.
+ 
+ 
+ 
+For product information, visit www.mathworks.com.
+For product information, visit www.mathworks.com.
+ 
+ 
+For product information, visit www.mathworks.com.
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+To get started, type one of these: helpwin, helpdesk, or demo.
+ 
+For product information, visit www.mathworks.com.
+ 
+ 
+ 
+To get started, type one of these: helpwin, helpdesk, or demo.
+For product information, visit www.mathworks.com.
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+To get started, type one of these: helpwin, helpdesk, or demo.
+To get started, type one of these: helpwin, helpdesk, or demo.
+To get started, type one of these: helpwin, helpdesk, or demo.
+To get started, type one of these: helpwin, helpdesk, or demo.
+To get started, type one of these: helpwin, helpdesk, or demo.
+To get started, type one of these: helpwin, helpdesk, or demo.
+To get started, type one of these: helpwin, helpdesk, or demo.
+To get started, type one of these: helpwin, helpdesk, or demo.
+To get started, type one of these: helpwin, helpdesk, or demo.
+To get started, type one of these: helpwin, helpdesk, or demo.
+To get started, type one of these: helpwin, helpdesk, or demo.
+To get started, type one of these: helpwin, helpdesk, or demo.
+For product information, visit www.mathworks.com.
+For product information, visit www.mathworks.com.
+ 
+ 
+For product information, visit www.mathworks.com.
+For product information, visit www.mathworks.com.
+For product information, visit www.mathworks.com.
+For product information, visit www.mathworks.com.
+ 
+For product information, visit www.mathworks.com.
+ 
+For product information, visit www.mathworks.com.
+ 
+ 
+ 
+For product information, visit www.mathworks.com.
+ 
+For product information, visit www.mathworks.com.
+To get started, type one of these: helpwin, helpdesk, or demo.
+ 
+ 
+To get started, type one of these: helpwin, helpdesk, or demo.
+To get started, type one of these: helpwin, helpdesk, or demo.
+To get started, type one of these: helpwin, helpdesk, or demo.
+To get started, type one of these: helpwin, helpdesk, or demo.
+To get started, type one of these: helpwin, helpdesk, or demo.
+To get started, type one of these: helpwin, helpdesk, or demo.
+To get started, type one of these: helpwin, helpdesk, or demo.
+For product information, visit www.mathworks.com.
+For product information, visit www.mathworks.com.
+For product information, visit www.mathworks.com.
+For product information, visit www.mathworks.com.
+ 
+For product information, visit www.mathworks.com.
+ 
+For product information, visit www.mathworks.com.
+ 
+ 
+For product information, visit www.mathworks.com.
+ 
+ 
+ 
+For product information, visit www.mathworks.com.
+ 
+To get started, type one of these: helpwin, helpdesk, or demo.
+For product information, visit www.mathworks.com.
+ 
+To get started, type one of these: helpwin, helpdesk, or demo.
+To get started, type one of these: helpwin, helpdesk, or demo.
+To get started, type one of these: helpwin, helpdesk, or demo.
+For product information, visit www.mathworks.com.
+To get started, type one of these: helpwin, helpdesk, or demo.
+For product information, visit www.mathworks.com.
+ 
+For product information, visit www.mathworks.com.
+To get started, type one of these: helpwin, helpdesk, or demo.
+To get started, type one of these: helpwin, helpdesk, or demo.
+For product information, visit www.mathworks.com.
+ 
+To get started, type one of these: helpwin, helpdesk, or demo.
+ 
+To get started, type one of these: helpwin, helpdesk, or demo.
+For product information, visit www.mathworks.com.
+ 
+To get started, type one of these: helpwin, helpdesk, or demo.
+To get started, type one of these: helpwin, helpdesk, or demo.
+To get started, type one of these: helpwin, helpdesk, or demo.
+To get started, type one of these: helpwin, helpdesk, or demo.
+To get started, type one of these: helpwin, helpdesk, or demo.
+To get started, type one of these: helpwin, helpdesk, or demo.
+For product information, visit www.mathworks.com.
+For product information, visit www.mathworks.com.
+ 
+For product information, visit www.mathworks.com.
+ 
+For product information, visit www.mathworks.com.
+ 
+ 
+For product information, visit www.mathworks.com.
+For product information, visit www.mathworks.com.
+ 
+For product information, visit www.mathworks.com.
+ 
+For product information, visit www.mathworks.com.
+ 
+ 
+To get started, type one of these: helpwin, helpdesk, or demo.
+To get started, type one of these: helpwin, helpdesk, or demo.
+For product information, visit www.mathworks.com.
+For product information, visit www.mathworks.com.
+ 
+ 
+To get started, type one of these: helpwin, helpdesk, or demo.
+For product information, visit www.mathworks.com.
+For product information, visit www.mathworks.com.
+ 
+ 
+For product information, visit www.mathworks.com.
+ 
+To get started, type one of these: helpwin, helpdesk, or demo.
+For product information, visit www.mathworks.com.
+ 
+To get started, type one of these: helpwin, helpdesk, or demo.
+ 
+For product information, visit www.mathworks.com.
+To get started, type one of these: helpwin, helpdesk, or demo.
+To get started, type one of these: helpwin, helpdesk, or demo.
+For product information, visit www.mathworks.com.
+For product information, visit www.mathworks.com.
+ 
+ 
+To get started, type one of these: helpwin, helpdesk, or demo.
+For product information, visit www.mathworks.com.
+ 
+For product information, visit www.mathworks.com.
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+To get started, type one of these: helpwin, helpdesk, or demo.
+To get started, type one of these: helpwin, helpdesk, or demo.
+To get started, type one of these: helpwin, helpdesk, or demo.
+To get started, type one of these: helpwin, helpdesk, or demo.
+To get started, type one of these: helpwin, helpdesk, or demo.
+To get started, type one of these: helpwin, helpdesk, or demo.
+For product information, visit www.mathworks.com.
+To get started, type one of these: helpwin, helpdesk, or demo.
+To get started, type one of these: helpwin, helpdesk, or demo.
+ 
+For product information, visit www.mathworks.com.
+For product information, visit www.mathworks.com.
+For product information, visit www.mathworks.com.
+ 
+For product information, visit www.mathworks.com.
+For product information, visit www.mathworks.com.
+ 
+ 
+For product information, visit www.mathworks.com.
+For product information, visit www.mathworks.com.
+ 
+ 
+ 
+ 
+ 
+To get started, type one of these: helpwin, helpdesk, or demo.
+To get started, type one of these: helpwin, helpdesk, or demo.
+To get started, type one of these: helpwin, helpdesk, or demo.
+To get started, type one of these: helpwin, helpdesk, or demo.
+To get started, type one of these: helpwin, helpdesk, or demo.
+To get started, type one of these: helpwin, helpdesk, or demo.
+To get started, type one of these: helpwin, helpdesk, or demo.
+To get started, type one of these: helpwin, helpdesk, or demo.
+For product information, visit www.mathworks.com.
+ 
+For product information, visit www.mathworks.com.
+For product information, visit www.mathworks.com.
+ 
+For product information, visit www.mathworks.com.
+ 
+ 
+For product information, visit www.mathworks.com.
+For product information, visit www.mathworks.com.
+ 
+For product information, visit www.mathworks.com.
+ 
+ 
+For product information, visit www.mathworks.com.
+ 
+>> Number of channels: 1
+Number of channels: 1
+Number of time points: 321000
+Number of time points: 321000
+Number of channels: 1
+Number of channels: 1
+Number of channels: 1
+Number of time points: 321000
+Number of time points: 321000
+Number of time points: 321000
+Number of channels: 1
+Number of time points: 321000
+Number of channels: 1
+Number of time points: 321000
+Number of channels: 1
+Number of time points: 321000
+Number of channels: 1
+Number of time points: 321000
+Number of channels: 1
+Number of time points: 321000
+>> >> Number of channels: 1
+Number of channels: 1
+Number of channels: 1
+Number of channels: 1
+Number of time points: 321000
+Number of time points: 321000
+Number of time points: 321000
+Number of time points: 321000
+Number of channels: 1
+Number of time points: 321000
+Number of channels: 1
+Number of time points: 321000
+Number of channels: 1
+Number of time points: 321000
+Number of channels: 1
+Number of time points: 321000
+Number of channels: 1
+Number of channels: 1
+Number of channels: 1
+Number of channels: 1
+Number of channels: 1
+Number of time points: 321000
+Number of time points: 321000
+Number of time points: 321000
+Number of time points: 321000
+Number of time points: 321000
+Number of channels: 1
+Number of time points: 321000
+Number of channels: 1
+Number of time points: 321000
+Number of channels: 1
+Number of channels: 1
+Number of channels: 1
+Number of channels: 1
+Number of time points: 321000
+Number of time points: 321000
+Number of channels: 1
+Number of time points: 321000
+Number of time points: 321000
+Number of channels: 1
+Number of time points: 321000
+Number of time points: 321000
+Number of channels: 1
+Number of time points: 321000
+Number of channels: 1
+Number of time points: 321000
+Number of channels: 1
+Number of time points: 321000
+Number of channels: 1
+Number of channels: 1
+Number of time points: 321000
+Number of channels: 1
+Number of channels: 1
+Number of time points: 321000
+Number of time points: 321000
+Number of time points: 321000
+Number of channels: 1
+Number of time points: 321000
+Number of channels: 1
+Number of time points: 321000
+Number of channels: 1
+Number of time points: 321000
+Number of channels: 1
+Number of time points: 321000
+Number of channels: 1
+Number of channels: 1
+Number of channels: 1
+Number of channels: 1
+Number of time points: 321000
+Number of time points: 321000
+Number of time points: 321000
+Number of time points: 321000
+Number of channels: 1
+Number of channels: 1
+Number of time points: 321000
+Number of time points: 321000
+Number of channels: 1
+Number of time points: 321000
+Number of channels: 1
+Number of time points: 321000
+Number of channels: 1
+Number of channels: 1
+Number of channels: 1
+Number of time points: 321000
+Number of time points: 321000
+Number of time points: 321000
+Number of channels: 1
+Number of time points: 321000
+Number of channels: 1
+Number of time points: 321000
+Number of channels: 1
+Number of time points: 321000
+Number of channels: 1
+Number of time points: 321000
+Number of channels: 1
+Number of time points: 321000
+Number of channels: 1
+Number of channels: 1
+Number of channels: 1
+Number of time points: 321000
+Number of time points: 321000
+Number of time points: 321000
+Number of channels: 1
+Number of time points: 321000
+Number of channels: 1
+Number of time points: 321000
+Number of channels: 1
+Number of time points: 321000
+Number of channels: 1
+Number of channels: 1
+Number of channels: 1
+Number of channels: 1
+Number of time points: 321000
+Number of time points: 321000
+Number of time points: 321000
+Number of time points: 321000
+Number of channels: 1
+Number of channels: 1
+Number of channels: 1
+Number of time points: 321000
+Number of time points: 321000
+Number of time points: 321000
+Number of channels: 1
+Number of time points: 321000
+Number of channels: 1
+Number of time points: 321000
+Number of channels: 1
+Number of time points: 321000
+Number of channels: 1
+Number of time points: 321000
+Number of channels: 1
+Number of time points: 321000
+Number of channels: 1
+Number of time points: 321000
+Number of channels: 1
+Number of time points: 321000
+Number of channels: 1
+Number of time points: 321000
+Number of channels: 1
+Number of time points: 321000
+Number of channels: 1
+Number of time points: 321000
+Number of channels: 1
+Number of time points: 321000
+>> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> Number of channels: 1
+Number of channels: 1
+Number of channels: 1
+Number of channels: 1
+Number of channels: 1
+Number of channels: 1
+Number of time points: 321000
+Number of time points: 321000
+Number of time points: 321000
+Number of time points: 321000
+Number of time points: 321000
+Number of time points: 321000
+Number of channels: 1
+Number of time points: 321000
+Number of channels: 1
+Number of time points: 321000
+----------------------------------------
+Begin PBS Epilogue Tue Mar 28 15:39:38 EDT 2017 1490729978
+Job ID:		2592103.mgt
+Username:	ali
+Group:		sarma
+Job Name:	spectral_fourier_EZT026seiz002
+Session:	13912
+Limits:		neednodes=12:ppn=8,nodes=12:ppn=8,walltime=00:20:00
+Resources:	cput=00:10:49,mem=12995332kb,vmem=70510432kb,walltime=00:00:32
+Queue:		dque
+Account:		
+Nodes:	node137 node144 node149 node151 node156 node164 node171 node172 node189 
+node190 node192 node195
+Killing leftovers...
+
+End PBS Epilogue Tue Mar 28 15:39:38 EDT 2017 1490729978
+----------------------------------------

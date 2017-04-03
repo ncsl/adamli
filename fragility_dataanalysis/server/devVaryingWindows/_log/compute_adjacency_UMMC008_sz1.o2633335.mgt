@@ -1,0 +1,1308 @@
+----------------------------------------
+Begin PBS Prologue Thu Mar 30 12:02:42 EDT 2017 1490889762
+Job ID:		2633335.mgt
+Username:	ali
+Group:		sarma
+Nodes:		node095
+End PBS Prologue Thu Mar 30 12:02:42 EDT 2017 1490889762
+----------------------------------------
+500
+500
+1.5
+1
+Running connectivity computation.
+
+                            < M A T L A B (R) >
+                  Copyright 1984-2013 The MathWorks, Inc.
+                    R2013a (8.1.0.604) 64-bit (glnxa64)
+                             February 15, 2013
+
+ 
+To get started, type one of these: helpwin, helpdesk, or demo.
+For product information, visit www.mathworks.com.
+ 
+Looking at patient: UMMC008_sz1
+
+patient_eeg_path =
+
+/home/ali/adamli/fragility_dataanalysis/data/ummc/UMMC008_sz1
+
+
+patient =
+
+UMMC008_sz1
+
+Adaptive filtering ...
+[Warning: Rank deficient, rank = 870, tol =  6.092280e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 1 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  6.808806e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 2 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  6.278439e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 3 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  6.509409e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 4 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  7.632404e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 5 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  6.243935e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 6 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  5.981529e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 7 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  1.428472e-07.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 8 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  3.591562e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 9 out of 409.36
+Finished: 10 out of 409.36
+Finished: 11 out of 409.36
+Finished: 12 out of 409.36
+Finished: 13 out of 409.36
+Finished: 14 out of 409.36
+Finished: 15 out of 409.36
+Finished: 16 out of 409.36
+Finished: 17 out of 409.36
+Finished: 18 out of 409.36
+Finished: 19 out of 409.36
+Finished: 20 out of 409.36
+Finished: 21 out of 409.36
+Finished: 22 out of 409.36
+Finished: 23 out of 409.36
+Finished: 24 out of 409.36
+Finished: 25 out of 409.36
+Finished: 26 out of 409.36
+Finished: 27 out of 409.36
+Finished: 28 out of 409.36
+Finished: 29 out of 409.36
+Finished: 30 out of 409.36
+Finished: 31 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  4.529609e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 32 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  6.784029e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 33 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  1.117294e-07.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 34 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  6.794691e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 35 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  4.692029e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 36 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  6.373257e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 37 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  5.203922e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 38 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  4.089784e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 39 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  5.232379e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 40 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  9.037276e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 41 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  8.861694e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 42 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  9.310689e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 43 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  7.751929e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 44 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  1.016375e-07.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 45 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  1.326509e-07.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 46 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  1.396491e-07.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 47 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  1.234559e-07.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 48 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  1.016733e-07.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 49 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  8.450566e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 50 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  1.044347e-07.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 51 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  5.359368e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 52 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  1.006135e-07.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 53 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  7.786492e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 54 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  8.097415e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 55 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  8.746479e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 56 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  8.187767e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 57 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  6.174980e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 58 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  6.545461e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 59 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  5.552689e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 60 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  6.224198e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 61 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  7.524069e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 62 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  5.280431e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 63 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  5.017290e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 64 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  4.213344e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 65 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  6.458034e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 66 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  4.736073e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 67 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  6.766192e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 68 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  5.067363e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 69 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  7.581945e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 70 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  4.752733e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 71 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  4.927937e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 72 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  5.036245e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 73 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  5.066503e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 74 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  7.305651e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 75 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  3.506822e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 76 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  5.495119e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 77 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  4.452641e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 78 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  5.400152e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 79 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  3.616641e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 80 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  5.897102e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 81 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  5.485710e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 82 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  4.228901e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 83 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  8.075527e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 84 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  8.726312e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 85 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  7.665293e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 86 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  4.783778e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 87 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  5.834147e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 88 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  5.331992e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 89 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  6.771310e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 90 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  5.842786e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 91 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  5.104715e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 92 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  5.926006e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 93 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  5.621473e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 94 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  6.013708e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 95 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  3.834074e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 96 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  4.497872e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 97 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  5.809205e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 98 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  3.603827e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 99 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  6.603590e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 100 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  6.460943e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 101 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  8.436306e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 102 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  8.342863e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 103 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  5.023226e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 104 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  4.952107e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 105 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  7.218313e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 106 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  5.717815e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 107 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  4.792693e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 108 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  6.353813e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 109 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  4.039408e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 110 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  8.621637e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 111 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  5.614586e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 112 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  4.530651e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 113 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  1.013341e-07.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 114 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  5.931549e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 115 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  5.237888e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 116 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  5.326551e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 117 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  4.332676e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 118 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  6.012421e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 119 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  8.237955e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 120 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  4.098503e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 121 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  7.970142e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 122 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  9.100782e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 123 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  3.750783e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 124 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  4.875932e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 125 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  4.861075e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 126 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  8.737221e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 127 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  4.982605e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 128 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  5.143618e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 129 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  1.311696e-07.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 130 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  7.301811e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 131 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  5.324585e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 132 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  8.975883e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 133 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  8.881923e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 134 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  7.440560e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 135 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  7.491054e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 136 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  5.129036e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 137 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  6.665320e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 138 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  8.372259e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 139 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  6.405611e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 140 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  7.043777e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 141 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  5.057143e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 142 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  6.722807e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 143 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  5.498687e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 144 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  5.722080e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 145 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  6.949549e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 146 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  4.712052e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 147 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  5.446306e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 148 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  6.110526e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 149 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  9.043584e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 150 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  5.251322e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 151 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  7.470670e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 152 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  6.857081e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 153 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  6.740013e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 154 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  6.305534e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 155 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  5.190131e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 156 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  6.527409e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 157 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  4.416622e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 158 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  7.036638e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 159 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  7.183407e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 160 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  1.056570e-07.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 161 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  1.287918e-07.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 162 out of 409.36
+Finished: 163 out of 409.36
+Finished: 164 out of 409.36
+Finished: 165 out of 409.36
+Finished: 166 out of 409.36
+Finished: 167 out of 409.36
+Finished: 168 out of 409.36
+Finished: 169 out of 409.36
+Finished: 170 out of 409.36
+Finished: 171 out of 409.36
+Finished: 172 out of 409.36
+Finished: 173 out of 409.36
+Finished: 174 out of 409.36
+Finished: 175 out of 409.36
+Finished: 176 out of 409.36
+Finished: 177 out of 409.36
+Finished: 178 out of 409.36
+Finished: 179 out of 409.36
+Finished: 180 out of 409.36
+Finished: 181 out of 409.36
+Finished: 182 out of 409.36
+Finished: 183 out of 409.36
+Finished: 184 out of 409.36
+Finished: 185 out of 409.36
+Finished: 186 out of 409.36
+Finished: 187 out of 409.36
+Finished: 188 out of 409.36
+Finished: 189 out of 409.36
+Finished: 190 out of 409.36
+Finished: 191 out of 409.36
+Finished: 192 out of 409.36
+Finished: 193 out of 409.36
+Finished: 194 out of 409.36
+Finished: 195 out of 409.36
+Finished: 196 out of 409.36
+Finished: 197 out of 409.36
+Finished: 198 out of 409.36
+Finished: 199 out of 409.36
+Finished: 200 out of 409.36
+Finished: 201 out of 409.36
+Finished: 202 out of 409.36
+Finished: 203 out of 409.36
+Finished: 204 out of 409.36
+Finished: 205 out of 409.36
+Finished: 206 out of 409.36
+Finished: 207 out of 409.36
+Finished: 208 out of 409.36
+Finished: 209 out of 409.36
+Finished: 210 out of 409.36
+Finished: 211 out of 409.36
+Finished: 212 out of 409.36
+Finished: 213 out of 409.36
+Finished: 214 out of 409.36
+Finished: 215 out of 409.36
+Finished: 216 out of 409.36
+Finished: 217 out of 409.36
+Finished: 218 out of 409.36
+Finished: 219 out of 409.36
+Finished: 220 out of 409.36
+Finished: 221 out of 409.36
+Finished: 222 out of 409.36
+Finished: 223 out of 409.36
+Finished: 224 out of 409.36
+Finished: 225 out of 409.36
+Finished: 226 out of 409.36
+Finished: 227 out of 409.36
+Finished: 228 out of 409.36
+Finished: 229 out of 409.36
+Finished: 230 out of 409.36
+Finished: 231 out of 409.36
+Finished: 232 out of 409.36
+Finished: 233 out of 409.36
+Finished: 234 out of 409.36
+Finished: 235 out of 409.36
+Finished: 236 out of 409.36
+Finished: 237 out of 409.36
+Finished: 238 out of 409.36
+Finished: 239 out of 409.36
+Finished: 240 out of 409.36
+Finished: 241 out of 409.36
+Finished: 242 out of 409.36
+Finished: 243 out of 409.36
+Finished: 244 out of 409.36
+Finished: 245 out of 409.36
+Finished: 246 out of 409.36
+Finished: 247 out of 409.36
+Finished: 248 out of 409.36
+Finished: 249 out of 409.36
+Finished: 250 out of 409.36
+Finished: 251 out of 409.36
+Finished: 252 out of 409.36
+Finished: 253 out of 409.36
+Finished: 254 out of 409.36
+Finished: 255 out of 409.36
+Finished: 256 out of 409.36
+Finished: 257 out of 409.36
+Finished: 258 out of 409.36
+Finished: 259 out of 409.36
+Finished: 260 out of 409.36
+Finished: 261 out of 409.36
+Finished: 262 out of 409.36
+Finished: 263 out of 409.36
+Finished: 264 out of 409.36
+Finished: 265 out of 409.36
+Finished: 266 out of 409.36
+Finished: 267 out of 409.36
+Finished: 268 out of 409.36
+Finished: 269 out of 409.36
+Finished: 270 out of 409.36
+Finished: 271 out of 409.36
+Finished: 272 out of 409.36
+Finished: 273 out of 409.36
+Finished: 274 out of 409.36
+Finished: 275 out of 409.36
+Finished: 276 out of 409.36
+Finished: 277 out of 409.36
+Finished: 278 out of 409.36
+Finished: 279 out of 409.36
+Finished: 280 out of 409.36
+Finished: 281 out of 409.36
+Finished: 282 out of 409.36
+Finished: 283 out of 409.36
+Finished: 284 out of 409.36
+Finished: 285 out of 409.36
+Finished: 286 out of 409.36
+Finished: 287 out of 409.36
+Finished: 288 out of 409.36
+Finished: 289 out of 409.36
+Finished: 290 out of 409.36
+Finished: 291 out of 409.36
+Finished: 292 out of 409.36
+Finished: 293 out of 409.36
+Finished: 294 out of 409.36
+Finished: 295 out of 409.36
+Finished: 296 out of 409.36
+Finished: 297 out of 409.36
+Finished: 298 out of 409.36
+Finished: 299 out of 409.36
+Finished: 300 out of 409.36
+Finished: 301 out of 409.36
+Finished: 302 out of 409.36
+Finished: 303 out of 409.36
+Finished: 304 out of 409.36
+Finished: 305 out of 409.36
+Finished: 306 out of 409.36
+Finished: 307 out of 409.36
+Finished: 308 out of 409.36
+Finished: 309 out of 409.36
+Finished: 310 out of 409.36
+Finished: 311 out of 409.36
+Finished: 312 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  8.762752e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 313 out of 409.36
+Finished: 314 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  1.522148e-07.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 315 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  8.072156e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 316 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  8.635253e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 317 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  1.555838e-07.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 318 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  1.148705e-07.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 319 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  7.839137e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 320 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  7.968697e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 321 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  1.056525e-07.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 322 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  6.581344e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 323 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  8.486405e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 324 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  7.550633e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 325 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  8.242067e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 326 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  9.119408e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 327 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  8.121359e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 328 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  1.294433e-07.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 329 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  1.256484e-07.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 330 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  7.841427e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 331 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  1.688497e-07.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 332 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  7.643309e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 333 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  8.512251e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 334 out of 409.36
+Finished: 335 out of 409.36
+Finished: 336 out of 409.36
+Finished: 337 out of 409.36
+Finished: 338 out of 409.36
+Finished: 339 out of 409.36
+Finished: 340 out of 409.36
+Finished: 341 out of 409.36
+Finished: 342 out of 409.36
+Finished: 343 out of 409.36
+Finished: 344 out of 409.36
+Finished: 345 out of 409.36
+Finished: 346 out of 409.36
+Finished: 347 out of 409.36
+Finished: 348 out of 409.36
+Finished: 349 out of 409.36
+Finished: 350 out of 409.36
+Finished: 351 out of 409.36
+Finished: 352 out of 409.36
+Finished: 353 out of 409.36
+Finished: 354 out of 409.36
+Finished: 355 out of 409.36
+Finished: 356 out of 409.36
+Finished: 357 out of 409.36
+Finished: 358 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  8.976845e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 359 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  7.433453e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 360 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  9.768662e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 361 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  1.233250e-07.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 362 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  1.029000e-07.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 363 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  8.759282e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 364 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  7.760416e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 365 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  1.617895e-07.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 366 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  1.046821e-07.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 367 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  9.778832e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 368 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  8.609542e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 369 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  6.963175e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 370 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  7.314887e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 371 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  1.188274e-07.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 372 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  1.014634e-07.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 373 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  1.835953e-07.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 374 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  9.030831e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 375 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  1.633257e-07.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 376 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  1.081892e-07.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 377 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  1.070920e-07.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 378 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  1.084727e-07.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 379 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  1.609010e-07.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 380 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  7.879950e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 381 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  7.042968e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 382 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  7.093716e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 383 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  7.652002e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 384 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  7.041061e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 385 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  5.178372e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 386 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  6.804047e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 387 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  7.152706e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 388 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  9.380430e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 389 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  8.435598e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 390 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  1.518331e-07.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 391 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  6.853341e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 392 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  7.556358e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 393 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  1.098589e-07.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 394 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  7.953508e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 395 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  8.518959e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 396 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  9.082059e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 397 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  9.423138e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 398 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  1.185441e-07.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 399 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  1.348917e-07.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 400 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  1.049075e-07.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 401 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  9.980905e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 402 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  9.580997e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 403 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  1.118238e-07.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 404 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  9.651660e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 405 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  7.630525e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 406 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  7.723589e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 407 out of 409.36
+[Warning: Rank deficient, rank = 870, tol =  9.813083e-08.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 408 out of 409.36
+[Warning: Rank deficient, rank = 90, tol =  1.995198e-06.] 
+[> In computeLeastSquares at 73
+  In computeConnectivity at 98
+  In serverAdjMainScript at 181] 
+Finished: 409 out of 409.36
+>> ----------------------------------------
+Begin PBS Epilogue Thu Mar 30 12:03:39 EDT 2017 1490889819
+Job ID:		2633335.mgt
+Username:	ali
+Group:		sarma
+Job Name:	compute_adjacency_UMMC008_sz1
+Session:	2469
+Limits:		neednodes=1:ppn=8,nodes=1:ppn=8,walltime=12:00:00
+Resources:	cput=00:00:27,mem=266044kb,vmem=1044580kb,walltime=00:00:52
+Queue:		dque
+Account:		
+Nodes:	node095
+Killing leftovers...
+
+End PBS Epilogue Thu Mar 30 12:03:39 EDT 2017 1490889819
+----------------------------------------
