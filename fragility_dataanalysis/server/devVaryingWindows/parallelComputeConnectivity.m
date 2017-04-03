@@ -95,6 +95,7 @@ else
     patient_eeg_path = fullfile(dataDir, patient);
 end
 
+fprintf('Loading data...');
 % READ EEG FILE Mat File
 % files to process
 data = load(fullfile(patient_eeg_path, patient));
@@ -107,7 +108,7 @@ seizure_eonset_ms = data.seizure_eonset_ms;
 seizure_eoffset_ms = data.seizure_eoffset_ms;
 seizure_conset_ms = data.seizure_conset_ms;
 seizure_coffset_ms = data.seizure_coffset_ms;
-
+fprintf('Loaded data...');
 clear data
 % check included channels length and how big eeg is
 if length(labels(included_channels)) ~= size(eeg(included_channels,:),1)
