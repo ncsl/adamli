@@ -190,8 +190,9 @@ if iProc == 1
     info.numSamplesInWin = numSampsInWin;
     info.numSamplesInStep = numSampsInStep;
     info.rawtimePoints = timePoints;
-    timePoints(:, 1) = timePoints(:, 1) - 1;
-    info.timePoints = (timePoints - seizure_eonset_ms * frequency_sampling / 1000) ./ frequency_sampling;
+    temptimePoints = timePoints;
+    temptimePoints(:, 1) = timePoints(:, 1) - 1;
+    info.timePoints = (temptimePoints - seizure_eonset_ms * frequency_sampling / 1000) ./ frequency_sampling;
     info.included_channels = included_channels;
     info.frequency_sampling = frequency_sampling;
     info.FILTER_TYPE = FILTER_RAW;
