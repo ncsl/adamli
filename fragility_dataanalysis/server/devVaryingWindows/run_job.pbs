@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-=======
 #!/bin/bash -l
 #PBS -M ali39@jhu.edu
 #PBS -m abe
@@ -18,6 +16,5 @@ cd /home/ali/adamli/fragility_dataanalysis/server/devVaryingWindows/
 
 for ((proc=0; proc<= Nnode; proc++))
 do 
-	pbsdsh -n $proc /home/ali/adamli/fragility_dataanalysis/server/devVaryingWindows/runAnalysis.sh ${proc} ${patient} ${numWins} ${winSize} ${stepSize} ${radius} ${RUNCONNECTIVITY} ${Nnode} &
+	pbsdsh -n $proc /home/ali/adamli/fragility_dataanalysis/server/devVaryingWindows/runAnalysis.sh ${proc} ${patient} ${winSize} ${stepSize} ${radius} ${RUNCONNECTIVITY} ${Nnode} &
 done
->>>>>>> bd9f6dfff5def0140cb9af066ab887cbdc2449a1

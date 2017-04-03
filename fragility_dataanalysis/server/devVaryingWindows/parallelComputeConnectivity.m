@@ -1,5 +1,5 @@
 function parallelComputeConnectivity(patient, winSize, stepSize, ...
-                                            iProc, numProcs, numWins)
+                                            iProc, numProcs)
 % function to compute the ltv model for a certain window based on
 % - # of processors
 % - # of windows
@@ -40,9 +40,6 @@ TYPE_CONNECTIVITY = 'leastsquares';
 l2regularization = 0;
 % set options for connectivity measurements
 OPTIONS.l2regularization = l2regularization;
-
-%- determine current window
-windows = iProc:numProcs*8:numWins;
 
 patient_id = [];
 seeg = 1;
@@ -119,6 +116,11 @@ end
 %- initialize the number of samples in the window / step (ms) 
 numSampsInWin = winSize * frequency_sampling / 1000;
 numSampsInStep = stepSize * frequency_sampling / 1000;
+
+numWins = floor(size(eeg, 2) / numSampsInStep - numSampsInWin/numSampsInStep + 1);
+
+%- determine current window
+windows = iProc:numProcs*8:numWins;
 
 % apply included channels to eeg and labels
 if ~isempty(included_channels)

@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-=======
 #!/bin/bash -l
 
 # 01: Prompt user for input that runs the analysis
@@ -101,7 +99,7 @@ fi
 
 ## 02: Call pbs job, runAnalysis
 for patient in $patients; do
-	numWins=$(<./patientMeta/$patient.txt)				# extract the number of windows to compute on
+	# numWins=$(<./patientMeta/$patient.txt)				# extract the number of windows to compute on
 	
 	echo $patient
 	if [[ "$RUNCONNECTIVITY" -eq 1 ]]; then
@@ -110,6 +108,5 @@ for patient in $patients; do
 		jobname="comp_pert_${patient}"
 	fi
 	# run a pbs batch job. Make sure there are no spaces in between the parameters passed
-	qsub -v RUNCONNECTIVITY=$RUNCONNECTIVITY,patient=$patient,winSize=$winSize,stepSize=$stepSize,radius=$radius,numWins=$numWins,Nnode=$Nnode -N ${jobname} -l nodes=${Nnode}:ppn=${NprocperNode},walltime=${walltime} run_job.pbs
+	qsub -v RUNCONNECTIVITY=$RUNCONNECTIVITY,patient=$patient,winSize=$winSize,stepSize=$stepSize,radius=$radius,Nnode=$Nnode -N ${jobname} -l nodes=${Nnode}:ppn=${NprocperNode},walltime=${walltime} run_job.pbs
 done
->>>>>>> bd9f6dfff5def0140cb9af066ab887cbdc2449a1

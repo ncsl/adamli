@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-=======
 function serverAdjMainScript(patient, winSize, stepSize)
 IS_SERVER = 1;
 if nargin == 0 % testing purposes
@@ -200,4 +198,3 @@ catch e
 end
 
 end
->>>>>>> bd9f6dfff5def0140cb9af066ab887cbdc2449a1
