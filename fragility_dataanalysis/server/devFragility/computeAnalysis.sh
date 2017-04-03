@@ -1,5 +1,4 @@
 #!/bin/bash
-
 source /etc/profile.modules
 module load matlab/matlab2013a
 
