@@ -35,10 +35,7 @@ disp(['Looking at patient: ',patient]);
 TYPE_CONNECTIVITY = 'leastsquares';     % type of functional conn.?
 BP_FILTER_RAW = 2;                      % apply notch filter before functional conn. computation?
 APPLY_FILTER = 0;
-IS_INTERICTAL = 0;                      % is this interictal data?
 l2regularization = 0;                   % apply l2 regularization to estimation of functional conn.?
-TEST_DESCRIP = 'after_first_removal';
-TEST_DESCRIP = [];
 
 % set patientID and seizureID
 patient_id = patient(1:strfind(patient, 'seiz')-1);
@@ -77,20 +74,9 @@ dataDir = fullfile(rootDir, '/data/', center);
 toSaveAdjDir = fullfile(rootDir, 'serverdata/adjmats/', strcat('win', num2str(winSize), ...
     '_step', num2str(stepSize), '_freq', num2str(frequency_sampling)), patient); % at lab
 
-% toSaveAdjDir = fullfile(rootDir, 'serverdata/adjmats/harmonics_notch/', strcat('win', num2str(winSize), ...
-%     '_step', num2str(stepSize), '_freq', num2str(frequency_sampling)), patient); % at lab
-
 if BP_FILTER_RAW == 2,
     toSaveAdjDir = fullfile(rootDir, 'serverdata/adjmats/adaptivefilter_adjmats/', strcat('win', num2str(winSize), ...
     '_step', num2str(stepSize), '_freq', num2str(frequency_sampling)), patient); % at lab
-end
-%%- If using External HardDrive
-% toSaveAdjDir = fullfile(strcat('/Volumes/NIL_PASS/serverdata/fixed_adj_mats_win', num2str(winSize), ...
-%     '_step', num2str(stepSize), '_freq', num2str(frequency_sampling))); % at home
-% dataDir = fullfile('/Volumes/NIL_PASS/data/', center);
-
-if ~isempty(TEST_DESCRIP)
-    toSaveAdjDir = fullfile(toSaveAdjDir, TEST_DESCRIP);
 end
 
 % create directory if it does not exist

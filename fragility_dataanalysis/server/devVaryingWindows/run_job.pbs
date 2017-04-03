@@ -1,7 +1,4 @@
 #!/bin/bash -l
-#PBS -N compute_adjacency_mat_seeg
-#PBS -l nodes=1:ppn=8
-#PBS -l walltime=12:00:00
 #PBS -M ali39@jhu.edu
 #PBS -m abe
 #PBS -q dque
@@ -17,6 +14,7 @@ module load matlab/matlab2013a
 # also make sure PBS -d is the correct directory 
 cd /home/ali/adamli/fragility_dataanalysis/server/devVaryingWindows/
 
-proc=0 
-pbsdsh -n $proc /home/ali/adamli/fragility_dataanalysis/server/devVaryingWindows/runAnalysis.sh $proc $patient $RUNCONNECTIVITY $winSize &
-wait
+for ((proc=0; proc<= Nnode; proc++))
+do 
+	pbsdsh -n $proc /home/ali/adamli/fragility_dataanalysis/server/devVaryingWindows/runAnalysis.sh ${proc} ${patient} ${numWins} ${winSize} ${stepSize} ${radius} ${RUNCONNECTIVITY} ${Nnode} &
+done

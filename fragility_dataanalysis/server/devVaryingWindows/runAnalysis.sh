@@ -6,7 +6,14 @@ module load matlab/matlab2013a
 ## 00: Load in input parameters
 proc="$1"
 patient="$2"
-stepSize=$winSize
+numWins="$3"
+winSize="$4"
+stepSize="$5"
+radius="$6"
+RUNCONNECTIVITY="$7"
+numWins="$8"
+
+# ${proc} ${patient} ${currentWin} ${winSize} ${stepSize} ${radius} ${RUNCONNECTIVITY}
 ## 01: Set parameters for matlab to run, and check if matlab is on path
 matlab_jvm="matlab -nojvm -nodesktop -nosplash -r"
 [[ ! -z "`which matlab`" ]] || \
@@ -15,21 +22,12 @@ matlab_jvm="matlab -nojvm -nodesktop -nosplash -r"
 		exit 1;
 	}
 
-winSize=500
-stepSize=500
-radius=1.5
-
-echo $winSize
-echo $stepSize
-echo $radius
-echo $RUNCONNECTIVITY
-
 # run adjacency computation and then run perturbation analysis on the same patient/seizure
 # open matlab and call functions
 if [[ "$RUNCONNECTIVITY" -eq 1 ]]; then
 	echo "Running connectivity computation."
 	matlab -logfile /home/ali/adamli/fragility_dataanalysis/server/devVaryingWindows/_log/job$1.txt -nojvm -nodisplay -nosplash -r "currentpatient='$patient'; \
-		serverAdjMainScript(currentpatient, $winSize, $stepSize);"
+		parallelComputeConnectivity(currentpatient, $winSize, $stepSize, $proc, $numProcs, $numWins);"
 else
 	echo "Running perturbation computation."
 	# run perturbation analysis
