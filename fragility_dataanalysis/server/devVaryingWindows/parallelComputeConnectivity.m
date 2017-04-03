@@ -7,11 +7,11 @@ function parallelComputeConnectivity(patient, winSize, stepSize, ...
 if nargin == 0 % testing purposes
     patient='EZT009seiz001';
 %     patient='JH102sz6';
-    patient='pt7sz19';
+    patient='pt1sz2';
     % window paramters
     winSize = 250; % 500 milliseconds
     stepSize = 125; 
-    iProc = 8;
+    iProc = 2;
     numProcs = 1;
     numWins = 103;
 end
@@ -35,7 +35,7 @@ addpath(rootDir);
 %- 0 == no filtering
 %- 1 == notch filtering
 %- 2 == adaptive filtering
-FILTER_RAW = 1; 
+FILTER_RAW = 2; 
 TYPE_CONNECTIVITY = 'leastsquares';
 l2regularization = 0;
 % set options for connectivity measurements
@@ -72,6 +72,7 @@ patient_id = buffpatid;
 
 % set dir to find raw data files
 dataDir = fullfile(rootDir, '/data/', center);
+% dataDir = fullfile('/Volumes/NIL_Pass/data', center);
 
 tempDir = fullfile('./tempData/', 'connectivity', strcat('win', num2str(winSize), ...
     '_step', num2str(stepSize)), patient);
