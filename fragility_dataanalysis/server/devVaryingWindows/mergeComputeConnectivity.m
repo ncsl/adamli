@@ -155,10 +155,10 @@ end
 % Check if it was successful full computation
 if SUCCESS
     try
-        save(fullfile(adjMatDir, fileName), 'adjmat_struct');
+        save(fullfile(toSaveDir, fileName), 'adjmat_struct');
     catch e
         disp(e);
-        save(fullfile(adjMatDir, fileName), 'adjmat_struct', '-v7.3');
+        save(fullfile(toSaveDir, fileName), 'adjmat_struct', '-v7.3');
     end
 
     rmdir(fullfile(tempDir));
