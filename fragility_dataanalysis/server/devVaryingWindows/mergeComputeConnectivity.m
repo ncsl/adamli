@@ -71,6 +71,7 @@ matFileNames = natsort({matFiles.name});
 %- load info file
 load(fullfile(tempDir,'info', 'infoAdjMat.mat'));
 FILTERTYPE = info.FILTER_TYPE;
+fs = info.frequency_sampling;
 
 % set directory to save merged computed data
 if FILTERTYPE == 1
