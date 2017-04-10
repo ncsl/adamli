@@ -143,7 +143,7 @@ adjmat_struct.frequency_sampling = info.frequency_sampling;
 adjmat_struct.FILTER = FILTERTYPE;
 
 % save the merged adjMatDir
-fileName = strcat(patient, '_adjmats_', lower(TYPE_CONNECTIVITY), '.mat');
+fileName = strcat(patient, '_adjmats_', lower(info.TYPE_CONNECTIVITY), '.mat');
 
 % Check if it was successful full computation
 if SUCCESS
