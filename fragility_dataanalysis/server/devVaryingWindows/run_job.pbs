@@ -14,16 +14,21 @@ module load matlab/matlab2013a
 # also make sure PBS -d is the correct directory 
 cd /home/ali/adamli/fragility_dataanalysis/server/devVaryingWindows/
 
-# ((proc=1; proc<= ((${Nnode})); proc++))
-for ((proc=0; proc < ((${NprocperNode})); proc++))
-do 
-	echo $proc
-	id=$((proc+1))
-	pbsdsh -n $proc /home/ali/adamli/fragility_dataanalysis/server/devVaryingWindows/runAnalysis.sh ${id} ${patient} ${winSize} ${stepSize} ${radius} ${RUNCONNECTIVITY} ${Nnode} &
-done
+if [[ "$merge" -eq 1 ]]; then
+	proc = 0
+	pbsdsh -n $proc /home/ali/adamli/fragility_dataanalysis/server/devVaryingWindows/mergeComputes.sh ${proc} ${patient} ${winSize} ${stepSize} ${radius} ${RUNCONNECTIVITY} &
+else
+	# ((proc=1; proc<= ((${Nnode})); proc++))
+	for ((proc=0; proc < ((${NprocperNode})); proc++))
+	do 
+		echo $proc
+		id=$((proc+1))
+		pbsdsh -n $proc /home/ali/adamli/fragility_dataanalysis/server/devVaryingWindows/runAnalysis.sh ${id} ${patient} ${winSize} ${stepSize} ${radius} ${RUNCONNECTIVITY} ${Nnode} &
+	done
 
-proc = ${NprocperNode}
-pbsdsh -n $proc /home/ali/adamli/fragility_dataanalysis/server/devVaryingWindows/mergeComputes.sh ${proc} ${patient} ${winSize} ${stepSize} ${radius} ${RUNCONNECTIVITY} &
+	proc = ${NprocperNode}
+	pbsdsh -n $proc /home/ali/adamli/fragility_dataanalysis/server/devVaryingWindows/mergeComputes.sh ${proc} ${patient} ${winSize} ${stepSize} ${radius} ${RUNCONNECTIVITY} &
+fi
 
 # need to add this wait to make sure things finish
 wait
