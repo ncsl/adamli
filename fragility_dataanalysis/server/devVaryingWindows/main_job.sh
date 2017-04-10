@@ -90,15 +90,19 @@ if [[ "$RUNSLEEP" -eq 1 ]]; then
 	qsub -l walltime=24:00:00,nodes=node232 run_b_sleep.sh
 fi
 
-NprocperNode=8    						# number of processors per node
-Nnode=1     							# the number of nodes to compute on
-Nnodeextra=2
-
 # 03: Parameters for each pbs job.
 if [[ "${RUNCONNECTIVITY}" -eq 1 ]]; then
 	walltime=01:00:00
 else
 	walltime=05:00:00					# the walltime for each computation
+fi
+
+NprocperNode=8    						# number of processors per node
+Nnode=1     							# the number of nodes to compute on
+Nnodeextra=2
+
+if [[ "${merge}" -eq 1 ]]; then
+	walltime=00:10:00
 fi
 
 ## 02: Call pbs job, runAnalysis
