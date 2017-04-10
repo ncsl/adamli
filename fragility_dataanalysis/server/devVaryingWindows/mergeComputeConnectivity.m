@@ -129,7 +129,7 @@ adjmat_struct.all_labels = info.all_labels;
 adjmat_struct.seizure_estart_ms = info.seizure_estart_ms;       % store in ms
 adjmat_struct.seizure_eend_ms = info.seizure_eend_ms;
 adjmat_struct.seizure_cstart_ms = info.seizure_cstart_ms;
-adjmat_struct.seizure_coffset_ms = info.seizure_coffset_ms;
+adjmat_struct.seizure_cend_ms = info.seizure_coffset_ms;
 adjmat_struct.seizure_estart_mark = info.seizure_estart_mark;
 adjmat_struct.seizure_eend_mark = info.seizure_eend_mark;
 adjmat_struct.engelscore = info.engelscore;
@@ -151,6 +151,7 @@ if isempty(test)
 else
    SUCCESS = 0;
 end
+SUCCESS = 1;
 
 % Check if it was successful full computation
 if SUCCESS
