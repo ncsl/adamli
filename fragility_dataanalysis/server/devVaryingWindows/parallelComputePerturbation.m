@@ -208,7 +208,7 @@ for iWin=1:length(windows)
     fprintf(['Finished: ', num2str(currentWin), '\n']);
 
         % filename to be saved temporarily
-    fileName = strcat(patient, '_adjmats_', num2str(currentWin));
+    fileName = strcat(patient, '_pertmats_', num2str(currentWin));
 
     
     % save the file in temporary dir
