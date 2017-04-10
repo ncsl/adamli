@@ -12,7 +12,7 @@ printf "Enter radius: "
 read radius
 printf "run sleep (Enter 1, or 0)? "
 read RUNSLEEP
-printf "run merge? (1 or 0)"
+printf "run merge? (1 or 0) "
 read merge
 
 # patients listed 5 per row

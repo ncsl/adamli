@@ -161,7 +161,7 @@ for iWin=1:length(windows)
         if ~exist(fullfile(tempDir, 'info'), 'dir')
             mkdir(fullfile(tempDir, 'info'));
         end
-        save(fullfile(tempDir, 'info', 'infoAdjMat.mat'), 'info'); 
+        save(fullfile(tempDir, 'info', 'infoPertMat.mat'), 'info'); 
     end
     
     %- extract adjMat at this window
@@ -212,6 +212,6 @@ for iWin=1:length(windows)
 
     
     % save the file in temporary dir
-    save(fullfile(tempDir, fileName), 'theta_adj');
+    save(fullfile(tempDir, fileName), 'perturbation_struct');
 end
 end
