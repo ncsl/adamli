@@ -145,6 +145,13 @@ adjmat_struct.FILTER = FILTERTYPE;
 % save the merged adjMatDir
 fileName = strcat(patient, '_adjmats_', lower(info.type_connectivity), '.mat');
 
+test = find(winsComputed == 0);
+if isempty(test)
+   SUCCESS = 1;
+else
+   SUCCESS = 0;
+end
+
 % Check if it was successful full computation
 if SUCCESS
     try
