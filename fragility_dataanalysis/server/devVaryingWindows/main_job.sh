@@ -12,6 +12,8 @@ printf "Enter radius: "
 read radius
 printf "run sleep (Enter 1, or 0)? "
 read RUNSLEEP
+printf "run merge? (1 or 0)"
+read merge
 
 # patients listed 5 per row
 patients=(
@@ -110,5 +112,5 @@ for patient in $patients; do
 		jobname="comp_pert_${patient}"
 	fi
 	# run a pbs batch job. Make sure there are no spaces in between the parameters passed
-	qsub -v RUNCONNECTIVITY=$RUNCONNECTIVITY,patient=$patient,winSize=$winSize,stepSize=$stepSize,radius=$radius,Nnode=$Nnode,NprocperNode=$NprocperNode -N ${jobname} -l nodes=${Nnodeextra}:ppn=${NprocperNode},walltime=${walltime} run_job.pbs
+	qsub -v merge=$merge,RUNCONNECTIVITY=$RUNCONNECTIVITY,patient=$patient,winSize=$winSize,stepSize=$stepSize,radius=$radius,Nnode=$Nnode,NprocperNode=$NprocperNode -N ${jobname} -l nodes=${Nnodeextra}:ppn=${NprocperNode},walltime=${walltime} run_job.pbs
 done

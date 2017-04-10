@@ -70,9 +70,7 @@ matFileNames = natsort({matFiles.name});
 
 %- load info file
 load(fullfile(tempDir,'info', 'infoAdjMat.mat'));
-FILTER_TYPE = info.FILTER_TYPE;
-
-winsComputed = zeros(N, 1);  
+FILTERTYPE = info.FILTER_TYPE;
 
 % set directory to save merged computed data
 if FILTERTYPE == 1
@@ -89,6 +87,9 @@ end
 if ~exist(toSaveDir, 'dir')
     mkdir(toSaveDir);
 end
+
+
+winsComputed = zeros(N, 1);  
 
 % construct the adjMats from the windows computed of adjMat
 for iMat=1:length(matFileNames)
@@ -138,7 +139,7 @@ adjmat_struct.timePoints = info.timePoints;
 adjmat_struct.adjMats = adjMats;
 adjmat_struct.included_channels = info.included_channels;
 adjmat_struct.frequency_sampling = info.frequency_sampling;
-adjmat_struct.FILTER = FILTER_TYPE;
+adjmat_struct.FILTER = FILTERTYPE;
 
 % save the merged adjMatDir
 fileName = strcat(patient, '_adjmats_', lower(TYPE_CONNECTIVITY), '.mat');
