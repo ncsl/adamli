@@ -28,5 +28,5 @@ else
 	echo "Running perturbation computation."
 	# run perturbation analysis
 	matlab -logfile /home/ali/adamli/fragility_dataanalysis/server/devVaryingWindows/_log/job$1.txt -nojvm -nodisplay -nosplash -r "currentpatient='$patient'; \
-		serverPerturbationScript(currentpatient, $radius, $winSize, $stepSize);"
+		mergeComputePerturbation(currentpatient, $radius, $winSize, $stepSize);"
 fi
