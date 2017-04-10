@@ -120,7 +120,7 @@ end
 
 %%- Create the structure for the adjacency matrices for this patient/seizure
 adjmat_struct = struct();
-adjmat_struct.type_connectivity = info.TYPE_CONNECTIVITY;
+adjmat_struct.type_connectivity = info.type_connectivity;
 adjmat_struct.ezone_labels = info.ezone_labels;
 adjmat_struct.earlyspread_labels = info.earlyspread_labels;
 adjmat_struct.latespread_labels = info.latespread_labels;
@@ -143,7 +143,7 @@ adjmat_struct.frequency_sampling = info.frequency_sampling;
 adjmat_struct.FILTER = FILTERTYPE;
 
 % save the merged adjMatDir
-fileName = strcat(patient, '_adjmats_', lower(info.TYPE_CONNECTIVITY), '.mat');
+fileName = strcat(patient, '_adjmats_', lower(info.type_connectivity), '.mat');
 
 % Check if it was successful full computation
 if SUCCESS
