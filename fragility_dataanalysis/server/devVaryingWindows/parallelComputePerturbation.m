@@ -102,9 +102,7 @@ end
 load(fullfile(connDir, strcat(patient, '_adjmats_leastsquares.mat')));
 
 %- initialize the number of samples in the window / step (ms) 
-numSampsInWin = winSize * frequency_sampling / 1000;
-numSampsInStep = stepSize * frequency_sampling / 1000;
-numWins = floor(size(adjmat_struct.adjMats, 1) / numSampsInStep - numSampsInWin/numSampsInStep + 1);
+numWins = size(adjmat_struct.adjMats, 1);
 
 %- determine current window
 windows = iProc:numProcs*8:numWins;
