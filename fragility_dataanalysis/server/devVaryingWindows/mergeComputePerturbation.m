@@ -1,4 +1,4 @@
-function mergeComputePerturbation(patient, winSize, stepSize)
+function mergeComputePerturbation(patient, radius, winSize, stepSize)
 %% INITIALIZATION
 % data directories to save data into - choose one
 eegRootDirServer = '/home/ali/adamli/fragility_dataanalysis/';     % work
