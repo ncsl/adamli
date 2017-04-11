@@ -1,7 +1,7 @@
 function serverPerturbationScript(patient, radius, winSize, stepSize)
     if nargin == 0 % testing purposes
         patient='EZT011seiz001';
-        patient ='pt17sz3';
+        patient ='pt13sz1';
 %         patient='UMMC006_sz2';
 %         patient = 'Pat16sz1p';
 %         patient = 'JH102sz1';
@@ -172,6 +172,6 @@ function serverPerturbationScript(patient, radius, winSize, stepSize)
     end
     
     % save the perturbation struct result
-    save(fullfile(toSavePertDir, filename), 'perturbation_struct');
+    save(fullfile(toSaveDir, filename), 'perturbation_struct');
     disp(['Saved file: ', filename]);
 end

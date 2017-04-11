@@ -86,10 +86,9 @@ for iMat=1:length(matFileNames)
     index = strfind(currentFile, '_');
     index = currentFile(1:index-1);
 
-    if str2num(index) ~= iMat
+    if str2double(index) ~= iMat
         disp(['There is an error at ', num2str(iMat)]);
     end
-    winsComputed(str2num(index)) = 1;
 
     for iPert=1:length(perturbationTypes)
         % initialize matrix if first loop and then store results
@@ -108,6 +107,8 @@ for iMat=1:length(matFileNames)
         perturbation_struct.(perturbationType).minNormPertMat(:, iMat) = perturbation.(perturbationType).minNormPerturbMat;
         perturbation_struct.(perturbationType).fragilityMat(:, iMat) = perturbation.(perturbationType).fragilityMat;
     end
+    
+    winsComputed(str2double(index)) = 1;
 end
 
 %%- Create the structure for the adjacency matrices for this patient/seizure
