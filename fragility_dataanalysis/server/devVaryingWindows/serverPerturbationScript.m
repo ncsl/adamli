@@ -1,15 +1,15 @@
 function serverPerturbationScript(patient, radius, winSize, stepSize)
     if nargin == 0 % testing purposes
         patient='EZT011seiz001';
-        patient ='pt17sz1';
-        patient='UMMC006_sz2';
+        patient ='pt17sz3';
+%         patient='UMMC006_sz2';
 %         patient = 'Pat16sz1p';
 %         patient = 'JH102sz1';
         % window paramters
         radius = 1.5;
-        winSize = 500; % 500 milliseconds
-        stepSize = 500; 
-        frequency_sampling = 1000; % in Hz
+        winSize = 250; % 500 milliseconds
+        stepSize = 125; 
+%         frequency_sampling = 1000; % in Hz
     end
 
     % set working directory
@@ -32,14 +32,9 @@ function serverPerturbationScript(patient, radius, winSize, stepSize)
     perturbationTypes = ['C', 'R'];
     w_space = linspace(-radius, radius, 51);
 
+    FILTER_RAW = 2;
     TYPE_CONNECTIVITY = 'leastsquares';
-    IS_SERVER = 1;
     
-%     if test ==1
-%     TEST_DESCRIP = 'after_first_removal';
-%     else
-    TEST_DESCRIP = [];
-%     end
     % set patientID and seizureID
     patient_id = patient(1:strfind(patient, 'seiz')-1);
     seizure_id = strcat('_', patient(strfind(patient, 'seiz'):end));
@@ -65,100 +60,76 @@ function serverPerturbationScript(patient, radius, winSize, stepSize)
     end
     %- Edit this file if new patients are added.
     [included_channels, ezone_labels, earlyspread_labels,...
-    latespread_labels, resection_labels, frequency_sampling, ...
+    latespread_labels, resection_labels, fs, ...
     center] ...
             = determineClinicalAnnotations(patient_id, seizure_id);
 
         
     % set directory to find adjacency matrix data
-    serverDir = fullfile(rootDir, '/serverdata/');
-    adjMatDir = fullfile(serverDir, 'adjmats/', strcat('win', num2str(winSize), ...
-    '_step', num2str(stepSize), '_freq', num2str(frequency_sampling))); % at lab
-    
-    % rejection of harmonics of 60 Hz.
-    adjMatDir = fullfile(serverDir, 'harmonics_adjmats/', strcat('win', num2str(winSize), ...
-    '_step', num2str(stepSize), '_freq', num2str(frequency_sampling))); % at lab
-
-    adjMatDir = fullfile(rootDir, 'serverdata/adjmats/adaptivefilter_adjmats/', strcat('win', num2str(winSize), ...
-    '_step', num2str(stepSize), '_freq', num2str(frequency_sampling))) % at lab
-
-    patDir = fullfile(adjMatDir, patient);
-    
-    if ~isempty(TEST_DESCRIP)
-        patDir = fullfile(patDir, TEST_DESCRIP);
+    if FILTER_RAW == 1
+        adjMatDir = fullfile(rootDir, 'serverdata/adjmats/notchfilter/', strcat('win', num2str(winSize), ...
+        '_step', num2str(stepSize), '_freq', num2str(fs)), patient); % at lab
+    elseif FILTER_RAW == 2
+        adjMatDir = fullfile(rootDir, 'serverdata/adjmats/adaptivefilter/', strcat('win', num2str(winSize), ...
+            '_step', num2str(stepSize), '_freq', num2str(fs)), patient); % at lab
+    else 
+        adjMatDir = fullfile(rootDir, 'serverdata/adjmats/nofilter/', strcat('win', num2str(winSize), ...
+            '_step', num2str(stepSize), '_freq', num2str(fs)), patient); % at lab
     end
     
     fileName = strcat(patient, '_adjmats_leastsquares.mat');
-    data = load(fullfile(patDir, fileName));
-    data = data.adjmat_struct;
+    adjmat_struct = load(fullfile(adjMatDir, fileName));
+    adjmat_struct = adjmat_struct.adjmat_struct;
     
     % extract meta data
-    ezone_labels = data.ezone_labels;
-    earlyspread_labels = data.earlyspread_labels;
-    latespread_labels = data.latespread_labels;
-    resection_labels = data.resection_labels;
-    all_labels = data.all_labels;
-    seizure_start = data.seizure_start;
-    seizure_end = data.seizure_end;
-%     winSize = data.winSize;
-%     stepSize = data.stepSize;
-    frequency_sampling = data.frequency_sampling;
-    included_channels = data.included_channels;
-    timePoints = data.timePoints;
-    try
-    numHarmonics = data.numHarmonics;
-    FILTER = data.FILTER;
-    catch e
-        disp(e)
-    end
+    timePoints = adjmat_struct.timePoints;
     
     %- set meta data struct
-    info.ezone_labels = ezone_labels;
-    info.earlyspread_labels = earlyspread_labels;
-    info.latespread_labels = latespread_labels;
-    info.resection_labels = resection_labels;
-    info.all_labels = all_labels;
-    info.seizure_start = seizure_start;
-    info.seizure_end = seizure_end;
-%     info.winSize = winSize;
-%     info.stepSize = stepSize;
-    info.frequency_sampling = frequency_sampling;
-    info.included_channels = included_channels;
-    try
-        info.numHarmonics = numHarmonics;
-        info.FILTER = FILTER;
-    catch e
-        disp(e)
-    end
-    adjMats = data.adjMats;
+    info.ezone_labels = adjmat_struct.ezone_labels;
+    info.earlyspread_labels = adjmat_struct.earlyspread_labels;
+    info.latespread_labels = adjmat_struct.latespread_labels;
+    info.resection_labels = adjmat_struct.resection_labels;
+    info.all_labels = adjmat_struct.all_labels;
+    info.seizure_estart_ms = adjmat_struct.seizure_estart_ms;       % store in ms
+    info.seizure_eend_ms = adjmat_struct.seizure_eend_ms;
+    info.seizure_cstart_ms = adjmat_struct.seizure_cstart_ms;
+    info.seizure_coffset_ms = adjmat_struct.seizure_cend_ms;
+    info.seizure_estart_mark = adjmat_struct.seizure_estart_mark;
+    info.seizure_eend_mark = adjmat_struct.seizure_eend_mark;
+    info.winSize = adjmat_struct.winSize;
+    info.stepSize = adjmat_struct.stepSize;
+    info.frequency_sampling = adjmat_struct.frequency_sampling;
+    info.included_channels = adjmat_struct.included_channels;
+    info.FILTER = adjmat_struct.FILTER;
+    info.timePoints = adjmat_struct.timePoints;
+    info.TYPE_CONNECTIVITY = adjmat_struct.type_connectivity;
+    
+    adjMats = adjmat_struct.adjMats;
     [T, N, ~] = size(adjMats);
     
-    seizureMarkStart = round(seizure_start / winSize);
-    if seeg
-        seizureMarkStart = round((seizure_start-1)/winSize);
+           
+    %%- w/o filtering harmonics
+    if FILTER_RAW == 1
+        toSaveDir = fullfile(rootDir, strcat('/serverdata/perturbationmats/notchfilter', '/win', num2str(winSize), ...
+            '_step', num2str(stepSize), '_freq', num2str(fs), '_radius', num2str(radius)), patient); % at lab
+    elseif FILTER_RAW == 2
+        toSaveDir = fullfile(rootDir, strcat('/serverdata/perturbationmats/adaptivefilter', '/win', num2str(winSize), ...
+            '_step', num2str(stepSize), '_freq', num2str(fs), '_radius', num2str(radius)), patient); % at lab
+    else 
+        toSaveDir = fullfile(rootDir, strcat('/serverdata/perturbationmats/nofilter', 'win', num2str(winSize), ...
+            '_step', num2str(stepSize), '_freq', num2str(fs), '_radius', num2str(radius)), patient); % at lab
     end
     
-    flag = -1;
-    for i=seizureMarkStart:size(adjMats,1)
-        adjmat = squeeze(adjMats(i, :, :));
-        evs = eig(adjmat);
-%         max(abs(evs))
-        if max(abs(evs)) > 1.4
-            flag = i;
-        end
-        if rank(adjmat) < size(adjmat,1)
-            i 
-        end
-    end
-    flag
+     % save the perturbation results
+    filename = strcat(patient, '_', 'pertmats_', ...
+            lower(TYPE_CONNECTIVITY), '_radius', num2str(radius), '.mat');
     
-    if flag ~= -1
-        adjMats = adjMats(1:flag-1,:,:);
-    else
-%         adjMats = adjMats(1:seizureMarkStart+2,:,:);
+    if ~exist(toSaveDir, 'dir')
+        mkdir(toSaveDir);
     end
     
-    [T, N, ~] = size(adjMats);
+    perturbation_struct = struct();
+    perturbation_struct.info = info; % meta data info
     
     for j=1:length(perturbationTypes)
         % initialize matrices to store
@@ -167,41 +138,7 @@ function serverPerturbationScript(patient, radius, winSize, stepSize)
         del_table = cell(N, T);
         
         perturbationType = perturbationTypes(j);
-        % save the perturbation results
-        filename = strcat(patient, '_', perturbationType, 'perturbation_', ...
-                lower(TYPE_CONNECTIVITY), '_radius', num2str(radius), '.mat');
-       
-        %%- w/o filtering harmonics
-        toSavePertDir = fullfile(serverDir, ...
-            strcat(perturbationType, '_perturbations', '_radius', num2str(radius)),...
-            strcat('win', num2str(winSize), '_step', num2str(stepSize), '_freq', num2str(frequency_sampling)), ...
-            patient);
         
-        %%- notch filtering harmonics
-        toSavePertDir = fullfile(serverDir, ...
-            'harmonics', strcat(perturbationType, '_perturbations', '_radius', num2str(radius)),...
-            strcat('win', num2str(winSize), '_step', num2str(stepSize), '_freq', num2str(frequency_sampling)), ...
-            patient);
-        
-        %%- adaptive filtering harmonics
-        toSavePertDir = fullfile(serverDir, ...
-            'perturbationmats/adaptivefilter', strcat(perturbationType, '_perturbations', '_radius', num2str(radius)),...
-            strcat('win', num2str(winSize), '_step', num2str(stepSize), '_freq', num2str(frequency_sampling)), ...
-            patient)
-        
-        
-        
-        if ~isempty(TEST_DESCRIP)
-            toSavePertDir = fullfile(toSavePertDir, TEST_DESCRIP);
-        end
-    
-        
-        if ~exist(toSavePertDir, 'dir')
-            mkdir(toSavePertDir);
-        end
-        
-        
-
         perturb_args = struct();
         perturb_args.perturbationType = perturbationType;
         perturb_args.w_space = w_space;
@@ -226,19 +163,15 @@ function serverPerturbationScript(patient, radius, winSize, stepSize)
                                             / max(minNormPerturbMat(:,t));
             end
         end
-        
-%         info.del_table = del_table;
-        
         % initialize struct to save
-        perturbation_struct = struct();
-        perturbation_struct.info = info; % meta data info
-        perturbation_struct.minNormPertMat = minNormPerturbMat;
-        perturbation_struct.timePoints = timePoints;
-        perturbation_struct.fragilityMat = fragilityMat;
-        perturbation_struct.del_table = del_table;
-        
-        % save the perturbation struct result
-        save(fullfile(toSavePertDir, filename), 'perturbation_struct');
-        disp(['Saved file: ', filename]);
+
+        perturbation_struct.(perturbationType).minNormPertMat = minNormPerturbMat;
+        perturbation_struct.(perturbationType).timePoints = timePoints;
+        perturbation_struct.(perturbationType).fragilityMat = fragilityMat;
+        perturbation_struct.(perturbationType).del_table = del_table;
     end
+    
+    % save the perturbation struct result
+    save(fullfile(toSavePertDir, filename), 'perturbation_struct');
+    disp(['Saved file: ', filename]);
 end

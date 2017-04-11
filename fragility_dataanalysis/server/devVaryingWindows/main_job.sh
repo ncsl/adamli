@@ -36,10 +36,10 @@ patients=(
 	# pt15sz1 pt15sz2 pt15sz3 pt15sz4
 	# pt16sz1 pt16sz2 pt16sz3
 	# pt17sz1 pt17sz2 pt17sz3')
-	'pt13sz1 pt17sz3')
-	# Pat2sz1p Pat2sz2p Pat2sz3p
-	# Pat16sz1p 
-	# 'Pat16sz2p Pat16sz3p JH101sz1')
+
+	'Pat2sz1p Pat2sz2p Pat2sz3p
+	Pat16sz1p Pat16sz2p Pat16sz3p')
+
 	# JH101sz1 JH101sz2 JH101sz3 JH101sz4
 	# JH102sz1 JH102sz2 JH102sz3 JH102sz4 JH102sz5 JH102sz6
 	# JH103sz1 JH103sz2 JH103sz3
