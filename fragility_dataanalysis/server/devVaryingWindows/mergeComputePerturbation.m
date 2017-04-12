@@ -96,7 +96,7 @@ for iMat=1:length(matFileNames)
         
         % initialize matrix if first loop and then store results
         if iMat==1
-            N = size(perturbation.fragilityMat, 1);
+            N = size(perturbation.(perturbationType).fragilityMat, 1);
             winsComputed = zeros(N, 1);  
 
             %- initialize
