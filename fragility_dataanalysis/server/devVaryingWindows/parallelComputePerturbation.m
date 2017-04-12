@@ -164,8 +164,10 @@ for iWin=1:length(windows)
     
     %- extract adjMat at this window
     adjMat = squeeze(adjmat_struct.adjMats(iWin,:,:));
-    
     [N, ~] = size(adjMat);
+    
+    % initialize the perturbation struct to save for this window
+    perturbation_struct = struct();
     
     %%- Perform both perturbations
     for iPert=1:length(perturbationTypes)
@@ -195,7 +197,6 @@ for iWin=1:length(windows)
         end
 
         % initialize struct to save
-        perturbation_struct = struct();
         perturbation_struct.(perturbationType) = struct();
         perturbation_struct.(perturbationType).del_table = del_table;
         perturbation_struct.(perturbationType).minNormPertMat = minNormPerturbMat;
