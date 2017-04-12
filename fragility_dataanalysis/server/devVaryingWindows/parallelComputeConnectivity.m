@@ -8,6 +8,8 @@ if nargin == 0 % testing purposes
     patient='EZT009seiz001';
 %     patient='JH102sz6';
     patient='pt1sz2';
+    patient='Pat2sz2p';
+    patient='UMMC001_sz1';
     % window paramters
     winSize = 250; % 500 milliseconds
     stepSize = 125; 
@@ -98,7 +100,7 @@ end
 fprintf('Loading data...');
 % READ EEG FILE Mat File
 % files to process
-data = load(fullfile(patient_eeg_path, patient));
+data = load(fullfile(patient_eeg_path, strcat(patient, '.mat')));
 eeg = data.data;
 labels = data.elec_labels;
 engelscore = data.engelscore;

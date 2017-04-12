@@ -15,6 +15,7 @@ addpath(genpath(fullfile(rootDir, '/fragility_library/')));
 addpath(genpath(fullfile(rootDir, '/eeg_toolbox/')));
 addpath(rootDir);
 
+perturbationTypes = ['C', 'R'];
 patient_id = [];
 seeg = 1;
 if isempty(patient_id)
