@@ -91,6 +91,8 @@ for iMat=1:length(matFileNames)
     end
 
     for iPert=1:length(perturbationTypes)
+        perturbationType = perturbationTypes(iPert);
+        
         % initialize matrix if first loop and then store results
         if iMat==1
             N = size(perturbation.fragilityMat, 1);
