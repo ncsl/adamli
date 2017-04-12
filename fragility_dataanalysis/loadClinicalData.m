@@ -15,7 +15,7 @@ addpath(rootDir);
 
 dataDir = fullfile(rootDir, 'data');
 
-filename = '/home/WIN/ali39/Dropbox/EZTrack-Prospective-Study/ummcsheet.csv';
+filename = '/home/WIN/ali39/Dropbox/EZTrack-Prospective-Study/jhusheet.csv';
 delimiter = ',';
 startRow = 2;
 
@@ -143,4 +143,4 @@ for id=1:length(Identifier)
     clinicaldata.(patient).engelscore = EngelScores(id);
 end
 
-save(fullfile(dataDir, 'ummcclinicalData.mat'), 'clinicaldata');
+save(fullfile(dataDir, 'jhuclinicalData.mat'), 'clinicaldata');
