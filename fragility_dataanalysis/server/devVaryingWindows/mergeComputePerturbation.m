@@ -118,7 +118,7 @@ end
 perturbation_struct.info = info;
 
 % save the merged adjMatDir
-fileName = strcat(patient, '_pertmats_', lower(info.type_connectivity), '_radius', num2str(radius), '.mat');
+fileName = strcat(patient, '_pertmats_', lower(info.TYPE_CONNECTIVITY), '_radius', num2str(radius), '.mat');
 
 % test = find(winsComputed == 0);
 % if isempty(test)
