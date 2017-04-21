@@ -107,7 +107,7 @@ for iMat=1:length(matFileNames)
 
          % extract the computed tehta adjacency
         perturbation_struct.(perturbationType).del_table(:, iMat) = perturbation.(perturbationType).del_table;
-        perturbation_struct.(perturbationType).minNormPertMat(:, iMat) = perturbation.(perturbationType).minNormPerturbMat;
+        perturbation_struct.(perturbationType).minNormPertMat(:, iMat) = perturbation.(perturbationType).minNormPertMat;
         perturbation_struct.(perturbationType).fragilityMat(:, iMat) = perturbation.(perturbationType).fragilityMat;
     end
     
