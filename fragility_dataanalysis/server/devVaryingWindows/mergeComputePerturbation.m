@@ -100,7 +100,7 @@ for iMat=1:length(matFileNames)
             winsComputed = zeros(N, 1);  
 
             %- initialize
-            perturbation_struct.(perturbationType).minNormPerturbMat = zeros(N, length(matFileNames));
+            perturbation_struct.(perturbationType).minNormPertMat = zeros(N, length(matFileNames));
             perturbation_struct.(perturbationType).fragilityMat = zeros(N, length(matFileNames));
             perturbation_struct.(perturbationType).del_table = cell(N, length(matFileNames));
         end

@@ -58,7 +58,7 @@ addpath(genpath('./spectral_library/'));
 % REFERENCE ELECTRODE
 % THIS_REF_TYPE = referenceType; 
 % FILTERING OPTIONS
-BP_FILTER_RAW = 1;  %-0 or 1: apply a bandpass filter to the raw traces (1-499 hz)
+BP_FILTER_RAW = 2;  %-0 or 1: apply a bandpass filter to the raw traces (1-499 hz)
 typeTransform = 'morlet';
 typeTransform = 'fourier';
 winSize = 500;
@@ -174,12 +174,12 @@ for iPat=1:length(patients)
 
     [numChannels, eventDurationMS] = size(data_struct.data);
     elec_labels = data_struct.elec_labels;
-    seizure_start = data_struct.seiz_start_mark;
-    seizure_end = data_struct.seiz_end_mark;
+%     seizure_start = data_struct.seiz_start_mark;
+%     seizure_end = data_struct.seiz_end_mark;
     data = data_struct.data;
     tWin = 0;
     
-    parfor iChan=1:numChannels
+    for iChan=1:numChannels
         eegWaveV = data(iChan,:);
         % add buffer to the eeg wave
         eegWaveV = [zeros(1, BufferMS), eegWaveV, zeros(1, BufferMS)];
