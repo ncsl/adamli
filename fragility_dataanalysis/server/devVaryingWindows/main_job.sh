@@ -14,8 +14,8 @@ printf "run sleep (Enter 1, or 0)? "
 read RUNSLEEP
 printf "run merge? (1 or 0) "
 read merge
-printf "enter patients (enter 0 if n/a): "
-read patient_list
+printf "run indiv patients? (enter 0 if n/a): "
+read indiv_patients
 
 # patients listed 5 per row
 patients=(
@@ -76,10 +76,12 @@ patients=(
 	# EZT037seiz001 EZT037seiz002')
 	# 'EZT070seiz001 EZT070seiz002')
 
-if [[ "$patient_list" -eq 0 ]]; then
-	# [[ -v ${patient_list} ]]; then
+if [[ "$indiv_patients" -eq 0 ]]; then
 	echo "just running reg patients"
 else
+	printf "Enter patients to run: "
+	read patient_list
+	
 	echo "Running patient list"
 	echo $patient_list
 	patients=${patient_list}
