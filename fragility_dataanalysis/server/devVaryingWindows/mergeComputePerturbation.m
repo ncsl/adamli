@@ -115,7 +115,7 @@ for iMat=1:length(matFileNames)
 end
 
 %%- Create the structure for the adjacency matrices for this patient/seizure
-perturbation_struct.info = perturbation.info;
+perturbation_struct.info = info;
 
 % save the merged adjMatDir
 fileName = strcat(patient, '_pertmats_', lower(info.type_connectivity), '_radius', num2str(radius), '.mat');

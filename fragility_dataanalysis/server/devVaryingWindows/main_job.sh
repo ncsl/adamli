@@ -103,7 +103,7 @@ Nnodeextra=2
 
 if [[ "${merge}" -eq 1 ]]; then
 	echo "Merging..."
-	walltime=00:10:00
+	walltime=01:00:00
 fi
 
 ## 02: Call pbs job, runAnalysis
