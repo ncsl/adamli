@@ -76,7 +76,7 @@ patients=(
 	# EZT037seiz001 EZT037seiz002')
 	# 'EZT070seiz001 EZT070seiz002')
 
-if [[ "${patient_list}" -eq 0 ]]; then
+if [[ "$patient_list" -eq 0 ]]; then
 	# [[ -v ${patient_list} ]]; then
 	echo "just running reg patients"
 else
