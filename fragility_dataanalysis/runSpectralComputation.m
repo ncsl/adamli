@@ -97,9 +97,9 @@ for iFB=1:length(freqBandYticks), freqBandYtickLabels{iFB} = sprintf('%.0f Hz', 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % data directories to save data into - choose one
 eegRootDirWork = '/Users/liaj/Documents/MATLAB/paremap';     % work
-% eegRootDirHome = '/Users/adam2392/Documents/MATLAB/Johns Hopkins/NINDS_Rotation';  % home
-eegRootDirHome = '/Volumes/NIL_PASS';
-eegRootDirJhu = '/home/WIN/ali39/Documents/adamli/fragility_dataanalysis/data';
+eegRootDirHome = '/Users/adam2392/Documents/adamli/fragility_dataanalysis/';  % home
+% eegRootDirHome = '/Volumes/NIL_PASS';
+eegRootDirJhu = '/home/WIN/ali39/Documents/adamli/fragility_dataanalysis/';
 % Determine which directory we're working with automatically
 if     ~isempty(dir(eegRootDirWork)), eegRootDir = eegRootDirWork;
 elseif ~isempty(dir(eegRootDirHome)), eegRootDir = eegRootDirHome;
