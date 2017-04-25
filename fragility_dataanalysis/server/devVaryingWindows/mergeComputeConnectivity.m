@@ -162,7 +162,8 @@ if SUCCESS
         disp(e);
         save(fullfile(toSaveDir, fileName), 'adjmat_struct', '-v7.3');
     end
-
+    delete(fullfile(tempDir, '*.mat'));
+    delete(fullfile(tempDir, 'info', '*.mat'));
     rmdir(fullfile(tempDir));
 else
     fprintf('Make sure to fix the windows not computed!');

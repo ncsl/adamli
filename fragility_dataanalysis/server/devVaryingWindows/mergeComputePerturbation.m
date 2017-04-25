@@ -100,32 +100,32 @@ for iMat=1:length(matFileNames)
             winsComputed = zeros(N, 1);  
 
             %- initialize
-            perturbation_struct.(perturbationType).minNormPerturbMat = zeros(N, length(matFileNames));
+            perturbation_struct.(perturbationType).minNormPertMat = zeros(N, length(matFileNames));
             perturbation_struct.(perturbationType).fragilityMat = zeros(N, length(matFileNames));
             perturbation_struct.(perturbationType).del_table = cell(N, length(matFileNames));
         end
 
          % extract the computed tehta adjacency
         perturbation_struct.(perturbationType).del_table(:, iMat) = perturbation.(perturbationType).del_table;
-        perturbation_struct.(perturbationType).minNormPertMat(:, iMat) = perturbation.(perturbationType).minNormPerturbMat;
+        perturbation_struct.(perturbationType).minNormPertMat(:, iMat) = perturbation.(perturbationType).minNormPertMat;
         perturbation_struct.(perturbationType).fragilityMat(:, iMat) = perturbation.(perturbationType).fragilityMat;
     end
     
-    winsComputed(str2double(index)) = 1;
+%     winsComputed(str2double(index)) = 1;
 end
 
 %%- Create the structure for the adjacency matrices for this patient/seizure
-perturbation_struct.info = perturbation.info;
+perturbation_struct.info = info;
 
 % save the merged adjMatDir
-fileName = strcat(patient, '_pertmats_', lower(info.type_connectivity), '_radius', num2str(radius), '.mat');
+fileName = strcat(patient, '_pertmats_', lower(info.TYPE_CONNECTIVITY), '_radius', num2str(radius), '.mat');
 
-test = find(winsComputed == 0);
-if isempty(test)
-   SUCCESS = 1;
-else
-   SUCCESS = 0;
-end
+% test = find(winsComputed == 0);
+% if isempty(test)
+%    SUCCESS = 1;
+% else
+%    SUCCESS = 0;
+% end
 SUCCESS = 1;
 
 % Check if it was successful full computation
@@ -136,7 +136,8 @@ if SUCCESS
         disp(e);
         save(fullfile(toSaveDir, fileName), 'perturbation_struct', '-v7.3');
     end
-
+    delete(fullfile(tempDir, '*.mat'));
+    delete(fullfile(tempDir, 'info', '*.mat'));
     rmdir(fullfile(tempDir));
 else
     fprintf('Make sure to fix the windows not computed!');
