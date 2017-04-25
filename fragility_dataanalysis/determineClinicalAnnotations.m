@@ -259,6 +259,13 @@ function [included_channels, onset_electrodes, ...
     elseif strcmp(patient_id, 'JH103')
         included_channels = [1:4 7:12 15:23 25:33 47:63 65:66 69:71 73:110];
         
+        %- aslp1
+        if strcmp(seizure_id, 'aslp1')
+            included_channels = [1:4 7:34 47:66 69:73 75:110];
+        elseif strcmp(seizure_id, 'aw1')
+            included_channels = [1:4 7:33 47:66 69:73 75:110]; % removed 34 (RHD10)
+        end
+        
         onset_electrodes = {};
         earlyspread_labels = {'POLRTG48', 'POLRTG40'};
         latespread_labels = {};
@@ -277,6 +284,14 @@ function [included_channels, onset_electrodes, ...
         center = 'jhu';
     elseif strcmp(patient_id, 'JH105')
         included_channels = [1:4 7:12 14:19 21:37 42 43 46:49 51:53 55:75 78:99]; % JH105
+        
+        if strcmp(seizure_id, 'aslp1')
+            included_channels = [1:4 7:12 14:19 21:37 42:43 46:49 51:53 55:75 78:99];
+        elseif strcmp(seizure_id, 'aw1')
+            % removed 55 (RPG40)
+            included_channels = [1:4 7:12 14:19 21:37 42:43 46:49 51:53 56:75 78:99];
+        end
+        
         onset_electrodes = {'POLRPG4', 'POLRPG5', 'POLRPG6', 'POLRPG12', 'POLRPG13', 'POLG14',...
             'POLRPG20','POLRPG21', ...
             'POLAPD1', 'POLAPD2', 'POLAPD3', 'POLAPD4', 'POLAPD5', 'POLAPD6', 'POLAPD7', 'POLAPD8', ...
