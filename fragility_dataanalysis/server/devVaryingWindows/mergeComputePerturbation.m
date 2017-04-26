@@ -76,6 +76,8 @@ if ~exist(toSaveDir, 'dir')
 end
 toSaveDir
 
+perturbation_struct = struct();
+
 % construct the adjMats from the windows computed of adjMat
 for iMat=1:length(matFileNames)
     matFile = fullfile(tempDir, matFileNames{iMat});

@@ -15,8 +15,8 @@ end
 % set working directory
 % data directories to save data into - choose one
 eegRootDirServer = '/home/ali/adamli/fragility_dataanalysis/';     % work
-% eegRootDirHome = '/Users/adam2392/Documents/MATLAB/Johns Hopkins/NINDS_Rotation';  % home
-eegRootDirHome = '/Volumes/NIL_PASS/';
+eegRootDirHome = '/Users/adam2392/Documents/adamli/fragility_dataanalysis/';  % home
+% eegRootDirHome = '/Volumes/NIL_PASS/';
 eegRootDirJhu = '/home/WIN/ali39/Documents/adamli/fragility_dataanalysis/';
 % Determine which directory we're working with automatically
 if     ~isempty(dir(eegRootDirServer)), rootDir = eegRootDirServer;
