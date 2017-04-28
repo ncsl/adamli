@@ -24,10 +24,10 @@ BP_FILTER = 0;
 addpath(genpath('./fragility_library'));
 addpath(genpath('./eeg_toolbox'));
 
-winSizes = [500, 1000];
+winSizes = [250, 500, 1000];
 mses = zeros(length(winSizes), 1);
 
-patient = 'pt1sz4';
+patient = 'pt1sz2';
 % patient = 'EZT019seiz002 ';
 
 patient_id = patient(1:strfind(patient, 'seiz')-1);
@@ -68,10 +68,10 @@ for i=1:length(winSizes)
     dataDir = fullfile('./data/', center);
 %     dataDir = '/Volumes/NIL_PASS/data/';
     if BP_FILTER
-        adjDir = strcat('./serverdata/testing_winsizes/fixed_adj_mats_win', num2str(winSize), '_step', num2str(winSize), '_freq1000/');
+        adjDir = strcat('./serverdata/adjmats/EMBC_Varying_Windows/', 'win', num2str(winSize), '_step', num2str(winSize), '_freq1000/');
 %         adjDir = strcat('/Volumes/NIL_PASS/serverdata/fixed_adj_mats_win', num2str(winSize), '_step', num2str(winSize), '_freq1000/');
     else
-        adjDir = strcat('./serverdata/testing_winsizes/nofilter_adj_mats_win', num2str(winSize), '_step', num2str(winSize), '_freq1000/');
+        adjDir = strcat('./serverdata/adjmats/EMBC_Varying_Windows/', 'win', num2str(winSize), '_step', num2str(winSize), '_freq1000/');
 %         adjDir = strcat('/Volumes/NIL_PASS/serverdata/nofilter_adj_mats_win', num2str(winSize), '_step', num2str(winSize), '_freq1000/');
     end
     
@@ -94,14 +94,14 @@ for i=1:length(winSizes)
     end
     %% Define parameters and Extract Fields
     data = rawdata.data;
-    seizureStart = rawdata.seiz_start_mark;
+    seizureStart = rawdata.seizure_eonset_ms;
     adjmat_struct = adjmat_struct.adjmat_struct;
 
     numCh = size(data,1);
     fs = 1000;
     nSample = 5;       % how many different times we want to sample when using the observer for each number of missing channels
     %% Use A and reconstruct raw data
-    seizureStartMark = adjmat_struct.seizure_start/adjmat_struct.winSize;
+    seizureStartMark = seizureStart/adjmat_struct.winSize;
 
     data = data(included_channels,:);
     winSize = adjmat_struct.winSize;
@@ -165,8 +165,8 @@ for i=1:length(winSizes)
     end
     toc;
     
-    timePoints = [1:2000, seizureStart-2000:seizureStart, seizureStart+500:seizureStart+2500];
-    timePoints = [1:2000, seizureStart-2000:seizureStart, seizureStart+500:seizureStart+2500];
+    timePoints = [1:2000, seizureStart-2000:seizureStart, seizureStart+2000:seizureStart+4500];
+    timePoints = [1:2000, seizureStart-2000:seizureStart, seizureStart+2000:seizureStart+4500];
     timePoints = 1:10000;
     %% Plotting
     FONTSIZE = 24;
