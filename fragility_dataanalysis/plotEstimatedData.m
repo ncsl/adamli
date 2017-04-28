@@ -300,7 +300,7 @@ bar(winSizes, mses, 'k'); set(gca, 'box', 'off');
 
 xlabel('Window Size', 'FontSize', FONTSIZE);
 ylabel('Mean Squared Error', 'FontSize', FONTSIZE);
-set(gca, 'XTickLabel', [250 500 100], 'FontSize', FONTSIZE);
+set(gca, 'XTickLabel', [250 500 1000], 'FontSize', FONTSIZE);
 currfig = gcf;
 currfig.PaperPosition = [-3.7448   -0.3385   15.9896   11.6771];
 currfig.Position = [1666 1 1535 1121];

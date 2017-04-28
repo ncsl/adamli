@@ -28,14 +28,14 @@ function serverPerturbationScript(patient, radius, winSize, stepSize)
     addpath(genpath(fullfile(rootDir, '/eeg_toolbox/')));
     addpath(rootDir);
 
-    % analysis parameters
-    perturbationTypes = ['C', 'R'];
-    w_space = linspace(-radius, radius, 51);
-
+    %- 0 == no filtering
+    %- 1 == notch filtering
+    %- 2 == adaptive filtering
     FILTER_RAW = 2;
     TYPE_CONNECTIVITY = 'leastsquares';
     
     % set patientID and seizureID
+    patient_id = [];
     patient_id = patient(1:strfind(patient, 'seiz')-1);
     seizure_id = strcat('_', patient(strfind(patient, 'seiz'):end));
     seeg = 1;
@@ -64,17 +64,35 @@ function serverPerturbationScript(patient, radius, winSize, stepSize)
     center] ...
             = determineClinicalAnnotations(patient_id, seizure_id);
 
+    perturbationTypes = ['C', 'R'];
+    w_space = linspace(-radius, radius, 51);
+    sigma = sqrt(radius^2 - w_space.^2); % move to the unit circle 1, for a plethora of different radial frequencies
+    b = [0; 1];                          % initialize for perturbation computation later
+    
+    % add to sigma and w to create a whole circle search
+    w_space = [w_space, w_space];
+    sigma = [-sigma, sigma];
         
     % set directory to find adjacency matrix data
     if FILTER_RAW == 1
         adjMatDir = fullfile(rootDir, 'serverdata/adjmats/notchfilter/', strcat('win', num2str(winSize), ...
         '_step', num2str(stepSize), '_freq', num2str(fs)), patient); % at lab
+        
+        toSaveDir = fullfile(rootDir, strcat('/serverdata/perturbationmats/notchfilter', '/win', num2str(winSize), ...
+                '_step', num2str(stepSize), '_freq', num2str(fs), '_radius', num2str(radius)), patient); % at lab
+
     elseif FILTER_RAW == 2
         adjMatDir = fullfile(rootDir, 'serverdata/adjmats/adaptivefilter/', strcat('win', num2str(winSize), ...
             '_step', num2str(stepSize), '_freq', num2str(fs)), patient); % at lab
+        
+        toSaveDir = fullfile(rootDir, strcat('/serverdata/perturbationmats/adaptivefilter', '/win', num2str(winSize), ...
+            '_step', num2str(stepSize), '_freq', num2str(fs), '_radius', num2str(radius)), patient); % at lab
     else 
         adjMatDir = fullfile(rootDir, 'serverdata/adjmats/nofilter/', strcat('win', num2str(winSize), ...
             '_step', num2str(stepSize), '_freq', num2str(fs)), patient); % at lab
+        
+        toSaveDir = fullfile(rootDir, strcat('/serverdata/perturbationmats/nofilter', 'win', num2str(winSize), ...
+            '_step', num2str(stepSize), '_freq', num2str(fs), '_radius', num2str(radius)), patient); % at lab
     end
     
     fileName = strcat(patient, '_adjmats_leastsquares.mat');
@@ -106,20 +124,7 @@ function serverPerturbationScript(patient, radius, winSize, stepSize)
     
     adjMats = adjmat_struct.adjMats;
     [T, N, ~] = size(adjMats);
-    
-           
-    %%- w/o filtering harmonics
-    if FILTER_RAW == 1
-        toSaveDir = fullfile(rootDir, strcat('/serverdata/perturbationmats/notchfilter', '/win', num2str(winSize), ...
-            '_step', num2str(stepSize), '_freq', num2str(fs), '_radius', num2str(radius)), patient); % at lab
-    elseif FILTER_RAW == 2
-        toSaveDir = fullfile(rootDir, strcat('/serverdata/perturbationmats/adaptivefilter', '/win', num2str(winSize), ...
-            '_step', num2str(stepSize), '_freq', num2str(fs), '_radius', num2str(radius)), patient); % at lab
-    else 
-        toSaveDir = fullfile(rootDir, strcat('/serverdata/perturbationmats/nofilter', 'win', num2str(winSize), ...
-            '_step', num2str(stepSize), '_freq', num2str(fs), '_radius', num2str(radius)), patient); % at lab
-    end
-    
+
      % save the perturbation results
     filename = strcat(patient, '_', 'pertmats_', ...
             lower(TYPE_CONNECTIVITY), '_radius', num2str(radius), '.mat');
