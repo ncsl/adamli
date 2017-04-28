@@ -94,6 +94,9 @@ function serverPerturbationScript(patient, radius, winSize, stepSize)
         toSaveDir = fullfile(rootDir, strcat('/serverdata/perturbationmats/nofilter', 'win', num2str(winSize), ...
             '_step', num2str(stepSize), '_freq', num2str(fs), '_radius', num2str(radius)), patient); % at lab
     end
+    if ~exist(toSaveDir, 'dir')
+        mkdir(toSaveDir);
+    end
     
     fileName = strcat(patient, '_adjmats_leastsquares.mat');
     adjmat_struct = load(fullfile(adjMatDir, fileName));
@@ -128,10 +131,6 @@ function serverPerturbationScript(patient, radius, winSize, stepSize)
      % save the perturbation results
     filename = strcat(patient, '_', 'pertmats_', ...
             lower(TYPE_CONNECTIVITY), '_radius', num2str(radius), '.mat');
-    
-    if ~exist(toSaveDir, 'dir')
-        mkdir(toSaveDir);
-    end
     
     perturbation_struct = struct();
     perturbation_struct.info = info; % meta data info
