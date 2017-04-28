@@ -214,7 +214,8 @@ adjmat_struct.latespread_labels = latespread_labels;
 adjmat_struct.resection_labels = resection_labels;
 adjmat_struct.all_labels = labels;
 adjmat_struct.seizure_estart_ms = seizure_eonset_ms;       % store in ms
-adjmat_struct.seizure_eend_ms = seizure_eoffset_ms;
+adjmat_struct.seizure_een
+d_ms = seizure_eoffset_ms;
 adjmat_struct.seizure_cstart_ms = seizure_conset_ms;
 adjmat_struct.seizure_cend_ms = seizure_coffset_ms;
 adjmat_struct.seizure_estart_mark = seizure_estart_mark;
