@@ -119,7 +119,7 @@ function serverPerturbationScript(patient, radius, winSize, stepSize)
     info.seizure_eend_mark = adjmat_struct.seizure_eend_mark;
     info.winSize = adjmat_struct.winSize;
     info.stepSize = adjmat_struct.stepSize;
-    info.frequency_sampling = adjmat_struct.frequency_sampling;
+    info.frequency_sampling = adjmat_struct.fs;
     info.included_channels = adjmat_struct.included_channels;
     info.FILTER = adjmat_struct.FILTER;
     info.timePoints = adjmat_struct.timePoints;
