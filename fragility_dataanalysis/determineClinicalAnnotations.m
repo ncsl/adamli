@@ -18,6 +18,9 @@ function [included_channels, onset_electrodes, ...
         center = 'cc';
     elseif strcmp(patient_id, 'Pat2')
         included_channels = [1:4 7:19 21:37 46:47 50:100];
+        
+        %- took out supposed gray matter received from Zach April 2017
+        included_channels = [1:4 7 9 11:12 15:18 21:28 30:34 47 50:62 64:67 70:73 79:87 90 95:99];
         onset_electrodes = {};
         earlyspread_labels = {};
         latespread_labels = {};
@@ -27,6 +30,11 @@ function [included_channels, onset_electrodes, ...
         center = 'cc';
     elseif strcmp(patient_id, 'Pat16')
         included_channels = [1:4 7:19 21:39 42:121 124:157 178:189];
+        
+        %- took out supposed gray matter received from Zach
+        included_channels = [1:3 10:16 23:24 28 31:35 37:39 42:44 46:47 49:54 58:62 64:65 68:70 76:89 93:98 ...
+            100:101 105:121 124 126 128:130 132:134 136:140 142:144 149:156 178:181 183:189];
+        
         onset_electrodes = {};
         earlyspread_labels = {};
         latespread_labels = {};
@@ -213,20 +221,6 @@ function [included_channels, onset_electrodes, ...
         onset_electrodes = {'C7', 'C8', 'C9', 'C6', 'C2', 'C10', 'C1'};
         earlyspread_labels = {};
         latespread_labels = {};
-        center = 'cc';
-    elseif strcmp(patient_id, 'Pat2')
-        included_channels = [];
-        onset_electrodes = {};
-        earlyspread_labels = {};
-        latespread_labels = {};
-        
-        center = 'cc';
-    elseif strcmp(patient_id, 'Pat16')
-        included_channels = [];
-        onset_electrodes = {};
-        earlyspread_labels = {};
-        latespread_labels = {};
-        
         center = 'cc';
     elseif strcmp(patient_id, 'JH101')
         included_channels = [1:4 7:19 21:37 42:43 46 48:63 72 75:86 90:119 122:135];
