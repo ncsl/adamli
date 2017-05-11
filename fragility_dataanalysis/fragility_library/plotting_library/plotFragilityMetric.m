@@ -1,4 +1,4 @@
-function plotFragilityMetric(fragility_mat, minPert_mat, clinicalIndices,...
+function plotFragilityMetric(fragility_mat, clinicalIndices,...
           timePoints, timeStart, timeEnd, PLOTARGS)
     %% Step 0: Extract Metadata from Structs
     %- extract clinical indices from EZ, spread regions
@@ -43,7 +43,6 @@ function plotFragilityMetric(fragility_mat, minPert_mat, clinicalIndices,...
         timeEnd = 20;
         fragility_mat = fragility_mat(:, 1:seizureMarkStart+timeEnd*frequency_sampling/stepSize);
         timePoints = timePoints(1:seizureMarkStart + timeEnd*frequency_sampling/stepSize, :);
-        
     end
     
     %% Step 1: Plot Heatmap

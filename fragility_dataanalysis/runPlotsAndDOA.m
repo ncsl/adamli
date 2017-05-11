@@ -1,13 +1,11 @@
 % function runPlotsAndDOA(frequency_sampling, winSize, stepSize, radius)
 % settings to run
 patients = {,...,
-%      'pt1aw1',...
-%     'pt1aw2', ...
-%     'pt2aw2', 'pt2aslp2',...
-%     'pt1aslp1',
-%     'pt1aslp2', ...
-%     'pt2aw1', 'pt2aw2', ...
-%     'pt2aslp1', 'pt2aslp2', ...
+     'pt1aw1','pt1aw2', ...
+    'pt2aw2', 'pt2aslp2',...
+    'pt1aslp1','pt1aslp2', ...
+    'pt2aw1', 'pt2aw2', ...
+    'pt2aslp1', 'pt2aslp2', ...
 %     'pt3aw1', ...
 %     'pt3aslp1', 'pt3aslp2', ...
 %     'pt1sz2', 'pt1sz3', 'pt1sz4',...
@@ -15,13 +13,13 @@ patients = {,...,
 %     'pt3sz2' 'pt3sz4', ...
 %     'UMMC001_sz1', 'UMMC001_sz2', 'UMMC001_sz3', ...
 %     'UMMC002_sz1', 'UMMC002_sz2','UMMC002_sz3', ...
-    'UMMC003_sz1', 'UMMC003_sz2', 'UMMC003_sz3', ...
-    'UMMC004_sz1', 'UMMC004_sz2', 'UMMC004_sz3', ...
-    'UMMC005_sz1', 'UMMC005_sz2', 'UMMC005_sz3', ...
-    'UMMC006_sz1', 'UMMC006_sz2', 'UMMC006_sz3', ...
-    'UMMC007_sz1', 'UMMC007_sz2','UMMC007_sz3', ...
-    'UMMC008_sz1', 'UMMC008_sz2', 'UMMC008_sz3', ...
-    'UMMC009_sz1','UMMC009_sz2', 'UMMC009_sz3', ...
+%     'UMMC003_sz1', 'UMMC003_sz2', 'UMMC003_sz3', ...
+%     'UMMC004_sz1', 'UMMC004_sz2', 'UMMC004_sz3', ...
+%     'UMMC005_sz1', 'UMMC005_sz2', 'UMMC005_sz3', ...
+%     'UMMC006_sz1', 'UMMC006_sz2', 'UMMC006_sz3', ...
+%     'UMMC007_sz1', 'UMMC007_sz2','UMMC007_sz3', ...
+%     'UMMC008_sz1', 'UMMC008_sz2', 'UMMC008_sz3', ...
+%     'UMMC009_sz1','UMMC009_sz2', 'UMMC009_sz3', ...
 %     'pt6sz3', 'pt6sz4', 'pt6sz5',...
 %     'pt7sz19', 'pt7sz21', 'pt7sz22',...
 %     'pt8sz1' 'pt8sz2' 'pt8sz3',...
@@ -69,13 +67,14 @@ PLOTALL = 1;
 
 % data parameters to find correct directory
 radius = 1.5;             % spectral radius
-winSize = 500;            % 500 milliseconds
-stepSize = 500; 
+winSize = 250;            % 500 milliseconds
+stepSize = 125; 
+FILTER_RAW = 2;
 
 % winSize = 250;
 % stepSize = 125;
 
-frequency_sampling = 1000; % in Hz
+fs = 1000; % in Hz
 IS_SERVER = 0;
 % TEST_DESCRIP = 'noleftandrpp';
 TEST_DESCRIP = 'after_first_removal';
@@ -136,48 +135,36 @@ for p=1:length(patients)
     end
     
     [included_channels, ezone_labels, earlyspread_labels, latespread_labels,...
-        resection_labels, frequency_sampling, center, success_or_failure] ...
+        resection_labels, fs, center, success_or_failure] ...
             = determineClinicalAnnotations(patient_id, seizure_id);
-      
-%     if frequency_sampling ~=1000
-%         winSize = winSize*frequency_sampling/1000;
-%         stepSize = stepSize*frequency_sampling/1000;
-%     end
         
     serverDir = fullfile(rootDir, '/serverdata/');
     %%- Extract an example
-    adjMatDir = fullfile(serverDir, 'adjmats', strcat('win', num2str(winSize), ...
-        '_step', num2str(stepSize), '_freq', num2str(frequency_sampling)), patient);
-    
-    if ~isempty(TEST_DESCRIP)
-        adjMatDir = fullfile(adjMatDir, TEST_DESCRIP);
+    if FILTER_RAW == 1
+        adjMatDir = fullfile(rootDir, 'serverdata/adjmats/notchfilter/', strcat('win', num2str(winSize), ...
+        '_step', num2str(stepSize), '_freq', num2str(fs)), patient); % at lab
+        
+        finalDataDir = fullfile(rootDir, strcat('/serverdata/perturbationmats/notchfilter', '/win', num2str(winSize), ...
+                '_step', num2str(stepSize), '_freq', num2str(fs), '_radius', num2str(radius)), patient); % at lab
+
+    elseif FILTER_RAW == 2
+        adjMatDir = fullfile(rootDir, 'serverdata/adjmats/adaptivefilter/', strcat('win', num2str(winSize), ...
+            '_step', num2str(stepSize), '_freq', num2str(fs)), patient); % at lab
+        
+        finalDataDir = fullfile(rootDir, strcat('/serverdata/perturbationmats/adaptivefilter', '/win', num2str(winSize), ...
+            '_step', num2str(stepSize), '_freq', num2str(fs), '_radius', num2str(radius)), patient); % at lab
+    else 
+        adjMatDir = fullfile(rootDir, 'serverdata/adjmats/nofilter/', strcat('win', num2str(winSize), ...
+            '_step', num2str(stepSize), '_freq', num2str(fs)), patient); % at lab
+        
+        finalDataDir = fullfile(rootDir, strcat('/serverdata/perturbationmats/nofilter', 'win', num2str(winSize), ...
+            '_step', num2str(stepSize), '_freq', num2str(fs), '_radius', num2str(radius)), patient); % at lab
     end
     
-    % directory that computed perturbation structs are saved
-    finalDataDir = fullfile(serverDir, strcat(perturbationType, '_perturbations', ...
-            '_radius', num2str(radius)), strcat('win', num2str(winSize), ...
-            '_step', num2str(stepSize), '_freq', num2str(frequency_sampling)), patient);
-        
-%     finalDataDir = fullfile(serverDir, ...
-%             'harmonics', strcat(perturbationType, '_perturbations', '_radius', num2str(radius)),...
-%             strcat('win', num2str(winSize), '_step', num2str(stepSize), '_freq', num2str(frequency_sampling)), ...
-%             patient);
-
-    finalDataDir = fullfile(serverDir, ...
-            'perturbationmats/adaptivefilter', strcat(perturbationType, '_perturbations', '_radius', num2str(radius)),...
-            strcat('win', num2str(winSize), '_step', num2str(stepSize), '_freq', num2str(frequency_sampling)), ...
-            patient);
-
-    % directory that computed perturbation structs without 0 Hz inside
-%     finalDataDir = fullfile(serverDir, strcat(perturbationType, '_perturbations', ...
-%             '_radius', num2str(radius)), 'no0hz_win500_step500_freq1000', patient);
-        
-    if ~isempty(TEST_DESCRIP)
-        finalDataDir = fullfile(finalDataDir, TEST_DESCRIP);
-    end
+    
     try
         final_data = load(fullfile(finalDataDir, strcat(patient, ...
-            '_', perturbationType, 'perturbation_', lower(TYPE_CONNECTIVITY), '.mat')));
+            '_pertmats_', lower(TYPE_CONNECTIVITY), '_radius', num2str(radius), '.mat')));
         final_data = final_data.perturbation_struct;
     catch e
         disp(e)
@@ -187,21 +174,26 @@ for p=1:length(patients)
         final_data = final_data.perturbation_struct;
     end
     % set data to local variables
-    minPerturb_time_chan = final_data.minNormPertMat;
-    fragility_rankings = final_data.fragilityMat;
-    timePoints = final_data.timePoints;
     info = final_data.info;
-    num_channels = size(minPerturb_time_chan,1);
-    seizureStart = info.seizure_start;
-    seizureEnd = info.seizure_end;
+    
+    %- extract clinical data
+    ezone_labels = info.ezone_labels;
+    earlyspread_labels = info.earlyspread_labels;
+    latespread_labels = info.latespread_labels;
+    resection_labels = info.resection_labels;
     included_labels = info.all_labels;
- 
+    seizure_estart_ms = info.seizure_estart_ms;
+    seizure_estart_mark = info.seizure_estart_mark;
+    seizure_eend_ms = info.seizure_eend_ms;
+    seizure_eend_mark = info.seizure_eend_mark;
+    num_channels = length(info.all_labels);
+    
+    %- set global variable for plotting
+    seizureStart = seizure_estart_ms;
+    seizureEnd = seizure_eend_ms;
+    seizureMarkStart = seizure_estart_mark;
+    
     %%- Get Indices for All Clinical Annotations
-%     if ~isempty(included_channels)
-%         included_labels = labels(included_channels);
-%     else
-%         included_labels = labels;
-%     end
     ezone_indices = findElectrodeIndices(ezone_labels, included_labels);
     earlyspread_indices = findElectrodeIndices(earlyspread_labels, included_labels);
     latespread_indices = findElectrodeIndices(latespread_labels, included_labels);
@@ -235,95 +227,41 @@ for p=1:length(patients)
         %- initialize directories to save things and where to get
         %- perturbation structs
         toSaveFigDir = fullfile(figDir, perturbationType, strcat(patient, '_win', num2str(winSize), ...
-            '_step', num2str(stepSize), '_freq', num2str(frequency_sampling), '_radius', num2str(radius)))
+            '_step', num2str(stepSize), '_freq', num2str(fs), '_radius', num2str(radius)))
         if ~exist(toSaveFigDir, 'dir')
             mkdir(toSaveFigDir);
         end
-        toSaveWeightsDir = fullfile(figDir, strcat(perturbationType, '_electrode_weights'), strcat(patient, num2str(winSize), ...
-            '_step', num2str(stepSize), '_freq', num2str(frequency_sampling), '_radius', num2str(radius)))
-        if ~exist(toSaveWeightsDir, 'dir')
-            mkdir(toSaveWeightsDir);
-        end
            
-        % directory that computed perturbation structs are saved
-        finalDataDir = fullfile(serverDir, strcat(perturbationType, '_perturbations', ...
-            '_radius', num2str(radius)), strcat('win', num2str(winSize),...
-            '_step', num2str(stepSize), '_freq', num2str(frequency_sampling)), patient);
-        
-%         finalDataDir = fullfile(serverDir, ...
-%             'harmonics', strcat(perturbationType, '_perturbations', '_radius', num2str(radius)),...
-%             strcat('win', num2str(winSize), '_step', num2str(stepSize), '_freq', num2str(frequency_sampling)), ...
-%             patient);
-
-        finalDataDir = fullfile(serverDir, ...
-                'perturbationmats/adaptivefilter', strcat(perturbationType, '_perturbations', '_radius', num2str(radius)),...
-                strcat('win', num2str(winSize), '_step', num2str(stepSize), '_freq', num2str(frequency_sampling)), ...
-                patient);
-
-%             % directory that computed perturbation structs without 0 Hz inside
-%         finalDataDir = fullfile(serverDir, strcat(perturbationType, '_perturbations', ...
-%             '_radius', num2str(radius)), 'no0hz_win500_step500_freq1000', patient);
-        
-        if ~isempty(TEST_DESCRIP)
-            finalDataDir = fullfile(finalDataDir, TEST_DESCRIP);
-        end
-
-        try
-            final_data = load(fullfile(finalDataDir, strcat(patient, ...
-                '_', perturbationType, 'perturbation_', lower(TYPE_CONNECTIVITY), ...
-                '_radius', num2str(radius), '.mat')));
-            final_data = final_data.perturbation_struct;
-        catch e
-            disp(e)
-        end
+        pertDataStruct = final_data.(perturbationType);
         
         tempWinSize = winSize;
         tempStepSize = stepSize;
-        if frequency_sampling ~=1000
-            tempWinSize = winSize*frequency_sampling/1000;
-            tempStepSize = stepSize*frequency_sampling/1000;
+        if fs ~=1000
+            tempWinSize = winSize*fs/1000;
+            tempStepSize = stepSize*fs/1000;
         end
         
         % set data to local variables
-        minPerturb_time_chan = final_data.minNormPertMat;
-        fragility_rankings = final_data.fragilityMat;
-        info = final_data.info;
-        timePoints = final_data.timePoints;
+        minPerturb_time_chan = pertDataStruct.minNormPertMat;
+        fragility_rankings = pertDataStruct.fragilityMat;
+        timePoints = pertDataStruct.timePoints;
+        del_table = pertDataStruct.del_table;
         
-        seizureMarkStart = seizureStart/tempStepSize - 1;
-        
-        % Compute fragility rankings per column by normalization
-%         minNormPerturbMat = minPerturb_time_chan;
-%         [N, T] = size(minPerturb_time_chan);
-%         for i=1:N      % loop through each channel
-%             for t=1:T % loop through each time point
-%                 fragilityMat(i,t) = (max(minNormPerturbMat(:,t)) - minNormPerturbMat(i,t)) ...
-%                                             / max(minNormPerturbMat(:,t)) - min(minNormPerturbMat(:,t));
-%             end
-%         end
-%         range(fragilityMat(:,1))
-%         
-%         for i=1:N      % loop through each channel
-%             for t=1:T % loop through each time point
-%                 fragilityMat(i,t) = ((minNormPerturbMat(i,t)) - min(minNormPerturbMat(:,t))) ...
-%                                             / (max(minNormPerturbMat(:,t)) - min(minNormPerturbMat(:,t))); 
-%             end
-%         end
-%         range(fragilityMat(:,1))
+        if isnan(seizureStart)
+            seizureStart = timePoints(end,1);
+            seizureEnd = timePoints(end,1);
+            seizureMarkStart = size(timePoints, 1);
+        end
         
         if seeg
             seizureMarkStart = (seizureStart-1) / tempStepSize;
         end
         
-%         if ~INTERICTAL
-%             minPerturb_time_chan = minPerturb_time_chan(:, 1:seizureMarkStart+20);
-%             fragility_rankings = fragility_rankings(:, 1:seizureMarkStart+20);
-%             timePoints = timePoints(1:seizureMarkStart+20,:);
-%         end
         % for ACC
 %         minPerturb_time_chan = minPerturb_time_chan(:, seizureMarkStart-121:seizureMarkStart);
 %         fragility_rankings = fragility_rankings(:, seizureMarkStart-121:seizureMarkStart);
 %         timePoints = timePoints(seizureMarkStart-121:seizureMarkStart,:);
+
         %% 1: Extract Processed Data and Begin Plotting and Save in finalDataDir
         %%- initialize plotting args
         FONTSIZE = 20;
@@ -332,20 +270,22 @@ for p=1:length(patients)
         PLOTARGS.YAXFontSize = 9;
         PLOTARGS.FONTSIZE = FONTSIZE;
         PLOTARGS.xlabelStr = 'Time With Respect To Seizure (sec)';
+        if isnan(info.seizure_estart_ms)
+            PLOTARGS.xlabelStr = 'Time (sec)';
+        end
         PLOTARGS.colorbarStr = 'Minimum 2-Induced Norm Perturbation';
         PLOTARGS.ylabelStr = 'Electrode Channels';
         PLOTARGS.xTickStep = 10*winSize/stepSize;
         PLOTARGS.titleStr = {['Minimum Norm Perturbation (', patient, ')'], ...
             [perturbationType, ' perturbation: ', ' Time Locked to Seizure']};
-%         PLOTARGS.titleStr = {['Minimum Norm Perturbation For All Channels'], ...
-%             ['C Perturbation: Time Locked To Seizure']};
         PLOTARGS.seizureMarkStart = seizureMarkStart;
-        PLOTARGS.frequency_sampling = frequency_sampling;
+        PLOTARGS.frequency_sampling = fs;
         PLOTARGS.stepSize = stepSize;
+
 
         if seizureStart == size(minPerturb_time_chan,1)*winSize % interictal data
             timeStart = 1;
-            timeEnd = timePoints(size(minPerturb_time_chan,2),1) / frequency_sampling;
+            timeEnd = timePoints(size(minPerturb_time_chan,2),1) / fs;
             if PLOTALL
                 PLOTARGS.toSaveFigFile = fullfile(toSaveFigDir, strcat(patient, '_minPerturbation_alldata'));
             else
@@ -359,10 +299,10 @@ for p=1:length(patients)
                 
                 % plotting from beginning of recording -> some time
                 % specified up there
-                timeStart = -seizureStart / frequency_sampling;
-                timeEnd = (timePoints(size(minPerturb_time_chan, 2), 2) - seizureStart)/frequency_sampling;
+                timeStart = -seizureStart / fs;
+                timeEnd = (timePoints(size(minPerturb_time_chan, 2), 2) - seizureStart)/fs;
                 
-                timeEnd = (timePoints(size(minPerturb_time_chan, 2), 2) - seizureStart + 1)/frequency_sampling;
+                timeEnd = (timePoints(size(minPerturb_time_chan, 2), 2) - seizureStart + 1)/fs;
                 
                 % for ACC
 %                 timeStart = ceil((timePoints(1,2) - seizureStart) / frequency_sampling);
@@ -376,19 +316,14 @@ for p=1:length(patients)
                 postWindow = 10;
                 preWindow = 60;
                 % find index of seizureStart
-                timeStart = (timeIndex - preWindow - timeIndex)*tempWinSize/frequency_sampling; 
-                timeEnd = (timeIndex - timeIndex + postWindow)*tempWinSize/frequency_sampling;
+                timeStart = (timeIndex - preWindow - timeIndex)*tempWinSize/fs; 
+                timeEnd = (timeIndex - timeIndex + postWindow)*tempWinSize/fs;
                 minPerturb_time_chan = minPerturb_time_chan(:, timeIndex-60:timeIndex + postWindow);
                 fragility_rankings = fragility_rankings(:, timeIndex-60:timeIndex + postWindow);
                 PLOTARGS.seizureIndex = abs(timeStart);
                 PLOTARGS.seizureEnd = abs(timeStart);
                 PLOTARGS.toSaveFigFile = fullfile(toSaveFigDir, strcat(patient, '_minPerturbation'));
             end
-        end
-        
- 
-        if ~isempty(TEST_DESCRIP)
-            PLOTARGS.toSaveFigFile = strcat(PLOTARGS.toSaveFigFile, '_', TEST_DESCRIP);
         end
         
         %% 2. Plot Min 2-Induced Norm Perturbation and Fragility Ranking
@@ -414,7 +349,7 @@ for p=1:length(patients)
             PLOTARGS.titleStr = {['Fragility Metric (', strcat(patient_id, seizure_id(2:end)), ')'], ...
             [perturbationType, ' Perturbation: ', ' Time Locked to Seizure']};
         end
-        plotFragilityMetric(fragility_rankings, minPerturb_time_chan, clinicalIndices, timePoints./frequency_sampling, timeStart, timeEnd, PLOTARGS);
+        plotFragilityMetric(fragility_rankings, clinicalIndices, timePoints./fs, timeStart, timeEnd, PLOTARGS);
         
         close all
     end
