@@ -105,9 +105,9 @@ fi
 
 # 03: Parameters for each pbs job.
 if [[ "${RUNCONNECTIVITY}" -eq 1 ]]; then
-	walltime=01:00:00
+	walltime=02:00:00
 else
-	walltime=05:00:00					# the walltime for each computation
+	walltime=12:00:00					# the walltime for each computation
 fi
 
 NprocperNode=8    						# number of processors per node
