@@ -179,7 +179,7 @@ function serverPerturbationScript(patient, radius, winSize, stepSize)
     try
         save(fullfile(toSaveDir, filename), 'perturbation_struct');
     catch e
-         save(fullfile(toSaveDir, filename), 'perturbation_struct', '-v7.3');
+        save(fullfile(toSaveDir, filename), 'perturbation_struct', '-v7.3');
     end
     disp(['Saved file: ', filename]);
 end
