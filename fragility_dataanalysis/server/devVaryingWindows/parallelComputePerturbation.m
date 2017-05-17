@@ -108,27 +108,27 @@ numWins = size(adjmat_struct.adjMats, 1);
 windows = iProc:numProcs*8:numWins;
 
 
-adjmat_struct.type_connectivity;
-adjmat_struct.ezone_labels;
-adjmat_struct.earlyspread_labels;
-adjmat_struct.latespread_labels;
-adjmat_struct.resection_labels;
-adjmat_struct.all_labels;
-adjmat_struct.seizure_estart_ms;       % store in ms
-adjmat_struct.seizure_eend_ms;
-adjmat_struct.seizure_cstart_ms;
-adjmat_struct.seizure_cend_ms;
-adjmat_struct.seizure_estart_mark;
-adjmat_struct.seizure_eend_mark;
-adjmat_struct.engelscore;
-adjmat_struct.outcome;
-adjmat_struct.winSize;
-adjmat_struct.stepSize;
-adjmat_struct.timePoints;
-adjmat_struct.adjMats;
-adjmat_struct.included_channels;
-adjmat_struct.frequency_sampling;
-adjmat_struct.FILTER;
+% adjmat_struct.type_connectivity;
+% adjmat_struct.ezone_labels;
+% adjmat_struct.earlyspread_labels;
+% adjmat_struct.latespread_labels;
+% adjmat_struct.resection_labels;
+% adjmat_struct.all_labels;
+% adjmat_struct.seizure_estart_ms;       % store in ms
+% adjmat_struct.seizure_eend_ms;
+% adjmat_struct.seizure_cstart_ms;
+% adjmat_struct.seizure_cend_ms;
+% adjmat_struct.seizure_estart_mark;
+% adjmat_struct.seizure_eend_mark;
+% adjmat_struct.engelscore;
+% adjmat_struct.outcome;
+% adjmat_struct.winSize;
+% adjmat_struct.stepSize;
+% adjmat_struct.timePoints;
+% adjmat_struct.adjMats;
+% adjmat_struct.included_channels;
+% adjmat_struct.frequency_sampling;
+% adjmat_struct.FILTER;
 
 %% Loop Through Each Window and Compute Perturbation
 for iWin=1:length(windows)
