@@ -107,7 +107,7 @@ fi
 if [[ "${RUNCONNECTIVITY}" -eq 1 ]]; then
 	walltime=02:00:00
 else
-	walltime=12:00:00					# the walltime for each computation
+	walltime=20:00:00					# the walltime for each computation
 fi
 
 NprocperNode=8    						# number of processors per node
