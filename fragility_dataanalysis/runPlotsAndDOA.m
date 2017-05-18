@@ -23,7 +23,7 @@ patients = {...,
 %     'pt16sz1' 'pt16sz2' 'pt16sz3',...
 %     'pt17sz1' 'pt17sz2', 'pt17sz3', ...
     
-%     'Pat2sz1p', 'Pat2sz2p', 'Pat2sz3p', ...
+    'Pat2sz1p', 'Pat2sz2p', 'Pat2sz3p', ...
     'Pat16sz1p', ...
 % 'Pat16sz2p', 'Pat16sz3p', ...
     
@@ -182,10 +182,10 @@ for p=1:length(patients)
     info = final_data.info;
     
     %- extract clinical data
-    ezone_labels = info.ezone_labels;
-    earlyspread_labels = info.earlyspread_labels;
-    latespread_labels = info.latespread_labels;
-    resection_labels = info.resection_labels;
+%     ezone_labels = info.ezone_labels;
+%     earlyspread_labels = info.earlyspread_labels;
+%     latespread_labels = info.latespread_labels;
+%     resection_labels = info.resection_labels;
     included_labels = info.all_labels;
     seizure_estart_ms = info.seizure_estart_ms;
     seizure_estart_mark = info.seizure_estart_mark;
