@@ -13,16 +13,18 @@ PLOTALL = 1;
 
 % data parameters to find correct directory
 radius = 1.5;             % spectral radius
-winSize = 250;            % 500 milliseconds
-stepSize = 125; 
-FILTER_RAW = 2;
+winSize = 500;            % 500 milliseconds
+stepSize = 500; 
+FILTER_RAW = 1;
 fs = 1000; % in Hz
 % TEST_DESCRIP = 'noleftandrpp';
 % TEST_DESCRIP = 'after_first_removal';
 TEST_DESCRIP = [];
 TYPE_CONNECTIVITY = 'leastsquares';
 
+addpath(genpath('../../fragility_library/'));
 addpath(('/Users/adam2392/Documents/adamli/fragility_dataanalysis/'));
+addpath('/home/WIN/ali39/Documents/adamli/fragility_dataanalysis/');
 
 % set working directory
 % data directories to save data into - choose one
@@ -36,8 +38,11 @@ elseif ~isempty(dir(eegRootDirHome)), rootDir = eegRootDirHome;
 elseif ~isempty(dir(eegRootDirJhu)), rootDir = eegRootDirJhu;
 else   error('Neither Work nor Home EEG directories exist! Exiting'); end
 
-figDir = fullfile('./figures/adaptivefiltered/', ...
+figDir = fullfile('./figures/notchfiltered/', ...
     strcat('win', num2str(winSize), '_step', num2str(stepSize), '_radius', num2str(radius)));
+if ~exist(figDir, 'dir')
+    mkdir(figDir);
+end
 
 %%- Begin Loop Through Different Patients Here
 for p=1:length(patients)
@@ -81,8 +86,8 @@ for p=1:length(patients)
         adjMatDir = fullfile(rootDir, 'serverdata/adjmats/notchfilter/', strcat('win', num2str(winSize), ...
         '_step', num2str(stepSize), '_freq', num2str(fs)), patient); % at lab
         
-        finalDataDir = fullfile(rootDir, strcat('/serverdata/perturbationmats/notchfilter', '/win', num2str(winSize), ...
-                '_step', num2str(stepSize), '_freq', num2str(fs), '_radius', num2str(radius)), patient); % at lab
+        finalDataDir = fullfile(rootDir, strcat('/serverdata/perturbationmats/notch'), ...
+            strcat('C_perturbations_radius', num2str(radius)), 'win500_step500_freq1000', patient); % at lab
 
     elseif FILTER_RAW == 2
         adjMatDir = fullfile(rootDir, 'serverdata/adjmats/adaptivefilter/', strcat('win', num2str(winSize), ...
@@ -119,25 +124,27 @@ for p=1:length(patients)
 %     latespread_labels = info.latespread_labels;
 %     resection_labels = info.resection_labels;
     included_labels = info.all_labels;
-    seizure_estart_ms = info.seizure_estart_ms;
-    seizure_estart_mark = info.seizure_estart_mark;
-    seizure_eend_ms = info.seizure_eend_ms;
-    seizure_eend_mark = info.seizure_eend_mark;
+%     seizure_estart_ms = info.seizure_estart_ms;
+%     seizure_estart_mark = info.seizure_estart_mark;
+%     seizure_eend_ms = info.seizure_eend_ms;
+%     seizure_eend_mark = info.seizure_eend_mark;
+    
+    
+    seizure_estart_ms = info.seizure_start;
+    seizure_eend_ms = info.seizure_end;
+    
     num_channels = length(info.all_labels);
     
     %- set global variable for plotting
     seizureStart = seizure_estart_ms;
     seizureEnd = seizure_eend_ms;
-    seizureMarkStart = seizure_estart_mark;
+%     seizureMarkStart = seizure_estart_mark;
     
     %%- Get Indices for All Clinical Annotations
     ezone_indices = findElectrodeIndices(ezone_labels, included_labels);
   
     allYTicks = 1:num_channels; 
     y_indices = setdiff(allYTicks, [ezone_indices]);
-    if sum(latespread_indices > 0)
-        y_indices = setdiff(allYTicks, [ezone_indices]);
-    end
     y_ezoneindices = sort(ezone_indices);
     y_earlyspreadindices = [];
     y_latespreadindices = [];
@@ -154,134 +161,130 @@ for p=1:length(patients)
     clinicalIndices.included_labels = included_labels;
     
     %% PLOT PERTURBATION RESULTS
-    for j=1:length(perturbationTypes)
-        perturbationType = perturbationTypes(j);
-        
-        %- initialize directories to save things and where to get
-        %- perturbation structs
-        toSaveFigDir = fullfile(figDir, perturbationType, strcat(patient, '_win', num2str(winSize), ...
-            '_step', num2str(stepSize), '_freq', num2str(fs), '_radius', num2str(radius)))
-        if ~exist(toSaveFigDir, 'dir')
-            mkdir(toSaveFigDir);
-        end
-           
-        pertDataStruct = final_data.(perturbationType);
-        
-        tempWinSize = winSize;
-        tempStepSize = stepSize;
-        if fs ~=1000
-            tempWinSize = winSize*fs/1000;
-            tempStepSize = stepSize*fs/1000;
-        end
-        
-        % set data to local variables
-        minPerturb_time_chan = pertDataStruct.minNormPertMat;
-        fragility_rankings = pertDataStruct.fragilityMat;
-        timePoints = pertDataStruct.timePoints;
-        del_table = pertDataStruct.del_table;
-        
-        if isnan(seizureStart)
-            seizureStart = timePoints(end,1);
-            seizureEnd = timePoints(end,1);
-            seizureMarkStart = size(timePoints, 1);
-        end
-        
-        if seeg
-            seizureMarkStart = (seizureStart-1) / tempStepSize;
-        end
-        
-        % for ACC
+    perturbationType = 'C';
+
+    %- initialize directories to save things and where to get
+    %- perturbation structs
+    toSaveFigDir = fullfile(figDir, perturbationType, strcat(patient, '_win', num2str(winSize), ...
+        '_step', num2str(stepSize), '_freq', num2str(fs), '_radius', num2str(radius)))
+    if ~exist(toSaveFigDir, 'dir')
+        mkdir(toSaveFigDir);
+    end
+
+    pertDataStruct = final_data;
+
+    tempWinSize = winSize;
+    tempStepSize = stepSize;
+    if fs ~=1000
+        tempWinSize = winSize*fs/1000;
+        tempStepSize = stepSize*fs/1000;
+    end
+
+    % set data to local variables
+    minPerturb_time_chan = pertDataStruct.minNormPertMat;
+    fragility_rankings = pertDataStruct.fragilityMat;
+    timePoints = pertDataStruct.timePoints;
+    del_table = pertDataStruct.del_table;
+
+    if isnan(seizureStart)
+        seizureStart = timePoints(end,1);
+        seizureEnd = timePoints(end,1);
+        seizureMarkStart = size(timePoints, 1);
+    end
+
+    seizureMarkStart = seizureStart / tempStepSize;
+    if seeg
+        seizureMarkStart = (seizureStart-1) / tempStepSize;
+    end
+
+    % for ACC
 %         minPerturb_time_chan = minPerturb_time_chan(:, seizureMarkStart-121:seizureMarkStart);
 %         fragility_rankings = fragility_rankings(:, seizureMarkStart-121:seizureMarkStart);
 %         timePoints = timePoints(seizureMarkStart-121:seizureMarkStart,:);
 
-        %% 1: Extract Processed Data and Begin Plotting and Save in finalDataDir
-        %%- initialize plotting args
-        FONTSIZE = 20;
-        PLOTARGS = struct();
-        PLOTARGS.SAVEFIG = 1;
-        PLOTARGS.YAXFontSize = 9;
-        PLOTARGS.FONTSIZE = FONTSIZE;
-        PLOTARGS.xlabelStr = 'Time With Respect To Seizure (sec)';
-        if isnan(info.seizure_estart_ms)
-            PLOTARGS.xlabelStr = 'Time (sec)';
+    %% 1: Extract Processed Data and Begin Plotting and Save in finalDataDir
+    %%- initialize plotting args
+    FONTSIZE = 20;
+    PLOTARGS = struct();
+    PLOTARGS.SAVEFIG = 1;
+    PLOTARGS.YAXFontSize = 9;
+    PLOTARGS.FONTSIZE = FONTSIZE;
+    PLOTARGS.xlabelStr = 'Time With Respect To Seizure (sec)';
+    PLOTARGS.colorbarStr = 'Minimum 2-Induced Norm Perturbation';
+    PLOTARGS.ylabelStr = 'Electrode Channels';
+    PLOTARGS.xTickStep = 10*winSize/stepSize;
+    PLOTARGS.titleStr = {['Minimum Norm Perturbation (', patient, ')'], ...
+        [perturbationType, ' pclerturbation: ', ' Time Locked to Seizure']};
+    PLOTARGS.seizureMarkStart = seizureMarkStart;
+    PLOTARGS.frequency_sampling = fs;
+    PLOTARGS.stepSize = stepSize;
+
+
+    if seizureStart == size(minPerturb_time_chan,1)*winSize % interictal data
+        timeStart = 1;
+        timeEnd = timePoints(size(minPerturb_time_chan,2),1) / fs;
+        if PLOTALL
+            PLOTARGS.toSaveFigFile = fullfile(toSaveFigDir, strcat(patient, '_minPerturbation_alldata'));
+        else
+            PLOTARGS.toSaveFigFile = fullfile(toSaveFigDir, strcat(patient, '_minPerturbation'));
         end
-        PLOTARGS.colorbarStr = 'Minimum 2-Induced Norm Perturbation';
-        PLOTARGS.ylabelStr = 'Electrode Channels';
-        PLOTARGS.xTickStep = 10*winSize/stepSize;
-        PLOTARGS.titleStr = {['Minimum Norm Perturbation (', patient, ')'], ...
-            [perturbationType, ' perturbation: ', ' Time Locked to Seizure']};
-        PLOTARGS.seizureMarkStart = seizureMarkStart;
-        PLOTARGS.frequency_sampling = fs;
-        PLOTARGS.stepSize = stepSize;
+    else % some seizure data
+        timeIndex = find(seizureStart<timePoints(:,2),1) - 1;
+        if PLOTALL % plot entire data series
+            seizureIndex = timeIndex;
+            seizureEndIndex = find(seizureEnd < timePoints(:,2),1) + 1;
 
+            % plotting from beginning of recording -> some time
+            % specified up there
+            timeStart = -seizureStart / fs;
+            timeEnd = (timePoints(size(minPerturb_time_chan, 2), 2) - seizureStart)/fs;
+            timeEnd = (timePoints(size(minPerturb_time_chan, 2), 2) - seizureStart + 1)/fs;
 
-        if seizureStart == size(minPerturb_time_chan,1)*winSize % interictal data
-            timeStart = 1;
-            timeEnd = timePoints(size(minPerturb_time_chan,2),1) / fs;
-            if PLOTALL
-                PLOTARGS.toSaveFigFile = fullfile(toSaveFigDir, strcat(patient, '_minPerturbation_alldata'));
-            else
-                PLOTARGS.toSaveFigFile = fullfile(toSaveFigDir, strcat(patient, '_minPerturbation'));
-            end
-        else % some seizure data
-            timeIndex = find(seizureStart<timePoints(:,2),1) - 1;
-            if PLOTALL % plot entire data series
-                seizureIndex = timeIndex;
-                seizureEndIndex = find(seizureEnd < timePoints(:,2),1) + 1;
-                
-                % plotting from beginning of recording -> some time
-                % specified up there
-                timeStart = -seizureStart / fs;
-                timeEnd = (timePoints(size(minPerturb_time_chan, 2), 2) - seizureStart)/fs;
-                timeEnd = (timePoints(size(minPerturb_time_chan, 2), 2) - seizureStart + 1)/fs;
-                
-                % for ACC
+            % for ACC
 %                 timeStart = ceil((timePoints(1,2) - seizureStart) / frequency_sampling);
 %                 timeEnd = (timePoints(end,2) - seizureStart) / frequency_sampling;
-                
+
 %                 PLOTARGS.seizureIndex = seizureIndex;
 %                 PLOTARGS.seizureEnd = seizureEndIndex;
 %                 PLOTARGS.seizureEnd = seizureIndex;
-                PLOTARGS.toSaveFigFile = fullfile(toSaveFigDir, strcat(patient, '_minPerturbation'));
-            else % only plot window of data
-                postWindow = 10;
-                preWindow = 60;
-                % find index of seizureStart
-                timeStart = (timeIndex - preWindow - timeIndex)*tempWinSize/fs; 
-                timeEnd = (timeIndex - timeIndex + postWindow)*tempWinSize/fs;
-                minPerturb_time_chan = minPerturb_time_chan(:, timeIndex-60:timeIndex + postWindow);
-                fragility_rankings = fragility_rankings(:, timeIndex-60:timeIndex + postWindow);
-                PLOTARGS.seizureIndex = abs(timeStart);
-                PLOTARGS.seizureEnd = abs(timeStart);
-                PLOTARGS.toSaveFigFile = fullfile(toSaveFigDir, strcat(patient, '_minPerturbation'));
-            end
+            PLOTARGS.toSaveFigFile = fullfile(toSaveFigDir, strcat(patient, '_minPerturbation'));
+        else % only plot window of data
+            postWindow = 10;
+            preWindow = 60;
+            % find index of seizureStart
+            timeStart = (timeIndex - preWindow - timeIndex)*tempWinSize/fs; 
+            timeEnd = (timeIndex - timeIndex + postWindow)*tempWinSize/fs;
+            minPerturb_time_chan = minPerturb_time_chan(:, timeIndex-60:timeIndex + postWindow);
+            fragility_rankings = fragility_rankings(:, timeIndex-60:timeIndex + postWindow);
+            PLOTARGS.seizureIndex = abs(timeStart);
+            PLOTARGS.seizureEnd = abs(timeStart);
+            PLOTARGS.toSaveFigFile = fullfile(toSaveFigDir, strcat(patient, '_minPerturbation'));
         end
-        
-        %% 2. Plot Fragility Ranking
-        if PLOTALL
-            PLOTARGS.toSaveFigFile = fullfile(toSaveFigDir, strcat(patient, '_fragilityMetric'));
-        else
-            PLOTARGS.toSaveFigFile = fullfile(toSaveFigDir, strcat(patient, '_fragilityMetric'));
-        end
-        
-        if ~isempty(TEST_DESCRIP)
-            PLOTARGS.toSaveFigFile = strcat(PLOTARGS.toSaveFigFile, TEST_DESCRIP);
-        end
-%         seizure_id = strcat('seiz', num2str(p));
-        PLOTARGS.colorbarStr = 'Fragility Metric';
-        if success_or_failure == 1
-            PLOTARGS.titleStr = {['Success: Fragility Metric (', strcat(patient_id, seizure_id), ')'], ...
-            [perturbationType, ' Perturbation: ', ' Time Locked to Seizure']};
-        elseif success_or_failure == 0
-            PLOTARGS.titleStr = {['Failure: Fragility Metric (', strcat(patient_id, seizure_id), ')'], ...
-            [perturbationType, ' Perturbation: ', ' Time Locked to Seizure']};
-        else % not set
-            PLOTARGS.titleStr = {['Fragility Metric (', strcat(patient_id, seizure_id(2:end)), ')'], ...
-            [perturbationType, ' Perturbation: ', ' Time Locked to Seizure']};
-        end
-        plotACCFragilityMetric(fragility_rankings, clinicalIndices, timePoints./fs, timeStart, timeEnd, PLOTARGS);
-        
-        close all
     end
+
+    %% 2. Plot Fragility Ranking
+    if PLOTALL
+        PLOTARGS.toSaveFigFile = fullfile(toSaveFigDir, strcat(patient, '_fragilityMetric'));
+    else
+        PLOTARGS.toSaveFigFile = fullfile(toSaveFigDir, strcat(patient, '_fragilityMetric'));
+    end
+
+    if ~isempty(TEST_DESCRIP)
+        PLOTARGS.toSaveFigFile = strcat(PLOTARGS.toSaveFigFile, TEST_DESCRIP);
+    end
+%         seizure_id = strcat('seiz', num2str(p));
+    PLOTARGS.colorbarStr = 'Fragility Metric';
+    if success_or_failure == 1
+        PLOTARGS.titleStr = {['Success: Fragility Metric (', strcat(patient_id, seizure_id), ')'], ...
+        [perturbationType, ' Perturbation: ', ' Time Locked to Seizure']};
+    elseif success_or_failure == 0
+        PLOTARGS.titleStr = {['Failure: Fragility Metric (', strcat(patient_id, seizure_id), ')'], ...
+        [perturbationType, ' Perturbation: ', ' Time Locked to Seizure']};
+    else % not set
+        PLOTARGS.titleStr = {['Fragility Metric (', strcat(patient_id, seizure_id(2:end)), ')'], ...
+        [perturbationType, ' Perturbation: ', ' Time Locked to Seizure']};
+    end
+    plotACCFragilityMetric(fragility_rankings, clinicalIndices, timePoints./fs, timeStart, timeEnd, PLOTARGS);
+
+    close all
 end
