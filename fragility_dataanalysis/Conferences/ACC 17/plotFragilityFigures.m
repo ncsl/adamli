@@ -7,7 +7,7 @@ patients = {...
 
 close all;
 
-perturbationTypes = ['C', 'R'];
+perturbationTypes = ['C'];
 perturbationType = perturbationTypes(1);
 PLOTALL = 1;
 
@@ -36,7 +36,7 @@ elseif ~isempty(dir(eegRootDirHome)), rootDir = eegRootDirHome;
 elseif ~isempty(dir(eegRootDirJhu)), rootDir = eegRootDirJhu;
 else   error('Neither Work nor Home EEG directories exist! Exiting'); end
 
-figDir = fullfile(rootDir, '/figures/adaptivefiltered/', ...
+figDir = fullfile('./figures/adaptivefiltered/', ...
     strcat('win', num2str(winSize), '_step', num2str(stepSize), '_radius', num2str(radius)));
 
 %%- Begin Loop Through Different Patients Here
