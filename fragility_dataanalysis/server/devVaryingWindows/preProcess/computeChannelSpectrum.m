@@ -2,8 +2,8 @@ function computeChannelSpectrum(patient, winSize, stepSize, typeTransform, curre
 if nargin==0
     patient='pt1sz2';
 %     patient='UMMC003_sz1';
-    winSize=500;
-    stepSize=250;
+    winSize=250;
+    stepSize=125;
     typeTransform='fourier';
     typeTransform = 'morlet';
     currentChan=2;
@@ -83,7 +83,7 @@ end
      %% DEFINE OUTPUT DIRS AND CLINICAL ANNOTATIONS
     %- Edit this file if new patients are added.
     [included_channels, ezone_labels, earlyspread_labels,...
-        latespread_labels, resection_labels, fs, ...
+        latespread_labels, resection_labels, frequency_sampling, ...
         center] ...
                 = determineClinicalAnnotations(patient_id, seizure_id);
     patient_id = buffpatid;
@@ -106,8 +106,8 @@ end
     
     [numChans, eventDurationMS] = size(data_struct.data);
     elec_labels = data_struct.elec_labels;
-    seizure_start = data_struct.seiz_start_mark;
-    seizure_end = data_struct.seiz_end_mark;
+    seizure_start = data_struct.seizure_eonset_ms;
+    seizure_end = data_struct.seizure_eoffset_ms;
     data = data_struct.data;
     
     if strcmp(typeTransform, 'morlet')
@@ -125,36 +125,36 @@ end
     
     eegWave = data(currentChan, :);
     
-    leneeg = floor(length(eegWave) / fs) * fs;
+    leneeg = floor(length(eegWave) / frequency_sampling) * frequency_sampling;
     eegWave = eegWave(1:leneeg);
     
     % set the number of harmonics
-    numHarmonics = floor(fs/2/60) - 1;
+    numHarmonics = floor(frequency_sampling/2/60) - 1;
 
     %- apply filtering on the eegWave
     if FILTER_RAW == 1
        % apply band notch filter to eeg data
-        eegWave = buttfilt(eegWave,[59.5 60.5], fs,'stop',1);
-        eegWave = buttfilt(eegWave,[119.5 120.5], fs,'stop',1);
+        eegWave = buttfilt(eegWave,[59.5 60.5], frequency_sampling,'stop',1);
+        eegWave = buttfilt(eegWave,[119.5 120.5], frequency_sampling,'stop',1);
         if frequency_sampling >= 250
-            eegWave = buttfilt(eegWave,[179.5 180.5], fs,'stop',1);
-            eegWave = buttfilt(eegWave,[239.5 240.5], fs,'stop',1);
+            eegWave = buttfilt(eegWave,[179.5 180.5], frequency_sampling,'stop',1);
+            eegWave = buttfilt(eegWave,[239.5 240.5], frequency_sampling,'stop',1);
             
             if frequency_sampling >= 500
-                eegWave = buttfilt(eegWave,[299.5 300.5], fs,'stop',1);
-                eegWave = buttfilt(eegWave,[359.5 360.5], fs,'stop',1);
-                eegWave = buttfilt(eegWave,[419.5 420.5], fs,'stop',1);
-                eegWave = buttfilt(eegWave,[479.5 480.5], fs,'stop',1);
+                eegWave = buttfilt(eegWave,[299.5 300.5], frequency_sampling,'stop',1);
+                eegWave = buttfilt(eegWave,[359.5 360.5], frequency_sampling,'stop',1);
+                eegWave = buttfilt(eegWave,[419.5 420.5], frequency_sampling,'stop',1);
+                eegWave = buttfilt(eegWave,[479.5 480.5], frequency_sampling,'stop',1);
             end
         end
     elseif FILTER_RAW == 2
          % apply an adaptive filtering algorithm.
-        eegWave = removePLI(eegWave, fs, numHarmonics, [50,0.01,4], [0.1,2,4], 2, 60);
+        eegWave = removePLI(eegWave, frequency_sampling, numHarmonics, [50,0.01,4], [0.1,2,4], 2, 60);
     else 
         disp('no filtering?');
     end
     
-    [powerMat, phaseMat, freqs, t_sec] = computeSpectralPower(eegWave, fs, typeTransform, transformArgs);
+    [powerMat, phaseMat, freqs, t_sec] = computeSpectralPower(eegWave, frequency_sampling, typeTransform, transformArgs);
     % squeeze channel dimension
     powerMat = squeeze(powerMat);
     phaseMat = squeeze(phaseMat);
@@ -181,10 +181,10 @@ end
     %%- condense matrices
     if strcmp(typeTransform, 'morlet')
         %%- TIME BIN POWERMATZ WITH WINDOWSIZE AND OVERLAP
-        [powerMat, t_sec] = timeBinSpectrogram(powerMat, fs, winSize, stepSize);
-        [phaseMat, ~] = timeBinSpectrogram(phaseMat, fs, winSize, stepSize);
+        [powerMat, t_sec] = timeBinSpectrogram(powerMat, frequency_sampling, winSize, stepSize);
+        [phaseMat, ~] = timeBinSpectrogram(phaseMat, frequency_sampling, winSize, stepSize);
         
-        [powerMatZ, ~] = timeBinSpectrogram(powerMatZ, fs, winSize, stepSize);
+        [powerMatZ, ~] = timeBinSpectrogram(powerMatZ, frequency_sampling, winSize, stepSize);
 
         %%- FREQUENCY BIN WITH FREQUENCY BANDS
 %             powerMat = freqBinSpectrogram(powerMat, rangeFreqs, waveletFreqs);
@@ -197,9 +197,9 @@ end
 
     % create 2D array to show time windows occupied by each index of new
     % power matrix
-    if fs ~=1000
-        winSizefs = winSize*fs/1000;
-        stepSizefs = stepSize*fs/1000;
+    if frequency_sampling ~=1000
+        winSizefs = winSize*frequency_sampling/1000;
+        stepSizefs = stepSize*frequency_sampling/1000;
     end
 
     % create to save data struct
@@ -211,12 +211,10 @@ end
     chanData.powerMat = squeeze(powerMat);
     chanData.powerMatZ = squeeze(powerMatZ);
 %     chanData.phaseMat = squeeze(phaseMat);
-%     chanData.seizure_end = seizure_end;
-%     chanData.seizure_start = seizure_start;
+    chanData.seizure_end = seizure_end;
+    chanData.seizure_start = seizure_start;
     chanData.winSizeMS = winSize;
     chanData.stepSizeMS = stepSize;
-    chanData.winSize = winSizefs;
-    chanData.stepSize = stepSizefs;
     chanData.waveT = t_sec;
     chanData.freqs = freqs;
 
