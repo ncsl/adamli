@@ -28,7 +28,7 @@ end
     %- 0 == no filtering
     %- 1 == notch filtering
     %- 2 == adaptive filtering
-    FILTER_RAW = 2; 
+    FILTER_RAW = 1; 
 %     winSize = 500;
 %     stepSize = 250;
 

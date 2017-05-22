@@ -1,9 +1,0 @@
-/var/spool/torque/mom_priv/jobs/2589040.mgt.SC: line 22: proc: command not found
-pbsdsh: task 115 exit status 1
-pbsdsh: task 113 exit status 1
-pbsdsh: task 116 exit status 1
-pbsdsh: task 118 exit status 1
-pbsdsh: task 119 exit status 1
-pbsdsh: task 117 exit status 1
-pbsdsh: task 114 exit status 1
-pbsdsh: task 112 exit status 1

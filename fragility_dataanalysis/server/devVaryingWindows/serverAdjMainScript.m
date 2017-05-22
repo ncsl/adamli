@@ -30,7 +30,7 @@ addpath(rootDir);
 %- 0 == no filtering
 %- 1 == notch filtering
 %- 2 == adaptive filtering
-FILTERTYPE = 2; 
+FILTERTYPE = 1; 
 TYPE_CONNECTIVITY = 'leastsquares';
 l2regularization = 0;
 % set options for connectivity measurements
@@ -188,14 +188,14 @@ parfor iWin=1:numWins
      %% Perform Least Squares Computations
     % step 2: compute some functional connectivity 
     if strcmp(TYPE_CONNECTIVITY, 'leastsquares')
-        fprintf('About to start least squares');
+        fprintf('About to start least squares\n');
         % linear model: Ax = b; A\b -> x
         b = double(tempeeg(:)); % define b as vectorized by stacking columns on top of another
         b = b(num_channels+1:end); % only get the time points after the first one
 
         % - use least square computation
         theta = computeLeastSquares(tempeeg, b, OPTIONS);
-        fprintf('Finished least squares');
+        fprintf('Finished least squares\n');
         theta_adj = reshape(theta, num_channels, num_channels)';    % reshape fills in columns first, so must transpose
     end
     
@@ -231,10 +231,10 @@ adjmat_struct.FILTER = FILTERTYPE;
 
 fileName = strcat(patient, '_adjmats_', lower(TYPE_CONNECTIVITY), '.mat');
 
-try
+varinfo = whos('adjmat_struct');
+if varinfo.bytes < 2^31
     save(fullfile(toSaveDir, fileName), 'adjmat_struct');
-catch e
-    disp(e);
+else 
     save(fullfile(toSaveDir, fileName), 'adjmat_struct', '-v7.3');
 end
 

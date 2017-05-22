@@ -9,6 +9,8 @@
 # Author: Adam Li (ali39@jhu.edu).
 # Created on 2017-05-22. Last update on .
 
+cd ./matlab\ lib/
+
 # Load module (comment this to debug in sh mode)
 module load matlab
 

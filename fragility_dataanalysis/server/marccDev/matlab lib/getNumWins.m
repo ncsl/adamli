@@ -44,8 +44,8 @@ function numWins = getNumWins(patient, winSize, stepSize)
     % files to process
     data = load(fullfile(patient_eeg_path, patient));
     eeg = data.data;
-    numSampsInWin = winSize * frequency_sampling / 1000;
-    numSampsInStep = stepSize * frequency_sampling / 1000;
+    numSampsInWin = winSize * fs / 1000;
+    numSampsInStep = stepSize * fs / 1000;
     
     numWins = floor(size(eeg, 2) / numSampsInStep - numSampsInWin/numSampsInStep + 1);
 end
