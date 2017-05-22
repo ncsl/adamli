@@ -13,9 +13,9 @@ PLOTALL = 1;
 
 % data parameters to find correct directory
 radius = 1.5;             % spectral radius
-winSize = 500;            % 500 milliseconds
-stepSize = 500; 
-FILTER_RAW = 1;
+winSize = 250;            % 500 milliseconds
+stepSize = 125; 
+FILTER_RAW = 2;
 fs = 1000; % in Hz
 % TEST_DESCRIP = 'noleftandrpp';
 % TEST_DESCRIP = 'after_first_removal';
@@ -119,37 +119,40 @@ for p=1:length(patients)
     info = final_data.info;
     
     %- extract clinical data
-%     ezone_labels = info.ezone_labels;
-%     earlyspread_labels = info.earlyspread_labels;
-%     latespread_labels = info.latespread_labels;
-%     resection_labels = info.resection_labels;
     included_labels = info.all_labels;
-%     seizure_estart_ms = info.seizure_estart_ms;
-%     seizure_estart_mark = info.seizure_estart_mark;
-%     seizure_eend_ms = info.seizure_eend_ms;
-%     seizure_eend_mark = info.seizure_eend_mark;
+    seizure_estart_ms = info.seizure_estart_ms;
+    seizure_estart_mark = info.seizure_estart_mark;
+    seizure_eend_ms = info.seizure_eend_ms;
+    seizure_eend_mark = info.seizure_eend_mark;
     
     
-    seizure_estart_ms = info.seizure_start;
-    seizure_eend_ms = info.seizure_end;
+%     seizure_estart_ms = info.seizure_start;
+%     seizure_eend_ms = info.seizure_end;
     
     num_channels = length(info.all_labels);
     
     %- set global variable for plotting
     seizureStart = seizure_estart_ms;
     seizureEnd = seizure_eend_ms;
-%     seizureMarkStart = seizure_estart_mark;
+    seizureMarkStart = seizure_estart_mark;
     
     %%- Get Indices for All Clinical Annotations
     ezone_indices = findElectrodeIndices(ezone_labels, included_labels);
-  
+    earlyspread_indices = findElectrodeIndices(earlyspread_labels, included_labels);
+    latespread_indices = findElectrodeIndices(latespread_labels, included_labels);
+
     allYTicks = 1:num_channels; 
-    y_indices = setdiff(allYTicks, [ezone_indices]);
+    y_indices = setdiff(allYTicks, [ezone_indices; earlyspread_indices]);
+    if sum(latespread_indices > 0)
+        latespread_indices(latespread_indices ==0) = [];
+        y_indices = setdiff(allYTicks, [ezone_indices; earlyspread_indices; latespread_indices]);
+    end
     y_ezoneindices = sort(ezone_indices);
-    y_earlyspreadindices = [];
-    y_latespreadindices = [];
+    y_earlyspreadindices = sort(earlyspread_indices);
+    y_latespreadindices = sort(latespread_indices);
     
     % find resection indices
+    %     y_resectionindices = findResectionIndices(included_labels, resection_labels);
     y_resectionindices = [];
     
     % create struct for clinical indices
@@ -171,7 +174,7 @@ for p=1:length(patients)
         mkdir(toSaveFigDir);
     end
 
-    pertDataStruct = final_data;
+    pertDataStruct = final_data.(perturbationType);
 
     tempWinSize = winSize;
     tempStepSize = stepSize;
@@ -240,13 +243,6 @@ for p=1:length(patients)
             timeEnd = (timePoints(size(minPerturb_time_chan, 2), 2) - seizureStart)/fs;
             timeEnd = (timePoints(size(minPerturb_time_chan, 2), 2) - seizureStart + 1)/fs;
 
-            % for ACC
-%                 timeStart = ceil((timePoints(1,2) - seizureStart) / frequency_sampling);
-%                 timeEnd = (timePoints(end,2) - seizureStart) / frequency_sampling;
-
-%                 PLOTARGS.seizureIndex = seizureIndex;
-%                 PLOTARGS.seizureEnd = seizureEndIndex;
-%                 PLOTARGS.seizureEnd = seizureIndex;
             PLOTARGS.toSaveFigFile = fullfile(toSaveFigDir, strcat(patient, '_minPerturbation'));
         else % only plot window of data
             postWindow = 10;
