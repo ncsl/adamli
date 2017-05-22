@@ -17,3 +17,19 @@ patient=${patient}
 currentNode=${currentNode}
 NprocperNode=${NNodes}
 
+# loop to run jobs on processor
+for ((iproc=1; iproc <= Nprocs; iproc++)); do
+	# current Node to compute on
+	currentNode=$(((${iproc}-1)*${NprocperNode}))
+
+	# create dynamic job name based on process we are on
+	if [[ "${RUNCONNECTIVITY}" -eq 1 ]]; then
+		jobname="compute_adjacency_${patient}_${iproc}"
+	else
+		jobname="compute_perturbation_${patient}_${iproc}"
+	fi
+
+	echo "Submit job ${iproc}"
+	# submit slurm job: pass in 1) jobname, 2) walltime, 3) number of nodes, 4) number of processors
+	sbatch -v RUNCONNECTIVITY=${RUNCONNECTIVITY},patient=${patient},currentNode=${currentNode},NprocperNode=${NNodes} -J ${jobname} -t ${walltime} runJob.sh
+done

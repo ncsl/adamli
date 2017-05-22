@@ -40,7 +40,7 @@ function plotFragilityMetric(fragility_mat, clinicalIndices,...
     rowsum_preseize = sum(thresh_fragility(:, 1:seizureMarkStart), 2);
     
     if seizureMarkStart < size(thresh_fragility,2) - 20
-        timeEnd = 20;
+        timeEnd = 0;
         fragility_mat = fragility_mat(:, 1:seizureMarkStart+timeEnd*frequency_sampling/stepSize);
         timePoints = timePoints(1:seizureMarkStart + timeEnd*frequency_sampling/stepSize, :);
     end

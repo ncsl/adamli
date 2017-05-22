@@ -2,7 +2,7 @@
 
 # patients listed 5 per row
 patients=(
-	# 'pt1aslp1 pt1aslp2 pt1aw1 pt1aw2
+	'pt1aslp1 pt1aslp2 pt1aw1 pt1aw2')
 	# pt2aslp1 pt2aslp2 pt2aw1 pt2aw2
 	# pt3aslp1 pt3aslp2 pt3aw1
 	# pt1sz2 pt1sz3 pt1sz4
@@ -42,8 +42,7 @@ patients=(
 	# UMMC009_sz1 UMMC009_sz2 UMMC009_sz3')
 
 	# 'Pat2sz1p Pat2sz2p Pat2sz3p
-	# Pat16sz1 
-	'Pat16sz2p Pat16sz3p')
+	# Pat16sz1 'Pat16sz2p Pat16sz3p')
 
 	# 'EZT004seiz001 EZT004seiz002
 	# EZT006seiz001 EZT006seiz002
@@ -73,46 +72,31 @@ printf "Enter step size: "
 read stepSize
 printf "Enter radius: "
 read radius
-printf "run merge? (1 or 0) "
-read merge
 
 # Pause before running to check
 printf "About to run on patients (press enter to continue): $patients" # prompt for patient_id {pt1, pt2, ..., JH105, EZT005}
 read answer
 
-## Run slurm batch job for this patient
-NprocperNode=24    							# number of processors per node (marcc has 24)
-NNodes=$(($NprocperNode-1))
-Nprocs=$((${numWins}/${NprocperNode}+1)) 	# the number of nodes to compute on
-walltime=02:00:00	
-
 ## define hardware reqs
-NUM_PROCSPERNODE=24 # number of processors per node (1-24)
+NUM_PROCSPERNODE=1 # number of processors per node (1-24)
 NUM_NODES=1			# number of nodes to request
 MEM_NODE=5 			# GB RAM per node (5-128)
 NUM_GPUS=1			# number of GPUS (need 6 procs per gpu)
 
 ## job reqs
-walltime=12:00:00  	# 1hr - 100 hr
-partition='shared' 	# debug, shared, unlimited, parallel, gpu, lrgmem, scavenger
+walltime=01:00:00  	# 1hr - 100 hr
+partition='debug' 	# debug, shared, unlimited, parallel, gpu, lrgmem, scavenger
+
+## load in the modules for this run -> python, matlab, etc.
+module list
+module load matlab
 
 ## 02: Call patient shell script for each patient
 for patient in $patients; do
 	echo $patient
-	if [[ "$RUNCONNECTIVITY" -eq 1 ]]; then
-		jobname="comp_adj_${patient}"
-	else
-		jobname="comp_pert_${patient}"
-	fi
 	
-	# submit slurm job: pass in 1) jobname, 2) walltime, 3) number of nodes, 4) number of processors
-	sbatch -v RUNCONNECTIVITY=${RUNCONNECTIVITY},patient=${patient},currentNode=${currentNode},NprocperNode=${NNodes} 
-	-J ${jobname}
-	-t ${walltime}
-	-N ${NUM_NODES}
-	-n ${NUM_PROCSPERNODE}
-	-p ${partition}
-	run_job.scr
+	# call matlab function to generate slurm files per patient
+	matlab -logfile /home/ali/adamli/fragility_dataanalysis/server/devVaryingWindows/_log/job$1.txt -nojvm -nodisplay -nosplash -r "currentpatient='$patient'; \
+		generate_slurm(currentpatient, $winSize, $stepSize, $radius,\
+		$partition, $walltime, $NUM_NODES, $NUM_PROCSPERNODE, $RUNCONNECTIVITY);"
 done
-
-# sbatch --array=0-15%4 script.sh
