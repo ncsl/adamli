@@ -132,21 +132,17 @@ for p=1:length(patients)
     
     %%- Get Indices for All Clinical Annotations
     ezone_indices = findElectrodeIndices(ezone_labels, included_labels);
-    earlyspread_indices = findElectrodeIndices(earlyspread_labels, included_labels);
-    latespread_indices = findElectrodeIndices(latespread_labels, included_labels);
-
+  
     allYTicks = 1:num_channels; 
-    y_indices = setdiff(allYTicks, [ezone_indices; earlyspread_indices]);
+    y_indices = setdiff(allYTicks, [ezone_indices]);
     if sum(latespread_indices > 0)
-        latespread_indices(latespread_indices ==0) = [];
-        y_indices = setdiff(allYTicks, [ezone_indices; earlyspread_indices; latespread_indices]);
+        y_indices = setdiff(allYTicks, [ezone_indices]);
     end
     y_ezoneindices = sort(ezone_indices);
-    y_earlyspreadindices = sort(earlyspread_indices);
-    y_latespreadindices = sort(latespread_indices);
+    y_earlyspreadindices = [];
+    y_latespreadindices = [];
     
     % find resection indices
-%     y_resectionindices = findResectionIndices(included_labels, resection_labels);
     y_resectionindices = [];
     
     % create struct for clinical indices
