@@ -153,14 +153,16 @@ for p=1:length(patients)
     adjMats = adjmat_struct.adjMats;
     
     % set perturbation data to local variables
-    minPerturb_time_chan = final_data.minNormPertMat;
-    fragility_rankings = final_data.fragilityMat;
-    timePoints = final_data.timePoints;
+    minPerturb_time_chan = final_data.C.minNormPertMat;
+    fragility_rankings = final_data.C.fragilityMat;
+    timePoints = final_data.C.timePoints;
+     del_table = final_data.C.del_table;
     info = final_data.info;
     num_channels = size(minPerturb_time_chan,1);
-    seizureStart = info.seizure_start;
-    seizureEnd = info.seizure_end;
+    seizureStart = info.seizure_estart_ms;
+    seizureEnd = info.seizure_eend_ms;
     included_labels = info.all_labels;
+   
 %     winSize = info.winSize;
 %     stepSize = info.stepSize;
     frequency_sampling = info.frequency_sampling;
@@ -172,7 +174,7 @@ for p=1:length(patients)
         tempStepSize = stepSize*frequency_sampling/1000;
     end
     
-    % seizure Mark 
+      % seizure Mark 
     seizureMarkStart = seizureStart / tempStepSize - 1;
     if seeg
         seizureMarkStart = (seizureStart-1) / tempStepSize;
@@ -182,6 +184,13 @@ for p=1:length(patients)
     if seeg
         seizureMarkEnd = (seizureEnd-1) / tempStepSize;
     end
+    
+     if isnan(seizureStart)
+        seizureStart = timePoints(end, 1);
+        seizureEnd = timePoints(end, 1);
+        seizureMarkStart = size(timePoints, 1);
+     end
+        
  
     %- get clinical indices of annotations
     ezone_indices = findElectrodeIndices(ezone_labels, included_labels);
@@ -250,7 +259,7 @@ for p=1:length(patients)
     chan = 1;
     for chan=1:N
         ek = [zeros(chan-1, 1); 1; zeros(N-chan,1)]; % unit column vector at this node
-        del_table = final_data.del_table;
+        
         del = del_table{chan, randIndice};
         if size(del, 2) == 1 || size(del, 1) == 1
             del = reshape(del, N, 1);
@@ -262,7 +271,7 @@ for p=1:length(patients)
                 del_temp = reshape(squeeze(del(:,i)), N, 1);
                 temp = del_temp*ek';
                 test = adjMat + temp;
-                plot(real(eig(test)), imag(eig(test)), 'r*', 'MarkerSize', 5); hold on;
+                a=plot(real(eig(test)), imag(eig(test)), 'r*', 'MarkerSize', 5); hold on;
             end
         end
     end
