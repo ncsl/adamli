@@ -19,7 +19,7 @@ do
 	pbsdsh -n $proc /home/ali/adamli/fragility_dataanalysis/server/devVaryingWindows/preProcess/computeSpectralAnalysis.sh ${proc} ${patient} ${winSize} ${stepSize} ${currentChan} ${typeTransform} &
 done
 
-proc = ${numChans}
-pbsdsh -n $proc /home/ali/adamli/fragility_dataanalysis/server/devVaryingWindows/preProcess/mergeJobs.sh ${proc} ${patient} ${winSize} ${stepSize} ${typeTransform} &
+# proc = ${numChans}
+# pbsdsh -n $proc /home/ali/adamli/fragility_dataanalysis/server/devVaryingWindows/preProcess/mergeJobs.sh ${proc} ${patient} ${winSize} ${stepSize} ${typeTransform} &
 
 wait
