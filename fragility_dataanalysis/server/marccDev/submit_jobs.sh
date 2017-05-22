@@ -94,7 +94,7 @@ NUM_GPUS=1			# number of GPUS (need 6 procs per gpu)
 
 ## job reqs
 walltime=12:00:00  	# 1hr - 100 hr
-partition='shared' 	# shared, unlimited, parallel, gpu, lrgmem, scavenger
+partition='shared' 	# debug, shared, unlimited, parallel, gpu, lrgmem, scavenger
 
 ## 02: Call patient shell script for each patient
 for patient in $patients; do
