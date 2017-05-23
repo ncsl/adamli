@@ -89,7 +89,9 @@ end
     patient_id = buffpatid;
     
     % set directory to save computed data
-    tempDir = fullfile(rootDir, 'server/devVaryingWindows/preProcess/tempData/', strcat(patient, '_', typeTransform));
+    tempDir = fullfile(rootDir, 'server/devVaryingWindows/preProcess/tempData/',...
+        strcat('win', num2str(winSize), '_step', num2str(stepSize)), ...
+        strcat(patient, '_', typeTransform));
 
     if ~exist(tempDir, 'dir')
         mkdir(tempDir);
