@@ -38,7 +38,7 @@ function generate_slurm(patients, winSize, stepSize, radius, ...
     eegRootDirServer = '/home/ali/adamli/fragility_dataanalysis/';                 % at ICM server 
     eegRootDirHome = '/Users/adam2392/Documents/adamli/fragility_dataanalysis/';   % at home macbook
     eegRootDirJhu = '/home/WIN/ali39/Documents/adamli/fragility_dataanalysis/';    % at JHU workstation
-    eegRootDirMarcc = '/home-1/ali39@jhu.edu/work/adamli/fragility_dataanalysis/'; % at MARCC server
+    eegRootDirMarcctest = '/home-1/ali39@jhu.edu/work/adamli/fragility_dataanalysis/'; % at MARCC server
     eegRootDirMarcc = '/scratch/groups/ssarma2/adamli/fragility_dataanalysis/';
     
     % Determine which directory we're working with automatically
@@ -46,9 +46,10 @@ function generate_slurm(patients, winSize, stepSize, radius, ...
     elseif ~isempty(dir(eegRootDirHome)), rootDir = eegRootDirHome;
     elseif ~isempty(dir(eegRootDirJhu)), rootDir = eegRootDirJhu;
     elseif ~isempty(dir(eegRootDirMarcc)), rootDir = eegRootDirMarcc;
+    elseif ~isempty(dir(eegRootDirMarcctest)), rootDir = eegRootDirMarcctest;
     else   error('Neither Work nor Home EEG directories exist! Exiting'); end
     
-    addpath(fullfile(rootDir, 'server/marccDev/matlab_lib/'));
+    addpath(genpath(fullfile(rootDir, 'server/marccDev/gen')));
     fprintf('Inside generation of slurm...\n');
     
     % determine number of patients to generate slurm script
