@@ -208,8 +208,8 @@ for iPat=1:length(patients)
         end
         reject_cell(iThresh) = length(thresholdindices) / numTimes; % store the ratio of data rejected
     %     reject_cell{iThresh} = thresholdindices;
-    end
-    % toc
+    end1
+    % toc`
 
     thresh_sense(iPat, :) = reject_cell;
 end
