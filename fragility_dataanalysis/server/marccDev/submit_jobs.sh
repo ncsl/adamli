@@ -97,11 +97,7 @@ module list
 module load matlab
 
 ## 02: Call patient shell script for each patient
-for patient in $patients; do
-	echo $patient
-	
-	# call matlab function to generate slurm files per patient
-	matlab -logfile /home/ali/adamli/fragility_dataanalysis/server/devVaryingWindows/_log/job$1.txt -nojvm -nodisplay -nosplash -r "currentpatient='$patient'; \
-		generate_slurm(currentpatient, $winSize, $stepSize, $radius,\
-		'$partition', $walltime, $NUM_NODES, $NUM_PROCSPERNODE, $RUNCONNECTIVITY, '$qos');"
-done
+# call matlab function to generate slurm files per patient
+matlab -logfile /home/ali/adamli/fragility_dataanalysis/server/devVaryingWindows/_log/job$1.txt -nojvm -nodisplay -nosplash -r "\
+	generate_slurm('$patients', $winSize, $stepSize, $radius,\
+	'$partition', $walltime, $NUM_NODES, $NUM_PROCSPERNODE, $RUNCONNECTIVITY, '$qos'); exit"

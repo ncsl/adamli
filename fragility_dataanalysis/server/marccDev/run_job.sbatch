@@ -15,4 +15,4 @@ cd ./matlab\ lib/
 module load matlab
 
 matlab -logfile _log/${SLURM_JOBNAME}_${SLURM_ARRAY_TASK_ID}.txt -nojvm -nodisplay -nosplash -r "\
-	serverComputeConnectivity($patient, $winSize, $stepSize, ${SLURM_ARRAY_TASK_ID});"
+	parallelComputeConnectivity($patient, $winSize, $stepSize, ${SLURM_ARRAY_TASK_ID});"

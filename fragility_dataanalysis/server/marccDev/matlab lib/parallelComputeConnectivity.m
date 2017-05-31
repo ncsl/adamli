@@ -1,5 +1,4 @@
-function parallelComputeConnectivity(patient, winSize, stepSize, ...
-                                            iProc, numProcs)
+function parallelComputeConnectivity(patient, winSize, stepSize, iTask)
 % function to compute the ltv model for a certain window based on
 % - # of processors
 % - # of windows
@@ -13,18 +12,17 @@ if nargin == 0 % testing purposes
     % window paramters
     winSize = 250; % 500 milliseconds
     stepSize = 125; 
-    iProc = 2;
+    iTask = 2;
     numProcs = 1;
     numWins = 103;
 end
 
 %% INITIALIZATION
 % data directories to save data into - choose one
-eegRootDirServer = '/home/ali/adamli/fragility_dataanalysis/';     % work
-% eegRootDirHome = '/Users/adam2392/Documents/MATLAB/Johns Hopkins/NINDS_Rotation';  % home
-eegRootDirHome = '/Users/adam2392/Documents/adamli/fragility_dataanalysis/';
-eegRootDirJhu = '/home/WIN/ali39/Documents/adamli/fragility_dataanalysis/';
-eegRootDirMarcc = '/home-1/ali39@jhu.edu/work/adamli/fragility_dataanalysis/';
+eegRootDirServer = '/home/ali/adamli/fragility_dataanalysis/';                 % at ICM server 
+eegRootDirHome = '/Users/adam2392/Documents/adamli/fragility_dataanalysis/';   % at home macbook
+eegRootDirJhu = '/home/WIN/ali39/Documents/adamli/fragility_dataanalysis/';    % at JHU workstation
+eegRootDirMarcc = '/home-1/ali39@jhu.edu/work/adamli/fragility_dataanalysis/'; % at MARCC server
 % Determine which directory we're working with automatically
 if     ~isempty(dir(eegRootDirServer)), rootDir = eegRootDirServer;
 elseif ~isempty(dir(eegRootDirHome)), rootDir = eegRootDirHome;
@@ -78,18 +76,11 @@ patient_id = buffpatid;
 dataDir = fullfile(rootDir, '/data/', center);
 % dataDir = fullfile('/Volumes/NIL_Pass/data', center);
 
-tempDir = fullfile('./tempData/', 'connectivity', strcat('win', num2str(winSize), ...
-    '_step', num2str(stepSize)), patient);
+tempDir = fullfile('./tempData/', strcat('win', num2str(winSize), ...
+    '_step', num2str(stepSize)), 'connectivity', patient);
 if ~exist(tempDir, 'dir')
     mkdir(tempDir);
 end
-        
-% put clinical annotations into a struct
-clinicalLabels = struct();
-clinicalLabels.ezone_labels = ezone_labels;
-clinicalLabels.earlyspread_labels = earlyspread_labels;
-clinicalLabels.latespread_labels = latespread_labels;
-clinicalLabels.resection_labels = resection_labels;
 
 %% Read in EEG Raw Data and Preprocess
 if seeg
@@ -125,9 +116,6 @@ numSampsInStep = stepSize * frequency_sampling / 1000;
 
 numWins = floor(size(eeg, 2) / numSampsInStep - numSampsInWin/numSampsInStep + 1);
 
-%- determine current window
-windows = iProc:numProcs*8:numWins;
-
 % apply included channels to eeg and labels
 if ~isempty(included_channels)
     eeg = eeg(included_channels, :);
@@ -142,11 +130,11 @@ if FILTER_RAW == 1
    % apply band notch filter to eeg data
     eeg = buttfilt(eeg,[59.5 60.5], frequency_sampling,'stop',1);
     eeg = buttfilt(eeg,[119.5 120.5], frequency_sampling,'stop',1);
-    if frequency_sampling >= 250
+    if frequency_sampling >= 500
         eeg = buttfilt(eeg,[179.5 180.5], frequency_sampling,'stop',1);
         eeg = buttfilt(eeg,[239.5 240.5], frequency_sampling,'stop',1);
 
-        if frequency_sampling >= 500
+        if frequency_sampling >= 1000
             eeg = buttfilt(eeg,[299.5 300.5], frequency_sampling,'stop',1);
             eeg = buttfilt(eeg,[359.5 360.5], frequency_sampling,'stop',1);
             eeg = buttfilt(eeg,[419.5 420.5], frequency_sampling,'stop',1);
@@ -173,7 +161,7 @@ seizureStartMark = find(timePoints(:,2) - seizure_eonset_ms * frequency_sampling
 seizureEndMark = find(timePoints(:,2) - seizure_eoffset_ms * frequency_sampling / 1000 == 0);
 
 % save meta data for the computation 
-if iProc == 1
+if iTask == 1
     info = struct();
     info.type_connectivity = TYPE_CONNECTIVITY;
     info.ezone_labels = ezone_labels;
@@ -209,34 +197,31 @@ if iProc == 1
 end
 fprintf('Should have finished saving info mat.\n');
 
+%- save file for this current window
+currentWin = iTask;
+% filename to be saved temporarily
+fileName = strcat(patient, '_adjmats_', num2str(currentWin));
 
-%- save file for all the windows
-for iWin=1:length(windows)
-    currentWin = windows(iWin);
-    % filename to be saved temporarily
-    fileName = strcat(patient, '_adjmats_', num2str(currentWin));
+% get the window of data to compute adjacency
+tempeeg = eeg(:, timePoints(currentWin,1):timePoints(currentWin,2));
 
-    % get the window of data to compute adjacency
-    tempeeg = eeg(:, timePoints(currentWin,1):timePoints(currentWin,2));
+%% Perform Least Squares Computations
+% step 2: compute some functional connectivity 
+if strcmp(TYPE_CONNECTIVITY, 'leastsquares')
+    fprintf('About to start least squares\n');
+    % linear model: Ax = b; A\b -> x
+    b = double(tempeeg(:)); % define b as vectorized by stacking columns on top of another
+    b = b(numChans+1:end); % only get the time points after the first one
 
-    %% Perform Least Squares Computations
-    % step 2: compute some functional connectivity 
-    if strcmp(TYPE_CONNECTIVITY, 'leastsquares')
-        fprintf('About to start least squares');
-        % linear model: Ax = b; A\b -> x
-        b = double(tempeeg(:)); % define b as vectorized by stacking columns on top of another
-        b = b(numChans+1:end); % only get the time points after the first one
-
-        % - use least square computation
-        theta = computeLeastSquares(tempeeg, b, OPTIONS);
-        fprintf('Finished least squares');
-        theta_adj = reshape(theta, numChans, numChans)';    % reshape fills in columns first, so must transpose
-    end
-
-    % display a message for the user
-    fprintf(['Finished: ', num2str(currentWin), '\n']);
-
-    % save the file in temporary dir
-    save(fullfile(tempDir, fileName), 'theta_adj');
+    % - use least square computation
+    theta = computeLeastSquares(tempeeg, b, OPTIONS);
+    fprintf('Finished least squares');
+    theta_adj = reshape(theta, numChans, numChans)';    % reshape fills in columns first, so must transpose
 end
+
+% display a message for the user
+fprintf(['Finished: ', num2str(currentWin), '\n']);
+
+% save the file in temporary dir
+save(fullfile(tempDir, fileName), 'theta_adj');
 end

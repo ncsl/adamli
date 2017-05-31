@@ -13,7 +13,7 @@
 % 3. WHAT IS THE OFFSET IN SUBMITTING ARRAY IN SBATCH
 % Ver.: 1.0 - Date: 05/22/2017
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-function generate_slurm(patient, winSize, stepSize, radius, ...
+function generate_slurm(patients, winSize, stepSize, radius, ...
     PARTITION, WALLTIME, NUMNODES, NUM_PROCS, JOBTYPE, ~)
     if nargin==0
         patient='pt1sz2';
@@ -33,43 +33,51 @@ function generate_slurm(patient, winSize, stepSize, radius, ...
         numWins=1000;
     end
     addpath('./matlab lib/');
-    fprintf('Inside generation of slurm...');
-    %- call function to compute number of windows for a patient based on
-    %- the data available, window size, and step size
-    numWins = getNumWins(patient, winSize, stepSize);
+    fprintf('Inside generation of slurm...\n');
     
-    %- create the header of slurm file
-    job_name = strcat(patient, '_batched');
-    partition = PARTITION;
-    walltime = WALLTIME;
-    numNodes = NUMNODES;
-    numCPUs = NUM_PROCS;
-    numTasks = 1;
-    Nbatch = numWins; % the number of jobs in job batch
-    if JOBTYPE == 1
-        jobname = strcat('ltvmodel_batch_', num2str(winSize), '_', num2str(stepSize));
-    else
-        jobname = strcat('pertmodel_batch_', num2str(radius));
-    end
+    % determine number of patients to generate slurm script
+    cell_pats = strsplit(patients, ' ');
+    numPats = size(cell_pats, 2);
     
-    %- create command to run
-    command = sprintf(strcat('export patient=%s; export winSize=%d; export stepSize=%d;\n', ...
-                        'sbatch --array=1-%d --time=%s --partition=%s', ...
-                        ' --nodes=%d --ntasks-per-node=%d --cpus-per-task=%d', ...
-                        ' --jobname=%s run_job.sbatch --export=%s,%d,%d'), ...
-                    patient, winSize, stepSize,...
-                    Nbatch, num2str(walltime), partition, numNodes, numTasks, numCPUs, jobname, ...
-                    patient, winSize, stepSize);
-                
-    if exist('QOS', 'var')
+    for i=1:numPats
+        patient = cell_pats{i};
+        
+        %- call function to compute number of windows for a patient based on
+        %- the data available, window size, and step size
+        numWins = getNumWins(patient, winSize, stepSize);
+
+        %- create the header of slurm file
+        job_name = strcat(patient, '_batched');
+        partition = PARTITION;
+        walltime = WALLTIME;
+        numNodes = NUMNODES;
+        numCPUs = NUM_PROCS;
+        numTasks = 1;
+        Nbatch = numWins; % the number of jobs in job batch
+        if JOBTYPE == 1
+            jobname = strcat('ltvmodel_batch_', num2str(winSize), '_', num2str(stepSize));
+        else
+            jobname = strcat('pertmodel_batch_', num2str(radius));
+        end
+
+        %- create command to run
         command = sprintf(strcat('export patient=%s; export winSize=%d; export stepSize=%d;\n', ...
-                        'sbatch --array=1-%d --time=%s --partition=%s', ...
-                        ' --nodes=%d --ntasks-per-node=%d --cpus-per-task=%d', ...
-                        ' --jobname=%s --qos=%s run_job.sbatch --export=%s,%d,%d'), ...
-                    patient, winSize, stepSize,...
-                    Nbatch, num2str(walltime), partition, numNodes, numTasks, numCPUs, jobname, QOS, ...
-                    patient, winSize, stepSize);
+                            'sbatch --array=1-%d --time=%s --partition=%s', ...
+                            ' --nodes=%d --ntasks-per-node=%d --cpus-per-task=%d', ...
+                            ' --jobname=%s run_job.sbatch --export=%s,%d,%d'), ...
+                        patient, winSize, stepSize,...
+                        Nbatch, num2str(walltime), partition, numNodes, numTasks, numCPUs, jobname, ...
+                        patient, winSize, stepSize);
+
+        if exist('QOS', 'var')
+            command = sprintf(strcat('export patient=%s; export winSize=%d; export stepSize=%d;\n', ...
+                            'sbatch --array=1-%d --time=%s --partition=%s', ...
+                            ' --nodes=%d --ntasks-per-node=%d --cpus-per-task=%d', ...
+                            ' --jobname=%s --qos=%s run_job.sbatch --export=%s,%d,%d'), ...
+                        patient, winSize, stepSize,...
+                        Nbatch, num2str(walltime), partition, numNodes, numTasks, numCPUs, jobname, QOS, ...
+                        patient, winSize, stepSize);
+        end
+        unix(command);
     end
-    
-    unix(command);
 end
