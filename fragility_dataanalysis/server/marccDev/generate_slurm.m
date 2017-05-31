@@ -33,7 +33,7 @@ function generate_slurm(patient, winSize, stepSize, radius, ...
         numWins=1000;
     end
     addpath('./matlab lib/');
-
+    fprintf('Inside generation of slurm...');
     %- call function to compute number of windows for a patient based on
     %- the data available, window size, and step size
     numWins = getNumWins(patient, winSize, stepSize);
