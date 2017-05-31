@@ -1,8 +1,8 @@
 #!/bin/bash
 
 #SBATCH
-#SBATCH -mail-type=end
-#SBATCH -mail-user=ali39@jhu.edu
+#SBATCH --mail-type=end
+#SBATCH --mail-user=ali39@jhu.edu
 #SBATCH --output=_err/%A_%a_${SLURM_JOBNAME}.out 
 #SBATCH --error=_err/%A_%a_${SLURM_JOBNAME}.err
 
