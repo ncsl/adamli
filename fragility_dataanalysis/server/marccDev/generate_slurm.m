@@ -14,17 +14,21 @@
 % Ver.: 1.0 - Date: 05/22/2017
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 function generate_slurm(patient, winSize, stepSize, radius, ...
-    PARTITION, WALLTIME, NUMNODES, NUM_PROCS, JOBTYPE)
+    PARTITION, WALLTIME, NUMNODES, NUM_PROCS, JOBTYPE, ~)
     if nargin==0
         patient='pt1sz2';
         winSize=250;
         stepSize=125;
         radius=1.5;
-        PARTITION='debug';
+        PARTITION='scavenger';
         WALLTIME='01:00:00';
         NUMNODES=1;
         NUM_PROCS=1;
         JOBTYPE=1;
+        
+        if strcmp(PARTITION, 'scavenger')
+            QOS='scavenger';
+        end
         
         numWins=1000;
     end
@@ -43,9 +47,9 @@ function generate_slurm(patient, winSize, stepSize, radius, ...
     numTasks = 1;
     Nbatch = numWins; % the number of jobs in job batch
     if JOBTYPE == 1
-        jobname = 'ltvmodel_batch';
+        jobname = strcat('ltvmodel_batch_', num2str(winSize), '_', num2str(stepSize));
     else
-        jobname = 'pertmodel_batch';
+        jobname = strcat('pertmodel_batch_', num2str(radius));
     end
     
     %- create command to run
@@ -56,6 +60,16 @@ function generate_slurm(patient, winSize, stepSize, radius, ...
                     patient, winSize, stepSize,...
                     Nbatch, num2str(walltime), partition, numNodes, numTasks, numCPUs, jobname, ...
                     patient, winSize, stepSize);
+                
+    if exist('QOS', 'var')
+        command = sprintf(strcat('export patient=%s; export winSize=%d; export stepSize=%d;\n', ...
+                        'sbatch --array=1-%d --time=%s --partition=%s', ...
+                        ' --nodes=%d --ntasks-per-node=%d --cpus-per-task=%d', ...
+                        ' --jobname=%s --qos=%s run_job.sbatch --export=%s,%d,%d'), ...
+                    patient, winSize, stepSize,...
+                    Nbatch, num2str(walltime), partition, numNodes, numTasks, numCPUs, jobname, QOS, ...
+                    patient, winSize, stepSize);
+    end
     
     unix(command);
 end

@@ -131,11 +131,11 @@ if FILTERTYPE == 1
    % apply band notch filter to eeg data
     eeg = buttfilt(eeg,[59.5 60.5], fs,'stop',1);
     eeg = buttfilt(eeg,[119.5 120.5], fs,'stop',1);
-    if fs >= 250
+    if fs >= 500
         eeg = buttfilt(eeg,[179.5 180.5], fs,'stop',1);
         eeg = buttfilt(eeg,[239.5 240.5], fs,'stop',1);
 
-        if fs >= 500
+        if fs >= 1000
             eeg = buttfilt(eeg,[299.5 300.5], fs,'stop',1);
             eeg = buttfilt(eeg,[359.5 360.5], fs,'stop',1);
             eeg = buttfilt(eeg,[419.5 420.5], fs,'stop',1);

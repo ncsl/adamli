@@ -86,6 +86,7 @@ NUM_GPUS=1			# number of GPUS (need 6 procs per gpu)
 ## job reqs
 walltime=01:00:00  	# 1hr - 100 hr
 partition='debug' 	# debug, shared, unlimited, parallel, gpu, lrgmem, scavenger
+qos='scavenger'
 
 ## load in the modules for this run -> python, matlab, etc.
 module list
@@ -98,5 +99,5 @@ for patient in $patients; do
 	# call matlab function to generate slurm files per patient
 	matlab -logfile /home/ali/adamli/fragility_dataanalysis/server/devVaryingWindows/_log/job$1.txt -nojvm -nodisplay -nosplash -r "currentpatient='$patient'; \
 		generate_slurm(currentpatient, $winSize, $stepSize, $radius,\
-		$partition, $walltime, $NUM_NODES, $NUM_PROCSPERNODE, $RUNCONNECTIVITY);"
+		$partition, $walltime, $NUM_NODES, $NUM_PROCSPERNODE, $RUNCONNECTIVITY, $qos);"
 done
