@@ -93,8 +93,8 @@ partition=scavenger 	# debug, shared, unlimited, parallel, gpu, lrgmem, scavenge
 qos=scavenger
 
 ## load in the modules for this run -> python, matlab, etc.
-# module list
-# module load matlab
+module list
+module load matlab
 
 ## 02: Call patient shell script for each patient
 for patient in $patients; do
