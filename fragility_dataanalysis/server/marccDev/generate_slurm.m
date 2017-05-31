@@ -50,6 +50,7 @@ function generate_slurm(patients, winSize, stepSize, radius, ...
     else   error('Neither Work nor Home EEG directories exist! Exiting'); end
     
     addpath(genpath(fullfile(rootDir, 'server/marccDev/')));
+    addpath(fullfile('/scratch/groups/ssarma2/adamli/fragility_dataanalysis/server/marccDev/matlab_lib/'));
     fprintf('Inside generation of slurm...\n');
     
     % determine number of patients to generate slurm script
