@@ -99,6 +99,7 @@ function generate_slurm(patients, winSize, stepSize, radius, ...
                         Nbatch, num2str(walltime), partition, numNodes, numTasks, numCPUs, jobname, QOS, ...
                         patient, winSize, stepSize);
         end
+        fprintf(command);
         unix(command);
     end
 end
