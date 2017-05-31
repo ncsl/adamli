@@ -49,7 +49,7 @@ function generate_slurm(patients, winSize, stepSize, radius, ...
     elseif ~isempty(dir(eegRootDirMarcctest)), rootDir = eegRootDirMarcctest;
     else   error('Neither Work nor Home EEG directories exist! Exiting'); end
     
-    addpath(genpath(fullfile(rootDir, 'server/marccDev/gen')));
+    addpath(genpath(fullfile(rootDir, 'server/marccDev/')));
     fprintf('Inside generation of slurm...\n');
     
     % determine number of patients to generate slurm script
