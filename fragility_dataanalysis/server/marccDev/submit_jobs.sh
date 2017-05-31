@@ -88,7 +88,7 @@ MEM_NODE=5 			# GB RAM per node (5-128)
 NUM_GPUS=1			# number of GPUS (need 6 procs per gpu)
 
 ## job reqs
-walltime=01:00:00  	# 1hr - 100 hr
+walltime=1:0:0  	# 1hr - 100 hr
 partition=scavenger 	# debug, shared, unlimited, parallel, gpu, lrgmem, scavenger
 qos=scavenger
 
