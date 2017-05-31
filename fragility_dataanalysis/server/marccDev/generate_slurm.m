@@ -37,6 +37,7 @@ function generate_slurm(patients, winSize, stepSize, radius, ...
     eegRootDirHome = '/Users/adam2392/Documents/adamli/fragility_dataanalysis/';   % at home macbook
     eegRootDirJhu = '/home/WIN/ali39/Documents/adamli/fragility_dataanalysis/';    % at JHU workstation
     eegRootDirMarcc = '/home-1/ali39@jhu.edu/work/adamli/fragility_dataanalysis/'; % at MARCC server
+    eegRootDirMarcc = '/scratch/groups/ssarma2/adamli/fragility_dataanalysis/';
     % Determine which directory we're working with automatically
     if     ~isempty(dir(eegRootDirServer)), rootDir = eegRootDirServer;
     elseif ~isempty(dir(eegRootDirHome)), rootDir = eegRootDirHome;
