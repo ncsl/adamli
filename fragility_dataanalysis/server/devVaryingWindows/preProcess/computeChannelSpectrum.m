@@ -147,22 +147,22 @@ end
     %- apply filtering on the eegWave
     if FILTER_RAW == 1
        % apply band notch filter to eeg data
-        eegWave = buttfilt(eegWave,[59.5 60.5], frequency_sampling,'stop',1);
-        eegWave = buttfilt(eegWave,[119.5 120.5], frequency_sampling,'stop',1);
-        if frequency_sampling >= 250
-            eegWave = buttfilt(eegWave,[179.5 180.5], frequency_sampling,'stop',1);
-            eegWave = buttfilt(eegWave,[239.5 240.5], frequency_sampling,'stop',1);
-            
-            if frequency_sampling >= 500
-                eegWave = buttfilt(eegWave,[299.5 300.5], frequency_sampling,'stop',1);
-                eegWave = buttfilt(eegWave,[359.5 360.5], frequency_sampling,'stop',1);
-                eegWave = buttfilt(eegWave,[419.5 420.5], frequency_sampling,'stop',1);
-                eegWave = buttfilt(eegWave,[479.5 480.5], frequency_sampling,'stop',1);
+        eeg = buttfilt(eeg,[59.5 60.5], frequency_sampling,'stop',1);
+        eeg = buttfilt(eeg,[119.5 120.5], frequency_sampling,'stop',1);
+        if frequency_sampling >= 500
+            eeg = buttfilt(eeg,[179.5 180.5], frequency_sampling,'stop',1);
+            eeg = buttfilt(eeg,[239.5 240.5], frequency_sampling,'stop',1);
+
+            if frequency_sampling >= 1000
+                eeg = buttfilt(eeg,[299.5 300.5], frequency_sampling,'stop',1);
+                eeg = buttfilt(eeg,[359.5 360.5], frequency_sampling,'stop',1);
+                eeg = buttfilt(eeg,[419.5 420.5], frequency_sampling,'stop',1);
+                eeg = buttfilt(eeg,[479.5 480.5], frequency_sampling,'stop',1);
             end
         end
     elseif FILTER_RAW == 2
          % apply an adaptive filtering algorithm.
-        eegWave = removePLI(eegWave, frequency_sampling, numHarmonics, [50,0.01,4], [0.1,2,4], 2, 60);
+        eeg = removePLI_multichan(eeg, frequency_sampling, numHarmonics, [50,0.01,4], [0.1,2,4], 2, 60);
     else 
         disp('no filtering?');
     end
