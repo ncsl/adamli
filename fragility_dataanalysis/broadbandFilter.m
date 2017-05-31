@@ -53,14 +53,19 @@ for iPat=1:length(patients)
     stepSize = 250;
 
     % data directories to save data into - choose one
-    eegRootDirServer = '/home/ali/adamli/fragility_dataanalysis/';     % work
-    % eegRootDirHome = '/Users/adam2392/Documents/MATLAB/Johns Hopkins/NINDS_Rotation';  % home
-    eegRootDirHome = '/Volumes/NIL_PASS/';
-    eegRootDirJhu = '/home/WIN/ali39/Documents/adamli/fragility_dataanalysis/';
+    eegRootDirHD = '/Volumes/NIL Pass/';
+    eegRootDirServer = '/home/ali/adamli/fragility_dataanalysis/';                 % at ICM server 
+    eegRootDirHome = '/Users/adam2392/Documents/adamli/fragility_dataanalysis/';   % at home macbook
+    eegRootDirJhu = '/home/WIN/ali39/Documents/adamli/fragility_dataanalysis/';    % at JHU workstation
+    eegRootDirMarcctest = '/home-1/ali39@jhu.edu/work/adamli/fragility_dataanalysis/'; % at MARCC server
+    eegRootDirMarcc = '/scratch/groups/ssarma2/adamli/fragility_dataanalysis/';
+    
     % Determine which directory we're working with automatically
     if     ~isempty(dir(eegRootDirServer)), rootDir = eegRootDirServer;
     elseif ~isempty(dir(eegRootDirHome)), rootDir = eegRootDirHome;
     elseif ~isempty(dir(eegRootDirJhu)), rootDir = eegRootDirJhu;
+    elseif ~isempty(dir(eegRootDirMarcc)), rootDir = eegRootDirMarcc;
+    elseif ~isempty(dir(eegRootDirHD)), rootDir = eegRootDirHD;
     else   error('Neither Work nor Home EEG directories exist! Exiting'); end
 
     addpath(genpath(fullfile(rootDir, '/fragility_library/')));
@@ -208,7 +213,7 @@ for iPat=1:length(patients)
         end
         reject_cell(iThresh) = length(thresholdindices) / numTimes; % store the ratio of data rejected
     %     reject_cell{iThresh} = thresholdindices;
-    end1
+    end
     % toc`
 
     thresh_sense(iPat, :) = reject_cell;
