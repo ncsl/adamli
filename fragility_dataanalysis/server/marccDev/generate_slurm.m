@@ -32,6 +32,8 @@ function generate_slurm(patients, winSize, stepSize, radius, ...
         
         numWins=1000;
     end
+    pwd
+    
     % data directories to save data into - choose one
     eegRootDirServer = '/home/ali/adamli/fragility_dataanalysis/';                 % at ICM server 
     eegRootDirHome = '/Users/adam2392/Documents/adamli/fragility_dataanalysis/';   % at home macbook
