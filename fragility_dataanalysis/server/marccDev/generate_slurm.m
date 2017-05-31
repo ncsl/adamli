@@ -48,7 +48,7 @@ function generate_slurm(patients, winSize, stepSize, radius, ...
     elseif ~isempty(dir(eegRootDirMarcc)), rootDir = eegRootDirMarcc;
     else   error('Neither Work nor Home EEG directories exist! Exiting'); end
     
-    addpath(fullfile(rootDir, 'server/marccDev/matlab lib/'));
+    addpath(fullfile(rootDir, 'server/marccDev/matlab_lib/'));
     fprintf('Inside generation of slurm...\n');
     
     % determine number of patients to generate slurm script
