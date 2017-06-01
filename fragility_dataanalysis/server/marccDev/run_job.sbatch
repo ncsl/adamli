@@ -14,7 +14,8 @@
 # Load module (comment this to debug in sh mode)
 module load matlab
 
-echo ${SLURM_JOBNAME}
+echo "Runninng sbatch file..."
+echo ${SBATCH_JOB_NAME}
 echo ${SLURM_SUBMIT_DIR}
 echo ${SLURM_ARRAY_TASK_ID}
 
