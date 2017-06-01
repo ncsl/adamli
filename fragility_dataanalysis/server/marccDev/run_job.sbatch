@@ -20,4 +20,4 @@ echo ${SLURM_ARRAY_TASK_ID}
 
 matlab -logfile _log/${SLURM_JOBNAME}_${SLURM_ARRAY_TASK_ID}.txt -nojvm -nodisplay -nodesktop -nosplash -r "\
 	cd('matlab_lib');\
-	parallelComputeConnectivity($patient, $winSize, $stepSize, ${SLURM_ARRAY_TASK_ID});"
+	parallelComputeConnectivity('$patient', $winSize, $stepSize, ${SLURM_ARRAY_TASK_ID});"
