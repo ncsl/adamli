@@ -138,21 +138,21 @@ for iPat=1:length(patients)
 
     %- channels to find
     noiseindices = find(~cellfun(@isempty, cellfun(@(x)strfind(x, 'POLG25'), chanStrs, 'uniform', 0)));
-    FONTSIZE = 16;
-
+    FONTSIZE = 16;    
     reject_cell = zeros(length(thresholds), 1);
 
-    % tic
-    %% Loop Through Channels and Apply Broadband Filter
+    %%- Loop through all thresholds to get figure on rate of data loss
     for iThresh=1:length(thresholds)
         threshold = thresholds(iThresh);
 
         thresholdindices = [];
+        
+        %% Loop Through Channels and Apply Broadband Filter
+        %%- Loop through frequencies for this transform
         for iChan=1:numChans
         % for i=1:length(noiseindices)
         %     iChan = noiseindices(i);
             chan = chanStrs{iChan};
-
 
             %- get channel power matrix
             chanPowerMat = squeeze(powerMatZ(iChan, :, 1:seizureStartMark));
@@ -205,10 +205,10 @@ for iPat=1:length(patients)
     %         xTickStep = (XUpperLim) / 10;
     %         xTicks = round(timeStart : (abs(timeEnd - timeStart)) / 10 : timeEnd);
     %         set(gca, 'XTick', (XLowerLim+0.5 : xTickStep : XUpperLim+0.5)); set(gca, 'XTickLabel', xTicks); % set xticks and their labels
-        end
+        end % end of loop through channels
         reject_cell(iThresh) = length(thresholdindices) / numTimes; % store the ratio of data rejected
     %     reject_cell{iThresh} = thresholdindices;
-    end
+    end % end of loop through filter thresholds
     % toc
 
     thresh_sense(iPat, :) = reject_cell;
