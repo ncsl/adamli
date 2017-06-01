@@ -2,7 +2,8 @@
 
 # patients listed 5 per row
 patients=(
-	'pt1aslp1 pt1aslp2 pt1aw1 pt1aw2')
+	'pt1aslp1')
+	 # pt1aslp2 pt1aw1 pt1aw2')
 	# pt2aslp1 pt2aslp2 pt2aw1 pt2aw2
 	# pt3aslp1 pt3aslp2 pt3aw1
 	# pt1sz2 pt1sz3 pt1sz4
@@ -73,6 +74,9 @@ read stepSize
 printf "Enter radius: "
 read radius
 
+# 1. run for 250, 125 ltv model
+# 2. run for 1.1, 1.15, 1.25, 1.75, 2.0 radius perturbation
+
 # Pause before running to check
 printf "About to run on patients (press enter to continue): $patients" # prompt for patient_id {pt1, pt2, ..., JH105, EZT005}
 read answer
@@ -84,20 +88,16 @@ MEM_NODE=5 			# GB RAM per node (5-128)
 NUM_GPUS=1			# number of GPUS (need 6 procs per gpu)
 
 ## job reqs
-walltime=01:00:00  	# 1hr - 100 hr
-partition='debug' 	# debug, shared, unlimited, parallel, gpu, lrgmem, scavenger
-qos='scavenger'
+walltime=1:0:0  	# 1hr - 100 hr
+partition=scavenger 	# debug, shared, unlimited, parallel, gpu, lrgmem, scavenger
+qos=scavenger
 
 ## load in the modules for this run -> python, matlab, etc.
 module list
 module load matlab
 
 ## 02: Call patient shell script for each patient
-for patient in $patients; do
-	echo $patient
-	
-	# call matlab function to generate slurm files per patient
-	matlab -logfile /home/ali/adamli/fragility_dataanalysis/server/devVaryingWindows/_log/job$1.txt -nojvm -nodisplay -nosplash -r "currentpatient='$patient'; \
-		generate_slurm(currentpatient, $winSize, $stepSize, $radius,\
-		$partition, $walltime, $NUM_NODES, $NUM_PROCSPERNODE, $RUNCONNECTIVITY, $qos);"
-done
+# call matlab function to generate slurm files per patient
+matlab -logfile /home-1/ali39@jhu.edu/work/adamli/fragility_dataanalysis/server/marccDev/_log/job$1.txt -nojvm -nodisplay -nosplash -r "\
+	generate_slurm('$patients', $winSize, $stepSize, $radius,\
+	'$partition', '$walltime', $NUM_NODES, $NUM_PROCSPERNODE, $RUNCONNECTIVITY, '$qos'); exit"
