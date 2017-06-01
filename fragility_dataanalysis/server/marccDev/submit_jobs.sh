@@ -89,7 +89,7 @@ NUM_GPUS=1			# number of GPUS (need 6 procs per gpu)
 
 ## job reqs
 walltime=1:0:0  	# 1hr - 100 hr
-partition=debug 	# debug, shared, unlimited, parallel, gpu, lrgmem, scavenger
+partition=scavenger 	# debug, shared, unlimited, parallel, gpu, lrgmem, scavenger
 qos=scavenger
 
 ## load in the modules for this run -> python, matlab, etc.

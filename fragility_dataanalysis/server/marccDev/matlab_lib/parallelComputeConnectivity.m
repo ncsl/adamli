@@ -81,7 +81,7 @@ patient_id = buffpatid;
 dataDir = fullfile(rootDir, '/data/', center);
 % dataDir = fullfile('/Volumes/NIL_Pass/data', center);
 
-tempDir = fullfile('./tempData/', strcat('win', num2str(winSize), ...
+tempDir = fullfile(rootDir, '/tempData/', strcat('win', num2str(winSize), ...
     '_step', num2str(stepSize)), 'connectivity', patient);
 if ~exist(tempDir, 'dir')
     mkdir(tempDir);
