@@ -58,7 +58,7 @@ dataDir = './data/';
 
 if INTERICTAL
     dataDir = './data/interictal_data/';
-    dataDir = '/Volumes/NIL_PASS/data/interictal_data/';
+    dataDir = '/Volumes/NIL_PASS/interictal spike raw edf data/';
 end   
 
 clinicalFile = fullfile('./data/clinicalData.mat');
