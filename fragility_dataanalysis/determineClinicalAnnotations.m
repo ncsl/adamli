@@ -27,7 +27,7 @@ function [included_channels, onset_electrodes, ...
         
         resection_labels = {};
         
-        center = 'cc';
+        center = 'laserablation';
     elseif strcmp(patient_id, 'Pat16')
         included_channels = [1:4 7:19 21:39 42:121 124:157 178:189];
         
@@ -41,7 +41,7 @@ function [included_channels, onset_electrodes, ...
         
         resection_labels = {};
         
-        center = 'cc';
+        center = 'laserablation';
     elseif strcmp(patient_id, 'EZT004')
         included_channels = [1:7 9:10 12:22 24:49 51:60 62:73];
         

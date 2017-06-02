@@ -16,7 +16,7 @@
 function generate_slurm(patients, winSize, stepSize, radius, ...
     PARTITION, WALLTIME, NUMNODES, NUM_PROCS, JOBTYPE, ~)
     if nargin==0
-        patient='pt1sz2';
+        patients='pt1sz2 pt1 ';
         winSize=250;
         stepSize=125;
         radius=1.5;
@@ -58,17 +58,21 @@ function generate_slurm(patients, winSize, stepSize, radius, ...
     
     % determine number of patients to generate slurm script
     cell_pats = strsplit(patients, ' ');
+    if strcmp(cell_pats{end}, '')
+        cell_pats(end) = [];
+    end
     numPats = size(cell_pats, 2);
     
     for i=1:numPats
         patient = cell_pats{i};
         
+        % trim white spaces in patient name
+        patients = strtrim(patients);
+        
         %- call function to compute number of windows for a patient based on
         %- the data available, window size, and step size
         numWins = getNumWins(patient, winSize, stepSize);
 
-        numWins = 4;
-        
         %- create the header of slurm file
         job_name = strcat(patient, '_batched');
         partition = PARTITION;

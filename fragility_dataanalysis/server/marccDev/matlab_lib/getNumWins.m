@@ -43,7 +43,7 @@ function numWins = getNumWins(patient, winSize, stepSize)
     
     % READ EEG FILE Mat File
     % files to process
-    data = load(fullfile(patient_eeg_path, patient));
+    data = load(fullfile(patient_eeg_path, strcat(patient, '.mat')));
     eeg = data.data;
     numSampsInWin = winSize * fs / 1000;
     numSampsInStep = stepSize * fs / 1000;
