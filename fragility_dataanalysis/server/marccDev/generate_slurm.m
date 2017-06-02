@@ -67,6 +67,8 @@ function generate_slurm(patients, winSize, stepSize, radius, ...
         %- the data available, window size, and step size
         numWins = getNumWins(patient, winSize, stepSize);
 
+        numWins = 4;
+        
         %- create the header of slurm file
         job_name = strcat(patient, '_batched');
         partition = PARTITION;

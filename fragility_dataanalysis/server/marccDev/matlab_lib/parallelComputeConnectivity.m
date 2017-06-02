@@ -16,14 +16,15 @@ if nargin == 0 % testing purposes
     numProcs = 1;
     numWins = 103;
 end
+fprintf('Inside parallel computing connectivity...\n');
 
 %% INITIALIZATION
 % data directories to save data into - choose one
 eegRootDirServer = '/home/ali/adamli/fragility_dataanalysis/';                 % at ICM server 
 eegRootDirHome = '/Users/adam2392/Documents/adamli/fragility_dataanalysis/';   % at home macbook
 eegRootDirJhu = '/home/WIN/ali39/Documents/adamli/fragility_dataanalysis/';    % at JHU workstation
-eegRootDirMarcc = '/home-1/ali39@jhu.edu/work/adamli/fragility_dataanalysis/'; % at MARCC server
-% eegRootDirMarcc = '/scratch/groups/ssarma2/adamli/fragility_dataanalysis/';
+% eegRootDirMarcc = '/home-1/ali39@jhu.edu/work/adamli/fragility_dataanalysis/'; % at MARCC server
+eegRootDirMarcc = '/scratch/groups/ssarma2/adamli/fragility_dataanalysis/';
 % Determine which directory we're working with automatically
 if     ~isempty(dir(eegRootDirServer)), rootDir = eegRootDirServer;
 elseif ~isempty(dir(eegRootDirHome)), rootDir = eegRootDirHome;
@@ -34,6 +35,9 @@ else   error('Neither Work nor Home EEG directories exist! Exiting'); end
 addpath(genpath(fullfile(rootDir, '/fragility_library/')));
 addpath(genpath(fullfile(rootDir, '/eeg_toolbox/')));
 addpath(rootDir);
+
+rootDir = '/home-1/ali39@jhu.edu/work/adamli/fragility_dataanalysis/'; % at MARCC server
+
 
 %- 0 == no filtering
 %- 1 == notch filtering
@@ -76,6 +80,7 @@ patient_id = buffpatid;
 % set dir to find raw data files
 dataDir = fullfile(rootDir, '/data/', center);
 
+<<<<<<< HEAD
 if FILTER_RAW == 1
     tempDir = fullfile('./tempData/', strcat('notchfilter/win', num2str(winSize), ...
     '_step', num2str(stepSize)), 'connectivity', patient);
@@ -84,6 +89,9 @@ elseif FILTER_RAW == 2
     '_step', num2str(stepSize)), 'connectivity', patient);
 else 
     tempDir = fullfile('./tempData/', strcat('nofilter/win', num2str(winSize), ...
+=======
+tempDir = fullfile(rootDir, '/tempData/', strcat('win', num2str(winSize), ...
+>>>>>>> 2542024a2e9b2bd94986d1338851a7c18705e46e
     '_step', num2str(stepSize)), 'connectivity', patient);
 end
 
