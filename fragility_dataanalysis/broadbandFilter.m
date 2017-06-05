@@ -185,6 +185,7 @@ for iPat=1:length(patients)
             rejectindices = find(highinteg >= threshold);
             thresholdindices = union(thresholdindices, rejectindices);
 
+            
     %         figure;
     %         subplot(2,1,1);
     %         imagesc(chanPowerMat);
@@ -213,14 +214,9 @@ for iPat=1:length(patients)
         end % end of loop through channels
         reject_cell(iThresh) = length(thresholdindices) / numTimes; % store the ratio of data rejected
     %     reject_cell{iThresh} = thresholdindices;
-<<<<<<< HEAD
+
     end % end of loop through filter thresholds
     % toc
-=======
-    end
-    % toc`
->>>>>>> 67d73ba487e0b9785d928ad0d32cd0df99f5b51c
-
     thresh_sense(iPat, :) = reject_cell;
 end
 
