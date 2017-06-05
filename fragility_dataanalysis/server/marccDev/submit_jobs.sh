@@ -20,7 +20,20 @@ patients=(
 	pt16sz1 pt16sz2 pt16sz3
 	pt17sz1 pt17sz2 pt17sz3
 	Pat2sz1p Pat2sz2p Pat2sz3p
-	Pat16sz1p Pat16sz2p Pat16sz3p')
+	Pat16sz1p Pat16sz2p Pat16sz3p
+		
+	UMMC001_sz1 UMMC001_sz2 UMMC001_sz3
+	UMMC002_sz1 UMMC002_sz2 UMMC002_sz3
+	UMMC003_sz1 UMMC003_sz2 UMMC003_sz3
+	UMMC004_sz1 UMMC004_sz2 UMMC004_sz3
+	UMMC005_sz1 UMMC005_sz2 UMMC005_sz3
+	UMMC006_sz1 UMMC006_sz2 UMMC006_sz3
+	UMMC007_sz1 UMMC007_sz2 UMMC007_sz3
+	UMMC008_sz1 UMMC008_sz2 UMMC008_sz3
+	UMMC009_sz1 UMMC009_sz2 UMMC009_sz3
+
+	JH103aslp1 JH103aw1
+	JH105aslp1 JH105aw1')
 
 
 	# 'JH101sz1 JH101sz2 JH101sz3 JH101sz4
@@ -31,18 +44,8 @@ patients=(
 	# JH106sz1 JH106sz2 JH106sz3 JH106sz4 JH106sz5 JH106sz6
 	# JH107sz1 JH107sz2 JH107sz3 JH107sz4 JH107sz5 JH107sz6 JH107sz7 JH107sz8 JH107sz8 JH107sz9
 	# JH108sz1 JH108sz2 JH108sz3 JH108sz4 JH108sz5 JH108sz6 JH108sz7
-	# JH103aslp1 JH103aw1
-	# JH105aslp1 JH105aw1')
 
-	# 'UMMC001_sz1 UMMC001_sz2 UMMC001_sz3
-	# UMMC002_sz1 UMMC002_sz2 UMMC002_sz3
-	# UMMC003_sz1 UMMC003_sz2 UMMC003_sz3
-	# UMMC004_sz1 UMMC004_sz2 UMMC004_sz3
-	# UMMC005_sz1 UMMC005_sz2 UMMC005_sz3
-	# UMMC006_sz1 UMMC006_sz2 UMMC006_sz3
-	# UMMC007_sz1 UMMC007_sz2 UMMC007_sz3
-	# UMMC008_sz1 UMMC008_sz2 UMMC008_sz3
-	# UMMC009_sz1 UMMC009_sz2 UMMC009_sz3')
+
 
 	# 'EZT004seiz001 EZT004seiz002
 	# EZT006seiz001 EZT006seiz002
@@ -88,7 +91,7 @@ NUM_GPUS=1			# number of GPUS (need 6 procs per gpu)
 
 ## job reqs
 walltime=1:0:0  	# 1hr - 100 hr
-partition=debug 	# debug, shared, unlimited, parallel, gpu, lrgmem, scavenger
+partition=scavenger 	# debug, shared, unlimited, parallel, gpu, lrgmem, scavenger
 qos=scavenger
 
 ## load in the modules for this run -> python, matlab, etc.

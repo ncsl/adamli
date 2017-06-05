@@ -80,7 +80,6 @@ patient_id = buffpatid;
 % set dir to find raw data files
 dataDir = fullfile(rootDir, '/data/', center);
 
-<<<<<<< HEAD
 if FILTER_RAW == 1
     tempDir = fullfile('./tempData/', strcat('notchfilter/win', num2str(winSize), ...
     '_step', num2str(stepSize)), 'connectivity', patient);
@@ -89,12 +88,8 @@ elseif FILTER_RAW == 2
     '_step', num2str(stepSize)), 'connectivity', patient);
 else 
     tempDir = fullfile('./tempData/', strcat('nofilter/win', num2str(winSize), ...
-=======
-tempDir = fullfile(rootDir, '/tempData/', strcat('win', num2str(winSize), ...
->>>>>>> 2542024a2e9b2bd94986d1338851a7c18705e46e
-    '_step', num2str(stepSize)), 'connectivity', patient);
+        '_step', num2str(stepSize)), 'connectivity', patient);
 end
-
 
 if ~exist(tempDir, 'dir')
     mkdir(tempDir);
