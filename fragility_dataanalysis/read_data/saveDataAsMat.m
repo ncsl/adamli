@@ -5,31 +5,32 @@ format long g
 patients = {...
 %     'PY04N012', 'PY11N007', 'PY11N008', 'PY11N009', 'PY11N010', ...
 %     'PY11N011', 'PY11N012', 'PY11N013', ...
-    'PY11N014', 'PY11N015', ...
-    'PY12N005', 'PY12N008', 'PY12N010', 'PY12N012', ...
-    'PY13N001', 'PY13N003', 'PY13N004', 'PY13N010', 'PY13N011', ...
-    'PY14N004', 'PY14N005', 'PY15N003', 'PY15N004'};
+%     'PY11N014', 'PY11N015', ...
+%     'PY12N005', 'PY12N008', 'PY12N010', 'PY12N012', ...
+%     'PY13N001', 'PY13N003', 'PY13N004', 'PY13N010', 'PY13N011', ...
+%     'PY14N004', 'PY14N005', 'PY15N003', 'PY15N004'};
+
+%     'PY04N008', 'PY04N009', 'PY04N013', 'PY04N015', ...
+    'PY05N004', 'PY05N005', 'PY05N006', 'PY05N007'};
+%     'PY05N019', ...
+%     'PY11N003', 'PY11N004', 'PY11N005', 'PY11N006'};
 
 
 for iPat=1:length(patients)
 %    try
-    patient = 'PY04N007';
     patient = patients{iPat};
-    pos = 0;
 
     % root directory of source files
     rootDir = '/home/WIN/ali39/Documents/adamli/fragility_dataanalysis/data/';
-    rootDir = '/media/ali39/TOSHIBA EXT/';
+    rootDir = '/media/ali39/ADAM LI/EpilepsyCenter_JHMI/';
 
-    patDir = fullfile(rootDir, patient, 'edf1');
+    patDir = fullfile(rootDir, patient);
 
     metaDir = '/home/WIN/ali39/Documents/adamli/fragility_dataanalysis/read_data/meta data/';
     InfoTime = load(fullfile(metaDir, 'infotime.mat'));     %- meta data for all recordings
     InfoEvent = load(fullfile(metaDir, 'infoevent.mat'));   %- meta data for all sz events
     PatTime = InfoTime.(patient);
     PatEvent = InfoEvent.(strcat('event',patient));
-
-
 
     [numsz, s2] = size(PatEvent.code);
     timeSz = PatEvent.time;
@@ -44,7 +45,7 @@ for iPat=1:length(patients)
     % seizure_coffset_ms = patientmeta.seizure_coffset_ms;
     % % number_of_samples = patientmeta.recording_duration_sec * fs;
     % outcome = patientmeta.outcome;
-    % engelscore = patientmeta.engelscore;
+%     engelscore = patientmeta.engelscore;
     % num_channels = patientmeta.numChans;
     engelscore = nan;
     outcome = nan;
@@ -165,7 +166,6 @@ for iPat=1:length(patients)
 
         % save the CPU time required for the computation in the log file and close
         % the log file
-        t = toc
 %    end
 %     catch e
 %         disp(e)

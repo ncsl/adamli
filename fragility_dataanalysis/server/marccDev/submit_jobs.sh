@@ -21,7 +21,7 @@ patients=(
 	pt17sz1 pt17sz2 pt17sz3
 	Pat2sz1p Pat2sz2p Pat2sz3p
 	Pat16sz1p Pat16sz2p Pat16sz3p
-		
+
 	UMMC001_sz1 UMMC001_sz2 UMMC001_sz3
 	UMMC002_sz1 UMMC002_sz2 UMMC002_sz3
 	UMMC003_sz1 UMMC003_sz2 UMMC003_sz3
@@ -90,7 +90,7 @@ MEM_NODE=5 			# GB RAM per node (5-128)
 NUM_GPUS=1			# number of GPUS (need 6 procs per gpu)
 
 ## job reqs
-walltime=1:0:0  	# 1hr - 100 hr
+walltime=0:10:0  	# 1hr - 100 hr
 partition=scavenger 	# debug, shared, unlimited, parallel, gpu, lrgmem, scavenger
 qos=scavenger
 
