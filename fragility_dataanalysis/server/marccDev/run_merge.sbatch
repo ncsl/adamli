@@ -16,16 +16,19 @@ module load matlab
 echo "Runninng sbatch merge file..."
 echo ${SBATCH_JOB_NAME}
 echo ${SLURM_SUBMIT_DIR}
+echo ${winSize}
+echo ${stepSize}
+echo ${windows}
 
 # run merges on either connectivity or perturbation computation
-if [[ "$RUNCONNECTIVITY" -eq 1 ]]; then
-	echo "Running connectivity merge."
-	matlab -logfile _log/${SBATCH_JOB_NAME}.txt -nojvm -nodisplay -nodesktop -nosplash -r "\
-	cd('matlab_lib');\
-	mergeConnectivity('$patient', $winSize, $stepSize);"
-else
-	echo "Running perturbation merge."
-	matlab -logfile _log/${SBATCH_JOB_NAME}.txt -nojvm -nodisplay -nodesktop -nosplash -r "\
-	cd('matlab_lib');\
-	mergePerturbation('$patient', $winSize, $stepSize, $radius);"
-fi
+# if [[ "$RUNCONNECTIVITY" -eq 1 ]]; then
+# 	echo "Running connectivity merge."
+# 	matlab -logfile _log/${SBATCH_JOB_NAME}.txt -nojvm -nodisplay -nodesktop -nosplash -r "\
+# 	cd('matlab_lib');\
+# 	mergeConnectivity('$patient', $winSize, $stepSize);"
+# else
+# 	echo "Running perturbation merge."
+# 	matlab -logfile _log/${SBATCH_JOB_NAME}.txt -nojvm -nodisplay -nodesktop -nosplash -r "\
+# 	cd('matlab_lib');\
+# 	mergePerturbation('$patient', $winSize, $stepSize, $radius);"
+# fi
