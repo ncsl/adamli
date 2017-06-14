@@ -171,41 +171,43 @@ for iPat=1:length(patients)
         end % end of loop through filter thresholds
         threshForPat(iChan, :) = reject_cell; % store threshold for data loss for each channel
         
-        figure;
-        subplot(2,1,1);
-        imagesc(powerMatZ);
-        colorbar(); colormap('jet'); ax = gca; 
-        ax.Box = 'off';
-        ax.YTick = 1:10:length(freqs); ax.YTickLabel = freqs(1:10:length(freqs));
-        ax.TickDir = 'out'; ax.YDir = 'normal';
-        ylabel('Freq (Hz)', 'FontSize', FONTSIZE);
-        title([patient, ' at electrode: ', chanStr], 'FontSize', FONTSIZE);
-        xlabel('Time (sec)', 'FontSize', FONTSIZE);
-        XLim = ax.XLim;
+        if iChan == 1
+            figure;
+            subplot(2,1,1);
+            imagesc(powerMatZ);
+            colorbar(); colormap('jet'); ax = gca; 
+            ax.Box = 'off';
+            ax.YTick = 1:10:length(freqs); ax.YTickLabel = freqs(1:10:length(freqs));
+            ax.TickDir = 'out'; ax.YDir = 'normal';
+            ylabel('Freq (Hz)', 'FontSize', FONTSIZE);
+            title([patient, ' at electrode: ', chanStr], 'FontSize', FONTSIZE);
+            xlabel('Time (sec)', 'FontSize', FONTSIZE);
+            XLim = ax.XLim;
 
-        subplot(2, 1, 2);
-        plot(highinteg);
-        colorbar(); hold on; ax2 = gca;
-        plot([seizureStartMark seizureStartMark], ax2.YLim, 'k');
+            subplot(2, 1, 2);
+            plot(highinteg);
+            colorbar(); hold on; ax2 = gca;
+            plot([seizureStartMark seizureStartMark], ax2.YLim, 'k');
 
-        if ~isnan(seizureStartMark)
-            timeStart = timePoints(1, 2) / fs - seizureStartMark * stepSize/fs;
-            timeEnd = timePoints(end, 2) / fs - seizureStartMark * stepSize/fs;
-        else
-            timeStart = 1;
-            timeEnd = length(highinteg);
+            if ~isnan(seizureStartMark)
+                timeStart = timePoints(1, 2) / fs - seizureStartMark * stepSize/fs;
+                timeEnd = timePoints(end, 2) / fs - seizureStartMark * stepSize/fs;
+            else
+                timeStart = 1;
+                timeEnd = length(highinteg);
+            end
+            ax2.XLim = XLim;
+            XLowerLim = XLim(1);
+            XUpperLim = XLim(2);
+            xTickStep = round((XUpperLim) / 10);
+            xTicks = round(timePoints(1,1) : timePoints(xTickStep, 1) - timePoints(1,1) : timePoints(end, 1));
+            ax2.XTick = (XLowerLim+0.5 : xTickStep : XUpperLim+0.5);
+            ax2.XTickLabel = xTicks; % set xticks and their labels
+            ylabel('Rejection Metric', 'FontSize', FONTSIZE);
+            xlabel('Time (sec)', 'FontSize', FONTSIZE);
         end
-        ax2.XLim = XLim;
-        XLowerLim = XLim(1);
-        XUpperLim = XLim(2);
-        xTickStep = round((XUpperLim) / 10);
-        xTicks = round(timePoints(1,1) : timePoints(xTickStep, 1) - timePoints(1,1) : timePoints(end, 1));
-        ax2.XTick = (XLowerLim+0.5 : xTickStep : XUpperLim+0.5);
-        ax2.XTickLabel = xTicks; % set xticks and their labels
-        ylabel('Rejection Metric', 'FontSize', FONTSIZE);
-        xlabel('Time (sec)', 'FontSize', FONTSIZE);
     end % end of loop through channels
-    toc
+    toc % about 10 seconds per patient
     
     thresh_sense(iPat) = reject_cell;  
 end
