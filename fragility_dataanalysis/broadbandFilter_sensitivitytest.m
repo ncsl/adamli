@@ -193,6 +193,7 @@ for iPat=1:length(patients)
         %- channels to find -> mainly for testing
 %         noiseindices = find(~cellfun(@isempty, cellfun(@(x)strfind(x, 'POLG25'), chanStrs, 'uniform', 0)));
 
+        % time points to reject
         highinteg = maskFilter(powerMatZ, freqs, highperctile, lowperctile);
 
         %%- Loop through all thresholds to get figure on rate of data loss
