@@ -38,19 +38,25 @@ patients = {
 %     'pt17sz1' 'pt17sz2', 'pt17sz3',...
 };
 
+%- set threshold for sensitivity of broadband filter
 thresholds = linspace(0, 1, 100);
-thresh_sense = zeros(length(patients), length(thresholds));
+thresh_sense = cell(length(patients), 1);
+
+% Initialization
+%- 0 == no filtering
+%- 1 == notch filtering
+%- 2 == adaptive filtering
+FILTER_RAW = 2; 
+filterType = 'notch';
+winSize = 250;
+stepSize = 125;
+typeTransform = 'fourier';
+
+%- Plotting Parameters
+FONTSIZE = 16;  
+
 for iPat=1:length(patients)
     patient = patients{iPat};
-    typeTransform = 'fourier';
-
-    % Initialization
-    %- 0 == no filtering
-    %- 1 == notch filtering
-    %- 2 == adaptive filtering
-    FILTER_RAW = 2; 
-    winSize = 500;
-    stepSize = 250;
 
     % data directories to save data into - choose one
     eegRootDirHD = '/Volumes/NIL Pass/';
@@ -104,120 +110,104 @@ for iPat=1:length(patients)
                 = determineClinicalAnnotations(patient_id, seizure_id);
     patient_id = buffpatid;
 
-    % set directory to save computed data
-    if FILTER_RAW == 1
-        spectDir = fullfile(rootDir, strcat('/serverdata/spectral_analysis/', typeTransform, '/notchharmonics_win', num2str(winSize), ...
-            '_step', num2str(stepSize), '_freq', num2str(fs)), patient); % at lab
-    elseif FILTER_RAW == 2
-        spectDir = fullfile(rootDir, strcat('/serverdata/spectral_analysis/', typeTransform, '/adaptivefilter/win', num2str(winSize), ...
-            '_step', num2str(stepSize), '_freq', num2str(fs)), patient); % at lab
-    else 
-        spectDir = fullfile(rootDir, strcat('/serverdata/spectral_analysis/', typeTransform, '/nofilter_', 'win', num2str(winSize), ...
-            '_step', num2str(stepSize), '_freq', num2str(fs)), patient); % at lab
-    end
-
-    % get all the spectral power files for this patient
-    elecFile = fullfile(spectDir, strcat(patient, '_', typeTransform));
-
-    % load in the electrode file
-    data = load(elecFile);
-    data = data.data;
-
-    chanStrs = data.chanStr;
-    winSize = data.winSize;
-    stepSize = data.stepSize;
-    seizureStart = data.seizure_start;
-    seizureEnd = data.seizure_end;
-    timePoints = data.waveT;
-    freqs = data.freqs;
-    powerMatZ = data.powerMatZ;
-
-    % get seizure marks in window
-    seizureStartMark = seizureStart / stepSize - (winSize/stepSize - 1);
-    seizureEndMark = seizureEnd / stepSize - (winSize/stepSize - 1);
-
-    [numChans, numFreqs, numTimes] = size(powerMatZ);
-    lowperctile = 1;
-    highperctile = 99;
-    perctiles = zeros(numFreqs, 2);
-
-    %- channels to find
-    noiseindices = find(~cellfun(@isempty, cellfun(@(x)strfind(x, 'POLG25'), chanStrs, 'uniform', 0)));
-    FONTSIZE = 16;    
-    reject_cell = zeros(length(thresholds), 1);
-
-    %%- Loop through all thresholds to get figure on rate of data loss
-    for iThresh=1:length(thresholds)
-        threshold = thresholds(iThresh);
-
-        thresholdindices = [];
+    %- directory with the spectral data
+    spectDir = fullfile(rootDir, strcat('/serverdata/spectral_analysis/'), typeTransform, ...
+            strcat(filterType, '_win', num2str(winSize), '_step', num2str(stepSize), '_freq', num2str(fs)), ...
+            strcat(patient));
+    chanFiles = dir(fullfile(spectDir, '*.mat')); % get all the channel mat files
+    chanFiles = {chanFiles(:).name};
+    chanFiles = natsort(chanFiles);
+    
+    %- if we are only looking at included channels
+    chanFiles = chanFiles(included_channels);
+    
+    threshForPat = zeros(length(chanFiles), length(thresholds));
+    
+    tic;
+    %- loop over every channel to create a mask
+    for iChan=1:length(chanFiles)
+        fileToLoad = fullfile(spectDir, chanFiles{iChan});
+        data = load(fileToLoad);
+        data = data.data;
         
-        %% Loop Through Channels and Apply Broadband Filter
-        %%- Loop through frequencies for this transform
-        for iChan=1:numChans
-        % for i=1:length(noiseindices)
-        %     iChan = noiseindices(i);
-            chan = chanStrs{iChan};
+        chanStr = data.chanStr;
+        winSizeMS = data.winSizeMS;
+        stepSizeMS = data.stepSizeMS;
+        seizureStart = data.seizure_start;
+        seizureEnd = data.seizure_end;
+        timePoints = data.waveT;
+        freqs = data.freqs;
+        powerMatZ = data.powerMatZ;
+        
+        % get seizure marks in window
+        seizureStartMark = seizureStart / stepSizeMS - (winSizeMS/stepSizeMS - 1);
+        seizureEndMark = seizureEnd / stepSizeMS - (winSizeMS/stepSizeMS - 1);
+        
+        [numFreqs, numTimes] = size(powerMatZ);
+        
+        % define percentiles of rejection 
+        lowperctile = 1;
+        highperctile = 99;
+        perctiles = zeros(numFreqs, 2);
 
-            %- get channel power matrix
-            chanPowerMat = squeeze(powerMatZ(iChan, :, 1:seizureStartMark));
-            mask = zeros(size(chanPowerMat));
+        reject_cell = zeros(length(thresholds), 1);
+  
+        %- channels to find -> mainly for testing
+%         noiseindices = find(~cellfun(@isempty, cellfun(@(x)strfind(x, 'POLG25'), chanStrs, 'uniform', 0)));
 
-            %-  compute low and high percentiles
-            perctiles(:, 1) = prctile(chanPowerMat, lowperctile, 2);
-            perctiles(:, 2) = prctile(chanPowerMat, highperctile, 2);
+        highinteg = maskFilter(powerMatZ, freqs, highperctile, lowperctile);
 
-            %- apply mask of {-1,0,1} to each frequency in the power matrix
-            for i=1:numFreqs
-                indices = chanPowerMat(i, :) > perctiles(i, 2);
-                mask(i, indices) = 1;
+        %%- Loop through all thresholds to get figure on rate of data loss
+        for iThresh=1:length(thresholds)
+            threshold = thresholds(iThresh);
 
-                indices = chanPowerMat(i, :) < perctiles(i, 1);
-                mask(i, indices) = -1;
-            end
+            thresholdindices = [];
 
-            %- create matrix on the mask of only high powers
-            highmask = zeros(size(mask));
-            highmask(mask == 1) = 1;
-            highinteg = trapz(freqs, highmask, 1) ./ trapz(freqs, ones(size(highmask)), 1);
-
-           %- log indices greater then a certain threshold
+            %- log indices greater then a certain threshold
             rejectindices = find(highinteg >= threshold);
             thresholdindices = union(thresholdindices, rejectindices);
 
-            
-    %         figure;
-    %         subplot(2,1,1);
-    %         imagesc(chanPowerMat);
-    %         colorbar(); set(gca, 'Box', 'off');
-    %         colormap('jet');
-    %          set(gca, 'ytick', 1:10:length(freqs), 'yticklabel', freqs(1:10:length(freqs)));
-    %         ylabel('Freq (Hz)', 'FontSize', FONTSIZE);
-    %         set(gca,'tickdir','out','YDir','normal'); % spectrogram should have low freq on the bottom
-    %         ax = gca;
-    %         title([patient, ' at electrode: ', chan], 'FontSize', FONTSIZE);
-    %         xlabel('Time (sec)', 'FontSize', FONTSIZE);
-    % 
-    %         subplot(2, 1, 2);
-    %         imagesc(highinteg);
-    %         colorbar(); hold on;
-    %         plot([seizureStartMark seizureStartMark], [1 41], 'k');
-    % 
-    %         timeStart = timePoints(1, 2) / fs - seizureStartMark * stepSize/fs;
-    %         timeEnd = timePoints(end, 2) / fs - seizureStartMark * stepSize/fs;
-    %         XLim = get(gca, 'XLim');
-    %         XLowerLim = XLim(1);
-    %         XUpperLim = XLim(2);
-    %         xTickStep = (XUpperLim) / 10;
-    %         xTicks = round(timeStart : (abs(timeEnd - timeStart)) / 10 : timeEnd);
-    %         set(gca, 'XTick', (XLowerLim+0.5 : xTickStep : XUpperLim+0.5)); set(gca, 'XTickLabel', xTicks); % set xticks and their labels
-        end % end of loop through channels
-        reject_cell(iThresh) = length(thresholdindices) / numTimes; % store the ratio of data rejected
-    %     reject_cell{iThresh} = thresholdindices;
+            reject_cell(iThresh) = length(thresholdindices) / numTimes; % store the ratio of data rejected
+        end % end of loop through filter thresholds
+        threshForPat(iChan, :) = reject_cell; % store threshold for data loss for each channel
+        
+        figure;
+        subplot(2,1,1);
+        imagesc(powerMatZ);
+        colorbar(); colormap('jet'); ax = gca; 
+        ax.Box = 'off';
+        ax.YTick = 1:10:length(freqs); ax.YTickLabel = freqs(1:10:length(freqs));
+        ax.TickDir = 'out'; ax.YDir = 'normal';
+        ylabel('Freq (Hz)', 'FontSize', FONTSIZE);
+        title([patient, ' at electrode: ', chanStr], 'FontSize', FONTSIZE);
+        xlabel('Time (sec)', 'FontSize', FONTSIZE);
+        XLim = ax.XLim;
 
-    end % end of loop through filter thresholds
-    % toc
-    thresh_sense(iPat, :) = reject_cell;
+        subplot(2, 1, 2);
+        plot(highinteg);
+        colorbar(); hold on; ax2 = gca;
+        plot([seizureStartMark seizureStartMark], ax2.YLim, 'k');
+
+        if ~isnan(seizureStartMark)
+            timeStart = timePoints(1, 2) / fs - seizureStartMark * stepSize/fs;
+            timeEnd = timePoints(end, 2) / fs - seizureStartMark * stepSize/fs;
+        else
+            timeStart = 1;
+            timeEnd = length(highinteg);
+        end
+        ax2.XLim = XLim;
+        XLowerLim = XLim(1);
+        XUpperLim = XLim(2);
+        xTickStep = round((XUpperLim) / 10);
+        xTicks = round(timePoints(1,1) : timePoints(xTickStep, 1) - timePoints(1,1) : timePoints(end, 1));
+        ax2.XTick = (XLowerLim+0.5 : xTickStep : XUpperLim+0.5);
+        ax2.XTickLabel = xTicks; % set xticks and their labels
+        ylabel('Rejection Metric', 'FontSize', FONTSIZE);
+        xlabel('Time (sec)', 'FontSize', FONTSIZE);
+    end % end of loop through channels
+    toc
+    
+    thresh_sense(iPat) = reject_cell;  
 end
 
 figure;
