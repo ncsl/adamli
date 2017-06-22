@@ -52,9 +52,9 @@ patients=(
 	# JH108sz1 JH108sz2 JH108sz3 JH108sz4 JH108sz5 JH108sz6 JH108sz7')
 
 	'Pat2sz1p Pat2sz2p Pat2sz3p
-	Pat16sz1p Pat16sz2p Pat16sz3p
-	JH103aw1 JH103aslp1
-	JH105aw1 JH105aslp1')
+	Pat16sz1p Pat16sz2p Pat16sz3p')
+	# JH103aw1 JH103aslp1
+	# JH105aw1 JH105aslp1')
 
 	# EZT004seiz001 EZT004seiz002
 	# EZT005seiz001 EZT005seiz002 EZT005seiz003
