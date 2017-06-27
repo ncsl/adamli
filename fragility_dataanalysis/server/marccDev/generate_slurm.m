@@ -53,8 +53,11 @@ function generate_slurm(patients, winSize, stepSize, radius, ...
     else   error('Neither Work nor Home EEG directories exist! Exiting'); end
     
     fprintf('Before adding to path\n');
+    fprintf(fullfile(rootDir, 'server/marccDev/'));
+    fprintf(fullfile(rootDir, '/fragility_library/'));
     
-    addpath(genpath(fullfile(rootDir, 'server/marccDev/')));
+    addpath((fullfile(rootDir, 'server/marccDev/')));
+    addpath((fullfile(rootDir, 'server/marccDev/matlab_lib/')));
     addpath(genpath(fullfile(rootDir, '/fragility_library/')));
     addpath(genpath(fullfile(rootDir, '/eeg_toolbox/')));
     addpath(rootDir);
@@ -176,8 +179,8 @@ function generate_slurm(patients, winSize, stepSize, radius, ...
 
             %- call function to compute number of windows for a patient based on
             %- the data available, window size, and step size
-%             numWins = getNumWins(patient, winSize, stepSize);
-            numWins = 10;
+            numWins = getNumWins(patient, winSize, stepSize);
+%             numWins = 10; % for testing
             %- create the header of slurm file
             job_name = strcat(patient, '_batched');
             partition = PARTITION;
