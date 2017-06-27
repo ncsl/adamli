@@ -121,6 +121,9 @@ function generate_slurm(patients, winSize, stepSize, radius, ...
             fprintf('There are still patients, or windows to compute.\n');
             % still have patients to compute -> so compute them
             if ~isempty(patientsToCompute)
+                fprintf('These are the patients to compute: \n');
+                fprintf(patientsToCompute);
+                
                 for i=1:length(patientsToCompute)
                     patient = patientsToCompute{i};
 

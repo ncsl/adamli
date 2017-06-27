@@ -117,3 +117,5 @@ export stepSize
 matlab -logfile /home-1/ali39@jhu.edu/work/adamli/fragility_dataanalysis/server/marccDev/_log/job$1.txt -nojvm -nodisplay -nosplash -r "\
 	generate_slurm('$buff', $winSize, $stepSize, $radius,\
 	'$partition', '$walltime', $NUM_NODES, $NUM_PROCSPERNODE, $RUNCONNECTIVITY, 1); exit"
+
+	
