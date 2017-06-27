@@ -117,18 +117,3 @@ export stepSize
 matlab -logfile /home-1/ali39@jhu.edu/work/adamli/fragility_dataanalysis/server/marccDev/_log/job$1.txt -nojvm -nodisplay -nosplash -r "\
 	generate_slurm('$buff', $winSize, $stepSize, $radius,\
 	'$partition', '$walltime', $NUM_NODES, $NUM_PROCSPERNODE, $RUNCONNECTIVITY, 1); exit"
-
-
-## 02: Call pbs job, runAnalysis
-# for patient in $patients; do
-# 	echo $patient
-# 	if [[ "$RUNCONNECTIVITY" -eq 1 ]]; then
-# 		jobname="merge_adj_${patient}"
-# 	else
-# 		jobname="merge_pert_${patient}"
-# 	fi
-
-# 	# run a pbs batch job. Make sure there are no spaces in between the parameters passed
-# 	sbatch -v RUNCONNECTIVITY=$RUNCONNECTIVITY,patient=$patient,winSize=$winSize,stepSize=$stepSize,radius=$radius --job-name=${jobname} --time=${walltime} --partition=${partition} --nodes={NUM_NODES} --ntasks-per-node=${NUM_TASKS} --cpus-per-task=${NUM_PROCSPERNODE} run_merge.sbatch
-# done
-
