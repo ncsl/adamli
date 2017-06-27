@@ -65,7 +65,7 @@ function serverPerturbationScript(patient, radius, winSize, stepSize)
             = determineClinicalAnnotations(patient_id, seizure_id);
 
     perturbationTypes = ['C', 'R'];
-    w_space = linspace(-radius, radius, 51);
+    w_space = linspace(-radius, radius, 50);
     sigma = sqrt(radius^2 - w_space.^2); % move to the unit circle 1, for a plethora of different radial frequencies
     b = [0; 1];                          % initialize for perturbation computation later
     
@@ -78,7 +78,7 @@ function serverPerturbationScript(patient, radius, winSize, stepSize)
         adjMatDir = fullfile(rootDir, 'serverdata/adjmats/notchfilter/', strcat('win', num2str(winSize), ...
         '_step', num2str(stepSize), '_freq', num2str(fs)), patient); % at lab
         
-        toSaveDir = fullfile(rootDir, strcat('/serverdata/perturbationmats/notchfilter', '/win', num2str(winSize), ...
+        toSaveDir = fullfile(rootDir, strcat('/serverdata/perturbationmats/nodchz_notchfilter', '/win', num2str(winSize), ...
                 '_step', num2str(stepSize), '_freq', num2str(fs), '_radius', num2str(radius)), patient); % at lab
 
     elseif FILTER_RAW == 2
