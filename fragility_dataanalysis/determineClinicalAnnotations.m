@@ -348,7 +348,7 @@ function [included_channels, onset_electrodes, ...
         latespread_labels = {};
         
         frequency_sampling = 500;
-        success_or_failure = 0;
+        success_or_failure = 1;
         
         center = 'ummc';
     elseif strcmp(patient_id, 'UMMC002')
@@ -411,6 +411,10 @@ function [included_channels, onset_electrodes, ...
         included_channels = [1:30];
         onset_electrodes = {'LMT1', 'LMT2', 'LMT3', 'LMT4', 'RMT1', 'RAT1', 'RAT2', 'RAT3', 'RAT4', ...
             'RPT3', 'RPT4', 'RPT5', 'LPT3', 'LMT1', 'LMT2', 'LAT4', 'LAT5'};
+% relabeled from EZTrack        
+%         {'LMES1', 'LMES2', 'LMES3', 'LMES4', 'RMES1', 'RPT3', ...
+%     'RPT4', 'RPT5', 'RANT1', 'RANT2', 'RANT3', 'RANT4', 'LPT3', ...
+%     'LANT4', 'LANT5'};
         earlyspread_labels = {};
         latespread_labels = {};
         

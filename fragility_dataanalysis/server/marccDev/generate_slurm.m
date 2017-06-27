@@ -38,7 +38,7 @@ function generate_slurm(patients, winSize, stepSize, radius, ...
     if strcmp(PARTITION, 'scavenger')
         QOS='scavenger';
     end
-    
+
     % data directories to save data into - choose one
     eegRootDirServer = '/home/ali/adamli/fragility_dataanalysis/';                 % at ICM server 
     eegRootDirHome = '/Users/adam2392/Documents/adamli/fragility_dataanalysis/';   % at home macbook
@@ -51,6 +51,8 @@ function generate_slurm(patients, winSize, stepSize, radius, ...
     elseif ~isempty(dir(eegRootDirJhu)), rootDir = eegRootDirJhu;
     elseif ~isempty(dir(eegRootDirMarcc)), rootDir = eegRootDirMarcc;
     else   error('Neither Work nor Home EEG directories exist! Exiting'); end
+    
+    fprintf('Before adding to path\n');
     
     addpath(genpath(fullfile(rootDir, 'server/marccDev/')));
     addpath(genpath(fullfile(rootDir, '/fragility_library/')));
@@ -174,8 +176,8 @@ function generate_slurm(patients, winSize, stepSize, radius, ...
 
             %- call function to compute number of windows for a patient based on
             %- the data available, window size, and step size
-            numWins = getNumWins(patient, winSize, stepSize);
-
+%             numWins = getNumWins(patient, winSize, stepSize);
+            numWins = 10;
             %- create the header of slurm file
             job_name = strcat(patient, '_batched');
             partition = PARTITION;
