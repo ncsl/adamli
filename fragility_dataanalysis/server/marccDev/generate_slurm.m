@@ -134,7 +134,7 @@ function generate_slurm(patients, winSize, stepSize, radius, ...
                     ' --array=1-%d --job-name=%s run_jobs.sbatch --export=%s,%d,%d'), ...
                         Nbatch, job_name, patient, winSize, stepSize);
             elseif ~isempty(patWinsToCompute)
-                winsToCompute = patWinsToCompute(patient);
+                winsToCompute = patWinsToCompute;
 
                 %- create a job array that goes through the windows to
                 %- compute instead of index by index

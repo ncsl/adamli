@@ -3,7 +3,8 @@
 # patients listed 5 per row
 patients=(
 	# 'pt1aslp1 pt1aslp2 pt1aw1 pt1aw2')
-	'pt2aslp1 pt2aslp2 pt2aw1 pt2aw2
+	# 'pt2aslp1 pt2aslp2 pt2aw1 
+	'pt2aw2
 	pt3aslp1 pt3aslp2 pt3aw1
 	pt1sz2 pt1sz3 pt1sz4
 	pt2sz1 pt2sz3 pt2sz4 
@@ -118,4 +119,3 @@ matlab -logfile /home-1/ali39@jhu.edu/work/adamli/fragility_dataanalysis/server/
 	generate_slurm('$buff', $winSize, $stepSize, $radius,\
 	'$partition', '$walltime', $NUM_NODES, $NUM_PROCSPERNODE, $RUNCONNECTIVITY, 1); exit"
 
-	
