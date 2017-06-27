@@ -90,6 +90,8 @@ if ~exist(toSaveDir, 'dir')
 end
 toSaveDir
 
+fprintf('Running merging now with Matlab!\n');
+
 
 winsComputed = zeros(N, 1);  
 
@@ -156,6 +158,7 @@ SUCCESS = 1;
 
 % Check if it was successful full computation
 if SUCCESS
+    fprintf('Successful merging!\n');
     try
         save(fullfile(toSaveDir, fileName), 'adjmat_struct');
     catch e

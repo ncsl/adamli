@@ -16,7 +16,7 @@
 function generate_slurm(patients, winSize, stepSize, radius, ...
     PARTITION, WALLTIME, NUMNODES, NUM_PROCS, JOBTYPE, MERGE)
     if nargin==0
-        patients='pt1sz2 pt3sz1';
+        patients='pt1sz2 pt3sz1 ';
         winSize=250;
         stepSize=125;
         radius=1.5;
@@ -95,7 +95,7 @@ function generate_slurm(patients, winSize, stepSize, radius, ...
         if isempty(patientsToCompute) && isempty(patWinsToCompute)
             fprintf('Merging computations.\n');
             
-            for iPat=1:length(patients)
+            for iPat=1:numPats
                 patient = cell_pats{iPat};
                 
                 % set jobname 
