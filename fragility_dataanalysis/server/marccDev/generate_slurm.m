@@ -78,164 +78,107 @@ function generate_slurm(patients, winSize, stepSize, radius, ...
     numCPUs = NUM_PROCS;
     numTasks = 1;
     
-    % initialize command
-    basecommand = sprintf(strcat('export winSize=%d; export stepSize=%d;\n', ...
-                    'sbatch --time=%s --partition=%s',' --nodes=%d --ntasks-per-node=%d --cpus-per-task=%d'), ...
-                     winSize, stepSize,...
-                    num2str(walltime), partition, numNodes, numTasks, numCPUs);
+    % initialize filter
+    filterType = 'adaptivefilter';
     
-    %- generate merge check
-    if MERGE
-        filterType = 'adaptivefilter';
+    for iPat=1:numPats
+        patient = cell_pats{iPat};
         
-        % run a computation on checking patients if there is missing data
-        [patientsToCompute, patWinsToCompute] = checkPatients(cell_pats, rootDir, winSize, stepSize, filterType);
+        % initialize command
+        basecommand = sprintf(strcat('export RUNCONNECTIVITY=%d; export patient=%s; export winSize=%d; export stepSize=%d;\n', ...
+                    'sbatch --time=%s --partition=%s --nodes=%d --ntasks-per-node=%d --cpus-per-task=%d'), ...
+                     JOBTYPE, patient, winSize, stepSize,...
+                    num2str(walltime), partition, numNodes, numTasks, numCPUs);
+        if exist('QOS', 'var')
+            basecommand = sprintf(strcat('export RUNCONNECTIVITY=%d; export patient=%s; export winSize=%d; export stepSize=%d;\n', ...
+                    'sbatch --time=%s --partition=%s --qos=%s --nodes=%d --ntasks-per-node=%d --cpus-per-task=%d'), ...
+                     JOBTYPE, patient, winSize, stepSize,...
+                    num2str(walltime), partition, QOS, numNodes, numTasks, numCPUs); 
+        end
         
-        % nothing to compute, so merge all computations
-        if isempty(patientsToCompute) && isempty(patWinsToCompute)
-            fprintf('Merging computations.\n');
+        % merging computations together
+        if MERGE
+            % run a computation on checking patients if there is missing data
+            [toCompute, patWinsToCompute] = checkPatient(patient, rootDir, winSize, stepSize, filterType);
             
-            for iPat=1:numPats
-                patient = cell_pats{iPat};
+            % nothing to compute, so merge all computations
+            if isempty(patWinsToCompute) && toCompute == 0
+                fprintf('Merging computations.\n');
                 
                 % set jobname 
                 job_name = strcat(patient, '_merge');
                 
                 % create command to run either using scavenger partition,
                 % or not
-                command = sprintf(strcat('export patient=%s;  export RUNCONNECTIVITY=%d;\n', basecommand, ...
-                            ' --job-name=%s run_merge.sbatch --export=%s,%d,%d'), ...
-                             patient, JOBTYPE,...
-                             job_name, patient, winSize, stepSize);
+                command = sprintf(strcat(basecommand, ...
+                            ' --job-name=%s run_merge.sbatch --export=%s,%d,%d,%d'), ...
+                             job_name, patient, winSize, stepSize, JOBTYPE);
+            elseif toCompute == 1 % still have either patients, or windows to compute
+                fprintf('Recomputing for this patient: %s.\n', patient);
                 
-                if exist('QOS', 'var')
-                        command = sprintf(strcat('export patient=%s; export RUNCONNECTIVITY=%d;\n', basecommand, ...
-                            ' --job-name=%s --qos=%s run_merge.sbatch --export=%s,%d,%d'), ...
-                             patient, JOBTYPE, ...
-                             job_name, QOS, patient, winSize, stepSize);
+                %- call function to compute number of windows for a patient based on
+                %- the data available, window size, and step size
+                numWins = getNumWins(patient, winSize, stepSize);
+                %             numWins = 10; % for testing
+
+                % jobname and array parameters for the batch command
+                Nbatch = numWins; % the number of jobs in job batch
+                if JOBTYPE == 1
+                    job_name = strcat(patient, '_ltv_batched');
+                else
+                    job_name = strcat(patient, '_pert_batched');
                 end
-                fprintf(command);
-                unix(command);
-            end
-        else % still have either patients, or windows to compute
-            fprintf('There are still patients, or windows to compute.\n');
-            % still have patients to compute -> so compute them
-            if ~isempty(patientsToCompute)
-                fprintf('These are the patients to compute: \n');
-                fprintf(patientsToCompute);
+
+                % create command to run
+                command = sprintf(strcat(basecommand, ...
+                    ' --array=1-%d --job-name=%s run_jobs.sbatch --export=%s,%d,%d'), ...
+                        Nbatch, job_name, patient, winSize, stepSize);
+            elseif ~isempty(patWinsToCompute)
+                winsToCompute = patWinsToCompute(patient);
+
+                %- create a job array that goes through the windows to
+                %- compute instead of index by index
+                Nbatch = length(winsToCompute);
+                if JOBTYPE == 1
+                    job_name = strcat(patient, '_ltv_sepwins');
+                else
+                    job_name = strcat(patient, '_pert_sepwins');
+                end
                 
-                for i=1:length(patientsToCompute)
-                    patient = patientsToCompute{i};
+                winsToCompute_cell = mat2str(winsToCompute);
+                winsToCompute_cell = winsToCompute_cell(2:end-1);
 
-                    %- call function to compute number of windows for a patient based on
-                    %- the data available, window size, and step size
-                    numWins = getNumWins(patient, winSize, stepSize);
-
-                    %- create the header of slurm file
-                    job_name = strcat(patient, '_batched');
-                    Nbatch = numWins; % the number of jobs in job batch
-                    if JOBTYPE == 1
-                        jobname = strcat('ltvmodel_batch_', num2str(winSize), '_', num2str(stepSize));
-                    else
-                        jobname = strcat('pertmodel_batch_', num2str(radius));
-                    end
-
-                    %- create command to run
-                    command = sprintf(strcat('export patient=%s; \n', basecommand, ...
-                                ' --array=1-%d --job-name=%s run_job.sbatch --export=%s,%d,%d'), ...
-                                patient, ...
+                %- create command to run
+                command = sprintf(strcat('export windows=%s;\n', basecommand, ...
+                                    ' --array=1-%d --job-name=%s run_job.sbatch --export=%s,%d,%d'), ...
+                                winsToCompute_cell,...
                                 Nbatch, job_name, patient, winSize, stepSize);
-
-                    if exist('QOS', 'var')
-                            command = sprintf(strcat('export patient=%s; \n', basecommand, ...
-                                ' --array=1-%d --qos=%s --job-name=%s run_job.sbatch --export=%s,%d,%d'), ...
-                                patient, ...
-                                Nbatch, QOS, job_name, patient, winSize, stepSize);
-                    end
-                    fprintf(command);
-                    unix(command);
-                end
-
-                clear patientsToCompute
             end
-
-            % there are windows to compute so compute them
-            if ~isempty(patWinsToCompute)
-                for i=1:length(patWinsToCompute)
-                    patient = patWinsToCompute{i};
-                    winsToCompute = patWinsToCompute(patient);
-
-                    %- create the header of slurm file
-                    job_name = strcat(patient, '_sepwins');
-
-                    %- create a job array that goes through the windows to
-                    %- compute instead of index by index
-                    Nbatch = length(winsToCompute);
-
-                    winsToCompute_cell = mat2str(winsToCompute);
-                    winsToCompute_cell = winsToCompute_cell(2:end-1);
-
-                    %- create command to run
-                    command = sprintf(strcat('export patient=%s; export winSize=%d;', ...
-                                             ' export stepSize=%d; export windows=%s;\n', ...
-                                        'sbatch --array=1-%d --time=%s --partition=%s', ...
-                                        ' --nodes=%d --ntasks-per-node=%d --cpus-per-task=%d', ...
-                                        ' --job-name=%s run_job.sbatch --export=%s,%d,%d'), ...
-                                    patient, winSize, stepSize, winsToCompute_cell,...
-                                    Nbatch, num2str(walltime), partition, numNodes, numTasks, numCPUs, jobname, ...
-                                    patient, winSize, stepSize);
-
-                    if exist('QOS', 'var')
-                        command = sprintf(strcat('export patient=%s; export winSize=%d; export stepSize=%d; export windows=%s;\n', ...
-                                        'sbatch --array=1-%d --time=%s --partition=%s', ...
-                                        ' --nodes=%d --ntasks-per-node=%d --cpus-per-task=%d', ...
-                                        ' --job-name=%s --qos=%s run_job.sbatch --export=%s,%d,%d'), ...
-                                    patient, winSize, stepSize, winsToCompute_cell,...
-                                    Nbatch, num2str(walltime), partition, numNodes, numTasks, numCPUs, jobname, QOS, ...
-                                    patient, winSize, stepSize);
-                    end
-                    fprintf(command);
-                    unix(command);
-                end
-            end
-        end
-    else % not merging and computing on windows
-        fprintf('Computing on windows.\n');
+        % else not merging
+        else
+            fprintf('Computing on windows.\n');
         
-        %- generate job slurms
-        for i=1:numPats
-            patient = cell_pats{i};
-
             %- call function to compute number of windows for a patient based on
             %- the data available, window size, and step size
             numWins = getNumWins(patient, winSize, stepSize);
 %             numWins = 10; % for testing
             
-            %- create the header of slurm file
-            job_name = strcat(patient, '_batched');
-            
+            % jobname and array parameters for the batch command
             Nbatch = numWins; % the number of jobs in job batch
             if JOBTYPE == 1
-                jobname = strcat('ltvmodel_batch_', num2str(winSize), '_', num2str(stepSize));
+                job_name = strcat(patient, '_ltv_batched');
             else
-                jobname = strcat('pertmodel_batch_', num2str(radius));
+                job_name = strcat(patient, '_pert_batched');
             end
 
-            %- create command to run
-            command = sprintf(strcat('export patient=%s; \n', command, ...
+            % create command to run
+            command = sprintf(strcat(basecommand, ...
                         ' --array=1-%d --job-name=%s run_jobs.sbatch --export=%s,%d,%d'), ...
-                        patient, ...
-                        Nbatch, job_name, patient, winSize, stepSize);
-
-            if exist('QOS', 'var')
-                    command = sprintf('export patient=%s; \n', strcat(command, ...
-                        ' --array=1-%d --qos=%s --job-name=%s run_job.sbatch --export=%s,%d,%d'), ...
-                        patient, ...
-                        Nbatch, QOS, job_name, patient, winSize, stepSize);
-            end
-            
-            fprintf(command);
-            unix(command);
+                            Nbatch, job_name, patient, winSize, stepSize);
         end
-    end
+        
+        % print command to see and submit to unix shell
+        fprintf(command);
+        unix(command);
+    end % end of loop through patients            
 end
