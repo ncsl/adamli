@@ -159,9 +159,13 @@ else
     save(fullfile(toSaveDir, fileName), 'adjmat_struct', '-v7.3');
 end
 
+fprintf('Successful merging!\n');
+
 % Remove directories if successful
 delete(fullfile(tempDir, 'info', '*.mat'));
 rmdir(fullfile(tempDir, 'info'));
-% delete(fullfile(tempDir, '*.mat'));
-% rmdir(fullfile(tempDir));
+delete(fullfile(tempDir, '*.mat'));
+rmdir(fullfile(tempDir));
+
+fprintf('Removed everything!\n');
 end
