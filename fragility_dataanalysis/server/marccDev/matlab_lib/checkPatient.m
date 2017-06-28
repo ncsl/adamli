@@ -21,6 +21,19 @@ if nargin == 0
     filterType = 'adaptive';
 end
 
+ % data directories to save data into - choose one
+eegRootDirServer = '/home/ali/adamli/fragility_dataanalysis/';                 % at ICM server 
+eegRootDirHome = '/Users/adam2392/Documents/adamli/fragility_dataanalysis/';   % at home macbook
+eegRootDirJhu = '/home/WIN/ali39/Documents/adamli/fragility_dataanalysis/';    % at JHU workstation
+eegRootDirMarcc = '/scratch/groups/ssarma2/adamli/fragility_dataanalysis/';
+
+% Determine which directory we're working with automatically
+if     ~isempty(dir(eegRootDirServer)), eegrootDir = eegRootDirServer;
+elseif ~isempty(dir(eegRootDirHome)), eegrootDir = eegRootDirHome;
+elseif ~isempty(dir(eegRootDirJhu)), eegrootDir = eegRootDirJhu;
+elseif ~isempty(dir(eegRootDirMarcc)), eegrootDir = eegRootDirMarcc;
+else   error('Neither Work nor Home EEG directories exist! Exiting'); end
+
 %- directory for the data stored
 tempDir = fullfile(rootDir, 'server/marccDev/matlab_lib/tempData/', ...
     filterType, strcat('win', num2str(winSize), '_step', num2str(stepSize)), 'connectivity');
@@ -57,7 +70,7 @@ end
             = determineClinicalAnnotations(patient_id, seizure_id);
         
 patDirExists = exist(fullfile(tempDir, patient), 'dir');
-dataDirExists = exist(fullfile(rootDir, 'serverdata/adjmats', strcat(filterType, 'filter'), ...
+dataDirExists = exist(fullfile(eegrootDir, 'serverdata/adjmats', strcat(filterType, 'filter'), ...
         strcat('win', num2str(winSize), '_step', num2str(stepSize), '_freq', num2str(fs))), 'dir');
 
 % initialize return variables
