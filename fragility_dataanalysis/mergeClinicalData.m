@@ -1,3 +1,5 @@
+% script to run to merge all clinical data into 1 data structure.
+
 dataDir = './data/';
 
 nihFile = fullfile(dataDir, 'nihclinicalData.mat');

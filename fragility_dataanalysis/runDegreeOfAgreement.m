@@ -83,6 +83,9 @@ typeConnectivity = 'leastsquares';
 % broadband filter parameters
 typeTransform = 'fourier'; % morlet, or fourier
 
+% degree of agreement parameters
+thresholds = [0.3, 0.6, 0.8, 0.9, 0.95, 0.99];
+
 % set figure directory to save plots
 figDir = fullfile(rootDir, '/figures', 'degreeOfAgreement', ...
     strcat(filterType, 'filter'), ...
@@ -180,6 +183,6 @@ for iPat=1:length(patients)
     % broadband filter for this patient
     timeWinsToReject = broadbandfilter(patient, typeTransform, winSize, stepSize, filterType, spectDir);
     
-    
+    % compute DOA for varying thresholds
     
 end
