@@ -1,4 +1,4 @@
-function timeWinsToReject = broadbandfilter(patient, typeTransform, winSize, stepSize, filterType)
+function timeWinsToReject = broadbandfilter(patient, typeTransform, winSize, stepSize, filterType, spectDir)
 % function: checkWindows
 % By: Adam Li
 % Date: 6/12/17
@@ -78,18 +78,22 @@ end
 patient_id = buffpatid;
 
 %- directory with the spectral data
-spectDir = fullfile(rootDir, strcat('/serverdata/spectral_analysis/'), typeTransform, ...
-        strcat(filterType, '_win', num2str(winSize), '_step', num2str(stepSize), '_freq', num2str(fs)), ...
-        strcat(patient));
+% spectDir = fullfile(rootDir, strcat('/serverdata/spectral_analysis/'), typeTransform, ...
+%         strcat(filterType, 'filter'), strcat('win', num2str(winSize), '_step', num2str(stepSize), '_freq', num2str(fs)), ...
+%         strcat(patient));
+    
 chanFiles = dir(fullfile(spectDir, '*.mat')); % get all the channel mat files
 chanFiles = {chanFiles(:).name};
 chanFiles = natsort(chanFiles);
 
+if isempty(chanFiles)
+    fprintf('The directory is %s\n', spectDir);
+    error('The directory is wrong, or there are no computed spectral analyses for %s\n', patient);
+end
 
 %- if we are only looking at included channels
 chanFiles = chanFiles(included_channels);
     
-
 % loop over every channel to create a mask on time windows for every
 % channel
 for iChan=1:length(chanFiles)

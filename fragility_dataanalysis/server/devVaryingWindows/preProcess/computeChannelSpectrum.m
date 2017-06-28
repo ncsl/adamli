@@ -1,11 +1,11 @@
 function computeChannelSpectrum(patient, winSize, stepSize, typeTransform, currentChan)
 if nargin==0
-    patient='pt1sz2';
+    patient='pt1aw1';
 %     patient='UMMC003_sz1';
     winSize=250;
     stepSize=125;
     typeTransform='fourier';
-    typeTransform = 'morlet';
+%     typeTransform = 'morlet';
     currentChan=2;
 end
 
@@ -130,8 +130,8 @@ end
         transformArgs.waveletWidth = waveletWidth;
         transformArgs.waveletFreqs = waveletFreqs;
     elseif strcmp(typeTransform, 'fourier')
-        transformArgs.winSize = 500;
-        transformArgs.stepSize = 250;
+        transformArgs.winSize = winSize;
+        transformArgs.stepSize = stepSize;
         transformArgs.mtBandWidth = 4;
         transformArgs.mtFreqs = [];
     end

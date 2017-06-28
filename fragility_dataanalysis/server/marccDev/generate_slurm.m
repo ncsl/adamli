@@ -181,7 +181,7 @@ function generate_slurm(patients, winSize, stepSize, radius, ...
         
         % print command to see and submit to unix shell
         fprintf(command);
-        fprintf('\n');
+        fprintf('\n\n');
         unix(command);
     end % end of loop through patients            
 end
