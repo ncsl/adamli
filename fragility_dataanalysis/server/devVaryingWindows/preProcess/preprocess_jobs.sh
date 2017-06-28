@@ -71,7 +71,6 @@ patients=(
 	# EZT028seiz001 EZT028seiz002
 	# EZT037seiz001 EZT037seiz002
 	# EZT070seiz001 EZT070seiz002
-	
 
 printf "About to run on patients (press enter to continue): $patients" # prompt for patient_id {pt1, pt2, ..., JH105, EZT005}
 read answer

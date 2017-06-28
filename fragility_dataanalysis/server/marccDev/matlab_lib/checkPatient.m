@@ -70,14 +70,14 @@ end
             = determineClinicalAnnotations(patient_id, seizure_id);
         
 patDirExists = exist(fullfile(tempDir, patient), 'dir');
-dataDirExists = exist(fullfile(eegrootDir, 'serverdata/adjmats', strcat(filterType, 'filter'), ...
+dataDirExists = exist(fullfile(eegrootDir, 'serverdata/adjmats', strcat(filterType), ...
         strcat('win', num2str(winSize), '_step', num2str(stepSize), '_freq', num2str(fs))), 'dir');
 
 % initialize return variables
 toCompute = 0;
 patWinsToCompute = [];
 
-if 7==patDirExists && 7~=dataDirExists
+if 7==patDirExists && 7~=dataDirExists % temp dir exists, but merged data dir doensn't exist
     % check if each directory has the right windows computed
     fileList = dir(fullfile(tempDir, patient, '*.mat'));
     fileList = {fileList(:).name};
@@ -92,7 +92,7 @@ if 7==patDirExists && 7~=dataDirExists
         fprintf('Need to compute certain windows for %s still!\n', patient);
         patWinsToCompute = winsToCompute;
     end
-elseif 7~=patDirExists && 7~=dataDirExists
+elseif 7~=patDirExists && 7~=dataDirExists % temp and merged dir don't exist
     fprintf('Need to compute for %s still!\n', patient);
     toCompute = 1;
 else

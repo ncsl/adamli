@@ -35,11 +35,11 @@ patients=(
 	UMMC006_sz1 UMMC006_sz2 UMMC006_sz3
 	UMMC007_sz1 UMMC007_sz2 UMMC007_sz3
 	UMMC008_sz1 UMMC008_sz2 UMMC008_sz3
-	UMMC009_sz1 UMMC009_sz2 UMMC009_sz3')
+	UMMC009_sz1 UMMC009_sz2 UMMC009_sz3
 
-	# 'pt2aw2 pt3aslp1
-	# pt15sz1 pt15sz2 pt15sz4
-	# pt16sz1 pt16sz3
+	pt15sz1 pt15sz2 pt15sz4
+	pt16sz1 pt16sz3')
+
 	# JH103aslp1 JH103aw1
 	# JH105aslp1 JH105aw1')
 
@@ -96,7 +96,7 @@ NUM_GPUS=1			# number of GPUS (need 6 procs per gpu)
 NUM_TASKS=1 		# number of tasks per CPU
 
 ## job reqs
-walltime=0:10:0
+walltime=0:15:0
 partition=debug 	# debug, shared, unlimited, parallel, gpu, lrgmem, scavenger
 qos=scavenger
 
