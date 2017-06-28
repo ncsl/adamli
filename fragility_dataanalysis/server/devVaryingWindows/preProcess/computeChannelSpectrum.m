@@ -28,7 +28,7 @@ end
     %- 0 == no filtering
     %- 1 == notch filtering
     %- 2 == adaptive filtering
-    FILTER_RAW = 1; 
+    FILTER_RAW = 2; 
 
     % set patientID and seizureID
     patient_id = patient(1:strfind(patient, 'seiz')-1);
