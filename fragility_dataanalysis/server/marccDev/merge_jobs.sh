@@ -34,7 +34,7 @@ patients=(
 	# UMMC008_sz1 UMMC008_sz2 UMMC008_sz3
 	# UMMC009_sz1 UMMC009_sz2 UMMC009_sz3
 
-	'pt2aw2 pt3aslp1 pt13sz4
+	'pt2aw2 pt3aslp1
 	pt15sz1 pt15sz2 pt15sz4
 	pt16sz1 pt16sz3
 	JH103aslp1 JH103aw1

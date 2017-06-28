@@ -19,7 +19,7 @@ function generate_slurm(patients, winSize, stepSize, radius, ...
         MERGE = 0;
     end    
     if nargin==0
-        patients='UMMC001_sz1';
+        patients='UMMC001_sz2';
         winSize=250;
         stepSize=125;
         radius=1.5;
