@@ -25,15 +25,46 @@ end
 tempDir = fullfile(rootDir, 'server/marccDev/matlab_lib/tempData/', ...
     filterType, strcat('win', num2str(winSize), '_step', num2str(stepSize)), 'connectivity');
 
-% mkdir(fullfile(tempDir, patient));
+% set patientID and seizureID
+patient_id = patient(1:strfind(patient, 'seiz')-1);
+seizure_id = strcat('_', patient(strfind(patient, 'seiz'):end));
+seeg = 1;
+if isempty(patient_id)
+    patient_id = patient(1:strfind(patient, 'sz')-1);
+    seizure_id = patient(strfind(patient, 'sz'):end);
+    seeg = 0;
+end
+if isempty(patient_id)
+    patient_id = patient(1:strfind(patient, 'aslp')-1);
+    seizure_id = patient(strfind(patient, 'aslp'):end);
+    seeg = 0;
+end
+if isempty(patient_id)
+    patient_id = patient(1:strfind(patient, 'aw')-1);
+    seizure_id = patient(strfind(patient, 'aw'):end);
+    seeg = 0;
+end
+buffpatid = patient_id;
+if strcmp(patient_id(end), '_')
+    patient_id = patient_id(1:end-1);
+end
 
+%% DEFINE OUTPUT DIRS AND CLINICAL ANNOTATIONS
+%- Edit this file if new patients are added.
+[included_channels, ezone_labels, earlyspread_labels,...
+    latespread_labels, resection_labels, fs, ...
+    center] ...
+            = determineClinicalAnnotations(patient_id, seizure_id);
+        
 patDirExists = exist(fullfile(tempDir, patient), 'dir');
+dataDirExists = exist(fullfile(rootDir, 'serverdata/adjmats', strcat(filterType, 'filter'), ...
+        strcat('win', num2str(winSize), '_step', num2str(stepSize), '_freq', num2str(fs))), 'dir');
 
 % initialize return variables
 toCompute = 0;
 patWinsToCompute = [];
 
-if patDirExists
+if patDirExists && ~dataDirExists
     % check if each directory has the right windows computed
     fileList = dir(fullfile(tempDir, patient, '*.mat'));
     fileList = {fileList(:).name};
@@ -48,7 +79,9 @@ if patDirExists
         fprintf('Need to compute certain windows for %s still!\n', patient);
         patWinsToCompute = winsToCompute;
     end
-else
+elseif ~patDirExists && ~dataDirExists
     fprintf('Need to compute for %s still!\n', patient);
     toCompute = 1;
+else
+    fprintf('%s directory already exists!\n', patient);
 end

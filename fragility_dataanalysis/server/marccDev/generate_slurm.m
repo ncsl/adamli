@@ -15,8 +15,11 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 function generate_slurm(patients, winSize, stepSize, radius, ...
     PARTITION, WALLTIME, NUMNODES, NUM_PROCS, JOBTYPE, MERGE)
+    if nargin < 10
+        MERGE = 0;
+    end    
     if nargin==0
-        patients='pt1sz2 pt3sz1 ';
+        patients='UMMC001_sz1';
         winSize=250;
         stepSize=125;
         radius=1.5;
@@ -25,15 +28,12 @@ function generate_slurm(patients, winSize, stepSize, radius, ...
         NUMNODES=1;
         NUM_PROCS=1;
         JOBTYPE=1;
-        MERGE = 0;
+        MERGE = 1;
         if strcmp(PARTITION, 'scavenger')
             QOS='scavenger';
         end
         
         numWins=1000;
-    end
-    if nargin < 10
-        MERGE = 0;
     end
     if strcmp(PARTITION, 'scavenger')
         QOS='scavenger';
@@ -113,7 +113,7 @@ function generate_slurm(patients, winSize, stepSize, radius, ...
                 command = sprintf(strcat(basecommand, ...
                             ' --job-name=%s run_merge.sbatch --export=%s,%d,%d,%d'), ...
                              job_name, patient, winSize, stepSize, JOBTYPE);
-            elseif toCompute == 1 % still have either patients, or windows to compute
+            elseif toCompute == 1 || ~isempty(patWinsToCompute) % still have either patients, or windows to compute
                 fprintf('Recomputing for this patient: %s.\n', patient);
                 
                 %- call function to compute number of windows for a patient based on
@@ -133,26 +133,28 @@ function generate_slurm(patients, winSize, stepSize, radius, ...
                 command = sprintf(strcat(basecommand, ...
                     ' --array=1-%d --job-name=%s run_jobs.sbatch --export=%s,%d,%d'), ...
                         Nbatch, job_name, patient, winSize, stepSize);
-            elseif ~isempty(patWinsToCompute)
-                winsToCompute = patWinsToCompute;
-
-                %- create a job array that goes through the windows to
-                %- compute instead of index by index
-                Nbatch = length(winsToCompute);
-                if JOBTYPE == 1
-                    job_name = strcat(patient, '_ltv_sepwins');
-                else
-                    job_name = strcat(patient, '_pert_sepwins');
-                end
-                
-                winsToCompute_cell = mat2str(winsToCompute);
-                winsToCompute_cell = winsToCompute_cell(2:end-1);
-
-                %- create command to run
-                command = sprintf(strcat('export windows=%s;\n', basecommand, ...
-                                    ' --array=1-%d --job-name=%s run_job.sbatch --export=%s,%d,%d'), ...
-                                winsToCompute_cell,...
-                                Nbatch, job_name, patient, winSize, stepSize);
+%             elseif ~isempty(patWinsToCompute)
+%                 fprintf('Recomputing windows for this patient: %s.\n', patient);
+%                 
+%                 winsToCompute = patWinsToCompute;
+% 
+%                 %- create a job array that goes through the windows to
+%                 %- compute instead of index by index
+%                 Nbatch = length(winsToCompute);
+%                 if JOBTYPE == 1
+%                     job_name = strcat(patient, '_ltv_sepwins');
+%                 else
+%                     job_name = strcat(patient, '_pert_sepwins');
+%                 end
+%                 
+%                 winsToCompute_cell = mat2str(winsToCompute');
+%                 winsToCompute_cell = winsToCompute_cell(2:end-1);
+% 
+%                 %- create command to run
+%                 command = sprintf(strcat('export windows=%s;\n', basecommand, ...
+%                                     ' --array=1-%d --job-name=%s run_job.sbatch --export=%s,%d,%d'), ...
+%                                 winsToCompute_cell,...
+%                                 Nbatch, job_name, patient, winSize, stepSize);
             end
         % else not merging
         else
@@ -179,6 +181,7 @@ function generate_slurm(patients, winSize, stepSize, radius, ...
         
         % print command to see and submit to unix shell
         fprintf(command);
+        fprintf('\n');
         unix(command);
     end % end of loop through patients            
 end
