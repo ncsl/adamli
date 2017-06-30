@@ -25,8 +25,7 @@ patients=(
 	# Pat16sz1p Pat16sz2p Pat16sz3p
 
 
-	'Pat2sz1p Pat2sz2p Pat2sz3p
-	UMMC005_sz1 UMMC007_sz1')
+	'Pat2sz1p Pat2sz2p Pat2sz3p')
 
 	# UMMC001_sz1 UMMC001_sz2 UMMC001_sz3
 	# UMMC002_sz1 UMMC002_sz2 UMMC002_sz3
