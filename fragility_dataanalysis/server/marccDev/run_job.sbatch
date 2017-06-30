@@ -20,6 +20,12 @@ echo ${SBATCH_JOB_NAME}
 echo ${SLURM_SUBMIT_DIR}
 echo ${SLURM_ARRAY_TASK_ID}
 
-matlab -logfile _log/${SBATCH_JOB_NAME}_${SLURM_ARRAY_TASK_ID}.txt -nojvm -nodisplay -nodesktop -nosplash -r "\
-	cd('matlab_lib');\
-	parallelComputeConnectivity('$patient', $winSize, $stepSize, ${SLURM_ARRAY_TASK_ID});"
+if [[ "$RUNCONNECTIVITY" -eq 1 ]]; then
+	matlab -logfile _log/${SBATCH_JOB_NAME}_${SLURM_ARRAY_TASK_ID}.txt -nojvm -nodisplay -nodesktop -nosplash -r "\
+		cd('matlab_lib');\
+		parallelComputeConnectivity('$patient', $winSize, $stepSize, ${SLURM_ARRAY_TASK_ID});"
+else
+	matlab -logfile _log/${SBATCH_JOB_NAME}_${SLURM_ARRAY_TASK_ID}.txt -nojvm -nodisplay -nodesktop -nosplash -r "\
+		cd('matlab_lib');\
+		parallelComputePerturbation('$patient', $winSize, $stepSize, $radius, ${SLURM_ARRAY_TASK_ID});"
+fi

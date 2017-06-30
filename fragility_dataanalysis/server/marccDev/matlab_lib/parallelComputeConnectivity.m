@@ -41,7 +41,8 @@ addpath(rootDir);
 %- 0 == no filtering
 %- 1 == notch filtering
 %- 2 == adaptive filtering
-FILTER_RAW = 2; 
+% FILTER_RAW = 2; 
+filterType = 'adaptive';
 TYPE_CONNECTIVITY = 'leastsquares';
 l2regularization = 0;
 % set options for connectivity measurements

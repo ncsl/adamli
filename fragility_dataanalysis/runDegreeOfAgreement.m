@@ -47,16 +47,6 @@ patients = {...,
 
 close all;
 
-% results of interest
-success_d = []; % to store doa for successful patients
-failure_d = []; % to store doa for failed patients
-success_pats = {};
-failure_pats = {};
-
-outcome = '';
-doa_scores = [];   % just to store doa 
-engel_scores = []; % store engel scores
-
 %% Set Root Directories
 % data directories to save data into - choose one
 eegRootDirHD = '/Volumes/NIL Pass/';
@@ -105,6 +95,17 @@ figDir = fullfile(rootDir, '/figures', 'degreeOfAgreement', ...
 pertDir = fullfile(rootDir, 'serverdata', 'perturbationmats', ...
         strcat(filterType, 'filter'));
 
+
+% results of interest
+success_d = []; % to store doa for successful patients
+failure_d = []; % to store doa for failed patients
+success_pats = {};
+failure_pats = {};
+
+outcomes = cell(length(patients), 1);
+doa_scores = zeros(length(patients), length(thresholds));   % just to store doa 
+engel_scores = zeros(length(patients),1); % store engel scores
+    
 %% Run Through And Plot
 for iPat=1:length(patients)
     patient = patients{iPat};
@@ -152,7 +153,7 @@ for iPat=1:length(patients)
     
     % notch and updated directory
     spectDir = fullfile(rootDir, strcat('/serverdata/spectral_analysis/'), typeTransform, ...
-        strcat(filterType, '_win', num2str(winSize), '_step', num2str(stepSize), '_freq', num2str(fs)), ...
+        strcat(filterType, 'filter', '_win', num2str(winSize), '_step', num2str(stepSize), '_freq', num2str(fs)), ...
         patient);
     
     % load computed results
@@ -206,13 +207,42 @@ for iPat=1:length(patients)
     end
 
     % compute DOA for varying thresholds
+    doa_buff = zeros(length(thresholds), 1);
     for iThresh=1:length(thresholds)
         threshold = thresholds(iThresh);
         
+        %% normal fragility metric
+        % set threshold on the fragility mat
+        thresh_fragility = fragilityMat;
+        thresh_fragility(thresh_fragility < threshold) = 0;
+        sum_fragility = sum(thresh_fragility, 2);
+        sum_fragility = sum_fragility ./ max(sum_fragility);
+%         thresh_fragility(thresh_fragility >= threshold) = 1;
+
         % compute fragility set of electrodes given this threshold
-%         fragility_set = included_labels(
+        fragility_set = included_labels(find(sum_fragility > 0));
         
         % compute doa 
         D = degreeOfAgreement(fragility_set, ezone_labels, included_labels, metric); 
+
+        %% min/max scaled fragility
+        % set threshold on the fragility mat min/maxed scaled
+        thresh_fragility = minmaxFragility;
+        thresh_fragility(thresh_fragility < threshold) = 0;
+        sum_fragility = sum(thresh_fragility, 2);
+        sum_fragility = sum_fragility ./ max(sum_fragility);
+%         thresh_fragility(thresh_fragility >= threshold) = 1;
+
+        % compute fragility set of electrodes given this threshold
+        fragility_set = included_labels(find(sum_fragility > 0));
+        
+        % compute doa 
+        D = degreeOfAgreement(fragility_set, ezone_labels, included_labels, metric); 
+
+        doa_buff(iThresh) = D;
     end
+    doa_scores(iPat,:) = doa_buff;
+    outcomes{iPat} = outcome;
+%     engel_scores = engel_score;
+    
 end % end of loop through patients
