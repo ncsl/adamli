@@ -172,13 +172,18 @@ for p=1:length(patients)
         data = eeg;
         elec_labels = upper(strtrim(labels));
 
-        try
+        varinfo = whos('data', 'elec_labels', 'fs', 'seizure_eonset_ms', 'seizure_eoffset_ms', ...
+                'seizure_conset_ms', 'seizure_coffset_ms', 'outcome', 'engelscore');
+        if sum([varinfo.bytes]) < 2^31
             save(fullfile(patient_eeg_path, patient), ...
                 'data', 'elec_labels', 'fs', 'seizure_eonset_ms', 'seizure_eoffset_ms', ...
                 'seizure_conset_ms', 'seizure_coffset_ms', 'outcome', 'engelscore');
-        catch e
-            disp(e);
+        else
+            save(fullfile(patient_eeg_path, patient), ...
+                'data', 'elec_labels', 'fs', 'seizure_eonset_ms', 'seizure_eoffset_ms', ...
+                'seizure_conset_ms', 'seizure_coffset_ms', 'outcome', 'engelscore', '-v7.3');
         end
+
     end
 
     % check if the eeg and labels are correct sizes 
