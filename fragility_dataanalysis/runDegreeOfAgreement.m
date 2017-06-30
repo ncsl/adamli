@@ -47,6 +47,16 @@ patients = {...,
 
 close all;
 
+% results of interest
+success_d = []; % to store doa for successful patients
+failure_d = []; % to store doa for failed patients
+success_pats = {};
+failure_pats = {};
+
+outcome = '';
+doa_scores = [];   % just to store doa 
+engel_scores = []; % store engel scores
+
 %% Set Root Directories
 % data directories to save data into - choose one
 eegRootDirHD = '/Volumes/NIL Pass/';
@@ -84,6 +94,7 @@ typeConnectivity = 'leastsquares';
 typeTransform = 'fourier'; % morlet, or fourier
 
 % degree of agreement parameters
+metric = 'default';
 thresholds = [0.3, 0.6, 0.8, 0.9, 0.95, 0.99];
 
 % set figure directory to save plots
@@ -182,7 +193,26 @@ for iPat=1:length(patients)
     
     % broadband filter for this patient
     timeWinsToReject = broadbandfilter(patient, typeTransform, winSize, stepSize, filterType, spectDir);
+    % OPTIONAL: apply broadband filter and get rid of time windows
+    % set time windows to nan
+%     fragilityMat(timeWinsToReject) = nan;
+%     minmaxFragility(timeWinsToReject) = nan;
     
+    % set outcome
+    if success_or_failure == 1
+        outcome = 'success';
+    else
+        outcome = 'failure';
+    end
+
     % compute DOA for varying thresholds
-    
-end
+    for iThresh=1:length(thresholds)
+        threshold = thresholds(iThresh);
+        
+        % compute fragility set of electrodes given this threshold
+%         fragility_set = included_labels(
+        
+        % compute doa 
+        D = degreeOfAgreement(fragility_set, ezone_labels, included_labels, metric); 
+    end
+end % end of loop through patients

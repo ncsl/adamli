@@ -1,4 +1,4 @@
-function [ D ] = DOA(EEZ, CEZ, ALL, metric, args)
+function [ D ] = degreeOfAgreement(EEZ, CEZ, ALL, metric, args)
 % #########################################################################
 % Function Summary: Computes statistic (DOA = Degree of Agreement) indicat-
 % ing how well EEZ (from EpiMap) and CEZ (clinical ezone) agree. 
