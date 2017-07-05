@@ -96,7 +96,7 @@ if [[ "${RUNCONNECTIVITY}" -eq 1 ]]; then
 else
 	walltime=0:20:0					# the walltime for each computation
 fi
-partition=scavenger 	# debug, shared, unlimited, parallel, gpu, lrgmem, scavenger
+partition=debug 	# debug, shared, unlimited, parallel, gpu, lrgmem, scavenger
 qos=scavenger
 
 ## load in the modules for this run -> python, matlab, etc.
