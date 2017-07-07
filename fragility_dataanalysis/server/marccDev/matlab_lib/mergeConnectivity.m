@@ -11,7 +11,7 @@ function mergeConnectivity(patient, winSize, stepSize)
 % - computedDir: the directory to check for all the computed patients
 % Output:
 % - vector of patients needed to compute
-fprintf('Inside parallel computing connectivity...\n');
+fprintf('Inside merging connectivity...\n');
 
 %% INITIALIZATION
 % data directories to save data into - choose one
@@ -38,6 +38,7 @@ addpath(rootDir);
 %- 2 == adaptive filtering
 FILTERTYPE = 2; 
 TYPE_CONNECTIVITY = 'leastsquares';
+filterType = 'adaptive';
 l2regularization = 0;
 % set options for connectivity measurements
 OPTIONS.l2regularization = l2regularization;
