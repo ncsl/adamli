@@ -19,6 +19,7 @@ echo ${SLURM_SUBMIT_DIR}
 echo ${winSize}
 echo ${stepSize}
 echo ${windows}
+echo ${radius}
 
 # run merges on either connectivity or perturbation computation
 if [[ "$RUNCONNECTIVITY" -eq 1 ]]; then

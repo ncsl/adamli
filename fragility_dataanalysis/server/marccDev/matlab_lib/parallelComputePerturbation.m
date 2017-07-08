@@ -99,6 +99,7 @@ adjmat_struct = data.adjmat_struct;
 
 % save meta data for the computation 
 if iTask == 1
+    fprintf('Making info struct\n');
     info = struct();
     info.type_connectivity = adjmat_struct.type_connectivity;
     info.ezone_labels = adjmat_struct.ezone_labels;
