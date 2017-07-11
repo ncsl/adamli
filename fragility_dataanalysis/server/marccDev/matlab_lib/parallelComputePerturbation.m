@@ -123,7 +123,7 @@ if iTask == 1
     info.timePoints = adjmat_struct.timePoints;
     info.included_channels = adjmat_struct.included_channels;
     info.frequency_sampling = adjmat_struct.frequency_sampling;
-    info.FILTER_TYPE = adjmat_struct.FILTER_TYPE;
+    info.FILTER = adjmat_struct.FILTER;
 
     if ~exist(fullfile(tempDir, 'info'), 'dir')
         mkdir(fullfile(tempDir, 'info'));
