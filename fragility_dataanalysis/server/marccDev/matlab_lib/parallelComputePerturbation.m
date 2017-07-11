@@ -107,10 +107,10 @@ if iTask == 1
     info.latespread_labels = adjmat_struct.latespread_labels;
     info.resection_labels = adjmat_struct.resection_labels;
     info.all_labels = adjmat_struct.all_labels;
-    info.seizure_estart_ms = adjmat_struct.seizure_eonset_ms;       % store in ms
-    info.seizure_eend_ms = adjmat_struct.seizure_eoffset_ms;
-    info.seizure_cstart_ms = adjmat_struct.seizure_conset_ms;
-    info.seizure_coffset_ms = adjmat_struct.seizure_coffset_ms;
+    info.seizure_estart_ms = adjmat_struct.seizure_estart_ms;       % store in ms
+    info.seizure_eend_ms = adjmat_struct.seizure_eend_ms;
+    info.seizure_cstart_ms = adjmat_struct.seizure_cstart_ms;
+    info.seizure_coffset_ms = adjmat_struct.seizure_cend_ms;
     info.seizure_estart_mark = adjmat_struct.seizure_estart_mark;
     info.seizure_eend_mark = adjmat_struct.seizure_eend_mark;
     info.engelscore = adjmat_struct.engelscore;
