@@ -33,6 +33,7 @@ elseif ~isempty(dir(eegRootDirHome)), eegrootDir = eegRootDirHome;
 elseif ~isempty(dir(eegRootDirJhu)), eegrootDir = eegRootDirJhu;
 elseif ~isempty(dir(eegRootDirMarcc)), eegrootDir = eegRootDirMarcc;
 else   error('Neither Work nor Home EEG directories exist! Exiting'); end
+addpath(eegrootDir);
 
 %- directory for the data stored
 tempDir = fullfile(rootDir, 'server/marccDev/matlab_lib/tempData/', ...
@@ -88,6 +89,7 @@ if 7==patDirExists && isempty(dataDirExists)  % temp dir exists, but merged data
     % get the windows still needed to compute, if any
     winsToCompute = checkWindows(fileList, numWins);
 
+    toCompute = 1;
     if ~isempty(winsToCompute)
         fprintf('Need to compute certain windows for %s still!\n', patient);
         patWinsToCompute = winsToCompute;
