@@ -100,30 +100,27 @@ perturbation_struct = struct();
 for iMat=1:length(matFileNames)
     matFile = fullfile(tempDir, matFileNames{iMat});
     data = load(matFile);
-
-     % extract the computed theta adjacency
+    % extract the computed theta adjacency
     perturbation = data.perturbation_struct;
     
     for iPert=1:length(perturbationTypes)
         perturbationType = perturbationTypes(iPert);
         
+        % initialize matrix if first loop and then store results
+        if iMat==1
+            N = size(perturbation.(perturbationType).fragilityMat, 1);
+
+            %- initialize
+            perturbation_struct.(perturbationType).minNormPertMat = zeros(N, length(matFileNames));
+            perturbation_struct.(perturbationType).fragilityMat = zeros(N, length(matFileNames));
+            perturbation_struct.(perturbationType).del_table = cell(N, length(matFileNames));
+        end
         
-        
+        % extract the perturbation model and fragility matrix
+        perturbation_struct.(perturbationType).del_table(:, iMat) = perturbation.(perturbationType).del_table;
+        perturbation_struct.(perturbationType).minNormPertMat(:, iMat) = perturbation.(perturbationType).minNormPertMat;
+        perturbation_struct.(perturbationType).fragilityMat(:, iMat) = perturbation.(perturbationType).fragilityMat; 
     end
-    % initialize matrix if first loop and then store results
-    if iMat==1
-        N = size(perturbation.(perturbationType).fragilityMat, 1);
-            
-        %- initialize
-        perturbation_struct.(perturbationType).minNormPertMat = zeros(N, length(matFileNames));
-        perturbation_struct.(perturbationType).fragilityMat = zeros(N, length(matFileNames));
-        perturbation_struct.(perturbationType).del_table = cell(N, length(matFileNames));
-    end
-    
-    % extract the perturbation model and fragility matrix
-    perturbation_struct.(perturbationType).del_table(:, iMat) = perturbation.(perturbationType).del_table;
-    perturbation_struct.(perturbationType).minNormPertMat(:, iMat) = perturbation.(perturbationType).minNormPertMat;
-    perturbation_struct.(perturbationType).fragilityMat(:, iMat) = perturbation.(perturbationType).fragilityMat;
 end
 
 %%- Create the structure for the pert model for this patient/seizure
