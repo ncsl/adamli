@@ -13,6 +13,13 @@ function mergePerturbation(patient, winSize, stepSize, radius)
 % - radius:
 % Output:
 % - saves the perturbation model into 1 mat file
+if nargin==0
+    patient = 'Pat2sz1p';
+    winSize=250;
+    stepSize=125;
+    radius=1.1;
+end
+
 fprintf('Inside merging perturbations...\n');
 
 %% INITIALIZATION
@@ -76,6 +83,7 @@ patient_id = buffpatid;
 %- get the temporary directory to look at
 tempDir = fullfile('./tempData/', strcat(filterType, 'filter'), strcat('win', num2str(winSize), ...
     '_step', num2str(stepSize)), 'perturbation', patient);
+tempDir = fullfile('./tempData', patient);
 
 %- set directory to save merged computed data
 toSaveDir = fullfile(rootDir, strcat('/serverdata/pertmats/', filterType, 'filter'), ...
@@ -88,7 +96,8 @@ if ~exist(toSaveDir, 'dir')
 end
 
 %- load info file
-load(fullfile(tempDir, 'info', 'infoPertMat.mat'));
+info = load(fullfile(tempDir, 'info', 'infoPertMat.mat'), 'info');
+info = info.info;
 
 % all the temp lti models per window
 matFiles = dir(fullfile(tempDir, '*.mat'));
