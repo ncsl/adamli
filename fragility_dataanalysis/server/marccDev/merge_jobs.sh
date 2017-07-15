@@ -32,10 +32,10 @@ patients=(
 	UMMC009_sz1 UMMC009_sz2 UMMC009_sz3
 
 	JH103aslp1 JH103aw1
-	JH105aslp1 JH105aw1')
+	JH105aslp1 JH105aw1
 
-	# 'Pat2sz1p Pat2sz2p Pat2sz3p	
-	# Pat16sz1p Pat16sz2p Pat16sz3p')
+	Pat2sz1p Pat2sz2p Pat2sz3p	
+	Pat16sz1p Pat16sz2p Pat16sz3p')
 
 	# 'JH101sz1 JH101sz2 JH101sz3 JH101sz4
 	# JH102sz1 JH102sz2 JH102sz3 JH102sz4 JH102sz5 JH102sz6
