@@ -82,7 +82,7 @@ patient_id = buffpatid;
 
 %- get the temporary directory to look at
 tempDir = fullfile('./tempData/', strcat(filterType, 'filter'), strcat('win', num2str(winSize), ...
-    '_step', num2str(stepSize)), 'perturbation', patient);
+    '_step', num2str(stepSize), '_radius', num2str(radius)), 'perturbation', patient);
 % tempDir = fullfile('./tempData', patient);
 
 %- set directory to save merged computed data

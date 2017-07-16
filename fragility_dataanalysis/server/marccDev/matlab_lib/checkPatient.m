@@ -1,4 +1,4 @@
-function [toCompute, patWinsToCompute] = checkPatient(patient, rootDir, winSize, stepSize, filterType);
+function [toCompute, patWinsToCompute] = checkPatient(patient, rootDir, winSize, stepSize, filterType, JOBTYPE)
 % function: checkPatient
 % By: Adam Li
 % Date: 6/12/17
@@ -36,8 +36,14 @@ else   error('Neither Work nor Home EEG directories exist! Exiting'); end
 addpath(eegrootDir);
 
 %- directory for the data stored
-tempDir = fullfile(rootDir, 'server/marccDev/matlab_lib/tempData/', ...
-    filterType, strcat('win', num2str(winSize), '_step', num2str(stepSize)), 'connectivity');
+if JOBTYPE==1
+    tempDir = fullfile(rootDir, 'server/marccDev/matlab_lib/tempData/', ...
+        filterType, strcat('win', num2str(winSize), '_step', num2str(stepSize)), 'connectivity');
+elseif JOBTYPE==2
+    tempDir = fullfile(rootDir, 'server/marccDev/matlab_lib/tempData/', ...
+        strcat(filterType, 'filter'), strcat('win', num2str(winSize), ...
+        '_step', num2str(stepSize), '_radius', num2str(radius)), 'perturbation', patient);
+end
 
 % set patientID and seizureID
 patient_id = patient(1:strfind(patient, 'seiz')-1);

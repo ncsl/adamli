@@ -83,7 +83,7 @@ sigma = [-sigma, sigma];
 
 %- temp directory
 tempDir = fullfile('./tempData/', strcat(filterType, 'filter'), strcat('win', num2str(winSize), ...
-    '_step', num2str(stepSize)), 'perturbation', patient);
+    '_step', num2str(stepSize), '_radius', num2str(radius)), 'perturbation', patient);
 if ~exist(tempDir, 'dir')
     mkdir(tempDir);
 end
