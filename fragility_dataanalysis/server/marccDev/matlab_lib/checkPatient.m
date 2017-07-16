@@ -1,4 +1,4 @@
-function [toCompute, patWinsToCompute] = checkPatient(patient, rootDir, winSize, stepSize, filterType, JOBTYPE)
+function [toCompute, patWinsToCompute] = checkPatient(patient, rootDir, winSize, stepSize, filterType, radius, JOBTYPE)
 % function: checkPatient
 % By: Adam Li
 % Date: 6/12/17
