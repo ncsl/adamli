@@ -41,8 +41,8 @@ if JOBTYPE==1
         filterType, strcat('win', num2str(winSize), '_step', num2str(stepSize)), 'connectivity');
 elseif JOBTYPE==2
     tempDir = fullfile(rootDir, 'server/marccDev/matlab_lib/tempData/', ...
-        strcat(filterType, 'filter'), strcat('win', num2str(winSize), ...
-        '_step', num2str(stepSize), '_radius', num2str(radius)), 'perturbation', patient);
+        filterType, strcat('win', num2str(winSize), ...
+        '_step', num2str(stepSize), '_radius', num2str(radius)), 'perturbation');
 end
 
 % set patientID and seizureID
@@ -77,8 +77,16 @@ end
             = determineClinicalAnnotations(patient_id, seizure_id);
         
 patDirExists = exist(fullfile(tempDir, patient), 'dir');
-dataDirExists = dir(fullfile(eegrootDir, 'serverdata/adjmats', strcat(filterType), ...
-        strcat('win', num2str(winSize), '_step', num2str(stepSize), '_freq', num2str(fs)), patient, '*.mat'));
+
+if JOBTYPE==1
+    dataDirExists = dir(fullfile(eegrootDir, 'serverdata/adjmats', strcat(filterType), ...
+            strcat('win', num2str(winSize), '_step', num2str(stepSize), '_freq', num2str(fs)),...
+            patient, '*.mat'));
+elseif JOBTYPE==2
+    dataDirExists = dir(fullfile(eegrootDir, 'serverdata/pertmats', strcat(filterType), ...
+            strcat('win', num2str(winSize), '_step', num2str(stepSize), '_freq', num2str(fs), '_radius', num2str(radius)),...
+            patient, '*.mat'));
+end
 
 % initialize return variables
 toCompute = 0;
