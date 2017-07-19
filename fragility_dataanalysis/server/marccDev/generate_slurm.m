@@ -62,7 +62,7 @@ function generate_slurm(patients, winSize, stepSize, radius, ...
     addpath(genpath(fullfile(rootDir, '/eeg_toolbox/')));
     addpath(rootDir);
 
-    fprintf('Inside generation of slurm...\n');
+    fprintf('\n\nInside generation of slurm...\n');
     
     % determine number of patients to generate slurm script
     cell_pats = strsplit(patients, ' ');

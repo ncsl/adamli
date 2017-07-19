@@ -78,40 +78,40 @@ elseif JOBTYPE==0
 end
 
 if JOBTYPE==1
-    dataDirExists = dir(fullfile(eegrootDir, 'serverdata/adjmats', strcat(filterType), ...
+    dataDirFiles = dir(fullfile(eegrootDir, 'serverdata/adjmats', strcat(filterType), ...
             strcat('win', num2str(winSize), '_step', num2str(stepSize), '_freq', num2str(fs), '_radius', num2str(radius)),...
             patient, '*.mat'));
 elseif JOBTYPE==0
-    dataDirExists = dir(fullfile(eegrootDir, 'serverdata/pertmats', strcat(filterType), ...
+    dataDirFiles = dir(fullfile(eegrootDir, 'serverdata/pertmats', strcat(filterType), ...
             strcat('win', num2str(winSize), '_step', num2str(stepSize), '_freq', num2str(fs), '_radius', num2str(radius)),...
             patient, '*.mat'));
 end
 
-patDirExists = exist(fullfile(tempDir, patient), 'dir');
+tempDirExists = exist(fullfile(tempDir, patient), 'dir');
+ 
+% get numWins needed
+numWins = getNumWins(patient, winSize, stepSize);
 
 % initialize return variables
 toCompute = 0;
 patWinsToCompute = [];
 
-if 7==patDirExists && isempty(dataDirExists)  % temp dir exists, but merged data dir doensn't exist
+if 7==tempDirExists && isempty(dataDirFiles)  % temp dir exists, but merged data dir doensn't exist
     % check if each directory has the right windows computed
     fileList = dir(fullfile(tempDir, patient, '*.mat'));
     fileList = {fileList(:).name};
-
-    % get numWins needed
-    numWins = getNumWins(patient, winSize, stepSize);
-
+   
     % get the windows still needed to compute, if any
     winsToCompute = checkWindows(fileList, numWins);
 
-    toCompute = 1;
     if ~isempty(winsToCompute)
+        toCompute = 1;
         fprintf('Need to compute certain windows for %s still!\n', patient);
         patWinsToCompute = winsToCompute;
     end
-elseif 7~=patDirExists && isempty(dataDirExists) % temp and merged dir don't exist
+elseif 7~=tempDirExists && isempty(dataDirFiles) % temp and merged dir don't exist
     fprintf('Need to compute for %s still!\n', patient);
     toCompute = 1;
-else
+else % tempDirExists ~=7 and dataDirFiles is not empty
     fprintf('%s directory already exists!\n', patient);
 end
