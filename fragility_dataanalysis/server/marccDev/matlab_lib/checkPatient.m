@@ -35,16 +35,6 @@ elseif ~isempty(dir(eegRootDirMarcc)), eegrootDir = eegRootDirMarcc;
 else   error('Neither Work nor Home EEG directories exist! Exiting'); end
 addpath(eegrootDir);
 
-%- directory for the data stored
-if JOBTYPE==1
-    tempDir = fullfile(rootDir, 'server/marccDev/matlab_lib/tempData/', ...
-        filterType, strcat('win', num2str(winSize), '_step', num2str(stepSize)), 'connectivity');
-elseif JOBTYPE==0
-    tempDir = fullfile(rootDir, 'server/marccDev/matlab_lib/tempData/', ...
-        filterType, strcat('win', num2str(winSize), ...
-        '_step', num2str(stepSize), '_radius', num2str(radius)), 'perturbation');
-end
-
 % set patientID and seizureID
 patient_id = patient(1:strfind(patient, 'seiz')-1);
 seizure_id = strcat('_', patient(strfind(patient, 'seiz'):end));
@@ -75,18 +65,29 @@ end
     latespread_labels, resection_labels, fs, ...
     center] ...
             = determineClinicalAnnotations(patient_id, seizure_id);
+     
         
-patDirExists = exist(fullfile(tempDir, patient), 'dir');
+%- directory for the data stored
+if JOBTYPE==1
+    tempDir = fullfile(rootDir, 'server/marccDev/matlab_lib/tempData/', ...
+        filterType, strcat('win', num2str(winSize), '_step', num2str(stepSize)), 'connectivity');
+elseif JOBTYPE==0
+    tempDir = fullfile(rootDir, 'server/marccDev/matlab_lib/tempData/', ...
+        filterType, strcat('win', num2str(winSize), ...
+        '_step', num2str(stepSize), '_radius', num2str(radius)), 'perturbation');
+end
 
 if JOBTYPE==1
     dataDirExists = dir(fullfile(eegrootDir, 'serverdata/adjmats', strcat(filterType), ...
-            strcat('win', num2str(winSize), '_step', num2str(stepSize), '_freq', num2str(fs)),...
+            strcat('win', num2str(winSize), '_step', num2str(stepSize), '_freq', num2str(fs), '_radius', num2str(radius)),...
             patient, '*.mat'));
 elseif JOBTYPE==0
     dataDirExists = dir(fullfile(eegrootDir, 'serverdata/pertmats', strcat(filterType), ...
             strcat('win', num2str(winSize), '_step', num2str(stepSize), '_freq', num2str(fs), '_radius', num2str(radius)),...
             patient, '*.mat'));
 end
+
+patDirExists = exist(fullfile(tempDir, patient), 'dir');
 
 % initialize return variables
 toCompute = 0;

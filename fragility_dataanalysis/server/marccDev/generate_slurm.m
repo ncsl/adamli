@@ -100,11 +100,12 @@ function generate_slurm(patients, winSize, stepSize, radius, ...
         
         % merging computations together
         if MERGE
+            fprintf('Checking patients...\n');
             % run a computation on checking patients if there is missing data
-            [toCompute, patWinsToCompute] = checkPatient(patient, rootDir, winSize, stepSize, filterType, radius, JOBTYPE);
+            [toCompute, ~] = checkPatient(patient, rootDir, winSize, stepSize, filterType, radius, JOBTYPE);
             
             % nothing to compute, so merge all computations
-            if isempty(patWinsToCompute) && toCompute == 0
+            if toCompute == 0
                 fprintf('Merging computations.\n');
                 
                 % set jobname 
@@ -115,7 +116,7 @@ function generate_slurm(patients, winSize, stepSize, radius, ...
                 command = sprintf(strcat(basecommand, ...
                             ' --job-name=%s run_merge.sbatch --export=%s,%d,%d,%d,%d'), ...
                              job_name, patient, winSize, stepSize, JOBTYPE, radius);
-            elseif toCompute == 1 || ~isempty(patWinsToCompute) % still have either patients, or windows to compute
+            elseif toCompute == 1  % still have either patients, or windows to compute
                 fprintf('Recomputing for this patient: %s.\n', patient);
                 
                 %- call function to compute number of windows for a patient based on
