@@ -55,6 +55,9 @@ patients = fieldnames(organized_patients);
 perturbationTypes = ['C', 'R'];
 perturbationType = perturbationTypes(1);
 
+% plotting parameters
+FONTSIZE = 20;
+
 % data parameters to find correct directory
 radius = 1.5;             % spectral radius of perturbation
 winSize = 250;            % window size in milliseconds
@@ -75,6 +78,7 @@ figDir = fullfile(rootDir, '/figures', 'degreeOfAgreement', ...
     strcat('perturbation', perturbationType, '_win', num2str(winSize), '_step', num2str(stepSize), '_radius', num2str(radius)));
 
 
+%% Initialization and Code
 % results of interest
 success_d = []; % to store doa for successful patients
 failure_d = []; % to store doa for failed patients
@@ -156,6 +160,7 @@ for iPat=1:length(patients)
         seizure_eend_ms = info.seizure_eend_ms;
         seizure_eend_mark = info.seizure_eend_mark;
         num_channels = length(info.all_labels);
+        engel_score = info.engel_score;
 
         %- set global variable for plotting
         seizureStart = seizure_estart_ms;
@@ -185,6 +190,87 @@ for iPat=1:length(patients)
             outcome = 'failure';
         end
 
-        
+        % compute degree of agreement for varying thresholds
+        doa_buff = doa_thresholds(fragilityMat, ezone_labels, included_labels, thresholds, metric);
+    
+        % store DOA, outcome, engel scores
+        doa_scores(iPat,:) = doa_buff;
+        outcomes{iPat} = outcome;
+        engel_scores(iPat) = engel_score;
+
+        % plot degree of agreement for this patient
+        figure;
+        plot(thresholds, doa_buff, 'k-'); hold on; axes = gca;
+        xlabel('Thresholds'); ylabel(strcat({'DOA using', metric}));
+        title(['DOA for ', patient]);
+        if strcmp(metric, 'default')
+            axes.YLim = [-1, 1]; 
+            plot(axes.XLim, [0, 0], 'k--'); 
+        elseif strcmp(metric, 'jaccard')
+            axes.YLim = [0, 1];
+        end
+        axes.FontSize = FONTSIZE;
     end % loop through data events
+    
+    figure;
+    for i=1:length(thresholds)
+        subplot(1,length(thresholds),i);
+        hold on;
+        axes = gca;
+        currfig = gcf;
+        toPlot = doa_scores(i, :);
+        grp = [zeros(1, length(pat_d(i,:)))];
+        boxplot(toPlot, grp, 'Labels', outcome);
+        xlabel('Success or Failed Surgery');
+        ylabel(strcat('Degree of Agreement (', metric, ')'));
+        titleStr = strcat('Threshold =', {' '}, num2str(thresholds(i)));
+        title(titleStr);
+
+        axes.FontSize = FONTSIZE;
+        if strcmp(metric, 'default')
+            axes.YLim = [-1, 1]; 
+            plot(axes.XLim, [0, 0], 'k--'); 
+        elseif strcmp(metric, 'jaccard')
+            axes.YLim = [0, 1];
+        end
+        currfig.Units = 'inches';
+        currfig.PaperPosition = [0    0.6389   20.0000   10.5417];
+        currfig.Position = [0    0.6389   20.0000   10.5417];
+    end
+
+    titleStr = strcat(center, ' - ', patient, ' Agreement With Clinical For Surgical Outcomes');
+    h = suptitle(titleStr);
+    set(h, 'FontSize', FONTSIZE); 
+
 end % loop through patients in NIH
+
+figure;
+for i=1:length(thresholds)
+    doa_score = doa_scores(:, i);
+    
+    subplot(1,length(thresholds),i);
+    hold on; axes = gca; currfig = gcf;
+    bh = boxplot(doa_score, 'Labels', {'S', 'F'});
+    set(bh, 'linewidth', 3);
+    axes.Box = 'off'; axes.LineWidth = 3;
+    xlabel('Engel Score'); ylabel(strcat('Degree of Agreement (', metric, ')'));
+    titleStr = strcat('Threshold =', {' '}, num2str(thresholds(i))); title(titleStr);
+    
+    axes.FontSize = FONTSIZE;
+    if strcmp(metric, 'default')
+        axes.YLim = [-1, 1]; 
+        plot(axes.XLim, [0, 0], 'k--', 'LineWidth', 1.5); 
+    elseif strcmp(metric, 'jaccard')
+        axes.YLim = [0, 1];
+    end
+
+    currfig.Units = 'inches';
+    currfig.PaperPosition = [0    0.6389   20.0000   10.5417];
+    currfig.Position = [0    0.6389   20.0000   10.5417];
+end
+
+% print our results for threshold = 0.9
+avg_doa = mean(doa_score(length(thresholds),:)); 
+sd_doa = std(doa_score(length(thresholds),:));
+
+fprintf('Success doa: %.02f +/- %.02f\n', avg_doa, sd_doa);
