@@ -191,7 +191,7 @@ for iPat=1:length(patients)
         minmaxFragility = min_max_scale(minNormPertMat); % perform min max scaling
 
         % broadband filter for this patient
-        timeWinsToReject = broadbandfilter(pat, typeTransform, winSize, stepSize, filterType, spectDir);
+%         timeWinsToReject = broadbandfilter(pat, typeTransform, winSize, stepSize, filterType, spectDir);
 
         % OPTIONAL: apply broadband filter and get rid of time windows
         % set time windows to nan
