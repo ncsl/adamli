@@ -59,7 +59,7 @@ perturbationType = perturbationTypes(1);
 FONTSIZE = 20;
 
 % data parameters to find correct directory
-radius = 1.5;             % spectral radius of perturbation
+radius = 1.25;             % spectral radius of perturbation
 winSize = 250;            % window size in milliseconds
 stepSize = 125; 
 filterType = 'adaptivefilter';  % adaptive, notch, or no
@@ -77,6 +77,9 @@ figDir = fullfile(rootDir, '/figures', 'degreeOfAgreement', ...
     strcat(filterType), ...
     strcat('perturbation', perturbationType, '_win', num2str(winSize), '_step', num2str(stepSize), '_radius', num2str(radius)));
 
+if ~exist(figDir, 'dir')
+    mkdir(figDir);
+end
 
 %% Initialization and Code
 % results of interest
@@ -136,10 +139,20 @@ for iPat=1:length(patients)
             strcat(filterType), ...
             strcat('win', num2str(winSize), '_step', num2str(stepSize), '_freq', num2str(fs), '_radius', num2str(radius)));
 
+%         spectDir = fullfile(rootDir, strcat('/serverdata/spectral_analysis/'), typeTransform, ...
+%             strcat(filterType, 'filter'), strcat('win', num2str(winSize), '_step', num2str(stepSize), '_freq', num2str(fs)), ...
+%             patient);
+    
+        % notch and updated directory
+        spectDir = fullfile(rootDir, strcat('/serverdata/spectral_analysis/'), typeTransform, ...
+            strcat(filterType, '_win', num2str(winSize), '_step', num2str(stepSize), '_freq', num2str(fs)), ...
+            pat);
+        
         % extract data
         % load computed results
         final_data = load(fullfile(pertDir, ...
-            strcat(patient, '_pertmats', '.mat')));
+            pat,...
+            strcat(pat, '_pertmats', '.mat')));
         final_data = final_data.perturbation_struct;
 
         
@@ -160,7 +173,7 @@ for iPat=1:length(patients)
         seizure_eend_ms = info.seizure_eend_ms;
         seizure_eend_mark = info.seizure_eend_mark;
         num_channels = length(info.all_labels);
-        engel_score = info.engel_score;
+        engelscore = info.engelscore;
 
         %- set global variable for plotting
         seizureStart = seizure_estart_ms;
@@ -176,7 +189,7 @@ for iPat=1:length(patients)
         minmaxFragility = min_max_scale(minNormPertMat); % perform min max scaling
 
         % broadband filter for this patient
-        timeWinsToReject = broadbandfilter(patient, typeTransform, winSize, stepSize, filterType, spectDir);
+        timeWinsToReject = broadbandfilter(pat, typeTransform, winSize, stepSize, filterType, spectDir);
 
         % OPTIONAL: apply broadband filter and get rid of time windows
         % set time windows to nan
@@ -191,37 +204,72 @@ for iPat=1:length(patients)
         end
 
         % compute degree of agreement for varying thresholds
-        doa_buff = doa_thresholds(fragilityMat, ezone_labels, included_labels, thresholds, metric);
+        doa_buff = doa_thresholds(fragilityMat, minmaxFragility, ezone_labels, included_labels, thresholds, metric);
     
+        %% Store Results and Plot For Patient Result
         % store DOA, outcome, engel scores
         doa_scores(iPat,:) = doa_buff;
         outcomes{iPat} = outcome;
-        engel_scores(iPat) = engel_score;
+        engel_scores(iPat) = engelscore;
 
-        % plot degree of agreement for this patient
-        figure;
-        plot(thresholds, doa_buff, 'k-'); hold on; axes = gca;
-        xlabel('Thresholds'); ylabel(strcat({'DOA using', metric}));
-        title(['DOA for ', patient]);
-        if strcmp(metric, 'default')
-            axes.YLim = [-1, 1]; 
-            plot(axes.XLim, [0, 0], 'k--'); 
-        elseif strcmp(metric, 'jaccard')
-            axes.YLim = [0, 1];
+        
+        if iPat==1 
+            % plot degree of agreement for this patient
+%             figure;
+%             plot(thresholds, doa_buff, 'k-'); hold on; axes = gca; currfig = gcf;
+%             xlabel('Thresholds'); ylabel(strcat({'DOA using', metric}));
+%             title(['DOA for ', pat]);
+%             if strcmp(metric, 'default')
+%                 axes.YLim = [-1, 1]; 
+%                 plot(axes.XLim, [0, 0], 'k--'); 
+%             elseif strcmp(metric, 'jaccard')
+%                 axes.YLim = [0, 1];
+%             end
+%             axes.FontSize = FONTSIZE;
+% 
+%             set(currfig, 'Units', 'inches');
+% 
+%         %     currfig.Position = [1986           1        1535        1121];
+%             currfig.Position = [17.3438         0   15.9896   11.6771];
+% 
+%             toSaveFigFile = fullfile(figDir, strcat(pat, '_doavsthreshold'));
+%             print(toSaveFigFile, '-dpng', '-r0')
         end
-        axes.FontSize = FONTSIZE;
+        
+        % store results into success/failure data struct
+        if strcmp(upper(outcome), 'SUCCESS')
+            if isempty(success_d)
+                success_d = doa_buff;
+            else
+                success_d = [success_d, doa_buff];
+            end
+
+            success_pats{end+1} = pat;
+        elseif strcmp(upper(outcome), 'FAILURE')
+            if isempty(failure_d) 
+                failure_d = doa_buff;
+            else
+                failure_d = [failure_d, doa_buff];
+            end
+
+            failure_pats{end+1} = pat;
+        end
+
+        if isempty(pat_d)
+            pat_d = doa_buff;
+        else
+            pat_d = [pat_d, doa_buff];
+        end
+        
     end % loop through data events
     
+    % plot box plot for this one patient depending on threshold
     figure;
     for i=1:length(thresholds)
-        subplot(1,length(thresholds),i);
-        hold on;
-        axes = gca;
-        currfig = gcf;
-        toPlot = doa_scores(i, :);
-        grp = [zeros(1, length(pat_d(i,:)))];
-        boxplot(toPlot, grp, 'Labels', outcome);
-        xlabel('Success or Failed Surgery');
+        subplot(1, length(thresholds), i);
+        hold on; axes = gca; currfig = gcf;
+        bh = boxplot(pat_d);
+        xlabel(pat);
         ylabel(strcat('Degree of Agreement (', metric, ')'));
         titleStr = strcat('Threshold =', {' '}, num2str(thresholds(i)));
         title(titleStr);
@@ -237,12 +285,42 @@ for iPat=1:length(patients)
         currfig.PaperPosition = [0    0.6389   20.0000   10.5417];
         currfig.Position = [0    0.6389   20.0000   10.5417];
     end
-
-    titleStr = strcat(center, ' - ', patient, ' Agreement With Clinical For Surgical Outcomes');
-    h = suptitle(titleStr);
-    set(h, 'FontSize', FONTSIZE); 
-
+    
+    toSaveFigFile = fullfile(figDir, strcat(patient, '_doavsthreshold'));
+    print(toSaveFigFile, '-dpng', '-r0') 
 end % loop through patients in NIH
+
+figure;
+for i=1:length(thresholds)
+    subplot(1,length(thresholds),i);
+    hold on;
+    axes = gca;
+    currfig = gcf;
+    toPlot = [success_d(:,i), failure_d(:,i)];
+    grp = [zeros(1, length(success_d(i,:))), ones(1, length(failure_d(i,:)))];
+    bh = boxplot(toPlot, grp, 'Labels', {'S', 'F'});
+    xlabel('Success or Failed Surgery');
+    ylabel(strcat('Degree of Agreement (', metric, ')'));
+    titleStr = strcat('Threshold =', {' '}, num2str(thresholds(i)));
+    title(titleStr);
+
+    axes.FontSize = FONTSIZE;
+    if strcmp(metric, 'default')
+        axes.YLim = [-1, 1]; 
+        plot(axes.XLim, [0, 0], 'k--'); 
+    elseif strcmp(metric, 'jaccard')
+        axes.YLim = [0, 1];
+    end
+    currfig.Units = 'inches';
+    currfig.PaperPosition = [0    0.6389   20.0000   10.5417];
+    currfig.Position = [0    0.6389   20.0000   10.5417];
+end
+
+titleStr = strcat(center, ' - ', patient, ' Agreement With Clinical For Surgical Outcomes');
+h = suptitle(titleStr);
+set(h, 'FontSize', FONTSIZE); 
+
+
 
 figure;
 for i=1:length(thresholds)
