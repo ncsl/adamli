@@ -97,7 +97,9 @@ for iPat=1:length(patients)
     
     % extract the events to analyze for this patient
     data_events = organized_patients.(patient);
-    
+    % vector to store doa for this patient
+    pat_d = [];
+        
     for iEv=1:length(data_events)
         ev = data_events{iEv};
         pat = ev;
@@ -263,31 +265,33 @@ for iPat=1:length(patients)
         
     end % loop through data events
     
-    % plot box plot for this one patient depending on threshold
-    figure;
-    for i=1:length(thresholds)
-        subplot(1, length(thresholds), i);
-        hold on; axes = gca; currfig = gcf;
-        bh = boxplot(pat_d);
-        xlabel(pat);
-        ylabel(strcat('Degree of Agreement (', metric, ')'));
-        titleStr = strcat('Threshold =', {' '}, num2str(thresholds(i)));
-        title(titleStr);
+    if iPat==1
+        % plot box plot for this one patient depending on threshold
+        figure;
+        for i=1:length(thresholds)
+            subplot(1, length(thresholds), i);
+            hold on; axes = gca; currfig = gcf;
+            bh = boxplot(pat_d(i,:));
+            xlabel(patient);
+            ylabel(strcat('Degree of Agreement (', metric, ')'));
+            titleStr = strcat('Thresh =', {' '}, num2str(thresholds(i)));
+            title(titleStr);
 
-        axes.FontSize = FONTSIZE;
-        if strcmp(metric, 'default')
-            axes.YLim = [-1, 1]; 
-            plot(axes.XLim, [0, 0], 'k--'); 
-        elseif strcmp(metric, 'jaccard')
-            axes.YLim = [0, 1];
+            axes.FontSize = FONTSIZE-4;
+            if strcmp(metric, 'default')
+                axes.YLim = [-1, 1]; 
+                plot(axes.XLim, [0, 0], 'k--'); 
+            elseif strcmp(metric, 'jaccard')
+                axes.YLim = [0, 1];
+            end
+            currfig.Units = 'inches';
+            currfig.PaperPosition = [0    0.6389   20.0000   10.5417];
+            currfig.Position = [0    0.6389   20.0000   10.5417];
         end
-        currfig.Units = 'inches';
-        currfig.PaperPosition = [0    0.6389   20.0000   10.5417];
-        currfig.Position = [0    0.6389   20.0000   10.5417];
+
+        toSaveFigFile = fullfile(figDir, strcat(patient, '_doavsthreshold'));
+        print(toSaveFigFile, '-dpng', '-r0') 
     end
-    
-    toSaveFigFile = fullfile(figDir, strcat(patient, '_doavsthreshold'));
-    print(toSaveFigFile, '-dpng', '-r0') 
 end % loop through patients in NIH
 
 figure;
@@ -296,7 +300,7 @@ for i=1:length(thresholds)
     hold on;
     axes = gca;
     currfig = gcf;
-    toPlot = [success_d(:,i), failure_d(:,i)];
+    toPlot = [success_d(i,:), failure_d(i,:)];
     grp = [zeros(1, length(success_d(i,:))), ones(1, length(failure_d(i,:)))];
     bh = boxplot(toPlot, grp, 'Labels', {'S', 'F'});
     xlabel('Success or Failed Surgery');
@@ -304,7 +308,7 @@ for i=1:length(thresholds)
     titleStr = strcat('Threshold =', {' '}, num2str(thresholds(i)));
     title(titleStr);
 
-    axes.FontSize = FONTSIZE;
+    axes.FontSize = FONTSIZE-4;
     if strcmp(metric, 'default')
         axes.YLim = [-1, 1]; 
         plot(axes.XLim, [0, 0], 'k--'); 
