@@ -194,6 +194,7 @@ for iPat=1:length(patients)
     
     % broadband filter for this patient
     timeWinsToReject = broadbandfilter(patient, typeTransform, winSize, stepSize, filterType, spectDir);
+    
     % OPTIONAL: apply broadband filter and get rid of time windows
     % set time windows to nan
 %     fragilityMat(timeWinsToReject) = nan;
@@ -240,9 +241,13 @@ for iPat=1:length(patients)
         D = degreeOfAgreement(fragility_set, ezone_labels, included_labels, metric); 
 
         doa_buff(iThresh) = D;
-    end
+    end % end of loop through thresholds
+    
+    % store DOA, outcome, engel scores
     doa_scores(iPat,:) = doa_buff;
     outcomes{iPat} = outcome;
 %     engel_scores = engel_score;
     
+    % plot degree of agreement for this patient
+
 end % end of loop through patients

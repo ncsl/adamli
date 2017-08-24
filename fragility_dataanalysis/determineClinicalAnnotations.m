@@ -7,7 +7,7 @@ function [included_channels, onset_electrodes, ...
     success_or_failure = -1; % if 1, then success, if 0 then failure, if -1 not set
     
     nihclinicalannotations; %- run through checking of nih clinical annotations
-    
+    laclinicalannotations;
    if strcmp(patient_id, 'EZT007')
         included_channels = [1:16 18:53 55:71 74:78 81:94];
         onset_electrodes = {'O7', 'E8', 'E7', 'I5', 'E9', 'I6', 'E3', 'E2',...
@@ -16,32 +16,6 @@ function [included_channels, onset_electrodes, ...
         earlyspread_labels = {};
         latespread_labels = {};
         center = 'cc';
-    elseif strcmp(patient_id, 'Pat2')
-        included_channels = [1:4 7:19 21:37 46:47 50:100];
-        
-        %- took out supposed gray matter received from Zach April 2017
-        included_channels = [1:4 7 9 11:12 15:18 21:28 30:34 47 50:62 64:67 70:73 79:87 90 95:99];
-        onset_electrodes = {'POL L''2', 'POL L''3', 'POL L''4'};
-        earlyspread_labels = {};
-        latespread_labels = {};
-        
-        resection_labels = {};
-        
-        center = 'laserablation';
-    elseif strcmp(patient_id, 'Pat16')
-        included_channels = [1:4 7:19 21:39 42:121 124:157 178:189];
-        
-        %- took out supposed gray matter received from Zach
-        included_channels = [1:3 10:16 23:24 28 31:35 37:39 42:44 46:47 49:54 58:62 64:65 68:70 76:89 93:98 ...
-            100:101 105:121 124 126 128:130 132:134 136:140 142:144 149:156 178:181 183:189];
-        
-        onset_electrodes = {'POL Q7', 'POL Q8'};
-        earlyspread_labels = {};
-        latespread_labels = {};
-        
-        resection_labels = {};
-        
-        center = 'laserablation';
     elseif strcmp(patient_id, 'EZT004')
         included_channels = [1:7 9:10 12:22 24:49 51:60 62:73];
         
@@ -260,7 +234,9 @@ function [included_channels, onset_electrodes, ...
             included_channels = [1:4 7:33 47:66 69:73 75:110]; % removed 34 (RHD10)
         end
         
-        onset_electrodes = {};
+        onset_electrodes = {'POLRAD1', 'POLRAD2', 'POLRAD3', 'POLRAD4', 'POLRAD5', ...
+            'POLRAD6', 'POLRAD7', 'POLRHD1', 'POLRHD2', 'POLRHD3', 'POLRHD4', ...
+            'POLRHD5', 'POLRHD6', 'POLRHD7', 'POLRHD8', 'POLRHD9'};
         earlyspread_labels = {'POLRTG48', 'POLRTG40'};
         latespread_labels = {};
         
