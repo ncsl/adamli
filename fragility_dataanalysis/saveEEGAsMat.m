@@ -47,21 +47,22 @@ patients = {,...
 %     'UMMC009_sz1', 'UMMC009_sz2', 'UMMC009_sz3', ...
 %     'JH103aslp1', 'JH103aw1', ...
 %     'JH105aslp1', 'JH105aw1',...
-    'Pat2sz1p', 'Pat2sz2p', 'Pat2sz3p', ...
-    'Pat16sz1p', 'Pat16sz2p', 'Pat16sz3p', ...
+%     'Pat2sz1p', 'Pat2sz2p', 'Pat2sz3p', ...
+%     'Pat16sz1p', 'Pat16sz2p', 'Pat16sz3p', ...
+    'LA01_ICTAL', 'LA01_Inter', ...
 };
 % add libraries of functions
 addpath('./fragility_library/');
 
 dataDir = './data/';
-% dataDir = '/Volumes/NIL_PASS/data/';
+dataDir = '/Volumes/ADAM LI/data/';
 
-if INTERICTAL
-    dataDir = './data/interictal_data/';
-    dataDir = '/Volumes/NIL_PASS/interictal spike raw edf data/';
-end   
+% if INTERICTAL
+%     dataDir = './data/interictal_data/';
+%     dataDir = '/Volumes/NIL_PASS/interictal spike raw edf data/';
+% end   
 
-clinicalFile = fullfile('./data/clinicalData.mat');
+clinicalFile = fullfile(dataDir, '/clinicalData.mat');
 load(clinicalFile);
 
 %%- Begin Loop Through Different Patients Here

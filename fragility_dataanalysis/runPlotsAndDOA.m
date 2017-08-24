@@ -89,16 +89,22 @@ addpath(genpath('./fragility_library/'));
 addpath(genpath('/Users/adam2392/Dropbox/eeg_toolbox'));
 addpath(genpath('/home/WIN/ali39/Documents/adamli/fragility_dataanalysis/eeg_toolbox/'));
 
-% set working directory
 % data directories to save data into - choose one
-eegRootDirServer = '/home/ali/adamli/fragility_dataanalysis/';     % work
-% eegRootDirHome = '/Users/adam2392/Documents/MATLAB/Johns Hopkins/NINDS_Rotation';  % home
-eegRootDirHome = '/Volumes/NIL_PASS/';
-eegRootDirJhu = '/home/WIN/ali39/Documents/adamli/fragility_dataanalysis/';
+eegRootDirHD = '/Volumes/NIL Pass/';
+eegRootDirHD = '/Volumes/ADAM LI/';
+eegRootDirServer = '/home/ali/adamli/fragility_dataanalysis/';                 % at ICM server 
+eegRootDirHome = '/Users/adam2392/Documents/adamli/fragility_dataanalysis/';   % at home macbook
+eegRootDirHome = 'test';
+eegRootDirJhu = '/home/WIN/ali39/Documents/adamli/fragility_dataanalysis/';    % at JHU workstation
+eegRootDirMarcctest = '/home-1/ali39@jhu.edu/work/adamli/fragility_dataanalysis/'; % at MARCC server
+eegRootDirMarcc = '/scratch/groups/ssarma2/adamli/fragility_dataanalysis/';
+
 % Determine which directory we're working with automatically
 if     ~isempty(dir(eegRootDirServer)), rootDir = eegRootDirServer;
 elseif ~isempty(dir(eegRootDirHome)), rootDir = eegRootDirHome;
 elseif ~isempty(dir(eegRootDirJhu)), rootDir = eegRootDirJhu;
+elseif ~isempty(dir(eegRootDirMarcc)), rootDir = eegRootDirMarcc;
+elseif ~isempty(dir(eegRootDirHD)), rootDir = eegRootDirHD;
 else   error('Neither Work nor Home EEG directories exist! Exiting'); end
 
 figDir = fullfile(rootDir, '/figures/adaptivefiltered/', ...
@@ -179,10 +185,10 @@ for p=1:length(patients)
     info = final_data.info;
     
     %- extract clinical data
-%     ezone_labels = info.ezone_labels;
-%     earlyspread_labels = info.earlyspread_labels;
-%     latespread_labels = info.latespread_labels;
-%     resection_labels = info.resection_labels;
+    ezone_labels = info.ezone_labels;
+    earlyspread_labels = info.earlyspread_labels;
+    latespread_labels = info.latespread_labels;
+    resection_labels = info.resection_labels;
     included_labels = info.all_labels;
     seizure_estart_ms = info.seizure_estart_ms;
     seizure_estart_mark = info.seizure_estart_mark;
@@ -283,7 +289,6 @@ for p=1:length(patients)
         PLOTARGS.seizureMarkStart = seizureMarkStart;
         PLOTARGS.frequency_sampling = fs;
         PLOTARGS.stepSize = stepSize;
-
 
         if seizureStart == size(minPerturb_time_chan,1)*winSize % interictal data
             timeStart = 1;

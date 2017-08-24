@@ -1,5 +1,10 @@
+function labelColorbar(ax, colorArgs)
+    colorbarStr = colorArgs.colorbarStr;
+    fontSize = colorArgs.FontSize;
 
-function labelColorbar(axes, label, fontSize)
-    axes.Label.String = label;
-    axes.FontSize = fontSize;
+    % activate colorbar, and position it, label it and change fontsize
+    cbar = colorbar();
+    cbar.Position(1) = cbar.Position(1) + 0.04;
+    cbar.Label.String = colorbarStr;
+    cbar.FontSize = fontSize;
 end

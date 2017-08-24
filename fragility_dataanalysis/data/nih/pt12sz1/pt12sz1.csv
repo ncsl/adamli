@@ -1,2 +1,0 @@
-patient_id,date,recording_start,onset_time,offset_time,recording_duration,num_channels,included_channels
-pt12sz1,1/17/13,16:36:33,16:37:46,16:41:46,381,65,[1:15 17:33 38:39 42:61]

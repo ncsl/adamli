@@ -1,4 +1,4 @@
-% patients = {...,
+patients = {...,
 %      'pt1aw1','pt1aw2', ...
 % %     'pt2aw2', 'pt2aslp2',...
 % %     'pt1aslp1','pt1aslp2', ...
@@ -19,16 +19,18 @@
 % %     'pt14sz1' 'pt14sz2' 'pt14sz3'  'pt16sz1' 'pt16sz2' 'pt16sz3',...
 % %     'pt15sz1' 'pt15sz2' 'pt15sz3' 'pt15sz4',...
 % %     'pt16sz1' 'pt16sz2' 'pt16sz3',...
-% %     'pt17sz1' 'pt17sz2', 'pt17sz3', ...
-% };
+    'pt17sz1' 'pt17sz2', 'pt17sz3', ...
+};
 
 close all;
 
 %% Set Root Directories
 % data directories to save data into - choose one
 eegRootDirHD = '/Volumes/NIL Pass/';
+eegRootDirHD = '/Volumes/ADAM LI/';
 eegRootDirServer = '/home/ali/adamli/fragility_dataanalysis/';                 % at ICM server 
 eegRootDirHome = '/Users/adam2392/Documents/adamli/fragility_dataanalysis/';   % at home macbook
+eegRootDirHome = 'test';
 eegRootDirJhu = '/home/WIN/ali39/Documents/adamli/fragility_dataanalysis/';    % at JHU workstation
 eegRootDirMarcctest = '/home-1/ali39@jhu.edu/work/adamli/fragility_dataanalysis/'; % at MARCC server
 eegRootDirMarcc = '/scratch/groups/ssarma2/adamli/fragility_dataanalysis/';
@@ -92,7 +94,7 @@ outcomes = cell(length(patients), 1);
 doa_scores = zeros(length(patients), length(thresholds));   % just to store doa 
 engel_scores = zeros(length(patients),1); % store engel scores
 
-for iPat=1:length(patients)
+for iPat=length(patients):length(patients)%1:length(patients)
     patient = patients{iPat};
     
     % extract the events to analyze for this patient
@@ -191,7 +193,7 @@ for iPat=1:length(patients)
         minmaxFragility = min_max_scale(minNormPertMat); % perform min max scaling
 
         % broadband filter for this patient
-%         timeWinsToReject = broadbandfilter(pat, typeTransform, winSize, stepSize, filterType, spectDir);
+        timeWinsToReject = broadbandfilter(pat, typeTransform, winSize, stepSize, filterType, spectDir);
 
         % OPTIONAL: apply broadband filter and get rid of time windows
         % set time windows to nan

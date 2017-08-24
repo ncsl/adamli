@@ -1,8 +1,0 @@
-EZT030_seiz001.mat has 82 channels & 82 labels
-EZT030_seiz002.mat has 82 channels & 82 labels
-EZT030_seiz003.mat has 82 channels & 82 labels
-EZT030_seiz004.mat has 82 channels & 82 labels
-EZT030_seiz005.mat has 82 channels & 82 labels
-EZT030_seiz006.mat has 82 channels & 82 labels
-EZT030_seiz007.mat has 82 channels & 82 labels
-EZT030_seiz008.mat has 82 channels & 82 labels
