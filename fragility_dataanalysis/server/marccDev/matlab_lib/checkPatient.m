@@ -36,36 +36,14 @@ else   error('Neither Work nor Home EEG directories exist! Exiting'); end
 addpath(eegrootDir);
 
 % set patientID and seizureID
-patient_id = patient(1:strfind(patient, 'seiz')-1);
-seizure_id = strcat('_', patient(strfind(patient, 'seiz'):end));
-seeg = 1;
-if isempty(patient_id)
-    patient_id = patient(1:strfind(patient, 'sz')-1);
-    seizure_id = patient(strfind(patient, 'sz'):end);
-    seeg = 0;
-end
-if isempty(patient_id)
-    patient_id = patient(1:strfind(patient, 'aslp')-1);
-    seizure_id = patient(strfind(patient, 'aslp'):end);
-    seeg = 0;
-end
-if isempty(patient_id)
-    patient_id = patient(1:strfind(patient, 'aw')-1);
-    seizure_id = patient(strfind(patient, 'aw'):end);
-    seeg = 0;
-end
-buffpatid = patient_id;
-if strcmp(patient_id(end), '_')
-    patient_id = patient_id(1:end-1);
-end
-
+[~, patient_id, seizure_id, is_seeg] = splitPatient(patient);
+    
 %% DEFINE OUTPUT DIRS AND CLINICAL ANNOTATIONS
 %- Edit this file if new patients are added.
 [included_channels, ezone_labels, earlyspread_labels,...
     latespread_labels, resection_labels, fs, ...
     center] ...
             = determineClinicalAnnotations(patient_id, seizure_id);
-     
         
 %- directory for the data stored
 if JOBTYPE==1

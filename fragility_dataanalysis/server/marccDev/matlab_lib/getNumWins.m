@@ -31,8 +31,12 @@ function numWins = getNumWins(patient, winSize, stepSize)
             
     %% EZT/SEEG PATIENTS
     if is_seeg
-        patient_eeg_path = fullfile(dataDir, patient_id);
-        patient = strcat(patient_id, seizure_id);
+        % for EZT patients
+%         patient_eeg_path = fullfile(dataDir, patient_id);
+%         patient = strcat(patient_id, seizure_id);
+        
+        % for LA patients
+        patient_eeg_path = fullfile(dataDir, patient);
     else
         patient_eeg_path = fullfile(dataDir, patient);
     end
