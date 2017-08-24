@@ -19,7 +19,7 @@ function generate_slurm(patients, winSize, stepSize, radius, ...
         MERGE = 0;
     end    
     if nargin==0
-        patients='UMMC001_sz2';
+        patients='LA01_ICTAL';
         winSize=250;
         stepSize=125;
         radius=1.5;
@@ -28,7 +28,7 @@ function generate_slurm(patients, winSize, stepSize, radius, ...
         NUMNODES=1;
         NUM_PROCS=1;
         JOBTYPE=1; % RUNCONNECTIVITY
-        MERGE = 1;
+        MERGE = 0;
         if strcmp(PARTITION, 'scavenger')
             QOS='scavenger';
         end
@@ -39,18 +39,26 @@ function generate_slurm(patients, winSize, stepSize, radius, ...
         QOS='scavenger';
     end
 
+    close all;
     % data directories to save data into - choose one
+    eegRootDirHD = '/Volumes/ADAM LI/';
     eegRootDirServer = '/home/ali/adamli/fragility_dataanalysis/';                 % at ICM server 
     eegRootDirHome = '/Users/adam2392/Documents/adamli/fragility_dataanalysis/';   % at home macbook
     eegRootDirJhu = '/home/WIN/ali39/Documents/adamli/fragility_dataanalysis/';    % at JHU workstation
     eegRootDirMarcc = '/scratch/groups/ssarma2/adamli/fragility_dataanalysis/';
-    
+
     % Determine which directory we're working with automatically
     if     ~isempty(dir(eegRootDirServer)), rootDir = eegRootDirServer;
+    % elseif ~isempty(dir(eegRootDirHD)), rootDir = eegRootDirHD;
     elseif ~isempty(dir(eegRootDirHome)), rootDir = eegRootDirHome;
     elseif ~isempty(dir(eegRootDirJhu)), rootDir = eegRootDirJhu;
     elseif ~isempty(dir(eegRootDirMarcc)), rootDir = eegRootDirMarcc;
     else   error('Neither Work nor Home EEG directories exist! Exiting'); end
+
+    % Determine which data directory we're working with automatically
+%     if     ~isempty(dir(eegRootDirServer)), dataDir = eegRootDirServer;
+%     if ~isempty(dir(eegRootDirHD)), dataDir = eegRootDirHD;
+%     else   error('Neither Work nor Home EEG directories exist! Exiting'); end
     
     fprintf('Before adding to path\n');
     fprintf(fullfile(rootDir, 'server/marccDev/'));

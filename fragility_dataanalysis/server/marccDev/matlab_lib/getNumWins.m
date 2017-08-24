@@ -17,11 +17,7 @@ function numWins = getNumWins(patient, winSize, stepSize)
     addpath(rootDir);
     
     %- get patient and seizure id and determine if it is a seeg patient or not
-    [patient_id, seizure_id, is_seeg] = getPatAndSeizId(patient);
-    buffpatid = patient_id;
-    if strcmp(patient_id(end), '_')
-        patient_id = patient_id(1:end-1);
-    end
+    [~, patient_id, seizure_id, is_seeg] = splitPatient(patient);
     
     %% DEFINE CHANNELS AND CLINICAL ANNOTATIONS
     %- Edit this file if new patients are added.
