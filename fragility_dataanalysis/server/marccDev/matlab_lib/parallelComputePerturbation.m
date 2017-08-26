@@ -40,7 +40,7 @@ addpath(rootDir);
 %- 1 == notch filtering
 %- 2 == adaptive filtering
 FILTER_RAW = 2; 
-filterType = 'adaptive';
+filterType = 'adaptivefilter';
 TYPE_CONNECTIVITY = 'leastsquares';
 
 patient_id = [];
@@ -82,7 +82,7 @@ w_space = [w_space, w_space];
 sigma = [-sigma, sigma];
 
 %- temp directory
-tempDir = fullfile('./tempData/', strcat(filterType, 'filter'), strcat('win', num2str(winSize), ...
+tempDir = fullfile('./tempData/', strcat(filterType), strcat('win', num2str(winSize), ...
     '_step', num2str(stepSize), '_radius', num2str(radius)), 'perturbation', patient);
 if ~exist(tempDir, 'dir')
     mkdir(tempDir);
