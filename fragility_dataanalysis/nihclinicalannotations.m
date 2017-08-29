@@ -152,6 +152,8 @@ elseif strcmp(patient_id, 'pt8')
 elseif strcmp(patient_id, 'pt10')
     included_channels = [1:3 5:10 12:19 21:22 24:35 48:85];
     included_channels = [1:3 5:10 12:19 21:22 24:35 48:69]; %w/o p ELECTRODES hfreq noise electrodes
+    
+    included_channels = [1:3 5:19 21:35 48:69]; % adapted 8/28/17 by Adam to include more electrodes
     onset_electrodes = {'POLTT1', 'POLTT2', 'POLTT3', 'POLTT4', 'POLTT5', 'POLTT6', ...
         'POLMST1', 'POLMST2', ...
         'POLAST2'};
@@ -289,11 +291,11 @@ elseif strcmp(patient_id, 'pt16')
     center = 'nih';
     success_or_failure = 1;
 elseif strcmp(patient_id, 'pt17')
-    included_channels = [1:19 21:37 42:43 46:51 53];
+    included_channels = [1:19 21:37 42:43 46:51];
 
-    if strcmp(seizure_id, 'sz2') % get rid of G7,6,4 with high frequency noises
-        included_channels = [1:19 21 23:25 28:37 42:43 46:51 53];
-    end
+%     if strcmp(seizure_id, 'sz2') % get rid of G7,6,4 with high frequency noises
+%         included_channels = [1:19 21 23:25 28:37 42:43 46:51 53];
+%     end
 
 
     onset_electrodes = {'POLTT', 'POLTT2'};

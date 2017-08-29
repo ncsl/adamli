@@ -16,7 +16,7 @@
 radius = 1.5;             % spectral radius
 winSize = 250;            % 500 milliseconds
 stepSize = 125; 
-filterType = 'adaptivefilter';
+filterType = 'notchfilter';
 fs = 1000; % in Hz
 typeConnectivity = 'leastsquares';
 typeTransform = 'fourier';
