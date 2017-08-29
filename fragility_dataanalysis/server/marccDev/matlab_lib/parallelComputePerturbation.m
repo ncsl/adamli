@@ -38,8 +38,7 @@ addpath(rootDir);
 %- 0 == no filtering
 %- 1 == notch filtering
 %- 2 == adaptive filtering
-FILTER_RAW = 2; 
-filterType = 'adaptivefilter';
+filterType = 'notchfilter';
 TYPE_CONNECTIVITY = 'leastsquares';
 
 % set patientID and seizureID
