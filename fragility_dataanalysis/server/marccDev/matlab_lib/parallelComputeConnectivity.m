@@ -9,6 +9,7 @@ if nargin == 0 % testing purposes
     patient='pt1sz2';
     patient='Pat2sz2p';
     patient='UMMC001_sz1';
+    patient='LA01_ICTAL';
     % window paramters
     winSize = 250; % 500 milliseconds
     stepSize = 125; 
@@ -42,7 +43,7 @@ addpath(rootDir);
 %- 1 == notch filtering
 %- 2 == adaptive filtering
 % FILTER_RAW = 2; 
-filterType = 'adaptive';
+filterType = 'adaptivefilter';
 TYPE_CONNECTIVITY = 'leastsquares';
 l2regularization = 0;
 % set options for connectivity measurements
@@ -57,30 +58,20 @@ OPTIONS.l2regularization = l2regularization;
     latespread_labels, resection_labels, frequency_sampling, ...
     center] ...
             = determineClinicalAnnotations(patient_id, seizure_id);
-patient_id = buffpatid;
 
 % set dir to find raw data files
 dataDir = fullfile(rootDir, '/data/', center);
 
-if FILTER_RAW == 1
-    tempDir = fullfile('./tempData/', strcat('notchfilter/win', num2str(winSize), ...
-    '_step', num2str(stepSize)), 'connectivity', patient);
-elseif FILTER_RAW == 2
-    tempDir = fullfile('./tempData/', strcat('adaptivefilter/win', num2str(winSize), ...
-    '_step', num2str(stepSize)), 'connectivity', patient);
-else 
-    tempDir = fullfile('./tempData/', strcat('nofilter/win', num2str(winSize), ...
+tempDir = fullfile('./tempData/', strcat(filterType, '/win', num2str(winSize), ...
         '_step', num2str(stepSize)), 'connectivity', patient);
-end
-
 if ~exist(tempDir, 'dir')
     mkdir(tempDir);
 end
 
 %% Read in EEG Raw Data and Preprocess
 if seeg
-    patient_eeg_path = fullfile(dataDir, patient_id);
-    patient = strcat(patient_id, seizure_id);
+    patient_eeg_path = fullfile(dataDir, patient);
+%     patient = strcat(patient_id, seizure_id); % for EZT pats
 else
     patient_eeg_path = fullfile(dataDir, patient);
 end
@@ -121,7 +112,7 @@ end
 numHarmonics = floor(frequency_sampling/2/60) - 1;
 
 %- apply filtering on the eegWave
-if FILTER_RAW == 1
+if strcmp(filterType, 'notchfilter')
    % apply band notch filter to eeg data
     eeg = buttfilt(eeg,[59.5 60.5], frequency_sampling,'stop',1);
     eeg = buttfilt(eeg,[119.5 120.5], frequency_sampling,'stop',1);
@@ -136,7 +127,7 @@ if FILTER_RAW == 1
             eeg = buttfilt(eeg,[479.5 480.5], frequency_sampling,'stop',1);
         end
     end
-elseif FILTER_RAW == 2
+elseif strcmp(filterType, 'adaptivefilter')
      % apply an adaptive filtering algorithm.
     eeg = removePLI_multichan(eeg, frequency_sampling, numHarmonics, [50,0.01,4], [0.1,2,4], 2, 60);
 else 
