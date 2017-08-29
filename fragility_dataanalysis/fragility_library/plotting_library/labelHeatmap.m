@@ -9,7 +9,7 @@ function labelHeatmap(ax, fig, clinicalIndices, PLOTARGS)
     timeEnd = PLOTARGS.timeEnd;
     frequency_sampling = PLOTARGS.frequency_sampling;
     stepSize = PLOTARGS.stepSize;
-    YAXFontSize = 9;
+    YAXFontSize = 11;
     if isfield(PLOTARGS, 'seizureIndex')
         seizureIndex = PLOTARGS.seizureIndex;
     end
@@ -30,13 +30,10 @@ function labelHeatmap(ax, fig, clinicalIndices, PLOTARGS)
     set(ax, 'box', 'off'); set(ax, 'YDir', 'normal');
     
     XLim = get(ax, 'xlim'); XLowerLim = XLim(1); XUpperLim = XLim(2);
-    xTickStep = (XUpperLim - XLowerLim) / 10;
-    xTicks = round(timeStart: (timeEnd-timeStart)/10 :timeEnd);
-    yTicks = [1, 5:5:length(included_labels)];
-    plot([seizureMarkStart seizureMarkStart], get(gca, 'ylim'), 'k', 'MarkerSize', 2)
-    set(ax, 'XTick', (XLowerLim+0.5 : xTickStep : XUpperLim+0.5)); set(ax, 'XTickLabel', xTicks); % set xticks and their labels
-    set(ax, 'YTick', yTicks);
     xlim([XLowerLim, XUpperLim+1]);
+
+    yTicks = [1, 5:5:length(included_labels)];    
+    set(ax, 'YTick', yTicks);
     
     % plot start star's for the different clinical annotations
     figIndices = {ezone_indices, earlyspread_indices, latespread_indices};
@@ -46,6 +43,13 @@ function labelHeatmap(ax, fig, clinicalIndices, PLOTARGS)
             xLocations = repmat(XUpperLim+1, length(figIndices{i}), 1);
             plotAnnotatedStars(gca, xLocations, figIndices{i}, colors{i});
         end
+    end
+    
+    leg = legend('EZ', 'Early Onset', 'Late Onset');
+    try
+        leg.Position = [0.8792    0.0103    0.1021    0.0880];
+    catch
+        disp('Legend not set yet for patient');
     end
     
     % plot *'s for the resection indices
@@ -62,7 +66,6 @@ function labelHeatmap(ax, fig, clinicalIndices, PLOTARGS)
     % plot the different labels on different axes to give different colors
     plotOptions = struct();
     plotOptions.YAXFontSize = YAXFontSize;
-    plotOptions.FONTSIZE = FONTSIZE;
     plotIndices(fig, plotOptions, all_indices, included_labels, ...
                                 ezone_indices, ...
                                 earlyspread_indices, ...

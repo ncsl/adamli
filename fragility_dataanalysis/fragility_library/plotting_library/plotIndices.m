@@ -6,7 +6,6 @@ function plotIndices(handle, plotOptions, y_indices, labels, ...
                             y_earlyspreadindices, ...
                             y_latespreadindices)
 YAXFontSize = plotOptions.YAXFontSize;
-FONTSIZE = plotOptions.FONTSIZE;
 
 ax1 = handle.CurrentAxes; % get the current axes
 ax1_xlim = ax1.XLim;
@@ -67,12 +66,4 @@ if sum(y_latespreadindices) > 0
     set(ax4, 'YTick', y_latespreadindices, 'YTickLabel', labels(y_latespreadindices), 'FontSize', YAXFontSize, 'YColor', 'blue');
     linkaxes([ax1 ax3], 'xy');
 end
-
-leg = legend('EZ', 'Early Onset', 'Late Onset');
-try
-    leg.Position = [0.8792    0.0103    0.1021    0.0880];
-catch
-    disp('Legend not set yet for patient');
-end
-% axes(ax1);
 end
