@@ -87,7 +87,7 @@ function generate_slurm(patients, winSize, stepSize, radius, ...
     numTasks = 1;
     
     % initialize filter
-    filterType = 'adaptivefilter';
+    filterType = 'notchfilter';
     
     for iPat=1:numPats
         patient = cell_pats{iPat};
