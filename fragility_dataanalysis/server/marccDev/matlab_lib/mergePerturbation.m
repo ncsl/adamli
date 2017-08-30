@@ -1,4 +1,4 @@
-function mergePerturbation(patient, winSize, stepSize, radius)
+function mergePerturbation(patient, winSize, stepSize, radius, filterType)
 % function: mergePerturbation
 % By: Adam Li
 % Date: 7/8/17
@@ -45,48 +45,26 @@ addpath(rootDir);
 %- 0 == no filtering
 %- 1 == notch filtering
 %- 2 == adaptive filtering
-FILTERTYPE = 2; 
-filterType = 'adaptive';
-TYPE_CONNECTIVITY = 'leastsquares';
-
+filterType = 'notchfilter';
 perturbationTypes = ['C', 'R'];
 
-patient_id = [];
-seeg = 1;
-if isempty(patient_id)
-    patient_id = patient(1:strfind(patient, 'sz')-1);
-    seizure_id = patient(strfind(patient, 'sz'):end);
-    seeg = 0;
-end
-if isempty(patient_id)
-    patient_id = patient(1:strfind(patient, 'aslp')-1);
-    seizure_id = patient(strfind(patient, 'aslp'):end);
-    seeg = 0;
-end
-if isempty(patient_id)
-    patient_id = patient(1:strfind(patient, 'aw')-1);
-    seizure_id = patient(strfind(patient, 'aw'):end);
-    seeg = 0;
-end
- buffpatid = patient_id;
-if strcmp(patient_id(end), '_')
-    patient_id = patient_id(1:end-1);
-end
+% set patientID and seizureID
+[~, patient_id, seizure_id, seeg] = splitPatient(patient);
+
 %% DEFINE CHANNELS AND CLINICAL ANNOTATIONS
 %- Edit this file if new patients are added.
 [included_channels, ezone_labels, earlyspread_labels,...
     latespread_labels, resection_labels, fs, ...
     center] ...
             = determineClinicalAnnotations(patient_id, seizure_id);
-patient_id = buffpatid;
 
 %- get the temporary directory to look at
-tempDir = fullfile('./tempData/', strcat(filterType, 'filter'), strcat('win', num2str(winSize), ...
+tempDir = fullfile('./tempData/', strcat(filterType), strcat('win', num2str(winSize), ...
     '_step', num2str(stepSize), '_radius', num2str(radius)), 'perturbation', patient);
 % tempDir = fullfile('./tempData', patient);
 
 %- set directory to save merged computed data
-toSaveDir = fullfile(rootDir, strcat('/serverdata/pertmats/', filterType, 'filter'), ...
+toSaveDir = fullfile(rootDir, strcat('/serverdata/pertmats/', filterType), ...
     strcat('win', num2str(winSize), '_step', num2str(stepSize), '_freq', num2str(fs), '_radius', num2str(radius)),...
     patient);
 

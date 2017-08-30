@@ -36,65 +36,26 @@ addpath(rootDir);
 %- 0 == no filtering
 %- 1 == notch filtering
 %- 2 == adaptive filtering
-FILTERTYPE = 2; 
-TYPE_CONNECTIVITY = 'leastsquares';
-filterType = 'adaptive';
-l2regularization = 0;
-% set options for connectivity measurements
-OPTIONS.l2regularization = l2regularization;
+filterType = 'notchfilter';
 
-patient_id = [];
-seeg = 1;
-if isempty(patient_id)
-    patient_id = patient(1:strfind(patient, 'sz')-1);
-    seizure_id = patient(strfind(patient, 'sz'):end);
-    seeg = 0;
-end
-if isempty(patient_id)
-    patient_id = patient(1:strfind(patient, 'aslp')-1);
-    seizure_id = patient(strfind(patient, 'aslp'):end);
-    seeg = 0;
-end
-if isempty(patient_id)
-    patient_id = patient(1:strfind(patient, 'aw')-1);
-    seizure_id = patient(strfind(patient, 'aw'):end);
-    seeg = 0;
-end
- buffpatid = patient_id;
-if strcmp(patient_id(end), '_')
-    patient_id = patient_id(1:end-1);
-end
+% set patientID and seizureID
+[~, patient_id, seizure_id, seeg] = splitPatient(patient);
+
 %% DEFINE CHANNELS AND CLINICAL ANNOTATIONS
 %- Edit this file if new patients are added.
 [included_channels, ezone_labels, earlyspread_labels,...
     latespread_labels, resection_labels, fs, ...
     center] ...
             = determineClinicalAnnotations(patient_id, seizure_id);
-patient_id = buffpatid;
 
 %- get the temporary directory to look at
-if FILTERTYPE == 1
-    tempDir = fullfile('./tempData/', strcat('notchfilter/win', num2str(winSize), ...
-    '_step', num2str(stepSize)), 'connectivity', patient);
-elseif FILTERTYPE == 2
-    tempDir = fullfile('./tempData/', strcat('adaptivefilter/win', num2str(winSize), ...
-    '_step', num2str(stepSize)), 'connectivity', patient);
-else 
-    tempDir = fullfile('./tempData/', strcat('nofilter/win', num2str(winSize), ...
+tempDir = fullfile('./tempData/', strcat(filterType, '/win', num2str(winSize), ...
         '_step', num2str(stepSize)), 'connectivity', patient);
-end
 
 %- set directory to save merged computed data
-if FILTERTYPE == 1
-    toSaveDir = fullfile(rootDir, strcat('/serverdata/adjmats/notchfilter', '/win', num2str(winSize), ...
+toSaveDir = fullfile(rootDir, strcat('/serverdata/adjmats/', filterType, '/win', num2str(winSize), ...
         '_step', num2str(stepSize), '_freq', num2str(fs)), patient); % at lab
-elseif FILTERTYPE == 2
-    toSaveDir = fullfile(rootDir, strcat('/serverdata/adjmats/adaptivefilter', '/win', num2str(winSize), ...
-        '_step', num2str(stepSize), '_freq', num2str(fs)), patient); % at lab
-else 
-    toSaveDir = fullfile(rootDir, strcat('/serverdata/adjmats/nofilter', 'win', num2str(winSize), ...
-        '_step', num2str(stepSize), '_freq', num2str(fs)), patient); % at lab
-end
+    
 % create directory if it does not exist
 if ~exist(toSaveDir, 'dir')
     mkdir(toSaveDir);
