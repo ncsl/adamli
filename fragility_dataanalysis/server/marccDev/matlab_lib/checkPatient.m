@@ -46,6 +46,8 @@ addpath(eegrootDir);
             = determineClinicalAnnotations(patient_id, seizure_id);
         
 %- directory for the data stored
+% JOBTYPE == 1 for ltv model
+% JOBTYPE == 2 for perturbation model
 if JOBTYPE==1
     tempDir = fullfile(rootDir, 'server/marccDev/matlab_lib/tempData/', ...
         filterType, strcat('win', num2str(winSize), '_step', num2str(stepSize)), 'connectivity');
@@ -55,15 +57,15 @@ elseif JOBTYPE==0
         '_step', num2str(stepSize), '_radius', num2str(radius)), 'perturbation');
 end
 
-if JOBTYPE==1
-    dataDirFiles = dir(fullfile(eegrootDir, 'serverdata/adjmats', strcat(filterType), ...
-            strcat('win', num2str(winSize), '_step', num2str(stepSize), '_freq', num2str(fs), '_radius', num2str(radius)),...
-            patient, '*.mat'));
-elseif JOBTYPE==0
-    dataDirFiles = dir(fullfile(eegrootDir, 'serverdata/pertmats', strcat(filterType), ...
-            strcat('win', num2str(winSize), '_step', num2str(stepSize), '_freq', num2str(fs), '_radius', num2str(radius)),...
-            patient, '*.mat'));
-end
+% if JOBTYPE==1
+%     dataDirFiles = dir(fullfile(eegrootDir, 'serverdata/adjmats', strcat(filterType), ...
+%             strcat('win', num2str(winSize), '_step', num2str(stepSize), '_freq', num2str(fs), '_radius', num2str(radius)),...
+%             patient, '*.mat'));
+% elseif JOBTYPE==0
+%     dataDirFiles = dir(fullfile(eegrootDir, 'serverdata/pertmats', strcat(filterType), ...
+%             strcat('win', num2str(winSize), '_step', num2str(stepSize), '_freq', num2str(fs), '_radius', num2str(radius)),...
+%             patient, '*.mat'));
+% end
 
 tempDirExists = exist(fullfile(tempDir, patient), 'dir');
  
@@ -74,7 +76,7 @@ numWins = getNumWins(patient, winSize, stepSize);
 toCompute = 0;
 patWinsToCompute = [];
 
-if 7==tempDirExists && isempty(dataDirFiles)  % temp dir exists, but merged data dir doensn't exist
+if 7==tempDirExists %&& isempty(dataDirFiles)  % temp dir exists, but merged data dir doensn't exist
     % check if each directory has the right windows computed
     fileList = dir(fullfile(tempDir, patient, '*.mat'));
     fileList = {fileList(:).name};
@@ -87,7 +89,7 @@ if 7==tempDirExists && isempty(dataDirFiles)  % temp dir exists, but merged data
         fprintf('Need to compute certain windows for %s still!\n', patient);
         patWinsToCompute = winsToCompute;
     end
-elseif 7~=tempDirExists && isempty(dataDirFiles) % temp and merged dir don't exist
+elseif 7~=tempDirExists %&& isempty(dataDirFiles) % temp and merged dir don't exist
     fprintf('Need to compute for %s still!\n', patient);
     toCompute = 1;
 else % tempDirExists ~=7 and dataDirFiles is not empty
