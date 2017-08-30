@@ -39,7 +39,6 @@ addpath(rootDir);
 %- 1 == notch filtering
 %- 2 == adaptive filtering
 filterType = 'notchfilter';
-TYPE_CONNECTIVITY = 'leastsquares';
 
 % set patientID and seizureID
 [~, patient_id, seizure_id, seeg] = splitPatient(patient);

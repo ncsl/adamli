@@ -24,11 +24,11 @@ function generate_slurm(patients, winSize, stepSize, radius, ...
         stepSize=125;
         radius=1.5;
         PARTITION='scavenger';
-        WALLTIME='0:0:30';
+        WALLTIME='0:30:0';
         NUMNODES=1;
         NUM_PROCS=1;
         JOBTYPE=1; % RUNCONNECTIVITY
-        MERGE = 0;
+        MERGE = 1;
         if strcmp(PARTITION, 'scavenger')
             QOS='scavenger';
         end
@@ -110,7 +110,7 @@ function generate_slurm(patients, winSize, stepSize, radius, ...
         if MERGE
             fprintf('Checking patients...\n');
             % run a computation on checking patients if there is missing data
-            [toCompute, ~] = checkPatient(patient, rootDir, winSize, stepSize, filterType, radius, JOBTYPE);
+            [toCompute, patWinsToCompute] = checkPatient(patient, rootDir, winSize, stepSize, filterType, radius, JOBTYPE);
             
             % nothing to compute, so merge all computations
             if toCompute == 0

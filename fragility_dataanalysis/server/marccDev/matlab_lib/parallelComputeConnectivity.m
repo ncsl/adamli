@@ -173,7 +173,7 @@ if iTask == 1
     info.timePoints = (temptimePoints - seizure_eonset_ms * frequency_sampling / 1000) ./ frequency_sampling;
     info.included_channels = included_channels;
     info.frequency_sampling = frequency_sampling;
-    info.FILTER_TYPE = FILTER_RAW;
+    info.FILTER_TYPE = filterType;
 
     if ~exist(fullfile(tempDir, 'info'), 'dir')
         mkdir(fullfile(tempDir, 'info'));
