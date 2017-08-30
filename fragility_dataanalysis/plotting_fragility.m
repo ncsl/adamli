@@ -2,6 +2,7 @@ function plotting_fragility(patient, winSize, stepSize, filterType, radius, type
 if nargin == 0
     % data parameters to find correct directory
     patient = 'pt1sz2';
+    patient='JH103aw1';
 %     patient = 'pt1aw1';
     radius = 1.5;             % spectral radius
     winSize = 250;            % 500 milliseconds
@@ -70,7 +71,11 @@ spectDir = fullfile(dataDir, strcat('/serverdata/spectral_analysis/'), typeTrans
     
 % set directory to save figure
 figDir = fullfile(rootDir, '/figures/', filterType, ...
-    strcat('win', num2str(winSize), '_step', num2str(stepSize), '_radius', num2str(radius)), 'preictal');
+    strcat('win', num2str(winSize), '_step', num2str(stepSize), '_radius', num2str(radius)), ...
+    'preictal');
+
+figDir = fullfile(rootDir, '/figures/', filterType, ...
+    strcat('win', num2str(winSize), '_step', num2str(stepSize), '_radius', num2str(radius)));
 if ~exist(figDir, 'dir')
     mkdir(figDir);
 end
@@ -83,10 +88,10 @@ final_data = final_data.perturbation_struct;
 info = final_data.info;
 
 % extract clinical data
-ezone_labels = info.ezone_labels;
-earlyspread_labels = info.earlyspread_labels;
-latespread_labels = info.latespread_labels;
-resection_labels = info.resection_labels;
+% ezone_labels = info.ezone_labels;
+% earlyspread_labels = info.earlyspread_labels;
+% latespread_labels = info.latespread_labels;
+% resection_labels = info.resection_labels;
 included_labels = info.all_labels;
 seizure_estart_ms = info.seizure_estart_ms;
 seizure_estart_mark = info.seizure_estart_mark;
@@ -178,17 +183,16 @@ clinicalIndices.included_labels = included_labels;
     % set time windows to nan
 %     fragilityMat(logical(timeWinsToReject)) = -1;
 %     minmaxFragility(timeWinsToReject) = nan;
-    
     tempMat = fragilityMat;
     tempMat(logical(timeWinsToReject)) = -1;
     
     % OPTIONAL: only plot the preictal states
-    if seizureMarkStart ~= size(fragilityMat, 2)
-        tempMat = tempMat(:, 1:seizureMarkStart);
-        timePoints = timePoints(1:seizureMarkStart, :);
-        timeStart = (timePoints(1,1)-1 - seizureStart) / fs;
-        timeEnd = (timePoints(end,1)-1 - seizureStart) / fs;
-    end
+%     if seizureMarkStart ~= size(fragilityMat, 2)
+%         tempMat = tempMat(:, 1:seizureMarkStart);
+%         timePoints = timePoints(1:seizureMarkStart, :);
+%         timeStart = (timePoints(1,1)-1 - seizureStart) / fs;
+%         timeEnd = (timePoints(end,1)-1 - seizureStart) / fs;
+%     end
     
     % 1. plot the heatmap
     fig_heatmap = plotHeatmap(tempMat); % get the current figure
@@ -204,7 +208,6 @@ clinicalIndices.included_labels = included_labels;
     hold on;
     set(fig_heatmap, 'Units', 'inches');
     fig_heatmap.Position = [17.3438         0   15.9896   11.6771];
-    
     
     % 2. label axes
     FONTSIZE = 20;
@@ -233,15 +236,16 @@ clinicalIndices.included_labels = included_labels;
     xTicks = round(timeStart:abs(timeEnd-timeStart)/10:timeEnd);
     
     % comment out if plotting preictal
-%     xTicks = round(timeStart: (timeEnd-timeStart)/10 :timeEnd);
-%     plot([seizureMarkStart seizureMarkStart], ax.YLim, 'k', 'MarkerSize', 2)
+    hold on
+    xTicks = round(timeStart: (timeEnd-timeStart)/10 :timeEnd);
+    plot([seizureMarkStart seizureMarkStart], ax.YLim, 'k', 'MarkerSize', 4)
     
     ax.XTick = (XLowerLim+0.5 : xTickStep : XUpperLim+0.5);
     ax.XTickLabel = xTicks; % set xticks and their labels
     xlim([XLowerLim, XUpperLim+1]);
     
     ylab = ax.YLabel;
-    ylab.Position = ylab.Position + [-24 0 0]; % move ylabel to the left
+    ylab.Position = ylab.Position + [-55 0 0]; % move ylabel to the left
     
     colorArgs = struct();
     colorArgs.colorbarStr = 'Fragility Metric';

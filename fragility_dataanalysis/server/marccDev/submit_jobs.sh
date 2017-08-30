@@ -36,7 +36,8 @@ patients=(
 	# Pat2sz1p Pat2sz2p Pat2sz3p
 	# Pat16sz1p Pat16sz2p Pat16sz3p')
 	
-	'JH105aslp1 JH105aw1')
+	# 'JH105aslp1 JH105aw1')
+	'JH105sz1 JH105sz2 JH105sz3 JH105sz4 JH105sz5')
 	# 'pt10sz1 pt10sz2 pt10sz3
 	# pt17sz1 pt17sz2 pt17sz3
 
