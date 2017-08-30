@@ -108,7 +108,7 @@ NUM_GPUS=1			# number of GPUS (need 6 procs per gpu)
 NUM_TASKS=1 		# number of tasks per CPU
 
 ## job reqs
-walltime=0:30:0
+walltime=0:15:0
 partition=scavenger 	# debug, shared, unlimited, parallel, gpu, lrgmem, scavenger
 qos=scavenger
 

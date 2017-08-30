@@ -56,7 +56,7 @@ sigma = sqrt(radius^2 - w_space.^2); % move to the unit circle 1, for a plethora
 b = [0; 1];                          % initialize for perturbation computation later
 
 % add to sigma and w to create a whole circle search
-w_space = [w_space, w_space];
+w_space = [w_space, w_space];clear
 sigma = [-sigma, sigma];
 
 %- temp directory

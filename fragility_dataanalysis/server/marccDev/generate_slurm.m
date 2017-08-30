@@ -110,7 +110,7 @@ function generate_slurm(patients, winSize, stepSize, radius, ...
         if MERGE
             fprintf('Checking patients...\n');
             % run a computation on checking patients if there is missing data
-            [toCompute, patWinsToCompute] = checkPatient(patient, rootDir, winSize, stepSize, filterType, radius, JOBTYPE);
+            [toCompute, ~] = checkPatient(patient, rootDir, winSize, stepSize, filterType, radius, JOBTYPE);
             
             % nothing to compute, so merge all computations
             if toCompute == 0

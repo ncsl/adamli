@@ -81,6 +81,8 @@ if 7==tempDirExists %&& isempty(dataDirFiles)  % temp dir exists, but merged dat
     fileList = dir(fullfile(tempDir, patient, '*.mat'));
     fileList = {fileList(:).name};
    
+    fileList = natsortfiles(fileList);
+    
     % get the windows still needed to compute, if any
     winsToCompute = checkWindows(fileList, numWins);
 

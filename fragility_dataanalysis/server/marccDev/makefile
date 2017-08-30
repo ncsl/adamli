@@ -1,5 +1,6 @@
 SHELL := /usr/bin/env bash
 
+MARCC_USER=ali39@jhu.edu
 ssh 							:= ssh $(port)
 remote	          := $(MARCC_USER)@gateway2.marcc.jhu.edu
 
