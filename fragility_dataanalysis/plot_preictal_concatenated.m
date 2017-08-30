@@ -17,6 +17,7 @@ radius = 1.5;             % spectral radius
 winSize = 250;            % 500 milliseconds
 stepSize = 125; 
 filterType = 'notchfilter';
+filterType = 'adaptivefilter';
 fs = 1000; % in Hz
 typeConnectivity = 'leastsquares';
 typeTransform = 'fourier';
@@ -57,7 +58,7 @@ perturbationTypes = ['C', 'R'];
 perturbationType = perturbationTypes(1);
 
 % load the organized patients struct
-load(fullfile(dataDir, 'serverdata/organized_patients/nih_patients.mat'));
+load(fullfile(dataDir, 'serverdata/organized_patients/jhu_patients.mat'));
 patients = fieldnames(organized_patients);
 
 % set directory to save figure
