@@ -87,6 +87,7 @@ if 7==tempDirExists %&& isempty(dataDirFiles)  % temp dir exists, but merged dat
     if ~isempty(winsToCompute)
         toCompute = 1;
         fprintf('Need to compute certain windows for %s still!\n', patient);
+        fprintf('Number of wins needed are %s vs %s\n', num2str(numWins), num2str(length(fileList)));
         patWinsToCompute = winsToCompute;
     end
 elseif 7~=tempDirExists %&& isempty(dataDirFiles) % temp and merged dir don't exist
