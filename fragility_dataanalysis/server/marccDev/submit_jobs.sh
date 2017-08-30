@@ -36,10 +36,10 @@ patients=(
 	# Pat2sz1p Pat2sz2p Pat2sz3p
 	# Pat16sz1p Pat16sz2p Pat16sz3p')
 	
-	# 'pt10sz1 pt10sz2 pt10sz3
-	# pt17sz1 pt17sz2 pt17sz3')
+	'pt10sz1 pt10sz2 pt10sz3
+	pt17sz1 pt17sz2 pt17sz3
 
-    'LA01_ICTAL LA01_Inter
+    LA01_ICTAL LA01_Inter
     LA02_ICTAL LA02_Inter
     LA03_ICTAL LA03_Inter
     LA04_ICTAL LA04_Inter
@@ -108,7 +108,7 @@ NUM_GPUS=1			# number of GPUS (need 6 procs per gpu)
 
 ## job reqs
 if [[ "${RUNCONNECTIVITY}" -eq 1 ]]; then
-	walltime=0:10:0
+	walltime=0:15:0
 else
 	walltime=0:20:0					# the walltime for each computation
 fi
