@@ -109,7 +109,7 @@ adjmat_struct.timePoints = info.timePoints;
 adjmat_struct.adjMats = adjMats;
 adjmat_struct.included_channels = info.included_channels;
 adjmat_struct.frequency_sampling = info.frequency_sampling;
-adjmat_struct.FILTER = FILTERTYPE;
+adjmat_struct.FILTER = info.FILTER_TYPE;
 
 % save the merged adjMatDir
 fileName = strcat(patient, '_adjmats_', lower(info.type_connectivity), '.mat');
