@@ -189,6 +189,8 @@ function generate_slurm(patients, winSize, stepSize, radius, ...
                     fprintf(command);
                     fprintf('\n\n');
                     unix(command);
+                    
+                    pause(0.5);
                 end
             end
         % else not merging
