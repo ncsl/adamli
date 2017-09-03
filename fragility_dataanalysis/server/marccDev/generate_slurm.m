@@ -19,7 +19,7 @@ function generate_slurm(patients, winSize, stepSize, radius, ...
         MERGE = 0;
     end    
     if nargin==0
-        patients='LA01_ICTAL';
+        patients='LA03_Inter';
         winSize=250;
         stepSize=125;
         radius=1.5;
@@ -97,7 +97,6 @@ function generate_slurm(patients, winSize, stepSize, radius, ...
                     'sbatch --time=%s --partition=%s --nodes=%d --ntasks-per-node=%d --cpus-per-task=%d'), ...
                      radius, JOBTYPE, patient, winSize, stepSize,...
                     num2str(walltime), partition, numNodes, numTasks, numCPUs);
-%         fprintf(basecommand);
         
         if exist('QOS', 'var')
             basecommand = sprintf(strcat('export radius=%f; export RUNCONNECTIVITY=%d; export patient=%s; export winSize=%d; export stepSize=%d;\n', ...
@@ -110,7 +109,7 @@ function generate_slurm(patients, winSize, stepSize, radius, ...
         if MERGE
             fprintf('Checking patients...\n');
             % run a computation on checking patients if there is missing data
-            [toCompute, ~] = checkPatient(patient, rootDir, winSize, stepSize, filterType, radius, JOBTYPE);
+            [toCompute, patWinsToCompute] = checkPatient(patient, rootDir, winSize, stepSize, filterType, radius, JOBTYPE);
             
             % nothing to compute, so merge all computations
             if toCompute == 0
@@ -132,6 +131,10 @@ function generate_slurm(patients, winSize, stepSize, radius, ...
                 command = sprintf(strcat(basecommand, ...
                             ' --job-name=%s run_merge.sbatch --export=%s,%d,%d,%d,%d'), ...
                              job_name, patient, winSize, stepSize, JOBTYPE, radius);
+                % print command to see and submit to unix shell
+                fprintf(command);
+                fprintf('\n\n');
+                unix(command);
             elseif toCompute == 1  % still have either patients, or windows to compute
                 fprintf('Recomputing for this patient: %s.\n', patient);
                 
@@ -152,28 +155,41 @@ function generate_slurm(patients, winSize, stepSize, radius, ...
                 command = sprintf(strcat(basecommand, ...
                     ' --array=1-%d --job-name=%s run_job.sbatch --export=%s,%d,%d,%d.%d'), ...
                         Nbatch, job_name, patient, winSize, stepSize, JOBTYPE, radius);
-%             elseif ~isempty(patWinsToCompute)
-%                 fprintf('Recomputing windows for this patient: %s.\n', patient);
-%                 
-%                 winsToCompute = patWinsToCompute;
-% 
-%                 %- create a job array that goes through the windows to
-%                 %- compute instead of index by index
-%                 Nbatch = length(winsToCompute);
-%                 if JOBTYPE == 1
-%                     job_name = strcat(patient, '_ltv_sepwins');
-%                 else
-%                     job_name = strcat(patient, '_pert_sepwins');
-%                 end
-%                 
-%                 winsToCompute_cell = mat2str(winsToCompute');
-%                 winsToCompute_cell = winsToCompute_cell(2:end-1);
-% 
-%                 %- create command to run
-%                 command = sprintf(strcat('export windows=%s;\n', basecommand, ...
-%                                     ' --array=1-%d --job-name=%s run_job.sbatch --export=%s,%d,%d'), ...
-%                                 winsToCompute_cell,...
-%                                 Nbatch, job_name, patient, winSize, stepSize);
+                
+                % print command to see and submit to unix shell
+                fprintf(command);
+                fprintf('\n\n');
+                unix(command);
+            elseif ~isempty(patWinsToCompute)
+                fprintf('Recomputing windows for this patient: %s.\n', patient);
+                
+                winsToCompute = patWinsToCompute;
+                winwalltime='0:5:0'; % short walltime for a single window
+                
+                for iWin=1:length(winsToCompute)
+                    winToCompute = winsToCompute(iWin);
+                    
+                    if JOBTYPE == 1
+                        job_name = strcat(patient, '_ltv_sepwins_', num2str(winToCompute));
+                    else
+                        job_name = strcat(patient, '_pert_sepwins_', num2str(winToCompute));
+                    end
+                    
+                    winCommand = sprintf(strcat('export radius=%f; export RUNCONNECTIVITY=%d; export patient=%s; export winSize=%d; export stepSize=%d; export window=%d;\n', ...
+                        'sbatch --time=%s --partition=%s --qos=%s --nodes=%d --ntasks-per-node=%d --cpus-per-task=%d'), ...
+                         radius, JOBTYPE, patient, winSize, stepSize, winToCompute,...
+                        num2str(winwalltime), partition, QOS, numNodes, numTasks, numCPUs); 
+
+                    %- create command to run
+                    command = sprintf(strcat(winCommand, ...
+                                ' --job-name=%s run_windows.sbatch --export=%s,%d,%d,%d,%d,%d'), ...
+                                 job_name, patient, winSize, stepSize, JOBTYPE, radius, winToCompute);
+                
+                    % print command to see and submit to unix shell
+                    fprintf(command);
+                    fprintf('\n\n');
+                    unix(command);
+                end
             end
         % else not merging
         else
@@ -196,11 +212,10 @@ function generate_slurm(patients, winSize, stepSize, radius, ...
             command = sprintf(strcat(basecommand, ...
                         ' --array=1-%d --job-name=%s run_job.sbatch --export=%s,%d,%d,%d,%d'), ...
                             Nbatch, job_name, patient, winSize, stepSize, JOBTYPE, radius);
+            % print command to see and submit to unix shell
+            fprintf(command);
+            fprintf('\n\n');
+            unix(command);
         end
-        
-        % print command to see and submit to unix shell
-        fprintf(command);
-        fprintf('\n\n');
-        unix(command);
     end % end of loop through patients            
 end
