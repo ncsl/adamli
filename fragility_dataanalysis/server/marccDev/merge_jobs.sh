@@ -2,10 +2,10 @@
 
 # patients listed 5 per row
 patients=(
-	# 'JH105aslp1 JH105aw1
-	# JH105sz1 JH105sz2 JH105sz3 JH105sz4 JH105sz5
-	# pt10sz1 pt10sz2 pt10sz3
-	# pt17sz1 pt17sz2 pt17sz3
+	'JH105aslp1 JH105aw1
+	JH105sz1 JH105sz2 JH105sz3 JH105sz4 JH105sz5
+	pt10sz1 pt10sz2 pt10sz3
+	pt17sz1 pt17sz2 pt17sz3')
 
  #    LA01_ICTAL LA01_Inter
  #    LA02_ICTAL LA02_Inter
@@ -16,13 +16,13 @@ patients=(
     # LA08_ICTAL LA08_Inter
 
     # 'LA03_ICTAL 
-    'LA03_Inter
-    LA05_ICTAL LA05_Inter
-    LA09_ICTAL LA09_Inter
-    LA10_ICTAL LA10_Inter
-    LA11_ICTAL LA11_Inter
-    LA15_ICTAL LA15_Inter
-    LA16_ICTAL LA16_Inter')
+    # 'LA03_Inter
+    # LA05_ICTAL LA05_Inter
+    # LA09_ICTAL LA09_Inter
+    # LA10_ICTAL LA10_Inter
+    # LA11_ICTAL LA11_Inter
+    # LA15_ICTAL LA15_Inter
+    # LA16_ICTAL LA16_Inter')
 
 	# 'pt1aslp1 pt1aslp2 pt1aw1 pt1aw2
 	# pt2aslp1 pt2aslp2 
