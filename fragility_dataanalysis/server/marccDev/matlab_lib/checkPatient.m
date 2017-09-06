@@ -76,7 +76,7 @@ numWins = getNumWins(patient, winSize, stepSize);
 toCompute = 0;
 patWinsToCompute = [];
 
-if 7==tempDirExists %&& isempty(dataDirFiles)  % temp dir exists, but merged data dir doensn't exist
+if 7==tempDirExists && isempty(dataDirFiles)  % temp dir exists, but merged data dir doensn't exist
     % check if each directory has the right windows computed
     fileList = dir(fullfile(tempDir, patient, '*.mat'));
     fileList = {fileList(:).name};
