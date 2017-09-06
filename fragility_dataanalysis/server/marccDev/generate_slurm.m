@@ -135,7 +135,7 @@ function generate_slurm(patients, winSize, stepSize, radius, ...
                 fprintf(command);
                 fprintf('\n\n');
                 unix(command);
-            elseif toCompute == 1 && isempty(patWinsToCompute) % still have either patients, or windows to compute
+            elseif toCompute == 1 %&& isempty(patWinsToCompute) % still have either patients, or windows to compute
                 fprintf('Recomputing for this patient: %s.\n', patient);
                 
                 %- call function to compute number of windows for a patient based on
