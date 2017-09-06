@@ -49,7 +49,7 @@ perturbationType = perturbationTypes(1);
 FONTSIZE = 20;
 
 % data parameters to find correct directory
-radius = 1.25;             % spectral radius of perturbation
+radius = 1.5;             % spectral radius of perturbation
 winSize = 250;            % window size in milliseconds
 stepSize = 125; 
 filterType = 'notchfilter';  % adaptive, notch, or no
@@ -82,7 +82,7 @@ outcomes = cell(length(patients), 1);
 doa_scores = zeros(length(patients), length(thresholds));   % just to store doa 
 engel_scores = zeros(length(patients),1); % store engel scores
 
-for iPat=length(patients):length(patients)%1:length(patients)
+for iPat=1:length(patients)
     patient = patients{iPat};
     
     % extract the events to analyze for this patient
@@ -124,7 +124,7 @@ for iPat=length(patients):length(patients)%1:length(patients)
         catch e
             final_data = load(fullfile(pertDir, ...
                 pat, ...
-                strcat(pat, '_pertmats_leastsquares_radius', num2str(radius))));
+                strcat(pat, '_pertmats_leastsquares_radius', num2str(radius), '.mat')));
         end
         final_data = final_data.perturbation_struct;
         
@@ -145,8 +145,13 @@ for iPat=length(patients):length(patients)%1:length(patients)
         seizure_eend_ms = info.seizure_eend_ms;
         seizure_eend_mark = info.seizure_eend_mark;
         num_channels = length(info.all_labels);
-        engelscore = info.engelscore;
-
+        try
+            engelscore = info.engelscore;
+        catch e
+            disp('Engel Score not set yet');
+            engelscore = nan;
+        end
+            
         %- set global variable for plotting
         seizureStart = seizure_estart_ms;
         seizureEnd = seizure_eend_ms;
@@ -261,7 +266,7 @@ for iPat=length(patients):length(patients)%1:length(patients)
         toSaveFigFile = fullfile(figDir, strcat(patient, '_doavsthreshold'));
         print(toSaveFigFile, '-dpng', '-r0') 
     end
-end % loop through patients in NIH
+end % loop through patients
 
 figure;
 for i=1:length(thresholds)

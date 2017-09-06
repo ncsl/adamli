@@ -125,7 +125,7 @@ elseif strcmp(patient_id, 'LA14')
     success_or_failure = 0;
     center = 'laserablation';
 elseif strcmp(patient_id, 'LA15')
-    included_channels = [];
+    included_channels = [1:4 7:19 21:39 42:95 97:112 114:132 135:187];
     onset_electrodes = {'R1', 'R2', 'R3'};
     earlyspread_labels = {};
     latespread_labels = {};
