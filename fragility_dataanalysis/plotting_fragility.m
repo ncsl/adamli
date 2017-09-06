@@ -61,7 +61,7 @@ serverDir = fullfile(dataDir, '/serverdata/');
 adjMatDir = fullfile(dataDir, 'serverdata/adjmats/', filterType, strcat('win', num2str(winSize), ...
         '_step', num2str(stepSize), '_freq', num2str(fs)), patient); % at lab
         
-finalDataDir = fullfile(dataDir, strcat('/serverdata/perturbationmats/', filterType, '/win', num2str(winSize), ...
+finalDataDir = fullfile(dataDir, strcat('/serverdata/pertmats/', filterType, '/win', num2str(winSize), ...
         '_step', num2str(stepSize), '_freq', num2str(fs), '_radius', num2str(radius)), patient); % at lab
 
 % notch and updated directory
@@ -80,8 +80,13 @@ if ~exist(figDir, 'dir')
     mkdir(figDir);
 end
 
-final_data = load(fullfile(finalDataDir, strcat(patient, ...
-    '_pertmats_', lower(typeConnectivity), '_radius', num2str(radius), '.mat')));
+try
+    final_data = load(fullfile(finalDataDir, ...
+        strcat(patient, '_pertmats', '.mat')));
+catch e
+    final_data = load(fullfile(finalDataDir, ...
+        strcat(patient, '_pertmats_leastsquares_radius', num2str(radius), '.mat')));
+end
 final_data = final_data.perturbation_struct;
 
 %% Extract metadata info
@@ -107,6 +112,7 @@ seizureMarkStart = seizure_estart_mark;
 % remove POL from labels
 included_labels = upper(included_labels);
 included_labels = strrep(included_labels, 'POL', '');
+included_labels = strtrim(included_labels);
 ezone_labels = strrep(ezone_labels, 'POL', '');
 earlyspread_labels = strrep(earlyspread_labels, 'POL', '');
 latespread_labels = strrep(latespread_labels, 'POL', '');
@@ -139,6 +145,7 @@ clinicalIndices.included_labels = included_labels;
 % if no arguments, and called as a function, then run some testing output
 % if nargin==0
     pertDataStruct = final_data.(perturbationType);
+    info = final_data.info;
     tempWinSize = winSize;
     tempStepSize = stepSize;
     if fs ~=1000
@@ -149,7 +156,11 @@ clinicalIndices.included_labels = included_labels;
     % set data to local variables
     minPerturb_time_chan = pertDataStruct.minNormPertMat;
     fragilityMat = pertDataStruct.fragilityMat;
-    timePoints = pertDataStruct.timePoints;
+    try
+        timePoints = pertDataStruct.timePoints;
+    catch e
+        timePoints = info.timePoints;
+    end
     del_table = pertDataStruct.del_table;
 
     if isnan(seizureStart)
@@ -171,6 +182,9 @@ clinicalIndices.included_labels = included_labels;
     timeStart = -seizureStart / fs;
     timeEnd = (timePoints(size(minPerturb_time_chan, 2), 2) - seizureStart)/fs;
     timeEnd = (timePoints(size(minPerturb_time_chan, 2), 2) - seizureStart + 1)/fs;
+    
+    % fix timeEnd for certain pats
+%     timeEnd = (timePoints(size(minPerturb_time_chan, 2), 2) - timeStart + 1);
     
     % get the metric for rejecting cells in heatmap
     timeWinsToReject = broadbandfilter(patient, typeTransform, winSize, stepSize, filterType, spectDir);
@@ -236,9 +250,9 @@ clinicalIndices.included_labels = included_labels;
     xTicks = round(timeStart:abs(timeEnd-timeStart)/10:timeEnd);
     
     % comment out if plotting preictal
+    %     xTicks = round(timeStart: (timeEnd-timeStart)/10 :timeEnd);
     hold on
-    xTicks = round(timeStart: (timeEnd-timeStart)/10 :timeEnd);
-    plot([seizureMarkStart seizureMarkStart], ax.YLim, 'k', 'MarkerSize', 4)
+    plot([seizureMarkStart seizureMarkStart], ax.YLim, 'k', 'MarkerSize', 6)
     
     ax.XTick = (XLowerLim+0.5 : xTickStep : XUpperLim+0.5);
     ax.XTickLabel = xTicks; % set xticks and their labels

@@ -35,10 +35,19 @@ function [doa_scores, outcomes, engel_scores] = computeDoaGroup(patients, winSiz
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 if nargin==0
     patients = {...,
-            'JH103aslp1', 'JH103aw1', ...
-            'JH103sz1' 'JH103sz2' 'JH103sz3',...
+%             'JH103aslp1', 'JH103aw1', ...
+%             'JH103sz1' 'JH103sz2' 'JH103sz3',...
 %     'JH105aslp1', 'JH105aw1',...
 %     'JH105sz1' 'JH105sz2' 'JH105sz3' 'JH105sz4' 'JH105sz5',...
+%     'UMMC001_sz1', 'UMMC001_sz2', 'UMMC001_sz3', ...
+%     'UMMC002_sz1', 'UMMC002_sz2', 'UMMC002_sz3', ...
+%     'UMMC003_sz1', 'UMMC003_sz2', 'UMMC003_sz3', ...
+%     'UMMC004_sz1', 'UMMC004_sz2', 'UMMC004_sz3', ...
+%     'UMMC005_sz1', 'UMMC005_sz2', 'UMMC005_sz3', ...
+    'UMMC006_sz1', 'UMMC006_sz2', 'UMMC006_sz3', ...
+%     'UMMC007_sz1', 'UMMC007_sz2','UMMC007_sz3', ...
+%     'UMMC008_sz1', 'UMMC008_sz2', 'UMMC008_sz3', ...
+%     'UMMC009_sz1', 'UMMC009_sz2', 'UMMC009_sz3', ...
     };
     % data parameters to find correct directory
     radius = 1.5;             % spectral radius of perturbation
@@ -142,7 +151,7 @@ for iPat=1:length(patients)
     try
         final_data = load(fullfile(pertDir, ...
             patient,...
-            strcat(pat, '_pertmats', '.mat')));
+            strcat(patient, '_pertmats', '.mat')));
     catch e
         final_data = load(fullfile(pertDir, ...
             patient, ...
@@ -245,7 +254,13 @@ for iPat=1:length(patients)
         %     currfig.Position = [1986           1        1535        1121];
             currfig.Position = [17.3438         0   15.9896   11.6771];
 
-            toSaveFigFile = fullfile(figDir, patient_id, strcat(patient_id, '_line_doavsthreshold'));
+            if ~exist(fullfile(figDir, patient_id), 'dir')
+                mkdir(fullfile(figDir, patient_id));
+            end
+            toSaveFigFile = fullfile(figDir, patient_id, strcat(patient_id, 'ictal_line_doavsthreshold'));
+%             toSaveFigFile = fullfile(figDir, patient_id, strcat(patient_id, 'ii_line_doavsthreshold'));
+%             toSaveFigFile = fullfile(figDir, patient_id, strcat(patient_id, '_line_doavsthreshold'));
+            
             print(toSaveFigFile, '-dpng', '-r0')
     end
 end % loop through patients
@@ -257,7 +272,7 @@ for i=1:length(thresholds)
     hold on; axes = gca; currfig = gcf;
     bh = boxplot(doa_scores(:,i));
     xlabel(patient_id);
-    ylabel(strcat('Degree of Agreement (', metric, ')'));
+    ylabel(strcat('Ictal Degree of Agreement (', metric, ')'));
     titleStr = strcat('Thresh =', {' '}, num2str(thresholds(i)));
     title(titleStr);
 
@@ -272,7 +287,9 @@ for i=1:length(thresholds)
     currfig.PaperPosition = [0    0.6389   20.0000   10.5417];
     currfig.Position = [0    0.6389   20.0000   10.5417];
 end
+toSaveFigFile = fullfile(figDir, patient_id, strcat(patient_id, 'ictal_grouped_doavsthreshold'));
+% toSaveFigFile = fullfile(figDir, patient_id, strcat(patient_id, 'ii_grouped_doavsthreshold'));
+% toSaveFigFile = fullfile(figDir, patient_id, strcat(patient_id, '_grouped_doavsthreshold'));
 
-toSaveFigFile = fullfile(figDir, patient_id, strcat(patient_id, '_grouped_doavsthreshold'));
 print(toSaveFigFile, '-dpng', '-r0')
 end
