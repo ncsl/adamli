@@ -62,9 +62,10 @@ for iPat=1:length(patients)
     % run a computation on checking patients if there is missing data
     [toCompute, patWinsToCompute] = checkPatient(patient, rootDir, winSize, stepSize, filterType, radius, JOBTYPE);
      
-   
-    parfor iWin=1:length(patWinsToCompute)
-        winToCompute = patWinsToCompute(iWin);
-        parallelComputeConnectivity(patient, winSize, stepSize, iWin);
+    if toCompute
+        parfor iWin=1:length(patWinsToCompute)
+            winToCompute = patWinsToCompute(iWin);
+            parallelComputeConnectivity(patient, winSize, stepSize, iWin);
+        end
     end
 end
