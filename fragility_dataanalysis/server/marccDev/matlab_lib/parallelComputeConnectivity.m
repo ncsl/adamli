@@ -85,7 +85,7 @@ if seeg
     patient_eeg_path = fullfile(dataDir, patient);
 %     patient = strcat(patient_id, seizure_id); % for EZT pats
 else
-    patient_eeg_path = fullfile(dataDir, patient);
+    patient_eeg_path = fullfile(dataDir, patient, 'avgref');
 end
 
 fprintf('Loading data...');
