@@ -68,6 +68,7 @@ elseif JOBTYPE==0
 end
 
 tempDirExists = exist(fullfile(tempDir, patient), 'dir');
+dataDirExists = length(dataDirFiles) > 0;
  
 % get numWins needed
 numWins = getNumWins(patient, winSize, stepSize);
@@ -76,7 +77,7 @@ numWins = getNumWins(patient, winSize, stepSize);
 toCompute = 0;
 patWinsToCompute = [];
 
-if 7==tempDirExists && isempty(dataDirFiles)  % temp dir exists, but merged data dir doensn't exist
+if 7==tempDirExists && ~dataDirExists  % temp dir exists, but merged data dir doensn't exist
     % check if each directory has the right windows computed
     fileList = dir(fullfile(tempDir, patient, '*.mat'));
     fileList = {fileList(:).name};
@@ -93,7 +94,7 @@ if 7==tempDirExists && isempty(dataDirFiles)  % temp dir exists, but merged data
         fprintf('Number of wins needed are %s vs %s\n', num2str(numWins), num2str(length(fileList)));
         patWinsToCompute = winsToCompute;
     end
-elseif 7~=tempDirExists %&& isempty(dataDirFiles) % temp and merged dir don't exist
+elseif 7~=tempDirExists && ~dataDirExists % temp and merged dir don't exist
     fprintf('Need to compute for %s still!\n', patient);
     toCompute = 1;
 else % tempDirExists ~=7 and dataDirFiles is not empty
