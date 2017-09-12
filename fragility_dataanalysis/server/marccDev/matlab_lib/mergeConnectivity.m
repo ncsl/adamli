@@ -91,6 +91,9 @@ for iMat=1:length(matFileNames)
         adjMats(iMat, :, :) = theta_adj;
     catch e
         fprintf(e);
+        fprintf(size(theta_adj));
+        fprintf('\n');
+        fprintf(size(adjMats));
     end
 end
 
