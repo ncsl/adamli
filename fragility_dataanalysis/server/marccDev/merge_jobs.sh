@@ -64,8 +64,8 @@ patients=(
     # LA06_ICTAL LA06_Inter
     # LA08_ICTAL LA08_Inter
     # LA09_ICTAL LA09_Inter
-    # LA10_ICTAL LA10_Inter
-    'LA09_ICTAL LA09_Inter
+    'LA10_ICTAL LA10_Inter
+    LA09_ICTAL LA09_Inter
     LA11_ICTAL LA11_Inter
     LA15_ICTAL LA15_Inter
     LA16_ICTAL LA16_Inter')
