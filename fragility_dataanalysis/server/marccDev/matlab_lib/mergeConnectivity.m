@@ -83,8 +83,15 @@ for iMat=1:length(matFileNames)
     if iMat==1
         N = size(theta_adj, 1);
         adjMats = zeros(numWins, N, N); 
+        fprintf('There are %f number of windows\n', numWins);
+        fprintf('There are %f number of mat files\n', length(matFileNames));
     end
-    adjMats(iMat, :, :) = theta_adj;
+    
+    try
+        adjMats(iMat, :, :) = theta_adj;
+    catch e
+        fprintf(e);
+    end
 end
 
 %%- Create the structure for the adjacency matrices for this patient/seizure
