@@ -75,7 +75,7 @@ OPTIONS.l2regularization = l2regularization;
 dataDir = fullfile(dataDir, '/data/', center);
 
 tempDir = fullfile('./tempData/', strcat(filterType, '/win', num2str(winSize), ...
-        '_step', num2str(stepSize)), 'connectivity', patient);
+        '_step', num2str(stepSize)), 'connectivity', patient, 'avgref');
 if ~exist(tempDir, 'dir')
     mkdir(tempDir);
 end
