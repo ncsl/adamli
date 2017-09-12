@@ -135,32 +135,7 @@ function generate_slurm(patients, winSize, stepSize, radius, ...
                 fprintf(command);
                 fprintf('\n\n');
                 unix(command);
-            elseif toCompute == 1 %&& isempty(patWinsToCompute) % still have either patients, or windows to compute
-                fprintf('Recomputing for this patient: %s.\n', patient);
-                
-                %- call function to compute number of windows for a patient based on
-                %- the data available, window size, and step size
-                numWins = getNumWins(patient, winSize, stepSize);
-                %             numWins = 10; % for testing
-
-                % jobname and array parameters for the batch command
-                Nbatch = numWins; % the number of jobs in job batch
-                if JOBTYPE == 1
-                    job_name = strcat(patient, '_ltv_batched');
-                else
-                    job_name = strcat(patient, '_pert_batched');
-                end
-
-                % create command to run
-                command = sprintf(strcat(basecommand, ...
-                    ' --array=1-%d --job-name=%s run_job.sbatch --export=%s,%d,%d,%d.%d'), ...
-                        Nbatch, job_name, patient, winSize, stepSize, JOBTYPE, radius);
-                
-                % print command to see and submit to unix shell
-                fprintf(command);
-                fprintf('\n\n');
-                unix(command);
-            elseif ~isempty(patWinsToCompute)
+            elseif length(patWinsToCompute) < 20
                 fprintf('Recomputing windows for this patient: %s.\n', patient);
                 
                 winsToCompute = patWinsToCompute;
@@ -192,6 +167,31 @@ function generate_slurm(patients, winSize, stepSize, radius, ...
                     
                     pause(0.5);
                 end
+            elseif toCompute == 1 %&& length(patWinsToCompute)  % still have either patients, or windows to compute
+                fprintf('Recomputing for this patient: %s.\n', patient);
+                
+                %- call function to compute number of windows for a patient based on
+                %- the data available, window size, and step size
+                numWins = getNumWins(patient, winSize, stepSize);
+                %             numWins = 10; % for testing
+
+                % jobname and array parameters for the batch command
+                Nbatch = numWins; % the number of jobs in job batch
+                if JOBTYPE == 1
+                    job_name = strcat(patient, '_ltv_batched');
+                else
+                    job_name = strcat(patient, '_pert_batched');
+                end
+
+                % create command to run
+                command = sprintf(strcat(basecommand, ...
+                    ' --array=1-%d --job-name=%s run_job.sbatch --export=%s,%d,%d,%d.%d'), ...
+                        Nbatch, job_name, patient, winSize, stepSize, JOBTYPE, radius);
+                
+                % print command to see and submit to unix shell
+                fprintf(command);
+                fprintf('\n\n');
+                unix(command);
             end
         % else not merging
         else

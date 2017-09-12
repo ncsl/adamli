@@ -7,9 +7,9 @@ if nargin == 0 % testing purposes
     patient='EZT009seiz001';
 %     patient='JH102sz6';
     patient='pt1sz2';
-    patient='Pat2sz2p';
-    patient='UMMC001_sz1';
-    patient='LA01_ICTAL';
+%     patient='Pat2sz2p';
+%     patient='UMMC001_sz1';
+%     patient='LA01_ICTAL';
     % window paramters
     winSize = 250; % 500 milliseconds
     stepSize = 125; 
