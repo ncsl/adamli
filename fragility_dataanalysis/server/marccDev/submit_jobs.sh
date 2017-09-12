@@ -110,9 +110,6 @@ read stepSize
 printf "Enter radius: "
 read radius
 
-# 1. run for 250, 125 ltv model
-# 2. run for 1.1, 1.15, 1.25, 1.75, 2.0 radius perturbation
-
 # Pause before running to check
 printf "About to run on patients (press enter to continue): $patients" # prompt for patient_id {pt1, pt2, ..., JH105, EZT005}
 read answer
