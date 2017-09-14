@@ -135,7 +135,7 @@ function generate_slurm(patients, winSize, stepSize, radius, ...
                 fprintf(command);
                 fprintf('\n\n');
                 unix(command);
-            elseif length(patWinsToCompute) < 20
+            elseif ~isempty(patWinsToCompute)
                 fprintf('Recomputing windows for this patient: %s.\n', patient);
                 
                 winsToCompute = patWinsToCompute;
@@ -150,9 +150,9 @@ function generate_slurm(patients, winSize, stepSize, radius, ...
                         job_name = strcat(patient, '_pert_sepwins_', num2str(winToCompute));
                     end
                     
-                    winCommand = sprintf(strcat('export radius=%f; export RUNCONNECTIVITY=%d; export patient=%s; export winSize=%d; export stepSize=%d; export window=%d;\n', ...
+                    winCommand = sprintf(strcat('export radius=%f; export RUNCONNECTIVITY=%d; export patient=%s; export winSize=%d; export stepSize=%d; export iSeq=%d;\n',...
                         'sbatch --time=%s --partition=%s --qos=%s --nodes=%d --ntasks-per-node=%d --cpus-per-task=%d'), ...
-                         radius, JOBTYPE, patient, winSize, stepSize, winToCompute,...
+                         radius, JOBTYPE, patient, winSize, stepSize, winToCompute, ...
                         num2str(winwalltime), partition, QOS, numNodes, numTasks, numCPUs); 
 
                     %- create command to run
@@ -165,7 +165,7 @@ function generate_slurm(patients, winSize, stepSize, radius, ...
                     fprintf('\n\n');
                     unix(command);
                     
-                    pause(0.5);
+                    pause(0.05);
                 end
             elseif toCompute == 1 %&& length(patWinsToCompute)  % still have either patients, or windows to compute
                 fprintf('Recomputing for this patient: %s.\n', patient);
