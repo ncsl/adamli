@@ -50,11 +50,11 @@ filterType = 'notchfilter';
 
 %- get the temporary directory to look at
 tempDir = fullfile('./tempData/', strcat(filterType, '/win', num2str(winSize), ...
-        '_step', num2str(stepSize)), 'connectivity', patient);
+        '_step', num2str(stepSize)), 'connectivity', patient, 'avgref');
 
 %- set directory to save merged computed data
 toSaveDir = fullfile(rootDir, strcat('/serverdata/adjmats/', filterType, '/win', num2str(winSize), ...
-        '_step', num2str(stepSize), '_freq', num2str(fs)), patient); % at lab
+        '_step', num2str(stepSize), '_freq', num2str(fs)), patient, 'avgref'); % at lab
     
 % create directory if it does not exist
 if ~exist(toSaveDir, 'dir')
