@@ -141,32 +141,55 @@ function generate_slurm(patients, winSize, stepSize, radius, ...
                 winsToCompute = patWinsToCompute;
                 winwalltime='0:5:0'; % short walltime for a single window
                 
-                for iWin=1:length(winsToCompute)
-                    winToCompute = winsToCompute(iWin);
-                    
-                    if JOBTYPE == 1
-                        job_name = strcat(patient, '_ltv_sepwins_', num2str(winToCompute));
-                    else
-                        job_name = strcat(patient, '_pert_sepwins_', num2str(winToCompute));
-                    end
-                    
-                    winCommand = sprintf(strcat('export radius=%f; export RUNCONNECTIVITY=%d; export patient=%s; export winSize=%d; export stepSize=%d; export iSeq=%d;\n',...
-                        'sbatch --time=%s --partition=%s --qos=%s --nodes=%d --ntasks-per-node=%d --cpus-per-task=%d'), ...
-                         radius, JOBTYPE, patient, winSize, stepSize, winToCompute, ...
-                        num2str(winwalltime), partition, QOS, numNodes, numTasks, numCPUs); 
-
-                    %- create command to run
-                    command = sprintf(strcat(winCommand, ...
-                                ' --job-name=%s run_windows.sbatch --export=%s,%d,%d,%d,%d,%d'), ...
-                                 job_name, patient, winSize, stepSize, JOBTYPE, radius, winToCompute);
-                
-                    % print command to see and submit to unix shell
-                    fprintf(command);
-                    fprintf('\n\n');
-                    unix(command);
-                    
-                    pause(0.05);
+                % submit a job using GNU system
+                if JOBTYPE == 1
+                    job_name = strcat(patient, '_ltv_sepwinsgnu');
+                else
+                    job_name = strcat(patient, '_pert_sepwinsgnu');
                 end
+
+                winCommand = sprintf(strcat('export radius=%f; export RUNCONNECTIVITY=%d;',...
+                    ' export patient=%s; export winSize=%d; export stepSize=%d; export winsToCompute=%s;\n',...
+                    'sbatch --time=%s --partition=%s --qos=%s --nodes=%d --ntasks-per-node=%d --cpus-per-task=%d'), ...
+                     radius, JOBTYPE, patient, winSize, stepSize, num2str(winsToCompute), ...
+                    num2str(winwalltime), partition, QOS, numNodes, numTasks, numCPUs); 
+
+                %- create command to run
+                command = sprintf(strcat(winCommand, ...
+                            ' --job-name=%s run_windows.sbatch --export=%s,%d,%d,%d,%d,%s'), ...
+                             job_name, patient, winSize, stepSize, JOBTYPE, radius, winsToCompute);
+
+                % print command to see and submit to unix shell
+                fprintf(command);
+                fprintf('\n\n');
+                unix(command);
+                
+%                 for iWin=1:length(winsToCompute)
+%                     winToCompute = winsToCompute(iWin);
+%                     
+%                     if JOBTYPE == 1
+%                         job_name = strcat(patient, '_ltv_sepwins_', num2str(winToCompute));
+%                     else
+%                         job_name = strcat(patient, '_pert_sepwins_', num2str(winToCompute));
+%                     end
+%                     
+%                     winCommand = sprintf(strcat('export radius=%f; export RUNCONNECTIVITY=%d; export patient=%s; export winSize=%d; export stepSize=%d; export winsToCompute=%d;\n',...
+%                         'sbatch --time=%s --partition=%s --qos=%s --nodes=%d --ntasks-per-node=%d --cpus-per-task=%d'), ...
+%                          radius, JOBTYPE, patient, winSize, stepSize, winToCompute, ...
+%                         num2str(winwalltime), partition, QOS, numNodes, numTasks, numCPUs); 
+% 
+%                     %- create command to run
+%                     command = sprintf(strcat(winCommand, ...
+%                                 ' --job-name=%s run_windows.sbatch --export=%s,%d,%d,%d,%d,%d'), ...
+%                                  job_name, patient, winSize, stepSize, JOBTYPE, radius, winToCompute);
+%                 
+%                     % print command to see and submit to unix shell
+%                     fprintf(command);
+%                     fprintf('\n\n');
+%                     unix(command);
+%                     
+%                     pause(0.05);
+%                 end
             elseif toCompute == 1 %&& length(patWinsToCompute)  % still have either patients, or windows to compute
                 fprintf('Recomputing for this patient: %s.\n', patient);
                 
@@ -192,6 +215,8 @@ function generate_slurm(patients, winSize, stepSize, radius, ...
                 fprintf(command);
                 fprintf('\n\n');
                 unix(command);
+            elseif toCompute == -1 % don't compute anything
+                fprintf('Not computing anything because data already exists!\n');
             end
         % else not merging
         else

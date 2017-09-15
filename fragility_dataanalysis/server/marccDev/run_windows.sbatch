@@ -9,6 +9,11 @@
 # Author: Adam Li (ali39@jhu.edu).
 # Created on 2017-09-03. 
 
+#---------------------------------------------------------------------
+# SLURM job script to run serial MATLAB
+# on MARCC using GNU parallel
+#---------------------------------------------------------------------
+
 # Load module (comment this to debug in sh mode)
 ml parallel
 ml matlab
@@ -21,6 +26,10 @@ echo ${winSize}
 echo ${stepSize}
 echo ${window}
 echo ${radius}
+echo ${winsToCompute}
+
+arrWins=($winsToCompute)
+echo ${arrWins}
 
 # 02: Create srun and reservation of CPUS
 # --exclusive - distinct CPUs allocated for each job
@@ -41,10 +50,10 @@ parallel="parallel --delay .2 -j 24 --joblog _gnulogs/runtask.log --resume"
 if [[ "$RUNCONNECTIVITY" -eq 1 ]]; then
 	$parallel $srun matlab -nojvm -nodisplay -nodesktop -nosplash -r "\
 		cd('matlab_lib');\
-		parallelComputeConnectivity('$patient', $winSize, $stepSize, ${iSeq});"
+		parallelComputeConnectivity('$patient', $winSize, $stepSize, ${1});" ::: #{arrWins[@]}
 else
 	$parallel $srun matlab -nojvm -nodisplay -nodesktop -nosplash -r "\
 		cd('matlab_lib');\
-		parallelComputePerturbation('$patient', $winSize, $stepSize, $radius, ${iSeq});"
+		parallelComputePerturbation('$patient', $winSize, $stepSize, $radius, ${1});" ::: #{arrWins[@]}
 fi
 

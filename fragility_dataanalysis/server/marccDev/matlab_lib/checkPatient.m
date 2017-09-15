@@ -98,5 +98,6 @@ elseif 7~=tempDirExists && ~dataDirExists % temp and merged dir don't exist
     fprintf('Need to compute for %s still!\n', patient);
     toCompute = 1;
 else % tempDirExists ~=7 and dataDirFiles is not empty
+    toCompute = -1;
     fprintf('%s directory already exists!\n', patient);
 end
