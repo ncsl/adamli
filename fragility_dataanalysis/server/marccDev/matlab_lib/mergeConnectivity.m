@@ -1,4 +1,4 @@
-function mergeConnectivity(patient, winSize, stepSize)
+function mergeConnectivity(patient, winSize, stepSize, reference)
 % function: mergeConnectivity
 % By: Adam Li
 % Date: 6/12/17
@@ -11,6 +11,12 @@ function mergeConnectivity(patient, winSize, stepSize)
 % - computedDir: the directory to check for all the computed patients
 % Output:
 % - vector of patients needed to compute
+if nargin==0
+    patient='LA15_ICTAL';
+    winSize=250;
+    stepSize=125;
+    reference = 'avgref';
+end
 fprintf('Inside merging connectivity...\n');
 
 %% INITIALIZATION
@@ -50,11 +56,11 @@ filterType = 'notchfilter';
 
 %- get the temporary directory to look at
 tempDir = fullfile('./tempData/', strcat(filterType, '/win', num2str(winSize), ...
-        '_step', num2str(stepSize)), 'connectivity', patient, 'avgref');
+        '_step', num2str(stepSize)), 'connectivity', patient, reference);
 
 %- set directory to save merged computed data
 toSaveDir = fullfile(rootDir, strcat('/serverdata/adjmats/', filterType, '/win', num2str(winSize), ...
-        '_step', num2str(stepSize), '_freq', num2str(fs)), patient, 'avgref'); % at lab
+        '_step', num2str(stepSize), '_freq', num2str(fs)), patient, reference); % at lab
     
 % create directory if it does not exist
 if ~exist(toSaveDir, 'dir')
@@ -74,10 +80,17 @@ numWins = getNumWins(patient, winSize, stepSize);
 % construct the adjMats from the windows computed of adjMat
 for iMat=1:length(matFileNames)
     matFile = fullfile(tempDir, matFileNames{iMat});
-    data = load(matFile);
+    
+%     try   
+        data = load(matFile);
 
-     % extract the computed theta adjacency
-    theta_adj = data.theta_adj;
+         % extract the computed theta adjacency
+         theta_adj = data.theta_adj;
+%     catch e
+%         disp(iMat);
+%         parallelComputeConnectivity(patient, winSize, stepSize, iMat);
+%         disp(e);
+%     end
     
     % initialize matrix if first loop and then store results
     if iMat==1
@@ -90,9 +103,11 @@ for iMat=1:length(matFileNames)
     try
         adjMats(iMat, :, :) = theta_adj;
     catch e
+        disp(iMat);
+        parallelComputeConnectivity(patient, winSize, stepSize, iMat);
         disp(size(theta_adj));
         fprintf('\n');
-        disp(size(adjMats));
+%         disp(size(adjMats));
     end
 end
 
@@ -124,7 +139,7 @@ adjmat_struct.frequency_sampling = info.frequency_sampling;
 adjmat_struct.FILTER = info.FILTER_TYPE;
 
 % save the merged adjMatDir
-fileName = strcat(patient, '_adjmats_', lower(info.type_connectivity), '.mat');
+fileName = strcat(patient, '_adjmats', reference, '_', lower(info.type_connectivity), '.mat');
 
 varinfo = whos('adjmat_struct');
 if varinfo.bytes < 2^31

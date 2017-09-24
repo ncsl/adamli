@@ -28,13 +28,10 @@ patients=(
 	# UMMC007_sz1 UMMC007_sz2 UMMC007_sz3
 	# UMMC008_sz1 UMMC008_sz2 UMMC008_sz3
 	# UMMC009_sz1 UMMC009_sz2 UMMC009_sz3
-
 	# JH103sz1 JH103sz2 JH103sz3
 	# JH103aslp1 JH103aw1
-	
 	# JH105sz1 JH105sz2 JH105sz3 JH105sz4 JH105sz5
 	# JH105aslp1 JH105aw1
-
 	# LA01_ICTAL LA01_Inter
  #    LA02_ICTAL LA02_Inter
  #    LA03_ICTAL LA03_Inter
@@ -47,10 +44,8 @@ patients=(
  #    LA11_ICTAL LA11_Inter
  #    LA15_ICTAL LA15_Inter
  #    LA16_ICTAL LA16_Inter')
-
 	# Pat2sz1p Pat2sz2p Pat2sz3p
 	# Pat16sz1p Pat16sz2p Pat16sz3p')
-	
 	# 'JH105aslp1 JH105aw1
 	# JH105sz1 JH105sz2 JH105sz3 JH105sz4 JH105sz5
 	# pt10sz1 pt10sz2 pt10sz3
@@ -69,7 +64,6 @@ patients=(
     # LA15_ICTAL LA15_Inter
     # LA16_ICTAL LA16_Inter')
 
-
 	# 'JH101sz1 JH101sz2 JH101sz3 JH101sz4
 	# JH102sz1 JH102sz2 JH102sz3 JH102sz4 JH102sz5 JH102sz6
 	# JH103sz1 JH103sz2 JH103sz3
@@ -78,26 +72,6 @@ patients=(
 	# JH106sz1 JH106sz2 JH106sz3 JH106sz4 JH106sz5 JH106sz6
 	# JH107sz1 JH107sz2 JH107sz3 JH107sz4 JH107sz5 JH107sz6 JH107sz7 JH107sz8 JH107sz8 JH107sz9
 	# JH108sz1 JH108sz2 JH108sz3 JH108sz4 JH108sz5 JH108sz6 JH108sz7
-
-
-
-	# 'EZT004seiz001 EZT004seiz002
-	# EZT006seiz001 EZT006seiz002
-	# EZT008seiz001 EZT008seiz002
-	# 'EZT009seiz001 EZT009seiz002
-	# EZT011seiz001 EZT011seiz002
-	# EZT013seiz001 EZT013seiz002
-	# EZT020seiz001 EZT020seiz002
-	# EZT025seiz001 EZT025seiz002')
-	# EZT026seiz001 EZT026seiz002
-	# EZT028seiz001 EZT028seiz002')
-	# 'EZT007seiz001 EZT007seiz002 EZT007seiz003
-	# EZT019seiz001 EZT019seiz002 EZT019seiz003
-	# 'EZT005seiz001 EZT005seiz002 EZT005seiz003
-	# EZT011seiz001')
-	# 'EZT070seiz001 EZT070seiz002')
-	# EZT037seiz001 EZT037seiz002')
-	# 'EZT070seiz001 EZT070seiz002')
 
 # 01: Prompt user for input that runs the analysis
 echo "Begin analysis." # print beginning statement
@@ -109,6 +83,8 @@ printf "Enter step size: "
 read stepSize
 printf "Enter radius: "
 read radius
+printf "Type of reference (e.g. avgref): "
+read reference
 
 # Pause before running to check
 printf "About to run on patients (press enter to continue): $patients" # prompt for patient_id {pt1, pt2, ..., JH105, EZT005}
@@ -141,8 +117,18 @@ for patient in $patients; do
 done
 echo $buff
 
+# Debug statement for reference type
+if [ -z "$reference" ]
+then
+      echo "\$var is empty"
+      reference="''"
+else
+      echo "\$var is NOT empty and should be 'avgref'"
+fi
+echo $reference
+
 ## 02: Call patient shell script for each patient
 matlab -logfile /home-1/ali39@jhu.edu/work/adamli/fragility_dataanalysis/server/marccDev/_log/job$1.txt -nojvm -nodisplay -nosplash -r "\
 	generate_slurm('$buff', $winSize, $stepSize, $radius,\
 	'$partition', '$walltime', $NUM_NODES, $NUM_PROCSPERNODE,\
-	 $RUNCONNECTIVITY); exit"
+	 $RUNCONNECTIVITY, $reference); exit"

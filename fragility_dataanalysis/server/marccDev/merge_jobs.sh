@@ -92,6 +92,8 @@ printf "Enter step size: "
 read stepSize
 printf "Enter radius: "
 read radius
+printf "Type of reference (e.g. avgref): "
+read reference
 
 # 1. run for 250, 125 ltv model
 # 2. run for 1.1, 1.15, 1.25, 1.75, 2.0 radius perturbation
@@ -124,6 +126,16 @@ for patient in $patients; do
 done
 echo $buff
 
+# Debug statement for reference type
+if [ -z "$reference" ]
+then
+      echo "\$var is empty"
+      reference="''"
+else
+      echo "\$var is NOT empty and should be 'avgref'"
+fi
+echo $reference
+
 ## 03: Call sbatch to run merges
 export winSize 
 export stepSize
@@ -132,5 +144,5 @@ export stepSize
 ## 02: Call patient shell script for each patient
 matlab -logfile /home-1/ali39@jhu.edu/work/adamli/fragility_dataanalysis/server/marccDev/_log/job$1.txt -nojvm -nodisplay -nosplash -r "\
 	generate_slurm('$buff', $winSize, $stepSize, $radius,\
-	'$partition', '$walltime', $NUM_NODES, $NUM_PROCSPERNODE, $RUNCONNECTIVITY, 1); exit"
+	'$partition', '$walltime', $NUM_NODES, $NUM_PROCSPERNODE, $RUNCONNECTIVITY, $reference, 1); exit"
 

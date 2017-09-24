@@ -1,19 +1,14 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% m-file: generate_slurm.m
+% m-file: generate_slurm_gnu.m
 %
 % Description: It uses a template of *.sbatch (slurm system) file and
 %              customizes it to make a *.sh file for every patient of
 %              iEEG data that must be processed by the cluster.
 %
 % Author: Adam Li
-%
-% QUESTIONS FOR PIERRE:
-% 1. DO I SET A SEPARATE JOB NAME IN HERE FOR EACH ENTRY IN THE JOB ARRAY?
-% 2. EXPLAIN NUMTASKS AGAIN?
-% 3. WHAT IS THE OFFSET IN SUBMITTING ARRAY IN SBATCH
-% Ver.: 1.0 - Date: 05/22/2017
+% Ver.: 1.0 - Date: 09/24/2017
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-function generate_slurm(patients, winSize, stepSize, radius, ...
+function generate_slurm_gnu(patients, winSize, stepSize, radius, ...
     PARTITION, WALLTIME, NUMNODES, NUM_PROCS, JOBTYPE, reference, MERGE) 
     if ~exist('MERGE','var')
         MERGE = 0;
@@ -97,15 +92,16 @@ function generate_slurm(patients, winSize, stepSize, radius, ...
         
         % initialize command
         basecommand = sprintf(strcat('export radius=%f; export RUNCONNECTIVITY=%d; export patient=%s; export winSize=%d; export stepSize=%d; export reference=%s;\n', ...
-                    'sbatch --time=%s --partition=%s --nodes=%d --ntasks-per-node=%d --cpus-per-task=%d'), ...
-                     radius, JOBTYPE, patient, winSize, stepSize, reference,...
-                    num2str(walltime), partition, numNodes, numTasks, numCPUs);
-        
+                        'srun --exclusive -time=%s --partition=%s --nodes=%d --ntasks-per-node=%d --cpus-per-task=%d', ...
+                        ' parallel --delay .2 -j 24 --joblog _gnulogs/runtask.log --resume'), ...
+                         radius, JOBTYPE, patient, winSize, stepSize, reference, ... % exports
+                         num2str(walltime), partition, numNodes, numTasks, numCPUs); 
         if exist('QOS', 'var')
             basecommand = sprintf(strcat('export radius=%f; export RUNCONNECTIVITY=%d; export patient=%s; export winSize=%d; export stepSize=%d; export reference=%s;\n', ...
-                    'sbatch --time=%s --partition=%s --qos=%s --nodes=%d --ntasks-per-node=%d --cpus-per-task=%d'), ...
-                     radius, JOBTYPE, patient, winSize, stepSize, reference, ...
-                    num2str(walltime), partition, QOS, numNodes, numTasks, numCPUs); 
+                        'srun --exclusive -time=%s --partition=%s --qos=%s --nodes=%d --ntasks-per-node=%d --cpus-per-task=%d', ...
+                        ' parallel --delay .2 -j 24 --joblog _gnulogs/runtask.log --resume'), ...
+                         radius, JOBTYPE, patient, winSize, stepSize, reference, ... % exports
+                         num2str(walltime), partition, QOS, numNodes, numTasks, numCPUs); 
         end
         
         % merging computations together
@@ -142,59 +138,6 @@ function generate_slurm(patients, winSize, stepSize, radius, ...
                 fprintf(command);
                 fprintf('\n\n');
                 unix(command);
-            elseif ~isempty(patWinsToCompute)
-                fprintf('Recomputing windows for this patient: %s.\n', patient);
-                
-                winsToCompute = patWinsToCompute;
-                winwalltime='0:5:0'; % short walltime for a single window
-                
-                % submit a job using GNU system
-                if JOBTYPE == 1
-                    job_name = strcat(patient, '_ltv_sepwinsgnu');
-                else
-                    job_name = strcat(patient, '_pert_sepwinsgnu');
-                end
-
-                winCommand = sprintf(strcat('export radius=%f; export RUNCONNECTIVITY=%d;',...
-                    ' export patient=%s; export winSize=%d; export stepSize=%d; export winsToCompute=%s; export reference=%s;\n',...
-                    'sbatch --time=%s --partition=%s --qos=%s --nodes=%d --ntasks-per-node=%d --cpus-per-task=%d'), ...
-                     radius, JOBTYPE, patient, winSize, stepSize, num2str(winsToCompute), reference, ...
-                    num2str(winwalltime), partition, QOS, numNodes, numTasks, numCPUs); 
-
-                %- create command to run
-                command = sprintf(strcat(winCommand, ...
-                            ' --job-name=%s run_windows.sbatch --export=%s,%d,%d,%d,%d,%s,%s'), ...
-                             job_name, patient, winSize, stepSize, JOBTYPE, radius, winsToCompute, reference);
-
-                % print command to see and submit to unix shell
-                fprintf(command);
-                fprintf('\n\n');
-                unix(command);
-            elseif toCompute == 1 %&& length(patWinsToCompute)  % still have either patients, or windows to compute
-                fprintf('Recomputing for this patient: %s.\n', patient);
-                
-                %- call function to compute number of windows for a patient based on
-                %- the data available, window size, and step size
-                numWins = getNumWins(patient, winSize, stepSize);
-                %             numWins = 10; % for testing
-
-                % jobname and array parameters for the batch command
-                Nbatch = numWins; % the number of jobs in job batch
-                if JOBTYPE == 1
-                    job_name = strcat(patient, '_ltv_batched');
-                else
-                    job_name = strcat(patient, '_pert_batched');
-                end
-
-                % create command to run
-                command = sprintf(strcat(basecommand, ...
-                    ' --array=1-%d --job-name=%s run_job.sbatch --export=%s,%d,%d,%d,%d,%s'), ...
-                        Nbatch, job_name, patient, winSize, stepSize, JOBTYPE, radius, reference);
-                
-                % print command to see and submit to unix shell
-                fprintf(command);
-                fprintf('\n\n');
-                unix(command);
             elseif toCompute == -1 % don't compute anything
                 fprintf('Not computing anything because data already exists!\n');
             end
@@ -205,20 +148,21 @@ function generate_slurm(patients, winSize, stepSize, radius, ...
             %- call function to compute number of windows for a patient based on
             %- the data available, window size, and step size
             numWins = getNumWins(patient, winSize, stepSize);
-%             numWins = 10; % for testing
             
-            % jobname and array parameters for the batch command
-            Nbatch = numWins; % the number of jobs in job batch
+            % jobname parameters for the batch command
             if JOBTYPE == 1
-                job_name = strcat(patient, '_ltv_batched');
+                job_name = strcat(patient, '_ltv_gnu');
             else
-                job_name = strcat(patient, '_pert_batched');
+                job_name = strcat(patient, '_pert_gnu');
             end
 
             % create command to run
             command = sprintf(strcat(basecommand, ...
-                        ' --array=1-%d --job-name=%s run_job.sbatch --export=%s,%d,%d,%d,%d,%s'), ...
-                            Nbatch, job_name, patient, winSize, stepSize, JOBTYPE, radius,reference);
+                        ' export numWins=%d;\n', ...
+                        ' --job-name=%s run_job.sbatch --export=%s,%d,%d,%d,%d,%s,%d'), ...
+                            numWins, ...
+                            Nbatch, job_name, patient, winSize, stepSize, JOBTYPE, radius,reference, numWins);
+                               
             % print command to see and submit to unix shell
             fprintf(command);
             fprintf('\n\n');

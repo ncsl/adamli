@@ -1,4 +1,4 @@
-function [toCompute, patWinsToCompute] = checkPatient(patient, rootDir, winSize, stepSize, filterType, radius, JOBTYPE)
+function [toCompute, patWinsToCompute] = checkPatient(patient, rootDir, winSize, stepSize, filterType, radius, reference, JOBTYPE)
 % function: checkPatient
 % By: Adam Li
 % Date: 6/12/17
@@ -19,6 +19,7 @@ if nargin == 0
     winSize = 250;
     stepSize = 125;
     filterType = 'adaptivefilter';
+    reference = 'avgref';
 end
 
  % data directories to save data into - choose one
@@ -60,14 +61,14 @@ end
 if JOBTYPE==1
     dataDirFiles = dir(fullfile(rootDir, 'serverdata/adjmats', strcat(filterType), ...
             strcat('win', num2str(winSize), '_step', num2str(stepSize), '_freq', num2str(fs)),...
-            patient, '*.mat'));
+            patient, reference, '*.mat'));
 elseif JOBTYPE==0
     dataDirFiles = dir(fullfile(rootDir, 'serverdata/pertmats', strcat(filterType), ...
             strcat('win', num2str(winSize), '_step', num2str(stepSize), '_freq', num2str(fs), '_radius', num2str(radius)),...
-            patient, '*.mat'));
+            patient, reference, '*.mat'));
 end
 
-tempDirExists = exist(fullfile(tempDir, patient), 'dir');
+tempDirExists = exist(fullfile(tempDir, patient, reference), 'dir');
 dataDirExists = length(dataDirFiles) > 0;
  
 % get numWins needed

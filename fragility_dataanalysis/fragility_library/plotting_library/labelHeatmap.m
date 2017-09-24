@@ -44,23 +44,23 @@ function labelHeatmap(ax, fig, clinicalIndices, PLOTARGS)
             plotAnnotatedStars(gca, xLocations, figIndices{i}, colors{i});
         end
     end
+
+    % plot stars for the resected labels
+%     figIndices = {resection_indices};
+%     colors = {[0.1 0 0]};
+%     for i=1:length(figIndices)
+%         if sum(figIndices{i})>0
+%             xLocations = repmat(XUpperLim+1, length(figIndices{i}), 1);
+%             plotAnnotatedStars(gca, xLocations, figIndices{i}, colors{i});
+%         end
+%     end
     
     leg = legend('EZ', 'Early Onset', 'Late Onset');
+%     leg = legend('Resected');
     try
         leg.Position = [0.8792    0.0103    0.1021    0.0880];
     catch
         disp('Legend not set yet for patient');
-    end
-    
-    % plot *'s for the resection indices
-    if ~isempty(resection_indices)
-        xlim([XLowerLim-1, XUpperLim+2])
-        
-        xLocations = repmat(XLowerLim-1, length(resection_indices), 1);
-        plot(xLocations, resection_indices, 'o', 'Color', [0 0.5 0], 'MarkerSize', 4); hold on;
-        
-        xLocations = repmat(XUpperLim+2, length(resection_indices), 1);
-        plot(xLocations, resection_indices, 'o', 'Color', [0 0.5 0],'MarkerSize', 4); hold on;
     end
 
     % plot the different labels on different axes to give different colors

@@ -1,4 +1,4 @@
-function parallelComputeConnectivity(patient, winSize, stepSize, iTask)
+function parallelComputeConnectivity(patient, winSize, stepSize, reference, iTask)
 % function to compute the ltv model for a certain window based on
 % - # of processors
 % - # of windows
@@ -16,6 +16,7 @@ if nargin == 0 % testing purposes
     iTask = 2;
     numProcs = 1;
     numWins = 103;
+    reference = 'avgref';
 end
 fprintf('Inside parallel computing connectivity...\n');
 
@@ -75,7 +76,7 @@ OPTIONS.l2regularization = l2regularization;
 dataDir = fullfile(dataDir, '/data/', center);
 
 tempDir = fullfile('./tempData/', strcat(filterType, '/win', num2str(winSize), ...
-        '_step', num2str(stepSize)), 'connectivity', patient, 'avgref');
+        '_step', num2str(stepSize)), 'connectivity', patient, reference);
 if ~exist(tempDir, 'dir')
     mkdir(tempDir);
 end
@@ -85,7 +86,7 @@ if seeg
     patient_eeg_path = fullfile(dataDir, patient);
 %     patient = strcat(patient_id, seizure_id); % for EZT pats
 else
-    patient_eeg_path = fullfile(dataDir, patient, 'avgref');
+    patient_eeg_path = fullfile(dataDir, patient);
 end
 
 fprintf('Loading data...');
@@ -117,7 +118,6 @@ numWins = floor(size(eeg, 2) / numSampsInStep - numSampsInWin/numSampsInStep + 1
 % apply included channels to eeg and labels
 if ~isempty(included_channels)
     eeg = eeg(included_channels, :);
-    labels = labels(included_channels);
 end
 
 % set the number of harmonics
@@ -198,7 +198,7 @@ fprintf('Should have finished saving info mat.\n');
 %- save file for this current window
 currentWin = iTask;
 % filename to be saved temporarily
-fileName = strcat(patient, '_adjmats_', num2str(currentWin));
+fileName = strcat(patient, '_adjmats', reference, '_', num2str(currentWin));
 
 % get the window of data to compute adjacency
 tempeeg = eeg(:, timePoints(currentWin,1):timePoints(currentWin,2));
@@ -218,7 +218,7 @@ if strcmp(TYPE_CONNECTIVITY, 'leastsquares')
 end
 
 % display a message for the user
-fprintf(['Finished: ', num2str(currentWin), '\n']);
+fprintf([reference, ' Finished: ', num2str(currentWin), '\n']);
 
 % save the file in temporary dir
 save(fullfile(tempDir, fileName), 'theta_adj');

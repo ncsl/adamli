@@ -1,5 +1,5 @@
 function parallelComputePerturbation(patient, winSize, stepSize, ... 
-    radius, iTask)
+    radius, reference, iTask)
 % function to compute the ltv model for a certain window based on
 % - # of processors
 % - # of windows
@@ -15,6 +15,7 @@ if nargin == 0 % testing purposes
     numProcs = 1;
     radius = 1.5;
     numWins = 103;
+    reference = 'avgref';
 end
 
 %% INITIALIZATION
@@ -61,7 +62,7 @@ sigma = [-sigma, sigma];
 
 %- temp directory
 tempDir = fullfile('./tempData/', strcat(filterType), strcat('win', num2str(winSize), ...
-    '_step', num2str(stepSize), '_radius', num2str(radius)), 'perturbation', patient);
+    '_step', num2str(stepSize), '_radius', num2str(radius)), 'perturbation', patient, reference);
 if ~exist(tempDir, 'dir')
     mkdir(tempDir);
 end
@@ -72,7 +73,7 @@ fprintf('Loading connectivity data...');
 connDir = fullfile(rootDir, 'serverdata', 'adjmats', strcat(filterType), ...
     strcat('win', num2str(winSize), '_step', num2str(stepSize), '_freq', num2str(frequency_sampling)),...
     patient);
-data = load(fullfile(connDir, strcat(patient, '_adjmats_leastsquares.mat')));
+data = load(fullfile(connDir, strcat(patient, '_adjmats', reference, '_leastsquares.mat')));
 adjmat_struct = data.adjmat_struct;
 
 % save meta data for the computation 
@@ -155,7 +156,7 @@ end
 fprintf(['Finished: ', num2str(iTask), '\n']);
 
     % filename to be saved temporarily
-fileName = strcat(patient, '_pertmats_', num2str(iTask));
+fileName = strcat(patient, '_pertmats', reference, '_', num2str(iTask));
     
 % save the file in temporary dir
 save(fullfile(tempDir, fileName), 'perturbation_struct');

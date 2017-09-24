@@ -8,6 +8,7 @@ function [included_channels, onset_electrodes, ...
     
     nihclinicalannotations; %- run through checking of nih clinical annotations
     laclinicalannotations;
+    ummcclinicalannotations;
    if strcmp(patient_id, 'EZT007')
         included_channels = [1:16 18:53 55:71 74:78 81:94];
         onset_electrodes = {'O7', 'E8', 'E7', 'I5', 'E9', 'I6', 'E3', 'E2',...
@@ -233,12 +234,18 @@ function [included_channels, onset_electrodes, ...
         elseif strcmp(seizure_id, 'aw1')
             included_channels = [1:4 7:33 47:66 69:73 75:110]; % removed 34 (RHD10)
         end
-        
-        onset_electrodes = {'POLRAD1', 'POLRAD2', 'POLRAD3', 'POLRAD4', 'POLRAD5', ...
-            'POLRAD6', 'POLRAD7', 'POLRHD1', 'POLRHD2', 'POLRHD3', 'POLRHD4', ...
-            'POLRHD5', 'POLRHD6', 'POLRHD7', 'POLRHD8', 'POLRHD9'};
-        earlyspread_labels = {'POLRTG48', 'POLRTG40'};
+                
+        onset_electrodes = {'RAD1', 'RAD2', 'RAD3', 'RAD4', 'RAD5', 'RAD6', 'RAD7','RAD8', ...
+            'RHD1', 'RHD2', 'RHD3', 'RHD4','RHD5', 'RHD6', 'RHD7', 'RHD8', 'RHD9',...
+            'RTG40', 'RTG48'};
+        earlyspread_labels = {};
         latespread_labels = {};
+        resection_labels = {'RTG40', 'RTG41', 'RTG42', 'RTG43', 'RTG44', ...
+            'RTG49', 'RTG50', 'RTG51', 'RTG52', ...
+            'RTG57', 'RTG58', 'RTG59', 'RTG60', ... % APPROXIMATELY ACCORDING TO CLINICIANS
+            'RAD1', 'RAD2', 'RAD3', 'RAD4', 'RAD5', 'RAD6', 'RAD7', 'RAD7', ...
+            };
+        
         
         success_or_failure = 0;
         
@@ -262,13 +269,20 @@ function [included_channels, onset_electrodes, ...
             included_channels = [1:4 7:12 14:19 21:37 42:43 46:49 51:53 56:75 78:99];
         end
         
-        onset_electrodes = {'POLRPG4', 'POLRPG5', 'POLRPG6', 'POLRPG12', 'POLRPG13', 'POLG14',...
-            'POLRPG20','POLRPG21', ...
-            'POLAPD1', 'POLAPD2', 'POLAPD3', 'POLAPD4', 'POLAPD5', 'POLAPD6', 'POLAPD7', 'POLAPD8', ...
-            'POLPPD1', 'POLPPD2', 'POLPPD3', 'POLPPD4', 'POLPPD5', 'POLPPD6', 'POLPPD7', 'POLPPD8', ...
-            'POLASI3', 'POLPSI5', 'POLPSI6'}; % JH105
-        earlyspread_labels = {'POLLAT1' 'POLLAT2', 'POLLAT6', 'POLLAT7', 'POLLAT8'};
-         latespread_labels = {};
+        onset_electrodes = {'RPG4', 'RPG5', 'RPG6', 'RPG12', 'RPG13', 'RPG14', 'RPG20', 'RPG21', ...
+                'APD1', 'APD2', 'APD3', 'APD4', 'APD5', 'APD6', 'APD7', 'APD8', ...
+                'PPD1', 'PPD2', 'PPD3', 'PPD4', 'PPD5', 'PPD6', 'PPD7', 'PPD8', ...
+                'ASI3', 'PSI5', 'PSI6'}; % JH105
+        earlyspread_labels = {'LAT1' 'LAT2', 'LAT6', 'LAT7', 'LAT8'};
+        latespread_labels = {};
+        resection_labels = {'RPG3', 'RPG4', 'RPG5', 'RPG6', ...
+            'RPG11', 'RPG12', 'RPG13', 'RPG19', 'RPG20', ...
+            'PPD1', 'PPD2', 'PPD3', 'PPD4', 'PPD5', 'PPD6', 'PPD7', 'PPD8', ...
+            'APD1', 'APD2', 'APD3', 'APD4', 'APD5', 'APD6', 'APD7', 'APD8', ...
+            'ASI2', 'ASI3', ...
+            'PDI2', 'PDI3', ...
+            'PSI6', 'PSI7', 'PSI8', ...
+            };
          
          success_or_failure = 1;
          
@@ -316,111 +330,5 @@ function [included_channels, onset_electrodes, ...
         success_or_failure = 0;
         
         center = 'jhu';
-    elseif strcmp(patient_id, 'UMMC001')
-        included_channels = [1:22 24:29 31:33 35:79 81:92];
-        onset_electrodes = {'GP13', 'GP21', 'GP29'};
-        earlyspread_labels = {'GP12', 'GP18', 'GP19', 'GP20', ...
-            'GP27', 'GP28', 'GA7', 'GA14', 'GA21'};
-        latespread_labels = {};
-        
-        frequency_sampling = 500;
-        success_or_failure = 1;
-        
-        center = 'ummc';
-    elseif strcmp(patient_id, 'UMMC002')
-        included_channels = [1:22 24:29 31:33 35:52];
-        onset_electrodes = {'ANT1', 'ANT2', 'ANT3', 'MEST1', 'MEST2', 'MEST3', 'MEST4', 'AT1', 'GRID17', 'GRID25'};
-        earlyspread_labels = {};
-        latespread_labels = {};
-        
-        frequency_sampling = 500;
-        success_or_failure = 1;
-        
-        center = 'ummc';
-    elseif strcmp(patient_id, 'UMMC003')
-        included_channels = [1:22 24:29 31:33 35:48];
-%         onset_electrodes = {'MesT4', 'MesT5', 'Grid4', 'Grid10', 'Grid12',...
-%             'Grid18', 'Grid19', 'Grid20', 'Grid26', 'Grid27'};
-        
-        onset_electrodes = {'MEST4', 'MEST5', 'GRID4', 'GRID10', 'GRID12', ...
-            'GRID18', 'GRID19', 'GRID20', 'GRID26', 'GRID27'};
-        earlyspread_labels = {};
-        latespread_labels = {};
-        
-        frequency_sampling = 250;
-        
-        success_or_failure = 1;
-        center = 'ummc';
-    elseif strcmp(patient_id, 'UMMC004')
-        included_channels = [1:22 24:29 31:33 35:49];
-        onset_electrodes = {'AT1', 'GRID1', 'GRID9', 'GRID10', 'GRID17', 'GRID18'};
-        earlyspread_labels = {};
-        latespread_labels = {};
-        
-        frequency_sampling = 249.853552;
-        frequency_sampling = 250;
-        
-        success_or_failure = 1;
-        center = 'ummc';
-    elseif strcmp(patient_id, 'UMMC005')
-        included_channels = [1:33 35:48];
-        onset_electrodes = {'AT2', 'G17', 'G19', 'G25', 'G27', 'AT1', 'AT2', 'AT3', 'AT4', 'AT5', 'AT6'};
-        earlyspread_labels = {};
-        latespread_labels = {};
-        
-        frequency_sampling = 999.412111;
-        frequency_sampling = 1000;
-        
-        success_or_failure = 1;
-        center = 'ummc';
-    elseif strcmp(patient_id, 'UMMC006')
-        included_channels = [1:22 24:29 31:33 35:56]; 
-        included_channels = [1:22 24:26 28:29 31:33 35:56]; % got rid of G6
-        onset_electrodes = {'MT2', 'MT3', 'MT4', 'MES2', 'MES3', 'MES4', 'MES5', 'MAT1', 'MAT2'};
-        earlyspread_labels = {};
-        latespread_labels = {};
-        
-        frequency_sampling = 250;
-        success_or_failure = 1;
-        center = 'ummc';
-    elseif strcmp(patient_id, 'UMMC007')
-        included_channels = [1:30];
-        onset_electrodes = {'LMT1', 'LMT2', 'LMT3', 'LMT4', 'RMT1', 'RAT1', 'RAT2', 'RAT3', 'RAT4', ...
-            'RPT3', 'RPT4', 'RPT5', 'LPT3', 'LMT1', 'LMT2', 'LAT4', 'LAT5'};
-% relabeled from EZTrack        
-%         {'LMES1', 'LMES2', 'LMES3', 'LMES4', 'RMES1', 'RPT3', ...
-%     'RPT4', 'RPT5', 'RANT1', 'RANT2', 'RANT3', 'RANT4', 'LPT3', ...
-%     'LANT4', 'LANT5'};
-        earlyspread_labels = {};
-        latespread_labels = {};
-        
-        frequency_sampling = 1000;
-        success_or_failure = 0;
-        center = 'ummc';
-    elseif strcmp(patient_id, 'UMMC008')
-        included_channels = [1:30];
-        onset_electrodes = {'GRID1', 'GRID2', 'GRID3', 'GRID4', 'GRID5', 'GRID9','GRID10', 'GRID11', 'GRID12', 'GRID13', ...
-            'GRID17', 'GRID18', 'GRID19', 'GRID20', 'GRID21', 'AT1', 'AT2', 'AT3', 'AT4', 'MT1', 'MT2', ...
-            'MT3', 'MT4'};
-        earlyspread_labels = {};
-        latespread_labels = {};
-        
-        frequency_sampling = 1000;
-        if strcmp(seizure_id, 'sz1')
-            frequency_sampling = 250;
-        end
-        
-        success_or_failure = 1;
-        center = 'ummc';
-    elseif strcmp(patient_id, 'UMMC009')
-        included_channels = [1:9 11:30];
-        onset_electrodes = {'G4', 'G5', 'G6', 'G7', 'G12', 'G14', 'PT1', 'AT1'};
-        earlyspread_labels = {};
-        latespread_labels = {};
-        
-        frequency_sampling = 1000;
-        
-        success_or_failure = -1;
-        center = 'ummc';
    end
 end

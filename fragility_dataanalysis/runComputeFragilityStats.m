@@ -192,5 +192,11 @@ for iPat=1:length(patients)
     vari = var(fragilityMat, ~, 1);
     cfvar = avg ./ vari;
    
-
+    % compute highest 10% fragile nodes
+    max_frag = max(fragilityMat, 1);
+    min_frag = min(fragilityMat, 1);
+    high_frag = prctile(fragilityMat, 1-0.1, 2);
+    
+    % get a count of number of electrodes within this 10% for each channel
+    
 end

@@ -37,7 +37,7 @@ function y = filtfilt2(b,a,x)
 %   Copyright 1988-2004 The MathWorks, Inc.
 %   $Revision: 1.7.4.4 $  $Date: 2009/08/11 15:47:37 $
 
-    error(nargchk(3,3,nargin,'struct'))
+    narginchk(3,3)
     
     % Check the input data type. Single precision is not supported.
 %     try

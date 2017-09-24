@@ -184,12 +184,12 @@ elseif strcmp(patient_id, 'Pat2')
 
     %- took out supposed gray matter received from Zach April 2017
     included_channels = [1:4 7 9 11:12 15:18 21:28 30:34 47 50:62 64:67 70:73 79:87 90 95:99];
-    onset_electrodes = {'POL L''2', 'POL L''3', 'POL L''4'};
+    onset_electrodes = {'L''2', 'L''3', 'L''4'};
     earlyspread_labels = {};
     latespread_labels = {};
 
     resection_labels = {};
-
+    success_or_failure = 1;
     center = 'laserablation';
 elseif strcmp(patient_id, 'Pat16')
     included_channels = [1:4 7:19 21:39 42:121 124:157 178:189];
@@ -198,11 +198,11 @@ elseif strcmp(patient_id, 'Pat16')
     included_channels = [1:3 10:16 23:24 28 31:35 37:39 42:44 46:47 49:54 58:62 64:65 68:70 76:89 93:98 ...
         100:101 105:121 124 126 128:130 132:134 136:140 142:144 149:156 178:181 183:189];
 
-    onset_electrodes = {'POL Q7', 'POL Q8'};
+    onset_electrodes = {'Q7', 'Q8'};
     earlyspread_labels = {};
     latespread_labels = {};
 
     resection_labels = {};
-
+    success_or_failure = 0;
     center = 'laserablation';
 end
