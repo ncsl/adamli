@@ -2,15 +2,13 @@
 
 # patients listed 5 per row
 patients=(
-	# 'pt1aslp1 pt1aslp2 pt1aw1 pt1aw2
-	# pt2aslp1 pt2aslp2 pt2aw1 pt2aw2
-	# pt3aslp1 pt3aslp2 pt3aw1
-	'pt1sz2') 
-	# pt1sz3 pt1sz4
-	# pt2sz1 pt2sz3 pt2sz4 
-	# pt3sz2 pt3sz4
-	# pt6sz3 pt6sz4 pt6sz5
-	# pt7sz19 pt7sz21 pt7sz22
+	'pt1aslp1 pt1aslp2 pt1aw1 pt1aw2
+	pt2aslp1 pt2aslp2 pt2aw1 pt2aw2
+	pt3aslp1 pt3aslp2 pt3aw1
+	pt1sz2 pt1sz3 pt1sz4
+	pt2sz1 pt2sz3 pt2sz4 
+	pt3sz2 pt3sz4
+	pt6sz3 pt6sz4 pt6sz5')
 	# pt8sz1 pt8sz2 pt8sz3
 	# pt10sz1 pt10sz2 pt10sz3
 	# pt11sz1 pt11sz2 pt11sz3 pt11sz4
@@ -20,6 +18,8 @@ patients=(
 	# pt15sz1 pt15sz2 pt15sz3 pt15sz4
 	# pt16sz1 pt16sz2 pt16sz3
 	# pt17sz1 pt17sz2 pt17sz3')
+	# pt7sz19 pt7sz21 pt7sz22
+
 	# UMMC001_sz1 UMMC001_sz2 UMMC001_sz3
 	# UMMC002_sz1 UMMC002_sz2 UMMC002_sz3
 	# UMMC003_sz1 UMMC003_sz2 UMMC003_sz3
@@ -99,9 +99,9 @@ NUM_GPUS=1			# number of GPUS (need 6 procs per gpu)
 
 ## job reqs
 if [[ "${RUNCONNECTIVITY}" -eq 1 ]]; then
-	walltime=0:20:0
+	walltime=0:10:0
 else
-	walltime=0:20:0					# the walltime for each computation
+	walltime=0:10:0					# the walltime for each computation
 fi
 partition=scavenger 	# debug, shared, unlimited, parallel, gpu, lrgmem, scavenger
 # partition=debug
@@ -132,13 +132,13 @@ fi
 echo $reference
 
 ## 02: Call patient shell script for each patient
-# matlab -logfile /home-1/ali39@jhu.edu/work/adamli/fragility_dataanalysis/server/marccDev/_log/job$1.txt -nojvm -nodisplay -nosplash -r "\
-# 	generate_slurm('$buff', $winSize, $stepSize, $radius,\
-# 	'$partition', '$walltime', $NUM_NODES, $NUM_PROCSPERNODE,\
-# 	 $RUNCONNECTIVITY, $reference); exit"
+matlab -logfile /home-1/ali39@jhu.edu/work/adamli/fragility_dataanalysis/server/marccDev/_log/job$1.txt -nojvm -nodisplay -nosplash -r "\
+	generate_slurm('$buff', $winSize, $stepSize, $radius,\
+	'$partition', '$walltime', $NUM_NODES, $NUM_PROCSPERNODE,\
+	 $RUNCONNECTIVITY, $reference); exit"
 
 ## 02: Call patient shell script for each patient
-matlab -logfile /home-1/ali39@jhu.edu/work/adamli/fragility_dataanalysis/server/marccDev/_log/job$1.txt -nojvm -nodisplay -nosplash -r "\
-	generate_slurm_gnu('$buff', $winSize, $stepSize, $radius,\
-	'$partition', '$walltime', $NUM_NODES, $NUM_PROCSPERNODE,\
-	 $RUNCONNECTIVITY, '$reference'); exit"
+# matlab -logfile /home-1/ali39@jhu.edu/work/adamli/fragility_dataanalysis/server/marccDev/_log/job$1.txt -nojvm -nodisplay -nosplash -r "\
+# 	generate_slurm_gnu('$buff', $winSize, $stepSize, $radius,\
+# 	'$partition', '$walltime', $NUM_NODES, $NUM_PROCSPERNODE,\
+# 	 $RUNCONNECTIVITY, '$reference'); exit"
