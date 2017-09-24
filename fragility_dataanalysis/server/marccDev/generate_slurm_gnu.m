@@ -162,7 +162,7 @@ function generate_slurm_gnu(patients, winSize, stepSize, radius, ...
                             job_name, patient, winSize, stepSize, JOBTYPE, radius,reference, numWins);
                                
             % print command to see and submit to unix shell
-            fprintf(command);
+            fprintf('Command is %s', command);
             fprintf('\n\n');
             unix(command);
         end
