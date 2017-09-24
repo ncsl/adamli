@@ -120,6 +120,15 @@ if ~isempty(included_channels)
     eeg = eeg(included_channels, :);
 end
 
+% perform common average referencing if needed
+if strcmp(reference, 'avgref')
+    if size(eeg, 1) > size(eeg, 2)
+        eeg = eeg';
+    end
+    avg = mean(eeg, 1);
+    eeg = eeg-avg;
+end
+
 % set the number of harmonics
 numHarmonics = floor(frequency_sampling/2/60) - 1;
 

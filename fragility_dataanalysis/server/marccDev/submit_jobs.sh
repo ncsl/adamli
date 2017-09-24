@@ -2,23 +2,24 @@
 
 # patients listed 5 per row
 patients=(
-	'pt1aslp1 pt1aslp2 pt1aw1 pt1aw2
-	pt2aslp1 pt2aslp2 pt2aw1 pt2aw2
-	pt3aslp1 pt3aslp2 pt3aw1
-	pt1sz2 pt1sz3 pt1sz4
-	pt2sz1 pt2sz3 pt2sz4 
-	pt3sz2 pt3sz4
-	pt6sz3 pt6sz4 pt6sz5
-	pt7sz19 pt7sz21 pt7sz22
-	pt8sz1 pt8sz2 pt8sz3
-	pt10sz1 pt10sz2 pt10sz3
-	pt11sz1 pt11sz2 pt11sz3 pt11sz4
-	pt12sz1 pt12sz2
-	pt13sz1 pt13sz2 pt13sz3 pt13sz5
-	pt14sz1 pt14sz2 pt14sz3
-	pt15sz1 pt15sz2 pt15sz3 pt15sz4
-	pt16sz1 pt16sz2 pt16sz3
-	pt17sz1 pt17sz2 pt17sz3')
+	# 'pt1aslp1 pt1aslp2 pt1aw1 pt1aw2
+	# pt2aslp1 pt2aslp2 pt2aw1 pt2aw2
+	# pt3aslp1 pt3aslp2 pt3aw1
+	'pt1sz2') 
+	# pt1sz3 pt1sz4
+	# pt2sz1 pt2sz3 pt2sz4 
+	# pt3sz2 pt3sz4
+	# pt6sz3 pt6sz4 pt6sz5
+	# pt7sz19 pt7sz21 pt7sz22
+	# pt8sz1 pt8sz2 pt8sz3
+	# pt10sz1 pt10sz2 pt10sz3
+	# pt11sz1 pt11sz2 pt11sz3 pt11sz4
+	# pt12sz1 pt12sz2
+	# pt13sz1 pt13sz2 pt13sz3 pt13sz5
+	# pt14sz1 pt14sz2 pt14sz3
+	# pt15sz1 pt15sz2 pt15sz3 pt15sz4
+	# pt16sz1 pt16sz2 pt16sz3
+	# pt17sz1 pt17sz2 pt17sz3')
 	# UMMC001_sz1 UMMC001_sz2 UMMC001_sz3
 	# UMMC002_sz1 UMMC002_sz2 UMMC002_sz3
 	# UMMC003_sz1 UMMC003_sz2 UMMC003_sz3
@@ -83,8 +84,8 @@ printf "Enter step size: "
 read stepSize
 printf "Enter radius: "
 read radius
-printf "Type of reference (e.g. avgref): "
-read reference
+# printf "Type of reference (e.g. avgref): "
+# read reference
 
 # Pause before running to check
 printf "About to run on patients (press enter to continue): $patients" # prompt for patient_id {pt1, pt2, ..., JH105, EZT005}
@@ -103,6 +104,7 @@ else
 	walltime=0:20:0					# the walltime for each computation
 fi
 partition=scavenger 	# debug, shared, unlimited, parallel, gpu, lrgmem, scavenger
+partition=debug
 qos=scavenger
 
 ## load in the modules for this run -> python, matlab, etc.
@@ -118,6 +120,7 @@ done
 echo $buff
 
 # Debug statement for reference type
+reference='avgref'
 if [ -z "$reference" ]
 then
       echo "\$var is empty"
@@ -128,7 +131,13 @@ fi
 echo $reference
 
 ## 02: Call patient shell script for each patient
+# matlab -logfile /home-1/ali39@jhu.edu/work/adamli/fragility_dataanalysis/server/marccDev/_log/job$1.txt -nojvm -nodisplay -nosplash -r "\
+# 	generate_slurm('$buff', $winSize, $stepSize, $radius,\
+# 	'$partition', '$walltime', $NUM_NODES, $NUM_PROCSPERNODE,\
+# 	 $RUNCONNECTIVITY, $reference); exit"
+
+## 02: Call patient shell script for each patient
 matlab -logfile /home-1/ali39@jhu.edu/work/adamli/fragility_dataanalysis/server/marccDev/_log/job$1.txt -nojvm -nodisplay -nosplash -r "\
-	generate_slurm('$buff', $winSize, $stepSize, $radius,\
+	generate_slurm_gnu('$buff', $winSize, $stepSize, $radius,\
 	'$partition', '$walltime', $NUM_NODES, $NUM_PROCSPERNODE,\
 	 $RUNCONNECTIVITY, $reference); exit"
