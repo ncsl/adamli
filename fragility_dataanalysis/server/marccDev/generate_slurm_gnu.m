@@ -93,18 +93,29 @@ function generate_slurm_gnu(patients, winSize, stepSize, radius, ...
         %- the data available, window size, and step size
         numWins = getNumWins(patient, winSize, stepSize);
         
+        % jobname parameters for the batch command
+        if JOBTYPE == 1
+            job_name = strcat(patient, '_ltv_gnu');
+        else
+            job_name = strcat(patient, '_pert_gnu');
+        end
+        if MERGE
+            % set jobname 
+            job_name = strcat(patient, '_merge');
+        end    
+        
         % initialize command
         basecommand = sprintf(strcat('export radius=%f; export RUNCONNECTIVITY=%d; export patient=%s; export winSize=%d; export stepSize=%d; export reference=%s;  export numWins=%d;\n', ...
-                        'srun --exclusive --time=%s --partition=%s --nodes=%d --ntasks-per-node=%d --cpus-per-task=%d', ... 
+                        'srun --exclusive --time=%s --partition=%s --nodes=%d --ntasks-per-node=%d --cpus-per-task=%d --job-name=%s ', ... 
                         ' parallel --delay .2 -j 24 --joblog _gnulogs/runtask.log --resume'), ...
                          radius, JOBTYPE, patient, winSize, stepSize, reference, numWins, ... % exports
-                         num2str(walltime), partition, numNodes, numTasks, numCPUs); 
+                         num2str(walltime), partition, numNodes, numTasks, numCPUs, job_name); 
         if exist('QOS', 'var')
             basecommand = sprintf(strcat('export radius=%f; export RUNCONNECTIVITY=%d; export patient=%s; export winSize=%d; export stepSize=%d; export reference=%s; export numWins=%d;\n', ...
-                        'srun --exclusive --time=%s --partition=%s --qos=%s --nodes=%d --ntasks-per-node=%d --cpus-per-task=%d', ...
+                        'srun --exclusive --time=%s --partition=%s --qos=%s --nodes=%d --ntasks-per-node=%d --cpus-per-task=%d --job-name=%s ', ...
                         ' parallel --delay .2 -j 24 --joblog _gnulogs/runtask.log --resume'), ...
                          radius, JOBTYPE, patient, winSize, stepSize, reference, numWins, ... % exports
-                         num2str(walltime), partition, QOS, numNodes, numTasks, numCPUs); 
+                         num2str(walltime), partition, QOS, numNodes, numTasks, numCPUs, job_name); 
         end
         
         % merging computations together
@@ -129,9 +140,6 @@ function generate_slurm_gnu(patients, winSize, stepSize, radius, ...
 %                              radius, JOBTYPE, patient, winSize, stepSize,...
 %                             num2str(walltime), mergepartition, numNodes, numTasks, numCPUs);
 
-                % set jobname 
-                job_name = strcat(patient, '_merge');
-                
                 % create command to run either using scavenger partition,
                 % or not
                 command = sprintf(strcat(basecommand, ...
@@ -147,17 +155,10 @@ function generate_slurm_gnu(patients, winSize, stepSize, radius, ...
         % else not merging -> compute on windows
         else
             fprintf('Computing all windows for %s.\n', patient);
-            
-            % jobname parameters for the batch command
-            if JOBTYPE == 1
-                job_name = strcat(patient, '_ltv_gnu');
-            else
-                job_name = strcat(patient, '_pert_gnu');
-            end
 
             % create command to run
             command = sprintf(strcat(basecommand, ...
-                        ' --job-name=%s run_job.sbatch --export=%s,%d,%d,%d,%d,%s,%d'), ...
+                        ' run_job.sbatch --export=%s,%d,%d,%d,%d,%s,%d'), ...
                             job_name, patient, winSize, stepSize, JOBTYPE, radius,reference, numWins);
                                
             % print command to see and submit to unix shell
