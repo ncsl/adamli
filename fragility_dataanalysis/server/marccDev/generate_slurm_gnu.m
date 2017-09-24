@@ -61,14 +61,13 @@ function generate_slurm_gnu(patients, winSize, stepSize, radius, ...
     fprintf('Before adding to path\n');
     fprintf(fullfile(rootDir, 'server/marccDev/'));
     fprintf(fullfile(rootDir, '/fragility_library/'));
-    
     addpath((fullfile(rootDir, 'server/marccDev/')));
     addpath((fullfile(rootDir, 'server/marccDev/matlab_lib/')));
     addpath(genpath(fullfile(rootDir, '/fragility_library/')));
     addpath(genpath(fullfile(rootDir, '/eeg_toolbox/')));
     addpath(rootDir);
 
-    fprintf('\n\nInside generation of slurm...\n');
+    fprintf('\n\nInside gnu generation of slurm...\n');
     
     % determine number of patients to generate slurm script
     cell_pats = strsplit(patients, ' ');
