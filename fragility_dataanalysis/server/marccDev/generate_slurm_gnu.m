@@ -138,7 +138,7 @@ function generate_slurm_gnu(patients, winSize, stepSize, radius, ...
                             ' --job-name=%s run_merge.sbatch --export=%s,%d,%d,%d,%d,%s'), ...
                              job_name, patient, winSize, stepSize, JOBTYPE, radius, reference);
                 % print command to see and submit to unix shell
-                fprintf(command);
+%                 fprintf(command);
                 fprintf('\n\n');
                 unix(command);
             elseif toCompute == -1 % don't compute anything
@@ -158,11 +158,10 @@ function generate_slurm_gnu(patients, winSize, stepSize, radius, ...
             % create command to run
             command = sprintf(strcat(basecommand, ...
                         ' --job-name=%s run_job.sbatch --export=%s,%d,%d,%d,%d,%s,%d'), ...
-                            numWins, ...
                             job_name, patient, winSize, stepSize, JOBTYPE, radius,reference, numWins);
                                
             % print command to see and submit to unix shell
-            fprintf('Command is %s', command);
+%             fprintf('Command is %s', command);
             fprintf('\n\n');
             unix(command);
         end
