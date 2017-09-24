@@ -104,12 +104,13 @@ else
 	walltime=0:20:0					# the walltime for each computation
 fi
 partition=scavenger 	# debug, shared, unlimited, parallel, gpu, lrgmem, scavenger
-partition=debug
+# partition=debug
 qos=scavenger
 
 ## load in the modules for this run -> python, matlab, etc.
 module list
-module load matlab
+ml matlab
+ml parallel
 
 # create concatenated strings in unix to ensure proper passing of list of patients
 buff=''
