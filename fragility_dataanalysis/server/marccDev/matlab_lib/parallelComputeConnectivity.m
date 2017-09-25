@@ -104,10 +104,11 @@ seizure_conset_ms = data.seizure_conset_ms;
 seizure_coffset_ms = data.seizure_coffset_ms;
 fprintf('Loaded data...');
 clear data
-% check included channels length and how big eeg is
-if length(labels(included_channels)) ~= size(eeg(included_channels,:),1)
-    disp('Something wrong here...!!!!');
-end
+
+% % check included channels length and how big eeg is
+% if length(labels(included_channels)) ~= size(eeg(included_channels,:),1)
+%     disp('Something wrong here...!!!!');
+% end
 
 %- initialize the number of samples in the window / step (ms) 
 numSampsInWin = winSize * frequency_sampling / 1000;
