@@ -56,7 +56,8 @@ filterType = 'notchfilter';
 
 %- get the temporary directory to look at
 tempDir = fullfile('./tempData/', strcat(filterType, '/win', num2str(winSize), ...
-        '_step', num2str(stepSize)), 'connectivity', patient, reference);
+        '_step', num2str(stepSize)), 'connectivity');
+patTempDir = fullfile(tempDir, patient, reference);
 
 %- set directory to save merged computed data
 toSaveDir = fullfile(rootDir, strcat('/serverdata/adjmats/', filterType, '/win', num2str(winSize), ...
@@ -68,10 +69,10 @@ if ~exist(toSaveDir, 'dir')
 end
 
 %- load info file
-load(fullfile(tempDir, 'info', 'infoAdjMat.mat'));
+load(fullfile(patTempDir, 'info', 'infoAdjMat.mat'));
 
 % all the temp lti models per window
-matFiles = dir(fullfile(tempDir, '*.mat'));
+matFiles = dir(fullfile(patTempDir, '*.mat'));
 matFileNames = natsort({matFiles.name});
 
 % get numWins needed
@@ -79,7 +80,7 @@ numWins = getNumWins(patient, winSize, stepSize);
 
 % construct the adjMats from the windows computed of adjMat
 for iMat=1:length(matFileNames)
-    matFile = fullfile(tempDir, matFileNames{iMat});
+    matFile = fullfile(patTempDir, matFileNames{iMat});
     
 %     try   
         data = load(matFile);
@@ -151,10 +152,10 @@ end
 fprintf('Successful merging!\n');
 
 % Remove directories if successful
-delete(fullfile(tempDir, 'info', '*.mat'));
-rmdir(fullfile(tempDir, 'info'));
-delete(fullfile(tempDir, '*.mat'));
-rmdir(fullfile(tempDir));
+delete(fullfile(patTempDir, 'info', '*.mat'));
+rmdir(fullfile(patTempDir, 'info'));
+delete(fullfile(patTempDir, '*.mat'));
+rmdir(fullfile(tempDir, patient));
 
 fprintf('Removed everything!\n');
 end
