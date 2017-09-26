@@ -26,10 +26,10 @@ if [[ "$RUNCONNECTIVITY" -eq 1 ]]; then
 	echo "Running connectivity merge."
 	matlab -logfile _log/${SBATCH_JOB_NAME}.txt -nojvm -nodisplay -nodesktop -nosplash -r "\
 	cd('matlab_lib');\
-	mergeConnectivity('$patient', $winSize, $stepSize, $reference);"
+	mergeConnectivity('$patient', $winSize, $stepSize, '$reference');"
 else
 	echo "Running perturbation merge."
 	matlab -logfile _log/${SBATCH_JOB_NAME}.txt -nojvm -nodisplay -nodesktop -nosplash -r "\
 	cd('matlab_lib');\
-	mergePerturbation('$patient', $winSize, $stepSize, $radius, $reference);"
+	mergePerturbation('$patient', $winSize, $stepSize, $radius, '$reference');"
 fi
