@@ -2,7 +2,7 @@
 #SBATCH
 #SBATCH --mail-type=end
 #SBATCH --mail-user=ali39@jhu.edu
-#SBATCH --output=_gnulogs/%A_%a_windows.out 
+#SBATCH --output=_gnuerr/%A_%a_windows.out 
 #SBATCH --error=_gnuerr/%A_%a_windows.err
 
 # Author: Adam Li (ali39@jhu.edu).
@@ -23,7 +23,7 @@ echo ${winSize}
 echo ${stepSize}
 echo ${window}
 echo ${radius}
-parallel='parallel --delay .2 -j 24 --joblog _gnulogs/${log_file} --resume'
+parallel="parallel --delay .2 -j 24 --joblog _gnulogs/${log_file} --resume"
 
 # submit jobs via GNU
 if [[ "$RUNCONNECTIVITY" -eq 1 ]]; then
