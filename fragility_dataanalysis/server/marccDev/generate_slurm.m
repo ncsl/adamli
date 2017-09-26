@@ -142,34 +142,34 @@ function generate_slurm(patients, winSize, stepSize, radius, ...
                 fprintf(command);
                 fprintf('\n\n');
                 unix(command);
-            elseif ~isempty(patWinsToCompute)
-                fprintf('Recomputing windows for this patient: %s.\n', patient);
-                
-                winsToCompute = patWinsToCompute;
-                winwalltime='0:5:0'; % short walltime for a single window
-                
-                % submit a job using GNU system
-                if JOBTYPE == 1
-                    job_name = strcat(patient, '_ltv_sepwinsgnu');
-                else
-                    job_name = strcat(patient, '_pert_sepwinsgnu');
-                end
-
-                winCommand = sprintf(strcat('export radius=%f; export RUNCONNECTIVITY=%d;',...
-                    ' export patient=%s; export winSize=%d; export stepSize=%d; export winsToCompute=%s; export reference=%s;\n',...
-                    'sbatch --time=%s --partition=%s --qos=%s --nodes=%d --ntasks-per-node=%d --cpus-per-task=%d'), ...
-                     radius, JOBTYPE, patient, winSize, stepSize, num2str(winsToCompute), reference, ...
-                    num2str(winwalltime), partition, QOS, numNodes, numTasks, numCPUs); 
-
-                %- create command to run
-                command = sprintf(strcat(winCommand, ...
-                            ' --job-name=%s run_windows.sbatch --export=%s,%d,%d,%d,%d,%s,%s'), ...
-                             job_name, patient, winSize, stepSize, JOBTYPE, radius, winsToCompute, reference);
-
-                % print command to see and submit to unix shell
-                fprintf(command);
-                fprintf('\n\n');
-                unix(command);
+%             elseif ~isempty(patWinsToCompute)
+%                 fprintf('Recomputing windows for this patient: %s.\n', patient);
+%                 
+%                 winsToCompute = patWinsToCompute;
+%                 winwalltime='0:5:0'; % short walltime for a single window
+%                 
+%                 % submit a job using GNU system
+%                 if JOBTYPE == 1
+%                     job_name = strcat(patient, '_ltv_sepwinsgnu');
+%                 else
+%                     job_name = strcat(patient, '_pert_sepwinsgnu');
+%                 end
+% 
+%                 winCommand = sprintf(strcat('export radius=%f; export RUNCONNECTIVITY=%d;',...
+%                     ' export patient=%s; export winSize=%d; export stepSize=%d; export winsToCompute=%s; export reference=%s;\n',...
+%                     'sbatch --time=%s --partition=%s --qos=%s --nodes=%d --ntasks-per-node=%d --cpus-per-task=%d'), ...
+%                      radius, JOBTYPE, patient, winSize, stepSize, num2str(winsToCompute), reference, ...
+%                     num2str(winwalltime), partition, QOS, numNodes, numTasks, numCPUs); 
+% 
+%                 %- create command to run
+%                 command = sprintf(strcat(winCommand, ...
+%                             ' --job-name=%s run_windows.sbatch --export=%s,%d,%d,%d,%d,%s,%s'), ...
+%                              job_name, patient, winSize, stepSize, JOBTYPE, radius, winsToCompute, reference);
+% 
+%                 % print command to see and submit to unix shell
+%                 fprintf(command);
+%                 fprintf('\n\n');
+%                 unix(command);
             elseif toCompute == 1 %&& length(patWinsToCompute)  % still have either patients, or windows to compute
                 fprintf('Recomputing for this patient: %s.\n', patient);
                 
