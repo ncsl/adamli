@@ -29,11 +29,11 @@ parallel="parallel --delay .2 -j 24 --joblog _gnulogs/${log_file} --resume"
 if [[ "$RUNCONNECTIVITY" -eq 1 ]]; then
 	$parallel matlab -nojvm -nodisplay -nodesktop -nosplash -r "\
 		cd('matlab_lib');\
-		parallelComputeConnectivity('$patient', $winSize, $stepSize, $reference, ${1});" ::: $(seq 1 $numWins)
+		parallelComputeConnectivity('$patient', $winSize, $stepSize, '$reference', ${1});" ::: $(seq 1 $numWins)
 else
 	$parallel matlab -nojvm -nodisplay -nodesktop -nosplash -r "\
 		cd('matlab_lib');\
-		parallelComputePerturbation('$patient', $winSize, $stepSize, $radius, $reference, ${1});" ::: $(seq 1 $numWins)
+		parallelComputePerturbation('$patient', $winSize, $stepSize, $radius, '$reference', ${1});" ::: $(seq 1 $numWins)
 fi
 
 # 01: Create srun and reservation of CPUS
