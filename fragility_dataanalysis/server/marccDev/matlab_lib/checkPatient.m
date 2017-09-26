@@ -82,7 +82,7 @@ patWinsToCompute = [];
 
 if 7==tempDirExists && ~dataDirExists  % temp dir exists, but merged data dir doensn't exist
     % check if each directory has the right windows computed
-    fileList = dir(fullfile(patTempDir '*.mat'));
+    fileList = dir(fullfile(patTempDir, '*.mat'));
     fileList = {fileList(:).name};
    
     fileList = natsortfiles(fileList);
