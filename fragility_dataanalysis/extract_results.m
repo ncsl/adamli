@@ -1,4 +1,4 @@
-function [final_data, info] = extract_results(patient, winSize, stepSize, filterType, radius)
+function [final_data, info] = extract_results(patient, winSize, stepSize, filterType, radius, reference)
 if nargin == 0
     % data parameters to find correct directory
     patient = 'pt1sz2';
@@ -13,6 +13,7 @@ if nargin == 0
     typeConnectivity = 'leastsquares';
     typeTransform = 'fourier';
     rejectThreshold = 0.3;
+    reference = 'avgref';
 end
     
 % data directories to save data into - choose one
@@ -55,10 +56,10 @@ addpath(rootDir);
 serverDir = fullfile(dataDir, '/serverdata/');
 
 adjMatDir = fullfile(dataDir, 'serverdata/adjmats/', filterType, strcat('win', num2str(winSize), ...
-        '_step', num2str(stepSize), '_freq', num2str(fs)), patient); % at lab
+        '_step', num2str(stepSize), '_freq', num2str(fs)), patient, reference); % at lab
         
 finalDataDir = fullfile(dataDir, strcat('/serverdata/pertmats/', filterType, '/win', num2str(winSize), ...
-        '_step', num2str(stepSize), '_freq', num2str(fs), '_radius', num2str(radius)), patient); % at lab
+        '_step', num2str(stepSize), '_freq', num2str(fs), '_radius', num2str(radius)), patient, reference); % at lab
 
 try
     final_data = load(fullfile(finalDataDir, ...

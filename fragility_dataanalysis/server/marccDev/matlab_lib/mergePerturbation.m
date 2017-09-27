@@ -1,4 +1,4 @@
-function mergePerturbation(patient, winSize, stepSize, radius, filterType)
+function mergePerturbation(patient, winSize, stepSize, radius, filterType, reference)
 % function: mergePerturbation
 % By: Adam Li
 % Date: 7/8/17
@@ -18,6 +18,7 @@ if nargin==0
     winSize=250;
     stepSize=125;
     radius=1.1;
+    reference = 'avgref';
 end
 
 fprintf('Inside merging perturbations...\n');
@@ -60,13 +61,13 @@ perturbationTypes = ['C', 'R'];
 
 %- get the temporary directory to look at
 tempDir = fullfile('./tempData/', strcat(filterType), strcat('win', num2str(winSize), ...
-    '_step', num2str(stepSize), '_radius', num2str(radius)), 'perturbation', patient);
-% tempDir = fullfile('./tempData', patient);
+    '_step', num2str(stepSize), '_radius', num2str(radius)), 'perturbation');
+patDir = fullfile(tempDir, patient, reference);
 
 %- set directory to save merged computed data
 toSaveDir = fullfile(rootDir, strcat('/serverdata/pertmats/', filterType), ...
     strcat('win', num2str(winSize), '_step', num2str(stepSize), '_freq', num2str(fs), '_radius', num2str(radius)),...
-    patient);
+    patient, reference);
 
 % create directory if it does not exist
 if ~exist(toSaveDir, 'dir')
@@ -74,18 +75,18 @@ if ~exist(toSaveDir, 'dir')
 end
 
 %- load info file
-info = load(fullfile(tempDir, 'info', 'infoPertMat.mat'), 'info');
+info = load(fullfile(patDir, 'info', 'infoPertMat.mat'), 'info');
 info = info.info;
 
 % all the temp lti models per window
-matFiles = dir(fullfile(tempDir, '*.mat'));
+matFiles = dir(fullfile(patDir, '*.mat'));
 matFileNames = natsort({matFiles.name});
 
 perturbation_struct = struct();
 
 % construct the adjMats from the windows computed of adjMat
 for iMat=1:length(matFileNames)
-    matFile = fullfile(tempDir, matFileNames{iMat});
+    matFile = fullfile(patDir, matFileNames{iMat});
     data = load(matFile);
     % extract the computed theta adjacency
     perturbation = data.perturbation_struct;
@@ -114,7 +115,7 @@ end
 perturbation_struct.info = info;
 
 % save the merged adjMatDir
-fileName = strcat(patient, '_pertmats', '.mat');
+fileName = strcat(patient, '_pertmats', reference, '.mat');
 
 varinfo = whos('perturbation_struct');
 if varinfo.bytes < 2^31
@@ -126,10 +127,11 @@ end
 fprintf('Successful merging of perturbation!\n');
 
 % Remove directories if successful
-delete(fullfile(tempDir, 'info', '*.mat'));
-rmdir(fullfile(tempDir, 'info'));
-delete(fullfile(tempDir, '*.mat'));
+delete(fullfile(patDir, 'info', '*.mat'));
+rmdir(fullfile(patDir, 'info'));
+delete(fullfile(patDir, '*.mat'));
 rmdir(fullfile(tempDir));
+
 
 fprintf('Removed everything!\n');
 end
