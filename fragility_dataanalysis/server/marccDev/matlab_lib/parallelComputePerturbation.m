@@ -72,7 +72,7 @@ fprintf('Loading connectivity data...');
 %- load the adjacency computed data
 connDir = fullfile(rootDir, 'serverdata', 'adjmats', strcat(filterType), ...
     strcat('win', num2str(winSize), '_step', num2str(stepSize), '_freq', num2str(frequency_sampling)),...
-    patient);
+    reference, patient);
 data = load(fullfile(connDir, strcat(patient, '_adjmats', reference, '_leastsquares.mat')));
 adjmat_struct = data.adjmat_struct;
 
