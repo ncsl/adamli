@@ -1,4 +1,4 @@
-function mergePerturbation(patient, winSize, stepSize, radius, filterType, reference)
+function mergePerturbation(patient, winSize, stepSize, radius, reference)
 % function: mergePerturbation
 % By: Adam Li
 % Date: 7/8/17
