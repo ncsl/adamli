@@ -73,11 +73,11 @@ done
 echo $buff
 
 # Debug statement for reference type
-reference=''
+reference=
 if [ -z "$reference" ]
 then
       echo "\$var is empty"
-      reference="''"
+      reference=""
 else
       echo "\$var is NOT empty and should be 'avgref'"
 fi
@@ -85,7 +85,7 @@ echo $reference
 
 for numRemove in $numToRemove; do
 	echo $numRemove
-	matlab -logfile /home-1/ali39@jhu.edu/work/adamli/fragility_dataanalysis/server/marccDev/_log/job$1.txt -nojvm -nodisplay -nosplash -r "\
+	matlab -logfile /home-1/ali39@jhu.edu/work/adamli/fragility_dataanalysis/server/marccDev/_log/job$numRemove.txt -nojvm -nodisplay -nosplash -r "\
 		generate_slurm_virtresection('$buff', $winSize, $stepSize, $radius,\
 		'$partition', '$walltime', $NUM_NODES, $NUM_PROCSPERNODE,\
 		 $RUNCONNECTIVITY, '$reference', $numRemove); exit"
