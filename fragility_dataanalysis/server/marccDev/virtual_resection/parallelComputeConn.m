@@ -1,4 +1,4 @@
-function parallelComputeConn(patient, winSize, stepSize, numChansToRemove, reference, iTask)
+function parallelComputeConn(patient, winSize, stepSize, numToRemove, reference, iTask)
 % function to compute the ltv model for a certain window based on
 % - # of processors
 % - # of windows
@@ -17,7 +17,7 @@ if nargin == 0 % testing purposes
     numProcs = 1;
     numWins = 103;
     reference = 'avgref';
-    numChansToRemove = 20;
+    numToRemove = 20;
 end
 fprintf('Inside parallel computing connectivity...\n');
 
@@ -120,7 +120,7 @@ if ~isempty(included_channels)
 end
 
 % PARTITION EEG DATA To Simulate Virtual Cortical Resection
-[eeg, new_labels, chans_removed] = partition_eeg_data(eeg, labels(included_channels), ezone_labels, numChansToRemove); 
+[eeg, new_labels, chans_removed] = partition_eeg_data(eeg, labels(included_channels), ezone_labels, numToRemove); 
 
 %% Perform Preprocessing - Referencing and Filtering
 % perform common average referencing if needed
