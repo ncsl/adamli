@@ -69,7 +69,7 @@ OPTIONS.l2regularization = l2regularization;
 
 %- Edit this file if new patients are added.
 [included_channels, ezone_labels, earlyspread_labels,...
-    latespread_labels, resection_labels, frequency_sampling, ...
+    latespread_labels, resection_labels, fs, ...
     center] ...
             = determineClinicalAnnotations(patient_id, seizure_id);
 
@@ -99,7 +99,7 @@ data = load(fullfile(patient_eeg_path, strcat(patient, '.mat')));
 eeg = data.data;
 labels = data.elec_labels;
 engelscore = data.engelscore;
-frequency_sampling = data.fs;
+fs = data.fs;
 outcome = data.outcome;
 seizure_eonset_ms = data.seizure_eonset_ms;
 seizure_eoffset_ms = data.seizure_eoffset_ms;
@@ -109,8 +109,8 @@ fprintf('Loaded data...');
 clear data
 
 %- initialize the number of samples in the window / step (ms) 
-numSampsInWin = winSize * frequency_sampling / 1000;
-numSampsInStep = stepSize * frequency_sampling / 1000;
+numSampsInWin = winSize * fs / 1000;
+numSampsInStep = stepSize * fs / 1000;
 
 numWins = floor(size(eeg, 2) / numSampsInStep - numSampsInWin/numSampsInStep + 1);
 
@@ -138,27 +138,27 @@ lenData = size(eeg,2); % length of data in seconds
 numChans = size(eeg,1);
 
 % set the number of harmonics
-numHarmonics = floor(frequency_sampling/2/60) - 1;
+numHarmonics = floor(fs/2/60) - 1;
 
 %- apply filtering on the eegWave
 if strcmp(filterType, 'notchfilter')
    % apply band notch filter to eeg data
-    eeg = buttfilt(eeg,[59.5 60.5], frequency_sampling,'stop',1);
-    eeg = buttfilt(eeg,[119.5 120.5], frequency_sampling,'stop',1);
-    if frequency_sampling >= 500
-        eeg = buttfilt(eeg,[179.5 180.5], frequency_sampling,'stop',1);
-        eeg = buttfilt(eeg,[239.5 240.5], frequency_sampling,'stop',1);
+    eeg = buttfilt(eeg,[59.5 60.5], fs,'stop',1);
+    eeg = buttfilt(eeg,[119.5 120.5], fs,'stop',1);
+    if fs >= 500
+        eeg = buttfilt(eeg,[179.5 180.5], fs,'stop',1);
+        eeg = buttfilt(eeg,[239.5 240.5], fs,'stop',1);
 
-        if frequency_sampling >= 1000
-            eeg = buttfilt(eeg,[299.5 300.5], frequency_sampling,'stop',1);
-            eeg = buttfilt(eeg,[359.5 360.5], frequency_sampling,'stop',1);
-            eeg = buttfilt(eeg,[419.5 420.5], frequency_sampling,'stop',1);
-            eeg = buttfilt(eeg,[479.5 480.5], frequency_sampling,'stop',1);
+        if fs >= 1000
+            eeg = buttfilt(eeg,[299.5 300.5], fs,'stop',1);
+            eeg = buttfilt(eeg,[359.5 360.5], fs,'stop',1);
+            eeg = buttfilt(eeg,[419.5 420.5], fs,'stop',1);
+            eeg = buttfilt(eeg,[479.5 480.5], fs,'stop',1);
         end
     end
 elseif strcmp(filterType, 'adaptivefilter')
      % apply an adaptive filtering algorithm.
-    eeg = removePLI_multichan(eeg, frequency_sampling, numHarmonics, [50,0.01,4], [0.1,2,4], 2, 60);
+    eeg = removePLI_multichan(eeg, fs, numHarmonics, [50,0.01,4], [0.1,2,4], 2, 60);
 else 
     disp('no filtering?');
 end
@@ -167,8 +167,8 @@ end
 timePoints = [1:numSampsInStep:lenData-numSampsInWin+1; numSampsInWin:numSampsInStep:lenData]';
 
 %- compute seizureStart/End Mark in time windows
-seizureStartMark = find(timePoints(:,2) - seizure_eonset_ms * frequency_sampling / 1000 == 0);
-seizureEndMark = find(timePoints(:,2) - seizure_eoffset_ms * frequency_sampling / 1000 == 0);
+seizureStartMark = find(timePoints(:,2) - seizure_eonset_ms * fs / 1000 == 0);
+seizureEndMark = find(timePoints(:,2) - seizure_eoffset_ms * fs / 1000 == 0);
 
 % save meta data for the computation 
 if iTask == 1
@@ -196,9 +196,9 @@ if iTask == 1
     info.rawtimePoints = timePoints;
     temptimePoints = timePoints;
     temptimePoints(:, 1) = timePoints(:, 1) - 1;
-    info.timePoints = (temptimePoints - seizure_eonset_ms * frequency_sampling / 1000) ./ frequency_sampling;
+    info.timePoints = (temptimePoints - seizure_eonset_ms * fs / 1000) ./ fs;
     info.included_channels = included_channels;
-    info.frequency_sampling = frequency_sampling;
+    info.frequency_sampling = fs;
     info.FILTER_TYPE = filterType;
 
     if ~exist(fullfile(tempDir, 'info'), 'dir')
