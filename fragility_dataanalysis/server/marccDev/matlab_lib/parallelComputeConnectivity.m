@@ -50,8 +50,7 @@ addpath(genpath(fullfile(rootDir, '/fragility_library/')));
 addpath(genpath(fullfile(rootDir, '/eeg_toolbox/')));
 addpath(rootDir);
 
-% rootDir = '/home-1/ali39@jhu.edu/work/adamli/fragility_dataanalysis/'; % at MARCC server
-
+%% Parameters HARD CODED
 %- 0 == no filtering
 %- 1 == notch filtering
 %- 2 == adaptive filtering
@@ -61,27 +60,33 @@ TYPE_CONNECTIVITY = 'leastsquares';
 l2regularization = 0;
 % set options for connectivity measurements
 OPTIONS.l2regularization = l2regularization;
+fs = 1000; % 1 kHz sampling by default
 
+% filename to be saved temporarily
+fileName = strcat(patient, '_adjmats', reference, '_', num2str(iTask));
+
+%% DEFINE CHANNELS AND CLINICAL ANNOTATIONS
 % set patientID and seizureID
 [~, patient_id, seizure_id, seeg] = splitPatient(patient);
 
-%% DEFINE CHANNELS AND CLINICAL ANNOTATIONS
 %- Edit this file if new patients are added.
 [included_channels, ezone_labels, earlyspread_labels,...
-    latespread_labels, resection_labels, frequency_sampling, ...
+    latespread_labels, resection_labels, fs, ...
     center] ...
             = determineClinicalAnnotations(patient_id, seizure_id);
 
 % set dir to find raw data files
 dataDir = fullfile(dataDir, '/data/', center);
 
-tempDir = fullfile('./tempData/', strcat(filterType, '/win', num2str(winSize), ...
-        '_step', num2str(stepSize)), 'connectivity', patient, reference);
+tempDir = fullfile(rootDir, 'server/marccDev/matlab_lib/tempData/', ...
+                'connectivity', filterType, ...
+                strcat('win', num2str(winSize), '_step', num2str(stepSize), '_freq', num2str(fs)), ...
+                patient, reference);
 if ~exist(tempDir, 'dir')
     mkdir(tempDir);
 end
 
-%% Read in EEG Raw Data and Preprocess
+%% Read in EEG Raw Data
 if seeg
     patient_eeg_path = fullfile(dataDir, patient);
 %     patient = strcat(patient_id, seizure_id); % for EZT pats
@@ -105,15 +110,9 @@ seizure_coffset_ms = data.seizure_coffset_ms;
 fprintf('Loaded data...');
 clear data
 
-% % check included channels length and how big eeg is
-% if length(labels(included_channels)) ~= size(eeg(included_channels,:),1)
-%     disp('Something wrong here...!!!!');
-% end
-
 %- initialize the number of samples in the window / step (ms) 
 numSampsInWin = winSize * frequency_sampling / 1000;
 numSampsInStep = stepSize * frequency_sampling / 1000;
-
 numWins = floor(size(eeg, 2) / numSampsInStep - numSampsInWin/numSampsInStep + 1);
 
 % apply included channels to eeg and labels
@@ -121,6 +120,7 @@ if ~isempty(included_channels)
     eeg = eeg(included_channels, :);
 end
 
+%% Perform Preprocessing - Referencing and Filtering
 % perform common average referencing if needed
 if strcmp(reference, 'avgref')
     if size(eeg, 1) > size(eeg, 2)
@@ -130,8 +130,10 @@ if strcmp(reference, 'avgref')
     eeg = eeg-avg;
 end
 
-% set the number of harmonics
-numHarmonics = floor(frequency_sampling/2/60) - 1;
+% paramters describing the data to be saved
+% window parameters - overlap, #samples, stepsize, window pointer
+lenData = size(eeg,2); % length of data in seconds
+numChans = size(eeg,1);
 
 %- apply filtering on the eegWave
 if strcmp(filterType, 'notchfilter')
@@ -150,16 +152,14 @@ if strcmp(filterType, 'notchfilter')
         end
     end
 elseif strcmp(filterType, 'adaptivefilter')
+    % set the number of harmonics
+    numHarmonics = floor(frequency_sampling/2/60) - 1;
+
      % apply an adaptive filtering algorithm.
     eeg = removePLI_multichan(eeg, frequency_sampling, numHarmonics, [50,0.01,4], [0.1,2,4], 2, 60);
 else 
     disp('no filtering?');
 end
-
-% paramters describing the data to be saved
-% window parameters - overlap, #samples, stepsize, window pointer
-lenData = size(eeg,2); % length of data in seconds
-numChans = size(eeg,1);
 
 % initialize timePoints vector and adjacency matrices
 timePoints = [1:numSampsInStep:lenData-numSampsInWin+1; numSampsInWin:numSampsInStep:lenData]';
@@ -204,11 +204,6 @@ if iTask == 1
     save(fullfile(tempDir,'info', 'infoAdjMat.mat'), 'info');
 end
 fprintf('Should have finished saving info mat.\n');
-
-%- save file for this current window
-currentWin = iTask;
-% filename to be saved temporarily
-fileName = strcat(patient, '_adjmats', reference, '_', num2str(currentWin));
 
 % get the window of data to compute adjacency
 tempeeg = eeg(:, timePoints(currentWin,1):timePoints(currentWin,2));

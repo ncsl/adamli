@@ -1,4 +1,4 @@
-function [toCompute, patWinsToCompute] = checkPatient(patient, rootDir, winSize, stepSize, filterType, radius, reference, JOBTYPE)
+function [toCompute, patWinsToCompute] = checkPatient(patient, patTempDir, resultsDir, winSize, stepSize)
 % function: checkPatient
 % By: Adam Li
 % Date: 6/12/17
@@ -20,9 +20,11 @@ if nargin == 0
     stepSize = 125;
     filterType = 'adaptivefilter';
     reference = 'avgref';
+    numToRemove = 2;
 end
 
- % data directories to save data into - choose one
+%% Set Directories
+% data directories to save data into - choose one
 eegRootDirServer = '/home/ali/adamli/fragility_dataanalysis/';                 % at ICM server 
 eegRootDirHome = '/Users/adam2392/Documents/adamli/fragility_dataanalysis/';   % at home macbook
 eegRootDirJhu = '/home/WIN/ali39/Documents/adamli/fragility_dataanalysis/';    % at JHU workstation
@@ -36,46 +38,15 @@ elseif ~isempty(dir(eegRootDirMarcc)), eegrootDir = eegRootDirMarcc;
 else   error('Neither Work nor Home EEG directories exist! Exiting'); end
 addpath(eegrootDir);
 
-% set patientID and seizureID
-[~, patient_id, seizure_id, is_seeg] = splitPatient(patient);
-    
-%% DEFINE OUTPUT DIRS AND CLINICAL ANNOTATIONS
-%- Edit this file if new patients are added.
-[included_channels, ezone_labels, earlyspread_labels,...
-    latespread_labels, resection_labels, fs, ...
-    center] ...
-            = determineClinicalAnnotations(patient_id, seizure_id);
-        
-%- directory for the data stored
-% JOBTYPE == 1 for ltv model
-% JOBTYPE == 2 for perturbation model
-if JOBTYPE==1
-    tempDir = fullfile(rootDir, 'server/marccDev/matlab_lib/tempData/', ...
-        filterType, strcat('win', num2str(winSize), '_step', num2str(stepSize)), 'connectivity');
-elseif JOBTYPE==0
-    tempDir = fullfile(rootDir, 'server/marccDev/matlab_lib/tempData/', ...
-        filterType, strcat('win', num2str(winSize), ...
-        '_step', num2str(stepSize), '_radius', num2str(radius)), 'perturbation');
-end
-
-if JOBTYPE==1
-    dataDirFiles = dir(fullfile(rootDir, 'serverdata/adjmats', strcat(filterType), ...
-            strcat('win', num2str(winSize), '_step', num2str(stepSize), '_freq', num2str(fs)),...
-            patient, reference, '*.mat'));
-elseif JOBTYPE==0
-    dataDirFiles = dir(fullfile(rootDir, 'serverdata/pertmats', strcat(filterType), ...
-            strcat('win', num2str(winSize), '_step', num2str(stepSize), '_freq', num2str(fs), '_radius', num2str(radius)),...
-            patient, reference, '*.mat'));
-end
-
-patTempDir = fullfile(tempDir, patient, reference);
-
-tempDirExists = exist(patTempDir, 'dir');
-dataDirExists = length(dataDirFiles) > 0;
- 
+%% Check This Patient's Temporary and Results Directories 
 % get numWins needed
 numWins = getNumWins(patient, winSize, stepSize);
-
+        
+% check if results has data and if the temp results dir has data
+dataDirFiles = dir(fullfile(resultsDir, '*.mat'));
+tempDirExists = exist(patTempDir, 'dir');
+dataDirExists = isempty(dataDirFiles);
+ 
 % initialize return variables
 toCompute = 0;
 patWinsToCompute = [];

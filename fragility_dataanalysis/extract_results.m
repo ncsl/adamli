@@ -63,7 +63,7 @@ finalDataDir = fullfile(dataDir, strcat('/serverdata/pertmats/', filterType, '/w
 
 try
     final_data = load(fullfile(finalDataDir, ...
-        strcat(patient, '_pertmats', '.mat')));
+        strcat(patient, '_pertmats', reference, '.mat')));
 catch e
     final_data = load(fullfile(finalDataDir, ...
         strcat(patient, '_pertmats_leastsquares_radius', num2str(radius), '.mat')));

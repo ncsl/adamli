@@ -1,4 +1,4 @@
-function mergePerturbation(patient, winSize, stepSize, radius, reference)
+function mergePert(patient, winSize, stepSize, radius, reference, numToRemove)
 % function: mergePerturbation
 % By: Adam Li
 % Date: 7/8/17
@@ -48,9 +48,6 @@ addpath(rootDir);
 filterType = 'notchfilter';
 perturbationTypes = ['C', 'R'];
 
-% save the merged perturbation model into this filename
-fileName = strcat(patient, '_pertmats', reference, '.mat');
-
 %% DEFINE CHANNELS AND CLINICAL ANNOTATIONS
 % set patientID and seizureID
 [~, patient_id, seizure_id, seeg] = splitPatient(patient);
@@ -63,18 +60,17 @@ fileName = strcat(patient, '_pertmats', reference, '.mat');
 
 %- get the temporary directory to look at
 tempDir = fullfile(rootDir, 'server/marccDev/matlab_lib/tempData/', ...
-                'perturbation', filterType, ...
+                'virtualresection', 'connectivity', filterType, ...
                 strcat('win', num2str(winSize), '_step', num2str(stepSize), '_freq', num2str(fs)));
 patDir = fullfile(rootDir, 'server/marccDev/matlab_lib/tempData/', ...
-                'perturbation', filterType, ...
+                'virtualresection', 'perturbation', filterType, ...
                 strcat('win', num2str(winSize), '_step', num2str(stepSize), '_freq', num2str(fs)), ...
-                patient, reference);
+                patient, reference, strcat('removed', num2str(numToRemove)));
 
 %- set directory to save merged computed data
-toSaveDir = fullfile(rootDir, 'serverdata/pertmats', strcat(filterType), ...
+toSaveDir =  fullfile(rootDir, 'serverdata/virtualresection/pertmats', strcat(filterType), ...
                 strcat('win', num2str(winSize), '_step', num2str(stepSize), '_freq', num2str(fs)),...
-                patient, reference);
-
+                patient, reference, strcat('removed', num2str(numToRemove)));
 % create directory if it does not exist
 if ~exist(toSaveDir, 'dir')
     mkdir(toSaveDir);
@@ -120,7 +116,9 @@ end
 %%- Create the structure for the pert model for this patient/seizure
 perturbation_struct.info = info;
 
-% determine how to save the results
+% save the merged adjMatDir
+fileName = strcat(patient, '_pertmats', reference, '_', 'removed', num2str(numToRemove), '.mat');
+
 varinfo = whos('perturbation_struct');
 if varinfo.bytes < 2^31
     save(fullfile(toSaveDir, fileName), 'perturbation_struct');
@@ -134,7 +132,8 @@ fprintf('Successful merging of perturbation!\n');
 delete(fullfile(patDir, 'info', '*.mat'));
 rmdir(fullfile(patDir, 'info'));
 delete(fullfile(patDir, '*.mat'));
-rmdir(fullfile(tempDir));
+rmdir(fullfile(tempDir, patient));
+
 
 fprintf('Removed everything!\n');
 end

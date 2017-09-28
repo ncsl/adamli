@@ -1,12 +1,11 @@
-function plotting_fragility(patients, winSize, stepSize, filterType, radius, typeConnectivity, typeTransform, rejectThreshold)
+function plotting_fragility(patients, winSize, stepSize, filterType, radius, typeConnectivity, typeTransform, rejectThreshold, reference)
 if nargin == 0
     % data parameters to find correct directory
     patient = 'pt1sz2';
     patients = {,... 
-%                 'pt6sz3', 'pt6sz4', 'pt6sz5',...
-%                 'pt1aslp1', ...
-                   'pt1aslp2', ...
-%                 'pt1aw1', 'pt1aw2', ...
+                'pt6sz3', 'pt6sz4', 'pt6sz5',...
+                'pt1aslp1', 'pt1aslp2', ...
+                'pt1aw1', 'pt1aw2', ...
 %                 'JH103aslp1', ...
 %                 'JH103aw1', ...
 %                 'JH105aslp1', ...
@@ -175,6 +174,8 @@ for iPat=1:length(patients)
     tempMat = fragilityMat;
     tempMat(logical(timeWinsToReject)) = -1;
     
+    timeStart = 1;
+    timeEnd = seizureMarkEnd;
     % OPTIONAL: only plot the preictal states
 %     if seizureMarkStart ~= size(fragilityMat, 2)
 %         tempMat = tempMat(:, 1:seizureMarkStart);
@@ -215,7 +216,12 @@ end
 % latespread_labels = info.latespread_labels;
 % resection_labels = info.resection_labels;
 included_labels = info.all_labels;
-num_channels = length(info.all_labels);
+try
+    included_labels = included_labels(info.included_channels);
+catch e
+    disp(e);
+end
+num_channels = length(included_labels);
 % remove POL from labels
 included_labels = upper(included_labels);
 included_labels = strrep(included_labels, 'POL', '');
@@ -347,26 +353,26 @@ XLim = ax.XLim; XLowerLim = XLim(1); XUpperLim = XLim(2);
 
 % Ictal: set the x axis in seconds and correct times
 % create a text for each preictal event and set it on the x-axis
-xTickStep = zeros(length(seizureBeginIndices), 1);
-xTickStep(1) = seizureEndIndices(1) / 2;
-xTicks = {};
-xTicks{1} = '1st Ictal Event';
-for iEv = 2:length(seizureBeginIndices)
-    xTickStep(iEv) = (seizureEndIndices(iEv) - (seizureEndIndices(iEv)- seizureEndIndices(iEv-1))/2);
-    xTicks{iEv} = strcat(num2str(iEv), 'th Ictal Event');
-end
-ax.XTick = xTickStep;
-ax.XTickLabel = xTicks; % set xticks and their labels
+% xTickStep = zeros(length(seizureBeginIndices), 1);
+% xTickStep(1) = seizureEndIndices(1) / 2;
+% xTicks = {};
+% xTicks{1} = '1st Ictal Event';
+% for iEv = 2:length(seizureBeginIndices)
+%     xTickStep(iEv) = (seizureEndIndices(iEv) - (seizureEndIndices(iEv)- seizureEndIndices(iEv-1))/2);
+%     xTicks{iEv} = strcat(num2str(iEv), 'th Ictal Event');
+% end
+% ax.XTick = xTickStep;
+% ax.XTickLabel = xTicks; % set xticks and their labels
 
 % plot entire series of data
-% xTickStep = (XUpperLim - XLowerLim) / 10;
-% xTicks = round(timeStart_plot:abs(timeEnd_plot-timeStart_plot)/10:timeEnd_plot);
-% ax.XTick = (XLowerLim+0.5 : xTickStep : XUpperLim+0.5);
-% ax.XTickLabel = xTicks; % set xticks and their labels
-% xlim([XLowerLim, XUpperLim+1]);
+xTickStep = (XUpperLim - XLowerLim) / 10;
+xTicks = round(timeStart_plot:abs(timeEnd_plot-timeStart_plot)/10:timeEnd_plot);
+ax.XTick = (XLowerLim+0.5 : xTickStep : XUpperLim+0.5);
+ax.XTickLabel = xTicks; % set xticks and their labels
+xlim([XLowerLim, XUpperLim+1]);
 
 % 3. save figure
 toSaveFigFile = fullfile(figDir, strcat(patient, '_broadbandfilter', ...
-    '_concatictal'));
+    '_indivdual'));
 print(toSaveFigFile, '-dpng', '-r0')
 end

@@ -1,5 +1,5 @@
-function parallelComputePerturbation(patient, winSize, stepSize, ... 
-    radius, reference, iTask)
+function parallelComputePert(patient, winSize, stepSize, ... 
+    radius, numToRemove, reference, iTask)
 % function to compute the ltv model for a certain window based on
 % - # of processors
 % - # of windows
@@ -36,7 +36,7 @@ addpath(genpath(fullfile(rootDir, '/fragility_library/')));
 addpath(genpath(fullfile(rootDir, '/eeg_toolbox/')));
 addpath(rootDir);
 
-%% Parameters HARD CODED
+%% Parameters HARDCODED
 %- 0 == no filtering
 %- 1 == notch filtering
 %- 2 == adaptive filtering
@@ -50,27 +50,21 @@ b = [0; 1];                          % initialize for perturbation computation l
 % add to sigma and w to create a whole circle search
 w_space = [w_space, w_space];
 sigma = [-sigma, sigma];
-
-% results of the ltv model 
-ltvmodel_filename = strcat(patient, '_adjmats', reference, '_leastsquares.mat');
-
-% filename to be saved temporarily
-fileName = strcat(patient, '_pertmats', reference, '_', num2str(iTask));
-    
 %% DEFINE CHANNELS AND CLINICAL ANNOTATIONS
 % set patientID and seizureID
 [~, patient_id, seizure_id, seeg] = splitPatient(patient);
 
 %- Edit this file if new patients are added.
 [included_channels, ezone_labels, earlyspread_labels,...
-    latespread_labels, resection_labels, fs, ...
+    latespread_labels, resection_labels, frequency_sampling, ...
     center] ...
             = determineClinicalAnnotations(patient_id, seizure_id);
 
+%- temp directory
 tempDir = fullfile(rootDir, 'server/marccDev/matlab_lib/tempData/', ...
-                'perturbation', filterType, ...
+                'virtualresection', 'perturbation', filterType, ...
                 strcat('win', num2str(winSize), '_step', num2str(stepSize), '_freq', num2str(fs)), ...
-                patient, reference);
+                patient, reference, strcat('removed', num2str(numToRemove)));
 if ~exist(tempDir, 'dir')
     mkdir(tempDir);
 end
@@ -78,10 +72,10 @@ end
 %% Read in LTV Model Data
 fprintf('Loading connectivity data...');
 %- load the adjacency computed data
-connDir = fullfile(rootDir, 'serverdata/adjmats', strcat(filterType), ...
+connDir = fullfile(rootDir, 'serverdata/virtualresection/adjmats', strcat(filterType), ...
                 strcat('win', num2str(winSize), '_step', num2str(stepSize), '_freq', num2str(fs)),...
-                patient, reference);
-data = load(fullfile(connDir, ltvmodel_filename));
+                patient, reference, strcat('removed', num2str(numToRemove)));
+data = load(fullfile(connDir, strcat(patient, '_adjmats', reference, '_', 'removed', num2str(numToRemove), '.mat')));
 adjmat_struct = data.adjmat_struct;
 
 % save meta data for the computation 
@@ -131,9 +125,7 @@ for iPert=1:length(perturbationTypes)
     perturbationType = perturbationTypes(iPert);
 
     % initialize vectors to store
-%     minNormPerturbMat = zeros(N,1);
     fragilityMat = zeros(N,1);
-%     del_table = cell(N,1);
 
     perturb_args = struct();
     perturb_args.perturbationType = perturbationType;
@@ -163,6 +155,9 @@ end
 % display a message for the user
 fprintf(['Finished: ', num2str(iTask), '\n']);
 
+    % filename to be saved temporarily
+fileName = strcat(patient, '_pertmats', reference, '_', num2str(iTask));
+    
 % save the file in temporary dir
 save(fullfile(tempDir, fileName), 'perturbation_struct');
 end

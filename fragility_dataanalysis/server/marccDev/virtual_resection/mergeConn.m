@@ -1,4 +1,4 @@
-function mergeConnectivity(patient, winSize, stepSize, reference)
+function mergeConn(patient, winSize, stepSize, reference, numToRemove)
 % function: mergeConnectivity
 % By: Adam Li
 % Date: 6/12/17
@@ -43,8 +43,6 @@ addpath(rootDir);
 %- 2 == adaptive filtering
 filterType = 'notchfilter';
 
-% save the merged ltv model into this filename
-fileName = strcat(patient, '_adjmats', reference, '_', lower(info.type_connectivity), '.mat');
 %% DEFINE CHANNELS AND CLINICAL ANNOTATIONS
 % set patientID and seizureID
 [~, patient_id, seizure_id, seeg] = splitPatient(patient);
@@ -57,18 +55,18 @@ fileName = strcat(patient, '_adjmats', reference, '_', lower(info.type_connectiv
 
 %- get the temporary directory to look at
 tempDir = fullfile(rootDir, 'server/marccDev/matlab_lib/tempData/', ...
-                'connectivity', filterType, ...
-                strcat('win', num2str(winSize), '_step', num2str(stepSize), '_freq', num2str(fs)));
+        'virtualresection', 'connectivity', filterType, ...
+        strcat('win', num2str(winSize), '_step', num2str(stepSize), '_freq', num2str(fs)));
 patTempDir = fullfile(rootDir, 'server/marccDev/matlab_lib/tempData/', ...
-                'connectivity', filterType, ...
+                'virtualresection', 'connectivity', filterType, ...
                 strcat('win', num2str(winSize), '_step', num2str(stepSize), '_freq', num2str(fs)), ...
-                patient, reference);
+                patient, reference, strcat('removed', num2str(numToRemove)));
 
 %- set directory to save merged computed data
-toSaveDir = fullfile(rootDir, 'serverdata/adjmats', strcat(filterType), ...
+toSaveDir = fullfile(rootDir, 'serverdata/virtualresection/adjmats', strcat(filterType), ...
                 strcat('win', num2str(winSize), '_step', num2str(stepSize), '_freq', num2str(fs)),...
-                patient, reference);
-    
+                patient, reference, strcat('removed', num2str(numToRemove)));
+
 % create directory if it does not exist
 if ~exist(toSaveDir, 'dir')
     mkdir(toSaveDir);
@@ -91,7 +89,7 @@ for iMat=1:length(matFileNames)
 
      % extract the computed theta adjacency
      theta_adj = data.theta_adj;
-         
+    
     % initialize matrix if first loop and then store results
     if iMat==1
         N = size(theta_adj, 1);
@@ -138,6 +136,9 @@ adjmat_struct.included_channels = info.included_channels;
 adjmat_struct.frequency_sampling = info.frequency_sampling;
 adjmat_struct.FILTER = info.FILTER_TYPE;
 
+% save the merged adjMatDir
+fileName = strcat(patient, '_adjmats', reference, '_', 'removed', num2str(numToRemove), '.mat');
+
 varinfo = whos('adjmat_struct');
 if varinfo.bytes < 2^31
     save(fullfile(toSaveDir, fileName), 'adjmat_struct');
@@ -145,7 +146,7 @@ else
     save(fullfile(toSaveDir, fileName), 'adjmat_struct', '-v7.3');
 end
 
-fprintf('Successful merging!\n');
+fprintf('Successful merging of connectivity!\n');
 
 % Remove directories if successful
 delete(fullfile(patTempDir, 'info', '*.mat'));
