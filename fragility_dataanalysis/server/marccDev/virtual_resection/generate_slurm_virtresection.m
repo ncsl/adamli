@@ -97,7 +97,7 @@ function generate_slurm_virtresection(patients, winSize, stepSize, radius, ...
         patient = cell_pats{iPat};
         
         
-        [~, patient_id, seizure_id, seeg] = splitPatient(patients{1});
+        [~, patient_id, seizure_id, seeg] = splitPatient(patient);
 
         %- Edit this file if new patients are added.
         [included_channels, ezone_labels, earlyspread_labels,...
