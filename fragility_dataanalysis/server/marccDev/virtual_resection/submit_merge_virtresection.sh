@@ -69,11 +69,11 @@ done
 echo $buff
 
 # Debug statement for reference type
-reference=avgref
+reference=
 if [ -z "$reference" ]
 then
       echo "\$var is empty"
-      reference="''"
+      reference=""
 else
       echo "\$var is NOT empty and should be 'avgref'"
 fi

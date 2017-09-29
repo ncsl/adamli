@@ -65,6 +65,7 @@ ltvmodel_filename = 'trev_adjmats.mat';
 data = load(fullfile(connDir, ltvmodel_filename));
 adjMats = data.adjMats;
 
+% left off on: 340
 for iTask=1:size(adjMats,1)
     %- extract adjMat at this window
     adjMat = squeeze(adjMats(iTask,:,:));
