@@ -42,10 +42,12 @@ addpath(eegrootDir);
 % get numWins needed
 numWins = getNumWins(patient, winSize, stepSize);
         
+% check if temporary data directory exists
+tempDirExists = exist(patTempDir, 'dir');
+
 % check if results has data and if the temp results dir has data
 dataDirFiles = dir(fullfile(resultsDir, '*.mat'));
-tempDirExists = exist(patTempDir, 'dir');
-dataDirExists = isempty(dataDirFiles);
+dataDirExists = ~isempty(dataDirFiles);
  
 % initialize return variables
 toCompute = 0;
