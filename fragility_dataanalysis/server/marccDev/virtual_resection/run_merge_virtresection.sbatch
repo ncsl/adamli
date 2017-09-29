@@ -25,11 +25,9 @@ echo ${radius}
 if [[ "$RUNCONNECTIVITY" -eq 1 ]]; then
 	echo "Running connectivity merge."
 	matlab -logfile _log/${SBATCH_JOB_NAME}.txt -nojvm -nodisplay -nodesktop -nosplash -r "\
-	cd('matlab_lib');\
 	mergeConn('$patient', $winSize, $stepSize, '$reference', $numToRemove);"
 else
 	echo "Running perturbation merge."
 	matlab -logfile _log/${SBATCH_JOB_NAME}.txt -nojvm -nodisplay -nodesktop -nosplash -r "\
-	cd('matlab_lib');\
 	mergePert('$patient', $winSize, $stepSize, $radius, '$reference', $numToRemove);"
 fi
