@@ -79,9 +79,6 @@ load(fullfile(patTempDir, 'info', 'infoAdjMat.mat'));
 matFiles = dir(fullfile(patTempDir, '*.mat'));
 matFileNames = natsort({matFiles.name});
 
-% get numWins needed
-numWins = getNumWins(patient, winSize, stepSize);
-
 % construct the adjMats from the windows computed of adjMat
 for iMat=1:length(matFileNames)
     matFile = fullfile(patTempDir, matFileNames{iMat});
@@ -93,8 +90,7 @@ for iMat=1:length(matFileNames)
     % initialize matrix if first loop and then store results
     if iMat==1
         N = size(theta_adj, 1);
-        adjMats = zeros(numWins, N, N); 
-        fprintf('There are %f number of windows\n', numWins);
+        adjMats = zeros(length(matFileNames), N, N); 
         fprintf('There are %f number of mat files\n', length(matFileNames));
     end
     
