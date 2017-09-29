@@ -199,4 +199,5 @@ for iPat=1:length(patients)
     
     % get a count of number of electrodes within this 10% for each channel
     
+    
 end
