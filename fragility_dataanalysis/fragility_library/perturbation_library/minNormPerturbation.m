@@ -15,7 +15,7 @@
 % i={1,..,N}
 % - LOGERROR = some errror message
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-function [minPerturbation, del_table, LOGERROR] = minNormPerturbation(patient, A, pertArgs)%, clinicalLabels)
+function [minPerturbation, del_table, LOGERROR] = minNormPerturbation(A, pertArgs)%, clinicalLabels)
 if nargin == 0
     patient_id = 'pt1';
     seizure_id = 'sz2';
@@ -49,10 +49,10 @@ stepSize = 500;
 %% Error Checking/Logging
 if max(abs(eig(A))) > radius
     LOGERROR =  ['This patient has eigenvalue > radius, check it!', ...
-        patient, '_', num2str(frequency_sampling), '_', num2str(winSize), '_', num2str(stepSize)];
+         num2str(frequency_sampling), '_', num2str(winSize), '_', num2str(stepSize)];
 elseif abs(max(abs(eig(A))) - radius) < 1e-8
     LOGERROR = ['This patient has eigenvalue == radius, check it!', ...
-        patient, '_', num2str(frequency_sampling), '_', num2str(winSize), '_', num2str(stepSize)];
+         num2str(frequency_sampling), '_', num2str(winSize), '_', num2str(stepSize)];
 else
     LOGERROR = [];
 end

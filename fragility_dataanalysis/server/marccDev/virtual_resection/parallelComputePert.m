@@ -132,7 +132,7 @@ for iPert=1:length(perturbationTypes)
     perturb_args.w_space = w_space;
     perturb_args.radius = radius;
 
-    [minNormPert, del_vecs, ERRORS] = minNormPerturbation(patient, adjMat, perturb_args);
+    [minNormPert, del_vecs, ERRORS] = minNormPerturbation(adjMat, perturb_args);
 
     % store results
     minNormPerturbMat = minNormPert;

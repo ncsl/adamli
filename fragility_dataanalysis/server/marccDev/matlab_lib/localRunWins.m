@@ -158,7 +158,8 @@ end
 % initialize timePoints vector and adjacency matrices
 timePoints = [1:numSampsInStep:lenData-numSampsInWin+1; numSampsInWin:numSampsInStep:lenData]';
 
-for iTask=1:numWins
+% left off at 13629
+for iTask=13629:numWins
     % filename to be saved temporarily
     fileName = strcat('trev_adjmats_', num2str(iTask));
 
