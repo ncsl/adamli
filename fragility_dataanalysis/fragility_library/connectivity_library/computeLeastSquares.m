@@ -65,8 +65,7 @@ function x = computeLeastSquares(eegMat, observationVector, OPTIONS)
     if ~issparse(H)
         H = sparse(H);
     end
-    observationVector = double(observationVector);
-
+    
     % step 3: Perform least squares - with/without regularization
     % create the reshaped adjacency matrix
     if l2regularization == 0

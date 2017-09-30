@@ -206,7 +206,7 @@ end
 fprintf('Should have finished saving info mat.\n');
 
 % get the window of data to compute adjacency
-tempeeg = eeg(:, timePoints(currentWin,1):timePoints(currentWin,2));
+tempeeg = eeg(:, timePoints(iTask,1):timePoints(iTask,2));
 
 %% Perform Least Squares Computations
 % step 2: compute some functional connectivity 
@@ -223,7 +223,7 @@ if strcmp(TYPE_CONNECTIVITY, 'leastsquares')
 end
 
 % display a message for the user
-fprintf([reference, ' Finished: ', num2str(currentWin), '\n']);
+fprintf([reference, ' Finished: ', num2str(iTask), '\n']);
 
 % save the file in temporary dir
 save(fullfile(tempDir, fileName), 'theta_adj');

@@ -1,4 +1,4 @@
-if nargin==0
+% if nargin==0
     patients = {...,
 %             'JH103aslp1', 'JH103aw1', ...
 %             'JH103sz1' 'JH103sz2' 'JH103sz3',...
@@ -12,14 +12,14 @@ if nargin==0
 %     'UMMC006_sz1', 'UMMC006_sz2', 'UMMC006_sz3', ...
 %     'UMMC007_sz1', 'UMMC007_sz2','UMMC007_sz3', ...
 %     'UMMC008_sz1', 'UMMC008_sz2', 'UMMC008_sz3', ...
-    'UMMC009_sz1', 'UMMC009_sz2', 'UMMC009_sz3', ...
+%     'UMMC009_sz1', 'UMMC009_sz2', 'UMMC009_sz3', ...
 %      'pt1aw1', 'pt1aw2', ...
 %     'pt1aslp1', 'pt1aslp2', ...
 %     'pt2aw1', 'pt2aw2', ...
 %     'pt2aslp1', 'pt2aslp2', ...
 %     'pt3aw1', ...
 %     'pt3aslp1', 'pt3aslp2', ...
-%     'pt1sz2', 'pt1sz3', 'pt1sz4',...
+    'pt1sz2', 'pt1sz3', 'pt1sz4',...
 %     'pt2sz1' 'pt2sz3' 'pt2sz4', ...
 %     'pt3sz2' 'pt3sz4', ...
 %     'pt6sz3', 'pt6sz4', 'pt6sz5', ...
@@ -39,7 +39,7 @@ if nargin==0
     perturbationTypes = ['C', 'R'];
     perturbationType = perturbationTypes(1);
 
-end
+% end
 
 close all;
 
@@ -185,19 +185,86 @@ for iPat=1:length(patients)
         outcome = 'failure';
     end
     
+    % Get Indices for All Clinical Annotations on electrodes
+    ezone_indices = findElectrodeIndices(ezone_labels, included_labels);
+    earlyspread_indices = findElectrodeIndices(earlyspread_labels, included_labels);
+    latespread_indices = findElectrodeIndices(latespread_labels, included_labels);
+    resection_indices = findElectrodeIndices(resection_labels, included_labels);
+    all_indices = 1:length(included_labels);
+    
     %% 3. Compute Statistics of Fragility Model
-    % here, we compute mean, variance and coefficient of variation for each
-    % snapshot
+    features_struct = struct();
+    
+    % compute mean, variance and coefficient of variation for each time
     avg = mean(fragilityMat, 1);
-    vari = var(fragilityMat, ~, 1);
-    cfvar = avg ./ vari;
-   
+    vari = var(fragilityMat, 0, 1);
+    cfvar_time = avg ./ vari;
+    
+    % compute mean, variance and coefficient of variation for each chan
+    avg = mean(fragilityMat, 2);
+    vari = var(fragilityMat, 0, 2);
+    cfvar_chan = avg ./ vari;
+    
     % compute highest 10% fragile nodes
-    max_frag = max(fragilityMat, 1);
-    min_frag = min(fragilityMat, 1);
-    high_frag = prctile(fragilityMat, 1-0.1, 2);
+    max_frag = max(fragilityMat,[], 2); % compute highest fragility during entire dataset
+    min_frag = min(fragilityMat,[], 2); % compute smallest fragility during entire dataset
+    high_frag = prctile(fragilityMat, 90, 2);
     
-    % get a count of number of electrodes within this 10% for each channel
+    % set highest fragility sum
+    fragility_sum = sum(fragilityMat(:));
     
+    % compute fragility assymmetry based on EZ electrodes
+    ez_fragility_set = fragilityMat(ezone_indices, :);
+    outez_fragility_set = fragilityMat(setdiff(all_indices, ezone_indices),:);
+    ez_asymmetry = (sum(ez_fragility_set(:)) - sum(outez_fragility_set(:))) / ...
+                        (sum(ez_fragility_set(:)) + sum(outez_fragility_set(:))) / fragility_sum;
     
+    % compute fragility asymmetry based on resected electrodes                
+    resected_fragility_set = fragilityMat(resection_indices, :);
+    outresect_fragility_set = fragilityMat(setdiff(all_indices, resection_indices),:);
+    resected_asymmetry = (sum(resected_fragility_set(:)) - sum(outez_fragility_set(:))) / ...
+                        (sum(resected_fragility_set(:)) + sum(outez_fragility_set(:))) / fragility_sum;
+    
+    % compute a shuffled asymmetry based on randomized 'selected' EZ
+    % electrodes
+%     numShuffles = 1000;
+%     shuffle_pdf_ez = zeros(numShuffles, 1);
+%     for i=1:numShuffles
+%         shuffle_ez_indices = randsample(length(all_indices), length(ezone_indices));
+%         shuffle_ez_frag = fragilityMat(shuffle_ez_indices, :);
+%         shuffle_outez_frag = fragilityMat(setdiff(all_indices, shuffle_ez_indices), :);
+%         shuffle_pdf_ez(i) = (sum(shuffle_ez_frag(:)) - sum(shuffle_outez_frag(:))) / ...
+%                         (sum(shuffle_ez_frag(:)) + sum(shuffle_outez_frag(:))) / fragility_sum;
+%     end
+%     
+%     shuffle_pdf_resect = zeros(numShuffles, 1);
+%     for i=1:numShuffles
+%         shuffle_resect_indices = randsample(length(all_indices), length(resection_indices));
+%         shuffle_resect_frag = fragilityMat(shuffle_resect_indices, :);
+%         shuffle_outresect_frag = fragilityMat(setdiff(all_indices, shuffle_resect_indices), :);
+%         shuffle_pdf_resect(i) = (sum(shuffle_resect_frag(:)) - sum(shuffle_outresect_frag(:))) / ...
+%                         (sum(shuffle_resect_frag(:)) + sum(shuffle_outresect_frag(:))) / fragility_sum;
+%     end
+%     figure;
+%     hist(shuffle_pdf_ez);
+%     axes = gca;
+%     hold on; plot([ez_asymmetry ez_asymmetry], axes.YLim, 'k-')
+%     
+%     hist(shuffle_pdf_resect); hold on;
+%     axes = gca;
+%     plot([resected_asymmetry resected_asymmetry], axes.YLim, 'k-')                
+    
+    % compute how fragile the network is over time
+    network_fragility = sum(minNormPertMat, 1);
+    
+    % create feature vector struct
+    features_struct.patient = patient;
+    features_struct.cfvar_time = cfvar_time;
+    features_struct.cfvar_chan = cfvar_chan;
+    features_struct.max_frag = max_frag;
+    features_struct.min_frag = min_frag;
+    features_struct.high_frag = high_frag;
+    features_struct.ez_asymmetry = ez_asymmetry;
+    features_struct.resected_asymmetry = resected_asymmetry;
+    features_struct.network_fragility = network_fragility;
 end

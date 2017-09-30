@@ -48,6 +48,9 @@ addpath(rootDir);
 filterType = 'notchfilter';
 perturbationTypes = ['C', 'R'];
 
+% save the merged adjMatDir
+fileName = strcat(patient, '_pertmats', reference, '_', 'removed', num2str(numToRemove), '.mat');
+
 %% DEFINE CHANNELS AND CLINICAL ANNOTATIONS
 % set patientID and seizureID
 [~, patient_id, seizure_id, seeg] = splitPatient(patient);
@@ -115,9 +118,6 @@ end
 
 %%- Create the structure for the pert model for this patient/seizure
 perturbation_struct.info = info;
-
-% save the merged adjMatDir
-fileName = strcat(patient, '_pertmats', reference, '_', 'removed', num2str(numToRemove), '.mat');
 
 varinfo = whos('perturbation_struct');
 if varinfo.bytes < 2^31
