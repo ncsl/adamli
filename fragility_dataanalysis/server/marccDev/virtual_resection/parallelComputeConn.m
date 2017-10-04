@@ -179,8 +179,6 @@ if iTask == 1
     info.latespread_labels = latespread_labels;
     info.resection_labels = resection_labels;
     info.all_labels = labels;
-    info.included_labels = new_labels;
-    info.chans_removed = chans_removed;
     info.seizure_estart_ms = seizure_eonset_ms;       % store in ms
     info.seizure_eend_ms = seizure_eoffset_ms;
     info.seizure_cstart_ms = seizure_conset_ms;
@@ -200,6 +198,9 @@ if iTask == 1
     info.included_channels = included_channels;
     info.frequency_sampling = fs;
     info.FILTER_TYPE = filterType;
+    
+    info.included_labels = new_labels;
+    info.chans_removed = chans_removed;
 
     if ~exist(fullfile(tempDir, 'info'), 'dir')
         mkdir(fullfile(tempDir, 'info'));

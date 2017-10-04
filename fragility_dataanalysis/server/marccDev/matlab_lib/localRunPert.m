@@ -60,13 +60,17 @@ end
 fprintf('Loading connectivity data...');
 %- load the adjacency computed data
 connDir = fullfile(dataDir, 'trev_adj');
+% connDir = fullfile(dataDir, 'serverdata/adjmats/notchfilter/win250_step125_freq1000/pt1sz2/');
+
             
-ltvmodel_filename = 'trev_adjmats.mat';       
+ltvmodel_filename = 'trev_adjmats.mat';  
+% ltvmodel_filename = 'pt1sz2_adjmats_leastsquares.mat';
 data = load(fullfile(connDir, ltvmodel_filename));
 adjMats = data.adjMats;
+% adjMats = data.adjmat_struct.adjMats;
 
-% left off on: 740
-for iTask=1750:size(adjMats,1)
+% left off on: 1750
+for iTask=1755:size(adjMats,1)
     %- extract adjMat at this window
     adjMat = squeeze(adjMats(iTask,:,:));
     [N, ~] = size(adjMat);

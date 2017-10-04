@@ -1,35 +1,14 @@
-function plotting_fragility(patients, winSize, stepSize, filterType, radius, typeConnectivity, typeTransform, rejectThreshold, reference)
-if nargin == 0
-    % data parameters to find correct directory
-    patient = 'pt1sz2';
-    patients = {,... 
-                'pt6sz3', 'pt6sz4', 'pt6sz5',...
-                'pt1aslp1', 'pt1aslp2', ...
-                'pt1aw1', 'pt1aw2', ...
-%                 'JH103aslp1', ...
-%                 'JH103aw1', ...
-%                 'JH105aslp1', ...
-%                 'JH105aw1', ...
-%             'UMMC002_sz1', 'UMMC002_sz2', 'UMMC002_sz3', ...
-%             'UMMC007_sz1', 'UMMC007_sz2','UMMC007_sz3', ...
-%             'Pat2sz1p', 'Pat2sz2p', 'Pat2sz3p', ...
-%             'Pat16sz1p', 'Pat16sz2p', 'Pat16sz3p', ...
-        };
-%     patient='JH103aw1';
-%     patient = 'pt1aw1';
-    radius = 1.5;             % spectral radius
-    winSize = 250;            % 500 milliseconds
-    stepSize = 125; 
-    filterType = 'adaptivefilter';
-    filterType = 'notchfilter';
-    fs = 1000; % in Hz
-    typeConnectivity = 'leastsquares';
-    typeTransform = 'fourier';
-    rejectThreshold = 0.3;
-    reference = 'avgref';
-end
+function plot_fragility_map(patients, resultsDir)
+if nargin==0
+    patients = {'pt1sz2'};
+    resultsDir = fullfile('/Volumes/ADAM LI/serverdata/virtualresection/', ...
+        'pertmats/notchfilter/win250_step125_freq1000/pt1sz2/removed2');
     
-close all;
+    spectDir = fullfile('/Volumes/ADAM LI/serverdata/spectral_analysis/fourier/', ...
+        'notchfilter_win250_step125_freq1000', 'pt1sz2');
+end
+
+%% Set Root Directories To Run Functions
 % data directories to save data into - choose one
 eegRootDirHD = '/Volumes/NIL Pass/';
 eegRootDirHD = '/Volumes/ADAM LI/';
@@ -48,18 +27,20 @@ elseif ~isempty(dir(eegRootDirJhu)), rootDir = eegRootDirJhu;
 elseif ~isempty(dir(eegRootDirMarcc)), rootDir = eegRootDirMarcc;
 else   error('Neither Work nor Home EEG directories exist! Exiting'); end
 
-% Determine which directory we're working with automatically
-if     ~isempty(dir(eegRootDirServer)), dataDir = eegRootDirServer;
-elseif ~isempty(dir(eegRootDirHD)), dataDir = eegRootDirHD;
-elseif ~isempty(dir(eegRootDirJhu)), dataDir = eegRootDirJhu;
-elseif ~isempty(dir(eegRootDirMarcc)), dataDir = eegRootDirMarcc;
-else   error('Neither Work nor Home EEG directories exist! Exiting'); end
-
 addpath(genpath(fullfile(rootDir, '/fragility_library/')));
-addpath(genpath(fullfile(rootDir, '/eeg_toolbox/')));
 addpath(rootDir);
 
-% parameters for the computed data
+%% Parameters Of Computed Analysis
+radius = 1.5;             % spectral radius
+winSize = 250;            % 500 milliseconds
+stepSize = 125; 
+filterType = 'adaptivefilter';
+filterType = 'notchfilter';
+fs = 1000; % in Hz
+typeConnectivity = 'leastsquares';
+typeTransform = 'fourier';
+rejectThreshold = 0.3;
+reference = '';
 perturbationTypes = ['C', 'R'];
 perturbationType = perturbationTypes(1);
 
@@ -76,15 +57,12 @@ elseif success_or_failure == 0
 else
     outcome = 'N/A';
 end
-    
-    
-% set directory to save figure
-figDir = fullfile(rootDir, '/figures/', strcat(filterType, reference), ...
-    strcat('win', num2str(winSize), '_step', num2str(stepSize), '_radius', num2str(radius)), ...
-    'preictal');
 
-figDir = fullfile(rootDir, '/figures/', strcat(filterType, reference), ...
-    strcat('win', num2str(winSize), '_step', num2str(stepSize), '_radius', num2str(radius)));
+
+% set directory to save figure
+figDir = fullfile(rootDir, '/figures/', 'virtualresection', strcat(filterType, reference), ...
+    strcat('win', num2str(winSize), '_step', num2str(stepSize), '_radius', num2str(radius)), ...
+    '');
 if ~exist(figDir, 'dir')
     mkdir(figDir);
 end
@@ -96,20 +74,14 @@ seizureBeginIndices = [];
 seizureEndIndices = [];
 timePlotStarts = [];
 timePlotEnds = [];
+
 for iPat=1:length(patients)
     % get the current patient
     patient = patients{iPat};
     
-    % spectral analysis directory for this patient
-    spectDir = fullfile(dataDir, strcat('/serverdata/spectral_analysis/'), typeTransform, ...
-        strcat(filterType, '_win', num2str(winSize), '_step', num2str(stepSize), '_freq', num2str(fs)), ...
-        patient);
-    
-    resultsDir = fullfile(dataDir, strcat('/serverdata/pertmats/', filterType, '/win', num2str(winSize), ...
-        '_step', num2str(stepSize), '_freq', num2str(fs), '_radius', num2str(radius)), patient, reference); % at lab
-    
+    % extract results to plot
     [final_data, info] = extract_results(patient, resultsDir, reference);
-
+    
     % extract actual data structures
     pertDataStruct = final_data.(perturbationType);
     info = final_data.info;
@@ -378,4 +350,5 @@ xlim([XLowerLim, XUpperLim+1]);
 toSaveFigFile = fullfile(figDir, strcat(patient, '_broadbandfilter', ...
     '_indivdual'));
 print(toSaveFigFile, '-dpng', '-r0')
+
 end

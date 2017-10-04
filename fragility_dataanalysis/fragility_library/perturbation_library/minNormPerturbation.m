@@ -28,6 +28,7 @@ if nargin == 0
 end
 
 tol = 1e-7;
+LOGERROR='';
 %% 0: Extract Vars and Initialize Parameters
 %- Note here: radius = sqrt(w_space^2 + sigma^2) for discrete time system
 perturbationType = pertArgs.perturbationType;
@@ -42,20 +43,6 @@ sigma = [-sigma, sigma];
 
 N = size(A,1); % get the Number of Electrodes
 minPerturbation = zeros(N,1); % initialize minPerturbation Matrix
-
-frequency_sampling = 1000;
-winSize = 500;
-stepSize = 500;
-%% Error Checking/Logging
-if max(abs(eig(A))) > radius
-    LOGERROR =  ['This patient has eigenvalue > radius, check it!', ...
-         num2str(frequency_sampling), '_', num2str(winSize), '_', num2str(stepSize)];
-elseif abs(max(abs(eig(A))) - radius) < 1e-8
-    LOGERROR = ['This patient has eigenvalue == radius, check it!', ...
-         num2str(frequency_sampling), '_', num2str(winSize), '_', num2str(stepSize)];
-else
-    LOGERROR = [];
-end
 
 %% Perform Algorithm
 %%- Compute Minimum Norm Perturbation

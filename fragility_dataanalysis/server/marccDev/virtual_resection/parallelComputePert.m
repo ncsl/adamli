@@ -105,6 +105,9 @@ if iTask == 1
     info.included_channels = adjmat_struct.included_channels;
     info.frequency_sampling = adjmat_struct.frequency_sampling;
     info.FILTER = adjmat_struct.FILTER;
+    
+    info.included_labels = adjmat_struct.included_labels;
+    info.removed_chans = adjmat_struct.removed_chans;
 
     if ~exist(fullfile(tempDir, 'info'), 'dir')
         mkdir(fullfile(tempDir, 'info'));
