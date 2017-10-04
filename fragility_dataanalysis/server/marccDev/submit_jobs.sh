@@ -2,13 +2,14 @@
 
 # patients listed 5 per row
 patients=(
-	'pt1aslp1 pt1aslp2 pt1aw1 pt1aw2
-	pt2aslp1 pt2aslp2 pt2aw1 pt2aw2
-	pt3aslp1 pt3aslp2 pt3aw1
-	pt1sz2 pt1sz3 pt1sz4
-	pt2sz1 pt2sz3 pt2sz4 
-	pt3sz2 pt3sz4
-	pt6sz3 pt6sz4 pt6sz5')
+	# 'pt1aslp1 pt1aslp2 pt1aw1 pt1aw2
+	# pt2aslp1 pt2aslp2 pt2aw1 pt2aw2
+	# pt3aslp1 pt3aslp2 pt3aw1
+	# pt1sz2 pt1sz3 pt1sz4
+	# pt2sz1 pt2sz3 pt2sz4 
+	# pt3sz2 pt3sz4
+	# pt6sz3 pt6sz4 pt6sz5')
+
 	# pt8sz1 pt8sz2 pt8sz3
 	# pt10sz1 pt10sz2 pt10sz3
 	# pt11sz1 pt11sz2 pt11sz3 pt11sz4
@@ -35,18 +36,18 @@ patients=(
 	# JH105sz1 JH105sz2 JH105sz3 JH105sz4 JH105sz5
 	# JH105aslp1 JH105aw1
 
-	# LA01_ICTAL LA01_Inter
- #    LA02_ICTAL LA02_Inter
- #    LA03_ICTAL LA03_Inter
- #    LA04_ICTAL LA04_Inter
- #    LA05_ICTAL LA05_Inter
- #    LA06_ICTAL LA06_Inter
- #    LA08_ICTAL LA08_Inter
- #    LA09_ICTAL LA09_Inter
- #    LA10_ICTAL LA10_Inter
- #    LA11_ICTAL LA11_Inter
- #    LA15_ICTAL LA15_Inter
- #    LA16_ICTAL LA16_Inter')
+	'LA01_ICTAL LA01_Inter
+    LA02_ICTAL LA02_Inter
+    LA03_ICTAL LA03_Inter
+    LA04_ICTAL LA04_Inter
+    LA05_ICTAL LA05_Inter
+    LA06_ICTAL LA06_Inter')
+    # LA08_ICTAL LA08_Inter
+    # LA09_ICTAL LA09_Inter
+    # LA10_ICTAL LA10_Inter
+    # LA11_ICTAL LA11_Inter
+    # LA15_ICTAL LA15_Inter
+    # LA16_ICTAL LA16_Inter')
 	# Pat2sz1p Pat2sz2p Pat2sz3p
 	# Pat16sz1p Pat16sz2p Pat16sz3p')
 
@@ -56,13 +57,6 @@ patients=(
 	# JH106sz1 JH106sz2 JH106sz3 JH106sz4 JH106sz5 JH106sz6
 	# JH107sz1 JH107sz2 JH107sz3 JH107sz4 JH107sz5 JH107sz6 JH107sz7 JH107sz8 JH107sz8 JH107sz9
 	# JH108sz1 JH108sz2 JH108sz3 JH108sz4 JH108sz5 JH108sz6 JH108sz7
-
-# numToRemove=(10 10 10 10
-# 	4 4 4 4
-# 	12 12 12
-# 	12 12 12)
-numToRemove=$(seq 1 4)
-echo $numToRemove
 
 # 01: Prompt user for input that runs the analysis
 echo "Begin analysis." # print beginning statement
@@ -121,22 +115,9 @@ else
 fi
 echo $reference
 
-for numRemove in $numToRemove; do
-	echo $numRemove
-	matlab -logfile /home-1/ali39@jhu.edu/work/adamli/fragility_dataanalysis/server/marccDev/_log/job$1.txt -nojvm -nodisplay -nosplash -r "\
-		generate_slurm_virtresection('$buff', $winSize, $stepSize, $radius,\
-		'$partition', '$walltime', $NUM_NODES, $NUM_PROCSPERNODE,\
-		 $RUNCONNECTIVITY, '$reference', $numRemove); exit"
-done
-
 ## 02: Call patient shell script for each patient
-# matlab -logfile /home-1/ali39@jhu.edu/work/adamli/fragility_dataanalysis/server/marccDev/_log/job$1.txt -nojvm -nodisplay -nosplash -r "\
-# 	generate_slurm('$buff', $winSize, $stepSize, $radius,\
-# 	'$partition', '$walltime', $NUM_NODES, $NUM_PROCSPERNODE,\
-# 	 $RUNCONNECTIVITY, '$reference'); exit"
-
-## 02: Call patient shell script for each patient
-# matlab -logfile /home-1/ali39@jhu.edu/work/adamli/fragility_dataanalysis/server/marccDev/_log/job$1.txt -nojvm -nodisplay -nosplash -r "\
-# 	generate_slurm_gnu('$buff', $winSize, $stepSize, $radius,\
-# 	'$partition', '$walltime', $NUM_NODES, $NUM_PROCSPERNODE,\
-# 	 $RUNCONNECTIVITY, '$reference'); exit"
+matlab -logfile /home-1/ali39@jhu.edu/work/adamli/fragility_dataanalysis/server/marccDev/_log/job$1.txt -nojvm -nodisplay -nosplash -r "\
+	generate_slurm('$buff', $winSize, $stepSize, $radius,\
+	'$partition', '$walltime', $NUM_NODES, $NUM_PROCSPERNODE,\
+	 $RUNCONNECTIVITY, '$reference'); exit"
+	 

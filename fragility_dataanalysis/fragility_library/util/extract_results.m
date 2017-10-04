@@ -25,8 +25,9 @@ try
     final_data = load(fullfile(resultsDir, ...
         strcat(patient, '_pertmats', reference, '.mat')));
 catch e
-    final_data = load(fullfile(resultsDir, ...
-        strcat(patient, '_pertmats_leastsquares_radius', num2str(radius), '.mat')));
+    disp(e);
+%     final_data = load(fullfile(resultsDir, ...
+%         strcat(patient, '_pertmats_leastsquares_radius', num2str(radius), '.mat')));
 end
 final_data = final_data.perturbation_struct;
 
