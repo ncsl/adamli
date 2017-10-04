@@ -69,8 +69,8 @@ data = load(fullfile(connDir, ltvmodel_filename));
 adjMats = data.adjMats;
 % adjMats = data.adjmat_struct.adjMats;
 
-% left off on: 1750
-for iTask=1755:size(adjMats,1)
+% left off on: 2359
+for iTask=2359:size(adjMats,1)
     %- extract adjMat at this window
     adjMat = squeeze(adjMats(iTask,:,:));
     [N, ~] = size(adjMat);
