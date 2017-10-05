@@ -83,9 +83,9 @@ NUM_GPUS=1			# number of GPUS (need 6 procs per gpu)
 
 ## job reqs
 if [[ "${RUNCONNECTIVITY}" -eq 1 ]]; then
-	walltime=2:00:00
+	walltime=1:00:00
 else
-	walltime=2:00:00					# the walltime for each computation
+	walltime=1:00:00					# the walltime for each computation
 fi
 partition=scavenger 	# debug, shared, unlimited, parallel, gpu, lrgmem, scavenger
 partition=shared
