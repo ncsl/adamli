@@ -1,4 +1,4 @@
-function [final_data, info] = extract_results(patient, resultsDir, reference)
+function [final_data, info] = extract_results(patient, resultsDir, reference, radius)
 if nargin == 0
     % data parameters to find correct directory
     patient = 'pt1sz2';
@@ -26,8 +26,8 @@ try
         strcat(patient, '_pertmats', reference, '.mat')));
 catch e
     disp(e);
-%     final_data = load(fullfile(resultsDir, ...
-%         strcat(patient, '_pertmats_leastsquares_radius', num2str(radius), '.mat')));
+    final_data = load(fullfile(resultsDir, ...
+        strcat(patient, '_pertmats_leastsquares_radius', num2str(radius), '.mat')));
 end
 final_data = final_data.perturbation_struct;
 

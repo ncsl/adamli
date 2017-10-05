@@ -108,7 +108,7 @@ for iPat=1:length(patients)
     resultsDir = fullfile(dataDir, strcat('/serverdata/pertmats/', filterType, '/win', num2str(winSize), ...
         '_step', num2str(stepSize), '_freq', num2str(fs), '_radius', num2str(radius)), patient, reference); % at lab
     
-    [final_data, info] = extract_results(patient, resultsDir, reference);
+    [final_data, info] = extract_results(patient, resultsDir, reference, radius);
 
     % extract actual data structures
     pertDataStruct = final_data.(perturbationType);
@@ -175,7 +175,7 @@ for iPat=1:length(patients)
     
     % set time windows to -1
     tempMat = fragilityMat;
-    tempMat(logical(timeWinsToReject)) = -1;
+    tempMat(logical(timeWinsToReject)) = nan;
     
     timeStart = 1;
     timeEnd = seizureMarkEnd;
@@ -260,16 +260,20 @@ clinicalIndices.resection_indices = y_resectionindices;
 clinicalIndices.included_labels = included_labels;
 
 %% Plot
+[r,c] = find(isnan(matToPlot));
+
 % 1. plot the heatmap
 fig_heatmap = plotHeatmap(matToPlot); % get the current figure
 ax = fig_heatmap.CurrentAxes; % get the current axes
-
+% hold on; 
+% plot(c, r, 'w.') ;
 % set colormap axes to configure for the -1 value from broadband filter
-newmap = jet;
+newmap = [1 1 1; jet(256)];
 ncol = size(newmap, 1);
 zpos = 1;
-newmap(zpos, :) = [1 1 1];
+newmap(zpos, :) = [0 0 0];
 colormap(newmap);
+clim = [-0.005, max(fragilityMat(:))];
 caxis(clim);
 
 hold on;
@@ -368,12 +372,22 @@ XLim = ax.XLim; XLowerLim = XLim(1); XUpperLim = XLim(2);
 % ax.XTickLabel = xTicks; % set xticks and their labels
 
 % plot entire series of data
-xTickStep = (XUpperLim - XLowerLim) / 10;
-xTicks = round(timeStart_plot:abs(timeEnd_plot-timeStart_plot)/10:timeEnd_plot);
-ax.XTick = (XLowerLim+0.5 : xTickStep : XUpperLim+0.5);
-ax.XTickLabel = xTicks; % set xticks and their labels
+% xTickStep = (XUpperLim - XLowerLim) / 10;
+% xTicks = round(timeStart_plot:abs(timeEnd_plot-timeStart_plot)/10:timeEnd_plot);
+% ax.XTick = (XLowerLim+0.5 : xTickStep : XUpperLim+0.5);
+% ax.XTickLabel = xTicks; % set xticks and their labels
+
+xticks = ax.XTick - 1;
+if rem(info.timePoints(1, 2), 1) ~= 0 || rem(info.timePoints(2, 2), 1) ~= 0
+    xticklabel = info.timePoints(xticks, 2);
+else
+    xticklabel = info.timePoints(xticks, 2)/fs;
+end
+ax.XTick = xticks;
+ax.XTickLabel = xticklabel;
 xlim([XLowerLim, XUpperLim+1]);
 
+pause(0.05);
 % 3. save figure
 toSaveFigFile = fullfile(figDir, strcat(patient, '_broadbandfilter', ...
     '_indivdual'));

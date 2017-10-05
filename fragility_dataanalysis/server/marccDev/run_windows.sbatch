@@ -28,32 +28,25 @@ echo ${window}
 echo ${radius}
 echo ${winsToCompute}
 
-arrWins=($winsToCompute)
-echo ${arrWins}
+arrWins=( $winsToCompute )
+for i in "${arrWins[@]}"; do echo $i; done
 
-# 02: Create srun and reservation of CPUS
-# --exclusive - distinct CPUs allocated for each job
-# -N1 - one node (# of nodes)
-# -n1 - one task (# of tasks)
-srun="srun -N1 -n1 --exclusive"
- 
 # --delay .2 prevents overloading the controlling node
 # -j is the number of tasks parallel runs so we set it to 24 (the number of steps we want to run)
 # --joblog makes parallel create a log of tasks that it has already run
 # --resume makes parallel use the joblog to resume from where it has left off
 # the combination of --joblog and --resume allow jobs to be resubmitted if
 # necessary and continue from where they left off
-parallel="parallel --delay .2 -j 24 --joblog _gnulogs/runtask.log --resume"
-
+parallel="parallel --delay .2 -j 24 --joblog _gnulogs/${log_file} --resume"
 
 # submit jobs via GNU
 if [[ "$RUNCONNECTIVITY" -eq 1 ]]; then
-	$parallel $srun matlab -nojvm -nodisplay -nodesktop -nosplash -r "\
+	$parallel "matlab -nojvm -nodisplay -nodesktop -nosplash -r \"
 		cd('matlab_lib');\
-		parallelComputeConnectivity('$patient', $winSize, $stepSize, $reference, ${1});" ::: #{arrWins[@]}
+		parallelComputeConnectivity('$patient', $winSize, $stepSize, '$reference', {1});\"" ::: ${arrWins[@]}
 else
-	$parallel $srun matlab -nojvm -nodisplay -nodesktop -nosplash -r "\
+	$parallel "matlab -nojvm -nodisplay -nodesktop -nosplash -r \"
 		cd('matlab_lib');\
-		parallelComputePerturbation('$patient', $winSize, $stepSize, $radius, $reference, ${1});" ::: #{arrWins[@]}
+		parallelComputePerturbation('$patient', $winSize, $stepSize, $radius, '$reference', {1});\"" ::: ${arrWins[@]}
 fi
 

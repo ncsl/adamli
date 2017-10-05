@@ -36,26 +36,32 @@ function labelHeatmap(ax, fig, clinicalIndices, PLOTARGS)
     set(ax, 'YTick', yTicks);
     
     % plot start star's for the different clinical annotations
-    figIndices = {ezone_indices, earlyspread_indices, latespread_indices};
-    colors = {[1 0 0], [1 .5 0], [0 0 1]};
-    for i=1:length(figIndices)
-        if sum(figIndices{i})>0
-            xLocations = repmat(XUpperLim+1, length(figIndices{i}), 1);
-            plotAnnotatedStars(gca, xLocations, figIndices{i}, colors{i});
+    if isempty(resection_indices)
+        figIndices = {ezone_indices, earlyspread_indices, latespread_indices};
+        colors = {[1 0 0], [1 .5 0], [0 0 1]};
+        for i=1:length(figIndices)
+            if sum(figIndices{i})>0
+                xLocations = repmat(XUpperLim+1, length(figIndices{i}), 1);
+                plotAnnotatedStars(gca, xLocations, figIndices{i}, colors{i});
+            end
         end
+        
+        leg = legend('EZ', 'Early Onset', 'Late Onset');
+    else
+        % plot stars for the resected labels
+        figIndices = {resection_indices};
+        colors = {[0.1 0 0]};
+        for i=1:length(figIndices)
+            if sum(figIndices{i})>0
+                xLocations = repmat(XUpperLim+1, length(figIndices{i}), 1);
+                plotAnnotatedStars(gca, xLocations, figIndices{i}, colors{i});
+            end
+        end
+        
+        leg = legend('Resection');
     end
-
-    % plot stars for the resected labels
-%     figIndices = {resection_indices};
-%     colors = {[0.1 0 0]};
-%     for i=1:length(figIndices)
-%         if sum(figIndices{i})>0
-%             xLocations = repmat(XUpperLim+1, length(figIndices{i}), 1);
-%             plotAnnotatedStars(gca, xLocations, figIndices{i}, colors{i});
-%         end
-%     end
     
-    leg = legend('EZ', 'Early Onset', 'Late Onset');
+    
 %     leg = legend('Resected');
     try
         leg.Position = [0.8792    0.0103    0.1021    0.0880];

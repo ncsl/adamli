@@ -192,6 +192,9 @@ if iTask == 1
     info.rawtimePoints = timePoints;
     temptimePoints = timePoints;
     temptimePoints(:, 1) = timePoints(:, 1) - 1;
+    if isnan(seizure_eonset_ms)
+        seizure_eonset_ms = 0;
+    end
     info.timePoints = (temptimePoints - seizure_eonset_ms * frequency_sampling / 1000) ./ frequency_sampling;
     info.included_channels = included_channels;
     info.frequency_sampling = frequency_sampling;
