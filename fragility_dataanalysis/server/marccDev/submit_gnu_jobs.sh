@@ -109,7 +109,7 @@ reference=""
 if [ -z "$reference" ]
 then
       echo "\$var is empty"
-      reference="''"
+      reference=""
 else
       echo "\$var is NOT empty and should be 'avgref'"
 fi
