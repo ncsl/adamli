@@ -36,18 +36,18 @@ patients=(
 	# JH105sz1 JH105sz2 JH105sz3 JH105sz4 JH105sz5
 	# JH105aslp1 JH105aw1
 
-	'LA01_ICTAL LA01_Inter
-    LA02_ICTAL LA02_Inter
-    LA03_ICTAL LA03_Inter
-    LA04_ICTAL LA04_Inter
-    LA05_ICTAL LA05_Inter
-    LA06_ICTAL LA06_Inter')
-    # LA08_ICTAL LA08_Inter
-    # LA09_ICTAL LA09_Inter
-    # LA10_ICTAL LA10_Inter
-    # LA11_ICTAL LA11_Inter
-    # LA15_ICTAL LA15_Inter
-    # LA16_ICTAL LA16_Inter')
+	# 'LA01_ICTAL LA01_Inter
+ #    LA02_ICTAL LA02_Inter
+ #    LA03_ICTAL LA03_Inter
+ #    LA04_ICTAL LA04_Inter
+ #    LA05_ICTAL LA05_Inter
+ #    LA06_ICTAL LA06_Inter')
+    'LA08_ICTAL LA08_Inter
+    LA09_ICTAL LA09_Inter
+    LA10_ICTAL LA10_Inter
+    LA11_ICTAL LA11_Inter
+    LA15_ICTAL LA15_Inter
+    LA16_ICTAL LA16_Inter')
 	# Pat2sz1p Pat2sz2p Pat2sz3p
 	# Pat16sz1p Pat16sz2p Pat16sz3p')
 
