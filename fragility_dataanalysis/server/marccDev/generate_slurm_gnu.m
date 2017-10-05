@@ -89,6 +89,13 @@ function generate_slurm_gnu(patients, winSize, stepSize, radius, ...
     for iPat=1:numPats
         patient = cell_pats{iPat};
         
+         % set patientID and seizureID
+        [~, patient_id, seizure_id, seeg] = splitPatient(patient);
+
+        [included_channels, ezone_labels, earlyspread_labels, latespread_labels,...
+            resection_labels, fs, center, success_or_failure] ...
+                = determineClinicalAnnotations(patient_id, seizure_id);
+        
         %- call function to compute number of windows for a patient based on
         %- the data available, window size, and step size
         numWins = getNumWins(patient, winSize, stepSize);
