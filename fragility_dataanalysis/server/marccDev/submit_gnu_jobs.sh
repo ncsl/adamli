@@ -9,9 +9,9 @@ patients=(
 	# pt2sz1 pt2sz3 pt2sz4 
 	# pt3sz2 pt3sz4
 	# pt6sz3 pt6sz4 pt6sz5')
-	'pt8sz1 pt8sz2 pt8sz3
-	pt10sz1 pt10sz2 pt10sz3
-	pt11sz1 pt11sz2 pt11sz3 pt11sz4')
+	# 'pt8sz1 pt8sz2 pt8sz3
+	# pt10sz1 pt10sz2 pt10sz3
+	# pt11sz1 pt11sz2 pt11sz3 pt11sz4')
 	# pt12sz1 pt12sz2
 	# pt13sz1 pt13sz2 pt13sz3 pt13sz5
 	# pt14sz1 pt14sz2 pt14sz3
@@ -36,18 +36,18 @@ patients=(
 	# pt10sz1 pt10sz2 pt10sz3
 	# pt17sz1 pt17sz2 pt17sz3')
 
-    # LA01_ICTAL LA01_Inter
-    # LA02_ICTAL LA02_Inter
-    # LA03_ICTAL LA03_Inter
-    # LA04_ICTAL LA04_Inter
-    # LA05_ICTAL LA05_Inter
-    # LA06_ICTAL LA06_Inter
-    # LA08_ICTAL LA08_Inter
-    # LA09_ICTAL LA09_Inter
-    # LA10_ICTAL LA10_Inter
-    # LA11_ICTAL LA11_Inter
-    # LA15_ICTAL LA15_Inter
-    # LA16_ICTAL LA16_Inter')
+	'LA01_ICTAL LA01_Inter
+    LA02_ICTAL LA02_Inter
+    LA03_ICTAL LA03_Inter
+    LA04_ICTAL LA04_Inter
+    LA05_ICTAL LA05_Inter
+    LA06_ICTAL LA06_Inter
+    LA08_ICTAL LA08_Inter
+    LA09_ICTAL LA09_Inter
+    LA10_ICTAL LA10_Inter
+    LA11_ICTAL LA11_Inter
+    LA15_ICTAL LA15_Inter
+    LA16_ICTAL LA16_Inter')
 
 	# 'JH101sz1 JH101sz2 JH101sz3 JH101sz4
 	# JH102sz1 JH102sz2 JH102sz3 JH102sz4 JH102sz5 JH102sz6
@@ -83,12 +83,12 @@ NUM_GPUS=1			# number of GPUS (need 6 procs per gpu)
 
 ## job reqs
 if [[ "${RUNCONNECTIVITY}" -eq 1 ]]; then
-	walltime=0:30:0
+	walltime=2:00:00
 else
-	walltime=0:10:0					# the walltime for each computation
+	walltime=2:00:00					# the walltime for each computation
 fi
 partition=scavenger 	# debug, shared, unlimited, parallel, gpu, lrgmem, scavenger
-partition=debug
+partition=shared
 qos=scavenger
 
 ## load in the modules for this run -> python, matlab, etc.
@@ -105,7 +105,7 @@ done
 echo $buff
 
 # Debug statement for reference type
-reference=avgref
+reference=""
 if [ -z "$reference" ]
 then
       echo "\$var is empty"

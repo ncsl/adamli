@@ -23,9 +23,9 @@ echo ${SLURM_ARRAY_TASK_ID}
 if [[ "$RUNCONNECTIVITY" -eq 1 ]]; then
 	matlab -logfile _log/${SBATCH_JOB_NAME}_${SLURM_ARRAY_TASK_ID}.txt -nojvm -nodisplay -nodesktop -nosplash -r "\
 		cd('matlab_lib');\
-		parallelComputeConnectivity('$patient', $winSize, $stepSize, '$reference', ${SLURM_ARRAY_TASK_ID});"
+		parallelComputeConnectivity('$patient', $winSize, $stepSize, '$reference', ${SLURM_ARRAY_TASK_ID}); exit;"
 else
 	matlab -logfile _log/${SBATCH_JOB_NAME}_${SLURM_ARRAY_TASK_ID}.txt -nojvm -nodisplay -nodesktop -nosplash -r "\
 		cd('matlab_lib');\
-		parallelComputePerturbation('$patient', $winSize, $stepSize, $radius, '$reference', ${SLURM_ARRAY_TASK_ID});"
+		parallelComputePerturbation('$patient', $winSize, $stepSize, $radius, '$reference', ${SLURM_ARRAY_TASK_ID}); exit;"
 fi
