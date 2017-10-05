@@ -83,12 +83,12 @@ NUM_GPUS=1			# number of GPUS (need 6 procs per gpu)
 
 ## job reqs
 if [[ "${RUNCONNECTIVITY}" -eq 1 ]]; then
-	walltime=1:00:0
+	walltime=0:30:0
 else
 	walltime=0:10:0					# the walltime for each computation
 fi
 partition=scavenger 	# debug, shared, unlimited, parallel, gpu, lrgmem, scavenger
-# partition=debug
+partition=debug
 qos=scavenger
 
 ## load in the modules for this run -> python, matlab, etc.
