@@ -143,7 +143,6 @@ function generate_slurm(patients, winSize, stepSize, radius, ...
             % run a computation on checking patients if there is missing data
             [toCompute, patWinsToCompute] = checkPatient(patient, tempDir, resultsDir, winSize, stepSize);
             
-            patWinsToCompute = [1, 4, 10, 100];
             % if merging, there are 3 cases to check:
             % 1. nothing to compute into temporary directories -> merge
             % 2. some windows are missing -> compute those windows with gnu
