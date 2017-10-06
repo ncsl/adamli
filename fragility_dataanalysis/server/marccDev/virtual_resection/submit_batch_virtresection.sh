@@ -55,7 +55,7 @@ if [[ "${RUNCONNECTIVITY}" -eq 1 ]]; then
 else
 	walltime=0:10:0					# the walltime for each computation
 fi
-partition=scavenger 	# debug, shared, unlimited, parallel, gpu, lrgmem, scavenger
+partition=shared 	# debug, shared, unlimited, parallel, gpu, lrgmem, scavenger
 # partition=debug
 qos=scavenger
 
@@ -73,7 +73,7 @@ done
 echo $buff
 
 # Debug statement for reference type
-reference=
+reference=""
 if [ -z "$reference" ]
 then
       echo "\$var is empty"

@@ -20,12 +20,16 @@
 %     'pt3aw1', ...
 %     'pt3aslp1', 'pt3aslp2', ...
     'pt1sz2', 'pt1sz3', 'pt1sz4',...
-%     'pt2sz1' 'pt2sz3' 'pt2sz4', ...
-%     'pt3sz2' 'pt3sz4', ...
-%     'pt6sz3', 'pt6sz4', 'pt6sz5', ...
-%     'pt8sz1' 'pt8sz2','pt8sz3',...
-%     'pt10sz1', 'pt10sz2' 'pt10sz3', ...
-%     'pt7sz19', 'pt7sz21', 'pt7sz22',...
+    'pt2sz1' 'pt2sz3' 'pt2sz4', ...
+    'pt3sz2' 'pt3sz4', ...
+    'pt6sz3', 'pt6sz4', 'pt6sz5', ...
+    'pt8sz1' 'pt8sz2','pt8sz3',...
+    'pt10sz1', 'pt10sz2' 'pt10sz3', ...
+    'pt7sz19', 'pt7sz21', 'pt7sz22',...
+    'pt13sz1', 'pt13sz2', 'pt13sz3', 'pt13sz5',...
+    'pt14sz1' 'pt14sz2' 'pt14sz3',...
+    'pt15sz1' 'pt15sz2' 'pt15sz3' 'pt15sz4',...
+    'pt16sz1' 'pt16sz2' 'pt16sz3',...
 %     'pt11sz1', 'pt11sz2' 'pt11sz3' 'pt11sz4', ...
 %     'pt12sz1', 'pt12sz2', ...
 %     'pt13sz1', 'pt13sz2', 'pt13sz3', 'pt13sz5',...
@@ -74,6 +78,17 @@ addpath(genpath(fullfile(rootDir, '/eeg_toolbox/')));
 addpath(rootDir);
 
 %% Set Parameters
+% parameters
+winSize = 250;
+stepSize = 125;
+filterType = 'notchfilter';
+% filterType = 'adaptivefilter';
+radius = 1.5;
+typeConnectivity = 'leastsquares';
+typeTransform = 'fourier';
+rejectThreshold = 0.3;
+reference = '';
+
 % plotting parameters
 FONTSIZE = 20;
 
@@ -146,7 +161,8 @@ for iPat=1:length(patients)
     seizureStart = seizure_estart_ms;
     seizureEnd = seizure_eend_ms;
     seizureMarkStart = seizure_estart_mark;
-
+    seizureMarkEnd = seizure_eend_mark;
+    
     % remove POL from labels & get clinical indices
     included_labels = upper(included_labels);
     included_labels = strrep(included_labels, 'POL', '');
@@ -165,10 +181,13 @@ for iPat=1:length(patients)
     %% 2. Perform any Preprocessing
     % broadband filter for this patient
     timeWinsToReject = broadbandfilter(patient, typeTransform, winSize, stepSize, filterType, spectDir);
-
+    rejectThreshold = 0.3;
+    timeWinsToReject(timeWinsToReject > rejectThreshold) = 1;
+    timeWinsToReject(timeWinsToReject <= rejectThreshold) = 0;
+    
     % OPTIONAL: apply broadband filter and get rid of time windows
     % set time windows to nan
-%     fragilityMat(timeWinsToReject) = nan;
+    fragilityMat(logical(timeWinsToReject)) = nan;
 %     minmaxFragility(timeWinsToReject) = nan;
 
     % OPTIONAL: only analyze the preictal states
@@ -177,6 +196,10 @@ for iPat=1:length(patients)
 %         tempMat = tempMat(:, 1:seizureMarkStart);
 %     end
 %     fragilityMat = tempMat;
+
+    % only analyze fragility until ictal off
+    fragilityMat = fragilityMat(:, 1:seizureMarkEnd);
+    minNormPertMat = minNormPertMat(:, 1:seizureMarkEnd);
 
     % set outcome
     if success_or_failure == 1
@@ -205,13 +228,78 @@ for iPat=1:length(patients)
     vari = var(fragilityMat, 0, 2);
     cfvar_chan = avg ./ vari;
     
+    % compute coefficient of var for preictal
+    preavg = mean(fragilityMat(:, 1:seizureMarkStart), 2);
+    prevari = var(fragilityMat(:, 1:seizureMarkStart), 0, 2);
+    precfvar_chan = preavg ./ prevari;
+    
+    % compute coefficient of var for ictal 
+    try
+        timesz = info.rawtimePoints(seizureMarkStart, 2)/fs;
+        post_index = find(info.rawtimePoints(:, 2)/fs == timesz + 10);
+    catch e
+        timesz = info.timePoints(seizureMarkStart, 2);
+        post_index = find(info.timePoints(:, 2) == timesz + 10);
+    end
+    postavg = mean(fragilityMat(:, seizureMarkStart:seizureMarkStart:post_index), 2);
+    postvari = var(fragilityMat(:, seizureMarkStart:seizureMarkStart:post_index), 0, 2);
+    postcfvar_chan = postavg ./ postvari;
+    
+    % compute coefficient of var for ictal + 20 seconds
+    try
+        timesz = info.rawtimePoints(seizureMarkStart, 2)/fs;
+        post_index = find(info.rawtimePoints(:, 2)/fs == timesz + 20);
+    catch e
+        timesz = info.timePoints(seizureMarkStart, 2);
+        post_index = find(info.timePoints(:, 2) == timesz + 20);
+    end
+    post20avg = mean(fragilityMat(:, seizureMarkStart:seizureMarkStart:post_index), 2);
+    post20vari = var(fragilityMat(:, seizureMarkStart:seizureMarkStart:post_index), 0, 2);
+    post20cfvar_chan = post20avg ./ post20vari;
+    
+    % compute coefficient of var for ictal + 30 seconds
+    try
+        timesz = info.rawtimePoints(seizureMarkStart, 2)/fs;
+        post_index = find(info.rawtimePoints(:, 2)/fs == timesz + 30);
+    catch e
+        timesz = info.timePoints(seizureMarkStart, 2);
+        post_index = find(info.timePoints(:, 2) == timesz + 30);
+    end
+    post30avg = mean(fragilityMat(:, seizureMarkStart:seizureMarkStart:post_index), 2);
+    post30vari = var(fragilityMat(:, seizureMarkStart:seizureMarkStart:post_index), 0, 2);
+    post30cfvar_chan = post30avg ./ post30vari;
+    
+    % compute coefficient of var for ictal + 40 seconds
+    try
+        timesz = info.rawtimePoints(seizureMarkStart, 2)/fs;
+        post_index = find(info.rawtimePoints(:, 2)/fs == timesz + 40);
+    catch e
+        timesz = info.timePoints(seizureMarkStart, 2);
+        post_index = find(info.timePoints(:, 2) == timesz + 40);
+    end
+    post40avg = mean(fragilityMat(:, seizureMarkStart:seizureMarkStart:post_index), 2);
+    post40vari = var(fragilityMat(:, seizureMarkStart:seizureMarkStart:post_index), 0, 2);
+    post40cfvar_chan = post40avg ./ post40vari;
+    
+    % compute coefficient of var for ictal + 50 seconds
+    try
+        timesz = info.rawtimePoints(seizureMarkStart, 2)/fs;
+        post_index = find(info.rawtimePoints(:, 2)/fs == timesz + 50);
+    catch e
+        timesz = info.timePoints(seizureMarkStart, 2);
+        post_index = find(info.timePoints(:, 2) == timesz + 50);
+    end
+    post50avg = mean(fragilityMat(:, seizureMarkStart:seizureMarkStart:post_index), 2);
+    post50vari = var(fragilityMat(:, seizureMarkStart:seizureMarkStart:post_index), 0, 2);
+    post50cfvar_chan = post50avg ./ post50vari;
+    
     % compute highest 10% fragile nodes
     max_frag = max(fragilityMat,[], 2); % compute highest fragility during entire dataset
     min_frag = min(fragilityMat,[], 2); % compute smallest fragility during entire dataset
     high_frag = prctile(fragilityMat, 90, 2);
     
     % set highest fragility sum
-    fragility_sum = sum(fragilityMat(:));
+    fragility_sum = nansum(fragilityMat(:));
     
     % compute fragility assymmetry based on EZ electrodes
     ez_fragility_set = fragilityMat(ezone_indices, :);
@@ -261,10 +349,21 @@ for iPat=1:length(patients)
     features_struct.patient = patient;
     features_struct.cfvar_time = cfvar_time;
     features_struct.cfvar_chan = cfvar_chan;
+    
+    features_struct.precfvar_chan = precfvar_chan;
+    features_struct.postcfvar_chan = postcfvar_chan;
+    features_struct.post20cfvar_chan = post20cfvar_chan;
+    features_struct.post20cfvar_chan = post30cfvar_chan;
+    features_struct.post20cfvar_chan = post40cfvar_chan;
+    features_struct.post20cfvar_chan = post50cfvar_chan;
+                
+    
     features_struct.max_frag = max_frag;
     features_struct.min_frag = min_frag;
     features_struct.high_frag = high_frag;
     features_struct.ez_asymmetry = ez_asymmetry;
     features_struct.resected_asymmetry = resected_asymmetry;
     features_struct.network_fragility = network_fragility;
+    
+    save(fullfile(figDir, strcat(patient, '_fragilitystats.mat')), 'features_struct');
 end
