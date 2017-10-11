@@ -13,30 +13,30 @@
 %     'UMMC007_sz1', 'UMMC007_sz2','UMMC007_sz3', ...
 %     'UMMC008_sz1', 'UMMC008_sz2', 'UMMC008_sz3', ...
 %     'UMMC009_sz1', 'UMMC009_sz2', 'UMMC009_sz3', ...
-     'pt1aw1', 'pt1aw2', ...
-    'pt1aslp1', 'pt1aslp2', ...
-    'pt2aw1', 'pt2aw2', ...
-    'pt2aslp1', 'pt2aslp2', ...
-    'pt3aw1', ...
-    'pt3aslp1', 'pt3aslp2', ...
-%     'pt1sz2', 'pt1sz3', 'pt1sz4',...
-%     'pt2sz1' 'pt2sz3' 'pt2sz4', ...
-%     'pt3sz2' 'pt3sz4', ...
-%     'pt6sz3', 'pt6sz4', 'pt6sz5', ...
-%     'pt8sz1' 'pt8sz2','pt8sz3',...
-%     'pt10sz1', 'pt10sz2' 'pt10sz3', ...
-%     'pt7sz19', 'pt7sz21', 'pt7sz22',...
-%     'pt13sz1', 'pt13sz2', 'pt13sz3', 'pt13sz5',...
-%     'pt14sz1' 'pt14sz2' 'pt14sz3',...
-%     'pt15sz1' 'pt15sz2' 'pt15sz3' 'pt15sz4',...
-%     'pt16sz1' 'pt16sz2' 'pt16sz3',...
-%     'pt1sz4',...
-%     'pt6sz3', 'pt6sz4', 'pt6sz5', ...
-%     'pt8sz1' 'pt8sz2','pt8sz3',...
-%     'pt7sz21', 'pt13sz5',...
-%     'pt14sz1' 'pt14sz2' 'pt14sz3',...
-%     'pt15sz1' 'pt15sz2' 'pt15sz3' 'pt15sz4',...
-%     'pt16sz1' 'pt16sz2' 'pt16sz3',...
+%      'pt1aw1', 'pt1aw2', ...
+%     'pt1aslp1', 'pt1aslp2', ...
+%     'pt2aw1', 'pt2aw2', ...
+%     'pt2aslp1', 'pt2aslp2', ...
+%     'pt3aw1', ...
+%     'pt3aslp1', 'pt3aslp2', ...
+    'pt1sz2', 'pt1sz3', 'pt1sz4',...
+    'pt2sz1' 'pt2sz3' 'pt2sz4', ...
+    'pt3sz2' 'pt3sz4', ...
+    'pt6sz3', 'pt6sz4', 'pt6sz5', ...
+    'pt8sz1' 'pt8sz2','pt8sz3',...
+    'pt10sz1', 'pt10sz2' 'pt10sz3', ...
+    'pt7sz19', 'pt7sz21', 'pt7sz22',...
+    'pt13sz1', 'pt13sz2', 'pt13sz3', 'pt13sz5',...
+    'pt14sz1' 'pt14sz2' 'pt14sz3',...
+    'pt15sz1' 'pt15sz2' 'pt15sz3' 'pt15sz4',...
+    'pt16sz1' 'pt16sz2' 'pt16sz3',...
+    'pt1sz4',...
+    'pt6sz3', 'pt6sz4', 'pt6sz5', ...
+    'pt8sz1' 'pt8sz2','pt8sz3',...
+    'pt7sz21', 'pt13sz5',...
+    'pt14sz1' 'pt14sz2' 'pt14sz3',...
+    'pt15sz1' 'pt15sz2' 'pt15sz3' 'pt15sz4',...
+    'pt16sz1' 'pt16sz2' 'pt16sz3',...
 %     'pt11sz1', 'pt11sz2' 'pt11sz3' 'pt11sz4', ...
 %     'pt12sz1', 'pt12sz2', ...
 %     'pt13sz1', 'pt13sz2', 'pt13sz3', 'pt13sz5',...
@@ -236,65 +236,65 @@ for iPat=1:length(patients)
     cfvar_chan = avg ./ vari;
     
     % compute coefficient of var for preictal
-%     preavg = nanmean(fragilityMat(:, 1:seizureMarkStart), 2);
-%     prevari = nanvar(fragilityMat(:, 1:seizureMarkStart), 0, 2);
-%     precfvar_chan = preavg ./ prevari;
-%     
-%     % compute coefficient of var for ictal 
-%     try
-%         timesz = info.rawtimePoints(seizureMarkStart, 2)/fs;
-%         post_index = find(info.rawtimePoints(:, 2)/fs == timesz + 10);
-%     catch e
-%         timesz = info.timePoints(seizureMarkStart, 2)/fs;
-%         post_index = find(info.timePoints(:, 2)/fs == timesz + 10);
-%     end
-%     seizureMarkStart
-%     post_index
-%     if isempty(post_index)
-%         patient
-%     end
-% 
-%     postcfvar_chan = computecoeffvar(fragilityMat, seizureMarkStart, post_index);
-%     
-%     % compute coefficient of var for ictal + 20 seconds
-%     try
-%         timesz = info.rawtimePoints(seizureMarkStart, 2)/fs;
-%         post_index = find(info.rawtimePoints(:, 2)/fs == timesz + 20);
-%     catch e
-%         timesz = info.timePoints(seizureMarkStart, 2)/fs;
-%         post_index = find(info.timePoints(:, 2)/fs == timesz + 20);
-%     end
-%     post20cfvar_chan = computecoeffvar(fragilityMat, seizureMarkStart, post_index);
-%     
-%     % compute coefficient of var for ictal + 30 seconds
-%     try
-%         timesz = info.rawtimePoints(seizureMarkStart, 2)/fs;
-%         post_index = find(info.rawtimePoints(:, 2)/fs == timesz + 30);
-%     catch e
-%         timesz = info.timePoints(seizureMarkStart, 2)/fs;
-%         post_index = find(info.timePoints(:, 2)/fs == timesz + 30);
-%     end
-%     post30cfvar_chan = computecoeffvar(fragilityMat, seizureMarkStart, post_index);
-%     
-%     % compute coefficient of var for ictal + 40 seconds
-%     try
-%         timesz = info.rawtimePoints(seizureMarkStart, 2)/fs;
-%         post_index = find(info.rawtimePoints(:, 2)/fs == timesz + 40);
-%     catch e
-%         timesz = info.timePoints(seizureMarkStart, 2)/fs;
-%         post_index = find(info.timePoints(:, 2)/fs == timesz + 40);
-%     end
-%     post40cfvar_chan = computecoeffvar(fragilityMat, seizureMarkStart, post_index);
-%     
-%     % compute coefficient of var for ictal + 50 seconds
-%     try
-%         timesz = info.rawtimePoints(seizureMarkStart, 2)/fs;
-%         post_index = find(info.rawtimePoints(:, 2)/fs == timesz + 50);
-%     catch e
-%         timesz = info.timePoints(seizureMarkStart, 2)/fs;
-%         post_index = find(info.timePoints(:, 2)/fs == timesz + 50);
-%     end
-%     post50cfvar_chan = computecoeffvar(fragilityMat, seizureMarkStart, post_index);
+    preavg = nanmean(fragilityMat(:, 1:seizureMarkStart), 2);
+    prevari = nanvar(fragilityMat(:, 1:seizureMarkStart), 0, 2);
+    precfvar_chan = preavg ./ prevari;
+    
+    % compute coefficient of var for ictal 
+    try
+        timesz = info.rawtimePoints(seizureMarkStart, 2)/fs;
+        post_index = find(info.rawtimePoints(:, 2)/fs == timesz + 10);
+    catch e
+        timesz = info.timePoints(seizureMarkStart, 2)/fs;
+        post_index = find(info.timePoints(:, 2)/fs == timesz + 10);
+    end
+    seizureMarkStart
+    post_index
+    if isempty(post_index)
+        patient
+    end
+
+    postcfvar_chan = computecoeffvar(fragilityMat, seizureMarkStart, post_index);
+    
+    % compute coefficient of var for ictal + 20 seconds
+    try
+        timesz = info.rawtimePoints(seizureMarkStart, 2)/fs;
+        post_index = find(info.rawtimePoints(:, 2)/fs == timesz + 20);
+    catch e
+        timesz = info.timePoints(seizureMarkStart, 2)/fs;
+        post_index = find(info.timePoints(:, 2)/fs == timesz + 20);
+    end
+    post20cfvar_chan = computecoeffvar(fragilityMat, seizureMarkStart, post_index);
+    
+    % compute coefficient of var for ictal + 30 seconds
+    try
+        timesz = info.rawtimePoints(seizureMarkStart, 2)/fs;
+        post_index = find(info.rawtimePoints(:, 2)/fs == timesz + 30);
+    catch e
+        timesz = info.timePoints(seizureMarkStart, 2)/fs;
+        post_index = find(info.timePoints(:, 2)/fs == timesz + 30);
+    end
+    post30cfvar_chan = computecoeffvar(fragilityMat, seizureMarkStart, post_index);
+    
+    % compute coefficient of var for ictal + 40 seconds
+    try
+        timesz = info.rawtimePoints(seizureMarkStart, 2)/fs;
+        post_index = find(info.rawtimePoints(:, 2)/fs == timesz + 40);
+    catch e
+        timesz = info.timePoints(seizureMarkStart, 2)/fs;
+        post_index = find(info.timePoints(:, 2)/fs == timesz + 40);
+    end
+    post40cfvar_chan = computecoeffvar(fragilityMat, seizureMarkStart, post_index);
+    
+    % compute coefficient of var for ictal + 50 seconds
+    try
+        timesz = info.rawtimePoints(seizureMarkStart, 2)/fs;
+        post_index = find(info.rawtimePoints(:, 2)/fs == timesz + 50);
+    catch e
+        timesz = info.timePoints(seizureMarkStart, 2)/fs;
+        post_index = find(info.timePoints(:, 2)/fs == timesz + 50);
+    end
+    post50cfvar_chan = computecoeffvar(fragilityMat, seizureMarkStart, post_index);
     
     % only analyze up to seizuremarkend for all following statistics
     fragilityMat = fragilityMat(:, 1:seizureMarkEnd);
@@ -357,12 +357,12 @@ for iPat=1:length(patients)
     features_struct.cfvar_time = cfvar_time;
     features_struct.cfvar_chan = cfvar_chan;
     
-%     features_struct.precfvar_chan = precfvar_chan;
-%     features_struct.postcfvar_chan = postcfvar_chan;
-%     features_struct.post20cfvar_chan = post20cfvar_chan;
-%     features_struct.post30cfvar_chan = post30cfvar_chan;
-%     features_struct.post40cfvar_chan = post40cfvar_chan;
-%     features_struct.post50cfvar_chan = post50cfvar_chan;
+    features_struct.precfvar_chan = precfvar_chan;
+    features_struct.postcfvar_chan = postcfvar_chan;
+    features_struct.post20cfvar_chan = post20cfvar_chan;
+    features_struct.post30cfvar_chan = post30cfvar_chan;
+    features_struct.post40cfvar_chan = post40cfvar_chan;
+    features_struct.post50cfvar_chan = post50cfvar_chan;
         
     features_struct.ezone_labels = ezone_labels;
     features_struct.included_labels = included_labels;
