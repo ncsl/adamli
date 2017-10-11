@@ -43,10 +43,10 @@ parallel="parallel --delay .2 -j 24 --joblog _gnulogs/${log_file} --resume"
 if [[ "$RUNCONNECTIVITY" -eq 1 ]]; then
 	$parallel "matlab -nojvm -nodisplay -nodesktop -nosplash -r \"
 		cd('matlab_lib');\
-		parallelComputeConnectivity('$patient', $winSize, $stepSize, '$reference', {1});\"" ::: ${arrWins[@]}
+		parallelComputeConnectivity('$patient', $winSize, $stepSize, '$reference', {1}); exit;\"" ::: ${arrWins[@]}
 else
 	$parallel "matlab -nojvm -nodisplay -nodesktop -nosplash -r \"
 		cd('matlab_lib');\
-		parallelComputePerturbation('$patient', $winSize, $stepSize, $radius, '$reference', {1});\"" ::: ${arrWins[@]}
+		parallelComputePerturbation('$patient', $winSize, $stepSize, $radius, '$reference', {1}); exit;\"" ::: ${arrWins[@]}
 fi
 

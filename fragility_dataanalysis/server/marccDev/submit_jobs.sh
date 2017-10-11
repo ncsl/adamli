@@ -85,7 +85,7 @@ NUM_GPUS=1			# number of GPUS (need 6 procs per gpu)
 if [[ "${RUNCONNECTIVITY}" -eq 1 ]]; then
 	walltime=0:10:0
 else
-	walltime=0:10:0					# the walltime for each computation
+	walltime=0:20:0					# the walltime for each computation
 fi
 partition=shared	# debug, shared, unlimited, parallel, gpu, lrgmem, scavenger
 # partition=debug

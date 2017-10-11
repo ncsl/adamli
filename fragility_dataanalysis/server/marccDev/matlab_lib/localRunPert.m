@@ -70,7 +70,7 @@ adjMats = data.adjMats;
 % adjMats = data.adjmat_struct.adjMats;
 
 % left off on: 2359
-for iTask=18419:size(adjMats,1)
+for iTask=18969:size(adjMats,1)
     %- extract adjMat at this window
     adjMat = squeeze(adjMats(iTask,:,:));
     [N, ~] = size(adjMat);
