@@ -1,4 +1,4 @@
-function plotting_fragility(patients, winSize, stepSize, filterType, radius, typeConnectivity, typeTransform, rejectThreshold, reference)
+function plotting_fragility(patients, winSize, stepSize, filterType, radius, typeConnectivity, typeTransform, rejectThreshold, reference, times)
 if nargin == 0
     % data parameters to find correct directory
     patient = 'pt1sz2';
@@ -378,9 +378,10 @@ XLim = ax.XLim; XLowerLim = XLim(1); XUpperLim = XLim(2);
 % ax.XTickLabel = xTicks; % set xticks and their labels
 
 xticks = ax.XTick - 1;
+if isnan(info.seizure_estart_ms)
+    seizure_estart_mark = 1;
+end
 try
-    
-    
     if rem(info.rawtimePoints(1, 2), 1) ~= 0 || rem(info.rawtimePoints(2, 2), 1) ~= 0
         seizTime = info.rawtimePoints(seizure_estart_mark, 2);
         xticklabel = info.rawtimePoints(xticks, 2) - seizTime;
@@ -402,9 +403,68 @@ ax.XTick = xticks;
 ax.XTickLabel = xticklabel;
 xlim([XLowerLim, XUpperLim+1]);
 
+%% PLOT second PLOT FOR COEFFICIENT OF VARIATION
+xrange = 1:size(matToPlot, 1);
+xrange(ezone_indices) = [];
+secfig = subplot(4,6, [6,12,18,24]);
+
+% coeffvar = computecoeffvar(matToPlot);
+
+% vector of hard coded time windows to go to for each patient
+time = times;
+try
+    timesz = info.rawtimePoints(seizureMarkStart, 2)/fs;
+    post_index = find(info.rawtimePoints(:, 2)/fs == (timesz + time));
+catch e
+    timesz = info.timePoints(seizureMarkStart, 2)/fs;
+    post_index = find(info.timePoints(:, 2)/fs == (timesz + time));
+end
+seizureMarkStart
+post_index
+if isempty(post_index)
+    patient
+end
+
+% compute coefficient of var for ictal 
+coeffvar = computecoeffvar(matToPlot, seizureMarkStart, post_index);
+
+% compute rowsum for ictal 
+high_mask = matToPlot;
+for ichan=1:num_channels
+    indices = high_mask(ichan,:) < 0.85;
+    high_mask(ichan,indices) = 0; 
+end
+rowsum = computerowsum(high_mask, seizureMarkStart, post_index);
+
+rowsum = rowsum ./ max(rowsum);
+coeffvar = coeffvar ./ max(coeffvar);
+
+%- plot stem
+stem(xrange, coeffvar(xrange), 'k'); hold on; axis tight;
+stem(ezone_indices, coeffvar(ezone_indices), 'r');
+
+plot(1:length(rowsum), 0.5*rowsum + 0.5*coeffvar, 'k-');
+plot(1:length(rowsum), 0.75*rowsum + 0.25*coeffvar, 'g-');
+stem(rowsum, 'b*');
+
+xoffset = 0.04;
+pos = get(gca, 'Position');
+pos(1) = pos(1) + xoffset;
+xlim([1 size(matToPlot,1)]);
+set(gca, 'Xdir', 'reverse');
+set(gca, 'Position', pos);
+set(gca, 'XTick', []); set(gca, 'XTickLabel', []);
+set(gca, 'yaxislocation', 'right');
+set(gca, 'XAxisLocation', 'bottom');
+xlabel('Coeff Var of Fragility Metric', 'FontSize', FONTSIZE-3);
+view([90 90])
+ax = gca;
+ax.XLabel.Rotation = 270;
+ax.XLabel.Position = ax.XLabel.Position + [0 max(ax.YLim)*1.05 0];
+
 pause(0.05);
 % 3. save figure
 toSaveFigFile = fullfile(figDir, strcat(patient, '_broadbandfilter', ...
-    '_indivdual'));
+    '_withcfvar'));
 print(toSaveFigFile, '-dpng', '-r0')
 end

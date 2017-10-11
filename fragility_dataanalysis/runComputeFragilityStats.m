@@ -60,9 +60,9 @@ times = [30 30 65]; % pt 7
 % times = [30 40 15 25]; % pt 15
 
 
-    % set which pertrubation model to analyze
-    perturbationTypes = ['C', 'R'];
-    perturbationType = perturbationTypes(1);
+% set which pertrubation model to analyze
+perturbationTypes = ['C', 'R'];
+perturbationType = perturbationTypes(1);
 
 % end
 
