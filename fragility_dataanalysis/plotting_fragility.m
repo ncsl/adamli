@@ -378,10 +378,25 @@ XLim = ax.XLim; XLowerLim = XLim(1); XUpperLim = XLim(2);
 % ax.XTickLabel = xTicks; % set xticks and their labels
 
 xticks = ax.XTick - 1;
-if rem(info.timePoints(1, 2), 1) ~= 0 || rem(info.timePoints(2, 2), 1) ~= 0
-    xticklabel = info.timePoints(xticks, 2);
-else
-    xticklabel = info.timePoints(xticks, 2)/fs;
+try
+    
+    
+    if rem(info.rawtimePoints(1, 2), 1) ~= 0 || rem(info.rawtimePoints(2, 2), 1) ~= 0
+        seizTime = info.rawtimePoints(seizure_estart_mark, 2);
+        xticklabel = info.rawtimePoints(xticks, 2) - seizTime;
+    else
+        seizTime = info.rawtimePoints(seizure_estart_mark, 2)/fs;
+        xticklabel = info.rawtimePoints(xticks, 2)/fs - seizTime;
+    end
+catch e
+    disp(e)
+    if rem(info.timePoints(1, 2), 1) ~= 0 || rem(info.timePoints(2, 2), 1) ~= 0
+        seizTime = info.timePoints(seizure_estart_mark, 2);
+        xticklabel = info.timePoints(xticks, 2) - seizTime;
+    else
+        seizTime = info.timePoints(seizure_estart_mark, 2)/fs;
+        xticklabel = info.timePoints(xticks, 2)/fs - seizTime;
+    end
 end
 ax.XTick = xticks;
 ax.XTickLabel = xticklabel;

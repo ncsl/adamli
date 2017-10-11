@@ -66,6 +66,11 @@ typeTransform = 'fourier';
 rejectThreshold = 0.3;
 reference = '';
 
+% set which pertrubation model to analyze
+perturbationTypes = ['C', 'R'];
+perturbationType = perturbationTypes(1);
+
+
 % plotting parameters
 FONTSIZE = 20;
 
@@ -114,7 +119,7 @@ for iPat=1:length(patients)
     info = final_data.info;
     included_labels = info.all_labels;
        
-    features_struct = load(fullfile(figDir, 'interictal', strcat(patient, '_fragilitystats.mat')));
+    load(fullfile(figDir, 'interictal', strcat(patient, '_fragilitystats.mat')));
     features_struct.included_labels = included_labels;
     
 %     % create feature vector struct
