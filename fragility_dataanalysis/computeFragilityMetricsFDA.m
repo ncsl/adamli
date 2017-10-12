@@ -5,9 +5,9 @@ patients = {...,
 %     'pt2aslp1', 'pt2aslp2', ...
 %     'pt3aw1', ...
 %     'pt3aslp1', 'pt3aslp2', ...
-    {'pt1sz2', 'pt1sz3', 'pt1sz4'},...
+%     {'pt1sz2', 'pt1sz3', 'pt1sz4'},...
 %     {'pt2sz1' 'pt2sz3' , 'pt2sz4'}, ...
-%     {'pt3sz2' 'pt3sz4'}, ...
+    {'pt3sz2' 'pt3sz4'}, ...
 %     {'pt6sz3', 'pt6sz4', 'pt6sz5'},...
 %     {'pt7sz19', 'pt7sz21', 'pt7sz22'},...
 %     {'pt8sz1' 'pt8sz2' 'pt8sz3'},...
@@ -35,9 +35,9 @@ patients = {...,
 };
 
 times = {,...
-    [15, 12, 10], ... % pt1
+%     [15, 12, 10], ... % pt1
 %     [60, 60, 75],... % pt2
-%     [30, 20],... % pt3
+    [17, 17],... % pt3
 % 	[20, 20 20],... % pt 6
 % 	[30 30 65],... % pt 7
 % 	[10 10 10],... % pt 8
@@ -103,6 +103,8 @@ end
 
 
 for iGroup=1:length(patients)
+    close all
+    
     group = patients{iGroup};
     
     coded_times = times{iGroup};
@@ -261,7 +263,7 @@ for iGroup=1:length(patients)
         % weighted sums
         weight50_sum = 0.5*rowsum + 0.5*postcfvar_chan;
         weight85_sum = 0.85*rowsum + 0.15*postcfvar_chan;
-        weightnew_sum = 0.5*rowsum + 0.25*postcfvar_chan + 0.25*num_high_fragility;
+        weightnew_sum = 0.7*rowsum + 0.1*postcfvar_chan + 0.2*num_high_fragility;
         
         weight50_sum = weight50_sum ./ max(weight50_sum);
         weight85_sum = weight85_sum ./ max(weight85_sum);
@@ -321,9 +323,9 @@ for iGroup=1:length(patients)
     FONTSIZE = 16;
     
     figure;
-    subplot(221);
+    subplot(231);
     hold on; axes = gca; currfig = gcf;
-    bh = boxplot(rowsum_doa);
+    bh = boxplot(rowsum_doa, 'Labels', thresholds);
     xlabel(patient_id);
     ylabel(strcat('Rowsum Degree of Agreement (', metric, ')'));
 
@@ -335,9 +337,9 @@ for iGroup=1:length(patients)
         axes.YLim = [0, 1];
     end
     
-    subplot(222);
+    subplot(232);
     hold on; axes = gca; currfig = gcf;
-    bh = boxplot(postcfvar_doa);
+    bh = boxplot(postcfvar_doa, 'Labels', thresholds);
     xlabel(patient_id);
     ylabel(strcat('Post Coeffvar Degree of Agreement (', metric, ')'));
 
@@ -349,9 +351,9 @@ for iGroup=1:length(patients)
         axes.YLim = [0, 1];
     end
     
-    subplot(223);
+    subplot(233);
     hold on; axes = gca; currfig = gcf;
-    bh = boxplot(weight50_doa);
+    bh = boxplot(weight50_doa, 'Labels', thresholds);
     xlabel(patient_id);
     ylabel(strcat('50% weight Degree of Agreement (', metric, ')'));
 
@@ -363,11 +365,25 @@ for iGroup=1:length(patients)
         axes.YLim = [0, 1];
     end
     
-    subplot(224);
+    subplot(234);
     hold on; axes = gca; currfig = gcf;
-    bh = boxplot(weight85_doa);
+    bh = boxplot(weight85_doa, 'Labels', thresholds);
     xlabel(patient_id);
     ylabel(strcat('85% weight Degree of Agreement (', metric, ')'));
+
+    axes.FontSize = FONTSIZE-4;
+    if strcmp(metric, 'default')
+        axes.YLim = [-1, 1]; 
+        plot(axes.XLim, [0, 0], 'k--'); 
+    elseif strcmp(metric, 'jaccard')
+        axes.YLim = [0, 1];
+    end
+    
+     subplot(235);
+    hold on; axes = gca; currfig = gcf;
+    bh = boxplot(weightnew_doa, 'Labels', thresholds);
+    xlabel(patient_id);
+    ylabel(strcat('New weight Degree of Agreement (', metric, ')'));
 
     axes.FontSize = FONTSIZE-4;
     if strcmp(metric, 'default')
@@ -379,4 +395,9 @@ for iGroup=1:length(patients)
     currfig.Units = 'inches';
     currfig.PaperPosition = [0    0.6389   20.0000   10.5417];
     currfig.Position = [0    0.6389   20.0000   10.5417];
+    
+    pause(0.05);
+    % 3. save figure
+    toSaveFigFile = fullfile(figDir, strcat(patient, '_doa'));
+    print(toSaveFigFile, '-dpng', '-r0')
 end % loop through groups of patients
