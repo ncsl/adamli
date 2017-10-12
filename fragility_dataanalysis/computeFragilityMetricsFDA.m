@@ -35,7 +35,7 @@ patients = {...,
 };
 
 times = {,...
-    [15, 20, 10], ... % pt1
+    [15, 12, 10], ... % pt1
 %     [60, 60, 75],... % pt2
 %     [30, 20],... % pt3
 % 	[20, 20 20],... % pt 6
@@ -90,6 +90,8 @@ reference = '';
 perturbationTypes = ['C', 'R'];
 perturbationType = perturbationTypes(1);
 
+thresholds = [0.5, 0.6, 0.7, 0.8, 0.9, 0.95];
+
 figDir = fullfile(rootDir, '/figures', 'fragilityStats', ...
     strcat(filterType), ...
     strcat('perturbation', perturbationType, '_win', num2str(winSize), '_step', num2str(stepSize), '_radius', num2str(radius)));
@@ -98,10 +100,18 @@ if ~exist(figDir, 'dir')
     mkdir(figDir);
 end
 
+
+
 for iGroup=1:length(patients)
     group = patients{iGroup};
     
     coded_times = times{iGroup};
+    
+    rowsum_doa = zeros(length(group), length(thresholds));
+    postcfvar_doa = zeros(length(group), length(thresholds));
+    weight50_doa = zeros(length(group), length(thresholds));
+    weight85_doa = zeros(length(group), length(thresholds));
+    weightnew_doa = zeros(length(group), length(thresholds));
     
     for iPat=1:length(group)
         patient = group{iPat}
@@ -232,46 +242,141 @@ for iGroup=1:length(patients)
         % compute coefficient of var for ictal 
         postcfvar_chan = computecoeffvar(fragilityMat, seizureMarkStart, post_index);
 
-        %% only analyze up to seizuremarkend for all following statistics
-        fragilityMat = fragilityMat(:, 1:seizureMarkEnd);
-        minNormPertMat = minNormPertMat(:, 1:seizureMarkEnd);
-
-        % compute highest 10% fragile nodes then compute normalized rowsum
-        max_frag = max(fragilityMat,[], 2); % compute highest fragility during entire dataset
-        min_frag = min(fragilityMat,[], 2); % compute smallest fragility during entire dataset
-        high_frag = prctile(fragilityMat, 95, 2);
-
+        % compute rowsum for ictal 
         high_mask = fragilityMat;
         for ichan=1:num_channels
-            indices = high_mask(ichan,:) < high_frag(ichan);
+            indices = high_mask(ichan,:) < 0.85;
             high_mask(ichan,indices) = 0; 
         end
-        
-        % compute row sum of electrodes with only the highest 10% fragility
-        rowsum = nansum(high_mask, 2);
-        
-        % threshold at top 10% and include electrodes
-        [r, ~] = find(fragilityMat > 0.9)
-        ez_90thresh_set = included_labels(unique(r));
-        
-        % threshold at top 5% and include electrodes
-        [r, ~] = find(fragilityMat > 0.95)
-        ez_95thresh_set = included_labels(unique(r));
-        
-        % create feature vector struct
-        features_struct.patient = patient;
-        features_struct.cfvar_time = cfvar_time;
-        features_struct.cfvar_chan = cfvar_chan;
+        rowsum = computerowsum(high_mask, seizureMarkStart, post_index);
 
-        features_struct.precfvar_chan = precfvar_chan;
-        features_struct.postcfvar_chan = postcfvar_chan;
-        features_struct.rowsum = rowsum;
-        features_struct.ez_90thresh_set = ez_90thresh_set;
-        features_struct.ez_95thresh_set = ez_95thresh_set;
+        % get instances of high fragility
+        num_high_fragility = computenumberfragility(fragilityMat, seizureMarkStart, post_index);
         
-        features_struct.ezone_labels = ezone_labels;
-        features_struct.included_labels = included_labels;
+        % normalize rowsum and coeff var
+        num_high_fragility = num_high_fragility ./ max(num_high_fragility);
+        rowsum = rowsum ./ max(rowsum);
+        postcfvar_chan = postcfvar_chan ./ max(postcfvar_chan);
+        
+        % weighted sums
+        weight50_sum = 0.5*rowsum + 0.5*postcfvar_chan;
+        weight85_sum = 0.85*rowsum + 0.15*postcfvar_chan;
+        weightnew_sum = 0.5*rowsum + 0.25*postcfvar_chan + 0.25*num_high_fragility;
+        
+        weight50_sum = weight50_sum ./ max(weight50_sum);
+        weight85_sum = weight85_sum ./ max(weight85_sum);
+        weightnew_sum = weightnew_sum ./ max(weightnew_sum);
 
-        save(fullfile(figDir, strcat(patient, '_fragilitystats.mat')), 'features_struct');
+        %% only analyze up to seizuremarkend for all following statistics
+%         fragilityMat = fragilityMat(:, 1:seizureMarkEnd);
+%         minNormPertMat = minNormPertMat(:, 1:seizureMarkEnd);
+% 
+%         % compute highest 10% fragile nodes then compute normalized rowsum
+%         max_frag = max(fragilityMat,[], 2); % compute highest fragility during entire dataset
+%         min_frag = min(fragilityMat,[], 2); % compute smallest fragility during entire dataset
+%         high_frag = prctile(fragilityMat, 95, 2);
+% 
+%         high_mask = fragilityMat;
+%         for ichan=1:num_channels
+%             indices = high_mask(ichan,:) < high_frag(ichan);
+%             high_mask(ichan,indices) = 0; 
+%         end
+%         
+%         % compute row sum of electrodes with only the highest 10% fragility
+%         rowsum = nansum(high_mask, 2);
+%         
+%         % threshold at top 10% and include electrodes
+%         [r, ~] = find(fragilityMat > 0.9)
+%         ez_90thresh_set = included_labels(unique(r));
+%         
+%         % threshold at top 5% and include electrodes
+%         [r, ~] = find(fragilityMat > 0.95)
+%         ez_95thresh_set = included_labels(unique(r));
+%         
+%         % create feature vector struct
+%         features_struct.patient = patient;
+%         features_struct.cfvar_time = cfvar_time;
+%         features_struct.cfvar_chan = cfvar_chan;
+% 
+%         features_struct.precfvar_chan = precfvar_chan;
+%         features_struct.postcfvar_chan = postcfvar_chan;
+%         features_struct.rowsum = rowsum;
+%         features_struct.ez_90thresh_set = ez_90thresh_set;
+%         features_struct.ez_95thresh_set = ez_95thresh_set;
+%         
+%         features_struct.ezone_labels = ezone_labels;
+%         features_struct.included_labels = included_labels;
+% 
+%         save(fullfile(figDir, strcat(patient, '_fragilitystats.mat')), 'features_struct');
+
+        %% compute Degree of agreements
+        rowsum_doa(iPat, :) = compute_doa_threshold(rowsum, ezone_labels, included_labels, thresholds);
+        postcfvar_doa(iPat, :) = compute_doa_threshold(postcfvar_chan, ezone_labels, included_labels, thresholds);
+        weight50_doa(iPat, :) = compute_doa_threshold(weight50_sum, ezone_labels, included_labels, thresholds);
+        weight85_doa(iPat, :) = compute_doa_threshold(weight85_sum, ezone_labels, included_labels, thresholds);
+        weightnew_doa(iPat, :) = compute_doa_threshold(weightnew_sum, ezone_labels, included_labels, thresholds);
     end % loop through patient
+    
+    metric = 'default';
+    FONTSIZE = 16;
+    
+    figure;
+    subplot(221);
+    hold on; axes = gca; currfig = gcf;
+    bh = boxplot(rowsum_doa);
+    xlabel(patient_id);
+    ylabel(strcat('Rowsum Degree of Agreement (', metric, ')'));
+
+    axes.FontSize = FONTSIZE-4;
+    if strcmp(metric, 'default')
+        axes.YLim = [-1, 1]; 
+        plot(axes.XLim, [0, 0], 'k--'); 
+    elseif strcmp(metric, 'jaccard')
+        axes.YLim = [0, 1];
+    end
+    
+    subplot(222);
+    hold on; axes = gca; currfig = gcf;
+    bh = boxplot(postcfvar_doa);
+    xlabel(patient_id);
+    ylabel(strcat('Post Coeffvar Degree of Agreement (', metric, ')'));
+
+    axes.FontSize = FONTSIZE-4;
+    if strcmp(metric, 'default')
+        axes.YLim = [-1, 1]; 
+        plot(axes.XLim, [0, 0], 'k--'); 
+    elseif strcmp(metric, 'jaccard')
+        axes.YLim = [0, 1];
+    end
+    
+    subplot(223);
+    hold on; axes = gca; currfig = gcf;
+    bh = boxplot(weight50_doa);
+    xlabel(patient_id);
+    ylabel(strcat('50% weight Degree of Agreement (', metric, ')'));
+
+    axes.FontSize = FONTSIZE-4;
+    if strcmp(metric, 'default')
+        axes.YLim = [-1, 1]; 
+        plot(axes.XLim, [0, 0], 'k--'); 
+    elseif strcmp(metric, 'jaccard')
+        axes.YLim = [0, 1];
+    end
+    
+    subplot(224);
+    hold on; axes = gca; currfig = gcf;
+    bh = boxplot(weight85_doa);
+    xlabel(patient_id);
+    ylabel(strcat('85% weight Degree of Agreement (', metric, ')'));
+
+    axes.FontSize = FONTSIZE-4;
+    if strcmp(metric, 'default')
+        axes.YLim = [-1, 1]; 
+        plot(axes.XLim, [0, 0], 'k--'); 
+    elseif strcmp(metric, 'jaccard')
+        axes.YLim = [0, 1];
+    end
+    currfig.Units = 'inches';
+    currfig.PaperPosition = [0    0.6389   20.0000   10.5417];
+    currfig.Position = [0    0.6389   20.0000   10.5417];
 end % loop through groups of patients

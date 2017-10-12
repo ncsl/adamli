@@ -9,17 +9,22 @@ patients=(
 	# pt2sz1 pt2sz3 pt2sz4 
 	# pt3sz2 pt3sz4
 	# pt6sz3 pt6sz4 pt6sz5')
-	'LA01_ICTAL LA01_Inter
-    LA02_ICTAL LA02_Inter
-    LA03_ICTAL LA03_Inter
-    LA04_ICTAL LA04_Inter
-    LA05_ICTAL LA05_Inter
-    LA06_ICTAL LA06_Inter
-    LA08_ICTAL LA08_Inter
+	# 'LA01_ICTAL LA01_Inter
+    # LA02_ICTAL LA02_Inter
+    # LA03_ICTAL LA03_Inter
+    # LA04_ICTAL LA04_Inter
+    # LA05_ICTAL LA05_Inter
+    # LA06_ICTAL LA06_Inter
+    # LA08_ICTAL LA08_Inter
+    # LA09_ICTAL LA09_Inter
+    # LA10_ICTAL LA10_Inter
+    # LA11_ICTAL LA11_Inter
+    # LA15_ICTAL LA15_Inter
+    # LA16_ICTAL LA16_Inter')
+
+    'LA05_ICTAL LA05_Inter
     LA09_ICTAL LA09_Inter
-    LA10_ICTAL LA10_Inter
     LA11_ICTAL LA11_Inter
-    LA15_ICTAL LA15_Inter
     LA16_ICTAL LA16_Inter')
 
 	# 'pt1aslp1 pt1aslp2 pt1aw1 pt1aw2

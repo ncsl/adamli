@@ -403,13 +403,6 @@ ax.XTick = xticks;
 ax.XTickLabel = xticklabel;
 xlim([XLowerLim, XUpperLim+1]);
 
-%% PLOT second PLOT FOR COEFFICIENT OF VARIATION
-xrange = 1:size(matToPlot, 1);
-xrange(ezone_indices) = [];
-secfig = subplot(4,6, [6,12,18,24]);
-
-% coeffvar = computecoeffvar(matToPlot);
-
 % vector of hard coded time windows to go to for each patient
 time = times;
 try
@@ -424,6 +417,15 @@ post_index
 if isempty(post_index)
     patient
 end
+
+plot([post_index, post_index], ax.YLim, 'k-', 'LineWidth', 3, 'LineStyle', '--');
+
+%% PLOT second PLOT FOR COEFFICIENT OF VARIATION
+xrange = 1:size(matToPlot, 1);
+xrange(ezone_indices) = [];
+secfig = subplot(4,6, [6,12,18,24]);
+
+% coeffvar = computecoeffvar(matToPlot);
 
 % compute coefficient of var for ictal 
 coeffvar = computecoeffvar(matToPlot, seizureMarkStart, post_index);
