@@ -53,7 +53,7 @@ NUM_TASKS=1 		# number of tasks per CPU
 
 ## job reqs
 walltime=0:5:0
-partition=scavenger 	# debug, shared, unlimited, parallel, gpu, lrgmem, scavenger
+partition=shared 	# debug, shared, unlimited, parallel, gpu, lrgmem, scavenger
 qos=scavenger
 
 ## load in the modules for this run -> python, matlab, etc.

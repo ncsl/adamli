@@ -53,6 +53,7 @@ addpath(rootDir);
 %- 2 == adaptive filtering
 filterType = 'notchfilter';
 fs = 1000;
+perturbationTypes = ['C', 'R'];
 
 %% For Connectivity
 % save the merged ltv model into this filename
@@ -81,45 +82,58 @@ end
 matFiles = dir(fullfile(patTempDir, '*.mat'));
 matFileNames = natsort({matFiles.name});
 
+%- load info file
+info = load(fullfile(patTempDir, 'info', 'infoPertMat.mat'), 'info');
+info = info.info;
+
+perturbation_struct = struct();
+
 % get numWins needed
 % numWins = getNumWins(patient, winSize, stepSize);
 numWins = length(matFileNames);
+
+numWins = getNumWins(patient, winSize, stepSize);
 
 % construct the adjMats from the windows computed of adjMat
 for iMat=1:length(matFileNames)
     matFile = fullfile(patTempDir, matFileNames{iMat});
     data = load(matFile);
-
-     % extract the computed theta adjacency
-     theta_adj = data.theta_adj;
-         
-    % initialize matrix if first loop and then store results
-    if iMat==1
-        N = size(theta_adj, 1);
-        adjMats = zeros(numWins, N, N); 
-        fprintf('There are %f number of windows\n', numWins);
-        fprintf('There are %f number of mat files\n', length(matFileNames));
-    end
     
-    try
-        adjMats(iMat, :, :) = theta_adj;
-    catch e
-        disp(iMat);
-        parallelComputeConnectivity(patient, winSize, stepSize, iMat);
-        disp(size(theta_adj));
-        fprintf('\n');
-%         disp(size(adjMats));
+    % extract the computed theta adjacency
+    perturbation = data.perturbation_struct;
+    
+    for iPert=1:1%length(perturbationTypes)
+        perturbationType = perturbationTypes(iPert);
+        
+        % initialize matrix if first loop and then store results
+        if iMat==1
+            N = size(perturbation.(perturbationType).fragilityMat, 1);
+
+            %- initialize
+            perturbation_struct.(perturbationType).minNormPertMat = zeros(N, length(matFileNames));
+            perturbation_struct.(perturbationType).fragilityMat = zeros(N, length(matFileNames));
+            perturbation_struct.(perturbationType).del_table = cell(N, length(matFileNames));
+        end
+        
+        % extract the perturbation model and fragility matrix
+        perturbation_struct.(perturbationType).del_table(:, iMat) = perturbation.(perturbationType).del_table;
+        perturbation_struct.(perturbationType).minNormPertMat(:, iMat) = perturbation.(perturbationType).minNormPertMat;
+        perturbation_struct.(perturbationType).fragilityMat(:, iMat) = perturbation.(perturbationType).fragilityMat; 
     end
 end
 
-varinfo = whos('adjMats');
+%%- Create the structure for the pert model for this patient/seizure
+perturbation_struct.info = info;
+
+% determine how to save the results
+varinfo = whos('perturbation_struct');
 if varinfo.bytes < 2^31
-    save(fullfile(toSaveDir, fileName), 'adjMats');
+    save(fullfile(toSaveDir, fileName), 'perturbation_struct');
 else 
-    save(fullfile(toSaveDir, fileName), 'adjMats', '-v7.3');
+    save(fullfile(toSaveDir, fileName), 'perturbation_struct', '-v7.3');
 end
 
-fprintf('Successful merging!\n');
+fprintf('Successful merging of perturbation!\n');
 
 % Remove directories if successful
 delete(fullfile(patTempDir, 'info', '*.mat'));
