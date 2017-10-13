@@ -1,4 +1,4 @@
-% script: localMergeConnectivity
+% script: localMergePerturbation
 % By: Adam Li
 % Date: 6/12/17
 % Description: For a patient's computed connectivity matrix windows, merge
@@ -12,25 +12,24 @@
 % - vector of patients needed to compute
 
 patient='trev';
-patient='LA09_ICTAL';
 winSize=250;
 stepSize=125;
 reference='';
 
-% INITIALIZATION
-data directories to save data into - choose one
+%% INITIALIZATION
+% data directories to save data into - choose one
 eegRootDirHD = '/Volumes/NIL Pass/';
 eegRootDirHD = '/Volumes/ADAM LI/';
 eegRootDirServer = '/home/ali/adamli/fragility_dataanalysis/';                 % at ICM server 
 eegRootDirHome = '/Users/adam2392/Documents/adamli/fragility_dataanalysis/';   % at home macbook
-eegRootDirHome = 'test';
+% eegRootDirHome = 'test';
 eegRootDirJhu = '/home/WIN/ali39/Documents/adamli/fragility_dataanalysis/';    % at JHU workstation
 eegRootDirMarcctest = '/home-1/ali39@jhu.edu/work/adamli/fragility_dataanalysis/'; % at MARCC server
 eegRootDirMarcc = '/scratch/groups/ssarma2/adamli/fragility_dataanalysis/';
 
 % Determine which directory we're working with automatically
 if     ~isempty(dir(eegRootDirServer)), rootDir = eegRootDirServer;
-elseif ~isempty(dir(eegRootDirHD)), rootDir = eegRootDirHD;
+% elseif ~isempty(dir(eegRootDirHD)), rootDir = eegRootDirHD;
 elseif ~isempty(dir(eegRootDirHome)), rootDir = eegRootDirHome;
 elseif ~isempty(dir(eegRootDirJhu)), rootDir = eegRootDirJhu;
 elseif ~isempty(dir(eegRootDirMarcc)), rootDir = eegRootDirMarcc;
@@ -48,79 +47,85 @@ addpath(genpath(fullfile(rootDir, '/eeg_toolbox/')));
 addpath(rootDir);
 
 
-% Parameters HARD CODED
-% - 0 == no filtering
-% - 1 == notch filtering
-% - 2 == adaptive filtering
+%% Parameters HARD CODED
+%- 0 == no filtering
+%- 1 == notch filtering
+%- 2 == adaptive filtering
 filterType = 'notchfilter';
 fs = 1000;
+perturbationTypes = ['C', 'R'];
 
-% For Connectivity
+%% For Connectivity
 % save the merged ltv model into this filename
-fileName = strcat(patient, '_adjmats', reference, '.mat');
+fileName = strcat(patient, '_pertmats', reference, '.mat');
 
-% - get the temporary directory to look at
+%- get the temporary directory to look at
 tempDir = fullfile(rootDir, 'server/marccDev/matlab_lib/tempData/', ...
-                'connectivity', filterType, ...
+                'perturbation', filterType, ...
                 strcat('win', num2str(winSize), '_step', num2str(stepSize), '_freq', num2str(fs)));
 patTempDir = fullfile(rootDir, 'server/marccDev/matlab_lib/tempData/', ...
-                'connectivity', filterType, ...
+                'perturbation', filterType, ...
                 strcat('win', num2str(winSize), '_step', num2str(stepSize), '_freq', num2str(fs)), ...
                 patient, reference);
 
-% - set directory to save merged computed data
-toSaveDir = fullfile(dataDir, 'serverdata/adjmats', strcat(filterType), ...
-                strcat('win', num2str(winSize), '_step', num2str(stepSize), '_freq', num2str(fs)),...
-                patient, reference);
+patTempDir = fullfile(dataDir, 'temp_trev_pert');
+            
+%- set directory to save merged computed data
+toSaveDir = fullfile(dataDir, 'trev_pert');
              
-create directory if it does not exist
+% create directory if it does not exist
 if ~exist(toSaveDir, 'dir')
     mkdir(toSaveDir);
 end
 
-all the temp lti models per window
+% all the temp lti models per window
 matFiles = dir(fullfile(patTempDir, '*.mat'));
 matFileNames = natsort({matFiles.name});
 
-get numWins needed
-numWins = getNumWins(patient, winSize, stepSize);
+
+perturbation_struct = struct();
+
+% get numWins needed
+% numWins = getNumWins(patient, winSize, stepSize);
 numWins = length(matFileNames);
 
 % construct the adjMats from the windows computed of adjMat
 for iMat=1:length(matFileNames)
     matFile = fullfile(patTempDir, matFileNames{iMat});
     data = load(matFile);
-
-%      extract the computed theta adjacency
-     theta_adj = data.theta_adj;
-         
-%     initialize matrix if first loop and then store results
-    if iMat==1
-        N = size(theta_adj, 1);
-        adjMats = zeros(numWins, N, N); 
-        fprintf('There are %f number of windows\n', numWins);
-        fprintf('There are %f number of mat files\n', length(matFileNames));
-    end
     
-    try
-        adjMats(iMat, :, :) = theta_adj;
-    catch e
-        disp(iMat);
-        parallelComputeConnectivity(patient, winSize, stepSize, iMat);
-        disp(size(theta_adj));
-        fprintf('\n');
-        disp(size(adjMats));
+    % extract the computed theta adjacency
+    perturbation = data.perturbation_struct;
+    
+    for iPert=1:1%length(perturbationTypes)
+        perturbationType = perturbationTypes(iPert);
+        
+        % initialize matrix if first loop and then store results
+        if iMat==1
+            N = size(perturbation.(perturbationType).fragilityMat, 1);
+
+            %- initialize
+            perturbation_struct.(perturbationType).minNormPertMat = zeros(N, length(matFileNames));
+            perturbation_struct.(perturbationType).fragilityMat = zeros(N, length(matFileNames));
+            perturbation_struct.(perturbationType).del_table = cell(N, length(matFileNames));
+        end
+        
+        % extract the perturbation model and fragility matrix
+        perturbation_struct.(perturbationType).del_table(:, iMat) = perturbation.(perturbationType).del_table;
+        perturbation_struct.(perturbationType).minNormPertMat(:, iMat) = perturbation.(perturbationType).minNormPertMat;
+        perturbation_struct.(perturbationType).fragilityMat(:, iMat) = perturbation.(perturbationType).fragilityMat; 
     end
 end
 
-varinfo = whos('adjMats');
+% determine how to save the results
+varinfo = whos('perturbation_struct');
 if varinfo.bytes < 2^31
-    save(fullfile(toSaveDir, fileName), 'adjMats');
+    save(fullfile(toSaveDir, fileName), 'perturbation_struct');
 else 
-    save(fullfile(toSaveDir, fileName), 'adjMats', '-v7.3');
+    save(fullfile(toSaveDir, fileName), 'perturbation_struct', '-v7.3');
 end
 
-fprintf('Successful merging!\n');
+fprintf('Successful merging of perturbation!\n');
 
 % Remove directories if successful
 delete(fullfile(patTempDir, 'info', '*.mat'));

@@ -21,7 +21,7 @@ patients=(
 # 	4 4 4 4
 # 	12 12 12
 # 	12 12 12)
-numToRemove=$(seq 1 4)
+numToRemove=$(seq 1 10)
 echo $numToRemove
 
 # 01: Prompt user for input that runs the analysis
@@ -69,7 +69,7 @@ done
 echo $buff
 
 # Debug statement for reference type
-reference=
+reference=""
 if [ -z "$reference" ]
 then
       echo "\$var is empty"
