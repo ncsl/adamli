@@ -159,13 +159,13 @@ function generate_slurm_virtresection(patients, winSize, stepSize, radius, ...
                 fprintf('Merging computations.\n');
 
                 % set jobname 
-                job_name = strcat(patient, '_merge');
+                job_name = strcat(patient, '_merge_', num2str(numToRemove));
                 
                 % create command to run either using scavenger partition,
                 % or not
                 command = sprintf(strcat(basecommand, ...
-                            ' --job-name=%s run_merge_virtresection.sbatch --export=%s,%d,%d,%d,%d,%s'), ...
-                             job_name, patient, winSize, stepSize, JOBTYPE, radius, reference);
+                            ' --job-name=%s run_merge_virtresection.sbatch --export=%s,%d,%d,%d,%d,%s,%d'), ...
+                             job_name, patient, winSize, stepSize, JOBTYPE, radius, reference, numToRemove);
                 % print command to see and submit to unix shell
                 fprintf(command);
                 fprintf('\n\n');
@@ -181,9 +181,9 @@ function generate_slurm_virtresection(patients, winSize, stepSize, radius, ...
                 % jobname and array parameters for the batch command
                 Nbatch = numWins; % the number of jobs in job batch
                 if JOBTYPE == 1
-                    job_name = strcat(patient, '_ltv_batched');
+                    job_name = strcat(patient, '_ltv_', num2str(numToRemove));
                 else
-                    job_name = strcat(patient, '_pert_batched');
+                    job_name = strcat(patient, '_pert_', num2str(numToRemove));
                 end
 
                 % create command to run
