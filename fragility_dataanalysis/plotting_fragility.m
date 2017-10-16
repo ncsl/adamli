@@ -1,11 +1,12 @@
 function plotting_fragility(patients, winSize, stepSize, filterType, radius, typeConnectivity, typeTransform, rejectThreshold, reference, times)
 if nargin == 0
     % data parameters to find correct directory
-    patient = 'pt1sz2';
+    patient = 'LA09_ICTAL';
     patients = {,... 
-                'pt6sz3', 'pt6sz4', 'pt6sz5',...
-                'pt1aslp1', 'pt1aslp2', ...
-                'pt1aw1', 'pt1aw2', ...
+%                 'pt6sz3', 'pt6sz4', 'pt6sz5',...
+%                 'pt1aslp1', 'pt1aslp2', ...
+%                 'pt1aw1', 'pt1aw2', ...
+                'LA09_ICTAL',...
 %                 'JH103aslp1', ...
 %                 'JH103aw1', ...
 %                 'JH105aslp1', ...
@@ -26,7 +27,7 @@ if nargin == 0
     typeConnectivity = 'leastsquares';
     typeTransform = 'fourier';
     rejectThreshold = 0.3;
-    reference = 'avgref';
+    reference = '';
 end
     
 close all;
@@ -164,19 +165,22 @@ for iPat=1:length(patients)
     timeEnd_plot = round((timePoints(size(minPerturb_time_chan, 2), 2) - seizureStart)/fs);
     timeEnd_plot = round((timePoints(size(minPerturb_time_chan, 2), 2) - seizureStart + 1)/fs);
     
-    % get the metric for rejecting cells in heatmap
-    timeWinsToReject = broadbandfilter(patient, typeTransform, winSize, stepSize, filterType, spectDir);
-    timeWinsToReject(timeWinsToReject > rejectThreshold) = 1;
-    timeWinsToReject(timeWinsToReject <= rejectThreshold) = 0;
+    try
+        % get the metric for rejecting cells in heatmap
+        timeWinsToReject = broadbandfilter(patient, typeTransform, winSize, stepSize, filterType, spectDir);
+        timeWinsToReject(timeWinsToReject > rejectThreshold) = 1;
+        timeWinsToReject(timeWinsToReject <= rejectThreshold) = 0;
 
-    % OPTIONAL: apply broadband filter and get rid of time windows
-    % store original clim
-    clim = [min(fragilityMat(:)), max(fragilityMat(:))];
-    
-    % set time windows to -1
-    tempMat = fragilityMat;
-    tempMat(logical(timeWinsToReject)) = nan;
-    
+        % OPTIONAL: apply broadband filter and get rid of time windows
+        % store original clim
+        clim = [min(fragilityMat(:)), max(fragilityMat(:))];
+
+        % set time windows to -1
+        tempMat = fragilityMat;
+        tempMat(logical(timeWinsToReject)) = nan;
+    catch e
+        tempMat = fragilityMat;
+    end
     timeStart = 1;
     timeEnd = seizureMarkEnd;
     % OPTIONAL: only plot the preictal states
@@ -268,13 +272,14 @@ ax = fig_heatmap.CurrentAxes; % get the current axes
 % hold on; 
 % plot(c, r, 'w.') ;
 % set colormap axes to configure for the -1 value from broadband filter
-newmap = [1 1 1; jet(256)];
-ncol = size(newmap, 1);
-zpos = 1;
-newmap(zpos, :) = [0 0 0];
-colormap(newmap);
-clim = [-0.005, max(fragilityMat(:))];
-caxis(clim);
+
+% newmap = [1 1 1; jet(256)];
+% ncol = size(newmap, 1);
+% zpos = 1;
+% newmap(zpos, :) = [0 0 0];
+% colormap(newmap);
+% clim = [-0.005, max(fragilityMat(:))];
+% caxis(clim);
 
 hold on;
 set(fig_heatmap, 'Units', 'inches');
@@ -406,10 +411,10 @@ xlim([XLowerLim, XUpperLim+1]);
 % vector of hard coded time windows to go to for each patient
 time = times;
 try
-    timesz = info.rawtimePoints(seizureMarkStart, 2)/fs;
+    timesz = info.rawtimePoints(int16(seizureMarkStart), 2)/fs;
     post_index = find(info.rawtimePoints(:, 2)/fs == (timesz + time));
 catch e
-    timesz = info.timePoints(seizureMarkStart, 2)/fs;
+    timesz = info.timePoints(int16(seizureMarkStart), 2)/fs;
     post_index = find(info.timePoints(:, 2)/fs == (timesz + time));
 end
 seizureMarkStart

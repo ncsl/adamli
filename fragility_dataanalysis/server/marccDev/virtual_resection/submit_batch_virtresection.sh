@@ -51,7 +51,7 @@ NUM_GPUS=1			# number of GPUS (need 6 procs per gpu)
 
 ## job reqs
 if [[ "${RUNCONNECTIVITY}" -eq 1 ]]; then
-	walltime=0:10:0
+	walltime=0:15:0
 else
 	walltime=0:10:0					# the walltime for each computation
 fi
