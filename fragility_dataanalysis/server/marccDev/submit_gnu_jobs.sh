@@ -36,27 +36,26 @@ patients=(
 	# pt10sz1 pt10sz2 pt10sz3
 	# pt17sz1 pt17sz2 pt17sz3')
 
-	'LA01_ICTAL LA01_Inter
-    LA02_ICTAL LA02_Inter
-    LA03_ICTAL LA03_Inter
-    LA04_ICTAL LA04_Inter
-    LA05_ICTAL LA05_Inter
-    LA06_ICTAL LA06_Inter
-    LA08_ICTAL LA08_Inter
-    LA09_ICTAL LA09_Inter
-    LA10_ICTAL LA10_Inter
-    LA11_ICTAL LA11_Inter
-    LA15_ICTAL LA15_Inter
-    LA16_ICTAL LA16_Inter')
+	'LA03_ICTAL LA03_Inter
+	LA05_ICTAL LA05_Inter
+	LA09_ICTAL LA09_Inter
+	LA10_ICTAL
+	LA11_ICTAL LA11_Inter
+	LA16_ICTAL')
 
-	# 'JH101sz1 JH101sz2 JH101sz3 JH101sz4
-	# JH102sz1 JH102sz2 JH102sz3 JH102sz4 JH102sz5 JH102sz6
-	# JH103sz1 JH103sz2 JH103sz3
-	# JH104sz1 JH104sz2 JH104sz3
-	# JH105sz1 JH105sz2 JH105sz3 JH105sz4 JH105sz5
-	# JH106sz1 JH106sz2 JH106sz3 JH106sz4 JH106sz5 JH106sz6
-	# JH107sz1 JH107sz2 JH107sz3 JH107sz4 JH107sz5 JH107sz6 JH107sz7 JH107sz8 JH107sz8 JH107sz9
-	# JH108sz1 JH108sz2 JH108sz3 JH108sz4 JH108sz5 JH108sz6 JH108sz7
+	# 'LA01_ICTAL LA01_Inter
+    # LA02_ICTAL LA02_Inter
+    # LA03_ICTAL LA03_Inter
+    # LA04_ICTAL LA04_Inter
+    # LA05_ICTAL LA05_Inter
+    # LA06_ICTAL LA06_Inter
+    # LA08_ICTAL LA08_Inter
+    # LA09_ICTAL LA09_Inter
+    # LA10_ICTAL LA10_Inter
+    # LA11_ICTAL LA11_Inter
+    # LA15_ICTAL LA15_Inter
+    # LA16_ICTAL LA16_Inter')
+
 
 # 01: Prompt user for input that runs the analysis
 echo "Begin analysis." # print beginning statement
@@ -83,12 +82,12 @@ NUM_GPUS=1			# number of GPUS (need 6 procs per gpu)
 
 ## job reqs
 if [[ "${RUNCONNECTIVITY}" -eq 1 ]]; then
-	walltime=1:00:00
+	walltime=5:00:00
 else
-	walltime=1:00:00					# the walltime for each computation
+	walltime=5:00:00					# the walltime for each computation
 fi
 partition=scavenger 	# debug, shared, unlimited, parallel, gpu, lrgmem, scavenger
-partition=shared
+partition=parallel
 qos=scavenger
 
 ## load in the modules for this run -> python, matlab, etc.
@@ -116,7 +115,7 @@ fi
 echo $reference
 
 ## 02: Call patient shell script for each patient
-matlab -logfile /home-1/ali39@jhu.edu/work/adamli/fragility_dataanalysis/server/marccDev/_log/job$1.txt -nojvm -nodisplay -nosplash -r "\
+matlab -logfile /home-1/ali39@jhu.edu/work/adamli/fragility_dataanalysis/server/marccDev/_gnulogs/job$1.txt -nojvm -nodisplay -nosplash -r "\
 	generate_slurm_gnu('$buff', $winSize, $stepSize, $radius,\
 	'$partition', '$walltime', $NUM_NODES, $NUM_PROCSPERNODE,\
 	 $RUNCONNECTIVITY, '$reference'); exit"

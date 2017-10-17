@@ -135,7 +135,7 @@ for iPert=1:length(perturbationTypes)
     perturb_args.w_space = w_space;
     perturb_args.radius = radius;
 
-    [minNormPert, del_vecs, ERRORS] = minNormPerturbation(adjMat, perturb_args);
+    [minNormPert, del_vecs, del_freqs, ERRORS] = minNormPerturbation(adjMat, perturb_args);
 
     % store results
     minNormPerturbMat = minNormPert;
@@ -151,6 +151,7 @@ for iPert=1:length(perturbationTypes)
     % initialize struct to save
     perturbation_struct.(perturbationType) = struct();
     perturbation_struct.(perturbationType).del_table = del_table;
+    perturbation_struct.(perturbationType).del_freqs = del_freqs;
     perturbation_struct.(perturbationType).minNormPertMat = minNormPerturbMat;
     perturbation_struct.(perturbationType).fragilityMat = fragilityMat;
 end

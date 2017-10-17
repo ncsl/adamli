@@ -1,3 +1,4 @@
+
 function plotting_fragility(patients, winSize, stepSize, filterType, radius, typeConnectivity, typeTransform, rejectThreshold, reference, times)
 if nargin == 0
     % data parameters to find correct directory
@@ -286,8 +287,9 @@ set(fig_heatmap, 'Units', 'inches');
 % fig_heatmap.Position = [17.3438         0   15.9896   11.6771];
 fig_heatmap.Position = [0.0417 0.6667 21.0694 13.0139];
 
+pause(0.005);
 % 2. label axes
-FONTSIZE = 20;
+FONTSIZE = 13;
 PLOTARGS = struct();
 PLOTARGS.YAXFontSize = 9;
 PLOTARGS.FONTSIZE = FONTSIZE;
@@ -311,7 +313,7 @@ labelHeatmap(ax, fig_heatmap,clinicalIndices, PLOTARGS);
 
 % move ylabel to the left a bit
 ylab = ax.YLabel;
-ylab.Position = ylab.Position + [-105 0 0]; % move ylabel to the left
+ylab.Position = ylab.Position + [-110 0 0]; % move ylabel to the left
 
 % label the colorbar
 colorArgs = struct();
@@ -332,7 +334,7 @@ for i=1:length(seizureEndIndices)-1
     plot([seizureMarkEnd seizureMarkEnd], ax.YLim, 'k', 'LineWidth', 3, 'LineStyle', '--')
 end
 
-
+pause(0.005);
 %% Set X - Axis
 XLim = ax.XLim; XLowerLim = XLim(1); XUpperLim = XLim(2);
 % % Preictal: set the x axis in seconds and correct times

@@ -21,17 +21,17 @@ function generate_slurm_gnu(patients, winSize, stepSize, radius, ...
         winSize=250;
         stepSize=125;
         radius=1.5;
-        PARTITION='scavenger';
-        WALLTIME='0:30:0';
+        PARTITION='shared';
+        WALLTIME='5:00:0';
         NUMNODES=1;
         NUM_PROCS=1;
         JOBTYPE=1; % RUNCONNECTIVITY
-        MERGE = 1;
+        MERGE = 0;
         if strcmp(PARTITION, 'scavenger')
             QOS='scavenger';
         end
-        reference = 'avgref';
-        numWins=1000;
+        reference = '';
+%         numWins=1000;
     end
     if strcmp(PARTITION, 'scavenger')
         QOS='scavenger';
@@ -81,7 +81,7 @@ function generate_slurm_gnu(patients, winSize, stepSize, radius, ...
     walltime = WALLTIME;
     numNodes = NUMNODES;
     numCPUs = NUM_PROCS;
-    numTasks = 1;
+    numTasks = 24;
     
     % initialize filter
     filterType = 'notchfilter';
@@ -155,11 +155,11 @@ function generate_slurm_gnu(patients, winSize, stepSize, radius, ...
         elseif JOBTYPE==0
             tempDir = fullfile(rootDir, 'server/marccDev/matlab_lib/tempData/', ...
                 'perturbation', filterType, ...
-                strcat('win', num2str(winSize), '_step', num2str(stepSize), '_freq', num2str(fs)), ...
+                strcat('win', num2str(winSize), '_step', num2str(stepSize), '_freq', num2str(fs), '_radius', num2str(radius)), ...
                 patient, reference);
             
             resultsDir = fullfile(rootDir, 'serverdata/pertmats', strcat(filterType), ...
-                strcat('win', num2str(winSize), '_step', num2str(stepSize), '_freq', num2str(fs)),...
+                strcat('win', num2str(winSize), '_step', num2str(stepSize), '_freq', num2str(fs), '_radius', num2str(radius)),...
                 patient, reference);
         end
         
@@ -178,7 +178,7 @@ function generate_slurm_gnu(patients, winSize, stepSize, radius, ...
                 % merge...
                 mergepartition='debug';
                 QOS = 'scavenger';
-                walltime='0:10:0';
+                walltime='0:20:0';
                 mergecommand = sprintf(strcat('export radius=%f; export RUNCONNECTIVITY=%d; export patient=%s; export winSize=%d; export stepSize=%d; export reference=%s;\n', ...
                             'sbatch --time=%s --partition=%s --qos=%s --nodes=%d --ntasks-per-node=%d --cpus-per-task=%d'), ...
                              radius, JOBTYPE, patient, winSize, stepSize, reference,...
@@ -200,6 +200,19 @@ function generate_slurm_gnu(patients, winSize, stepSize, radius, ...
         else
             fprintf('Computing all windows for %s.\n', patient);
 
+%             parallel=sprintf(' parallel --delay .2 -j 24 --joblog _gnulogs/%s --resume ', log_file);
+%         
+%             if JOBTYPE == 1
+%                 sprintf(strcat(basecommand, ...
+%                     parallel, ...
+%                     'cd(''matlab_lib'');', ...
+%                     'parallelComputeConnectivity('$patient', $winSize, $stepSize, '$reference', {1}); exit;\"" ::: $(seq 1 $numWins)
+% else
+% 	$parallel "matlab -nojvm -nodisplay -nodesktop -nosplash -r \"
+% 		cd('matlab_lib');\
+% 		parallelComputePerturbation('$patient', $winSize, $stepSize, $radius, '$reference', {1}); exit;\"" ::: $(seq 1 $numWins)
+% fi
+            
             % create command to run
             command = sprintf(strcat(basecommand, ...
                         ' gnu_run_jobs.sbatch --export=%s,%d,%d,%d,%d,%s,%d'), ...

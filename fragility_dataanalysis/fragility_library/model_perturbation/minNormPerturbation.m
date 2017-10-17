@@ -15,7 +15,7 @@
 % i={1,..,N}
 % - LOGERROR = some errror message
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-function [minPerturbation, del_table, LOGERROR] = minNormPerturbation(A, pertArgs)%, clinicalLabels)
+function [minPerturbation, del_table, del_freqs, LOGERROR] = minNormPerturbation(A, pertArgs)%, clinicalLabels)
 if nargin == 0
     patient_id = 'pt1';
     seizure_id = 'sz2';
@@ -49,6 +49,7 @@ minPerturbation = zeros(N,1); % initialize minPerturbation Matrix
 % store min delta for each electrode X w
 del_size = zeros(N, length(w_space));   % store min_norms
 del_table = cell(N, 1);                 % store min_norm vector for each node
+del_freqs = cell(N, 1);                % store min freqs
 
 %%- grid search over sigma and w for each row to determine, what is
 %%- the min norm perturbation
@@ -128,23 +129,37 @@ for iNode=1:N % 1st loop through each electrode
     % find index of min norm perturbation for this node
     min_index = find(del_size(iNode,:) == min(del_size(iNode, :)));
     
+    % store the minimum norm vector and frequency
     if length(min_index) == 1
         % store the min-norm perturbation vector for this node
         del_table(iNode) = del_vecs(min_index);
+        
+        curr_sigma = sigma(min_index);
+        curr_w = w_space(min_index);
+        lambda = curr_sigma + 1i*curr_w;
+        
+        del_freqs(iNode) = lambda;
     else
         temp = del_vecs(min_index);
 
         for i=1:length(min_index)
             vec = reshape(temp{i}, N, 1);
             
+            curr_sigma = sigma(min_index(i));
+            curr_w = w_space(min_index(i));
+            lambda = curr_sigma + 1i*curr_w;
+        
             if i==1
                 to_insert = vec;
+                to_insert_lambdas = lambda;
             else
                 to_insert = cat(2, to_insert, vec);
+                to_insert_lambdas = [to_insert_lambdas; lambda];
             end
         end
         
         del_table(iNode) = {to_insert};
+        del_freqs(iNode) = {to_insert_lambdas};
     end
     
     % test on the min norm perturbation vector

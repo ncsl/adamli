@@ -5,16 +5,16 @@ patients = {...,
 %     'pt2aslp1', 'pt2aslp2', ...
 %     'pt3aw1', ...
 %     'pt3aslp1', 'pt3aslp2', ...
-%     {'pt1sz2', 'pt1sz3', 'pt1sz4'},...
-%     {'pt2sz1' 'pt2sz3' , 'pt2sz4'}, ...
-%     {'pt3sz2' 'pt3sz4'}, ...
-%     {'pt6sz3', 'pt6sz4', 'pt6sz5'},...
-%     {'pt7sz19', 'pt7sz21', 'pt7sz22'},...
-%     {'pt8sz1' 'pt8sz2' 'pt8sz3'},...
-%     {'pt10sz1','pt10sz2' 'pt10sz3'}, ...
-%     {'pt13sz1', 'pt13sz2', 'pt13sz3', 'pt13sz5'},...
-%     {'pt14sz1' 'pt14sz2' 'pt14sz3'}, ...
-%     {'pt15sz1' 'pt15sz2' 'pt15sz3' 'pt15sz4'},...
+    {'pt10sz1','pt10sz2' 'pt10sz3'}, ...
+    {'pt13sz1', 'pt13sz2', 'pt13sz3', 'pt13sz5'},...
+    {'pt14sz1' 'pt14sz2' 'pt14sz3'}, ...
+    {'pt15sz1' 'pt15sz2' 'pt15sz3' 'pt15sz4'},...
+        {'pt1sz2', 'pt1sz3', 'pt1sz4'},...
+    {'pt2sz1' 'pt2sz3' , 'pt2sz4'}, ...
+    {'pt3sz2' 'pt3sz4'}, ...
+    {'pt6sz3', 'pt6sz4', 'pt6sz5'},...
+    {'pt7sz19', 'pt7sz21', 'pt7sz22'},...
+    {'pt8sz1' 'pt8sz2' 'pt8sz3'},...
 
 %     {'pt6sz3', 'pt6sz4', 'pt6sz5'},...
 %     {'pt7sz19', 'pt7sz21', 'pt7sz22'},...
@@ -35,8 +35,7 @@ patients = {...,
 %     {'LA04_ICTAL'}, ...'LA04_Inter', ...
 %     {'LA06_ICTAL'}, ...'LA06_Inter', ...
 %     {'LA08_ICTAL'}, ...'LA08_Inter', ...
-%     'LA10_ICTAL', ...'LA10_Inter', ...
-    {'LA15_ICTAL'}, ...'LA15_Inter', ...
+%     {'LA15_ICTAL'}, ...'LA15_Inter', ...
 %     'LA16_ICTAL', ...'LA16_Inter', ...
 
 %     'Pat2sz1p', 'Pat2sz2p', 'Pat2sz3p', ...
@@ -60,20 +59,21 @@ times = {,...
 %     [10], ... % LA04
 %     [10], ... % LA06
 %     [15],... % LA08
-    [20], ... % LA15
+%     [20], ... % LA15
 %     [10, 10, 10],... % JH103
 %     [13, 13, 13, 13, 13], ... % JH105
-%     [15, 12, 10], ... % pt1
-%     [60, 60, 75],... % pt2
-%     [17, 17],... % pt3
-%     [12 12 12],... % pt 8
-%     [7 7 7 7],... % pt13
-%     [20 30 10 30],...
-% 	[10, 10 10],... % pt 6
-% 	[10 30 10],... % pt 7
-% 	[50 50 50],... % pt 10
-% 	[60 55 55],... % pt 14
+	[50 30 50],... % pt 10
+    [7 7 7 7],... % pt13
+	[60 55 55],... % pt 14
+    [20 30 10 30],... % pt15
+        [15, 12, 10], ... % pt1
+    [60, 60, 75],... % pt2
+    [17, 17],... % pt3
+	[10, 10 10],... % pt 6
+	[10 30 10],... % pt 7
+    [12 12 12],... % pt 8
     }; % pt 15
+
 %% Set Root Directories
 % data directories to save data into - choose one
 eegRootDirHD = '/Volumes/NIL Pass/';
@@ -130,9 +130,10 @@ if ~exist(figDir, 'dir')
     mkdir(figDir);
 end
 
-
 doa_group = zeros(length([patients{:}]), length(thresholds));
 group_ind = 1;
+
+doa_mat = struct();
     
 for iGroup=1:length(patients)
     close all
@@ -279,7 +280,7 @@ for iGroup=1:length(patients)
 
         % compute coefficient of var for ictal 
         postcfvar_chan = computecoeffvar(fragilityMat, seizureMarkStart, post_index);
-
+        
         % compute rowsum for ictal 
         high_mask = fragilityMat;
         for ichan=1:num_channels
@@ -288,12 +289,21 @@ for iGroup=1:length(patients)
         end
         rowsum = computerowsum(high_mask, seizureMarkStart, post_index);
 
+        % compute rowsum for preictal
+        try
+            prerowsum = computerowsum(high_mask, seizureMarkStart - (post_index-seizureMarkStart), seizureMarkStart);
+        catch e
+            disp(e)
+            prerowsum = computerowsum(high_mask, seizureMarkStart - (post_index-seizureMarkStart)/2, seizureMarkStart);
+        end
+        
         % get instances of high fragility
         num_high_fragility = computenumberfragility(fragilityMat, seizureMarkStart, post_index);
         
         % normalize rowsum and coeff var
         num_high_fragility = num_high_fragility ./ max(num_high_fragility);
         rowsum = rowsum ./ max(rowsum);
+        prerowsum = prerowsum ./ max(prerowsum);
         postcfvar_chan = postcfvar_chan ./ max(postcfvar_chan);
         
         % weighted sums
@@ -305,246 +315,23 @@ for iGroup=1:length(patients)
         weight85_sum = weight85_sum ./ max(weight85_sum);
         weightnew_sum = weightnew_sum ./ max(weightnew_sum);
 
-        %% only analyze up to seizuremarkend for all following statistics
-%         fragilityMat = fragilityMat(:, 1:seizureMarkEnd);
-%         minNormPertMat = minNormPertMat(:, 1:seizureMarkEnd);
-% 
-%         % compute highest 10% fragile nodes then compute normalized rowsum
-%         max_frag = max(fragilityMat,[], 2); % compute highest fragility during entire dataset
-%         min_frag = min(fragilityMat,[], 2); % compute smallest fragility during entire dataset
-%         high_frag = prctile(fragilityMat, 95, 2);
-% 
-%         high_mask = fragilityMat;
-%         for ichan=1:num_channels
-%             indices = high_mask(ichan,:) < high_frag(ichan);
-%             high_mask(ichan,indices) = 0; 
-%         end
-%         
-%         % compute row sum of electrodes with only the highest 10% fragility
-%         rowsum = nansum(high_mask, 2);
-%         
-%         % threshold at top 10% and include electrodes
-%         [r, ~] = find(fragilityMat > 0.9)
-%         ez_90thresh_set = included_labels(unique(r));
-%         
-%         % threshold at top 5% and include electrodes
-%         [r, ~] = find(fragilityMat > 0.95)
-%         ez_95thresh_set = included_labels(unique(r));
-%         
-%         % create feature vector struct
-%         features_struct.patient = patient;
-%         features_struct.cfvar_time = cfvar_time;
-%         features_struct.cfvar_chan = cfvar_chan;
-% 
-%         features_struct.precfvar_chan = precfvar_chan;
-%         features_struct.postcfvar_chan = postcfvar_chan;
-%         features_struct.rowsum = rowsum;
-%         features_struct.ez_90thresh_set = ez_90thresh_set;
-%         features_struct.ez_95thresh_set = ez_95thresh_set;
-%         
-%         features_struct.ezone_labels = ezone_labels;
-%         features_struct.included_labels = included_labels;
-% 
-%         save(fullfile(figDir, strcat(patient, '_fragilitystats.mat')), 'features_struct');
-
         %% compute Degree of agreements
 %         ezone_labels = resection_labels;
         rowsum_doa(iPat, :) = compute_doa_threshold(rowsum, ezone_labels, included_labels, thresholds, metric);
+        prerowsum_doa(iPat,:) = compute_doa_threshold(prerowsum, ezone_labels, included_labels, thresholds, metric);
         postcfvar_doa(iPat, :) = compute_doa_threshold(postcfvar_chan, ezone_labels, included_labels, thresholds, metric);
         weight50_doa(iPat, :) = compute_doa_threshold(weight50_sum, ezone_labels, included_labels, thresholds, metric);
         weight85_doa(iPat, :) = compute_doa_threshold(weight85_sum, ezone_labels, included_labels, thresholds, metric);
         weightnew_doa(iPat, :) = compute_doa_threshold(weightnew_sum, ezone_labels, included_labels, thresholds, metric);
-    end % loop through patient
     
-    doa_group(group_ind:group_ind+iPat-1, :) = weightnew_doa;
-    group_ind = group_ind + iPat;
-    
-    FONTSIZE = 16;
-    
-    %% BOX PLOT
-%     figure;
-%     subplot(231);
-%     hold on; axes = gca; currfig = gcf;
-%     bh = boxplot(rowsum_doa, 'Labels', thresholds);
-%     xlabel(patient_id);
-%     ylabel(strcat('Rowsum Degree of Agreement (', metric, ')'));
-% 
-%     axes.FontSize = FONTSIZE-4;
-%     if strcmp(metric, 'default')
-%         axes.YLim = [-1, 1]; 
-%         plot(axes.XLim, [0, 0], 'k--'); 
-%     elseif strcmp(metric, 'jaccard')
-%         axes.YLim = [0, 1];
-%     end
-%     
-%     subplot(232);
-%     hold on; axes = gca; currfig = gcf;
-%     bh = boxplot(postcfvar_doa, 'Labels', thresholds);
-%     xlabel(patient_id);
-%     ylabel(strcat('Post Coeffvar Degree of Agreement (', metric, ')'));
-% 
-%     axes.FontSize = FONTSIZE-4;
-%     if strcmp(metric, 'default')
-%         axes.YLim = [-1, 1]; 
-%         plot(axes.XLim, [0, 0], 'k--'); 
-%     elseif strcmp(metric, 'jaccard')
-%         axes.YLim = [0, 1];
-%     end
-%     
-%     subplot(233);
-%     hold on; axes = gca; currfig = gcf;
-%     bh = boxplot(weight50_doa, 'Labels', thresholds);
-%     xlabel(patient_id);
-%     ylabel(strcat('50% weight Degree of Agreement (', metric, ')'));
-% 
-%     axes.FontSize = FONTSIZE-4;
-%     if strcmp(metric, 'default')
-%         axes.YLim = [-1, 1]; 
-%         plot(axes.XLim, [0, 0], 'k--'); 
-%     elseif strcmp(metric, 'jaccard')
-%         axes.YLim = [0, 1];
-%     end
-%     
-%     subplot(234);
-%     hold on; axes = gca; currfig = gcf;
-%     bh = boxplot(weight85_doa, 'Labels', thresholds);
-%     xlabel(patient_id);
-%     ylabel(strcat('85% weight Degree of Agreement (', metric, ')'));
-% 
-%     axes.FontSize = FONTSIZE-4;
-%     if strcmp(metric, 'default')
-%         axes.YLim = [-1, 1]; 
-%         plot(axes.XLim, [0, 0], 'k--'); 
-%     elseif strcmp(metric, 'jaccard')
-%         axes.YLim = [0, 1];
-%     end
-%     
-%      subplot(235);
-% %     figure;
-%     hold on; axes = gca; currfig = gcf;
-%     bh = boxplot(weightnew_doa, 'Labels', thresholds);
-%     xlabel(patient_id);
-%     ylabel(strcat('New weight Degree of Agreement (', metric, ')'));
-% 
-%     axes.FontSize = FONTSIZE-4;
-%     if strcmp(metric, 'default')
-%         axes.YLim = [-1, 1]; 
-%         plot(axes.XLim, [0, 0], 'k--'); 
-%     elseif strcmp(metric, 'jaccard')
-%         axes.YLim = [0, 1];
-%     end
-%     currfig.Units = 'inches';
-%     currfig.PaperPosition = [0    0.6389   20.0000   10.5417];
-%     currfig.Position = [0    0.6389   20.0000   10.5417];
-%     
-%     pause(0.05);
-%     % 3. save figure
-%     toSaveFigFile = fullfile(figDir, strcat(patient, '_doa'));
-%     print(toSaveFigFile, '-dpng', '-r0')
-%     
-    %% line PLOT
-    figure;
-    subplot(231);
-    hold on; axes = gca; currfig = gcf;
-    bh = plot(rowsum_doa, 'k-');
-    xlabel(patient_id);
-    ylabel(strcat('Rowsum Degree of Agreement (', metric, ')'));
-
-    axes.FontSize = FONTSIZE-4;
-    if strcmp(metric, 'default')
-        axes.YLim = [-1, 1]; 
-        plot(axes.XLim, [0, 0], 'k--'); 
-    elseif strcmp(metric, 'jaccard')
-        axes.YLim = [0, 1];
-    end
-    
-    subplot(232);
-    hold on; axes = gca; currfig = gcf;
-    bh = plot(postcfvar_doa);
-    xlabel(patient_id);
-    ylabel(strcat('Post Coeffvar Degree of Agreement (', metric, ')'));
-
-    axes.FontSize = FONTSIZE-4;
-    if strcmp(metric, 'default')
-        axes.YLim = [-1, 1]; 
-        plot(axes.XLim, [0, 0], 'k--'); 
-    elseif strcmp(metric, 'jaccard')
-        axes.YLim = [0, 1];
-    end
-    
-    subplot(233);
-    hold on; axes = gca; currfig = gcf;
-    bh = plot(weight50_doa);
-    xlabel(patient_id);
-    ylabel(strcat('50% weight Degree of Agreement (', metric, ')'));
-
-    axes.FontSize = FONTSIZE-4;
-    if strcmp(metric, 'default')
-        axes.YLim = [-1, 1]; 
-        plot(axes.XLim, [0, 0], 'k--'); 
-    elseif strcmp(metric, 'jaccard')
-        axes.YLim = [0, 1];
-    end
-    
-    subplot(234);
-    hold on; axes = gca; currfig = gcf;
-    bh = plot(weight85_doa);
-    xlabel(patient_id);
-    ylabel(strcat('85% weight Degree of Agreement (', metric, ')'));
-
-    axes.FontSize = FONTSIZE-4;
-    if strcmp(metric, 'default')
-        axes.YLim = [-1, 1]; 
-        plot(axes.XLim, [0, 0], 'k--'); 
-    elseif strcmp(metric, 'jaccard')
-        axes.YLim = [0, 1];
-    end
-    
-    subplot(235);
-    hold on; axes = gca; currfig = gcf;
-    bh = plot(weightnew_doa);
-    xlabel(patient_id);
-    ylabel(strcat('New weight Degree of Agreement (', metric, ')'));
-
-    axes.FontSize = FONTSIZE-4;
-    if strcmp(metric, 'default')
-        axes.YLim = [-1, 1]; 
-        plot(axes.XLim, [0, 0], 'k--'); 
-    elseif strcmp(metric, 'jaccard')
-        axes.YLim = [0, 1];
-    end
-    currfig.Units = 'inches';
-    currfig.PaperPosition = [0    0.6389   20.0000   10.5417];
-    currfig.Position = [0    0.6389   20.0000   10.5417];
-    
-    pause(0.05);
-    % 3. save figure
-    toSaveFigFile = fullfile(figDir, strcat(patient, '_doa'));
-    print(toSaveFigFile, '-dpng', '-r0')
+        doa_mat.(patient) = struct();
+        doa_mat.(patient).rowsum = rowsum_doa(iPat, :);
+        doa_mat.(patient).postcfvar = postcfvar_doa(iPat, :);
+        doa_mat.(patient).prerowsum = prerowsum_doa(iPat, :);
+        doa_mat.(patient).weight85 = weight85_doa(iPat,:);
+        doa_mat.(patient).weightsum = weightnew_doa(iPat,:);
+    end % loop through patient    
 end % loop through groups of patients
 
+save(fullfile(figDir, 'CC_doas.mat'), 'doa_mat');
 
-figure;
-hold on; axes = gca; currfig = gcf;
-bh = notBoxPlot(doa_group);
-% bh = boxplot(doa_group, 'Labels', thresholds);
-xlabel('Thresholds On Weighted Sum');
-ylabel(strcat('Degree of Agreement (', metric, ')'));
-title('Failure for CC');
-
-axes.FontSize = FONTSIZE-4;
-hold on;
-if strcmp(metric, 'default')
-    axes.YLim = [-1, 1]; 
-    plot(axes.XLim, [0, 0], 'k--'); 
-elseif strcmp(metric, 'jaccard')
-    axes.YLim = [0, 1];
-end
-currfig.Units = 'inches';
-currfig.PaperPosition = [0    0.6389   20.0000   10.5417];
-currfig.Position = [0    0.6389   20.0000   10.5417];
-
-pause(0.05);
-% 3. save figure
-toSaveFigFile = fullfile(figDir, strcat('failure', '_cc_', metric));
-print(toSaveFigFile, '-dpng', '-r0')

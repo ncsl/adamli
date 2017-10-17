@@ -3,6 +3,10 @@ if strcmp(patient_id, 'LA01')
     included_channels = [1 3 7:8 11:13 17:19 22:26 32 34:35 37 42 50:51 58 ... 
                         62:65 70:72 77:81 84:97 100:102 105:107 110:114 120:121 130:131];
 
+    % including X'4
+    included_channels = [1 3 7:8 11:13 17:19 22:26 32 34:35 37 42 50:55 58 ... 
+                        62:65 70:72 77:81 84:97 100:102 105:107 110:114 120:121 130:131];
+                    
     onset_electrodes = {'Y''1', 'X''4'};
     earlyspread_labels = {};
     latespread_labels = {};

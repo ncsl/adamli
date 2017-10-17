@@ -16,7 +16,7 @@ if nargin == 0 % testing purposes
     iTask = 2;
     numProcs = 1;
     numWins = 103;
-    reference = 'avgref';
+    reference = '';
 end
 fprintf('Inside parallel computing connectivity...\n');
 

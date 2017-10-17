@@ -16,9 +16,9 @@ end
         fragility_set = included_labels(thresh_metric_ind);
         
         % get rid of grid electrodes in fragility set
-%         gridindsC = strfind(fragility_set, 'G');
-%         gridinds = find(not(cellfun('isempty', gridindsC))); 
-%         fragility_set(gridinds) = [];
+        gridindsC = strfind(fragility_set, 'X');
+        gridinds = find(not(cellfun('isempty', gridindsC))); 
+        fragility_set(gridinds) = [];
         
         % compute doa 
         D = degreeOfAgreement(fragility_set, ezone_labels, included_labels, metric); 
