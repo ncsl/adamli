@@ -36,12 +36,12 @@ patients=(
 	# pt10sz1 pt10sz2 pt10sz3
 	# pt17sz1 pt17sz2 pt17sz3')
 
-	# 'LA03_ICTAL LA03_Inter
-	'LA05_ICTAL LA05_Inter')
-	# LA09_ICTAL LA09_Inter
-	# LA10_ICTAL
-	# LA11_ICTAL LA11_Inter
-	# LA16_ICTAL')
+	'LA03_ICTAL LA03_Inter
+	LA05_ICTAL LA05_Inter
+	LA09_ICTAL LA09_Inter
+	LA10_ICTAL
+	LA11_ICTAL LA11_Inter
+	LA16_ICTAL')
 
 	# 'LA01_ICTAL LA01_Inter
     # LA02_ICTAL LA02_Inter
@@ -82,9 +82,9 @@ NUM_GPUS=1			# number of GPUS (need 6 procs per gpu)
 
 ## job reqs
 if [[ "${RUNCONNECTIVITY}" -eq 1 ]]; then
-	walltime=5:00:00
+	walltime=10:00:00
 else
-	walltime=5:00:00					# the walltime for each computation
+	walltime=10:00:00					# the walltime for each computation
 fi
 partition=scavenger 	# debug, shared, unlimited, parallel, gpu, lrgmem, scavenger
 partition=parallel
