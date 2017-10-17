@@ -51,7 +51,6 @@ filterType = 'notchfilter';
 perturbationTypes = ['C', 'R'];
 w_space = linspace(-radius, radius, 51);
 sigma = sqrt(radius^2 - w_space.^2); % move to the unit circle 1, for a plethora of different radial frequencies
-b = [0; 1];                          % initialize for perturbation computation later
 
 % add to sigma and w to create a whole circle search
 w_space = [w_space, w_space(2:end-1)];
@@ -65,12 +64,12 @@ fileName = strcat(patient, '_pertmats', reference, '_', num2str(iTask));
     
 %% DEFINE CHANNELS AND CLINICAL ANNOTATIONS
 % set patientID and seizureID
-[~, patient_id, seizure_id, seeg] = splitPatient(patient);
+[~, patient_id, seizure_id, ~] = splitPatient(patient);
 
 %- Edit this file if new patients are added.
-[included_channels, ezone_labels, earlyspread_labels,...
-    latespread_labels, resection_labels, fs, ...
-    center] ...
+[~, ~, ~,...
+    ~, ~, fs, ...
+    ~] ...
             = determineClinicalAnnotations(patient_id, seizure_id);
 
 tempDir = fullfile(rootDir, 'server/marccDev/matlab_lib/tempData/', ...

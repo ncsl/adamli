@@ -48,8 +48,9 @@ sigma = sqrt(radius^2 - w_space.^2); % move to the unit circle 1, for a plethora
 b = [0; 1];                          % initialize for perturbation computation later
 
 % add to sigma and w to create a whole circle search
-w_space = [w_space, w_space];
-sigma = [-sigma, sigma];
+w_space = [w_space, w_space(2:end-1)];
+sigma = [-sigma, sigma(2:end-1)];
+
 %% DEFINE CHANNELS AND CLINICAL ANNOTATIONS
 % set patientID and seizureID
 [~, patient_id, seizure_id, seeg] = splitPatient(patient);
@@ -134,6 +135,7 @@ for iPert=1:length(perturbationTypes)
     perturb_args.perturbationType = perturbationType;
     perturb_args.w_space = w_space;
     perturb_args.radius = radius;
+    perturb_args.sigma = sigma;
 
     [minNormPert, del_vecs, del_freqs, ERRORS] = minNormPerturbation(adjMat, perturb_args);
 
