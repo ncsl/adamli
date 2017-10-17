@@ -189,6 +189,9 @@ if iTask == 1
     info.stepSize = stepSize;
     info.numSamplesInWin = numSampsInWin;
     info.numSamplesInStep = numSampsInStep;
+    info.included_channels = included_channels;
+    info.frequency_sampling = frequency_sampling;
+    
     info.rawtimePoints = timePoints;
     temptimePoints = timePoints;
     temptimePoints(:, 1) = timePoints(:, 1) - 1;
@@ -196,8 +199,6 @@ if iTask == 1
         seizure_eonset_ms = 0;
     end
     info.timePoints = (temptimePoints - seizure_eonset_ms * frequency_sampling / 1000) ./ frequency_sampling;
-    info.included_channels = included_channels;
-    info.frequency_sampling = frequency_sampling;
     info.FILTER_TYPE = filterType;
 
     if ~exist(fullfile(tempDir, 'info'), 'dir')

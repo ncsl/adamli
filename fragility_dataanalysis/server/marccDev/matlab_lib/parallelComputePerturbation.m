@@ -15,11 +15,13 @@ if nargin == 0 % testing purposes
     numProcs = 1;
     radius = 1.5;
     numWins = 103;
-    reference = 'avgref';
+    reference = '';
+    iTask = 100;
 end
 
 %% INITIALIZATION
 % data directories to save data into - choose one
+eegRootDirHD = '/Volumes/ADAM LI/';
 eegRootDirServer = '/home/ali/adamli/fragility_dataanalysis/';                 % at ICM server 
 eegRootDirHome = '/Users/adam2392/Documents/adamli/fragility_dataanalysis/';   % at home macbook
 eegRootDirJhu = '/home/WIN/ali39/Documents/adamli/fragility_dataanalysis/';    % at JHU workstation
@@ -30,6 +32,10 @@ if     ~isempty(dir(eegRootDirServer)), rootDir = eegRootDirServer;
 elseif ~isempty(dir(eegRootDirHome)), rootDir = eegRootDirHome;
 elseif ~isempty(dir(eegRootDirJhu)), rootDir = eegRootDirJhu;
 elseif ~isempty(dir(eegRootDirMarcc)), rootDir = eegRootDirMarcc;
+else   error('Neither Work nor Home EEG directories exist! Exiting'); end
+
+if     ~isempty(dir(eegRootDirServer)), dataDir = eegRootDirServer;
+elseif ~isempty(dir(eegRootDirHD)), dataDir = eegRootDirHD;
 else   error('Neither Work nor Home EEG directories exist! Exiting'); end
 
 addpath(genpath(fullfile(rootDir, '/fragility_library/')));
@@ -48,8 +54,8 @@ sigma = sqrt(radius^2 - w_space.^2); % move to the unit circle 1, for a plethora
 b = [0; 1];                          % initialize for perturbation computation later
 
 % add to sigma and w to create a whole circle search
-w_space = [w_space, w_space];
-sigma = [-sigma, sigma];
+w_space = [w_space, w_space(2:end-1)];
+sigma = [-sigma, sigma(2:end-1)];
 
 % results of the ltv model 
 ltvmodel_filename = strcat(patient, '_adjmats', reference, '_leastsquares.mat');
@@ -78,7 +84,7 @@ end
 %% Read in LTV Model Data
 fprintf('Loading connectivity data...');
 %- load the adjacency computed data
-connDir = fullfile(rootDir, 'serverdata/adjmats', strcat(filterType), ...
+connDir = fullfile(dataDir, 'serverdata/adjmats', strcat(filterType), ...
                 strcat('win', num2str(winSize), '_step', num2str(stepSize), '_freq', num2str(fs)),...
                 patient, reference);
 data = load(fullfile(connDir, ltvmodel_filename));
@@ -94,22 +100,22 @@ if iTask == 1
     info.latespread_labels = adjmat_struct.latespread_labels;
     info.resection_labels = adjmat_struct.resection_labels;
     info.all_labels = adjmat_struct.all_labels;
+    info.included_channels = adjmat_struct.included_channels;
+    info.frequency_sampling = adjmat_struct.frequency_sampling;
+    
     info.seizure_estart_ms = adjmat_struct.seizure_estart_ms;       % store in ms
     info.seizure_eend_ms = adjmat_struct.seizure_eend_ms;
     info.seizure_cstart_ms = adjmat_struct.seizure_cstart_ms;
     info.seizure_coffset_ms = adjmat_struct.seizure_cend_ms;
     info.seizure_estart_mark = adjmat_struct.seizure_estart_mark;
     info.seizure_eend_mark = adjmat_struct.seizure_eend_mark;
-    info.engelscore = adjmat_struct.engelscore;
-    info.outcome = adjmat_struct.outcome;
     info.winSize = adjmat_struct.winSize;
     info.stepSize = adjmat_struct.stepSize;
     info.numSamplesInWin = adjmat_struct.numSamplesInWin;
     info.numSamplesInStep = adjmat_struct.numSamplesInStep;
     info.rawtimePoints = adjmat_struct.rawtimePoints;
     info.timePoints = adjmat_struct.timePoints;
-    info.included_channels = adjmat_struct.included_channels;
-    info.frequency_sampling = adjmat_struct.frequency_sampling;
+
     info.FILTER = adjmat_struct.FILTER;
 
     if ~exist(fullfile(tempDir, 'info'), 'dir')
@@ -139,6 +145,7 @@ for iPert=1:length(perturbationTypes)
     perturb_args.perturbationType = perturbationType;
     perturb_args.w_space = w_space;
     perturb_args.radius = radius;
+    perturb_args.sigma = sigma;
 
     [minNormPert, del_vecs, del_freqs, ERRORS] = minNormPerturbation(adjMat, perturb_args);
 

@@ -34,12 +34,13 @@ LOGERROR='';
 perturbationType = pertArgs.perturbationType;
 w_space = pertArgs.w_space;
 radius = pertArgs.radius;
-sigma = sqrt(radius^2 - w_space.^2); % move to the unit circle 1, for a plethora of different radial frequencies
+sigma = pertArgs.sigma;
+% sigma = sqrt(radius^2 - w_space.^2); % move to the unit circle 1, for a plethora of different radial frequencies
 b = [0; -1];                          % initialize for perturbation computation later
 
 % add to sigma and w to create a whole circle search
-w_space = [w_space, w_space];
-sigma = [-sigma, sigma];
+% w_space = [w_space, w_space];
+% sigma = [-sigma, sigma];
 
 N = size(A,1); % get the Number of Electrodes
 minPerturbation = zeros(N,1); % initialize minPerturbation Matrix
@@ -138,7 +139,7 @@ for iNode=1:N % 1st loop through each electrode
         curr_w = w_space(min_index);
         lambda = curr_sigma + 1i*curr_w;
         
-        del_freqs(iNode) = lambda;
+        del_freqs{iNode} = lambda;
     else
         temp = del_vecs(min_index);
 
