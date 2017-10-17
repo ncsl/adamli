@@ -47,7 +47,7 @@ function x = computeLeastSquares(eegMat, observationVector, OPTIONS)
         H = zeros(length(observationVector), num_chans^2);
     catch e
         disp(e)
-        H = sparse(length(observationVector, num_chans^2));
+        H = sparse(length(observationVector), num_chans^2));
     end
     
     % step 2: build up H matrix
