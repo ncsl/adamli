@@ -7,33 +7,48 @@
 % 3. Show the minimum norm perturbation
 close all;
 
-%% add paths/library
-%% Set Working Directories
-% set working directory
+%% INITIALIZATION
 % data directories to save data into - choose one
-eegRootDirServer = '/home/ali/adamli/fragility_dataanalysis/';                      % ICM SERVER
-% eegRootDirHome = '/Users/adam2392/Documents/MATLAB/Johns Hopkins/NINDS_Rotation'; % home
-eegRootDirHome = '/Volumes/NIL_PASS/';                                              % external HD
-eegRootDirJhu = '/home/WIN/ali39/Documents/adamli/fragility_dataanalysis/';         % at work - JHU
-
+eegRootDirHD = '/Volumes/ADAM LI/';
+eegRootDirServer = '/home/ali/adamli/fragility_dataanalysis/';                 % at ICM server 
+eegRootDirHome = '/Users/adam2392/Documents/adamli/fragility_dataanalysis/';   % at home macbook
+eegRootDirJhu = '/home/WIN/ali39/Documents/adamli/fragility_dataanalysis/';    % at JHU workstation
+% eegRootDirMarcc = '/home-1/ali39@jhu.edu/work/adamli/fragility_dataanalysis/'; % at MARCC server
+eegRootDirMarcc = '/scratch/groups/ssarma2/adamli/fragility_dataanalysis/';
 % Determine which directory we're working with automatically
 if     ~isempty(dir(eegRootDirServer)), rootDir = eegRootDirServer;
 elseif ~isempty(dir(eegRootDirHome)), rootDir = eegRootDirHome;
 elseif ~isempty(dir(eegRootDirJhu)), rootDir = eegRootDirJhu;
-else   error('Neither Work nor Home EEG directories exist! Exiting.'); end
+elseif ~isempty(dir(eegRootDirMarcc)), rootDir = eegRootDirMarcc;
+else   error('Neither Work nor Home EEG directories exist! Exiting'); end
+
+if     ~isempty(dir(eegRootDirServer)), dataDir = eegRootDirServer;
+elseif ~isempty(dir(eegRootDirHD)), dataDir = eegRootDirHD;
+else   error('Neither Work nor Home EEG directories exist! Exiting'); end
 
 addpath(genpath(fullfile(rootDir, '/fragility_library/')));
 addpath(genpath(fullfile(rootDir, '/eeg_toolbox/')));
 addpath(rootDir);
 
+%% Clinical Annotations
 center = 'nih';
 patient = 'pt1sz2';
-dataDir = fullfile(rootDir, 'data', center, patient);
+
+% set patientID and seizureID
+[~, patient_id, seizure_id, seeg] = splitPatient(patient);
+
+%- Edit this file if new patients are added.
+[included_channels, ezone_labels, earlyspread_labels,...
+    latespread_labels, resection_labels, fs, ...
+    center] ...
+            = determineClinicalAnnotations(patient_id, seizure_id);
+
+dataDir = fullfile(dataDir, 'data', center, patient);
 
 %- plotting options
 FONTSIZE = 16;
 
-%% create simulated matrices
+%% Create simulated matrices & Initialize Parameters
 % create a random matrix
 P = 3; % the size of the random matrix
 A = randn(P,P);
@@ -49,21 +64,23 @@ conjev = sqrt(0.99-imagev^2);
 L = diag([0.99 + 0*i, conjev+imagev*i, conjev-imagev*i]);
 adjMat = A*L*inv(A);
 
-radius = 1.5;
-pertArgs.perturbationType = 'C';
-pertArgs.w_space = linspace(-radius, radius, 101);
-pertArgs.radius = radius;
+% set perturbation parameters
+perturbationTypes = ['C', 'R'];
+perturbationType = perturbationTypes(1);
+radius = 1.25;
 
-perturbationType = pertArgs.perturbationType;
-w_space = pertArgs.w_space;
-radius = pertArgs.radius;
-
+w_space = linspace(-radius, radius, 51);
 sigma = sqrt(radius^2 - w_space.^2); % move to the unit circle 1, for a plethora of different radial frequencies
+% add to sigma and w to create a whole circle search
+w_space = [w_space, w_space(2:end-1)];
+sigma = [-sigma, sigma(2:end-1)];
 b = [0; -1];                          % initialize for perturbation computation later
 
-% add to sigma and w to create a whole circle search
-w_space = [w_space, w_space];
-sigma = [-sigma, sigma];
+perturb_args = struct();
+perturb_args.perturbationType = perturbationType;
+perturb_args.w_space = w_space;
+perturb_args.radius = radius;
+perturb_args.sigma = sigma;
 
 % figure;
 % plot(sigma, w_space, 'k*')
@@ -71,150 +88,12 @@ sigma = [-sigma, sigma];
 %%- Compute Minimum Norm Perturbation
 [N, ~] = size(adjMat);
 
-minPerturbation = zeros(N,1); % initialize minPerturbation Matrix
-
-% store min delta for each electrode X w
-del_size = zeros(N, length(w_space));   % store min_norms
-del_table = cell(N, 1);                 % store min_norm vector for each node
-
 %%- grid search over sigma and w for each row to determine, what is
 %%- the min norm perturbation
 A = adjMat;
-for iNode=1:N % 1st loop through each electrode
-    ek = [zeros(iNode-1, 1); 1; zeros(N-iNode,1)]; % unit column vector at this node
-   
-    del_vecs = cell(length(w_space), 1);       % store all min_norm vectors
-    for iW=1:length(w_space) % 2nd loop through frequencies
-        curr_sigma = sigma(iW);
-        curr_w = w_space(iW);
-        lambda = curr_sigma + 1i*curr_w;
-        
-        % compute row, or column perturbation
-        % A\b => Ax = b => x = inv(A)*b
-        if (perturbationType == 'R')
-            C = (A-lambda*eye(N))\ek;
-        elseif (perturbationType == 'C')
-            C = ek'/(A-lambda*eye(N)); 
-%             C = (A-lambda*eye(N))'\ek;
-        end
 
-        %- extract real and imaginary components
-        %- create B vector of constraints
-        Cr = real(C);  Ci = imag(C);
-        if strcmp(perturbationType, 'R')
-            B = [Ci, Cr]';
-        else
-            B = [Ci; Cr];
-%             B = [Ci, Cr]';
-        end
-        
-        % Paper way of computing this?...
-        Cr = real(C);  Ci = imag(C);
-        Cr = Cr'; Ci = Ci';
-        if (norm(Ci) < tol)
-            B = eye(N);
-        else
-            B = null(orth(Ci)'); 
-        end
-        
-        del = -(B*inv(B'*B)*B'*Cr)/(Cr'*B*inv(B'*B)*B'*Cr);
-        
-        % compute perturbation necessary
-        if w_space(iW) ~= 0
-%             del = B'*inv(B*B')*b;
-        else
-%             del = -C./(norm(C)^2);
-            
-             % test to make sure things are working...
-%             if strcmp(perturbationType, 'C')
-%                 del = reshape(del, N, 1);
-%                 temp = del * ek';
-%             else
-%                 temp = ek*del';
-%             end
-%             test = A + temp;
-%             
-%             iW
-%             lambda
-%             iNode
-%             eig(test)
-%             figure;
-%             plot(real(eig(test)), imag(eig(test)), 'ko'); hold on;
-%             th = 0:pi/50:2*pi;
-%             r = radius; x = 0; y = 0;
-%             xunit = r * cos(th) + x;
-%             yunit = r * sin(th) + y;
-%             h = plot(xunit, yunit, 'b-'); 
-%             axes = gca;
-%             plot(get(axes, 'XLim'), [0 0], 'k');
-%             plot([0 0], get(axes, 'YLim'), 'k');
-%             if isempty(find(abs(radius - abs(eig(test))) < 1e-8))
-%                 disp('Max eigenvalue is not displaced to correct location')
-%             end
-%             close all
-        end
-        
-        % store the l2-norm of the perturbation vector
-        del_size(iNode, iW) = norm(del); 
-        
-        % store the perturbation vector at this specified radii point
-        del_vecs{iW} = del;
-    end
-
-    %%- 03: Store Results min norm perturbation
-    % find index of min norm perturbation for this node
-    min_index = find(del_size(iNode,:) == min(del_size(iNode, :)));
-    
-    if length(min_index) == 1
-        % store the min-norm perturbation vector for this node
-        del_table(iNode) = {reshape(del_vecs{min_index}, N, 1)};
-    else
-        temp = del_vecs(min_index);
-
-        for i=1:length(min_index)
-            vec = reshape(temp{i}, N, 1);
-            
-            if i==1
-                to_insert = vec;
-            else
-                to_insert = cat(2, to_insert, vec);
-            end
-        end
-        
-        del_table(iNode) = {to_insert};
-    end
-    
-    min_index
-    % test on the min norm perturbation vector
-    if strcmp(perturbationType, 'C')
-        del = reshape(del_vecs{min_index}, N, 1);
-        pertTest = del * ek';
-    else
-        del = reshape(del_vecs{min_index}, 1, N);
-        pertTest = ek*del_vecs{min_index};
-    end
-    test = A + pertTest;
-    figure;
-    %- plot radius circle
-    th = 0:pi/50:2*pi;
-    r = radius; x = 0; y = 0;
-    xunit = r * cos(th) + x;
-    yunit = r * sin(th) + y;
-    h = plot(xunit, yunit, 'b-'); hold on;
-    axes = gca;
-    plot(get(axes, 'XLim'), [0 0], 'k');
-    plot([0 0], get(axes, 'YLim'), 'k');
-    plot(real(eig(test)), imag(eig(test)), 'ko')
-    
-    % store the min-norm perturbation for this node
-    if length(min_index) > 1
-        if del_size(iNode, min_index(1)) == del_size(iNode, min_index(2))
-            minPerturbation(iNode) = del_size(iNode, min_index(1));
-        end
-    else
-        minPerturbation(iNode) = del_size(iNode, min_index);
-    end
-end % end of loop through channels\
+% perform minimum norm perturbation
+[minPerturbation, del_table, del_freqs, ~] = minNormPerturbation(A, perturb_args)%, clinicalLabels)
 
 %% Plotting
 figure;
