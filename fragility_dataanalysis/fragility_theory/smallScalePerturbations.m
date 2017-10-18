@@ -126,15 +126,11 @@ for iSim=1:numSims
     % - use least square computation
     theta = computeLeastSquares(tempeeg, b, OPTIONS);
     fprintf('Finished least squares');
-    theta_adj = reshape(theta, numChans, numChans)';    % reshape fills in columns first, so must transpose
+    adjMat = reshape(theta, numChans, numChans)';    % reshape fills in columns first, so must transpose
     
-    adjMat = squeeze(computeConnectivity(eeg(randIndices, randTime:randTime+winSize-1), adj_args));
-
-    [N, ~] = size(adjMat);
-
     % perform minimum norm perturbation
-    [minPerturbation, del_table, del_freqs, ~] = minNormPerturbation(adjMat, perturb_args)%, clinicalLabels)
-
+    [minPerturbation, del_table, del_freqs, del_size] = minNormPerturbation(adjMat, perturb_args);%, clinicalLabels)
+    
     all_del_sizes(iSim,:,:) = del_size;
 end
 
@@ -152,7 +148,7 @@ colors = {'k', 'b', 'r'};
 temp = squeeze(mean(all_del_sizes, 1));
 tempstd = squeeze(std(all_del_sizes, 0, 1));
 % figure;
-for i=1:N
+for i=1:numChans
     figure;
     %     shadedErrorBar(1:length(w_space), temp(i,:), tempstd(i,:));
     plot(1:length(w_space), temp(i,:), 'Color', colors{i}); hold on;

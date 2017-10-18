@@ -15,7 +15,7 @@
 % i={1,..,N}
 % - LOGERROR = some errror message
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-function [minPerturbation, del_table, del_freqs, LOGERROR] = minNormPerturbation(A, pertArgs)%, clinicalLabels)
+function [minPerturbation, del_table, del_freqs, del_size] = minNormPerturbation(A, pertArgs)%, clinicalLabels)
 if nargin == 0
     patient_id = 'pt1';
     seizure_id = 'sz2';
@@ -27,8 +27,6 @@ if nargin == 0
     included_channels = 0;
 end
 
-tol = 1e-7;
-LOGERROR='';
 %% 0: Extract Vars and Initialize Parameters
 %- Note here: radius = sqrt(w_space^2 + sigma^2) for discrete time system
 perturbationType = pertArgs.perturbationType;
@@ -88,42 +86,12 @@ for iNode=1:N % 1st loop through each electrode
         else
             del = -C./(norm(C)^2);
         end
-
-%         % Paper way of computing this?...
-%         Cr = real(C);  Ci = imag(C);
-%         Cr = Cr'; Ci = Ci';
-%         if (norm(Ci) < tol)
-%             B = eye(N);
-%         else
-%             B = null(orth([Ci])'); 
-%         end
-%         
-%         del = -(B*inv(B'*B)*B'*Cr)/(Cr'*B*inv(B'*B)*B'*Cr);
         
         % store the l2-norm of the perturbation vector
         del_size(iNode, iW) = norm(del); 
         
         % store the perturbation vector at this specified radii point
         del_vecs{iW} = del;
-        
-        % test to make sure things are working...
-%         if strcmp(perturbationType, 'C')
-%             del = del';
-%             try
-%                 temp = del*ek';
-%             catch e
-% %                 disp(e)
-%                 temp = del'*ek'; 
-%             end
-%         else
-%             temp = ek*del';
-%         end
-%         test = A + temp;
-%         plot(real(eig(test)), imag(eig(test)), 'ko')
-% %         if isempty(find(abs(radius - abs(eig(test))) < 1e-8))
-% %             disp('Max eigenvalue is not displaced to correct location')
-% %         end
-%         close all
     end
 
     %%- 03: Store Results min norm perturbation
@@ -162,15 +130,6 @@ for iNode=1:N % 1st loop through each electrode
         del_table(iNode) = {to_insert};
         del_freqs(iNode) = {to_insert_lambdas};
     end
-    
-    % test on the min norm perturbation vector
-%     if strcmp(perturbationType, 'C')
-%         pertTest = del_vecs{min_index} * ek';
-%     else
-%         pertTest = ek*del_vecs{min_index};
-%     end
-%     test = A + pertTest;
-%     plot(real(eig(test)), imag(eig(test)), 'ko')
     
     % store the min-norm perturbation for this node
     if length(min_index) > 1
