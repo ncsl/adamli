@@ -111,9 +111,11 @@ function generate_slurm_gnu(patients, winSize, stepSize, radius, ...
             % set jobname 
             job_name = strcat(patient, '_merge');
         end    
-        
-        log_file = strcat('runtask_', patient, '.log');
-        
+        if JOBTYPE == 1
+            log_file = strcat('runtask_', patient, '.log');
+        else
+            log_file = strcat('runtask_', patient, '_pert.log');
+        end
         % initialize command
         basecommand = sprintf(strcat('export radius=%f; export RUNCONNECTIVITY=%d; ', ...
                 'export patient=%s; export winSize=%d; export stepSize=%d; export reference=%s;  export numWins=%d; export log_file=%s; \n', ...
