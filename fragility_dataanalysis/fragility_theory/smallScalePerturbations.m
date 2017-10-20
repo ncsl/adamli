@@ -104,18 +104,18 @@ numSampsInWin = winSize * frequency_sampling / 1000;
 numSampsInStep = stepSize * frequency_sampling / 1000;
 numWins = floor(size(eeg, 2) / numSampsInStep - numSampsInWin/numSampsInStep + 1);
 
-
 P = 3; % size of simulation
 numSims = 200;
-all_del_sizes = zeros(numSims, P, length(w_space));
+all_del_sizes = zeros(numSims, P, length(w_space)); % store all min del vectors for all wspace
+all_adjmats = zeros(numSims, P, P);                 % store all adjmats used
 for iSim=1:numSims
     randIndices = randsample(size(eeg,1), P);
     randTime = randsample(seizure_eonset_ms-winSize, 1);
     
     % get the window of data to compute adjacency
     tempeeg = eeg(randIndices, randTime:randTime+winSize-1);
-
-    [numChans, numSamps] = size(tempeeg);
+    
+    numChans = size(tempeeg, 1);
     
     % Perform Least Squares Computations
     fprintf('About to start least squares\n');
@@ -132,16 +132,16 @@ for iSim=1:numSims
     [minPerturbation, del_table, del_freqs, del_size] = minNormPerturbation(adjMat, perturb_args);%, clinicalLabels)
     
     all_del_sizes(iSim,:,:) = del_size;
+    all_adjmats(iSim, :, :) = adjMat;
 end
 
-for i=1:numSims
-    for j=1:N
-        testindex = find(all_del_sizes(i,j,:) == min(all_del_sizes(i,j,:)));
-        if testindex ~= 152 && testindex ~= 51
-            disp(['Wrong at ', num2str(i), ' ', num2str(j)]);
-        end
-    end
-end
+test = reshape(all_del_sizes, numSims*P, length(w_space));
+% create variables for plotting
+avg_minnorm = nanmean(reshape(all_del_sizes, numSims*P, length(w_space)), 1);
+var_minnorm = nanvar(reshape(all_del_sizes, numSims*P, length(w_space)), [], 1);
+
+figure;
+shadedErrorBar(1:length(w_space), avg_minnorm, var_minnorm, 'ko');
 
 colors = {'k', 'b', 'r'};
 

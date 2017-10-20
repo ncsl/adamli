@@ -130,20 +130,6 @@ function generate_slurm_gnu(patients, winSize, stepSize, radius, ...
                          num2str(walltime), partition, QOS, memNode, numNodes, numTasks, numCPUs, job_name); 
         end
         
-%                basecommand = sprintf(strcat('export radius=%f; export RUNCONNECTIVITY=%d; export patient=%s; export winSize=%d; export stepSize=%d; export reference=%s;  export numWins=%d;\n', ...
-%                         'srun --exclusive --time=%s --partition=%s --nodes=%d --ntasks-per-node=%d --cpus-per-task=%d --job-name=%s ', ... 
-%                         ' parallel --delay .2 -j 24 --joblog _gnulogs/runtask.log --resume'), ...
-%                          radius, JOBTYPE, patient, winSize, stepSize, reference, numWins, ... % exports
-%                          num2str(walltime), partition, numNodes, numTasks, numCPUs, job_name); 
-%         if exist('QOS', 'var')
-%             basecommand = sprintf(strcat('export radius=%f; export RUNCONNECTIVITY=%d; export patient=%s; export winSize=%d; export stepSize=%d; export reference=%s; export numWins=%d;\n', ...
-%                         'sbatch --exclusive --time=%s --partition=%s --qos=%s --nodes=%d --ntasks-per-node=%d --cpus-per-task=%d --job-name=%s ', ...
-%                         ' parallel --delay .2 -j 24 --joblog _gnulogs/runtask.log --resume'), ...
-%                          radius, JOBTYPE, patient, winSize, stepSize, reference, numWins, ... % exports
-%                          num2str(walltime), partition, QOS, numNodes, numTasks, numCPUs, job_name); 
-%         end
-        
-
         % set directories to check for 1) individual window computation and
         % 2) merged results computation
         if JOBTYPE==1
@@ -179,7 +165,7 @@ function generate_slurm_gnu(patients, winSize, stepSize, radius, ...
                 
                 % initialize command with debug partition if just doing a
                 % merge...
-                mergepartition='debug';
+                mergepartition='shared';
                 QOS = 'scavenger';
                 walltime='0:20:0';
                 mergecommand = sprintf(strcat('export radius=%f; export RUNCONNECTIVITY=%d; export patient=%s; export winSize=%d; export stepSize=%d; export reference=%s;\n', ...
@@ -198,24 +184,23 @@ function generate_slurm_gnu(patients, winSize, stepSize, radius, ...
                 unix(command);
             elseif toCompute == -1 % don't compute anything
                 fprintf('Not computing anything because data already exists!\n');
+            elseif toCompute == 1 % still needs some computing, so call job again
+                fprintf('These windows still need computing! %s \n', num2str(patWinsToCompute));
+                
+                % create command to run
+                command = sprintf(strcat(basecommand, ...
+                            ' gnu_run_jobs.sbatch --export=%s,%d,%d,%d,%d,%s,%d'), ...
+                                patient, winSize, stepSize, JOBTYPE, radius,reference, numWins);
+
+                % print command to see and submit to unix shell
+                fprintf('Command is %s', command);
+                fprintf('\n\n');
+                unix(command);
             end
         % else not merging -> compute on windows
         else
             fprintf('Computing all windows for %s.\n', patient);
 
-%             parallel=sprintf(' parallel --delay .2 -j 24 --joblog _gnulogs/%s --resume ', log_file);
-%         
-%             if JOBTYPE == 1
-%                 sprintf(strcat(basecommand, ...
-%                     parallel, ...
-%                     'cd(''matlab_lib'');', ...
-%                     'parallelComputeConnectivity('$patient', $winSize, $stepSize, '$reference', {1}); exit;\"" ::: $(seq 1 $numWins)
-% else
-% 	$parallel "matlab -nojvm -nodisplay -nodesktop -nosplash -r \"
-% 		cd('matlab_lib');\
-% 		parallelComputePerturbation('$patient', $winSize, $stepSize, $radius, '$reference', {1}); exit;\"" ::: $(seq 1 $numWins)
-% fi
-            
             % create command to run
             command = sprintf(strcat(basecommand, ...
                         ' gnu_run_jobs.sbatch --export=%s,%d,%d,%d,%d,%s,%d'), ...
