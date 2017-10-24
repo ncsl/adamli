@@ -106,8 +106,11 @@ numWins = floor(size(eeg, 2) / numSampsInStep - numSampsInWin/numSampsInStep + 1
 
 P = 3; % size of simulation
 numSims = 200;
-all_del_sizes = zeros(numSims, P, length(w_space)); % store all min del vectors for all wspace
+all_del_sizes = zeros(numSims*P, length(w_space)); % store all min del vectors for all wspace
 all_adjmats = zeros(numSims, P, P);                 % store all adjmats used
+% all_del_freqs = cell(numSims, P);
+all_del_freqs = cell(numSims, 1);
+fprintf('Starting simulation for loop\n');
 for iSim=1:numSims
     randIndices = randsample(size(eeg,1), P);
     randTime = randsample(seizure_eonset_ms-winSize, 1);
@@ -118,57 +121,103 @@ for iSim=1:numSims
     numChans = size(tempeeg, 1);
     
     % Perform Least Squares Computations
-    fprintf('About to start least squares\n');
     % linear model: Ax = b; A\b -> x
     b = double(tempeeg(:)); % define b as vectorized by stacking columns on top of another
     b = b(numChans+1:end); % only get the time points after the first one
 
     % - use least square computation
     theta = computeLeastSquares(tempeeg, b, OPTIONS);
-    fprintf('Finished least squares');
     adjMat = reshape(theta, numChans, numChans)';    % reshape fills in columns first, so must transpose
     
     % perform minimum norm perturbation
     [minPerturbation, del_table, del_freqs, del_size] = minNormPerturbation(adjMat, perturb_args);%, clinicalLabels)
     
-    all_del_sizes(iSim,:,:) = del_size;
+    i = iSim-1;
+    all_del_sizes(P*i+1:P*(i+1),:) = del_size;
+    all_del_freqs{iSim} = del_freqs;
     all_adjmats(iSim, :, :) = adjMat;
 end
+fprintf('Finished simulation for loop\n');
 
-test = reshape(all_del_sizes, numSims*P, length(w_space));
+% get A matrix when the minimum is not at w=0; if possible
+list_allfreqs = [all_del_freqs{:}];
+% indices = find([all_del_freqs{:}] ~= radius);
+
+% get vector when minimum is not at w=0
+% minvec = del_table(indices);
+
 % create variables for plotting
-avg_minnorm = nanmean(reshape(all_del_sizes, numSims*P, length(w_space)), 1);
-var_minnorm = nanvar(reshape(all_del_sizes, numSims*P, length(w_space)), [], 1);
+% avg_minnorm = nanmean(reshape(all_del_sizes, numSims*P, length(w_space)), 1);
+% var_minnorm = nanvar(reshape(all_del_sizes, numSims*P, length(w_space)), [], 1);
+avg_minnorm = nanmean(all_del_sizes, 1);
+var_minnorm = nanvar(all_del_sizes, [], 1);
 
+%% figure to show along wspace waht the min norm was at each point
 figure;
 shadedErrorBar(1:length(w_space), avg_minnorm, var_minnorm, 'ko');
+axes = gca;
+title('Distribution of Minimum Norm Perturbation Along Stability Radius');
+xlabel('W-space Index');
+ylabel('Euclidean Norm of Perturbation');
 
-colors = {'k', 'b', 'r'};
+%% figure to show the distribution of average min norms
+mindel_overw = min(all_del_sizes);
 
-temp = squeeze(mean(all_del_sizes, 1));
-tempstd = squeeze(std(all_del_sizes, 0, 1));
-% figure;
-for i=1:numChans
-    figure;
-    %     shadedErrorBar(1:length(w_space), temp(i,:), tempstd(i,:));
-    plot(1:length(w_space), temp(i,:), 'Color', colors{i}); hold on;
-    plot(1:length(w_space), squeeze(min(all_del_sizes(:,i,:))), 'LineStyle', ':', 'Color', colors{i});
-%     plot(1:length(w_space), squeeze(max(all_del_sizes(:,i,:))), 'LineStyle', '--', 'Color', colors{i});
-    ax = gca;
-    ax.FontSize = FONTSIZE;
-    xlabel('Along W Space');
-    ylabel('Delta Norms');
-    title(['Delta Norms over W Space']);
-    legend('Average Norms', 'Min Norms', 'Max Norms');
-    
-    currfig = gcf;
-    set(currfig, 'Units', 'inches');
-    currfig.Position = [17.3438         0   15.9896   11.6771];
-    
-    toSaveFigFile = fullfile(figDir, strcat(patient, '_chanindex', num2str(i), '_realdata_randomtime'));
-    print(toSaveFigFile, '-dpng', '-r0');
-    
-    close all
+xticklabs = {};
+for i=1:length(w_space)
+    xstr = strcat(num2str(sigma(i)), '+', num2str(w_space(i)), 'j');
+    xticklabs{end+1} = xstr;
 end
 
-disp('done')
+figure;
+subplot(211); % plot over entire instability radius
+plot(1:length(w_space), min(all_del_sizes), 'ko');
+xlim([1 length(w_space)]);
+axes = gca;
+xticklocs = axes.XTick;
+axes.XTickLabel = xticklabs(xticklocs);
+hold on;
+plot([26, 26], axes.YLim, 'r-');
+plot([76, 76], axes.YLim, 'r-');
+title('Minimum Norm At Each Point Along Stability Radius');
+ylabel('Minimum Norm');
+
+subplot(212); % plot over area around w = 0
+indices_to_plot = 60:80;
+plot(indices_to_plot, mindel_overw(indices_to_plot), 'ko');
+axes = gca;
+% axes.XTickLabel = xticklabs(indices_to_plot);
+hold on;
+title('Minimum Norm At Each Point Along Stability Radius');
+ylabel('Minimum Norm');
+
+
+% colors = {'k', 'b', 'r'};
+% 
+% temp = squeeze(mean(all_del_sizes, 1));
+% tempstd = squeeze(std(all_del_sizes, 0, 1));
+% % figure;
+% for i=1:numChans
+%     figure;
+%     %     shadedErrorBar(1:length(w_space), temp(i,:), tempstd(i,:));
+%     plot(1:length(w_space), temp(i,:), 'Color', colors{i}); hold on;
+%     plot(1:length(w_space), squeeze(min(all_del_sizes(:,i,:))), 'LineStyle', ':', 'Color', colors{i});
+% %     plot(1:length(w_space), squeeze(max(all_del_sizes(:,i,:))), 'LineStyle', '--', 'Color', colors{i});
+%     ax = gca;
+%     ax.FontSize = FONTSIZE;
+%     xlabel('Along W Space');
+%     ylabel('Delta Norms');
+%     title(['Delta Norms over W Space']);
+%     legend('Average Norms', 'Min Norms', 'Max Norms');
+%     
+%     currfig = gcf;
+%     set(currfig, 'Units', 'inches');
+%     currfig.Position = [17.3438         0   15.9896   11.6771];
+%     
+%     toSaveFigFile = fullfile(figDir, strcat(patient, '_chanindex', num2str(i), '_realdata_randomtime'));
+%     print(toSaveFigFile, '-dpng', '-r0');
+%     
+%     close all
+% end
+% 
+% disp('done')

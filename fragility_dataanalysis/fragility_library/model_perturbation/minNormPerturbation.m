@@ -50,6 +50,7 @@ del_size = zeros(N, length(w_space));   % store min_norms
 del_table = cell(N, 1);                 % store min_norm vector for each node
 del_freqs = cell(N, 1);                % store min freqs
 
+flag = 0;
 %%- grid search over sigma and w for each row to determine, what is
 %%- the min norm perturbation
 for iNode=1:N % 1st loop through each electrode
@@ -83,6 +84,20 @@ for iNode=1:N % 1st loop through each electrode
         % compute perturbation necessary
         if w_space(iW) ~= 0
             del = B'*inv(B*B')*b;
+%             [warnmsg, msgid] = lastwarn;
+%             if strcmp(msgid,'MATLAB:nearlySingularMatrix') && flag==0
+%                 fprintf('on wspace %i', iW);
+%                 flag = 1;
+%             end
+%             catch ME
+%                 disp(ME);
+%                 switch ME.identifier
+%                     case 'MATLAB:nearlySingularMatrix'
+%                         fprintf('The place on wspace it happened was %i \n', iW);
+%                     otherwise
+%                         rethrow(ME)
+%                 end
+%             end
         else
             del = -C./(norm(C)^2);
         end
