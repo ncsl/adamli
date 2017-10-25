@@ -186,6 +186,7 @@ function generate_slurm_gnu(patients, winSize, stepSize, radius, ...
                 fprintf('Not computing anything because data already exists!\n');
             elseif toCompute == 1 % still needs some computing, so call job again
                 fprintf('These windows still need computing! %s \n', num2str(patWinsToCompute));
+                fprintf('Lenght of windows needed to compute! %s \n', num2str(length(patWinsToCompute)));
                 
                 % create command to run
                 command = sprintf(strcat(basecommand, ...
