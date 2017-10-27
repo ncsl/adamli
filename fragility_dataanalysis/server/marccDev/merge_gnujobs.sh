@@ -23,9 +23,10 @@ patients=(
     # LA16_ICTAL LA16_Inter')
 
     # 'LA05_ICTAL LA05_Inter')
-	'LA03_ICTAL LA03_Inter
-	LA09_ICTAL LA09_Inter
-	LA10_ICTAL
+	# 'LA03_ICTAL LA03_Inter
+	# LA10_ICTAL
+
+	'LA09_ICTAL
 	LA11_ICTAL LA11_Inter
 	LA16_ICTAL')
 
