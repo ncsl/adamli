@@ -5,7 +5,7 @@ patients = {...,
 %     'pt2aslp1', 'pt2aslp2', ...
 %     'pt3aw1', ...
 %     'pt3aslp1', 'pt3aslp2', ...
-%     {'pt1sz2', 'pt1sz3', 'pt1sz4'},...
+    {'pt1sz2', 'pt1sz3', 'pt1sz4'},...
 %     {'pt2sz1' 'pt2sz3' , 'pt2sz4'}, ...
 %     {'pt3sz2' 'pt3sz4'}, ...
 %     {'pt6sz3', 'pt6sz4', 'pt6sz5'},...
@@ -36,23 +36,8 @@ patients = {...,
 %     {'LA06_ICTAL'}, ...'LA06_Inter', ...
 %     {'LA08_ICTAL'}, ...'LA08_Inter', ...
 %     'LA10_ICTAL', ...'LA10_Inter', ...
-    {'LA15_ICTAL'}, ...'LA15_Inter', ...
+%     {'LA15_ICTAL'}, ...'LA15_Inter', ...
 %     'LA16_ICTAL', ...'LA16_Inter', ...
-
-%     'Pat2sz1p', 'Pat2sz2p', 'Pat2sz3p', ...
-%     'Pat16sz1p', 'Pat16sz2p', 'Pat16sz3p', ...
-%     'LA01_ICTAL', 'LA01_Inter', ...
-%     'LA02_ICTAL', 'LA02_Inter', ...
-%     'LA03_ICTAL', 'LA03_Inter', ...
-%     'LA04_ICTAL', 'LA04_Inter', ...
-%     'LA05_ICTAL', 'LA05_Inter', ...
-%     'LA06_ICTAL', 'LA06_Inter', ...
-%     'LA08_ICTAL', 'LA08_Inter', ...
-%     'LA09_ICTAL', 'LA09_Inter', ...
-%     'LA10_ICTAL', 'LA10_Inter', ...
-%     'LA11_ICTAL', 'LA11_Inter', ...
-%     'LA15_ICTAL', 'LA15_Inter', ...
-%     'LA16_ICTAL', 'LA16_Inter', ...
 };
 
 times = {,...
@@ -60,10 +45,10 @@ times = {,...
 %     [10], ... % LA04
 %     [10], ... % LA06
 %     [15],... % LA08
-    [20], ... % LA15
+%     [20], ... % LA15
 %     [10, 10, 10],... % JH103
 %     [13, 13, 13, 13, 13], ... % JH105
-%     [15, 12, 10], ... % pt1
+    [15, 12, 10], ... % pt1
 %     [60, 60, 75],... % pt2
 %     [17, 17],... % pt3
 %     [12 12 12],... % pt 8
@@ -141,6 +126,7 @@ for iGroup=1:length(patients)
     
     coded_times = times{iGroup};
     
+    preictal_doa = zeros(length(group), length(thresholds));
     rowsum_doa = zeros(length(group), length(thresholds));
     postcfvar_doa = zeros(length(group), length(thresholds));
     weight50_doa = zeros(length(group), length(thresholds));
@@ -304,48 +290,6 @@ for iGroup=1:length(patients)
         weight50_sum = weight50_sum ./ max(weight50_sum);
         weight85_sum = weight85_sum ./ max(weight85_sum);
         weightnew_sum = weightnew_sum ./ max(weightnew_sum);
-
-        %% only analyze up to seizuremarkend for all following statistics
-%         fragilityMat = fragilityMat(:, 1:seizureMarkEnd);
-%         minNormPertMat = minNormPertMat(:, 1:seizureMarkEnd);
-% 
-%         % compute highest 10% fragile nodes then compute normalized rowsum
-%         max_frag = max(fragilityMat,[], 2); % compute highest fragility during entire dataset
-%         min_frag = min(fragilityMat,[], 2); % compute smallest fragility during entire dataset
-%         high_frag = prctile(fragilityMat, 95, 2);
-% 
-%         high_mask = fragilityMat;
-%         for ichan=1:num_channels
-%             indices = high_mask(ichan,:) < high_frag(ichan);
-%             high_mask(ichan,indices) = 0; 
-%         end
-%         
-%         % compute row sum of electrodes with only the highest 10% fragility
-%         rowsum = nansum(high_mask, 2);
-%         
-%         % threshold at top 10% and include electrodes
-%         [r, ~] = find(fragilityMat > 0.9)
-%         ez_90thresh_set = included_labels(unique(r));
-%         
-%         % threshold at top 5% and include electrodes
-%         [r, ~] = find(fragilityMat > 0.95)
-%         ez_95thresh_set = included_labels(unique(r));
-%         
-%         % create feature vector struct
-%         features_struct.patient = patient;
-%         features_struct.cfvar_time = cfvar_time;
-%         features_struct.cfvar_chan = cfvar_chan;
-% 
-%         features_struct.precfvar_chan = precfvar_chan;
-%         features_struct.postcfvar_chan = postcfvar_chan;
-%         features_struct.rowsum = rowsum;
-%         features_struct.ez_90thresh_set = ez_90thresh_set;
-%         features_struct.ez_95thresh_set = ez_95thresh_set;
-%         
-%         features_struct.ezone_labels = ezone_labels;
-%         features_struct.included_labels = included_labels;
-% 
-%         save(fullfile(figDir, strcat(patient, '_fragilitystats.mat')), 'features_struct');
 
         %% compute Degree of agreements
 %         ezone_labels = resection_labels;
