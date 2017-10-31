@@ -88,7 +88,9 @@ function generate_slurm_virtresection(patients, winSize, stepSize, radius, ...
     walltime = WALLTIME;
     numNodes = NUMNODES;
     numCPUs = NUM_PROCS;
-    numTasks = 1;
+    numTasks=1;
+%     numTasks = 24;
+%     memNode = 5*numTasks; % memory GB per CPU
     
     % initialize filter
     filterType = 'notchfilter';
