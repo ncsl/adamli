@@ -1,10 +1,11 @@
-function doas = compute_doa_threshold(computed_metric, ezone_labels, included_labels, thresholds, metric)
+function [doas, fragileset] = compute_doa_threshold(computed_metric, ezone_labels, included_labels, thresholds, metric)
 if nargin==4
     metric = 'default';
 %     metric = 'jaccard';
 end
     % compute DOA for varying thresholds
     doas = zeros(length(thresholds), 1);
+    fragileset = cell(length(thresholds), 1);
     for iThresh=1:length(thresholds)
         threshold = thresholds(iThresh);
 
@@ -23,6 +24,7 @@ end
         % compute doa 
         D = degreeOfAgreement(fragility_set, ezone_labels, included_labels, metric); 
         
+        fragileset{iThresh} = fragility_set;
         doas(iThresh) = D;
     end % end of loop through thresholds
 end

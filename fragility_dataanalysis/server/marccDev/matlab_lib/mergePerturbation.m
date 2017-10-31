@@ -18,7 +18,7 @@ if nargin==0
     winSize=250;
     stepSize=125;
     radius=1.1;
-    reference = 'avgref';
+    reference = '';
 end
 
 fprintf('Inside merging perturbations...\n');

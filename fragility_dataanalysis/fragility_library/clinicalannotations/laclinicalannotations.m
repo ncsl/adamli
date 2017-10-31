@@ -7,8 +7,10 @@ if strcmp(patient_id, 'LA01')
     included_channels = [1 3 7:8 11:13 17:19 22:26 32 34:35 37 42 50:55 58 ... 
                         62:65 70:72 77:81 84:97 100:102 105:107 110:114 120:121 130:131];
                     
-    onset_electrodes = {'Y''1', 'X''4'};
-    earlyspread_labels = {};
+    onset_electrodes = {'Y''1', 'X''4', ...
+        'T''5', 'T''6', 'O''1', 'O''2', 'B1', 'B2',...% rare onsets
+        };
+    earlyspread_labels = {'P1','P2','P6', 'X1','X8','X9', 'E''2','E''3', 'T''1'};
     latespread_labels = {};
     resection_labels = {};
     
@@ -44,7 +46,7 @@ elseif strcmp(patient_id, 'LA04')
     latespread_labels = {};
     resection_labels = {};
     
-    success_or_failure = 1;
+    success_or_failure = 0;
     center = 'laserablation';
 elseif strcmp(patient_id, 'LA05')
     included_channels = [1:4 7:19 21:39 42:191];
@@ -66,10 +68,11 @@ elseif strcmp(patient_id, 'LA06')
     latespread_labels = {};
     resection_labels = {};
     
-    success_or_failure = 1;
+    success_or_failure = 0;
     center = 'laserablation';
 elseif strcmp(patient_id, 'LA07')
-    included_channels = [];
+    included_channels = [1:18 22:23 25 34:37 44 48:51 54:55 57:69 65:66 68:78 ...
+        82:83 85:93 96:107 114:120];
     onset_electrodes = {'T1', 'T3', 'R''8', 'R''9'};
     earlyspread_labels = {};
     latespread_labels = {};
@@ -133,7 +136,7 @@ elseif strcmp(patient_id, 'LA12')
     success_or_failure = 0;
     center = 'laserablation';
 elseif strcmp(patient_id, 'LA13')
-    included_channels = [];
+    included_channels = [1:4 7:12 23:33 36:37 44:45 48:70 72:93];
     onset_electrodes = {'Y13', 'Y14'};
     earlyspread_labels = {};
     latespread_labels = {};

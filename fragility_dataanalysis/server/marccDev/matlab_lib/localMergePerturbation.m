@@ -67,10 +67,10 @@ patTempDir = fullfile(rootDir, 'server/marccDev/matlab_lib/tempData/', ...
                 'perturbation', filterType, ...
                 strcat('win', num2str(winSize), '_step', num2str(stepSize), '_freq', num2str(fs)), ...
                 patient, reference);
-
+patTempDir = fullfile('~/Downloads/', 'LA09_ICTALtemp');
 %- set directory to save merged computed data
 toSaveDir = fullfile(dataDir, 'serverdata/pertmats', strcat(filterType), ...
-                strcat('win', num2str(winSize), '_step', num2str(stepSize), '_freq', num2str(fs)),...
+                strcat('win', num2str(winSize), '_step', num2str(stepSize), '_freq', num2str(fs), '_radius', num2str(radius)),...
                 patient, reference);
              
 % create directory if it does not exist
@@ -102,7 +102,7 @@ for iMat=1:length(matFileNames)
     % extract the computed theta adjacency
     perturbation = data.perturbation_struct;
     
-    for iPert=1:1%length(perturbationTypes)
+    for iPert=1:length(perturbationTypes)
         perturbationType = perturbationTypes(iPert);
         
         % initialize matrix if first loop and then store results

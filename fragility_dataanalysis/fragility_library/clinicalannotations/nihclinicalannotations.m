@@ -177,7 +177,7 @@ elseif strcmp(patient_id, 'pt10')
         'TT1', 'TT2', 'TT3', 'TT4', 'TT5', 'TT6', 'AST1', 'AST2', 'AST3', 'AST4'};
     
     center = 'nih';
-    success_or_failure = 1;
+    success_or_failure = 0;
 elseif strcmp(patient_id, 'pt11')
     included_channels = [1:19 21:37 39 40 43:74 76:81 83:87 89:94 101:130];
 

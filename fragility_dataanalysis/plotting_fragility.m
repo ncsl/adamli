@@ -35,6 +35,7 @@ close all;
 % data directories to save data into - choose one
 eegRootDirHD = '/Volumes/NIL Pass/';
 eegRootDirHD = '/Volumes/ADAM LI/';
+% eegRootDirHD = '~/Downloads/';
 eegRootDirServer = '/home/ali/adamli/fragility_dataanalysis/';                 % at ICM server 
 eegRootDirHome = '/Users/adam2392/Documents/adamli/fragility_dataanalysis/';   % at home macbook
 % eegRootDirHome = 'test';
@@ -109,7 +110,7 @@ for iPat=1:length(patients)
     
     resultsDir = fullfile(dataDir, strcat('/serverdata/pertmats/', filterType, '/win', num2str(winSize), ...
         '_step', num2str(stepSize), '_freq', num2str(fs), '_radius', num2str(radius)), patient, reference); % at lab
-    
+%     resultsDir = fullfile(dataDir, 'pertmats', patient);
     [final_data, info] = extract_results(patient, resultsDir, reference, radius);
 
     % extract actual data structures
@@ -411,50 +412,71 @@ ax.XTickLabel = xticklabel;
 xlim([XLowerLim, XUpperLim+1]);
 
 % vector of hard coded time windows to go to for each patient
-time = times;
-try
-    timesz = info.rawtimePoints(int16(seizureMarkStart), 2)/fs;
-    post_index = find(info.rawtimePoints(:, 2)/fs == (timesz + time));
-catch e
-    timesz = info.timePoints(int16(seizureMarkStart), 2)/fs;
-    post_index = find(info.timePoints(:, 2)/fs == (timesz + time));
-end
-seizureMarkStart
-post_index
-if isempty(post_index)
-    patient
-end
+post_index = size(matToPlot,2);
+if ~isempty(times)
+    time = times;
+    try
+        timesz = info.rawtimePoints(int16(seizureMarkStart), 2)/fs;
+        post_index = find(info.rawtimePoints(:, 2)/fs == (timesz + time));
+    catch e
+        timesz = info.timePoints(int16(seizureMarkStart), 2)/fs;
+        post_index = find(info.timePoints(:, 2)/fs == (timesz + time));
+    end
+    seizureMarkStart
+    post_index
+    if isempty(post_index)
+        patient
+    end
 
-plot([post_index, post_index], ax.YLim, 'k-', 'LineWidth', 3, 'LineStyle', '--');
-
+    plot([post_index, post_index], ax.YLim, 'k-', 'LineWidth', 3, 'LineStyle', '--');
+end
 %% PLOT second PLOT FOR COEFFICIENT OF VARIATION
 xrange = 1:size(matToPlot, 1);
 xrange(ezone_indices) = [];
 secfig = subplot(4,6, [6,12,18,24]);
 
-% coeffvar = computecoeffvar(matToPlot);
-
-% compute coefficient of var for ictal 
-coeffvar = computecoeffvar(matToPlot, seizureMarkStart, post_index);
-
-% compute rowsum for ictal 
+ % compute high fragility regions 
 high_mask = matToPlot;
 for ichan=1:num_channels
     indices = high_mask(ichan,:) < 0.85;
     high_mask(ichan,indices) = 0; 
 end
-rowsum = computerowsum(high_mask, seizureMarkStart, post_index);
 
-rowsum = rowsum ./ max(rowsum);
-coeffvar = coeffvar ./ max(coeffvar);
+if ~isnan(seizureMarkStart)
+    % compute coefficient of var for ictal 
+    coeffvar = computecoeffvar(matToPlot, seizureMarkStart, post_index);
+    
+    % compute rowsum for ictal period
+    rowsum = computerowsum(high_mask, seizureMarkStart, post_index);
+    
+    % normalize
+    rowsum = rowsum ./ max(rowsum);
+    coeffvar = coeffvar ./ max(coeffvar);
 
-%- plot stem
-stem(xrange, coeffvar(xrange), 'k'); hold on; axis tight;
-stem(ezone_indices, coeffvar(ezone_indices), 'r');
+    %- plot stem
+    stem(xrange, coeffvar(xrange), 'k'); hold on; axis tight;
+    stem(ezone_indices, coeffvar(ezone_indices), 'r');
 
-plot(1:length(rowsum), 0.5*rowsum + 0.5*coeffvar, 'k-');
-plot(1:length(rowsum), 0.75*rowsum + 0.25*coeffvar, 'g-');
-stem(rowsum, 'b*');
+    plot(1:length(rowsum), 0.5*rowsum + 0.5*coeffvar, 'k-');
+    plot(1:length(rowsum), 0.75*rowsum + 0.25*coeffvar, 'g-');
+    stem(rowsum, 'b*');
+else
+    rowsum = computerowsum(high_mask, 1, size(high_mask, 2));
+    
+%     chanindex = strcmp(included_labels, 'C''7');
+%     [autocor, lags] = xcorr(high_mask(chanindex,:)', floor(size(high_mask, 2)/10), 'coeff');
+%     figure; plot(lags,autocor)
+%     xlabel('Lag (windows)')
+%     ylabel('Autocorrelation')
+%     for i=1:size(high_mask,1)
+%         [autocor, lags] = xcorr(high_mask(i,:)', floor(size(high_mask, 2)/10), 'coeff');
+%           if nansum(autocor > 0.3) > floor(size(high_mask, 2)/10)
+%               included_labels(i)
+%           end
+%     end
+    stem(xrange, rowsum(xrange), 'k'); hold on; axis tight;
+    stem(ezone_indices, rowsum(ezone_indices), 'r');
+end
 
 xoffset = 0.04;
 pos = get(gca, 'Position');

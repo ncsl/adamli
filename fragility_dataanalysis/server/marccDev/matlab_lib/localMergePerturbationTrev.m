@@ -11,7 +11,7 @@
 % Output:
 % - vector of patients needed to compute
 
-patient='trev';
+patient='LA09_ICTAL';
 winSize=250;
 stepSize=125;
 reference='';
@@ -67,12 +67,13 @@ patTempDir = fullfile(rootDir, 'server/marccDev/matlab_lib/tempData/', ...
                 'perturbation', filterType, ...
                 strcat('win', num2str(winSize), '_step', num2str(stepSize), '_freq', num2str(fs)), ...
                 patient, reference);
-
 patTempDir = fullfile(dataDir, 'temp_trev_pert');
             
+patTempDir = fullfile('~/Downloads/LA09_ICTAL/');
 %- set directory to save merged computed data
-toSaveDir = fullfile(dataDir, 'trev_pert');
+% toSaveDir = fullfile(dataDir, 'trev_pert');
              
+toSaveDir = fullfile('~/Downloads/');
 % create directory if it does not exist
 if ~exist(toSaveDir, 'dir')
     mkdir(toSaveDir);
@@ -81,7 +82,6 @@ end
 % all the temp lti models per window
 matFiles = dir(fullfile(patTempDir, '*.mat'));
 matFileNames = natsort({matFiles.name});
-
 
 perturbation_struct = struct();
 
