@@ -44,11 +44,20 @@ function x = computeLeastSquares(eegMat, observationVector, OPTIONS)
     
     % step 1: either initialize new H matrix with sparse, or full matrix.
     fprintf('Creating H matrix\n');
-    try
-        H = zeros(length(observationVector), num_chans^2);
-    catch e
-        disp(e)
-        H = sparse(length(observationVector), num_chans^2);
+    if num_chans < 100
+        try
+            H = zeros(length(observationVector), num_chans^2);
+        catch e
+            disp(e)
+            H = sparse(length(observationVector), num_chans^2);
+        end
+    else
+        try
+            H = sparse(length(observationVector), num_chans^2);
+        catch e
+            disp(e)
+            H = zeros(length(observationVector), num_chans^2);
+        end
     end
     fprintf('Finished creating H matrix\n');
     
