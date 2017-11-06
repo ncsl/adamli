@@ -43,12 +43,14 @@ function x = computeLeastSquares(eegMat, observationVector, OPTIONS)
     tmpdata = eegMat'; % store transpose of eeg matrix
     
     % step 1: either initialize new H matrix with sparse, or full matrix.
+    fprintf('Creating H matrix\n');
     try
         H = zeros(length(observationVector), num_chans^2);
     catch e
         disp(e)
         H = sparse(length(observationVector), num_chans^2);
     end
+    fprintf('Finished creating H matrix\n');
     
     % step 2: build up H matrix
     N = 1:num_chans:size(H,1); % step size per row iteration
