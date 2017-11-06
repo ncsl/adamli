@@ -8,11 +8,9 @@ function [rowsum, excluded_indices, num_high_fragility] = computedoainterictal(f
     delta = 0.7;
     
      % compute high fragility regions 
-    high_mask = fragilitymat;
-    for ichan=1:num_channels
-        indices = high_mask(ichan,:) < epsilon;
-        high_mask(ichan,indices) = 0; 
-    end
+    threshMat = fragilitymat;
+    threshMat(fragilitymat < epsilon) = nan;
+    high_mask = threshMat;
     
     % part i) compute rowsum for entire period
     rowsum = computerowsum(high_mask, 1, num_wins);
@@ -31,7 +29,7 @@ function [rowsum, excluded_indices, num_high_fragility] = computedoainterictal(f
     num_high_fragility = computenumberfragility(fragilitymat, 1, num_wins, delta);
     
     if NORMALIZE
-        rowsum = rowsum ./ max(rowsum);
-        num_high_fragility = num_high_fragility ./ max(num_high_fragility);
+        rowsum = rowsum ./ num_wins;
+        num_high_fragility = num_high_fragility ./ num_wins;
     end
 end

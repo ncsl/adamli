@@ -72,21 +72,31 @@ patients=(
 	# JH107sz1 JH107sz2 JH107sz3 JH107sz4 JH107sz5 JH107sz6 JH107sz7 JH107sz8 JH107sz8 JH107sz9
 	# JH108sz1 JH108sz2 JH108sz3 JH108sz4 JH108sz5 JH108sz6 JH108sz7
 
-# 01: Prompt user for input that runs the analysis
-echo "Begin merging computation." # print beginning statement
-printf "Run Connectivity (Enter 1, or 0)? "
-read RUNCONNECTIVITY
-printf "Enter window size: "
-read winSize
-printf "Enter step size: "
-read stepSize
-printf "Enter radius: "
-read radius
-# printf "Type of reference (e.g. avgref): "
-# read reference
+## load in the modules for this run -> python, matlab, etc.
+module list
+module load matlab
 
-# 1. run for 250, 125 ltv model
-# 2. run for 1.1, 1.15, 1.25, 1.75, 2.0 radius perturbation
+# 01: Prompt user for input that runs the analysis
+echo "Begin analysis." # print beginning statement
+read -p "Run model (1 for connectivity, 0 for perturbation): " RUNCONNECTIVITY
+read -p "Enter window size: " winSize
+read -p "Enter step size: " stepSize
+read -p "Enter radius: " radius
+read -p "Enter type of reference: " reference
+
+# set values and their defauls
+RUNCONNECTIVITY=${RUNCONNECTIVITY:-1}
+winSize=${winSize:-250}
+stepSize=${stepSize:-125}
+radius=${radius:-1.5}
+reference=${reference:-""}
+
+# show 
+echo $RUNCONNECTIVITY
+echo $winSize
+echo $stepSize
+echo $radius
+echo $reference
 
 # Pause before running to check
 printf "About to run on patients (press enter to continue): $patients" # prompt for patient_id {pt1, pt2, ..., JH105, EZT005}
@@ -104,9 +114,6 @@ walltime=10:00:0
 partition=parallel 	# debug, shared, unlimited, parallel, gpu, lrgmem, scavenger
 qos=scavenger
 
-## load in the modules for this run -> python, matlab, etc.
-module list
-module load matlab
 
 # create concatenated strings in unix to ensure proper passing of list of patients
 buff=''
@@ -116,16 +123,6 @@ for patient in $patients; do
 done
 echo $buff
 
-# Debug statement for reference type
-reference=""
-if [ -z "$reference" ]
-then
-      echo "\$var is empty"
-      reference=""
-else
-      echo "\$var is NOT empty and should be 'avgref'"
-fi
-echo $reference
 
 ## 03: Call sbatch to run merges
 export winSize 

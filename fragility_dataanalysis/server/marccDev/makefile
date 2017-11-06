@@ -20,6 +20,7 @@ remote	          := $(MARCC_USER)@gateway2.marcc.jhu.edu
 # 	@{ rsync -aP ali39@jhu.edu@gateway2.marcc.jhu.edu:/home-1/ali39@jhu.edu/work/adamli/fragility_dataanalysis/serverdata/ ../../serverdata/;\
 # }
 
+# rsync -aP /Volumes/ADAM\ LI/data/laserablation/LA07* ali39@jhu.edu@gateway2.marcc.jhu.edu:/home-1/ali39@jhu.edu/work/adamli/fragility_dataanalysis/data/laserablation/;
 ######################### Syncing to Cloud #########################
 # Sync data up to the cloud
 *sync-data:

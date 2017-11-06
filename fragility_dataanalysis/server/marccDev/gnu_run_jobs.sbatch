@@ -1,4 +1,5 @@
 #!/bin/bash
+
 #SBATCH
 #SBATCH --mail-type=end
 #SBATCH --mail-user=ali39@jhu.edu

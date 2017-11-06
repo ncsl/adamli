@@ -36,7 +36,9 @@ patients=(
 	# pt10sz1 pt10sz2 pt10sz3
 	# pt17sz1 pt17sz2 pt17sz3')
 
-	'LA05_ICTAL LA05_Inter')
+	'LA05_ICTAL LA05_Inter
+	LA07_ICTAL LA07_Inter
+	LA13_ICTAL LA13_Inter')
 	# 'LA03_ICTAL LA03_Inter
 	# LA09_ICTAL LA09_Inter
 	# LA10_ICTAL
@@ -56,29 +58,43 @@ patients=(
     # LA15_ICTAL LA15_Inter
     # LA16_ICTAL LA16_Inter')
 
+## load in the modules for this run -> python, matlab, etc.
+module list
+ml matlab
+ml parallel
 
 # 01: Prompt user for input that runs the analysis
 echo "Begin analysis." # print beginning statement
-printf "Run Connectivity (Enter 1, or 0)? "
-read RUNCONNECTIVITY
-printf "Enter window size: "
-read winSize
-printf "Enter step size: "
-read stepSize
-printf "Enter radius: "
-read radius
-# printf "Type of reference (e.g. avgref): "
-# read reference
+read -p "Run model (1 for connectivity, 0 for perturbation): " RUNCONNECTIVITY
+read -p "Enter window size: " winSize
+read -p "Enter step size: " stepSize
+read -p "Enter radius: " radius
+read -p "Enter type of reference: " reference
+
+# set values and their defauls
+RUNCONNECTIVITY=${RUNCONNECTIVITY:-1}
+winSize=${winSize:-250}
+stepSize=${stepSize:-125}
+radius=${radius:-1.5}
+reference=${reference:-""}
+
+# show 
+echo $RUNCONNECTIVITY
+echo $winSize
+echo $stepSize
+echo $radius
+echo $reference
 
 # Pause before running to check
 printf "About to run on patients (press enter to continue): $patients" # prompt for patient_id {pt1, pt2, ..., JH105, EZT005}
 read answer
 
 ## define hardware reqs
-NUM_PROCSPERNODE=1 # number of processors per node (1-24)
+NUM_PROCSPERNODE=24 # number of processors per node (1-24)
 NUM_NODES=1			# number of nodes to request
-MEM_NODE=5 			# GB RAM per node (5-128)
+MEM_NODE=20 		# GB RAM per node (5-128)
 NUM_GPUS=1			# number of GPUS (need 6 procs per gpu)
+NUM_CPUPERTASK=1
 
 ## job reqs
 if [[ "${RUNCONNECTIVITY}" -eq 1 ]]; then
@@ -86,14 +102,11 @@ if [[ "${RUNCONNECTIVITY}" -eq 1 ]]; then
 else
 	walltime=10:00:00					# the walltime for each computation
 fi
+
 partition=scavenger 	# debug, shared, unlimited, parallel, gpu, lrgmem, scavenger
 partition=parallel
 qos=scavenger
 
-## load in the modules for this run -> python, matlab, etc.
-module list
-ml matlab
-ml parallel
 
 # create concatenated strings in unix to ensure proper passing of list of patients
 buff=''
@@ -103,19 +116,10 @@ for patient in $patients; do
 done
 echo $buff
 
-# Debug statement for reference type
-reference=""
-if [ -z "$reference" ]
-then
-      echo "\$var is empty"
-      reference=""
-else
-      echo "\$var is NOT empty and should be 'avgref'"
-fi
-echo $reference
 
 ## 02: Call patient shell script for each patient
 matlab -logfile /home-1/ali39@jhu.edu/work/adamli/fragility_dataanalysis/server/marccDev/_gnulogs/job$1.txt -nojvm -nodisplay -nosplash -r "\
 	generate_slurm_gnu('$buff', $winSize, $stepSize, $radius,\
-	'$partition', '$walltime', $NUM_NODES, $NUM_PROCSPERNODE,\
+	'$partition', '$walltime', $NUM_NODES,\
+	 $NUM_PROCSPERNODE, $MEM_NODE, $NUM_CPUPERTASK, \
 	 $RUNCONNECTIVITY, '$reference'); exit"

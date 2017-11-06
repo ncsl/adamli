@@ -131,8 +131,8 @@ xlabelStr = 'Real Part';
 ylabelStr = 'Imag Part';
 titleStr = ['Eigenspectrum of ', perturbationType, ' Perturbation'];
 labelBasicAxes(axes, titleStr, ylabelStr, xlabelStr, FONTSIZE);
-xlim([-radius radius]);
-ylim([-radius radius]);
+% xlim([-radius radius]);
+% ylim([-radius radius]);
 plot(get(axes, 'XLim'), [0 0], 'k');
 plot([0 0], get(axes, 'YLim'), 'k');
 

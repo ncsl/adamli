@@ -4,18 +4,7 @@ function labelHeatmap(ax, fig, clinicalIndices, PLOTARGS)
     titleStr = PLOTARGS.titleStr;
     xlabelStr = PLOTARGS.xlabelStr;
     ylabelStr = PLOTARGS.ylabelStr;
-    seizureMarkStart = PLOTARGS.seizureMarkStart;
-    timeStart = PLOTARGS.timeStart;
-    timeEnd = PLOTARGS.timeEnd;
-    frequency_sampling = PLOTARGS.frequency_sampling;
-    stepSize = PLOTARGS.stepSize;
     YAXFontSize = 11;
-    if isfield(PLOTARGS, 'seizureIndex')
-        seizureIndex = PLOTARGS.seizureIndex;
-    end
-    if isfield(PLOTARGS, 'seizureEnd')
-        seizureEnd = PLOTARGS.seizureEnd;
-    end
     
     %- extract clinical indices from EZ, spread regions
     all_indices = clinicalIndices.all_indices;
