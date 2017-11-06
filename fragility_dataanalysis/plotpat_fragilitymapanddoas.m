@@ -4,38 +4,34 @@ close all
 
 %% Success LA
 % patients = {,...
-%     'LA01_ICTAL', 'LA01_Inter',...
-%     'LA02_ICTAL', 'LA02_Inter', ...
+%     {'LA01_ICTAL', 'LA01_Inter'},...
+%     {'LA02_ICTAL', 'LA02_Inter'}, ...
 % };
 % 
-% %       'LA09_ICTAL', 
-% %       'LA09_Inter',...
-% %     'LA10_ICTAL', ...'LA10_Inter', ...
-% 
 % times = {,...
-%     [[],[]],... % LA01
+%     [[20],[]],... % LA01
 %     [16, []], ... % LA02
 % };
 
 %% Failure LA
-% patients = {,...
-% %     'LA02_ICTAL', 'LA02_Inter',...
-%     'LA04_ICTAL','LA04_Inter', ...
-%     'LA06_ICTAL', 'LA06_Inter', ...
-%     'LA08_ICTAL', 'LA08_Inter', ...
-%     'LA11_ICTAL', 'LA11_Inter', ...
-%     'LA15_ICTAL', 'LA15_Inter', ...
-%     'LA16_ICTAL', 'LA16_Inter', ...
-% };
-% times = {,...
-% %     [16, []], ... % LA02 % <- include the previous annotation. ask zach
-%     [10, []],... % LA04
-%     [10,[]], ... % LA06
-%     [15,[]],... % LA08
-%     [[],[]],... % LA11
-%     [20,[]], ... % LA15
-%     [10,[]],... % LA16
-% };
+patients = {,...
+%     'LA02_ICTAL', 'LA02_Inter',...
+    {'LA04_ICTAL','LA04_Inter'}, ...
+    {'LA06_ICTAL', 'LA06_Inter'}, ...
+    {'LA08_ICTAL', 'LA08_Inter'}, ...
+    {'LA11_ICTAL', 'LA11_Inter'}, ...
+    {'LA15_ICTAL', 'LA15_Inter'}, ...
+    {'LA16_ICTAL', 'LA16_Inter'}, ...
+};
+times = {,...
+%     [16, []], ... % LA02 % <- include the previous annotation. ask zach
+    [10, []],... % LA04
+    [10,[]], ... % LA06
+    [15,[]],... % LA08
+    [[],[]],... % LA11
+    [20,[]], ... % LA15
+    [10,[]],... % LA16
+};
 
 %% Success Ictal
 % patients = {...,
@@ -71,20 +67,20 @@ close all
 % };
 
 %% Failures
-patients = {,...
-    {'pt6sz3', 'pt6sz4', 'pt6sz5'},...
-    {'pt7sz19', 'pt7sz21', 'pt7sz22'},...
-    {'pt10sz1','pt10sz2' 'pt10sz3'}, ...
-    {'pt12sz1', 'pt12sz2'},...
-    {'pt14sz1' 'pt14sz2' 'pt14sz3'}, ...
-};
-times = {,...
-    [10, 10 10],... % pt 6
-	[10 30 10],... % pt 7
-	[50 50 50],... % pt 10
-    [170, 170], ...% pt 12
-	[60 55 55],... % pt 14
-};
+% patients = {,...
+%     {'pt6sz3', 'pt6sz4', 'pt6sz5'},...
+%     {'pt7sz19', 'pt7sz21', 'pt7sz22'},...
+%     {'pt10sz1','pt10sz2' 'pt10sz3'}, ...
+%     {'pt12sz1', 'pt12sz2'},...
+%     {'pt14sz1' 'pt14sz2' 'pt14sz3'}, ...
+% };
+% times = {,...
+%     [10, 10 10],... % pt 6
+% 	[10 30 10],... % pt 7
+% 	[50 50 50],... % pt 10
+%     [170, 170], ...% pt 12
+% 	[60 55 55],... % pt 14
+% };
 %% Set Root Directories
 % data directories to save data into - choose one
 eegRootDirHD = '/Volumes/NIL Pass/';
@@ -265,15 +261,11 @@ for iGroup=1:length(patients)
             allfragmats{inds(ind)} = fragilityMat(:, seizureMarkStart:post_index);
         else
             allfragmats{inds(ind)} = fragilityMat;
+            seizureMarkStart = size(fragilityMat, 2);
+            seizureMarkEnd = size(fragilityMat, 2);
         end
-        
+
         analstart = seizureMarkStart;
-        % for pt2
-%         if contains(patient, 'pt2')
-%             analstart = seizureMarkStart;
-%             allfragmats{inds(ind)} = fragilityMat(:, analstart:analstart+480);
-%             post_index = analstart+480;
-%         end
         if contains(patient, 'pt3')
             analstart = seizureMarkStart;
             allfragmats{inds(ind)} = fragilityMat(:, analstart:post_index);
@@ -457,73 +449,73 @@ for iGroup=1:length(patients)
 
         close all;
         %% Plot the patient specific plot too
-%         pid =inds(ind);
-%         
-%         % find indices of certain channels for pt3
-%         fginds = find(cellfun('length',regexp(included_labels,'FG')) == 1);
-%         weightnew_sum(fginds) = 0;
-% 
-%         % compute DOA
-%         [doas(pid), fragilesets] = compute_doa_threshold(weightnew_sum, ezone_labels, included_labels, threshold, metric);        
-% 
-%         %% Plotting Per Patient
-%         fig_heatmap = figure();
-%         subplot(131);
-%         imagesc(allfragmats{pid});
-% 
-%         ax = fig_heatmap.CurrentAxes; % get the current axes
-%         clim = ax.CLim;
-%         hold on;
-%         set(fig_heatmap, 'Units', 'inches');
-%         % fig_heatmap.Position = [17.3438         0   15.9896   11.6771];
-%         fig_heatmap.Position = [0.0417 0.6667 21.0694 13.0139];
-% 
-%         pause(0.005);
-%         % 2. label axes
-%         FONTSIZE = 13;
-%         PLOTARGS = struct();
-%         PLOTARGS.YAXFontSize = 9;
-%         PLOTARGS.FONTSIZE = FONTSIZE;
-%         PLOTARGS.xlabelStr = 'Time (1 col = 1 window)';
-%         PLOTARGS.ylabelStr = 'Electrode Channels';
-%         PLOTARGS.titleStr = {['Fragility Metric (', strcat(patient), ')'], ...
-%                 [perturbationType, ' Perturbation: ', ' Time Locked to Seizure']};
-%         labelHeatmap(ax, fig_heatmap,clinicalIndices, PLOTARGS);
-% 
-%         % move ylabel to the left a bit
-%         ylab = ax.YLabel;
-%         ylab.Position = ylab.Position + [-110 0 0]; % move ylabel to the left
-% 
-%         % label the colorbar
-%         colorArgs = struct();
-%         colorArgs.colorbarStr = 'Fragility Metric';
-%         colorArgs.FontSize = FONTSIZE;
-%         labelColorbar(ax, colorArgs)
-% 
-%         % compute high fragility regions
-%         threshMat = allfragmats{pid};
-%         threshMat(threshMat < epsilon) = nan;
-%         subplot(132);
-%         imagesc(threshMat); colorbar(); colormap('jet'); hold on; ax = gca;
-%         ax.CLim = clim;
-%         labelHeatmap(ax, fig_heatmap,clinicalIndices, PLOTARGS);
-% 
-%         % DOA Plot
-%         subplot(133);
-%         ax = gca; 
-%         plot(ax.XLim, [doas(pid), doas(pid)], 'k-');
-%         ax.YLim = [0, 1];
-%         title('Degree of Agreement')
-%         toSaveFigFile = fullfile(figDir, strcat(patient, '_doaanalysis'));
-%         print(toSaveFigFile, '-dpng', '-r0')
-% 
-%         pause(1);
-%         close all;
-% 
-%         ind = ind + 1;
+        pid =inds(ind);
+        
+        % find indices of certain channels for pt3
+        fginds = find(cellfun('length',regexp(included_labels,'FG')) == 1);
+        weightnew_sum(fginds) = 0;
+
+        % compute DOA
+        [doas(pid), fragilesets] = compute_doa_threshold(weightnew_sum, ezone_labels, included_labels, threshold, metric);        
+
+        %% Plotting Per Patient
+        fig_heatmap = figure();
+        subplot(131);
+        imagesc(allfragmats{pid});
+
+        ax = fig_heatmap.CurrentAxes; % get the current axes
+        clim = ax.CLim;
+        hold on;
+        set(fig_heatmap, 'Units', 'inches');
+        % fig_heatmap.Position = [17.3438         0   15.9896   11.6771];
+        fig_heatmap.Position = [0.0417 0.6667 21.0694 13.0139];
+
+        pause(0.005);
+        % 2. label axes
+        FONTSIZE = 13;
+        PLOTARGS = struct();
+        PLOTARGS.YAXFontSize = 9;
+        PLOTARGS.FONTSIZE = FONTSIZE;
+        PLOTARGS.xlabelStr = 'Time (1 col = 1 window)';
+        PLOTARGS.ylabelStr = 'Electrode Channels';
+        PLOTARGS.titleStr = {['Fragility Metric (', strcat(patient), ')'], ...
+                [perturbationType, ' Perturbation: ', ' Time Locked to Seizure']};
+        labelHeatmap(ax, fig_heatmap,clinicalIndices, PLOTARGS);
+
+        % move ylabel to the left a bit
+        ylab = ax.YLabel;
+        ylab.Position = ylab.Position + [-110 0 0]; % move ylabel to the left
+
+        % label the colorbar
+        colorArgs = struct();
+        colorArgs.colorbarStr = 'Fragility Metric';
+        colorArgs.FontSize = FONTSIZE;
+        labelColorbar(ax, colorArgs)
+
+        % compute high fragility regions
+        threshMat = allfragmats{pid};
+        threshMat(threshMat < epsilon) = nan;
+        subplot(132);
+        imagesc(threshMat); colorbar(); colormap('jet'); hold on; ax = gca;
+        ax.CLim = clim;
+        labelHeatmap(ax, fig_heatmap,clinicalIndices, PLOTARGS);
+
+        % DOA Plot
+        subplot(133);
+        ax = gca; 
+        plot(ax.XLim, [doas(pid), doas(pid)], 'k-');
+        ax.YLim = [0, 1];
+        title('Degree of Agreement')
+        toSaveFigFile = fullfile(figDir, strcat(patient, '_doaanalysis'));
+        print(toSaveFigFile, '-dpng', '-r0')
+
+        pause(1);
+        close all;
+
+        ind = ind + 1;
     end
 end
 
-save('gridsearchictalsuccessmats_v2.mat', 'allfragmats', ...
+save('CCgridsearchictalfailuremats.mat', 'allfragmats', ...
     'allezlabels', 'allincludedlabels', ...
     'allspreadlabels', 'allresectionlabels', 'allseizuremarks', 'allstartstop');

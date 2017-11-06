@@ -212,6 +212,7 @@ fprintf('Should have finished saving info mat.\n');
 % get the window of data to compute adjacency
 tempeeg = eeg(:, timePoints(iTask,1):timePoints(iTask,2));
 
+clear eeg
 %% Perform Least Squares Computations
 % step 2: compute some functional connectivity 
 if strcmp(TYPE_CONNECTIVITY, 'leastsquares')
