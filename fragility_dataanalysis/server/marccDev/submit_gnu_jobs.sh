@@ -90,7 +90,7 @@ printf "About to run on patients (press enter to continue): $patients" # prompt 
 read answer
 
 ## define hardware reqs
-NUM_PROCSPERNODE=24 # number of processors per node (1-24)
+NUM_PROCSPERNODE=12 # number of processors per node (1-24)
 NUM_NODES=1			# number of nodes to request
 MEM_NODE=700 		# GB RAM per node (5-128)
 NUM_GPUS=1			# number of GPUS (need 6 procs per gpu)
