@@ -20,6 +20,7 @@ function generate_slurm_gnu(patients, winSize, stepSize, radius, ...
     end
     if nargin==0
         patients='LA16_Inter';
+        patients='pt1sz2';
         winSize=250;
         stepSize=125;
         radius=1.5;

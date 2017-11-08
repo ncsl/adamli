@@ -82,10 +82,16 @@ echo $reference
 
 for numRemove in $numToRemove; do
 	echo $numRemove
-	## 02: Call patient shell script for each patient
-	matlab -logfile /home-1/ali39@jhu.edu/work/adamli/fragility_dataanalysis/server/marccDev/_log/job$1.txt -nojvm -nodisplay -nosplash -r "\
-		generate_slurm_virtresection('$buff', $winSize, $stepSize, $radius,\
-		'$partition', '$walltime', $NUM_NODES, $NUM_PROCSPERNODE,\
-		 $RUNCONNECTIVITY, '$reference', $numRemove, 1); exit"
+	if [[ "${numRemove}" -eq 1 ]]; then
+		echo "Done"
+	elif [[ "${RUNCONNECTIVITY}" -eq 1 ]]; then
+		echo "Done"
+	else
+		## 02: Call patient shell script for each patient
+		matlab -logfile /home-1/ali39@jhu.edu/work/adamli/fragility_dataanalysis/server/marccDev/_log/job$1.txt -nojvm -nodisplay -nosplash -r "\
+			generate_slurm_virtresection('$buff', $winSize, $stepSize, $radius,\
+			'$partition', '$walltime', $NUM_NODES, $NUM_PROCSPERNODE,\
+			 $RUNCONNECTIVITY, '$reference', $numRemove, 1); exit"
+	fi
 done
 
