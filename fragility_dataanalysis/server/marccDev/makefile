@@ -33,6 +33,9 @@ remote	          := $(MARCC_USER)@gateway2.marcc.jhu.edu
 	@{ rsync -aP ali39@jhu.edu@gateway2.marcc.jhu.edu:/home-1/ali39@jhu.edu/work/adamli/fragility_dataanalysis/serverdata/pertmats/notchfilter/win250_step125_freq1000_radius1.5/LA16_ICTAL/ ~/Downloads/temp/;\
 }
 
+# rsync -aP ali39@jhu.edu@gateway2.marcc.jhu.edu:/home-1/ali39@jhu.edu/work/adamli/fragility_dataanalysis/server/marccDev/matlab_lib/tempData/perturbation/notchfilter/win250_step125_freq1000/pt1sz2/* ~/Downloads/temp/;\
+
+
 # Sync ltv model files to local
 *sync-adj-files:
 	@{ rsync -aP ali39@jhu.edu@gateway2.marcc.jhu.edu:/home-1/ali39@jhu.edu/work/adamli/fragility_dataanalysis/serverdata/adjmats/notchfilter/win250_step125_freq1000/${patient}/ ~/Downloads/${patient}/;\

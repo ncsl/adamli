@@ -84,7 +84,7 @@ for numRemove in $numToRemove; do
 	echo $numRemove
 	if [[ "${numRemove}" -eq 1 ]]; then
 		echo "Done"
-	elif [[ "${RUNCONNECTIVITY}" -eq 1 ]]; then
+	elif [[ "${numRemove}" -eq 4 ]]; then
 		echo "Done"
 	else
 		## 02: Call patient shell script for each patient
