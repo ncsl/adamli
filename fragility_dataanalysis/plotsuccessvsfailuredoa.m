@@ -224,6 +224,10 @@ for pid=1:length(patients) % loop through each patient
     fginds = find(cellfun('length',regexp(included_labels,'FG')) == 1);
     weightnew_sum(fginds) = 0;
     
+    if contains(patient, 'LA01')
+        ezone_labels = union(ezone_labels, spread_labels);
+    end
+    
     % compute DOA
     [doas(pid), fragilesets] = compute_doa_threshold(weightnew_sum, ezone_labels, included_labels, threshold, metric);        
 

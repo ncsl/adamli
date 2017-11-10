@@ -124,7 +124,7 @@ perturbationTypes = ['C', 'R'];
 perturbationType = perturbationTypes(1);
 
 FONTSIZE = 16;
-metric = 'default';
+metric = 'jaccard';
 
 figDir = fullfile(rootDir, '/figures', 'fragilityStats', ...
     strcat(filterType), ...
@@ -524,6 +524,6 @@ for iGroup=1:length(patients)
     end
 end
 
-save('CCgridsearchictalfailuremats.mat', 'allfragmats', ...
+save('CCgridsearchictalsuccessmats_v2.mat', 'allfragmats', ...
     'allezlabels', 'allincludedlabels', ...
     'allspreadlabels', 'allresectionlabels', 'allseizuremarks', 'allstartstop');
