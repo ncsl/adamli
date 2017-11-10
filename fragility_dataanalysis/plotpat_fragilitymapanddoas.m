@@ -3,35 +3,35 @@ clc
 close all
 
 %% Success LA
-% patients = {,...
-%     {'LA01_ICTAL', 'LA01_Inter'},...
-%     {'LA02_ICTAL', 'LA02_Inter'}, ...
-% };
-% 
-% times = {,...
-%     [[20],[]],... % LA01
-%     [16, []], ... % LA02
-% };
+patients = {,...
+    {'LA01_ICTAL', 'LA01_Inter'},...
+    {'LA02_ICTAL', 'LA02_Inter'}, ...
+};
+
+times = {,...
+    [[20],[]],... % LA01
+    [16, []], ... % LA02
+};
 
 %% Failure LA
-patients = {,...
-%     'LA02_ICTAL', 'LA02_Inter',...
-    {'LA04_ICTAL','LA04_Inter'}, ...
-    {'LA06_ICTAL', 'LA06_Inter'}, ...
-    {'LA08_ICTAL', 'LA08_Inter'}, ...
-    {'LA11_ICTAL', 'LA11_Inter'}, ...
-    {'LA15_ICTAL', 'LA15_Inter'}, ...
-    {'LA16_ICTAL', 'LA16_Inter'}, ...
-};
-times = {,...
-%     [16, []], ... % LA02 % <- include the previous annotation. ask zach
-    [10, []],... % LA04
-    [10,[]], ... % LA06
-    [15,[]],... % LA08
-    [[],[]],... % LA11
-    [20,[]], ... % LA15
-    [10,[]],... % LA16
-};
+% patients = {,...
+% %     'LA02_ICTAL', 'LA02_Inter',...
+%     {'LA04_ICTAL','LA04_Inter'}, ...
+%     {'LA06_ICTAL', 'LA06_Inter'}, ...
+%     {'LA08_ICTAL', 'LA08_Inter'}, ...
+%     {'LA11_ICTAL', 'LA11_Inter'}, ...
+%     {'LA15_ICTAL', 'LA15_Inter'}, ...
+%     {'LA16_ICTAL', 'LA16_Inter'}, ...
+% };
+% times = {,...
+% %     [16, []], ... % LA02 % <- include the previous annotation. ask zach
+%     [10, []],... % LA04
+%     [10,[]], ... % LA06
+%     [15,[]],... % LA08
+%     [[],[]],... % LA11
+%     [20,[]], ... % LA15
+%     [10,[]],... % LA16
+% };
 
 %% Success Ictal
 % patients = {...,
@@ -124,7 +124,7 @@ perturbationTypes = ['C', 'R'];
 perturbationType = perturbationTypes(1);
 
 FONTSIZE = 16;
-metric = 'jaccard';
+metric = 'default';
 
 figDir = fullfile(rootDir, '/figures', 'fragilityStats', ...
     strcat(filterType), ...
@@ -455,6 +455,10 @@ for iGroup=1:length(patients)
         fginds = find(cellfun('length',regexp(included_labels,'FG')) == 1);
         weightnew_sum(fginds) = 0;
 
+        % here comebine ezone_labels and the spread labels (e.g. for LA01)
+        % to test how that works with degree of agreement
+        ezone_labels = union(ezone_labels, spread_labels);
+        
         % compute DOA
         [doas(pid), fragilesets] = compute_doa_threshold(weightnew_sum, ezone_labels, included_labels, threshold, metric);        
 
@@ -504,7 +508,11 @@ for iGroup=1:length(patients)
         subplot(133);
         ax = gca; 
         plot(ax.XLim, [doas(pid), doas(pid)], 'k-');
-        ax.YLim = [0, 1];
+        if strcmp(metric, 'jaccard')
+            ax.YLim = [0, 1];
+        else 
+            ax.YLim = [-1 1];
+        end
         title('Degree of Agreement')
         toSaveFigFile = fullfile(figDir, strcat(patient, '_doaanalysis'));
         print(toSaveFigFile, '-dpng', '-r0')

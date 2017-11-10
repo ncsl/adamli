@@ -2,57 +2,6 @@ clear all
 clc
 close all
 
-%% Ictal and Interictal
-% patients = {...,
-%     {'pt1sz2', 'pt1sz3', 'pt1sz4', 'pt1aw1','pt1aw2', 'pt1aslp1','pt1aslp2'}, ...},...
-%     {'pt2sz1' 'pt2sz3' , 'pt2sz4', 'pt2aw1', 'pt2aw2', 'pt2aslp1', 'pt2aslp2'}, ...}, ...
-%     {'pt3sz2' 'pt3sz4', 'pt3aw1', 'pt3aslp1', 'pt3aslp2'}, ...}, ...
-%     {'pt8sz1' 'pt8sz2' 'pt8sz3'},...
-%     {'pt13sz1', 'pt13sz2', 'pt13sz3', 'pt13sz5'},...
-%     {'pt15sz1'  'pt15sz3' 'pt15sz4'},...
-% };
-% 'pt15sz2'
-
-% times = {,...
-%     [15, 12, 10, [], [], [], []], ... % pt1
-%     [60, 60, 75, [], [], [], []],... % pt2
-%     [17, 17, [], [], []],... % pt3
-%     [12 12 12],... % pt 8
-%     [7 7 7 7],... % pt13
-%     [20 30 10 30],... % pt 15
-% };
-
-%% Ictal Only
-% patients = {...,
-%     {'pt1sz2', 'pt1sz3', 'pt1sz4'}, ...},...
-%     {'pt2sz1' 'pt2sz3' , 'pt2sz4'}, ...}, ...
-%     {'pt3sz2' 'pt3sz4'}, ...}, ...
-%     {'pt8sz1' 'pt8sz2' 'pt8sz3'},...
-%     {'pt13sz1', 'pt13sz2', 'pt13sz3', 'pt13sz5'},...
-%     {'pt15sz1'  'pt15sz4'},...
-% };
-% % 'pt15sz2' 'pt15sz3'
-% 
-% times = {,...
-%     [15, 12, 10], ... % pt1
-%     [60, 60, 75],... % pt2
-%     [17, 17],... % pt3
-%     [12 12 12],... % pt 8
-%     [7 7 7 7],... % pt13
-%     [20 30 10 30],... % pt 15
-% };
-%% Interictal Only
-% patients={, ...
-% {'pt1aw1','pt1aw2', 'pt1aslp1','pt1aslp2'}, ...
-% {'pt2aw1', 'pt2aw2', 'pt2aslp1', 'pt2aslp2'},...
-% {'pt3aw1', 'pt3aslp1', 'pt3aslp2'}, ...
-% };
-% times = {,...
-%     [[], [], [], []], ... % pt1
-%     [[], [], [], []],... % pt2
-%     [[], [], []],... % pt3
-% };
-
 %% Set Root Directories
 % data directories to save data into - choose one
 eegRootDirHD = '/Volumes/NIL Pass/';
@@ -128,17 +77,6 @@ patients = {,...
     {'LA02_ICTAL', 'LA02_Inter'}, ...
 };
 
-% extract parameters chosen from grid search
-% doa_params = avg_doa_params;
-% doa_params = med_doa_params
-% doa_params = min_doa_params
-
-% epsilon = doa_params(1); % epsilon on high_mask
-% a1 = doa_params(2); % weight on rowsum
-% a2 = doa_params(3); % weight on number of high fragility
-% a3 = doa_params(4); % weight on post_cfvarchan
-% threshold = doa_params(5) % threshold on final weighted sum
-
 epsilon = 0.8;
 a1 = 0.8;
 a2 = 0.2;
@@ -185,14 +123,11 @@ for iGroup=1:length(patients)
         resection_labels = strrep(resection_labels, 'POL', '');
         spread_labels = strrep(spread_labels, 'POL', '');
 
+        % initialize the weighted sums for all patients
         if buffpid==1
             weighted_sums = zeros(length(included_labels), length(patient_group));
         end
-        % modify pt1sz4
-    %     if strcmp(patient, 'pt1sz4')
-    %         fragilityMat = fragilityMat(:,1:180);
-    %     end
-
+        
         if interictal
             % compute on interictal
             [rowsum, excluded_indices, num_high_fragility] = computedoainterictal(fragilityMat, epsilon, NORMALIZE);
@@ -309,7 +244,7 @@ for iGroup=1:length(patients)
     %     close all;
     end % end of loop through all patients
     
-    weighted_sums(weighted_sums == nan) = 0;
+    weighted_sums(isnan(weighted_sums)) = 0;
     successavg_weightsums{iGroup} = mean(weighted_sums, 2);
     
     % compute DOA
@@ -480,6 +415,7 @@ end
 toplotdoas = [combinedoa; failcombinedoa];
 toplotx = [ones(length(combinedoa), 1); ones(length(failcombinedoa),1)*2];
 group = [repmat({'Success'}, length(combinedoa), 1); repmat({'Failure'}, length(failcombinedoa), 1)];
+
 fig = figure;
 %% Plot successes
 % first plot boxplot
@@ -487,15 +423,16 @@ bh = boxplot(toplotdoas, group,'Whisker',1); hold on; axes = gca; currfig = gcf;
 % second plot points with jitter on the x-axis
 xvals = jitterxaxis(toplotx);
 plot(xvals, toplotdoas, 'ko');
-title(['NIH Success Vs. Failure N=11 with #Points=', num2str(length(patients)+length(failurepatients))]);
-axes.YLim = [0, 1];
-ylabel('Jaccard Index');
+title(['CC LA Success Vs. Failure N=11 with #Points=', num2str(length(patients)+length(failurepatients))]);
+if strcmp(metric, 'jaccard')
+    axes.YLim = [0, 1];
+    ylabel('Jaccard Index');
+else 
+    axes.YLim = [-1, 1];
+    ylabel('DOA');
+end
 % plot(1, mean(doas), 'dg')
 % plot(2, mean(faildoas), 'dg')
 axes.FontSize = FONTSIZE;
-
-%%% Plot Failures
-bh = boxplot(faildoas, 'Label', {'Failure'}, 'Positions', 2); hold on;
-% second plot points with jitter on the x-axis
-xvals = jitterxaxis(faildoas);
-plot(xvals, faildoas, 'ko');
+toSaveFigFile = fullfile(figDir, strcat('CC', 'combined_doaanalysis'));
+print(toSaveFigFile, '-dpng', '-r0')

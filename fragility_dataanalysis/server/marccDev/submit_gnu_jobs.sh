@@ -105,7 +105,7 @@ else
 fi
 
 partition=lrgmem 	# debug, shared, unlimited, parallel, gpu, lrgmem, scavenger
-partition=parallel
+# partition=parallel
 qos=scavenger
 
 

@@ -23,23 +23,63 @@ close all
 % };
 
 %% Ictal Only
-patients = {...,
-    {'pt1sz2', 'pt1sz3', 'pt1sz4'}, ...},...
-    {'pt2sz1' 'pt2sz3' , 'pt2sz4'}, ...}, ...
-    {'pt3sz2' 'pt3sz4'}, ...}, ...
-    {'pt8sz1' 'pt8sz2' 'pt8sz3'},...
-    {'pt13sz1', 'pt13sz2', 'pt13sz3', 'pt13sz5'},...
-    {'pt15sz1'  'pt15sz4'},...
+% patients = {...,
+%     {'pt1sz2', 'pt1sz3', 'pt1sz4'}, ...},...
+%     {'pt2sz1' 'pt2sz3' , 'pt2sz4'}, ...}, ...
+%     {'pt3sz2' 'pt3sz4'}, ...}, ...
+%     {'pt8sz1' 'pt8sz2' 'pt8sz3'},...
+%     {'pt13sz1', 'pt13sz2', 'pt13sz3', 'pt13sz5'},...
+%     {'pt15sz1'  'pt15sz4'},...
+% };
+% % 'pt15sz2' 'pt15sz3'
+% 
+% times = {,...
+%     [15, 12, 10], ... % pt1
+%     [60, 60, 75],... % pt2
+%     [17, 17],... % pt3
+%     [12 12 12],... % pt 8
+%     [7 7 7 7],... % pt13
+%     [20 30 10 30],... % pt 15
+% };
+
+% failurepatients = {,...
+%      'pt6sz3', 'pt6sz4', 'pt6sz5',...
+%     'pt7sz19', 'pt7sz21', 'pt7sz22',...
+%     'pt10sz1','pt10sz2' 'pt10sz3', ...
+%     'pt12sz1', 'pt12sz2',...
+%     'pt14sz1' 'pt14sz2' 'pt14sz3', ...
+% };
+% 
+
+%% Success LA
+patients = {,...
+    'LA01_ICTAL', 'LA01_Inter',...
+    'LA02_ICTAL', 'LA02_Inter', ...
 };
-% 'pt15sz2' 'pt15sz3'
 
 times = {,...
-    [15, 12, 10], ... % pt1
-    [60, 60, 75],... % pt2
-    [17, 17],... % pt3
-    [12 12 12],... % pt 8
-    [7 7 7 7],... % pt13
-    [20 30 10 30],... % pt 15
+    [[20],[]],... % LA01
+    [16, []], ... % LA02
+};
+
+%% Failure LA
+failurepatients = {,...
+%     'LA02_ICTAL', 'LA02_Inter',...
+    'LA04_ICTAL','LA04_Inter', ...
+    'LA06_ICTAL', 'LA06_Inter', ...
+    'LA08_ICTAL', 'LA08_Inter', ...
+    'LA11_ICTAL', 'LA11_Inter', ...
+    'LA15_ICTAL', 'LA15_Inter', ...
+    'LA16_ICTAL', 'LA16_Inter', ...
+};
+times = {,...
+%     [16, []], ... % LA02 % <- include the previous annotation. ask zach
+    [10, []],... % LA04
+    [10,[]], ... % LA06
+    [15,[]],... % LA08
+    [[],[]],... % LA11
+    [20,[]], ... % LA15
+    [10,[]],... % LA16
 };
 %% Interictal Only
 % patients={, ...
@@ -97,6 +137,7 @@ perturbationType = perturbationTypes(1);
 
 FONTSIZE = 16;
 metric = 'jaccard';
+% metric = 'default';
 
 thresholds = [0.6, 0.7, 0.8, 0.9, 0.95];
 
@@ -111,31 +152,7 @@ end
 
 %% load the fragility mats and grid search results
 load('gridsearchictalsuccessmats_v2.mat');
-load('gridsearchictalresults.mat');
-% load('gridsearchmats.mat');
-% load('gridsearchresults.mat');
-% med_doa_params = [epsilon, a1, a2, a3, threshold];
-
-% success patients
-patients = {...,
-    'pt1sz2','pt1sz3', 'pt1sz4', ...},...
-    'pt2sz1' 'pt2sz3' , 'pt2sz4', ...}, ...
-    'pt3sz2' 'pt3sz4', ...}, ...
-    'pt8sz1' 'pt8sz2' 'pt8sz3',...
-    'pt13sz1', 'pt13sz2', 'pt13sz3', 'pt13sz5',...
-    'pt15sz1' 'pt15sz4',...
-};
-
-% extract parameters chosen from grid search
-doa_params = avg_doa_params
-% doa_params = med_doa_params
-% doa_params = min_doa_params
-
-epsilon = doa_params(1); % epsilon on high_mask
-a1 = doa_params(2); % weight on rowsum
-a2 = doa_params(3); % weight on number of high fragility
-a3 = doa_params(4); % weight on post_cfvarchan
-threshold = doa_params(5) % threshold on final weighted sum
+load('CCgridsearchictalsuccessmats.mat');
 
 epsilon = 0.8;
 a1 = 0.8;
@@ -295,15 +312,8 @@ for pid=1:length(patients) % loop through each patient
 end % end of loop through all patients
 
 %% Doas for Failure pats
-failurepatients = {,...
-     'pt6sz3', 'pt6sz4', 'pt6sz5',...
-    'pt7sz19', 'pt7sz21', 'pt7sz22',...
-    'pt10sz1','pt10sz2' 'pt10sz3', ...
-    'pt12sz1', 'pt12sz2',...
-    'pt14sz1' 'pt14sz2' 'pt14sz3', ...
-};
-
-load('gridsearchictalfailuremats_v2.mat');
+% load('gridsearchictalfailuremats_v2.mat');
+load('CCgridsearchictalfailuremats.mat');
 %% Compute DOA For All Patients
 faildoas = zeros(length(failurepatients), 1);
 for pid=1:length(failurepatients) % loop through each patient
@@ -355,25 +365,6 @@ for pid=1:length(failurepatients) % loop through each patient
     end
 end % end of loop through all patients
 
-%% Combine DOAS per patient
-% patients = {...,
-%     'pt1sz2', 'pt1sz3', 'pt1sz4', ...},...
-%     'pt2sz1' 'pt2sz3' , 'pt2sz4', ...}, ...
-%     'pt3sz2' 'pt3sz4', ...}, ...
-%     'pt8sz1' 'pt8sz2' 'pt8sz3',...
-%     'pt13sz1', 'pt13sz2', 'pt13sz3', 'pt13sz5',...
-%     'pt15sz1' 'pt15sz2' 'pt15sz3' 'pt15sz4',...
-% };
-% patinds = [1, 1, 1, ...
-%            2, 2, 2, ...
-%            3, 3, ...
-%            4, 4, 4, ...
-%            5, 5, 5, 5, ...
-%            6, 6, 6, 6, ...
-%            ];
-
-% compute doas and combine per patient to come up with 1 DOA per patient
-
 %% Plot Relevant DOA
 toplotdoas = [doas; faildoas];
 toplotx = [ones(length(doas), 1); ones(length(faildoas),1)*2];
@@ -385,15 +376,23 @@ bh = boxplot(toplotdoas, group,'Whisker',1); hold on; axes = gca; currfig = gcf;
 % second plot points with jitter on the x-axis
 xvals = jitterxaxis(toplotx);
 plot(xvals, toplotdoas, 'ko');
-title(['NIH Success Vs. Failure N=11 with #Points=', num2str(length(patients)+length(failurepatients))]);
-axes.YLim = [0, 1];
-ylabel('Jaccard Index');
+title(['CC LA Success Vs. Failure N=11 with #Points=', num2str(length(patients)+length(failurepatients))]);
+if strcmp(metric, 'jaccard')
+    axes.YLim = [0, 1];
+    ylabel('Jaccard Index');
+else 
+    axes.YLim = [-1, 1];
+    ylabel('DOA');
+end
 % plot(1, mean(doas), 'dg')
 % plot(2, mean(faildoas), 'dg')
 axes.FontSize = FONTSIZE;
+toSaveFigFile = fullfile(figDir, strcat('CC', '_doaanalysis'));
+print(toSaveFigFile, '-dpng', '-r0')
+
 
 %%% Plot Failures
-bh = boxplot(faildoas, 'Label', {'Failure'}, 'Positions', 2); hold on;
-% second plot points with jitter on the x-axis
-xvals = jitterxaxis(faildoas);
-plot(xvals, faildoas, 'ko');
+% bh = boxplot(faildoas, 'Label', {'Failure'}, 'Positions', 2); hold on;
+% % second plot points with jitter on the x-axis
+% xvals = jitterxaxis(faildoas);
+% plot(xvals, faildoas, 'ko');

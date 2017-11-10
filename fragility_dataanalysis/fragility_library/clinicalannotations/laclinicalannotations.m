@@ -213,3 +213,5 @@ elseif strcmp(patient_id, 'Pat16')
     success_or_failure = 0;
     center = 'laserablation';
 end
+
+resection_labels = onset_electrodes;
