@@ -101,11 +101,12 @@ printf "About to run on patients (press enter to continue): $patients" # prompt 
 read answer
 
 ## define hardware reqs
-NUM_PROCSPERNODE=1 # number of processors per node (1-24)
+NUM_PROCSPERNODE=24 # number of processors per node (1-24)
 NUM_NODES=1			# number of nodes to request
 MEM_NODE=5 			# GB RAM per node (5-128)
 NUM_GPUS=1			# number of GPUS (need 6 procs per gpu)
 NUM_TASKS=1 		# number of tasks per CPU
+NUM_CPUPERTASK=1
 
 ## job reqs
 walltime=10:00:0
@@ -133,5 +134,4 @@ matlab -logfile /home-1/ali39@jhu.edu/work/adamli/fragility_dataanalysis/server/
 	'$partition', '$walltime', $NUM_NODES, $NUM_PROCSPERNODE,\
 	$MEM_NODE,$NUM_CPUPERTASK,\
 	 $RUNCONNECTIVITY, '$reference', 1); exit"
-
 
