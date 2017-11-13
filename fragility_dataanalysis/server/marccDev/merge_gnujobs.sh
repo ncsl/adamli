@@ -110,7 +110,7 @@ NUM_CPUPERTASK=1
 
 ## job reqs
 walltime=10:00:0
-partition=parallel 	# debug, shared, unlimited, parallel, gpu, lrgmem, scavenger
+partition=lrgmem 	# debug, shared, unlimited, parallel, gpu, lrgmem, scavenger
 qos=scavenger
 
 

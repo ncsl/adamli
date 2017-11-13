@@ -411,6 +411,8 @@ end
 %     subplot(length(successavg_weightsums), 1, i);
 % end
 
+save('ccperpattoplot.mat', 'combinedoa', 'failcombinedoa');
+
 %% Plot Relevant DOA
 toplotdoas = [combinedoa; failcombinedoa];
 toplotx = [ones(length(combinedoa), 1); ones(length(failcombinedoa),1)*2];
