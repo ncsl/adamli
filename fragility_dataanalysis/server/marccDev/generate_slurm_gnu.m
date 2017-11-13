@@ -205,6 +205,23 @@ function generate_slurm_gnu(patients, winSize, stepSize, radius, ...
             elseif toCompute == 1 % still needs some computing, so call job again
                 fprintf('Lenght of windows needed to compute! %s \n', num2str(length(patWinsToCompute)));
                 
+                % reset job name to use the same file for completing the
+                % gnu runs in parallel
+                if JOBTYPE == 1
+                    job_name = strcat(patient, '_ltv_gnu');
+                else
+                    job_name = strcat(patient, '_pert_gnu');
+                end
+                
+                basecommand = sprintf(strcat(exportcommand, ...
+                            ' sbatch --exclusive --time=%s --partition=%s --nodes=%d --ntasks-per-node=%d --cpus-per-task=%d --job-name=%s '), ...
+                                 num2str(walltime), partition, numNodes, numTasks, numCPUs, job_name); 
+                if strcmp(partition, 'scavenger')
+                    basecommand = sprintf(strcat(exportcommand, ...
+                            ' sbatch --exclusive --time=%s --partition=%s --qos=%s --nodes=%d --ntasks-per-node=%d --cpus-per-task=%d --job-name=%s '), ...
+                                 num2str(walltime), partition, QOS,  numNodes, numTasks, numCPUs,  job_name); 
+                end
+                
                 % create command to run
                 command = sprintf(strcat(basecommand, ...
                             ' gnu_run_jobs.sbatch '));
