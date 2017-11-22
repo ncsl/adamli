@@ -25,7 +25,9 @@ echo ${stepSize}
 echo ${window}
 echo ${radius}
 echo ${numWins}
-parallel="parallel --delay .2 -j 24 --joblog _gnulogs/${log_file} --resume "
+echo ${log_file}
+
+parallel="parallel --delay .2 -j 24 --joblog _gnulogs/$log_file --resume "
 
 # submit jobs via GNU
 if [[ "$RUNCONNECTIVITY" -eq 1 ]]; then
