@@ -99,8 +99,6 @@ taper_pow_norm=(1-(taper_ind && no_tapers==1))+(taper_ind && no_tapers==1)/rms(E
 
 % pmtm is too slow
 
-
-
 %- Loop over trials and compute the spectra
 for iTrial=1:NeegTrials,
     
@@ -109,7 +107,6 @@ for iTrial=1:NeegTrials,
     %% split signal into windows and apply tapers to each one
     %eeg_windowed = buffer(eeg,Nsamples,ovrlp_samples,'nodelay');
     [eeg_windowed, rem] = buffer(eeg,Nsamples,ovrlp_samples,'nodelay'); %- starts at first sample (nodelay option), and tosses out samples at end if final window is not filled (rem output contains partial)
-    
     eeg_windowed = repmat(detrend(eeg_windowed),[1,1,no_tapers]); %this should be changed to use bsxfun instead  %- JHW added detrend based on Fries methods... no obvious effect
     windows    = size(eeg_windowed,2);
     E_windowed = permute(repmat(E,[1,1,windows]),[1 3 2]);

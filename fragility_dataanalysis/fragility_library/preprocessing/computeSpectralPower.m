@@ -10,6 +10,23 @@
 % [powerMat, phaseMat] = computeSpectralPower(eegWave, fs, freqs, 'fourier', transformArgs);
 % 
 function [powerMat, phaseMat, freqs, t_sec] = computeSpectralPower(eegWave, fs, typeTransform, transformArgs)
+    %% INPUT INITIAL ARGUMENTS TO TEST
+    if nargin == 0
+        disp('No arguments, so feeding in test data!\n');
+        datafile = fullfile('~/Downloads/pt1sz2.mat');
+        data = load(datafile);
+        
+        eegWave = data.data;
+        fs = data.fs;
+        typeTransform = 'fourier';
+        winSize = 250;
+        stepSize = 125;
+        transformArgs.winSize = winSize;
+        transformArgs.stepSize = stepSize;
+        transformArgs.mtBandWidth = 4;
+        transformArgs.mtFreqs = [];
+    end
+
     %% Initial Argument Checking
     %- check user entered in correct transforms
     transforms = {'morlet', 'fourier'};
@@ -65,4 +82,8 @@ function [powerMat, phaseMat, freqs, t_sec] = computeSpectralPower(eegWave, fs, 
         powerMat = 10*log10(rawPowBase);
         phaseMat = rawPhaseBase;
     end
+    
+    %% Adding Test Saving of the Results to Compare with Other Methods Written in Python
+    testfile = 'test.mat';
+    save(fullfile('~/Downloads/', testfile), 'powerMat', 'phaseMat');
 end

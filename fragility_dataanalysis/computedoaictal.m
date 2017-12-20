@@ -1,4 +1,4 @@
-function [rowsum, excluded_indices, num_high_fragility] = ...
+function [rowsum, excluded_indices, num_high_fragility, cfvar_chan] = ...
                                     computedoaictal(fragilitymat, ...
                                         startindex, endindex, epsilon, NORMALIZE)
     % for interictal periods, we look at the entire spectrum
@@ -43,9 +43,14 @@ function [rowsum, excluded_indices, num_high_fragility] = ...
     num_high_fragility = computenumberfragility(high_mask, 1, size(high_mask,2), delta);
     
     % part iv) compute coefficient of variation
+    % compute mean, variance and coefficient of variation for each chan
+    cfvar_chan = computecoeffvar(fragilitymat);
+%     cfvar_chan = computecoeffvar(threshMat);
+    
     if NORMALIZE
         rowsum = rowsum ./ num_wins;
         num_high_fragility = (num_high_fragility - nanmean(num_high_fragility)) ./ sqrt(nanvar(num_high_fragility));
 %         num_high_fragility = num_high_fragility ./ num_wins;
+        cfvar_chan = cfvar_chan ./ max(cfvar_chan);
     end
 end
