@@ -1,7 +1,6 @@
 function [powMT freqs_FFT t_sec phsMT] = eeg_mtwelch2(eegTrialsxTime,Fs,T,overlap,TW,mtFreqOut,varargin)
 %
 %eeg_mtwelch
-%Written by: Julio I. Chapeton
 %
 %Calculates the spectrum and t-f representation of a signal using a short time fourier transform (STFT).
 %These can be calculated with multitapers, no tapers, or a Hann taper. The spectrum is produced by averaging the STFTs.
